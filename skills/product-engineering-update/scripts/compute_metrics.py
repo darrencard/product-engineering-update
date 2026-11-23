@@ -85,7 +85,10 @@ def show(v: float | None, unit: str) -> str | None:
         return f"{trim(v, 0)}m"
     if unit == "count" and abs(v) >= 10000:
         return f"{trim(v / 1000, 1)}K"
-    if unit in ("count", "per week", "score"):
+    if unit == "count":
+        # Whole counts read with a thousands separator: 6,120, to match how targets are written.
+        return f"{v:,.0f}" if float(v).is_integer() else trim(v, 1)
+    if unit in ("per week", "score"):
         return trim(v, 1)
     return f"{trim(v, 2)} {unit}"
 

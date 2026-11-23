@@ -18,6 +18,7 @@ from __future__ import annotations
 
 import copy
 import csv
+import datetime as dt
 import json
 import re
 import shutil
@@ -64,6 +65,10 @@ def run_fixture(name: str, work: Path) -> tuple[Json, Json]:
         if done.returncode != 0:
             raise RuntimeError(done.stderr)
     return json.loads((run / "deck.json").read_text(encoding="utf-8")), json.loads((run / "metrics.json").read_text(encoding="utf-8"))
+
+
+def render_time(stamp: str) -> dt.datetime:
+    return dt.datetime.strptime(stamp, "%Y-%m-%dT%H:%M:%SZ")
 
 
 def rules(report: Json) -> set[str]:
@@ -229,6 +234,93 @@ class Fixtures(unittest.TestCase):
         self.assertEqual(done.returncode, 0, done.stderr)
         for expected in ("Computed changes", "Gaps shown as data needed", "Board cut (8 slides)", "Checklist", "explicit yes"):
             self.assertIn(expected, done.stdout)
+
+
+class GitHub(unittest.TestCase):
+    """The GitHub shortcut: raw exports in, the delivery slide out, with nothing retyped."""
+
+    def setUp(self) -> None:
+        self.work = Path(tempfile.mkdtemp(prefix="peu-gh-"))
+        self.run = self.work / "run"
+        self.run.mkdir()
+        shutil.copy(FIXTURES / "complete" / "intake.json", self.run / "intake.json")
+
+    def tearDown(self) -> None:
+        shutil.rmtree(self.work, ignore_errors=True)
+
+    def exports(self, reviewed: bool) -> tuple[Path, Path]:
+        """60 merged pull requests a quarter for 2 quarters, and weekly deploys, in GitHub's own shapes."""
+        prs = []
+        for first, lead, review in (("2026-04-0", 52, 9), ("2026-07-0", 38, 13)):
+            for i in range(60):
+                opened = f"{first}{(i % 9) + 1}T09:00:00Z"
+                merged = (render_time(opened) + dt.timedelta(hours=lead)).strftime("%Y-%m-%dT%H:%M:%SZ")
+                reviews = []
+                if reviewed:
+                    at = (render_time(opened) + dt.timedelta(hours=review)).strftime("%Y-%m-%dT%H:%M:%SZ")
+                    reviews = [{"submittedAt": at, "state": "CHANGES_REQUESTED" if i % 6 == 0 else "APPROVED"}]
+                prs.append({"number": len(prs) + 1, "createdAt": opened, "mergedAt": merged, "reviews": reviews})
+        prs.append({"number": 999, "createdAt": "2026-08-01T09:00:00Z", "mergedAt": None, "reviews": []})
+        deployments = [
+            {"id": i, "environment": "Production" if i % 2 else "Preview", "created_at": f"2026-0{7 + (i % 3)}-1{i % 9}T12:00:00Z"} for i in range(40)
+        ]
+        prs_path, dep_path = self.work / "prs.json", self.work / "deployments.json"
+        prs_path.write_text(json.dumps(prs), encoding="utf-8")
+        half = len(deployments) // 2
+        dep_path.write_text(json.dumps(deployments[:half]) + json.dumps(deployments[half:]), encoding="utf-8")  # two pages, as --paginate writes them
+        return prs_path, dep_path
+
+    def convert(self, prs: Path, deployments: Path) -> subprocess.CompletedProcess[str]:
+        return script(
+            "from_github.py",
+            "--prs",
+            str(prs),
+            "--deployments",
+            str(deployments),
+            "--repo",
+            "kestrel/app",
+            "--retrieved-at",
+            "2026-09-30",
+            "--run",
+            str(self.run),
+        )
+
+    def test_reviewed_pull_requests_fill_the_delivery_slide_with_paired_metrics(self) -> None:
+        done = self.convert(*self.exports(reviewed=True))
+        self.assertEqual(done.returncode, 0, done.stderr)
+        self.assertIn("120 merged pull requests (120 with a review) and 20 deploys", done.stdout)
+        for step in ("compute_metrics.py", "draft.py"):
+            self.assertEqual(script(step, "--run", str(self.run)).returncode, 0)
+        metrics = json.loads((self.run / "metrics.json").read_text(encoding="utf-8"))["metrics"]
+        self.assertEqual((metrics["lead_time"]["prior_display"], metrics["lead_time"]["display"]), ("52h", "38h"))
+        self.assertEqual((metrics["review_time"]["prior_display"], metrics["review_time"]["display"]), ("9h", "13h"))
+        self.assertEqual(metrics["rework_rate"]["display"], "16.7%")
+        self.assertNotIn("change_failure_rate", metrics, "GitHub cannot supply a change failure rate")
+        deck = json.loads((self.run / "deck.json").read_text(encoding="utf-8"))
+        rows = {r["metric"] for r in slide(deck, "09")["blocks"][0]["rows"] if "metric" in r}
+        self.assertEqual(rows, {"Deploys per week", "Lead time for change", "Pull request review time"})
+        self.assertEqual(validate.check(deck)["errors"], [])
+        self.assertIn("GitHub (kestrel/app)", {r["source_system"] for r in deck["ledger"]})
+
+    def test_a_repository_with_no_reviews_gets_a_gap_and_not_a_speed_only_slide(self) -> None:
+        done = self.convert(*self.exports(reviewed=False))
+        self.assertEqual(done.returncode, 0, done.stderr)
+        self.assertIn("Speed will be held back", done.stdout)
+        for step in ("compute_metrics.py", "draft.py"):
+            self.assertEqual(script(step, "--run", str(self.run)).returncode, 0)
+        deck = json.loads((self.run / "deck.json").read_text(encoding="utf-8"))
+        delivery = slide(deck, "09")
+        self.assertEqual(block_types(delivery), {"cards", "data_needed"})
+        self.assertIn("Speed was measured", json.dumps(delivery))
+        self.assertNotIn("38h", json.dumps(delivery))
+
+    def test_a_broken_export_is_refused_in_one_line(self) -> None:
+        bad = self.work / "bad.json"
+        bad.write_text('{"not": "a list"}', encoding="utf-8")
+        done = script("from_github.py", "--prs", str(bad), "--repo", "kestrel/app", "--run", str(self.run))
+        self.assertNotEqual(done.returncode, 0)
+        self.assertNotIn("Traceback", done.stderr)
+        self.assertFalse((self.run / "data" / "source_control.json").exists())
 
 
 class Adversarial(unittest.TestCase):

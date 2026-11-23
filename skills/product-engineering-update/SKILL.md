@@ -61,6 +61,8 @@ Read `assets/contracts.json` or [references/sources.md](references/sources.md) f
 2. Save the rows as CSV or JSON with the columns `python3 scripts/collect.py --list` shows for that source.
 3. Run `python3 scripts/collect.py <source> --csv <file> --system "<system name>" --query "<query or report>" --retrieved-at <YYYY-MM-DD> --run run`. `--query` is how the rows were produced: the query, the report name, or "CSV export supplied by the user". `--retrieved-at` is the date the data was pulled; without it the file's modified date is used.
 
+For GitHub there is a shortcut that needs no CSV: follow [references/connect-github.md](references/connect-github.md). It is the fastest way to a first real slide.
+
 `collect.py` rejects a file with missing columns or bad rows and says what to fix. Fix the file. Do not edit rows to make them pass, and do not create a file for a source the user does not have.
 
 ### 3. Compute
@@ -129,6 +131,7 @@ Each render writes the HTML file and the ledger as CSV beside it. Give the user 
 - [references/audience-cuts.md](references/audience-cuts.md): what each cut includes and leaves out, and the cadence.
 - [references/metrics-glossary.md](references/metrics-glossary.md): every computed metric, its formula and its quality pair.
 - [references/sources.md](references/sources.md): each source, the columns it needs and the slides it feeds.
+- [references/connect-github.md](references/connect-github.md): pull delivery data straight from GitHub.
 - [references/frameworks.md](references/frameworks.md): the reading behind each slide.
 - Slide contracts: [01](references/slides/01.md), [02](references/slides/02.md), [03](references/slides/03.md), [04](references/slides/04.md), [05](references/slides/05.md), [06](references/slides/06.md), [07](references/slides/07.md), [08](references/slides/08.md), [09](references/slides/09.md), [09b](references/slides/09b.md), [10](references/slides/10.md), [11](references/slides/11.md), [12](references/slides/12.md), [13](references/slides/13.md), [14](references/slides/14.md), [15](references/slides/15.md), [16](references/slides/16.md), [17](references/slides/17.md), [18](references/slides/18.md).
 

@@ -527,7 +527,9 @@ def check(deck: Json, contracts: list[Json] | None = None, schema: Json | None =
     unknown = [r["id"] for r in deck["ledger"] if r["confidence"] == "Unknown"]
     if unknown:
         rows = ", ".join(unknown)
-        found.warn("unknown-rows", "-", f"{len(unknown)} ledger row(s) are Unknown: {rows}. Each should show as a data_needed block, not a figure.")
+        found.warn(
+            "unknown-rows", "-", f"{len(unknown)} ledger row(s) are Unknown: {rows}. Check that each shows as a data needed block and nowhere as a figure."
+        )
     return found.report()
 
 
