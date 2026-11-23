@@ -27,10 +27,10 @@ Copy the skill folder into your skills directory:
 cp -r skills/product-engineering-update ~/.claude/skills/
 ```
 
-Or install it as a plugin, once this repository is published (replace `<owner>/<repo>`):
+Or install it as a plugin:
 
 ```bash
-claude plugin marketplace add <owner>/<repo>
+claude plugin marketplace add darrencard/product-engineering-update
 ```
 
 ```bash
