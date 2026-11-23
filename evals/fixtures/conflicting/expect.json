@@ -1,0 +1,22 @@
+{
+  "valid": true,
+  "filled": [
+    "02",
+    "03",
+    "04",
+    "05",
+    "09",
+    "11",
+    "12",
+    "14",
+    "16",
+    "17",
+    "18"
+  ],
+  "absent": [],
+  "conflicts": [
+    "ARR",
+    "Loads cleared per week"
+  ],
+  "board_slides": 8
+}

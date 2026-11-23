@@ -1,0 +1,12 @@
+{
+  "name": "dacard",
+  "owner": { "name": "Dacard" },
+  "plugins": [
+    {
+      "name": "product-engineering-update",
+      "displayName": "Product & Engineering Update",
+      "source": "./",
+      "description": "Build a product and engineering update from your own data. Every figure sourced, no overclaims."
+    }
+  ]
+}

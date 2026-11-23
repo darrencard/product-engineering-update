@@ -1,0 +1,147 @@
+{
+  "company": "Kestrel Labs",
+  "author": "the CPTO",
+  "period": {
+    "label": "2026-Q3",
+    "start": "2026-07-01",
+    "end": "2026-09-30"
+  },
+  "as_of": "2026-09-30",
+  "gap_owner": "the VP Engineering",
+  "gap_due": "Q4",
+  "objectives": [
+    {
+      "name": "Grow ARR to $50M",
+      "target": "$50M",
+      "owner": "CEO"
+    }
+  ],
+  "strategy": {
+    "diagnosis": "Dispatchers lose most of their day to exceptions that rules engines can't handle.",
+    "policy": "We win mid-market brokers by automating the exception, priced per load.",
+    "actions": [
+      "Raise agent task success to 90%",
+      "First automated load inside 14 days"
+    ],
+    "non_goals": [
+      "Build a carrier marketplace",
+      "Ship on-premise"
+    ]
+  },
+  "product_lines": [
+    {
+      "name": "Dispatch Agent",
+      "stage": "Expand",
+      "objective": "Grow ARR to $50M"
+    }
+  ],
+  "investment_plan": {
+    "New capabilities": 35,
+    "Improve the core": 20,
+    "Growth": 10,
+    "Platform & scale": 20,
+    "Keep the lights on": 15
+  },
+  "rd_lines": [
+    "R&D payroll",
+    "AI tools for the team",
+    "Cloud"
+  ],
+  "north_star": {
+    "metric": "Loads cleared per week",
+    "definition": "Loads cleared with no manual touch",
+    "target": 22000,
+    "target_display": "22K",
+    "owner": "Agent team"
+  },
+  "inputs": [
+    {
+      "metric": "Activation",
+      "target": 50,
+      "target_display": "50%",
+      "higher_is_better": true,
+      "owner": "Activation team"
+    },
+    {
+      "metric": "Weekly active dispatchers",
+      "target": 6000,
+      "target_display": "6,000",
+      "higher_is_better": true,
+      "owner": "Core dispatch"
+    }
+  ],
+  "delivery_ranges": {
+    "Deploys per week": "3+",
+    "Lead time for change": "under 40h",
+    "Change failure rate": "under 5%",
+    "Time to restore": "under 60m",
+    "Pull request review time": "under 10h"
+  },
+  "ai_features": [
+    {
+      "name": "Dispatch Agent",
+      "eval_set": "v14"
+    }
+  ],
+  "bets": [
+    {
+      "bet": "Multi-stop reroutes",
+      "commitment": "Promise",
+      "appetite": "6 weeks, 5 engineers",
+      "expected": "Task success 86% to 90%",
+      "confidence": "High",
+      "stop_rule": "Evals gain under 2 points by week 3",
+      "objective": "Grow ARR to $50M",
+      "cause": "Higher task success lets accounts move more loads to the agent",
+      "owner": "Agent team"
+    },
+    {
+      "bet": "Guided activation",
+      "commitment": "Experiment",
+      "appetite": "4 weeks, 3 engineers",
+      "expected": "Activation 41% to 50%",
+      "confidence": "Medium",
+      "stop_rule": "No lift in a 2 week live test",
+      "objective": "Grow ARR to $50M",
+      "cause": "A faster first automated load lifts trial conversion",
+      "owner": "Activation team"
+    }
+  ],
+  "risks": [
+    {
+      "risk": "One model provider carries most inference spend",
+      "likelihood": "Medium",
+      "impact": "High",
+      "mitigation": "Routing layer across 2 providers. Platform lead",
+      "due": "Dec 2026"
+    }
+  ],
+  "stopped": [
+    {
+      "what": "Carrier marketplace",
+      "why": "It did not serve the strategy"
+    }
+  ],
+  "decisions": [
+    {
+      "ask": "Approve a per-load pricing pilot",
+      "options": "Pilot with 10 customers, or wait a quarter",
+      "recommendation": "Run the pilot with 10 customers.",
+      "deadline": "4 Nov 2026"
+    }
+  ],
+  "connected": [
+    "ai_tools",
+    "analytics",
+    "billing",
+    "crm",
+    "evals",
+    "finance",
+    "hr",
+    "incidents",
+    "source_control",
+    "support",
+    "survey",
+    "tracker"
+  ]
+}

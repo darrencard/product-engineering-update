@@ -1,0 +1,2 @@
+metric,period,value,query
+Loads cleared per week,2026-Q3,21400,select avg(loads) from ns_weekly

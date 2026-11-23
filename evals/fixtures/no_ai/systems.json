@@ -1,0 +1,12 @@
+{
+  "analytics": "PostHog",
+  "billing": "Stripe",
+  "crm": "CRM",
+  "finance": "Finance close",
+  "hr": "HR system",
+  "incidents": "Incident tool",
+  "source_control": "GitHub",
+  "support": "Support desk",
+  "survey": "Developer survey",
+  "tracker": "Linear"
+}

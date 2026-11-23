@@ -1,0 +1,7 @@
+metric,period,value,definition
+Loads cleared per week,2026-Q2,18400,"Loads cleared with no manual touch, weekly average"
+Loads cleared per week,2026-Q3,23100,"Loads cleared with no manual touch, weekly average"
+Activation,2026-Q2,39,"Accounts with a first automated load inside 14 days, percent"
+Activation,2026-Q3,41,"Accounts with a first automated load inside 14 days, percent"
+Weekly active dispatchers,2026-Q2,5890,Dispatchers active in a week
+Weekly active dispatchers,2026-Q3,6120,Dispatchers active in a week

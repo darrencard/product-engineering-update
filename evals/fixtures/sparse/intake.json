@@ -1,0 +1,43 @@
+{
+  "company": "Kestrel Labs",
+  "author": "the CPTO",
+  "period": {
+    "label": "2026-Q3",
+    "start": "2026-07-01",
+    "end": "2026-09-30"
+  },
+  "as_of": "2026-09-30",
+  "gap_owner": "the VP Engineering",
+  "gap_due": "Q4",
+  "objectives": [],
+  "strategy": {
+    "diagnosis": null,
+    "policy": null,
+    "actions": [],
+    "non_goals": []
+  },
+  "product_lines": [],
+  "investment_plan": {},
+  "rd_lines": [],
+  "north_star": {
+    "metric": null,
+    "definition": null,
+    "target": null,
+    "owner": null
+  },
+  "inputs": [],
+  "delivery_ranges": {},
+  "ai_features": [
+    {
+      "name": "Dispatch Agent",
+      "eval_set": "v14"
+    }
+  ],
+  "bets": [],
+  "risks": [],
+  "stopped": [],
+  "decisions": [],
+  "connected": [
+    "tracker"
+  ]
+}

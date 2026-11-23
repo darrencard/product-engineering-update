@@ -1,0 +1,3244 @@
+{
+  "$schema": "../deck.schema.json",
+  "meta": {
+    "title": "The Product & Engineering Update | Dacard",
+    "description": "An answer-first, source-cited template for product and engineering updates to leadership, boards and staff. Worked example plus template guidance.",
+    "brand": "Dacard",
+    "product": "The Product & Engineering Update",
+    "company": "Harborline",
+    "period": "Q3 FY26",
+    "as_of": "2026-09-30",
+    "template_version": "1.1",
+    "audiences": [
+      {
+        "key": "L",
+        "label": "Leadership",
+        "chip": "Leadership"
+      },
+      {
+        "key": "B",
+        "label": "Board & investors",
+        "chip": "Board"
+      },
+      {
+        "key": "S",
+        "label": "All staff",
+        "chip": "Staff"
+      }
+    ],
+    "cuts": {
+      "L": [
+        "01",
+        "02",
+        "03",
+        "04",
+        "05",
+        "06",
+        "07",
+        "08",
+        "09",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "16",
+        "17",
+        "18"
+      ],
+      "B": [
+        "01",
+        "05",
+        "09b",
+        "11",
+        "12",
+        "14",
+        "16",
+        "18"
+      ],
+      "S": [
+        "01",
+        "02",
+        "03",
+        "04",
+        "06",
+        "08",
+        "11",
+        "15",
+        "16",
+        "17"
+      ]
+    },
+    "notice": {
+      "illustrative": true,
+      "text": "Worked example. Harborline is a fictional company and every Harborline figure is illustrative. Benchmarks and frameworks are real and cited."
+    },
+    "footer": "Dacard is Darren Card's applied AI studio. Free to use and adapt with credit. Harborline and its data are fictional. Benchmarks are quoted with source and date, and survey figures are labelled as such.",
+    "source_types": [
+      {
+        "key": "interview",
+        "label": "Intake interview",
+        "examples": [
+          "Answered by you"
+        ],
+        "csv": "None. Anything you don't supply is marked Unknown"
+      },
+      {
+        "key": "docs",
+        "label": "Documents",
+        "examples": [
+          "Notion",
+          "Google Drive"
+        ],
+        "csv": "Upload the files as they are"
+      },
+      {
+        "key": "tracker",
+        "label": "Issue tracker",
+        "examples": [
+          "Linear",
+          "Jira"
+        ],
+        "csv": "One row per issue or epic with objective, work type, product line, owner and status"
+      },
+      {
+        "key": "finance",
+        "label": "Finance actuals",
+        "examples": [
+          "Finance close",
+          "Provider invoices"
+        ],
+        "csv": "Plan and actual by line and period, ARR by product line"
+      },
+      {
+        "key": "billing",
+        "label": "Billing",
+        "examples": [
+          "Stripe"
+        ],
+        "csv": "ARR by account and month"
+      },
+      {
+        "key": "analytics",
+        "label": "Product analytics",
+        "examples": [
+          "PostHog",
+          "Amplitude",
+          "Mixpanel"
+        ],
+        "csv": "One row per metric and period with the value and its definition"
+      },
+      {
+        "key": "warehouse",
+        "label": "Warehouse",
+        "examples": [
+          "Snowflake",
+          "BigQuery",
+          "MotherDuck"
+        ],
+        "csv": "The result of each metric query, with the query text"
+      },
+      {
+        "key": "crm",
+        "label": "CRM",
+        "examples": [
+          "Your CRM"
+        ],
+        "csv": "Closed deals with outcome and reason"
+      },
+      {
+        "key": "support",
+        "label": "Support desk",
+        "examples": [
+          "Your support tool"
+        ],
+        "csv": "Tickets with theme and account"
+      },
+      {
+        "key": "research",
+        "label": "Research and call notes",
+        "examples": [
+          "Research repository",
+          "Call notes"
+        ],
+        "csv": "One row per interview or experiment with the finding"
+      },
+      {
+        "key": "source_control",
+        "label": "Source control and CI",
+        "examples": [
+          "GitHub",
+          "Your CI"
+        ],
+        "csv": "Deploys and pull requests with timestamps and outcome"
+      },
+      {
+        "key": "incidents",
+        "label": "Incidents and status",
+        "examples": [
+          "Incident tool",
+          "Status page"
+        ],
+        "csv": "Incidents with start, restore time and service, plus each availability objective"
+      },
+      {
+        "key": "security",
+        "label": "Security tracker",
+        "examples": [
+          "Your security tool"
+        ],
+        "csv": "Open findings with severity and age, audit status"
+      },
+      {
+        "key": "evals",
+        "label": "Evals and traces",
+        "examples": [
+          "Eval harness",
+          "Production traces"
+        ],
+        "csv": "Eval runs by version with pass rate, cost per request"
+      },
+      {
+        "key": "ai_tools",
+        "label": "AI tool admin data",
+        "examples": [
+          "Tool admin exports"
+        ],
+        "csv": "Seats, weekly use and cost by tool"
+      },
+      {
+        "key": "survey",
+        "label": "Developer survey",
+        "examples": [
+          "Quarterly survey"
+        ],
+        "csv": "Question, period and score"
+      },
+      {
+        "key": "hr",
+        "label": "HR and hiring",
+        "examples": [
+          "HR system",
+          "Hiring tracker"
+        ],
+        "csv": "Headcount and plan by function, open roles, exits"
+      }
+    ]
+  },
+  "slides": [
+    {
+      "id": "00",
+      "kind": "cover",
+      "act": "Open",
+      "nav": "Cover",
+      "audiences": [
+        "L",
+        "B",
+        "S"
+      ],
+      "illustrative": false,
+      "meta": [
+        "Template v1.1, November 2026",
+        "By Darren Card"
+      ],
+      "title": "The product & engineering update built not to overclaim",
+      "blocks": [
+        {
+          "type": "text",
+          "variant": "lede",
+          "text": "One story for leadership, the board and the whole company. It runs from strategy through discovery, delivery and measurement to the next investments. Every number carries a source, a date and a confidence label."
+        },
+        {
+          "type": "cards",
+          "columns": 3,
+          "items": [
+            {
+              "title": "Answer first",
+              "body": [
+                "Each slide title is a claim you can check. The evidence sits under it."
+              ]
+            },
+            {
+              "title": "Paired metrics",
+              "body": [
+                "Every speed number sits next to the quality number it can hurt."
+              ]
+            },
+            {
+              "title": "One source, three cuts",
+              "body": [
+                "Switch the audience above. The slides change, the facts don't."
+              ]
+            }
+          ],
+          "max_width": 900
+        },
+        {
+          "type": "facts",
+          "items": [
+            "18 core slides",
+            "Board cut 8",
+            "Staff cut 10",
+            "Sources you need: Appendix D",
+            "Keys J and K move between slides"
+          ]
+        }
+      ],
+      "guide": [
+        {
+          "label": "How to use",
+          "text": "Read the example once as Leadership. Switch to Board to see what drops out. Turn on guidance to see the question each slide answers, the data it needs and the rule it follows."
+        },
+        {
+          "label": "Pre-read",
+          "text": "Send it 5 business days before a board meeting. Spend the meeting on slide 18."
+        },
+        {
+          "label": "Safe harbour",
+          "text": "Add your own forward-looking statement and confidentiality notice here."
+        }
+      ]
+    },
+    {
+      "id": "01",
+      "kind": "slide",
+      "act": "Open",
+      "nav": "The answer",
+      "audiences": [
+        "L",
+        "B",
+        "S"
+      ],
+      "illustrative": true,
+      "kicker": "Harborline, Q3 FY26",
+      "title": "Retention is on plan, expansion is behind, and we need one decision on model spend.",
+      "blocks": [
+        {
+          "type": "cards",
+          "columns": 3,
+          "items": [
+            {
+              "title": "What happened",
+              "body": [
+                {
+                  "list": [
+                    "ARR reached $41.2M, up 7% on the quarter.[[L01]]",
+                    "The Dispatch Agent now clears 23.1K loads a week with no manual touch, against a 22K target.[[L02]]",
+                    "Cost per successful agent task fell from $0.41 to $0.33.[[L07]]"
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "So what",
+              "body": [
+                {
+                  "list": [
+                    "Expansion ARR came in at $1.9M against $2.4M. Seat pricing caps growth in accounts where the agent does the work.[[L04]]",
+                    "Code review time rose 44%. Review is now our delivery constraint.[[L09]]"
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Now what",
+              "body": [
+                {
+                  "list": [
+                    "Decide on a 12-month model commitment worth $1.6M.",
+                    "Approve a per-load pricing pilot with 10 customers.",
+                    "Refer candidates for Head of AI Quality."
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "columns": [
+            {
+              "label": "Pillar"
+            },
+            {
+              "label": "Status"
+            },
+            {
+              "label": "Signal"
+            },
+            {
+              "label": "Trend"
+            }
+          ],
+          "rows": [
+            [
+              "Customer outcomes",
+              "[[status:watch]]",
+              "North Star ahead of target, activation at 41% against 50%",
+              "Mixed"
+            ],
+            [
+              "Delivery",
+              "[[status:landed]]",
+              "9 of 11 commitments shipped, 5 moved their metric",
+              "Up"
+            ],
+            [
+              "Reliability & quality",
+              "[[status:watch]]",
+              "Availability objective met, change failure rate 3.4% and rising",
+              "Slipping"
+            ],
+            [
+              "AI economics",
+              "[[status:watch]]",
+              "AI gross margin 52% against 55%",
+              "Up 4 points"
+            ],
+            [
+              "Team",
+              "[[status:landed]]",
+              "60 of 64 planned roles filled, 1 regretted exit",
+              "Flat"
+            ]
+          ]
+        },
+        {
+          "type": "strip",
+          "label": "Changed since the last update.",
+          "text": "Keep-the-lights-on work rose from a planned 15% to 22%. The TMS integration and SOC 2 Type II moved to Q4. We killed the carrier marketplace and added a per-load pricing pilot."
+        }
+      ],
+      "asof": "Data as of 30 Sep 2026. Status words: landed, watch, stalled.",
+      "ledger_refs": [],
+      "guide": {
+        "question": "Are we on track, what changed, and what do you need from me?",
+        "needs": "Nothing new. This slide is a rollup of slides 5 to 18, written last.",
+        "rule": "One headline sentence. At most 3 wins and 2 headwinds. State what changed since the last update. Every ask on this slide appears again on slide 18."
+      },
+      "dig_deeper": [
+        "[Engineering Management, Pyramid Communication: An Actionable Guide](https://engmanage.substack.com/p/pyramid-communication) (Nov 2025). Lead with the recommendation, then the supporting arguments, then the data.",
+        "[Cedric Chin, The Amazon Weekly Business Review](https://commoncog.com/the-amazon-weekly-business-review/) (Jul 2024). A weekly metrics review works by exposing cause and effect, and depends on leadership discipline more than tooling.",
+        "[Amanda Herson, Founder Collective, Debates Over Updates](https://foundercollective.com/?p=14226) (Mar 2026). Start with what changed since the last meeting, send data ahead, and build the meeting around 1 decision.",
+        "[Product School, Product Leadership](https://productschool.com/blog/leadership/product-leadership) (Nov 2026). One story cut three ways, why this problem for teams, why this bet for executives, why now for the board."
+      ]
+    },
+    {
+      "id": "02",
+      "kind": "slide",
+      "act": "Strategy",
+      "nav": "Strategy on a page",
+      "audiences": [
+        "L",
+        "S"
+      ],
+      "illustrative": true,
+      "kicker": "Strategy",
+      "title": "We win mid-market freight brokers by automating the exception, priced per load.",
+      "blocks": [
+        {
+          "type": "cards",
+          "columns": 4,
+          "items": [
+            {
+              "title": "Diagnosis",
+              "body": [
+                "Dispatchers lose most of their day to exceptions that rules engines can't handle. Incumbents sell seats, so they gain nothing when that work disappears."
+              ]
+            },
+            {
+              "title": "Guiding policy",
+              "body": [
+                "Own the exception for brokers with 50 to 500 dispatchers. Charge for loads the agent clears."
+              ]
+            },
+            {
+              "title": "Coherent actions",
+              "body": [
+                {
+                  "list": [
+                    "Raise agent task success to 90%",
+                    "First automated load inside 14 days",
+                    "Cut cost per task below $0.27"
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "We will not",
+              "body": [
+                {
+                  "list": [
+                    "Build a carrier marketplace",
+                    "Ship on-premise",
+                    "Take custom work for fleets above 5,000 trucks this year"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "columns": [
+            {
+              "label": "Layer"
+            },
+            {
+              "label": "Harborline"
+            },
+            {
+              "label": "Owner"
+            },
+            {
+              "label": "Horizon"
+            }
+          ],
+          "rows": [
+            [
+              "Mission",
+              "Freight that moves without phone calls",
+              "CEO",
+              "Open"
+            ],
+            [
+              "Company strategy",
+              "Lead exception automation for mid-market brokers",
+              "CEO",
+              "1 to 3 years"
+            ],
+            [
+              "Product strategy",
+              "Agent quality first, activation second, unit cost third",
+              "CPTO",
+              "1 to 2 years"
+            ],
+            [
+              "Themes",
+              "Agent quality, guided activation, model routing, usage pricing",
+              "Directors",
+              "2 to 4 quarters"
+            ],
+            [
+              "Goals",
+              "The measures on slides 11 and 12",
+              "Teams",
+              "Quarter"
+            ]
+          ]
+        }
+      ],
+      "asof": "Strategy last reviewed Jul 2026. Next review Jan 2027.",
+      "ledger_refs": [],
+      "guide": {
+        "question": "What is our bet and what are we not doing?",
+        "needs": "The strategy document. If it doesn't exist, the intake interview writes this slide with you.",
+        "rule": "The \"we will not\" column is required. Test it by asking 2 engineers and a salesperson to explain the strategy in 2 sentences each."
+      },
+      "dig_deeper": [
+        "[Will Larson, Introduction for Engineering Strategy](https://lethain.com/intro-eng-strategy/) (May 2024). Diagnosis, guiding policy and coherent actions, applied to an engineering organisation.",
+        "[Lenny Rachitsky with Chandra Janakiraman, An operator's guide to product strategy](https://www.lennysnewsletter.com/p/an-operators-guide-to-product-strategy-chandra-janakiraman) (Jan 2025). A good strategy names a few focus areas and the areas explicitly out of focus.",
+        "[Roger Martin, Why the How-to-Win Strategy Choice is So Hard](https://rogerlmartin.substack.com/p/why-the-how-to-win-strategy-choice) (Nov 2025). Choose where to play and how to win together. A list of initiatives is not a strategy.",
+        "Claire Vo, The Last Roadmap (Lenny and Friends Summit, Sep 2026). Hold convictions for years and treat features as disposable."
+      ],
+      "requires": [
+        {
+          "source": "interview",
+          "data": "Objectives, diagnosis, guiding policy, actions and non-goals",
+          "required": true
+        },
+        {
+          "source": "docs",
+          "data": "The strategy document",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "03",
+      "kind": "slide",
+      "act": "Strategy",
+      "nav": "Line of sight",
+      "audiences": [
+        "L",
+        "S"
+      ],
+      "illustrative": true,
+      "kicker": "Strategy",
+      "title": "78% of R&D capacity traces to a company objective through a stated cause.",
+      "blocks": [
+        {
+          "type": "tree",
+          "objective": "Grow ARR to $50M",
+          "bets": [
+            {
+              "bet": "Guided activation",
+              "owner": "Activation team",
+              "outcome": "Activation 41% to 50%",
+              "cause": "A faster first automated load lifts trial conversion",
+              "confidence": "Medium, 1 live test"
+            },
+            {
+              "bet": "Per-load pricing pilot",
+              "owner": "Growth team",
+              "outcome": "Expansion ARR $2.4M a quarter",
+              "cause": "Price that tracks cleared loads grows with agent use",
+              "confidence": "Low, untested"
+            }
+          ]
+        },
+        {
+          "type": "tree",
+          "objective": "Net revenue retention at 120%",
+          "bets": [
+            {
+              "bet": "Agent quality",
+              "owner": "Agent team, eval agent",
+              "outcome": "Task success 86% to 90%",
+              "cause": "Accounts with more automated loads renew at higher rates",
+              "confidence": "High, cohort data"
+            },
+            {
+              "bet": "Core reliability",
+              "owner": "Core dispatch team",
+              "outcome": "12 tickets per 100 accounts",
+              "cause": "Fewer dispatch failures reduce churn risk flags",
+              "confidence": "Medium"
+            }
+          ]
+        },
+        {
+          "type": "tree",
+          "objective": "AI gross margin at 55%",
+          "bets": [
+            {
+              "bet": "Model routing",
+              "owner": "Platform team, review agent",
+              "outcome": "Cost per task $0.33 to $0.27",
+              "cause": "Simple tasks go to a cheaper model with no eval loss",
+              "confidence": "High, offline evals"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "variant": "note",
+          "text": "The other 22% is keep-the-lights-on and unplanned work. It supports every objective and is reported on slide 5.[[L05]]"
+        }
+      ],
+      "asof": "Source: Linear initiatives tagged by objective, Q3 FY26.",
+      "ledger_refs": [],
+      "guide": {
+        "question": "How does each team's work connect to what the company is trying to do?",
+        "needs": "Initiatives or epics tagged to an objective, with an owner. Agents that carry work are listed as owners too.",
+        "rule": "Each row states the cause in one sentence and a confidence level. A branch with no stated cause is an org chart, so it comes off the slide."
+      },
+      "dig_deeper": [
+        "[John Cutler, Stop the (Goal) Cascade Madness](https://cutlefish.substack.com/p/tbm-305-stop-the-goal-cascade-madness) (Aug 2024). Many goal cascades are org chart cascades with no model underneath. 2 levels of goals are enough.",
+        "[Teresa Torres, When It Comes to Discovery, Something is Better Than Nothing](https://www.producttalk.org/y-oslo-2024/) (Dec 2024). An opportunity solution tree maps the path from an outcome through opportunities and solutions to tested assumptions.",
+        "[Linear, Initiative updates](https://linear.app/changelog/2025-02-13-initiative-updates) (Feb 2025). Written updates report progress and summarise work across the projects in an initiative.",
+        "[Notion on Latent Space](https://www.latent.space/p/notion) (2026). The team that owns a capability also owns the tool its agents use."
+      ],
+      "requires": [
+        {
+          "source": "tracker",
+          "data": "Initiatives or epics tagged to an objective, each with an owner",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "04",
+      "kind": "slide",
+      "act": "Strategy",
+      "nav": "Portfolio",
+      "audiences": [
+        "L",
+        "S"
+      ],
+      "illustrative": true,
+      "kicker": "Strategy",
+      "title": "The agent line produced 81% of ARR growth on 34% of capacity.",
+      "blocks": [
+        {
+          "type": "table",
+          "columns": [
+            {
+              "label": "Product line"
+            },
+            {
+              "label": "Stage"
+            },
+            {
+              "label": "Objective served"
+            },
+            {
+              "label": "Capacity",
+              "align": "num"
+            },
+            {
+              "label": "ARR",
+              "align": "num"
+            },
+            {
+              "label": "Lead outcome"
+            },
+            {
+              "label": "Status"
+            }
+          ],
+          "rows": [
+            [
+              "Dispatch Agent",
+              "Expand",
+              "Retention, AI margin",
+              "34%",
+              "$14.0M, up 19%",
+              "Task success 86%, target 88%",
+              "[[status:watch]]"
+            ],
+            [
+              "Core Dispatch",
+              "Sustain",
+              "Retention",
+              "26%",
+              "$27.2M, up 2%",
+              "12.6 tickets per 100 accounts, target 12",
+              "[[status:watch]]"
+            ],
+            [
+              "Onboarding & growth",
+              "Expand",
+              "ARR growth",
+              "13%",
+              "Drives new ARR",
+              "Activation 41%, target 50%",
+              "[[status:stalled]]"
+            ],
+            [
+              "Carrier Scorecards",
+              "Explore",
+              "ARR growth",
+              "6%",
+              "Beta, no revenue",
+              "Too early to read",
+              "[[status:watch]]"
+            ],
+            [
+              "Platform, shared",
+              "Sustain",
+              "All three",
+              "21%",
+              "Shared",
+              "Cost per task $0.33, target $0.27",
+              "[[status:landed]]"
+            ]
+          ]
+        },
+        {
+          "type": "cards",
+          "columns": 3,
+          "items": [
+            {
+              "title": "Explore",
+              "body": [
+                "We are still testing value. Fund in small, time-boxed amounts and expect to kill some."
+              ]
+            },
+            {
+              "title": "Expand",
+              "body": [
+                "Value is proven. Fund growth and measure adoption and revenue."
+              ]
+            },
+            {
+              "title": "Sustain",
+              "body": [
+                "The line pays for the rest. Fund reliability and cost, and cap new scope."
+              ]
+            }
+          ]
+        }
+      ],
+      "asof": "Sources: Linear capacity by product line (includes each line's keep-the-lights-on work), Finance ARR by SKU. Q3 FY26.",
+      "ledger_refs": [
+        "L15"
+      ],
+      "guide": {
+        "question": "Across every product line, where does the money go and what does each line return?",
+        "needs": "Capacity and revenue split by product line, one lead outcome per line, a stage for each.",
+        "rule": "One row per line and one lead outcome per row. Judge each line by its stage. With a single product, drop this slide."
+      },
+      "dig_deeper": [
+        "[Kent Beck, Canon 3X: Explore/Expand/Extract](https://newsletter.kentbeck.com/p/canon-3x-exploreexpandextract) (Jul 2026). Explore, expand and extract each need their own approach, finance included. Running one phase by another's rules kills ideas.",
+        "ICONIQ Growth, The Essential R&D Board Slides (2024). Roadmap and adoption shown by product."
+      ],
+      "requires": [
+        {
+          "source": "tracker",
+          "data": "Capacity by product line",
+          "required": true
+        },
+        {
+          "source": "finance",
+          "data": "ARR by product line",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "05",
+      "kind": "slide",
+      "act": "Strategy",
+      "nav": "Investment mix",
+      "audiences": [
+        "L",
+        "B"
+      ],
+      "illustrative": true,
+      "kicker": "Strategy",
+      "title": "We planned 15% on keeping the lights on and spent 22%. Inference ran 28% over plan.",
+      "blocks": [
+        {
+          "type": "cards",
+          "columns": "2:1",
+          "items": [
+            {
+              "title": "Engineering capacity by type of work",
+              "body": [
+                {
+                  "type": "plan_vs_actual",
+                  "legend": {
+                    "plan": "Plan",
+                    "actual": "Actual",
+                    "over": "Over plan"
+                  },
+                  "rows": [
+                    {
+                      "label": "New capabilities",
+                      "plan": 35,
+                      "actual": 31
+                    },
+                    {
+                      "label": "Improve the core",
+                      "plan": 20,
+                      "actual": 18
+                    },
+                    {
+                      "label": "Growth",
+                      "plan": 10,
+                      "actual": 8
+                    },
+                    {
+                      "label": "Platform & scale",
+                      "plan": 20,
+                      "actual": 21
+                    },
+                    {
+                      "label": "Keep the lights on",
+                      "plan": 15,
+                      "actual": 22,
+                      "over": true
+                    }
+                  ]
+                },
+                "SOC 2 evidence work and follow-up from 3 Sev-2 incidents took 7 points from new capabilities and growth. We expect 17% next quarter.[[L05]]"
+              ]
+            },
+            {
+              "title": "Dollars, Q3",
+              "body": [
+                {
+                  "type": "table",
+                  "columns": [
+                    {
+                      "label": "Line"
+                    },
+                    {
+                      "label": "Plan",
+                      "align": "num"
+                    },
+                    {
+                      "label": "Actual",
+                      "align": "num"
+                    }
+                  ],
+                  "rows": [
+                    [
+                      "R&D payroll",
+                      "$3.75M",
+                      "$3.7M"
+                    ],
+                    [
+                      "Inference (cost of revenue)",
+                      "$480K",
+                      "$612K"
+                    ],
+                    [
+                      "AI tools for the team",
+                      "$95K",
+                      "$90K"
+                    ],
+                    [
+                      "Cloud",
+                      "$400K",
+                      "$410K"
+                    ],
+                    [
+                      "R&D as a share of revenue",
+                      "41%",
+                      "41%"
+                    ]
+                  ]
+                },
+                "Inference grew with agent volume, which rose 26%. Unit cost fell 20%.[[L06]]",
+                "R&D was 45% of revenue a year ago. The plan reaches 36% by FY28. SaaS Capital puts the private SaaS median at 22% of ARR (Jun 2026)."
+              ]
+            }
+          ]
+        },
+        {
+          "type": "cards",
+          "columns": 1,
+          "items": [
+            {
+              "type": "data_needed",
+              "label": "Data needed",
+              "text": "Cash, net burn and runway in months. This example covers product and engineering spend only, so it has no company cash position. A board cut needs all three.",
+              "owner": "the CFO",
+              "due": "Q4"
+            }
+          ]
+        }
+      ],
+      "asof": "Sources: Linear work-type labels, Finance actuals, provider invoices. Quarter ending 30 Sep 2026.",
+      "ledger_refs": [],
+      "guide": {
+        "question": "Where did the people and the money go, and did that match the strategy?",
+        "needs": "A work-type label on every issue or epic, Finance actuals, model provider and tooling invoices.",
+        "rule": "Explain any variance over 3 points in one sentence. Show token and tooling spend next to headcount, and R&D as a share of revenue with a dated path. Agree the split with Finance before the meeting."
+      },
+      "dig_deeper": [
+        "ICONIQ Growth, The Essential R&D Board Slides (Jul 2024). Capacity across new capabilities, quality, internal productivity and keep-the-lights-on, shown for last, current and next quarters.",
+        "[Adam Ferrari, Allocating with Intent](https://adamferrari.substack.com/p/allocating-with-intent) (Mar 2025). Every R&D organisation is placing bets. Name the categories, set target percentages and track actual spend against them.",
+        "[John Cutler, Time Allocation ≠ Capacity Allocation](https://cutlefish.substack.com/p/tbm-377-time-allocation-capacity) (Sep 2025). Hours allocated are not capacity. Interruptions, rework and dependencies shape what a team can deliver.",
+        "[LinearB, engineering benchmarks 2025](https://linearb.io/blog/engineering-benchmarks-2025-devex-developer-productivity) (Jan 2025, about 3,000 organisations). Effort averages 55% new value, 20% enhancements, 15% developer experience and 10% keeping the lights on. LinearB presents these as guidance.",
+        "[SaaS Capital, Spending Benchmarks for Private B2B SaaS Companies](https://www.saas-capital.com/blog-posts/spending-benchmarks-for-private-b2b-saas-companies/) (Jun 2026, survey of more than 1,000 companies). The median spend on research and development is 22% of ARR."
+      ],
+      "requires": [
+        {
+          "source": "tracker",
+          "data": "A work-type label on every issue or epic",
+          "required": true
+        },
+        {
+          "source": "finance",
+          "data": "Plan and actual spend, with model provider and tooling invoices",
+          "required": true
+        },
+        {
+          "source": "finance",
+          "data": "Cash balance, net burn and runway",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "06",
+      "kind": "slide",
+      "act": "Discovery",
+      "nav": "What we learned",
+      "audiences": [
+        "L",
+        "S"
+      ],
+      "illustrative": true,
+      "kicker": "Discovery",
+      "title": "Two of five opportunities are validated. We killed one after a prototype test.",
+      "blocks": [
+        {
+          "type": "table",
+          "columns": [
+            {
+              "label": "Opportunity"
+            },
+            {
+              "label": "Risk tested"
+            },
+            {
+              "label": "Evidence"
+            },
+            {
+              "label": "How we tested"
+            },
+            {
+              "label": "Confidence"
+            },
+            {
+              "label": "Decision"
+            }
+          ],
+          "rows": [
+            [
+              "The agent fails on multi-stop reroutes",
+              "Feasibility",
+              "14 of 36 eval failures, 9 interviews",
+              "Error analysis, prototype",
+              "High",
+              "Fund, bet 1"
+            ],
+            [
+              "New accounts stall before the first automated load",
+              "Usability",
+              "41% activate in 14 days, 7 interviews",
+              "Live test, plus 6 points",
+              "Medium",
+              "Fund, bet 2"
+            ],
+            [
+              "Brokers want to pay per load",
+              "Viability",
+              "11 interviews, 1 competitor move",
+              "Untested",
+              "Low",
+              "Pilot, bet 4"
+            ],
+            [
+              "Carrier scorecards",
+              "Value",
+              "5 interviews",
+              "Prototype in test",
+              "Medium",
+              "Continue"
+            ],
+            [
+              "Carrier marketplace",
+              "Value",
+              "3 of 12 customers would pay",
+              "Prototype",
+              "High",
+              "Killed"
+            ]
+          ]
+        },
+        {
+          "type": "tiles",
+          "columns": 4,
+          "items": [
+            {
+              "value": "23",
+              "label": "customer interviews"
+            },
+            {
+              "value": "6",
+              "label": "prototype tests"
+            },
+            {
+              "value": "2",
+              "label": "live experiments"
+            },
+            {
+              "value": "412",
+              "label": "eval cases reviewed by product managers"
+            }
+          ]
+        }
+      ],
+      "asof": "Sources: research repository, experiment log, eval suite v14. Q3 FY26.",
+      "ledger_refs": [
+        "L08"
+      ],
+      "guide": {
+        "question": "What did we learn about customers this period, and how sure are we?",
+        "needs": "Interview notes, prototype and experiment results, eval error analysis.",
+        "rule": "Evidence comes from real customers. AI can summarise interviews and it can't stand in for them. Name the risk each test addressed (value, usability, feasibility or viability). Show at least one thing you killed."
+      },
+      "dig_deeper": [
+        "Teresa Torres, Continuous Discovery Habits (2021). In 2026 she said she would add a chapter on evals as a discovery habit, and that cheap building is no reason to build everything ([airfocus, Jun 2026](https://airfocus.com/blog/how-ai-is-changing-product-management/)).",
+        "[Marty Cagan, The AI Productivity Paradox](https://www.svpg.com/the-ai-productivity-paradox/) (Jul 2026). Build to learn in discovery, build to earn in delivery. His four risks are value, usability, feasibility and viability.",
+        "[Hamel Husain and Shreya Shankar on error analysis](https://hamel.dev/notes/llm/ai-product-engineering/evals-error-analysis.html) (Jun 2026). A product manager or domain expert should read the failures.",
+        "[First Round, The Art of Evals at Figma](https://review.firstround.com/figma-ai-eval-process/) (May 2025). People at the centre of AI product evaluation."
+      ],
+      "requires": [
+        {
+          "source": "research",
+          "data": "Interview notes, prototype and experiment results",
+          "required": true
+        },
+        {
+          "source": "evals",
+          "data": "Eval error analysis",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "07",
+      "kind": "slide",
+      "act": "Discovery",
+      "nav": "Customer & market signal",
+      "audiences": [
+        "L"
+      ],
+      "illustrative": true,
+      "kicker": "Discovery",
+      "title": "Buyers choose us on agent accuracy and leave over a missing integration.",
+      "blocks": [
+        {
+          "type": "tiles",
+          "columns": 3,
+          "items": [
+            {
+              "value": "19 of 37",
+              "label": "wins cite agent accuracy in the pilot",
+              "note": "The pilot is our best sales asset. Keep it under 14 days."
+            },
+            {
+              "value": "11 of 27",
+              "label": "losses cite the missing TMS integration",
+              "note": "This commitment slipped to Q4. It is the top delivery priority."
+            },
+            {
+              "value": "12.6",
+              "label": "support tickets per 100 accounts, down from 14.2",
+              "note": "Reroute errors remain the largest ticket theme."
+            }
+          ]
+        },
+        {
+          "type": "cards",
+          "columns": 1,
+          "items": [
+            {
+              "title": "Market",
+              "body": [
+                "One direct competitor moved to per-load pricing in September. Two prospects raised it unprompted in October. This supports the pricing pilot on slide 16 and adds no proof that customers will pay more."
+              ]
+            }
+          ]
+        }
+      ],
+      "asof": "Sources: CRM win and loss notes on 64 closed deals, support desk. Q3 FY26.",
+      "ledger_refs": [
+        "L10"
+      ],
+      "guide": {
+        "question": "What are customers and competitors telling us?",
+        "needs": "Win and loss reasons with counts, support themes, call notes.",
+        "rule": "Counts, never anecdotes. Say what each signal changes on the roadmap."
+      },
+      "dig_deeper": [
+        "Melissa Perri and Denise Tilles, Product Operations (2023). Business data, customer data, process.",
+        "[Melissa Perri, The bottleneck isn't building, it's deciding](https://productinstitute.kit.com/posts/the-bottleneck-isn-t-building-it-s-deciding) (2026), with the State of AI in Product 2026 survey of 309 product leaders."
+      ],
+      "requires": [
+        {
+          "source": "crm",
+          "data": "Win and loss reasons with counts",
+          "required": true
+        },
+        {
+          "source": "support",
+          "data": "Support themes",
+          "required": true
+        },
+        {
+          "source": "research",
+          "data": "Call notes",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "08",
+      "kind": "slide",
+      "act": "Delivery",
+      "nav": "Shipped vs impact",
+      "audiences": [
+        "L",
+        "S"
+      ],
+      "illustrative": true,
+      "kicker": "Delivery",
+      "title": "We shipped 9 of 11 commitments. 5 have moved their target metric so far.",
+      "blocks": [
+        {
+          "type": "table",
+          "columns": [
+            {
+              "label": "Commitment"
+            },
+            {
+              "label": "Target metric"
+            },
+            {
+              "label": "Result"
+            },
+            {
+              "label": "Status"
+            }
+          ],
+          "rows": [
+            {
+              "group": "Moved the metric (5)"
+            },
+            [
+              "Agent handles late pickups",
+              "Human override rate",
+              "9.2% to 7.1%",
+              "[[status:landed]]"
+            ],
+            [
+              "Prompt caching",
+              "Cost per successful task",
+              "$0.41 to $0.33",
+              "[[status:landed]]"
+            ],
+            [
+              "Bulk load import",
+              "Time to first load",
+              "3.1 days to 1.9",
+              "[[status:landed]]"
+            ],
+            [
+              "Eval suite v14",
+              "Eval cases",
+              "260 to 412",
+              "[[status:landed]]"
+            ],
+            [
+              "Onboarding checklist",
+              "Activation",
+              "39% to 41%",
+              "[[status:landed]]"
+            ],
+            {
+              "group": "Shipped, too early to read (2)"
+            },
+            [
+              "Carrier scorecards beta, audit log export",
+              "Weekly use, enterprise deals unblocked",
+              "Read in Q4",
+              "[[status:watch]]"
+            ],
+            {
+              "group": "Shipped, no movement (2)"
+            },
+            [
+              "Rate confirmation parsing v2, driver mobile updates",
+              "Manual edits, driver response time",
+              "No change",
+              "[[status:watch]]"
+            ],
+            {
+              "group": "Slipped (2)"
+            },
+            [
+              "TMS integration, SOC 2 Type II evidence",
+              "Loss rate, enterprise readiness",
+              "Moved to Q4",
+              "[[status:stalled]]"
+            ]
+          ]
+        }
+      ],
+      "asof": "Sources: Linear projects, release notes, product analytics. Q3 FY26.",
+      "ledger_refs": [
+        "L03"
+      ],
+      "guide": {
+        "question": "Did we ship what we said, and did it work?",
+        "needs": "The commitments made last period, each with one target metric named before launch.",
+        "rule": "Group by outcome. A shipped item with no metric goes under \"no movement\". Never list features without results."
+      },
+      "dig_deeper": [
+        "ICONIQ Growth, The Essential R&D Board Slides (2024). Product spotlight with success measures defined up front.",
+        "[Karri Saarinen, 10 rules for crafting products](https://www.figma.com/blog/karri-saarinens-10-rules-for-crafting-products-that-stand-out/) (Mar 2025). Reduce scope to raise quality."
+      ],
+      "requires": [
+        {
+          "source": "tracker",
+          "data": "Last period's commitments, each with one target metric named before launch",
+          "required": true
+        },
+        {
+          "source": "analytics",
+          "data": "The result for each target metric",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "09",
+      "kind": "slide",
+      "act": "Delivery",
+      "nav": "Delivery system health",
+      "audiences": [
+        "L"
+      ],
+      "illustrative": true,
+      "kicker": "Delivery",
+      "title": "Throughput is up 21%. Review time and change failures are the cost.",
+      "blocks": [
+        {
+          "type": "scorecard",
+          "target_kind": "range",
+          "labels": {
+            "metric": "Metric",
+            "prior": "Prior qtr",
+            "actual": "This qtr",
+            "target": "Healthy range",
+            "status": "Status"
+          },
+          "rows": [
+            {
+              "group": "Speed"
+            },
+            {
+              "metric": "Deploys per week",
+              "prior": "34",
+              "actual": "41",
+              "target": "35+",
+              "status": "landed"
+            },
+            {
+              "metric": "Lead time for change",
+              "prior": "52h",
+              "actual": "38h",
+              "target": "under 40h",
+              "status": "landed"
+            },
+            {
+              "metric": "Delivered against committed",
+              "prior": "74%",
+              "actual": "82%",
+              "target": "80 to 90%",
+              "status": "landed"
+            },
+            {
+              "group": "Quality, the pair for every speed metric"
+            },
+            {
+              "metric": "Change failure rate",
+              "prior": "3.1%",
+              "actual": "3.4%",
+              "target": "under 3.5%",
+              "status": "watch"
+            },
+            {
+              "metric": "Time to restore",
+              "prior": "46m",
+              "actual": "41m",
+              "target": "under 60m",
+              "status": "landed"
+            },
+            {
+              "metric": "Pull request review time",
+              "prior": "9h",
+              "actual": "13h",
+              "target": "under 10h",
+              "status": "stalled"
+            },
+            {
+              "metric": "Rework rate",
+              "prior": "11%",
+              "actual": "14%",
+              "target": "under 12%",
+              "status": "watch"
+            },
+            {
+              "group": "Effectiveness and impact"
+            },
+            {
+              "metric": "Developer experience index, 14-question quarterly survey scored 0 to 100",
+              "prior": "68",
+              "actual": "71",
+              "target": "70+",
+              "status": "landed"
+            },
+            {
+              "metric": "Capacity on new capabilities",
+              "prior": "33%",
+              "actual": "31%",
+              "target": "30 to 40%",
+              "status": "landed"
+            },
+            {
+              "metric": "ARR per R&D employee",
+              "prior": "$642K",
+              "actual": "$687K",
+              "target": "$650K+",
+              "status": "landed"
+            }
+          ]
+        }
+      ],
+      "asof": "Sources: GitHub, CI, incident tool, quarterly developer survey. Q3 FY26.",
+      "ledger_refs": [
+        "L09"
+      ],
+      "guide": {
+        "question": "Is the system that ships our product healthy and stable?",
+        "needs": "Source control and CI data, incident records, a developer survey. Pick 8 to 10 metrics and keep them every period.",
+        "rule": "No speed metric without its quality pair. Show a healthy range for each metric, because single-point targets on delivery metrics get gamed. Define every index. Leave out story points, velocity, lines of code and AI suggestion acceptance rate."
+      },
+      "dig_deeper": [
+        "[DORA, State of AI-assisted Software Development](https://dora.dev/dora-report-2025/) (Sep 2025, about 5,000 respondents). AI use now tracks with higher throughput and lower stability.",
+        "ICONIQ Growth, The Essential R&D Board Slides (2024). The scorecard layout here, with speed, effectiveness, quality and impact.",
+        "[DX Core 4 and the AI Measurement Framework](https://newsletter.getdx.com/p/measuring-engineering-productivity-in-the-ai-era) (2025). Utilization, impact, cost.",
+        "[Faros AI, AI Productivity Paradox](https://243608892.fs1.hubspotusercontent-na2.net/hubfs/243608892/AI_Engineering_Impact_Report_July_2025_Faros_AI.pdf) (Jul 2025, 10,000+ developers). 98% more merged pull requests, 91% longer reviews, no company-level gain. Vendor telemetry."
+      ],
+      "requires": [
+        {
+          "source": "source_control",
+          "data": "Deploys, lead time, review time and change failures",
+          "required": true
+        },
+        {
+          "source": "incidents",
+          "data": "Time to restore",
+          "required": true
+        },
+        {
+          "source": "survey",
+          "data": "The developer experience index",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "09b",
+      "kind": "slide",
+      "act": "Delivery",
+      "nav": "Delivery on a page",
+      "audiences": [
+        "B"
+      ],
+      "illustrative": true,
+      "kicker": "Delivery",
+      "title": "We shipped 9 of 11 commitments and faster than last quarter. Review time is the cost.",
+      "blocks": [
+        {
+          "type": "cards",
+          "columns": 3,
+          "items": [
+            {
+              "title": "Delivery",
+              "body": [
+                {
+                  "list": [
+                    "9 of 11 commitments shipped",
+                    "5 have moved their target metric",
+                    "The TMS integration and SOC 2 Type II moved to Q4"
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Speed and its price",
+              "body": [
+                {
+                  "list": [
+                    "Deploys per week 34 to 41",
+                    "Lead time 52h to 38h",
+                    "Change failure rate 3.1% to 3.4%",
+                    "Review time 9h to 13h, outside our range"
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Security & AI governance",
+              "body": [
+                {
+                  "list": [
+                    "Every service met its availability objective",
+                    "0 critical vulnerabilities open past 30 days",
+                    "Every model change passes an eval gate",
+                    "Customer data is excluded from model training by contract"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "strip",
+          "label": "AI inside the team.",
+          "text": "88% of engineers use it weekly at $90K a quarter. Pull requests move 18% faster than a year ago and reviews take 44% longer. We report no productivity percentage."
+        }
+      ],
+      "asof": "Condensed from slides 8, 9, 10 and 13 of the leadership cut. Q3 FY26.",
+      "ledger_refs": [],
+      "guide": {
+        "question": "For a board, did we deliver, at what cost to quality, and are we safe?",
+        "needs": "Nothing new. It condenses four leadership slides.",
+        "rule": "Board cut only. Keep security and AI governance on this page every quarter, even when nothing changed."
+      },
+      "rolls_up": [
+        "08",
+        "09",
+        "10",
+        "13"
+      ]
+    },
+    {
+      "id": "10",
+      "kind": "slide",
+      "act": "Delivery",
+      "nav": "Platform & security",
+      "audiences": [
+        "L"
+      ],
+      "illustrative": true,
+      "kicker": "Delivery",
+      "title": "Every service met its availability objective. SOC 2 Type II moved one quarter.",
+      "blocks": [
+        {
+          "type": "cards",
+          "columns": 2,
+          "items": [
+            {
+              "title": "Reliability",
+              "body": [
+                {
+                  "list": [
+                    "Dispatch API met its 99.95% objective with 41% of the error budget unspent",
+                    "0 Sev-1 incidents, 3 Sev-2",
+                    "Agent p95 latency 6.8s, inside its 8s objective"
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Security & AI governance",
+              "body": [
+                {
+                  "list": [
+                    "SOC 2 Type II audit window moved to Q4",
+                    "0 critical vulnerabilities open past 30 days",
+                    "Every model change passes an eval gate",
+                    "AI use policy published. Customer data is excluded from training by contract"
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Engineering strategy",
+              "body": [
+                {
+                  "list": [
+                    "Diagnosis. One model provider and slow reviews limit us",
+                    "Policy. Route by task and keep batches small",
+                    "Actions. Routing layer, merge queue, eval gate"
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Architecture & debt",
+              "body": [
+                {
+                  "list": [
+                    "Model routing design approved",
+                    "Debt register holds 14 items, 4 retired this quarter",
+                    "Canadian data region live"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "asof": "Sources: status page, security tracker, architecture decision log. Q3 FY26.",
+      "ledger_refs": [],
+      "guide": {
+        "question": "Is the base we build on safe, stable and getting simpler?",
+        "needs": "Service-level objectives and error budgets, incident data, audit status, vulnerability ageing, the debt register.",
+        "rule": "Tie platform work to money or risk, such as lower cloud spend, faster enterprise onboarding or avoided downtime. Report objectives and error budget in place of raw uptime. State the engineering strategy in three lines. The board gets slide 9b."
+      },
+      "dig_deeper": [
+        "[Will Larson, Steps to build an engineering strategy](https://lethain.com/components-of-eng-strategy/) (Mar 2025). Explore, diagnose, refine, set policy, then run it. Each step feeds the next.",
+        "[InfoQ, Grafana applies SLOs and error budgets to AI agent behaviour](https://www.infoq.com/news/2026/10/grafana-slo-ai-agent/) (Oct 2026). Service-level objectives and error budgets can track agent quality, because a system can stay up while it becomes less trustworthy.",
+        "[InfoQ on Joy Ebertz, All Tech Debt is Not Created Equal](https://www.infoq.com/news/2026/03/tech-debt-not-equal/) (QCon London, Mar 2026). Decide which debt matters with 6 questions, starting with the cost of doing nothing.",
+        "[Product School, AI-native](https://productschool.com/blog/artificial-intelligence/ai-native) (Feb 2026). Version prompts and models, log behaviour, keep an incident process for AI features."
+      ],
+      "requires": [
+        {
+          "source": "incidents",
+          "data": "Availability objectives, error budgets and incident data",
+          "required": true
+        },
+        {
+          "source": "security",
+          "data": "Audit status and vulnerability ageing",
+          "required": true
+        },
+        {
+          "source": "docs",
+          "data": "The architecture decision log and debt register",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "11",
+      "kind": "slide",
+      "act": "Measurement",
+      "nav": "Outcome scorecard",
+      "audiences": [
+        "L",
+        "B",
+        "S"
+      ],
+      "illustrative": true,
+      "kicker": "Measurement",
+      "title": "The North Star beat target. Activation and expansion did not.",
+      "blocks": [
+        {
+          "type": "scorecard",
+          "target_kind": "target",
+          "labels": {
+            "metric": "Outcome",
+            "prior": "Prior qtr",
+            "actual": "This qtr",
+            "target": "Target",
+            "status": "Status",
+            "extra": [
+              "Benchmark",
+              "Owner"
+            ]
+          },
+          "rows": [
+            {
+              "metric": "North Star, loads cleared with no manual touch per week",
+              "prior": "18.4K",
+              "actual": "23.1K",
+              "target": "22K",
+              "status": "landed",
+              "extra": [
+                "None external",
+                "Agent team"
+              ]
+            },
+            {
+              "metric": "Activation, first automated load in 14 days",
+              "prior": "39%",
+              "actual": "41%",
+              "target": "50%",
+              "status": "stalled",
+              "extra": [
+                "None external",
+                "Activation team"
+              ]
+            },
+            {
+              "metric": "Weekly active dispatchers",
+              "prior": "5,890",
+              "actual": "6,120",
+              "target": "6,000",
+              "status": "landed",
+              "extra": [
+                "None external",
+                "Core dispatch"
+              ]
+            },
+            {
+              "metric": "Net revenue retention",
+              "prior": "117%",
+              "actual": "118%",
+              "target": "120%",
+              "status": "watch",
+              "extra": [
+                "Median 102%, top quartile 110%",
+                "CPTO, CRO"
+              ]
+            },
+            {
+              "metric": "Gross logo retention",
+              "prior": "93%",
+              "actual": "93%",
+              "target": "92%",
+              "status": "landed",
+              "extra": [
+                "None comparable",
+                "Customer success"
+              ]
+            },
+            {
+              "metric": "Expansion ARR in quarter",
+              "prior": "$2.1M",
+              "actual": "$1.9M",
+              "target": "$2.4M",
+              "status": "stalled",
+              "extra": [
+                "None external",
+                "Growth team"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "cards",
+          "columns": 2,
+          "items": [
+            {
+              "title": "Who does the work",
+              "body": [
+                "The agent touched 62% of loads this quarter and people alone handled 38%. We report agent and human activity separately so rising agent volume can't hide falling human use."
+              ]
+            },
+            {
+              "title": "What we don't count as outcomes",
+              "body": [
+                "Feature usage counts, AI adoption and pilots started. They are inputs and they live on slides 8 and 13."
+              ]
+            }
+          ]
+        }
+      ],
+      "asof": "Sources: PostHog, warehouse, Stripe, CRM. Quarter ending 30 Sep 2026.",
+      "ledger_refs": [
+        "L02",
+        "L04"
+      ],
+      "guide": {
+        "question": "Are customer and business outcomes moving?",
+        "needs": "One North Star, 3 to 5 input metrics, each with a definition, an owner, a target and a prior period.",
+        "rule": "Same metrics every period. Add an external benchmark only where a sourced one exists, and write \"none\" where it doesn't. Split agent activity from human activity wherever agents act for customers."
+      },
+      "dig_deeper": [
+        "[Aleph and Benchmarkit, 2026 SaaS & AI Performance Benchmarks](https://www.getaleph.com/answers/net-revenue-retention-saas-2026) (Jun 2026, 342 companies, 2025 actuals). Source of the retention benchmark.",
+        "[Eric Weber, North star metrics for AI data products](https://ericdataproduct.substack.com/p/north-star-metrics-for-ai-data-products) (May 2026). An AI product's North Star measures the change in its users' downstream work. Adoption, token use and satisfaction don't qualify.",
+        "Christina Wodtke, Radical Focus (2nd ed. 2021). A light cadence for goals. Linear prefers strategy and a North Star to team-level OKRs.",
+        "ICONIQ Growth, The Essential R&D Board Slides (2024). Report adoption over several periods, never as a single point.",
+        "[Atlassian, State of Teams 2026](https://www.atlassian.com/blog/how-we-build/the-future-of-product-craft) (May 2026). 89% of executives say AI sped work up and 6% can point to company-wide return."
+      ],
+      "requires": [
+        {
+          "source": "analytics",
+          "data": "One North Star and 3 to 5 input metrics, each with a definition, owner, target and prior period",
+          "required": true
+        },
+        {
+          "source": "billing",
+          "data": "Retention and expansion ARR",
+          "required": true
+        },
+        {
+          "source": "warehouse",
+          "data": "The query behind each metric",
+          "required": false
+        },
+        {
+          "source": "crm",
+          "data": "Customer accounts behind the retention measures",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "12",
+      "kind": "slide",
+      "act": "Measurement",
+      "nav": "AI in the product",
+      "audiences": [
+        "L",
+        "B"
+      ],
+      "illustrative": true,
+      "kicker": "Measurement",
+      "title": "The agent passes its quality bar and costs 20% less per task. Margin is 3 points short.",
+      "blocks": [
+        {
+          "type": "tiles",
+          "columns": 3,
+          "items": [
+            {
+              "value": "91.3%",
+              "label": "eval pass rate on 412 cases, bar is 90%"
+            },
+            {
+              "value": "86%",
+              "label": "task success in production, target 88%"
+            },
+            {
+              "value": "7.1%",
+              "label": "human override rate, down from 9.2%"
+            },
+            {
+              "value": "$0.33",
+              "label": "cost per successful task, down from $0.41"
+            },
+            {
+              "value": "52%",
+              "label": "AI gross margin, target 55%. Survey average 53% projected for 2026 (ICONIQ, Jul 2026)"
+            },
+            {
+              "value": "81%",
+              "label": "of inference spend with one provider, 2 providers in use"
+            }
+          ]
+        },
+        {
+          "type": "cards",
+          "columns": 3,
+          "items": [
+            {
+              "title": "Where it fails, 36 of 412 cases",
+              "body": [
+                {
+                  "list": [
+                    "Multi-stop reroutes, 14",
+                    "Carrier constraint missed, 9",
+                    "Ambiguous instruction, 8",
+                    "Other, 5"
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Margin path",
+              "body": [
+                "48% in Q2, 52% in Q3. Plan is 56% in Q4 once routing ships and 60% by Q2 FY27. Blended gross margin is 71%."
+              ]
+            },
+            {
+              "type": "data_needed",
+              "label": "Data needed",
+              "text": "Inference cost by customer segment. We don't measure it yet, so we can't say which accounts run below margin.",
+              "owner": "the Platform team",
+              "due": "Q4"
+            }
+          ]
+        }
+      ],
+      "asof": "Sources: eval harness v14, production traces, provider billing, Finance. Q3 FY26.",
+      "ledger_refs": [
+        "L07",
+        "L08",
+        "L11"
+      ],
+      "guide": {
+        "question": "Is our AI good, used and profitable?",
+        "needs": "A versioned eval set, production traces, cost per request, AI revenue and cost of revenue from Finance.",
+        "rule": "Show AI margin on its own line with a dated path to your target. Name the top failure modes with counts. When a number is missing, show a \"data needed\" card with an owner and a date."
+      },
+      "dig_deeper": [
+        "[ICONIQ, State of AI 2026](https://www.iconiq.com/growth/reports/state-of-ai-2026) (Jul 2026, survey of about 300 executives). AI product gross margin averaged 45% in 2025. The 2026 and 2027 figures are projections.",
+        "[Husain and Shankar, error analysis](https://hamel.dev/notes/llm/ai-product-engineering/evals-error-analysis.html) (Jun 2026). Read failures first, then write checks.",
+        "[Kyle Poyar, State of B2B Monetization 2025](https://www.growthunhinged.com/p/2025-state-of-b2b-monetization) (240 companies). Seat pricing fell from 21% to 15% and hybrid rose from 27% to 41%.",
+        "[Product School, AI-native](https://productschool.com/blog/artificial-intelligence/ai-native) (Feb 2026). The remove-it test, and evals as a condition for shipping."
+      ],
+      "requires": [
+        {
+          "source": "evals",
+          "data": "A versioned eval set, production traces and cost per request",
+          "required": true
+        },
+        {
+          "source": "finance",
+          "data": "AI revenue and cost of revenue",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "13",
+      "kind": "slide",
+      "act": "Measurement",
+      "nav": "AI in how we build",
+      "audiences": [
+        "L"
+      ],
+      "illustrative": true,
+      "kicker": "Measurement",
+      "title": "88% of engineers use AI weekly and pull requests move 18% faster than a year ago. Reviews take 44% longer.",
+      "blocks": [
+        {
+          "type": "table",
+          "columns": [
+            {
+              "label": "Use"
+            },
+            {
+              "label": "Stage"
+            },
+            {
+              "label": "Adoption"
+            },
+            {
+              "label": "Measured effect"
+            },
+            {
+              "label": "Guardrail"
+            }
+          ],
+          "rows": [
+            [
+              "Code assistants",
+              "Operational",
+              "88% of engineers weekly",
+              "Pull request cycle time down 18% on Q3 last year",
+              "Change failure rate, 3.4%"
+            ],
+            [
+              "Review agent",
+              "Operational",
+              "First review on 61% of pull requests",
+              "Human review time still up, 9h to 13h",
+              "Rework rate, 14%"
+            ],
+            [
+              "Unattended coding agents",
+              "Experimental",
+              "4 teams, 12% of merged pull requests",
+              "Too early to read",
+              "100% human review before merge"
+            ]
+          ]
+        },
+        {
+          "type": "cards",
+          "columns": 2,
+          "items": [
+            {
+              "title": "Cost",
+              "body": [
+                "$685 per engineer per month across tools and tokens, $90K for the quarter.[[L12]]"
+              ]
+            },
+            {
+              "title": "What we claim",
+              "body": [
+                "Throughput rose and review became the constraint. We don't report a productivity percentage. Slide 11 is the test of whether faster shipping produced better outcomes."
+              ]
+            }
+          ]
+        }
+      ],
+      "asof": "Sources: AI tool admin data, GitHub, developer survey. Baseline is Q3 FY25.",
+      "ledger_refs": [
+        "L09"
+      ],
+      "guide": {
+        "question": "Is AI making us better, or only busier?",
+        "needs": "Tool usage data, a pre-AI baseline, cost per engineer, the quality metrics from slide 9.",
+        "rule": "Report utilization, effect and cost together. Split attended tools from unattended agents. Any effect needs a baseline and a window. Adoption is never a result."
+      },
+      "dig_deeper": [
+        "[METR's 2025 trial](https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/) (Jul 2025, 16 developers, 246 issues) found experienced developers took 19% longer with AI. In [Feb 2026](https://metr.org/blog/2026-02-24-uplift-update/) METR called that result out of date and changed its experiment design.",
+        "[Stripe, Minions](https://stripe.dev/blog/minions-stripes-one-shot-end-to-end-coding-agents) (2026). More than 1,300 merged pull requests a week with no human-written code, every one reviewed by a person.",
+        "Ramp CPO Geoff Charles (Sep 2026) put agent-written pull requests at 75% and called speed a systems problem. A Ramp data engineer described internal AI return as measured by \"vibes\" ([dbt Summit 2026](https://www.getdbt.com/blog/ramp-internal-ai-agents-million-sessions)).",
+        "[Vercel Ship 2026](https://vercel.com/blog/vercel-ship-2026-recap) (Oct 2026). Agents that find and fix bugs from production context.",
+        "[Shopify's AI memo](https://www.digitalcommerce360.com/2025/04/08/internal-memo-shopify-ceo-declares-ai-non-optional/) (Apr 2025). The best-known example of an explicit AI stance, which DORA lists as a capability."
+      ],
+      "requires": [
+        {
+          "source": "ai_tools",
+          "data": "Usage and cost per engineer by tool",
+          "required": true
+        },
+        {
+          "source": "source_control",
+          "data": "A baseline from before the tools, and the quality metrics from slide 9",
+          "required": true
+        },
+        {
+          "source": "survey",
+          "data": "Developer sentiment",
+          "required": false
+        }
+      ]
+    },
+    {
+      "id": "14",
+      "kind": "slide",
+      "act": "Next investments",
+      "nav": "Risks & assumptions",
+      "audiences": [
+        "L",
+        "B"
+      ],
+      "illustrative": true,
+      "kicker": "Next investments",
+      "title": "Our largest risk is inference cost tied to one provider. Routing is the fix.",
+      "blocks": [
+        {
+          "type": "table",
+          "columns": [
+            {
+              "label": "Risk"
+            },
+            {
+              "label": "Likelihood"
+            },
+            {
+              "label": "Impact"
+            },
+            {
+              "label": "Mitigation and owner"
+            },
+            {
+              "label": "Due"
+            }
+          ],
+          "rows": [
+            [
+              "81% of inference spend sits with one model provider",
+              "Medium",
+              "High",
+              "Routing layer across 2 providers. Platform lead",
+              "Dec 2026"
+            ],
+            [
+              "Review capacity caps delivery as agent output grows",
+              "High",
+              "Medium",
+              "Merge queue, smaller batches, review agent tuning. VP Engineering",
+              "Nov 2026"
+            ],
+            [
+              "A model upgrade lowers agent quality",
+              "Medium",
+              "High",
+              "Eval gate on every model change. Agent team lead",
+              "In place"
+            ],
+            [
+              "SOC 2 Type II slips again and blocks enterprise deals",
+              "Low",
+              "Medium",
+              "Evidence automation, weekly check. Security lead",
+              "Jan 2027"
+            ],
+            [
+              "Head of AI Quality stays open past Q4",
+              "Medium",
+              "Medium",
+              "Search firm engaged, interim owner named. CPTO",
+              "Dec 2026"
+            ]
+          ]
+        },
+        {
+          "type": "cards",
+          "columns": 1,
+          "items": [
+            {
+              "title": "The plan assumes",
+              "body": [
+                "Model prices keep falling or hold. Brokers accept per-load pricing. Agent volume grows 20% a quarter. If one fails, slide 16 changes."
+              ]
+            }
+          ]
+        }
+      ],
+      "asof": "Source: risk register, reviewed 2 Oct 2026.",
+      "ledger_refs": [],
+      "guide": {
+        "question": "What could break the plan, and what are we doing about it?",
+        "needs": "A risk register with likelihood, impact, owner and date. A short list of assumptions the plan rests on.",
+        "rule": "5 risks at most. Each mitigation names a person. Include model, vendor, eval and review risks alongside the usual ones."
+      },
+      "dig_deeper": [
+        "McKinsey, A new operating model for a new world (Jun 2025). 12 elements and 4 outcomes, clarity, speed, skills and commitment. It reports a 30% gap between strategy potential and delivery, even at strong companies.",
+        "[Cagan, Build vs Buy in the Age of AI](https://www.svpg.com/the-ai-productivity-paradox/) and related SVPG pieces (2025 to 2026).",
+        "[Robert Kimani, LeadDev, Your engineering strategy has a new failure mode](https://leaddev.com/leadership/your-engineering-strategy-has-a-new-failure-mode) (Oct 2026). Match how reversible a commitment is to how strong its evidence is. Platform migrations can take years to reverse."
+      ],
+      "requires": [
+        {
+          "source": "docs",
+          "data": "A risk register with likelihood, impact, owner and date",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "15",
+      "kind": "slide",
+      "act": "Next investments",
+      "nav": "Stopped & won't do",
+      "audiences": [
+        "L",
+        "S"
+      ],
+      "illustrative": true,
+      "kicker": "Next investments",
+      "title": "We stopped three things this quarter to fund agent quality.",
+      "blocks": [
+        {
+          "type": "cards",
+          "columns": 3,
+          "items": [
+            {
+              "title": "Killed, carrier marketplace",
+              "body": [
+                "3 of 12 customers said they would pay. Two engineers moved to the Agent team."
+              ]
+            },
+            {
+              "title": "Declined, on-premise for 2 prospects",
+              "body": [
+                "$310K of pipeline. It would have cost a quarter of Platform capacity and sits outside our strategy."
+              ]
+            },
+            {
+              "title": "Paused, mobile redesign",
+              "body": [
+                "No link to a current objective. Revisit in the January strategy review."
+              ]
+            }
+          ]
+        }
+      ],
+      "asof": "Source: decision log, Q3 FY26.",
+      "ledger_refs": [],
+      "guide": {
+        "question": "What did we kill or decline, and what did that free?",
+        "needs": "A decision log. If none exists, start one this period.",
+        "rule": "An empty slide is a finding. Say what each stop cost and what it paid for."
+      },
+      "dig_deeper": [
+        "[Chandra Janakiraman on Lenny's Podcast](https://www.lennysnewsletter.com/p/an-operators-guide-to-product-strategy-chandra-janakiraman) (Jan 2025). Name the areas that are explicitly out of focus.",
+        "Teresa Torres (2026). Building got cheap, and that is no reason to build everything."
+      ],
+      "requires": [
+        {
+          "source": "docs",
+          "data": "A decision log",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "16",
+      "kind": "slide",
+      "act": "Next investments",
+      "nav": "Next bets",
+      "audiences": [
+        "L",
+        "B",
+        "S"
+      ],
+      "illustrative": true,
+      "kicker": "Next investments",
+      "title": "Five bets for Q4. Three are promises, one is an experiment and one is a probe.",
+      "blocks": [
+        {
+          "type": "table",
+          "columns": [
+            {
+              "label": "Bet"
+            },
+            {
+              "label": "Commitment"
+            },
+            {
+              "label": "Appetite"
+            },
+            {
+              "label": "Expected result"
+            },
+            {
+              "label": "Confidence"
+            },
+            {
+              "label": "We stop if"
+            }
+          ],
+          "rows": [
+            [
+              "Multi-stop reroutes in the agent",
+              "Promise",
+              "6 weeks, 5 engineers",
+              "Task success 86% to 90%",
+              "High",
+              "Evals gain under 2 points by week 3"
+            ],
+            [
+              "TMS integration",
+              "Promise",
+              "6 weeks, 4 engineers",
+              "Integration losses fall from 11 to under 4 a quarter",
+              "High",
+              "Partner API access slips past week 2"
+            ],
+            [
+              "Model routing layer",
+              "Promise",
+              "6 weeks, 4 engineers",
+              "AI gross margin 52% to 56%",
+              "High",
+              "Eval pass rate drops below 90%"
+            ],
+            [
+              "Guided activation",
+              "Experiment",
+              "4 weeks, 3 engineers",
+              "Activation 41% to 48%",
+              "Medium",
+              "Test arm gains under 3 points"
+            ],
+            [
+              "Per-load pricing pilot",
+              "Probe",
+              "8 weeks, 10 customers",
+              "Learn whether accounts expand. Target $0.4M expansion",
+              "Low",
+              "Fewer than 4 of 10 convert"
+            ]
+          ]
+        },
+        {
+          "type": "text",
+          "variant": "note",
+          "text": "A promise is a date we give customers. An experiment has a metric and an end. A probe buys learning and may ship nothing."
+        }
+      ],
+      "asof": "Source: bet briefs approved 6 Oct 2026.",
+      "ledger_refs": [],
+      "guide": {
+        "question": "What do we fund next and what do we expect back?",
+        "needs": "A one-page brief per bet with appetite, expected result, confidence and a stop rule. Each bet traces to slide 3 and to evidence on slide 6.",
+        "rule": "Label the commitment level. Name outcomes in the title of each bet. Five bets is the ceiling for most teams."
+      },
+      "dig_deeper": [
+        "[Lenny Rachitsky with Ryan Singer, A better way to plan, build, and ship products](https://www.lennysnewsletter.com/p/shape-up-ryan-singer) (Mar 2025) and [John Cutler on Shape Up's constraints](https://cutlefish.substack.com/p/tbm-386-understanding-enabling-constraints) (Nov 2025). Appetite, bets, fixed time with variable scope, and a circuit breaker.",
+        "Claire Vo, The Last Roadmap (Sep 2026). Features as probes, experiments or promises, with commitment stated plainly. See [ChatPRD](https://www.chatprd.ai).",
+        "ICONIQ Growth, The Essential R&D Board Slides (2024). Show the next 12 months and a longer view."
+      ],
+      "requires": [
+        {
+          "source": "docs",
+          "data": "A one-page brief per bet with appetite, expected result, confidence and a stop rule",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "17",
+      "kind": "slide",
+      "act": "Next investments",
+      "nav": "Team & operating model",
+      "audiences": [
+        "L",
+        "S"
+      ],
+      "illustrative": true,
+      "kicker": "Next investments",
+      "title": "60 of 64 planned roles are filled. Head of AI Quality is the hire that matters.",
+      "blocks": [
+        {
+          "type": "cards",
+          "columns": "2:1",
+          "items": [
+            {
+              "type": "table",
+              "columns": [
+                {
+                  "label": "Function"
+                },
+                {
+                  "label": "Now",
+                  "align": "num"
+                },
+                {
+                  "label": "Plan",
+                  "align": "num"
+                },
+                {
+                  "label": "Open"
+                }
+              ],
+              "rows": [
+                [
+                  "Engineering",
+                  "44",
+                  "46",
+                  "1 platform, 1 product engineer"
+                ],
+                [
+                  "Product management",
+                  "5",
+                  "5",
+                  ""
+                ],
+                [
+                  "Design",
+                  "4",
+                  "5",
+                  "1 designer"
+                ],
+                [
+                  "Data & ML",
+                  "4",
+                  "5",
+                  "Head of AI Quality"
+                ],
+                [
+                  "Security & platform operations",
+                  "3",
+                  "3",
+                  ""
+                ],
+                [
+                  "Total R&D",
+                  "60",
+                  "64",
+                  "4 roles"
+                ]
+              ]
+            },
+            {
+              "title": "How we work now",
+              "body": [
+                {
+                  "list": [
+                    "Product managers lead eval error analysis each week.",
+                    "Each team owns the tools its agents use.",
+                    "Weekly written project updates feed this deck. Nobody builds slides by hand.",
+                    "9 engineers per product manager. 1 regretted exit this quarter."
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "cards",
+          "columns": 1,
+          "items": [
+            {
+              "title": "Help needed",
+              "body": [
+                "Referrals for Head of AI Quality. The profile is a leader who has run evals for a production agent and can work across product and engineering."
+              ]
+            }
+          ]
+        }
+      ],
+      "asof": "Sources: HR system, hiring tracker. As of 30 Sep 2026.",
+      "ledger_refs": [
+        "L13"
+      ],
+      "guide": {
+        "question": "Is the team shaped for how we now build, and where do we need help?",
+        "needs": "Headcount against plan by function, open senior roles, attrition, a forward 12-month view.",
+        "rule": "Focus on the hard hires. Name the help you want from the reader. For staff, add recognition and drop the ratios."
+      },
+      "dig_deeper": [
+        "ICONIQ Growth, The Essential R&D Board Slides (2024). Forward org chart, open leadership roles, expertise gaps.",
+        "Marty Cagan, Transformed (2024) and [A Vision for Product Teams](https://www.svpg.com/a-vision-for-product-teams/) (Feb 2025).",
+        "McKinsey, A new operating model for a new world (Jun 2025). Structure is 1 of 12 elements.",
+        "[Figma, 2026 AI report](https://www.figma.com/blog/2026-ai-report/) (Jun 2026). Developers taking part in design rose from 44% to 60% in a year.",
+        "Lenny Rachitsky with Cat Wu (Apr 2026) on how Anthropic's product team ships in days, and [The Pragmatic Engineer on Claude Code](https://newsletter.pragmaticengineer.com/p/how-claude-code-is-built)."
+      ],
+      "requires": [
+        {
+          "source": "hr",
+          "data": "Headcount against plan by function, open senior roles and attrition",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "18",
+      "kind": "slide",
+      "act": "Next investments",
+      "nav": "Decisions & asks",
+      "audiences": [
+        "L",
+        "B"
+      ],
+      "illustrative": true,
+      "kicker": "Next investments",
+      "title": "We need two decisions today and one introduction.",
+      "blocks": [
+        {
+          "type": "cards",
+          "columns": 3,
+          "items": [
+            {
+              "title": "Decide, model commitment",
+              "body": [
+                "Sign a 12-month, $1.6M commitment with our primary provider for an estimated 18% saving, or stay on demand until routing ships in December.",
+                {
+                  "p": "We recommend waiting 60 days. Routing changes our volume split and this door is hard to reopen.",
+                  "emphasis": true
+                }
+              ]
+            },
+            {
+              "title": "Decide, pricing pilot",
+              "body": [
+                "Approve per-load pricing for 10 customers for 8 weeks. Revenue at risk is about $90K if all 10 pay less.",
+                {
+                  "p": "We recommend approval. Expansion is stalled under seat pricing.",
+                  "emphasis": true
+                }
+              ]
+            },
+            {
+              "title": "Ask, introductions",
+              "body": [
+                "Two or three candidates for Head of AI Quality by 15 November."
+              ]
+            }
+          ]
+        }
+      ],
+      "asof": "Decisions due at the meeting on 4 Nov 2026.",
+      "ledger_refs": [],
+      "guide": {
+        "question": "What do you need from the people in the room?",
+        "needs": "For each decision, the options, the cost of each, your recommendation and the deadline.",
+        "rule": "Brief the CEO and chair on any miss before the meeting. If there is nothing to decide, say so and end early."
+      },
+      "dig_deeper": [
+        "[First Round Review, Board Meetings 101](https://review.firstround.com/board-meetings-101-for-early-stage-founders/) (Aug 2026). \"Thoughts?\" is a weak ask. Say whether you want advice, pressure-testing, introductions or a formal decision.",
+        "[Melissa Perri](https://productinstitute.kit.com/posts/the-bottleneck-isn-t-building-it-s-deciding) (2026). Deciding is now the constraint, so measure product work by decisions changed."
+      ],
+      "requires": [
+        {
+          "source": "interview",
+          "data": "For each decision, the options, the cost of each, your recommendation and the deadline",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "A",
+      "kind": "appendix",
+      "act": "Appendix",
+      "nav": "Evidence ledger",
+      "audiences": [
+        "L",
+        "B",
+        "S"
+      ],
+      "illustrative": true,
+      "title": "Every number has a row in the ledger.",
+      "blocks": [
+        {
+          "type": "ledger"
+        },
+        {
+          "type": "text",
+          "variant": "note",
+          "text": "Product operations keeps the ledger and each metric owner confirms their rows before review."
+        }
+      ],
+      "guide": [
+        {
+          "label": "Rule",
+          "text": "Verified comes from the system that owns the number. Derived is computed in code. Estimated is supplied by a person. Unknown renders as a \"data needed\" card and is never filled with prose."
+        },
+        {
+          "label": "Owner",
+          "text": "Product operations keeps the ledger. Each row has a named metric owner who confirms it before the review."
+        }
+      ]
+    },
+    {
+      "id": "B",
+      "kind": "appendix",
+      "act": "Appendix",
+      "nav": "Audience cuts & cadence",
+      "audiences": [
+        "L",
+        "B",
+        "S"
+      ],
+      "illustrative": false,
+      "title": "One source of truth, cut three ways, on a fixed rhythm.",
+      "blocks": [
+        {
+          "type": "table",
+          "columns": [
+            {
+              "label": "Audience"
+            },
+            {
+              "label": "Slides"
+            },
+            {
+              "label": "Leave out"
+            },
+            {
+              "label": "Lead with"
+            },
+            {
+              "label": "Rhythm"
+            }
+          ],
+          "rows": [
+            [
+              "Leadership team",
+              "All 18",
+              "Nothing",
+              "Decisions and constraints",
+              "Monthly"
+            ],
+            [
+              "Board & investors",
+              "1, 5, 9b, 11, 12, 14, 16, 18",
+              "Team-level detail, backlog, tooling. Strategy returns when it changes",
+              "Why now, economics, risk, asks",
+              "Quarterly, sent 5 business days ahead"
+            ],
+            [
+              "All staff",
+              "1, 2, 3, 4, 6, 8, 11, 15, 16, 17",
+              "Margin detail, confidential risks",
+              "Why this problem, how your work connects",
+              "Monthly or quarterly"
+            ]
+          ]
+        },
+        {
+          "type": "cards",
+          "columns": 4,
+          "items": [
+            {
+              "title": "Weekly",
+              "body": [
+                "Written project updates in your tracker. They are the input."
+              ]
+            },
+            {
+              "title": "Monthly",
+              "body": [
+                "Regenerate the leadership cut and review it."
+              ]
+            },
+            {
+              "title": "Quarterly",
+              "body": [
+                "Board and staff cuts. Reset plan against actual. Review bets."
+              ]
+            },
+            {
+              "title": "Yearly",
+              "body": [
+                "Refresh slides 2, 3 and 4 and the plan on slide 5."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "C",
+      "kind": "appendix",
+      "act": "Appendix",
+      "nav": "How it's generated",
+      "audiences": [
+        "L",
+        "B",
+        "S"
+      ],
+      "illustrative": false,
+      "title": "A Claude skill will build this deck from your systems and refuse to guess.",
+      "blocks": [
+        {
+          "type": "strip",
+          "label": "Status.",
+          "text": "The template is ready to use by hand today. The skill is built and under test. It isn't published yet. This page describes how it works."
+        },
+        {
+          "type": "steps",
+          "items": [
+            {
+              "title": "Interview",
+              "text": "Objectives, strategy, non-goals, plan, audience, period."
+            },
+            {
+              "title": "Collect",
+              "text": "Tracker, source control, analytics, warehouse, billing, CRM. CSV works too."
+            },
+            {
+              "title": "Compute",
+              "text": "All arithmetic runs in code and writes to the ledger."
+            },
+            {
+              "title": "Draft",
+              "text": "Titles come from the computed changes."
+            },
+            {
+              "title": "Check",
+              "text": "The rules below run on every slide."
+            },
+            {
+              "title": "Review",
+              "text": "You see a change list and sign off before the board cut renders."
+            }
+          ]
+        },
+        {
+          "type": "cards",
+          "columns": 2,
+          "items": [
+            {
+              "title": "Checks that will block a render",
+              "body": [
+                {
+                  "list": [
+                    "A figure with no ledger row",
+                    "A speed metric with no quality pair",
+                    "An AI productivity claim with no baseline and window",
+                    "An adoption number in an outcome slot",
+                    "A metric older than its reporting window",
+                    "A bet with no stop rule"
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "How it differs from deck tools",
+              "body": [
+                "Gamma, ChatPRD, Notion agents and Linear Pulse can already turn company data into slides, documents and status summaries. This template adds the part they leave to you, which is a fixed story, a data contract per slide and rules about what you may claim.",
+                {
+                  "cta": {
+                    "label": "Book a call",
+                    "href": "https://www.dacard.ai"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "dig_deeper": [
+        "[Agent Skills specification](https://agentskills.io/specification) and [Anthropic's authoring guidance](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices).",
+        "[Anthropic's product-management plugin](https://github.com/anthropics/knowledge-work-plugins/tree/main/product-management). Specs, roadmap and stakeholder updates."
+      ]
+    },
+    {
+      "id": "D",
+      "kind": "appendix",
+      "act": "Appendix",
+      "nav": "What you need to connect",
+      "audiences": [
+        "L",
+        "B",
+        "S"
+      ],
+      "illustrative": false,
+      "title": "Every slide names the sources it needs. None requires a connector.",
+      "blocks": [
+        {
+          "type": "text",
+          "variant": "lede",
+          "text": "Connect what you have. A CSV or a file upload works for every system. A slide that lacks its minimum data shows a data needed block with an owner and a due date. It's never filled with prose."
+        },
+        {
+          "type": "sources_needed"
+        },
+        {
+          "type": "text",
+          "variant": "note",
+          "text": "Slide 1 rolls up the slides in its own cut and needs nothing new. Slide 9b condenses slides 8, 9, 10 and 13, so the board cut needs their sources too. Turn on template guidance to see what each slide needs."
+        }
+      ]
+    }
+  ],
+  "ledger": [
+    {
+      "id": "L01",
+      "claim": "ARR $41.2M",
+      "value": null,
+      "unit": null,
+      "source_system": "Stripe, Finance close",
+      "query_or_url": null,
+      "window": "30 Sep 2026",
+      "retrieved_at": null,
+      "confidence": "Verified",
+      "owner": null
+    },
+    {
+      "id": "L02",
+      "claim": "23.1K no-touch loads per week",
+      "value": null,
+      "unit": null,
+      "source_system": "Warehouse query ns_weekly",
+      "query_or_url": null,
+      "window": "Last 4 weeks of Q3",
+      "retrieved_at": null,
+      "confidence": "Verified",
+      "owner": null
+    },
+    {
+      "id": "L03",
+      "claim": "9 of 11 commitments shipped",
+      "value": null,
+      "unit": null,
+      "source_system": "Linear projects",
+      "query_or_url": null,
+      "window": "Q3 FY26",
+      "retrieved_at": null,
+      "confidence": "Verified",
+      "owner": null
+    },
+    {
+      "id": "L04",
+      "claim": "Expansion ARR $1.9M",
+      "value": null,
+      "unit": null,
+      "source_system": "CRM, Finance",
+      "query_or_url": null,
+      "window": "Q3 FY26",
+      "retrieved_at": null,
+      "confidence": "Verified",
+      "owner": null
+    },
+    {
+      "id": "L05",
+      "claim": "Capacity split by work type",
+      "value": null,
+      "unit": null,
+      "source_system": "Linear labels, 94% of issues labelled",
+      "query_or_url": null,
+      "window": "Q3 FY26",
+      "retrieved_at": null,
+      "confidence": "Derived",
+      "owner": null
+    },
+    {
+      "id": "L06",
+      "claim": "Inference $612K",
+      "value": null,
+      "unit": null,
+      "source_system": "Provider invoices",
+      "query_or_url": null,
+      "window": "Q3 FY26",
+      "retrieved_at": null,
+      "confidence": "Verified",
+      "owner": null
+    },
+    {
+      "id": "L07",
+      "claim": "Cost per successful task $0.33",
+      "value": null,
+      "unit": null,
+      "source_system": "Billing divided by successful traces",
+      "query_or_url": null,
+      "window": "Sep 2026",
+      "retrieved_at": null,
+      "confidence": "Derived",
+      "owner": null
+    },
+    {
+      "id": "L08",
+      "claim": "Eval pass rate 91.3%",
+      "value": null,
+      "unit": null,
+      "source_system": "Eval harness v14, 376 of 412",
+      "query_or_url": null,
+      "window": "Run of 28 Sep 2026",
+      "retrieved_at": null,
+      "confidence": "Verified",
+      "owner": null
+    },
+    {
+      "id": "L09",
+      "claim": "Review time 13h, cycle time down 18%",
+      "value": null,
+      "unit": null,
+      "source_system": "GitHub",
+      "query_or_url": null,
+      "window": "Q3 FY26 against Q3 FY25",
+      "retrieved_at": null,
+      "confidence": "Derived",
+      "owner": null
+    },
+    {
+      "id": "L10",
+      "claim": "Win and loss reasons",
+      "value": null,
+      "unit": null,
+      "source_system": "CRM notes coded by product ops",
+      "query_or_url": null,
+      "window": "64 deals, Q3 FY26",
+      "retrieved_at": null,
+      "confidence": "Estimated",
+      "owner": null
+    },
+    {
+      "id": "L11",
+      "claim": "AI gross margin 52%",
+      "value": null,
+      "unit": null,
+      "source_system": "Finance",
+      "query_or_url": null,
+      "window": "Q3 FY26",
+      "retrieved_at": null,
+      "confidence": "Verified",
+      "owner": null
+    },
+    {
+      "id": "L12",
+      "claim": "AI tools $685 per engineer per month",
+      "value": null,
+      "unit": null,
+      "source_system": "Vendor invoices over 72 engineers",
+      "query_or_url": null,
+      "window": "Q3 FY26",
+      "retrieved_at": null,
+      "confidence": "Derived",
+      "owner": null
+    },
+    {
+      "id": "L13",
+      "claim": "Headcount 60 of 64",
+      "value": null,
+      "unit": null,
+      "source_system": "HR system",
+      "query_or_url": null,
+      "window": "30 Sep 2026",
+      "retrieved_at": null,
+      "confidence": "Verified",
+      "owner": null
+    },
+    {
+      "id": "L15",
+      "claim": "Capacity and ARR by product line",
+      "value": null,
+      "unit": null,
+      "source_system": "Linear, Finance ARR by SKU",
+      "query_or_url": null,
+      "window": "Q3 FY26",
+      "retrieved_at": null,
+      "confidence": "Derived",
+      "owner": null
+    },
+    {
+      "id": "L14",
+      "claim": "Inference cost by segment",
+      "value": null,
+      "unit": null,
+      "source_system": "Not instrumented",
+      "query_or_url": null,
+      "window": "",
+      "retrieved_at": null,
+      "confidence": "Unknown",
+      "owner": null
+    }
+  ],
+  "sources": [
+    {
+      "id": "S01",
+      "title": "Engineering Management, Pyramid Communication: An Actionable Guide",
+      "url": "https://engmanage.substack.com/p/pyramid-communication",
+      "cited_on": [
+        "01"
+      ]
+    },
+    {
+      "id": "S02",
+      "title": "Cedric Chin, The Amazon Weekly Business Review",
+      "url": "https://commoncog.com/the-amazon-weekly-business-review/",
+      "cited_on": [
+        "01"
+      ]
+    },
+    {
+      "id": "S03",
+      "title": "Amanda Herson, Founder Collective, Debates Over Updates",
+      "url": "https://foundercollective.com/?p=14226",
+      "cited_on": [
+        "01"
+      ]
+    },
+    {
+      "id": "S04",
+      "title": "Product School, Product Leadership",
+      "url": "https://productschool.com/blog/leadership/product-leadership",
+      "cited_on": [
+        "01"
+      ]
+    },
+    {
+      "id": "S05",
+      "title": "Will Larson, Introduction for Engineering Strategy",
+      "url": "https://lethain.com/intro-eng-strategy/",
+      "cited_on": [
+        "02"
+      ]
+    },
+    {
+      "id": "S06",
+      "title": "Lenny Rachitsky with Chandra Janakiraman, An operator's guide to product strategy",
+      "url": "https://www.lennysnewsletter.com/p/an-operators-guide-to-product-strategy-chandra-janakiraman",
+      "cited_on": [
+        "02",
+        "15"
+      ]
+    },
+    {
+      "id": "S07",
+      "title": "Roger Martin, Why the How-to-Win Strategy Choice is So Hard",
+      "url": "https://rogerlmartin.substack.com/p/why-the-how-to-win-strategy-choice",
+      "cited_on": [
+        "02"
+      ]
+    },
+    {
+      "id": "S08",
+      "title": "John Cutler, Stop the (Goal) Cascade Madness",
+      "url": "https://cutlefish.substack.com/p/tbm-305-stop-the-goal-cascade-madness",
+      "cited_on": [
+        "03"
+      ]
+    },
+    {
+      "id": "S09",
+      "title": "Teresa Torres, When It Comes to Discovery, Something is Better Than Nothing",
+      "url": "https://www.producttalk.org/y-oslo-2024/",
+      "cited_on": [
+        "03"
+      ]
+    },
+    {
+      "id": "S10",
+      "title": "Linear, Initiative updates",
+      "url": "https://linear.app/changelog/2025-02-13-initiative-updates",
+      "cited_on": [
+        "03"
+      ]
+    },
+    {
+      "id": "S11",
+      "title": "Notion on Latent Space",
+      "url": "https://www.latent.space/p/notion",
+      "cited_on": [
+        "03"
+      ]
+    },
+    {
+      "id": "S12",
+      "title": "Kent Beck, Canon 3X: Explore/Expand/Extract",
+      "url": "https://newsletter.kentbeck.com/p/canon-3x-exploreexpandextract",
+      "cited_on": [
+        "04"
+      ]
+    },
+    {
+      "id": "S13",
+      "title": "Adam Ferrari, Allocating with Intent",
+      "url": "https://adamferrari.substack.com/p/allocating-with-intent",
+      "cited_on": [
+        "05"
+      ]
+    },
+    {
+      "id": "S14",
+      "title": "John Cutler, Time Allocation ≠ Capacity Allocation",
+      "url": "https://cutlefish.substack.com/p/tbm-377-time-allocation-capacity",
+      "cited_on": [
+        "05"
+      ]
+    },
+    {
+      "id": "S15",
+      "title": "LinearB, engineering benchmarks 2025",
+      "url": "https://linearb.io/blog/engineering-benchmarks-2025-devex-developer-productivity",
+      "cited_on": [
+        "05"
+      ]
+    },
+    {
+      "id": "S16",
+      "title": "SaaS Capital, Spending Benchmarks for Private B2B SaaS Companies",
+      "url": "https://www.saas-capital.com/blog-posts/spending-benchmarks-for-private-b2b-saas-companies/",
+      "cited_on": [
+        "05"
+      ]
+    },
+    {
+      "id": "S17",
+      "title": "airfocus, Jun 2026",
+      "url": "https://airfocus.com/blog/how-ai-is-changing-product-management/",
+      "cited_on": [
+        "06"
+      ]
+    },
+    {
+      "id": "S18",
+      "title": "Marty Cagan, The AI Productivity Paradox",
+      "url": "https://www.svpg.com/the-ai-productivity-paradox/",
+      "cited_on": [
+        "06",
+        "14"
+      ]
+    },
+    {
+      "id": "S19",
+      "title": "Hamel Husain and Shreya Shankar on error analysis",
+      "url": "https://hamel.dev/notes/llm/ai-product-engineering/evals-error-analysis.html",
+      "cited_on": [
+        "06",
+        "12"
+      ]
+    },
+    {
+      "id": "S20",
+      "title": "First Round, The Art of Evals at Figma",
+      "url": "https://review.firstround.com/figma-ai-eval-process/",
+      "cited_on": [
+        "06"
+      ]
+    },
+    {
+      "id": "S21",
+      "title": "Melissa Perri, The bottleneck isn't building, it's deciding",
+      "url": "https://productinstitute.kit.com/posts/the-bottleneck-isn-t-building-it-s-deciding",
+      "cited_on": [
+        "07",
+        "18"
+      ]
+    },
+    {
+      "id": "S22",
+      "title": "Karri Saarinen, 10 rules for crafting products",
+      "url": "https://www.figma.com/blog/karri-saarinens-10-rules-for-crafting-products-that-stand-out/",
+      "cited_on": [
+        "08"
+      ]
+    },
+    {
+      "id": "S23",
+      "title": "DORA, State of AI-assisted Software Development",
+      "url": "https://dora.dev/dora-report-2025/",
+      "cited_on": [
+        "09"
+      ]
+    },
+    {
+      "id": "S24",
+      "title": "DX Core 4 and the AI Measurement Framework",
+      "url": "https://newsletter.getdx.com/p/measuring-engineering-productivity-in-the-ai-era",
+      "cited_on": [
+        "09"
+      ]
+    },
+    {
+      "id": "S25",
+      "title": "Faros AI, AI Productivity Paradox",
+      "url": "https://243608892.fs1.hubspotusercontent-na2.net/hubfs/243608892/AI_Engineering_Impact_Report_July_2025_Faros_AI.pdf",
+      "cited_on": [
+        "09"
+      ]
+    },
+    {
+      "id": "S26",
+      "title": "Will Larson, Steps to build an engineering strategy",
+      "url": "https://lethain.com/components-of-eng-strategy/",
+      "cited_on": [
+        "10"
+      ]
+    },
+    {
+      "id": "S27",
+      "title": "InfoQ, Grafana applies SLOs and error budgets to AI agent behaviour",
+      "url": "https://www.infoq.com/news/2026/10/grafana-slo-ai-agent/",
+      "cited_on": [
+        "10"
+      ]
+    },
+    {
+      "id": "S28",
+      "title": "InfoQ on Joy Ebertz, All Tech Debt is Not Created Equal",
+      "url": "https://www.infoq.com/news/2026/03/tech-debt-not-equal/",
+      "cited_on": [
+        "10"
+      ]
+    },
+    {
+      "id": "S29",
+      "title": "Product School, AI-native",
+      "url": "https://productschool.com/blog/artificial-intelligence/ai-native",
+      "cited_on": [
+        "10",
+        "12"
+      ]
+    },
+    {
+      "id": "S30",
+      "title": "Aleph and Benchmarkit, 2026 SaaS & AI Performance Benchmarks",
+      "url": "https://www.getaleph.com/answers/net-revenue-retention-saas-2026",
+      "cited_on": [
+        "11"
+      ]
+    },
+    {
+      "id": "S31",
+      "title": "Eric Weber, North star metrics for AI data products",
+      "url": "https://ericdataproduct.substack.com/p/north-star-metrics-for-ai-data-products",
+      "cited_on": [
+        "11"
+      ]
+    },
+    {
+      "id": "S32",
+      "title": "Atlassian, State of Teams 2026",
+      "url": "https://www.atlassian.com/blog/how-we-build/the-future-of-product-craft",
+      "cited_on": [
+        "11"
+      ]
+    },
+    {
+      "id": "S33",
+      "title": "ICONIQ, State of AI 2026",
+      "url": "https://www.iconiq.com/growth/reports/state-of-ai-2026",
+      "cited_on": [
+        "12"
+      ]
+    },
+    {
+      "id": "S34",
+      "title": "Kyle Poyar, State of B2B Monetization 2025",
+      "url": "https://www.growthunhinged.com/p/2025-state-of-b2b-monetization",
+      "cited_on": [
+        "12"
+      ]
+    },
+    {
+      "id": "S35",
+      "title": "METR's 2025 trial",
+      "url": "https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/",
+      "cited_on": [
+        "13"
+      ]
+    },
+    {
+      "id": "S36",
+      "title": "Feb 2026",
+      "url": "https://metr.org/blog/2026-02-24-uplift-update/",
+      "cited_on": [
+        "13"
+      ]
+    },
+    {
+      "id": "S37",
+      "title": "Stripe, Minions",
+      "url": "https://stripe.dev/blog/minions-stripes-one-shot-end-to-end-coding-agents",
+      "cited_on": [
+        "13"
+      ]
+    },
+    {
+      "id": "S38",
+      "title": "dbt Summit 2026",
+      "url": "https://www.getdbt.com/blog/ramp-internal-ai-agents-million-sessions",
+      "cited_on": [
+        "13"
+      ]
+    },
+    {
+      "id": "S39",
+      "title": "Vercel Ship 2026",
+      "url": "https://vercel.com/blog/vercel-ship-2026-recap",
+      "cited_on": [
+        "13"
+      ]
+    },
+    {
+      "id": "S40",
+      "title": "Shopify's AI memo",
+      "url": "https://www.digitalcommerce360.com/2025/04/08/internal-memo-shopify-ceo-declares-ai-non-optional/",
+      "cited_on": [
+        "13"
+      ]
+    },
+    {
+      "id": "S41",
+      "title": "Robert Kimani, LeadDev, Your engineering strategy has a new failure mode",
+      "url": "https://leaddev.com/leadership/your-engineering-strategy-has-a-new-failure-mode",
+      "cited_on": [
+        "14"
+      ]
+    },
+    {
+      "id": "S42",
+      "title": "Lenny Rachitsky with Ryan Singer, A better way to plan, build, and ship products",
+      "url": "https://www.lennysnewsletter.com/p/shape-up-ryan-singer",
+      "cited_on": [
+        "16"
+      ]
+    },
+    {
+      "id": "S43",
+      "title": "John Cutler on Shape Up's constraints",
+      "url": "https://cutlefish.substack.com/p/tbm-386-understanding-enabling-constraints",
+      "cited_on": [
+        "16"
+      ]
+    },
+    {
+      "id": "S44",
+      "title": "ChatPRD",
+      "url": "https://www.chatprd.ai",
+      "cited_on": [
+        "16"
+      ]
+    },
+    {
+      "id": "S45",
+      "title": "A Vision for Product Teams",
+      "url": "https://www.svpg.com/a-vision-for-product-teams/",
+      "cited_on": [
+        "17"
+      ]
+    },
+    {
+      "id": "S46",
+      "title": "Figma, 2026 AI report",
+      "url": "https://www.figma.com/blog/2026-ai-report/",
+      "cited_on": [
+        "17"
+      ]
+    },
+    {
+      "id": "S47",
+      "title": "The Pragmatic Engineer on Claude Code",
+      "url": "https://newsletter.pragmaticengineer.com/p/how-claude-code-is-built",
+      "cited_on": [
+        "17"
+      ]
+    },
+    {
+      "id": "S48",
+      "title": "First Round Review, Board Meetings 101",
+      "url": "https://review.firstround.com/board-meetings-101-for-early-stage-founders/",
+      "cited_on": [
+        "18"
+      ]
+    },
+    {
+      "id": "S49",
+      "title": "Agent Skills specification",
+      "url": "https://agentskills.io/specification",
+      "cited_on": [
+        "C"
+      ]
+    },
+    {
+      "id": "S50",
+      "title": "Anthropic's authoring guidance",
+      "url": "https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices",
+      "cited_on": [
+        "C"
+      ]
+    },
+    {
+      "id": "S51",
+      "title": "Anthropic's product-management plugin",
+      "url": "https://github.com/anthropics/knowledge-work-plugins/tree/main/product-management",
+      "cited_on": [
+        "C"
+      ]
+    }
+  ]
+}

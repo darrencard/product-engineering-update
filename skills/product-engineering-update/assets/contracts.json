@@ -1,0 +1,523 @@
+[
+  {
+    "id": "01",
+    "nav": "The answer",
+    "act": "Open",
+    "audiences": [
+      "L",
+      "B",
+      "S"
+    ],
+    "evidence_blocks": [
+      "cards",
+      "table"
+    ],
+    "rolls_up": [],
+    "requires": []
+  },
+  {
+    "id": "02",
+    "nav": "Strategy on a page",
+    "act": "Strategy",
+    "audiences": [
+      "L",
+      "S"
+    ],
+    "evidence_blocks": [
+      "cards",
+      "table"
+    ],
+    "rolls_up": [],
+    "requires": [
+      {
+        "source": "interview",
+        "data": "Objectives, diagnosis, guiding policy, actions and non-goals",
+        "required": true
+      },
+      {
+        "source": "docs",
+        "data": "The strategy document",
+        "required": false
+      }
+    ]
+  },
+  {
+    "id": "03",
+    "nav": "Line of sight",
+    "act": "Strategy",
+    "audiences": [
+      "L",
+      "S"
+    ],
+    "evidence_blocks": [
+      "tree"
+    ],
+    "rolls_up": [],
+    "requires": [
+      {
+        "source": "tracker",
+        "data": "Initiatives or epics tagged to an objective, each with an owner",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "04",
+    "nav": "Portfolio",
+    "act": "Strategy",
+    "audiences": [
+      "L",
+      "S"
+    ],
+    "evidence_blocks": [
+      "table"
+    ],
+    "rolls_up": [],
+    "requires": [
+      {
+        "source": "tracker",
+        "data": "Capacity by product line",
+        "required": true
+      },
+      {
+        "source": "finance",
+        "data": "ARR by product line",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "05",
+    "nav": "Investment mix",
+    "act": "Strategy",
+    "audiences": [
+      "L",
+      "B"
+    ],
+    "evidence_blocks": [
+      "plan_vs_actual",
+      "table"
+    ],
+    "rolls_up": [],
+    "requires": [
+      {
+        "source": "tracker",
+        "data": "A work-type label on every issue or epic",
+        "required": true
+      },
+      {
+        "source": "finance",
+        "data": "Plan and actual spend, with model provider and tooling invoices",
+        "required": true
+      },
+      {
+        "source": "finance",
+        "data": "Cash balance, net burn and runway",
+        "required": false
+      }
+    ]
+  },
+  {
+    "id": "06",
+    "nav": "What we learned",
+    "act": "Discovery",
+    "audiences": [
+      "L",
+      "S"
+    ],
+    "evidence_blocks": [
+      "table",
+      "tiles"
+    ],
+    "rolls_up": [],
+    "requires": [
+      {
+        "source": "research",
+        "data": "Interview notes, prototype and experiment results",
+        "required": true
+      },
+      {
+        "source": "evals",
+        "data": "Eval error analysis",
+        "required": false
+      }
+    ]
+  },
+  {
+    "id": "07",
+    "nav": "Customer & market signal",
+    "act": "Discovery",
+    "audiences": [
+      "L"
+    ],
+    "evidence_blocks": [
+      "tiles"
+    ],
+    "rolls_up": [],
+    "requires": [
+      {
+        "source": "crm",
+        "data": "Win and loss reasons with counts",
+        "required": true
+      },
+      {
+        "source": "support",
+        "data": "Support themes",
+        "required": true
+      },
+      {
+        "source": "research",
+        "data": "Call notes",
+        "required": false
+      }
+    ]
+  },
+  {
+    "id": "08",
+    "nav": "Shipped vs impact",
+    "act": "Delivery",
+    "audiences": [
+      "L",
+      "S"
+    ],
+    "evidence_blocks": [
+      "table"
+    ],
+    "rolls_up": [],
+    "requires": [
+      {
+        "source": "tracker",
+        "data": "Last period's commitments, each with one target metric named before launch",
+        "required": true
+      },
+      {
+        "source": "analytics",
+        "data": "The result for each target metric",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "09",
+    "nav": "Delivery system health",
+    "act": "Delivery",
+    "audiences": [
+      "L"
+    ],
+    "evidence_blocks": [
+      "scorecard"
+    ],
+    "rolls_up": [],
+    "requires": [
+      {
+        "source": "source_control",
+        "data": "Deploys, lead time, review time and change failures",
+        "required": true
+      },
+      {
+        "source": "incidents",
+        "data": "Time to restore",
+        "required": true
+      },
+      {
+        "source": "survey",
+        "data": "The developer experience index",
+        "required": false
+      }
+    ]
+  },
+  {
+    "id": "09b",
+    "nav": "Delivery on a page",
+    "act": "Delivery",
+    "audiences": [
+      "B"
+    ],
+    "evidence_blocks": [
+      "cards"
+    ],
+    "rolls_up": [
+      "08",
+      "09",
+      "10",
+      "13"
+    ],
+    "requires": [
+      {
+        "source": "tracker",
+        "data": "Last period's commitments, each with one target metric named before launch",
+        "required": true
+      },
+      {
+        "source": "analytics",
+        "data": "The result for each target metric",
+        "required": true
+      },
+      {
+        "source": "source_control",
+        "data": "Deploys, lead time, review time and change failures",
+        "required": true
+      },
+      {
+        "source": "incidents",
+        "data": "Time to restore",
+        "required": true
+      },
+      {
+        "source": "survey",
+        "data": "The developer experience index",
+        "required": false
+      },
+      {
+        "source": "incidents",
+        "data": "Availability objectives, error budgets and incident data",
+        "required": true
+      },
+      {
+        "source": "security",
+        "data": "Audit status and vulnerability ageing",
+        "required": true
+      },
+      {
+        "source": "docs",
+        "data": "The architecture decision log and debt register",
+        "required": false
+      },
+      {
+        "source": "ai_tools",
+        "data": "Usage and cost per engineer by tool",
+        "required": true
+      },
+      {
+        "source": "source_control",
+        "data": "A baseline from before the tools, and the quality metrics from slide 9",
+        "required": true
+      },
+      {
+        "source": "survey",
+        "data": "Developer sentiment",
+        "required": false
+      }
+    ]
+  },
+  {
+    "id": "10",
+    "nav": "Platform & security",
+    "act": "Delivery",
+    "audiences": [
+      "L"
+    ],
+    "evidence_blocks": [
+      "cards"
+    ],
+    "rolls_up": [],
+    "requires": [
+      {
+        "source": "incidents",
+        "data": "Availability objectives, error budgets and incident data",
+        "required": true
+      },
+      {
+        "source": "security",
+        "data": "Audit status and vulnerability ageing",
+        "required": true
+      },
+      {
+        "source": "docs",
+        "data": "The architecture decision log and debt register",
+        "required": false
+      }
+    ]
+  },
+  {
+    "id": "11",
+    "nav": "Outcome scorecard",
+    "act": "Measurement",
+    "audiences": [
+      "L",
+      "B",
+      "S"
+    ],
+    "evidence_blocks": [
+      "scorecard"
+    ],
+    "rolls_up": [],
+    "requires": [
+      {
+        "source": "analytics",
+        "data": "One North Star and 3 to 5 input metrics, each with a definition, owner, target and prior period",
+        "required": true
+      },
+      {
+        "source": "billing",
+        "data": "Retention and expansion ARR",
+        "required": true
+      },
+      {
+        "source": "warehouse",
+        "data": "The query behind each metric",
+        "required": false
+      },
+      {
+        "source": "crm",
+        "data": "Customer accounts behind the retention measures",
+        "required": false
+      }
+    ]
+  },
+  {
+    "id": "12",
+    "nav": "AI in the product",
+    "act": "Measurement",
+    "audiences": [
+      "L",
+      "B"
+    ],
+    "evidence_blocks": [
+      "tiles"
+    ],
+    "rolls_up": [],
+    "requires": [
+      {
+        "source": "evals",
+        "data": "A versioned eval set, production traces and cost per request",
+        "required": true
+      },
+      {
+        "source": "finance",
+        "data": "AI revenue and cost of revenue",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "13",
+    "nav": "AI in how we build",
+    "act": "Measurement",
+    "audiences": [
+      "L"
+    ],
+    "evidence_blocks": [
+      "table"
+    ],
+    "rolls_up": [],
+    "requires": [
+      {
+        "source": "ai_tools",
+        "data": "Usage and cost per engineer by tool",
+        "required": true
+      },
+      {
+        "source": "source_control",
+        "data": "A baseline from before the tools, and the quality metrics from slide 9",
+        "required": true
+      },
+      {
+        "source": "survey",
+        "data": "Developer sentiment",
+        "required": false
+      }
+    ]
+  },
+  {
+    "id": "14",
+    "nav": "Risks & assumptions",
+    "act": "Next investments",
+    "audiences": [
+      "L",
+      "B"
+    ],
+    "evidence_blocks": [
+      "table"
+    ],
+    "rolls_up": [],
+    "requires": [
+      {
+        "source": "docs",
+        "data": "A risk register with likelihood, impact, owner and date",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "15",
+    "nav": "Stopped & won't do",
+    "act": "Next investments",
+    "audiences": [
+      "L",
+      "S"
+    ],
+    "evidence_blocks": [
+      "cards"
+    ],
+    "rolls_up": [],
+    "requires": [
+      {
+        "source": "docs",
+        "data": "A decision log",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "16",
+    "nav": "Next bets",
+    "act": "Next investments",
+    "audiences": [
+      "L",
+      "B",
+      "S"
+    ],
+    "evidence_blocks": [
+      "table"
+    ],
+    "rolls_up": [],
+    "requires": [
+      {
+        "source": "docs",
+        "data": "A one-page brief per bet with appetite, expected result, confidence and a stop rule",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "17",
+    "nav": "Team & operating model",
+    "act": "Next investments",
+    "audiences": [
+      "L",
+      "S"
+    ],
+    "evidence_blocks": [
+      "table"
+    ],
+    "rolls_up": [],
+    "requires": [
+      {
+        "source": "hr",
+        "data": "Headcount against plan by function, open senior roles and attrition",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "18",
+    "nav": "Decisions & asks",
+    "act": "Next investments",
+    "audiences": [
+      "L",
+      "B"
+    ],
+    "evidence_blocks": [
+      "cards"
+    ],
+    "rolls_up": [],
+    "requires": [
+      {
+        "source": "interview",
+        "data": "For each decision, the options, the cost of each, your recommendation and the deadline",
+        "required": true
+      }
+    ]
+  }
+]

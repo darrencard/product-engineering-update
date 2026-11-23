@@ -1,0 +1,101 @@
+id,title,work_type,status,estimate,completed_at,product_line,objective,owner
+NEW-1,New capabilities item 1,New capabilities,Done,1,2026-07-01,Dispatch Agent,Grow ARR to $50M,Dispatch Agent team
+NEW-2,New capabilities item 2,New capabilities,Done,1,2026-07-04,Dispatch Agent,Grow ARR to $50M,Dispatch Agent team
+NEW-3,New capabilities item 3,New capabilities,Done,1,2026-07-07,Dispatch Agent,Grow ARR to $50M,Dispatch Agent team
+NEW-4,New capabilities item 4,New capabilities,Done,1,2026-07-10,Dispatch Agent,Grow ARR to $50M,Dispatch Agent team
+NEW-5,New capabilities item 5,New capabilities,Done,1,2026-07-13,Dispatch Agent,Grow ARR to $50M,Dispatch Agent team
+NEW-6,New capabilities item 6,New capabilities,Done,1,2026-07-16,Dispatch Agent,Grow ARR to $50M,Dispatch Agent team
+NEW-7,New capabilities item 7,New capabilities,Done,1,2026-07-19,Dispatch Agent,Grow ARR to $50M,Dispatch Agent team
+NEW-8,New capabilities item 8,New capabilities,Done,1,2026-07-22,Dispatch Agent,Grow ARR to $50M,Dispatch Agent team
+NEW-9,New capabilities item 9,New capabilities,Done,1,2026-07-25,Dispatch Agent,Grow ARR to $50M,Dispatch Agent team
+NEW-10,New capabilities item 10,New capabilities,Done,1,2026-07-28,Dispatch Agent,Grow ARR to $50M,Dispatch Agent team
+NEW-11,New capabilities item 11,New capabilities,Done,1,2026-07-31,Dispatch Agent,Grow ARR to $50M,Dispatch Agent team
+NEW-12,New capabilities item 12,New capabilities,Done,1,2026-08-03,Dispatch Agent,Grow ARR to $50M,Dispatch Agent team
+NEW-13,New capabilities item 13,New capabilities,Done,1,2026-08-06,Dispatch Agent,Grow ARR to $50M,Dispatch Agent team
+NEW-14,New capabilities item 14,New capabilities,Done,1,2026-08-09,Dispatch Agent,Grow ARR to $50M,Dispatch Agent team
+NEW-15,New capabilities item 15,New capabilities,Done,1,2026-08-12,Dispatch Agent,Grow ARR to $50M,Dispatch Agent team
+NEW-16,New capabilities item 16,New capabilities,Done,1,2026-08-15,Dispatch Agent,Grow ARR to $50M,Dispatch Agent team
+NEW-17,New capabilities item 17,New capabilities,Done,1,2026-08-18,Dispatch Agent,Grow ARR to $50M,Dispatch Agent team
+NEW-18,New capabilities item 18,New capabilities,Done,1,2026-08-21,Dispatch Agent,Grow ARR to $50M,Dispatch Agent team
+NEW-19,New capabilities item 19,New capabilities,Done,1,2026-08-24,Dispatch Agent,Grow ARR to $50M,Dispatch Agent team
+NEW-20,New capabilities item 20,New capabilities,Done,1,2026-08-27,Dispatch Agent,Grow ARR to $50M,Dispatch Agent team
+NEW-21,New capabilities item 21,New capabilities,Done,1,2026-08-30,Dispatch Agent,Grow ARR to $50M,Dispatch Agent team
+NEW-22,New capabilities item 22,New capabilities,Done,1,2026-09-02,Dispatch Agent,Grow ARR to $50M,Dispatch Agent team
+NEW-23,New capabilities item 23,New capabilities,Done,1,2026-09-05,Dispatch Agent,Grow ARR to $50M,Dispatch Agent team
+NEW-24,New capabilities item 24,New capabilities,Done,1,2026-09-08,Dispatch Agent,Grow ARR to $50M,Dispatch Agent team
+NEW-25,New capabilities item 25,New capabilities,Done,1,2026-09-11,Dispatch Agent,Grow ARR to $50M,Dispatch Agent team
+NEW-26,New capabilities item 26,New capabilities,Done,1,2026-09-14,Dispatch Agent,Grow ARR to $50M,Dispatch Agent team
+NEW-27,New capabilities item 27,New capabilities,Done,1,2026-09-17,Dispatch Agent,Grow ARR to $50M,Dispatch Agent team
+NEW-28,New capabilities item 28,New capabilities,Done,1,2026-09-20,Dispatch Agent,Grow ARR to $50M,Dispatch Agent team
+NEW-29,New capabilities item 29,New capabilities,Done,1,2026-09-23,Dispatch Agent,Grow ARR to $50M,Dispatch Agent team
+NEW-30,New capabilities item 30,New capabilities,Done,1,2026-09-26,Dispatch Agent,Grow ARR to $50M,Dispatch Agent team
+NEW-31,New capabilities item 31,New capabilities,Done,1,2026-07-01,Dispatch Agent,Grow ARR to $50M,Dispatch Agent team
+IMP-1,Improve the core item 1,Improve the core,Done,1,2026-07-01,Dispatch Agent,Grow ARR to $50M,Core Dispatch team
+IMP-2,Improve the core item 2,Improve the core,Done,1,2026-07-04,Dispatch Agent,Grow ARR to $50M,Core Dispatch team
+IMP-3,Improve the core item 3,Improve the core,Done,1,2026-07-07,Dispatch Agent,Grow ARR to $50M,Core Dispatch team
+IMP-4,Improve the core item 4,Improve the core,Done,1,2026-07-10,Dispatch Agent,Grow ARR to $50M,Core Dispatch team
+IMP-5,Improve the core item 5,Improve the core,Done,1,2026-07-13,Dispatch Agent,Grow ARR to $50M,Core Dispatch team
+IMP-6,Improve the core item 6,Improve the core,Done,1,2026-07-16,Dispatch Agent,Grow ARR to $50M,Core Dispatch team
+IMP-7,Improve the core item 7,Improve the core,Done,1,2026-07-19,Dispatch Agent,Grow ARR to $50M,Core Dispatch team
+IMP-8,Improve the core item 8,Improve the core,Done,1,2026-07-22,Dispatch Agent,Grow ARR to $50M,Core Dispatch team
+IMP-9,Improve the core item 9,Improve the core,Done,1,2026-07-25,Dispatch Agent,Grow ARR to $50M,Core Dispatch team
+IMP-10,Improve the core item 10,Improve the core,Done,1,2026-07-28,Dispatch Agent,Grow ARR to $50M,Core Dispatch team
+IMP-11,Improve the core item 11,Improve the core,Done,1,2026-07-31,Dispatch Agent,Grow ARR to $50M,Core Dispatch team
+IMP-12,Improve the core item 12,Improve the core,Done,1,2026-08-03,Dispatch Agent,Grow ARR to $50M,Core Dispatch team
+IMP-13,Improve the core item 13,Improve the core,Done,1,2026-08-06,Dispatch Agent,Grow ARR to $50M,Core Dispatch team
+IMP-14,Improve the core item 14,Improve the core,Done,1,2026-08-09,Dispatch Agent,Grow ARR to $50M,Core Dispatch team
+IMP-15,Improve the core item 15,Improve the core,Done,1,2026-08-12,Dispatch Agent,Grow ARR to $50M,Core Dispatch team
+IMP-16,Improve the core item 16,Improve the core,Done,1,2026-08-15,Dispatch Agent,Grow ARR to $50M,Core Dispatch team
+IMP-17,Improve the core item 17,Improve the core,Done,1,2026-08-18,Dispatch Agent,Grow ARR to $50M,Core Dispatch team
+IMP-18,Improve the core item 18,Improve the core,Done,1,2026-08-21,Dispatch Agent,Grow ARR to $50M,Core Dispatch team
+GRO-1,Growth item 1,Growth,Done,1,2026-07-01,Dispatch Agent,Grow ARR to $50M,Core Dispatch team
+GRO-2,Growth item 2,Growth,Done,1,2026-07-04,Dispatch Agent,Grow ARR to $50M,Core Dispatch team
+GRO-3,Growth item 3,Growth,Done,1,2026-07-07,Dispatch Agent,Grow ARR to $50M,Core Dispatch team
+GRO-4,Growth item 4,Growth,Done,1,2026-07-10,Dispatch Agent,Grow ARR to $50M,Core Dispatch team
+GRO-5,Growth item 5,Growth,Done,1,2026-07-13,Dispatch Agent,Grow ARR to $50M,Core Dispatch team
+GRO-6,Growth item 6,Growth,Done,1,2026-07-16,Dispatch Agent,Grow ARR to $50M,Core Dispatch team
+GRO-7,Growth item 7,Growth,Done,1,2026-07-19,Dispatch Agent,Grow ARR to $50M,Core Dispatch team
+GRO-8,Growth item 8,Growth,Done,1,2026-07-22,Dispatch Agent,Grow ARR to $50M,Core Dispatch team
+PLA-1,Platform & scale item 1,Platform & scale,Done,1,2026-07-01,Dispatch Agent,Grow ARR to $50M,Platform team
+PLA-2,Platform & scale item 2,Platform & scale,Done,1,2026-07-04,Dispatch Agent,Grow ARR to $50M,Platform team
+PLA-3,Platform & scale item 3,Platform & scale,Done,1,2026-07-07,Dispatch Agent,Grow ARR to $50M,Platform team
+PLA-4,Platform & scale item 4,Platform & scale,Done,1,2026-07-10,Dispatch Agent,Grow ARR to $50M,Platform team
+PLA-5,Platform & scale item 5,Platform & scale,Done,1,2026-07-13,Dispatch Agent,Grow ARR to $50M,Platform team
+PLA-6,Platform & scale item 6,Platform & scale,Done,1,2026-07-16,Dispatch Agent,Grow ARR to $50M,Platform team
+PLA-7,Platform & scale item 7,Platform & scale,Done,1,2026-07-19,Dispatch Agent,Grow ARR to $50M,Platform team
+PLA-8,Platform & scale item 8,Platform & scale,Done,1,2026-07-22,Dispatch Agent,Grow ARR to $50M,Platform team
+PLA-9,Platform & scale item 9,Platform & scale,Done,1,2026-07-25,Dispatch Agent,Grow ARR to $50M,Platform team
+PLA-10,Platform & scale item 10,Platform & scale,Done,1,2026-07-28,Dispatch Agent,Grow ARR to $50M,Platform team
+PLA-11,Platform & scale item 11,Platform & scale,Done,1,2026-07-31,Dispatch Agent,Grow ARR to $50M,Platform team
+PLA-12,Platform & scale item 12,Platform & scale,Done,1,2026-08-03,Dispatch Agent,Grow ARR to $50M,Platform team
+PLA-13,Platform & scale item 13,Platform & scale,Done,1,2026-08-06,Dispatch Agent,Grow ARR to $50M,Platform team
+PLA-14,Platform & scale item 14,Platform & scale,Done,1,2026-08-09,Dispatch Agent,Grow ARR to $50M,Platform team
+PLA-15,Platform & scale item 15,Platform & scale,Done,1,2026-08-12,Dispatch Agent,Grow ARR to $50M,Platform team
+PLA-16,Platform & scale item 16,Platform & scale,Done,1,2026-08-15,Dispatch Agent,Grow ARR to $50M,Platform team
+PLA-17,Platform & scale item 17,Platform & scale,Done,1,2026-08-18,Dispatch Agent,Grow ARR to $50M,Platform team
+PLA-18,Platform & scale item 18,Platform & scale,Done,1,2026-08-21,Dispatch Agent,Grow ARR to $50M,Platform team
+PLA-19,Platform & scale item 19,Platform & scale,Done,1,2026-08-24,Dispatch Agent,Grow ARR to $50M,Platform team
+PLA-20,Platform & scale item 20,Platform & scale,Done,1,2026-08-27,Dispatch Agent,Grow ARR to $50M,Platform team
+PLA-21,Platform & scale item 21,Platform & scale,Done,1,2026-08-30,Dispatch Agent,Grow ARR to $50M,Platform team
+KEE-1,Keep the lights on item 1,Keep the lights on,Done,1,2026-07-01,Dispatch Agent,,Platform team
+KEE-2,Keep the lights on item 2,Keep the lights on,Done,1,2026-07-04,Dispatch Agent,,Platform team
+KEE-3,Keep the lights on item 3,Keep the lights on,Done,1,2026-07-07,Dispatch Agent,,Platform team
+KEE-4,Keep the lights on item 4,Keep the lights on,Done,1,2026-07-10,Dispatch Agent,,Platform team
+KEE-5,Keep the lights on item 5,Keep the lights on,Done,1,2026-07-13,Dispatch Agent,,Platform team
+KEE-6,Keep the lights on item 6,Keep the lights on,Done,1,2026-07-16,Dispatch Agent,,Platform team
+KEE-7,Keep the lights on item 7,Keep the lights on,Done,1,2026-07-19,Dispatch Agent,,Platform team
+KEE-8,Keep the lights on item 8,Keep the lights on,Done,1,2026-07-22,Dispatch Agent,,Platform team
+KEE-9,Keep the lights on item 9,Keep the lights on,Done,1,2026-07-25,Dispatch Agent,,Platform team
+KEE-10,Keep the lights on item 10,Keep the lights on,Done,1,2026-07-28,Dispatch Agent,,Platform team
+KEE-11,Keep the lights on item 11,Keep the lights on,Done,1,2026-07-31,Dispatch Agent,,Platform team
+KEE-12,Keep the lights on item 12,Keep the lights on,Done,1,2026-08-03,Dispatch Agent,,Platform team
+KEE-13,Keep the lights on item 13,Keep the lights on,Done,1,2026-08-06,Dispatch Agent,,Platform team
+KEE-14,Keep the lights on item 14,Keep the lights on,Done,1,2026-08-09,Dispatch Agent,,Platform team
+KEE-15,Keep the lights on item 15,Keep the lights on,Done,1,2026-08-12,Dispatch Agent,,Platform team
+KEE-16,Keep the lights on item 16,Keep the lights on,Done,1,2026-08-15,Dispatch Agent,,Platform team
+KEE-17,Keep the lights on item 17,Keep the lights on,Done,1,2026-08-18,Dispatch Agent,,Platform team
+KEE-18,Keep the lights on item 18,Keep the lights on,Done,1,2026-08-21,Dispatch Agent,,Platform team
+KEE-19,Keep the lights on item 19,Keep the lights on,Done,1,2026-08-24,Dispatch Agent,,Platform team
+KEE-20,Keep the lights on item 20,Keep the lights on,Done,1,2026-08-27,Dispatch Agent,,Platform team
+KEE-21,Keep the lights on item 21,Keep the lights on,Done,1,2026-08-30,Dispatch Agent,,Platform team
+KEE-22,Keep the lights on item 22,Keep the lights on,Done,1,2026-09-02,Dispatch Agent,,Platform team

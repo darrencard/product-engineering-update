@@ -1,0 +1,1098 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.dacard.ai/update/deck.schema.json",
+  "title": "Product & Engineering Update deck",
+  "description": "The data contract for one deck. Text fields accept a light markup: **bold**, [label](https://url), [[L01]] for an evidence ledger reference and [[status:landed]] for a status mark.",
+  "type": "object",
+  "required": [
+    "meta",
+    "slides",
+    "ledger",
+    "sources"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "meta": {
+      "$ref": "#/$defs/meta"
+    },
+    "slides": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/slide"
+      }
+    },
+    "ledger": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/ledgerRow"
+      }
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/source"
+      }
+    }
+  },
+  "$defs": {
+    "audience": {
+      "enum": [
+        "L",
+        "B",
+        "S"
+      ]
+    },
+    "status": {
+      "enum": [
+        "landed",
+        "watch",
+        "stalled"
+      ]
+    },
+    "confidence": {
+      "enum": [
+        "Verified",
+        "Derived",
+        "Estimated",
+        "Unknown"
+      ]
+    },
+    "columns": {
+      "enum": [
+        1,
+        2,
+        3,
+        4,
+        "2:1"
+      ]
+    },
+    "ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "strings": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "meta": {
+      "type": "object",
+      "required": [
+        "title",
+        "description",
+        "brand",
+        "product",
+        "company",
+        "period",
+        "as_of",
+        "template_version",
+        "audiences",
+        "cuts",
+        "notice",
+        "footer",
+        "source_types"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "brand": {
+          "type": "string"
+        },
+        "product": {
+          "type": "string"
+        },
+        "company": {
+          "type": "string"
+        },
+        "period": {
+          "type": "string"
+        },
+        "as_of": {
+          "type": "string",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+        },
+        "template_version": {
+          "type": "string"
+        },
+        "audiences": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": [
+              "key",
+              "label",
+              "chip"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "key": {
+                "$ref": "#/$defs/audience"
+              },
+              "label": {
+                "type": "string"
+              },
+              "chip": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "cuts": {
+          "description": "Core slide ids per audience. Must match slides[].audiences. The board cut holds at most 8.",
+          "type": "object",
+          "required": [
+            "L",
+            "B",
+            "S"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "L": {
+              "$ref": "#/$defs/ids"
+            },
+            "B": {
+              "$ref": "#/$defs/ids"
+            },
+            "S": {
+              "$ref": "#/$defs/ids"
+            }
+          }
+        },
+        "notice": {
+          "type": "object",
+          "required": [
+            "illustrative",
+            "text"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "illustrative": {
+              "type": "boolean"
+            },
+            "text": {
+              "type": "string"
+            }
+          }
+        },
+        "footer": {
+          "type": "string"
+        },
+        "source_types": {
+          "description": "The systems a deck can draw on. Slides name them in requires.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "key",
+              "label",
+              "examples",
+              "csv"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "key": {
+                "type": "string",
+                "pattern": "^[a-z_]+$"
+              },
+              "label": {
+                "type": "string"
+              },
+              "examples": {
+                "$ref": "#/$defs/strings"
+              },
+              "csv": {
+                "description": "What a CSV upload must hold when no connector is available.",
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "slide": {
+      "type": "object",
+      "required": [
+        "id",
+        "kind",
+        "act",
+        "nav",
+        "audiences",
+        "illustrative",
+        "title",
+        "blocks"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^(\\d\\d[a-z]?|[A-Z])$"
+        },
+        "kind": {
+          "enum": [
+            "cover",
+            "slide",
+            "appendix"
+          ]
+        },
+        "act": {
+          "type": "string"
+        },
+        "nav": {
+          "type": "string"
+        },
+        "audiences": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/audience"
+          }
+        },
+        "meta": {
+          "description": "Free meta line, cover only.",
+          "$ref": "#/$defs/strings"
+        },
+        "kicker": {
+          "type": "string"
+        },
+        "illustrative": {
+          "description": "True when any figure on the slide is not real data.",
+          "type": "boolean"
+        },
+        "title": {
+          "description": "An assertion sentence.",
+          "type": "string",
+          "minLength": 1
+        },
+        "blocks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/block"
+          }
+        },
+        "asof": {
+          "type": "string"
+        },
+        "ledger_refs": {
+          "$ref": "#/$defs/ids"
+        },
+        "guide": {
+          "oneOf": [
+            {
+              "type": "object",
+              "required": [
+                "question",
+                "needs",
+                "rule"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "question": {
+                  "type": "string"
+                },
+                "needs": {
+                  "type": "string"
+                },
+                "rule": {
+                  "type": "string"
+                }
+              }
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": [
+                  "label",
+                  "text"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "label": {
+                    "type": "string"
+                  },
+                  "text": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "dig_deeper": {
+          "$ref": "#/$defs/strings"
+        },
+        "rolls_up": {
+          "description": "Slides this one condenses. It inherits the sources they require.",
+          "$ref": "#/$defs/ids"
+        },
+        "requires": {
+          "description": "The sources this slide needs before it can render with real data.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "source",
+              "data",
+              "required"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "source": {
+                "description": "A key from meta.source_types.",
+                "type": "string"
+              },
+              "data": {
+                "type": "string"
+              },
+              "required": {
+                "description": "False when the slide still renders without it.",
+                "type": "boolean"
+              }
+            }
+          }
+        }
+      }
+    },
+    "block": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/text"
+        },
+        {
+          "$ref": "#/$defs/cards"
+        },
+        {
+          "$ref": "#/$defs/tiles"
+        },
+        {
+          "$ref": "#/$defs/table"
+        },
+        {
+          "$ref": "#/$defs/scorecard"
+        },
+        {
+          "$ref": "#/$defs/ledger"
+        },
+        {
+          "$ref": "#/$defs/sourcesNeeded"
+        },
+        {
+          "$ref": "#/$defs/tree"
+        },
+        {
+          "$ref": "#/$defs/strip"
+        },
+        {
+          "$ref": "#/$defs/steps"
+        },
+        {
+          "$ref": "#/$defs/facts"
+        }
+      ]
+    },
+    "text": {
+      "type": "object",
+      "required": [
+        "type",
+        "variant",
+        "text"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "text"
+        },
+        "variant": {
+          "enum": [
+            "lede",
+            "note"
+          ]
+        },
+        "text": {
+          "type": "string"
+        }
+      }
+    },
+    "cards": {
+      "type": "object",
+      "required": [
+        "type",
+        "columns",
+        "items"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "cards"
+        },
+        "columns": {
+          "$ref": "#/$defs/columns"
+        },
+        "max_width": {
+          "type": "number"
+        },
+        "items": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/$defs/card"
+              },
+              {
+                "$ref": "#/$defs/dataNeeded"
+              },
+              {
+                "$ref": "#/$defs/table"
+              },
+              {
+                "$ref": "#/$defs/scorecard"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "card": {
+      "type": "object",
+      "required": [
+        "body"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "body": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "object",
+                "required": [
+                  "p"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "p": {
+                    "type": "string"
+                  },
+                  "space": {
+                    "type": "number"
+                  },
+                  "emphasis": {
+                    "type": "boolean"
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "required": [
+                  "list"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "list": {
+                    "$ref": "#/$defs/strings"
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "required": [
+                  "cta"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "cta": {
+                    "type": "object",
+                    "required": [
+                      "label",
+                      "href"
+                    ],
+                    "additionalProperties": false,
+                    "properties": {
+                      "label": {
+                        "type": "string"
+                      },
+                      "href": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "$ref": "#/$defs/planVsActual"
+              },
+              {
+                "$ref": "#/$defs/table"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "dataNeeded": {
+      "description": "Shown when a slide lacks its minimum data. Never replaced with prose.",
+      "type": "object",
+      "required": [
+        "type",
+        "label",
+        "text",
+        "owner",
+        "due"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "data_needed"
+        },
+        "label": {
+          "type": "string"
+        },
+        "text": {
+          "type": "string"
+        },
+        "owner": {
+          "type": "string",
+          "minLength": 1
+        },
+        "due": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "tiles": {
+      "type": "object",
+      "required": [
+        "type",
+        "columns",
+        "items"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "tiles"
+        },
+        "columns": {
+          "$ref": "#/$defs/columns"
+        },
+        "max_width": {
+          "type": "number"
+        },
+        "items": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": [
+              "value",
+              "label"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "value": {
+                "type": "string"
+              },
+              "label": {
+                "type": "string"
+              },
+              "note": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "table": {
+      "type": "object",
+      "required": [
+        "type",
+        "columns",
+        "rows"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "table"
+        },
+        "columns": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": [
+              "label"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "label": {
+                "type": "string"
+              },
+              "align": {
+                "const": "num"
+              },
+              "mono": {
+                "type": "boolean"
+              }
+            }
+          }
+        },
+        "rows": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/$defs/strings"
+              },
+              {
+                "type": "object",
+                "required": [
+                  "group"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "group": {
+                    "type": "string"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    "scorecard": {
+      "description": "Prior, actual, a range or target, and a status. Delivery metrics take a range, never a single-point target.",
+      "type": "object",
+      "required": [
+        "type",
+        "target_kind",
+        "labels",
+        "rows"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "scorecard"
+        },
+        "target_kind": {
+          "enum": [
+            "range",
+            "target"
+          ]
+        },
+        "labels": {
+          "type": "object",
+          "required": [
+            "metric",
+            "prior",
+            "actual",
+            "target",
+            "status"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "metric": {
+              "type": "string"
+            },
+            "prior": {
+              "type": "string"
+            },
+            "actual": {
+              "type": "string"
+            },
+            "target": {
+              "type": "string"
+            },
+            "status": {
+              "type": "string"
+            },
+            "extra": {
+              "$ref": "#/$defs/strings"
+            }
+          }
+        },
+        "rows": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "metric",
+                  "prior",
+                  "actual",
+                  "target",
+                  "status"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "metric": {
+                    "type": "string"
+                  },
+                  "prior": {
+                    "type": "string"
+                  },
+                  "actual": {
+                    "type": "string"
+                  },
+                  "target": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "$ref": "#/$defs/status"
+                  },
+                  "extra": {
+                    "$ref": "#/$defs/strings"
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "required": [
+                  "group"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "group": {
+                    "type": "string"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    "ledger": {
+      "description": "Renders the deck's top-level ledger.",
+      "type": "object",
+      "required": [
+        "type"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "ledger"
+        }
+      }
+    },
+    "sourcesNeeded": {
+      "description": "Renders the sources table from meta.source_types and slides[].requires.",
+      "type": "object",
+      "required": [
+        "type"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "sources_needed"
+        }
+      }
+    },
+    "planVsActual": {
+      "type": "object",
+      "required": [
+        "type",
+        "legend",
+        "rows"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "plan_vs_actual"
+        },
+        "legend": {
+          "type": "object",
+          "required": [
+            "plan",
+            "actual",
+            "over"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "plan": {
+              "type": "string"
+            },
+            "actual": {
+              "type": "string"
+            },
+            "over": {
+              "type": "string"
+            }
+          }
+        },
+        "rows": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": [
+              "label",
+              "plan",
+              "actual"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "label": {
+                "type": "string"
+              },
+              "plan": {
+                "description": "Percent of capacity.",
+                "type": "number",
+                "minimum": 0,
+                "maximum": 50
+              },
+              "actual": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 50
+              },
+              "over": {
+                "type": "boolean"
+              }
+            }
+          }
+        }
+      }
+    },
+    "tree": {
+      "description": "One objective and the bets that serve it. Every branch states its cause.",
+      "type": "object",
+      "required": [
+        "type",
+        "objective",
+        "bets"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "tree"
+        },
+        "objective": {
+          "type": "string"
+        },
+        "bets": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": [
+              "bet",
+              "owner",
+              "outcome",
+              "cause",
+              "confidence"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "bet": {
+                "type": "string"
+              },
+              "owner": {
+                "type": "string"
+              },
+              "outcome": {
+                "type": "string"
+              },
+              "cause": {
+                "type": "string",
+                "minLength": 1
+              },
+              "confidence": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        }
+      }
+    },
+    "strip": {
+      "type": "object",
+      "required": [
+        "type",
+        "label",
+        "text"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "strip"
+        },
+        "label": {
+          "type": "string"
+        },
+        "text": {
+          "type": "string"
+        }
+      }
+    },
+    "steps": {
+      "type": "object",
+      "required": [
+        "type",
+        "items"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "steps"
+        },
+        "items": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": [
+              "title",
+              "text"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "title": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "facts": {
+      "type": "object",
+      "required": [
+        "type",
+        "items"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "facts"
+        },
+        "items": {
+          "$ref": "#/$defs/strings"
+        }
+      }
+    },
+    "ledgerRow": {
+      "description": "One row per figure. A field with no evidence is null, never a guess.",
+      "type": "object",
+      "required": [
+        "id",
+        "claim",
+        "value",
+        "unit",
+        "source_system",
+        "query_or_url",
+        "window",
+        "retrieved_at",
+        "confidence",
+        "owner"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^L\\d+$"
+        },
+        "claim": {
+          "type": "string"
+        },
+        "value": {
+          "type": [
+            "number",
+            "string",
+            "null"
+          ]
+        },
+        "unit": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "source_system": {
+          "type": "string"
+        },
+        "query_or_url": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "window": {
+          "type": "string"
+        },
+        "retrieved_at": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "confidence": {
+          "$ref": "#/$defs/confidence"
+        },
+        "owner": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "stale": {
+          "description": "True when the figure is older than the reporting window. A stale figure is shown as stale, never as current.",
+          "type": "boolean"
+        }
+      }
+    },
+    "source": {
+      "description": "An external source cited in the deck.",
+      "type": "object",
+      "required": [
+        "id",
+        "title",
+        "url",
+        "cited_on"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^S\\d+$"
+        },
+        "title": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string",
+          "pattern": "^https://"
+        },
+        "cited_on": {
+          "$ref": "#/$defs/ids"
+        }
+      }
+    }
+  }
+}
