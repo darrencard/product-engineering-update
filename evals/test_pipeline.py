@@ -39,6 +39,9 @@ import validate  # noqa: E402
 
 Json = dict[str, Any]
 
+# Slides whose evidence is written cards, not figures.
+WORD_SLIDES = {"01", "02", "09b", "15", "18"}
+
 
 def script(name: str, *args: str) -> subprocess.CompletedProcess[str]:
     """Run one of the skill's scripts in isolated mode, as a user's session would."""
@@ -94,8 +97,8 @@ class Fixtures(unittest.TestCase):
     def expect(self, name: str) -> Json:
         return json.loads((FIXTURES / name / "expect.json").read_text(encoding="utf-8"))
 
-    def test_there_are_five_fixtures(self) -> None:
-        self.assertEqual(sorted(self.decks), ["complete", "conflicting", "no_ai", "single_product", "sparse"])
+    def test_there_are_six_fixtures(self) -> None:
+        self.assertEqual(sorted(self.decks), ["complete", "conflict_resolved", "conflicting", "no_ai", "single_product", "sparse"])
 
     def test_every_fixture_meets_its_expected_outcome(self) -> None:
         for name, deck in self.decks.items():
@@ -108,11 +111,8 @@ class Fixtures(unittest.TestCase):
                 for absent in want["absent"]:
                     self.assertNotIn(absent, ids)
                 for filled in want["filled"]:
-                    self.assertNotIn(
-                        "data_needed",
-                        block_types(slide(deck, filled)) - ({"data_needed"} if filled in ("05", "11") else set()),
-                        f"slide {filled} should have data",
-                    )
+                    has_figures = block_types(slide(deck, filled)) - {"cards", "data_needed"}
+                    self.assertTrue(has_figures or filled in WORD_SLIDES, f"slide {filled} should have data")
                     self.assertNotIn("is not reported this period", slide(deck, filled)["title"])
                 self.assertEqual(len([s for s in core if "B" in s["audiences"]]), want["board_slides"])
                 self.assertEqual(sorted(c["metric"] for c in self.metrics[name]["conflicts"]), want["conflicts"])
@@ -160,6 +160,37 @@ class Fixtures(unittest.TestCase):
         self.assertNotIn("21.4K", text)
         self.assertIsNone(metrics["metrics"]["arr"]["value"])
         self.assertNotIn("ARR rose", json.dumps(slide(deck, "01")))
+
+    def test_a_disputed_figure_appears_nowhere_as_a_number(self) -> None:
+        deck = self.decks["conflicting"]
+        slides = json.dumps(deck["slides"])
+        for leaked in ("$10.1M", "$10.9M", "23.1K", "21.4K"):
+            self.assertNotIn(leaked, slides, f"{leaked} must not appear on a slide")
+        self.assertNotIn('["ARR"', json.dumps(slide(deck, "05")), "ARR is not a spend line")
+        self.assertFalse(
+            [r for r in deck["ledger"] if r["confidence"] != "Unknown" and r["claim"].startswith("ARR")], "no ledger row may state a disputed ARR as fact"
+        )
+        self.assertNotIn("ARR $", " ".join(r["claim"] for r in deck["ledger"] if "Plan and actual" in r["claim"]))
+        self.assertIn("2 figures held because two sources disagree", json.dumps(slide(deck, "01")))
+
+    def test_naming_the_owning_source_settles_a_conflict_and_keeps_the_other_reading(self) -> None:
+        deck, metrics = self.decks["conflict_resolved"], self.metrics["conflict_resolved"]
+        self.assertEqual(metrics["conflicts"], [])
+        self.assertEqual([r for r in deck["ledger"] if r["confidence"] == "Unknown"], [])
+        self.assertIn("23.1K", json.dumps(slide(deck, "11")))
+        claims = " ".join(r["claim"] for r in deck["ledger"])
+        self.assertIn("PostHog owns this figure, named in the intake; Warehouse says 21400", claims)
+        self.assertIn("Stripe owns this figure, named in the intake; Finance close says $10.1M", claims)
+        self.assertEqual(validate.check(deck)["errors"], [])
+
+    def test_a_generated_deck_holds_no_template_text_and_shows_units(self) -> None:
+        deck = self.decks["complete"]
+        cover = json.dumps(slide(deck, "00"))
+        self.assertNotIn("Fill in each slide", cover)
+        self.assertIn("16 of 19 slides show data", cover)
+        rows = {r["metric"]: r for r in slide(deck, "11")["blocks"][0]["rows"] if "metric" in r}
+        self.assertEqual((rows["Activation"]["prior"], rows["Activation"]["actual"]), ("39%", "41%"))
+        self.assertIn("data_needed", block_types(slide(deck, "12")), "slide 12 must show the AI margin gap")
 
     def test_computed_figures_are_right(self) -> None:
         m = self.metrics["complete"]["metrics"]

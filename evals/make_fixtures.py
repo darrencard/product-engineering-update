@@ -73,7 +73,7 @@ INTAKE: dict[str, Any] = {
         "owner": "Agent team",
     },
     "inputs": [
-        {"metric": "Activation", "target": 50, "target_display": "50%", "higher_is_better": True, "owner": "Activation team"},
+        {"metric": "Activation", "unit": "%", "target": 50, "target_display": "50%", "higher_is_better": True, "owner": "Activation team"},
         {"metric": "Weekly active dispatchers", "target": 6000, "target_display": "6,000", "higher_is_better": True, "owner": "Core dispatch"},
     ],
     "delivery_ranges": {
@@ -353,7 +353,11 @@ def main() -> None:
     clash["warehouse"] = [{"metric": "Loads cleared per week", "period": LABEL, "value": 21_400, "query": "select avg(loads) from ns_weekly"}]
     clash["finance"] = clash["finance"] + [{"line": "ARR", "period": LABEL, "plan": 11_000_000, "actual": 10_100_000}]
     write("conflicting", INTAKE, clash, {"valid": True, "filled": full, "absent": [], "conflicts": ["ARR", "Loads cleared per week"], "board_slides": 8})
-    print(f"make_fixtures: wrote 5 fixtures to {FIXTURES}")
+    # The same clash, after the user has said which source owns each figure.
+    settled = copy.deepcopy(INTAKE)
+    settled["source_of_truth"] = {"ARR": "billing", "Loads cleared per week": "PostHog"}
+    write("conflict_resolved", settled, clash, {"valid": True, "filled": full, "absent": [], "conflicts": [], "board_slides": 8})
+    print(f"make_fixtures: wrote 6 fixtures to {FIXTURES}")
 
 
 if __name__ == "__main__":

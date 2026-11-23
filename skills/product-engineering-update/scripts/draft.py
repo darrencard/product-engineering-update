@@ -370,7 +370,10 @@ class Draft:
             return
         refs = [self.metrics[k]["ledger"] for k in ("eval_pass_rate", "cost_per_task") if k in self.metrics]
         title = " ".join(c for c in (self.change("eval_pass_rate"), self.change("cost_per_task")) if c)
-        self.fill("12", title, [{"type": "tiles", "columns": 3, "items": tiles}], refs, self.systems("evals"))
+        blocks: list[Json] = [{"type": "tiles", "columns": 3, "items": tiles}]
+        # The slide's contract also needs AI revenue against its cost. Nothing computes that yet, so the gap is shown.
+        blocks.append({"type": "cards", "columns": 1, "items": [self.gap("AI revenue and cost of revenue, for AI gross margin.")]})
+        self.fill("12", title, blocks, refs, self.systems("evals"))
 
     def signal(self) -> None:
         crm, support = self.extra.get("crm"), self.extra.get("support")
@@ -448,8 +451,14 @@ class Draft:
         items: list[Json] = [{"title": "What happened", "body": [{"list": [f"{text}[[{ref}]]" for text, ref in points[:4]]}]}]
         items.append({"title": "Now what", "body": [{"list": asks}] if asks else ["No decisions were supplied for this period."]})
         gaps = [s["nav"] for s in self.deck["slides"] if s["kind"] == "slide" and s["id"] not in self.filled and s["id"] != "01"]
+        held = [c["metric"] for c in self.m["conflicts"]]
+        notes = []
         if gaps:
-            items.append({"title": "Not reported", "body": [f"{plural(len(gaps), 'slide')} lack data this period: {', '.join(gaps)}."]})
+            notes.append(f"{plural(len(gaps), 'slide')} lack data this period: {', '.join(gaps)}.")
+        if held:
+            notes.append(f"{plural(len(held), 'figure')} held because two sources disagree: {', '.join(held)}.")
+        if notes:
+            items.append({"title": "Not reported", "body": notes})
         title = self.slides["11"]["title"] if "11" in self.filled else points[0][0]
         self.fill(
             "01",
@@ -580,6 +589,16 @@ class Draft:
                         item["owner"] = intake.get("gap_owner") or item["owner"]
                         item["due"] = intake.get("gap_due") or item["due"]
             s["asof"] = f"No data collected for {intake['period']['label']}."
+        core = [s for s in deck["slides"] if s["kind"] == "slide"]
+        cover["blocks"] = [
+            {
+                "type": "text",
+                "variant": "lede",
+                "text": f"{len(self.filled)} of {len(core)} slides show data for {intake['period']['label']}. "
+                "The rest show what is missing, who owns it and when it is due. Every figure has a row in the evidence ledger.",
+            },
+            *[b for b in cover["blocks"] if b["type"] == "facts"],
+        ]
         deck["ledger"] = self.m["ledger"]
         deck["meta"]["cuts"] = {
             a["key"]: [s["id"] for s in deck["slides"] if s["kind"] == "slide" and a["key"] in s["audiences"]] for a in deck["meta"]["audiences"]
@@ -601,7 +620,7 @@ def main() -> int:
     out.write_text(json.dumps(deck, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     core = [s for s in deck["slides"] if s["kind"] == "slide"]
     with_data = ", ".join(x.lstrip("0") for x in draft.filled) or "none"
-    print(f"draft: wrote {out}. {len(draft.filled)} of {len(core)} slides have data ({with_data}). The rest show data needed.")
+    print(f"draft: wrote {out}. {len(draft.filled)} of {len(core)} core slides across the 3 cuts have data ({with_data}). The rest show data needed.")
     print("draft: next, improve the titles without changing what they claim, then run validate.py.")
     return 0
 

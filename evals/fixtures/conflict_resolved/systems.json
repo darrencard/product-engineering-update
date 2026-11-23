@@ -1,0 +1,15 @@
+{
+  "ai_tools": "Tool admin exports",
+  "analytics": "PostHog",
+  "billing": "Stripe",
+  "crm": "CRM",
+  "evals": "Eval harness",
+  "finance": "Finance close",
+  "hr": "HR system",
+  "incidents": "Incident tool",
+  "source_control": "GitHub",
+  "support": "Support desk",
+  "survey": "Developer survey",
+  "tracker": "Linear",
+  "warehouse": "Warehouse"
+}

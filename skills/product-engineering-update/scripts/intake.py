@@ -36,7 +36,7 @@ EMPTY: Json = {
     "investment_plan": {},  # {"New capabilities": 35, "Keep the lights on": 15}  percent of capacity, by work type
     "rd_lines": [],  # finance lines that count as R&D spend, for R&D as a share of revenue: ["R&D payroll", "Cloud"]
     "north_star": {"metric": None, "definition": None, "target": None, "owner": None},
-    "inputs": [],  # [{"metric": "Activation", "target": 50, "target_display": "50%", "higher_is_better": true, "owner": "..."}]
+    "inputs": [],  # [{"metric": "Activation", "unit": "%", "target": 50, "target_display": "50%", "higher_is_better": true, "owner": "..."}]
     "delivery_ranges": {},  # {"Deploys per week": "35+", "Change failure rate": "under 3.5%"}  healthy ranges, never single points
     "ai_features": None,  # [{"name": "Dispatch Agent", "eval_set": "v14"}]  [] means none in production; null means not asked yet
     "bets": [],  # [{"bet", "commitment", "appetite", "expected", "confidence", "stop_rule", "objective", "cause", "owner"}]
@@ -44,6 +44,8 @@ EMPTY: Json = {
     "stopped": [],  # [{"what", "why"}]
     "decisions": [],  # [{"ask", "options", "recommendation", "deadline"}]
     "connected": [],  # source keys that have data: "tracker", "billing", ...
+    # When two sources disagree on a figure, the user names the one that owns it: {"ARR": "billing"}. Never fill this in for them.
+    "source_of_truth": {},
 }
 
 # Which slide goes without data when a field is Unknown.

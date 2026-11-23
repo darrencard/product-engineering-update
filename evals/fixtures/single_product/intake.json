@@ -57,6 +57,7 @@
   "inputs": [
     {
       "metric": "Activation",
+      "unit": "%",
       "target": 50,
       "target_display": "50%",
       "higher_is_better": true,

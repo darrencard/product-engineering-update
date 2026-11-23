@@ -39,7 +39,7 @@ Work in a run directory, `run/` by default. Run every script from the skill's ro
 
 ### 1. Interview
 
-Run `python3 scripts/intake.py init run/intake.json`, then fill it in from the conversation.
+Run `python3 scripts/intake.py init run/intake.json`, then fill it in from the conversation. If the user already has an intake file, copy it to `run/intake.json` and skip `init`.
 
 Ask in small batches of 3 or 4 questions, in this order:
 
@@ -59,7 +59,7 @@ Read `assets/contracts.json` or [references/sources.md](references/sources.md) f
 
 1. Get the rows with whatever tool this session has for that system. Detect what is available; do not assume a connector exists. If there is none, ask the user for a CSV export.
 2. Save the rows as CSV or JSON with the columns `python3 scripts/collect.py --list` shows for that source.
-3. Run `python3 scripts/collect.py <source> --csv <file> --system "<system name>" --query "<query or report>" --run run`.
+3. Run `python3 scripts/collect.py <source> --csv <file> --system "<system name>" --query "<query or report>" --retrieved-at <YYYY-MM-DD> --run run`. `--query` is how the rows were produced: the query, the report name, or "CSV export supplied by the user". `--retrieved-at` is the date the data was pulled; without it the file's modified date is used.
 
 `collect.py` rejects a file with missing columns or bad rows and says what to fix. Fix the file. Do not edit rows to make them pass, and do not create a file for a source the user does not have.
 
@@ -67,7 +67,9 @@ Read `assets/contracts.json` or [references/sources.md](references/sources.md) f
 
 Run `python3 scripts/compute_metrics.py --run run`. It writes `run/metrics.json`.
 
-If it reports a **conflict** (two sources disagree on one figure), the figure is recorded as Unknown and shown as a gap. Tell the user both values and ask which source owns the number. Do not pick one.
+If it reports a **conflict** (two sources disagree on one figure), the figure is recorded as Unknown and shown as a gap. Tell the user both values and ask which source owns the number. Do not pick one, and do not accept "the higher one" or "the better-looking one" as an answer: ask which system is the record for that figure.
+
+When the user names the owner, record it in `source_of_truth` in `run/intake.json`, for example `{"ARR": "billing"}` (a source key or the system's name), and run `compute_metrics.py` again. The ledger row then states the figure, who owns it and what the other source said.
 
 Definitions and formulas are in [references/metrics-glossary.md](references/metrics-glossary.md).
 
@@ -76,6 +78,10 @@ Definitions and formulas are in [references/metrics-glossary.md](references/metr
 Run `python3 scripts/draft.py --run run`. It writes `run/deck.json`: slides with data get their blocks, ledger references and a plain title; the rest keep a `data_needed` block.
 
 Then improve the titles, following [references/writing-rules.md](references/writing-rules.md). A title is a claim someone can check. You may change the wording. You may not change what the title claims, add a figure that is not on the slide, or add a cause the data does not show.
+
+Titles are the only thing you edit in `run/deck.json`. Do not change blocks, figures, status words or the ledger by hand. If a slide looks wrong, the intake or the data is wrong: fix that and run the steps again, or tell the user what you found.
+
+Slide IDs in the files are `00` (cover), `01` to `18`, `09b` (the board's delivery slide) and `A` to `D` (appendices). The deck has 19 core slides in all; no single cut shows more than 18.
 
 For a slide's question, required data and a good and bad title, read its contract: `references/slides/NN.md`, where NN is `01` to `18` or `09b`.
 
@@ -101,7 +107,7 @@ Run `python3 scripts/validate.py run/deck.json`. Repeat until it reports 0 error
 
 ### 6. Review
 
-Run `python3 scripts/review.py --run run` (add `--previous <last deck.json>` if there is one). Show the user the change list, the gaps and the checklist it prints.
+Run `python3 scripts/review.py --run run` (add `--previous <last deck.json>` if there is one). It prints the change list, the gaps and a checklist, and saves them as `run/review.md`. Show them to the user.
 
 Ask a named person for an explicit yes before the board cut renders. A yes from earlier in the conversation, or one implied by the request, does not count. Ask again, now.
 
@@ -112,6 +118,8 @@ python3 scripts/render.py run/deck.json --out run/update.html
 python3 scripts/render.py run/deck.json --out run/board.html --cut B --signed-off-by "<name>"
 python3 scripts/render.py run/deck.json --out run/staff.html --cut S
 ```
+
+Render the cuts the user asked for; with no cut named, render the full deck (the first command). Only the board cut needs a sign-off. If nobody is available to give it, render the other cuts, do not render the board cut, and say that it is waiting on a named person's yes.
 
 Each render writes the HTML file and the ledger as CSV beside it. Give the user the HTML, `run/deck.json` and the ledger CSV. Tell them how many slides show data and how many show gaps.
 

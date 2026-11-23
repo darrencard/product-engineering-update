@@ -369,6 +369,11 @@ def _check_placeholders(deck: Json, found: Findings) -> None:
     for s in deck["slides"]:
         if s["title"].startswith(PLACEHOLDER_TITLE):
             found.err("placeholder-left", s["id"], f'the title is still the template\'s "{s["title"][:QUOTE_CHARS]}". Write the claim the slide makes.')
+        leftover = re.search(
+            r"\[(Company|Period|Author)\]|Fill in each slide from the sources it names", " ".join(strings([s.get("title", ""), s.get("meta", []), s["blocks"]]))
+        )
+        if leftover:
+            found.err("placeholder-left", s["id"], f'still holds the blank template\'s text "{leftover.group(0)}". Replace it or remove it.')
         for gap in blocks_of_type(s["blocks"], "data_needed"):
             for name in ("owner", "due"):
                 if gap[name].strip() in PLACEHOLDER_OWNERS:

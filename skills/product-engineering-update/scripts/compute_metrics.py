@@ -308,6 +308,21 @@ def billing(r: Run) -> None:
         r.metric("expansion_arr", "Expansion ARR in period", sum(max(cur.get(a, 0) - v, 0) for a, v in old.items()), None, "$", src)
 
 
+def owner_of(r: Run, metric: str) -> str | None:
+    """The source the user named as owning a figure, from source_of_truth in the intake. Only the user can name it."""
+    return (r.intake.get("source_of_truth") or {}).get(metric)
+
+
+def owned_by(src: Json, owner: str) -> bool:
+    return owner.lower() in (src["source"].lower(), src["system"].lower())
+
+
+def unit_for(r: Run, metric: str) -> str:
+    """The unit the intake gives a metric, such as "%". Analytics rows carry bare numbers."""
+    wanted = [r.intake.get("north_star") or {}, *(r.intake.get("inputs") or [])]
+    return next((w["unit"] for w in wanted if w.get("metric") == metric and w.get("unit")), "count")
+
+
 def analytics(r: Run) -> None:
     """Analytics and warehouse rows are the same shape; a disagreement between them is a conflict."""
     found: dict[str, dict[str, list[tuple[float, Json]]]] = {}
@@ -322,7 +337,21 @@ def analytics(r: Run) -> None:
             continue
         values = periods[r.label]
         distinct = sorted({v for v, _ in values})
-        if len(distinct) > 1 and (distinct[-1] - distinct[0]) > CONFLICT_TOLERANCE * abs(distinct[-1]):
+        unit = unit_for(r, name)
+        disagree = len(distinct) > 1 and (distinct[-1] - distinct[0]) > CONFLICT_TOLERANCE * abs(distinct[-1])
+        owner = owner_of(r, name)
+        owned = [(v, s) for v, s in values if owner and owned_by(s, owner)]
+        if disagree and owned:
+            # The user named the owning source. Use it, and keep the other reading on the ledger row.
+            others = said((s["system"], trim(v, 2)) for v, s in values if not owned_by(s, owner or ""))
+            earlier = sorted(p for p in periods if p < r.label)
+            prior_owned = [v for v, s in periods[earlier[-1]] if owned_by(s, owner or "")] if earlier else []
+            value, src = owned[0]
+            r.metric("analytics:" + name, name, value, prior_owned[0] if prior_owned else None, unit, src, "Verified")
+            r.ledger[-1]["claim"] += f" ({src['system']} owns this figure, named in the intake; {others})"
+            r.extra["analytics_metrics"].append("analytics:" + name)
+            continue
+        if disagree:
             r.conflicts.append({"metric": name, "values": [{"source": s["system"], "value": v} for v, s in values]})
             lid = r.row(f"{name}: sources disagree ({said((s['system'], trim(v, 2)) for v, s in values)})", None, None, values[0][1], "Unknown")
             r.metrics["analytics:" + name] = {
@@ -341,7 +370,7 @@ def analytics(r: Run) -> None:
         earlier = sorted(p for p in periods if p < r.label)
         prior = periods[earlier[-1]][0][0] if earlier else None
         value, src = values[0]
-        r.metric("analytics:" + name, name, value, prior, "count", src, "Verified")
+        r.metric("analytics:" + name, name, value, prior, unit, src, "Verified")
         r.extra["analytics_metrics"].append("analytics:" + name)
 
 
@@ -352,8 +381,11 @@ def finance(r: Run) -> None:
     rows = [x for x in src["rows"] if x["period"] == r.label]
     if not rows:
         return
-    lid = r.row("Plan and actual spend by line: " + ", ".join(f"{x['line']} {money(x['actual'])}" for x in rows), None, "$", src, "Verified")
-    r.extra["finance"] = {"rows": [{"line": x["line"], "plan": money(x["plan"]), "actual": money(x["actual"])} for x in rows], "ledger": lid}
+    # ARR is a balance, not spend. It is read here only to check it against billing, never shown as a spend line.
+    spend = [x for x in rows if x["line"].lower() != "arr"]
+    if spend:
+        lid = r.row("Plan and actual spend by line: " + ", ".join(f"{x['line']} {money(x['actual'])}" for x in spend), None, "$", src, "Verified")
+        r.extra["finance"] = {"rows": [{"line": x["line"], "plan": money(x["plan"]), "actual": money(x["actual"])} for x in spend], "ledger": lid}
     by_line = {x["line"].lower(): x for x in rows}
     rd_lines = [line.lower() for line in (r.intake.get("rd_lines") or [])]
     revenue = by_line.get("revenue")
@@ -364,6 +396,22 @@ def finance(r: Run) -> None:
     billed = r.metrics.get("arr")
     if stated and billed and abs(stated["actual"] - billed["value"]) > CONFLICT_TOLERANCE * abs(billed["value"]):
         bsrc = r.data("billing")
+        owner = owner_of(r, "ARR")
+        row = next(x for x in r.ledger if x["id"] == billed["ledger"])
+        if owner and owned_by(bsrc, owner):
+            row["claim"] += f" ({bsrc['system']} owns this figure, named in the intake; {src['system']} says {money(stated['actual'])})"
+            return
+        if owner and owned_by(src, owner):
+            row.update(
+                claim=f"ARR {money(stated['actual'])} ({src['system']} owns this figure, named in the intake; {bsrc['system']} says {money(billed['value'])})",
+                value=rounded(stated["actual"]),
+                source_system=src["system"],
+                query_or_url=src.get("query_or_url"),
+                retrieved_at=src.get("retrieved_at"),
+                confidence="Verified",
+            )
+            billed.update(value=rounded(stated["actual"]), prior=None, display=money(stated["actual"]), prior_display=None, source=src["source"])
+            return
         views = [{"source": bsrc["system"], "value": billed["value"]}, {"source": src["system"], "value": stated["actual"]}]
         r.conflicts.append({"metric": "ARR", "values": views})
         claim = f"ARR: sources disagree ({said([(bsrc['system'], money(billed['value'])), (src['system'], money(stated['actual']))])})"

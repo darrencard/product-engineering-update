@@ -69,7 +69,7 @@ def build(run: Path, previous: Path | None) -> str:
         if m["conflicts"]:
             lines += ["", "## Conflicts", ""] + [
                 f"- {c['metric']}: "
-                + "; ".join(f"{v['source']} says {v['value']:g}" for v in c["values"])
+                + "; ".join(f"{v['source']} says {v['value']:,.0f}" if abs(v["value"]) >= 1000 else f"{v['source']} says {v['value']:g}" for v in c["values"])
                 + ". Shown as a gap until someone says which source owns it."
                 for c in m["conflicts"]
             ]
