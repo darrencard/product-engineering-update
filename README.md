@@ -114,4 +114,9 @@ Not built: an export to Slides or PowerPoint. The deck is one HTML file: present
 
 Built by Darren Card at Dacard, an applied AI studio: https://www.dacard.ai. Harborline and Kestrel Labs are fictional, and every figure for them is illustrative. The fonts embedded in the template are Geist, Geist Mono and Instrument Sans, each under the SIL Open Font License.
 
-Licence: not yet chosen. Until a LICENSE file is added, all rights are reserved.
+## Licence
+
+Two licences, by kind of file:
+
+- **Code** (the scripts, tests, tools, schema and slide contracts): MIT. See `LICENSE`.
+- **Template and deck content** (the skill's instructions and references, the page template, the blank deck and the examples): CC BY 4.0. See `LICENSE-CONTENT.md`. Use and adapt it freely, with credit.

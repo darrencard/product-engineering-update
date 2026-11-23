@@ -1,6 +1,7 @@
 ---
 name: product-engineering-update
 description: Builds a product and engineering update deck for leadership, the board and all staff from a company's own data, as one self-contained HTML file with an evidence ledger. Interviews the user, normalises exports from their tracker, source control, analytics, billing, finance and other systems (or CSV uploads), computes every figure in code, and blocks any slide that overclaims. Use when the user asks for a product update, engineering update, R&D update, board deck, leadership update, QBR or all-hands update, or wants to check an existing update for unsourced or overclaimed numbers.
+license: MIT for the scripts, CC BY 4.0 for the instructions, references and template. See LICENSE and LICENSE-CONTENT.md in the repository root.
 metadata:
   author: Dacard
   version: "0.1.0"
