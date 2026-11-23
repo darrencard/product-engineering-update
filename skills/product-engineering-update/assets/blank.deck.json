@@ -74,7 +74,7 @@
       "illustrative": false,
       "text": "Blank template. Each slide shows the data it needs. Replace the block with your figures, and give every figure a row in the ledger."
     },
-    "footer": "Built on the Dacard Product & Engineering Update template. Free to use and adapt with credit.",
+    "footer": "Made with [the Product & Engineering Update](https://www.dacard.ai/update) by Dacard. Free to use and adapt with credit.",
     "source_types": [
       {
         "key": "interview",
@@ -1390,7 +1390,7 @@
         {
           "type": "strip",
           "label": "Status.",
-          "text": "The template is ready to use by hand today. The skill is built and under test. It isn't published yet. This page describes how it works."
+          "text": "The template is ready to use by hand today. The skill is published as version 0.1.0 at github.com/darrencard/product-engineering-update. It has been tested on synthetic companies, not yet on a real company's full data."
         },
         {
           "type": "steps",

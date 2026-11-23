@@ -35,6 +35,9 @@ from typing import Any
 ASSETS = Path(__file__).resolve().parent.parent / "assets"
 Json = dict[str, Any]
 
+# The one line a generated deck carries about where it came from. The licence asks for credit; this is it.
+CREDIT = "Made with [the Product & Engineering Update](https://www.dacard.ai/update) by Dacard."
+
 # Slides that only make sense when AI features are in production.
 AI_SLIDES = ("12", "13")
 
@@ -542,7 +545,7 @@ class Draft:
                 "illustrative": False,
                 "text": f"{intake['company']}, {intake['period']['label']}. Every figure has a row in the evidence ledger. A slide without its data says so.",
             },
-            footer=f"{intake['company']} product & engineering update, {intake['period']['label']}. Built on the Dacard template.",
+            footer=f"{intake['company']} product & engineering update, {intake['period']['label']}. {CREDIT}",
         )
         cover = self.slides["00"]
         cover["title"] = f"{intake['company']} product & engineering update"

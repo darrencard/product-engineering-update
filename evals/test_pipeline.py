@@ -197,6 +197,11 @@ class Fixtures(unittest.TestCase):
         self.assertEqual((rows["Activation"]["prior"], rows["Activation"]["actual"]), ("39%", "41%"))
         self.assertIn("data_needed", block_types(slide(deck, "12")), "slide 12 must show the AI margin gap")
 
+    def test_a_generated_deck_credits_the_template_with_a_safe_link(self) -> None:
+        deck = self.decks["complete"]
+        self.assertIn("[the Product & Engineering Update](https://www.dacard.ai/update)", deck["meta"]["footer"])
+        self.assertIn('<a href="https://www.dacard.ai/update">the Product &amp; Engineering Update</a>', render.render_deck(deck))
+
     def test_computed_figures_are_right(self) -> None:
         m = self.metrics["complete"]["metrics"]
         self.assertEqual(m["deploys_per_week"]["display"], "4")
