@@ -36,4 +36,4 @@ With GitHub data already collected, each GitHub deploy that matches a Vercel dep
 | Deploys and error reports, no healthy range | A gap: every delivery metric needs a range from the intake |
 | Deploys only | Refused: deployments alone say nothing about quality |
 
-Ask for the range the same way as the others: "What share of releases rolled back or followed by errors is healthy for your team?" Do not supply it yourself.
+Ask for the range the same way as the others: `intake.py suggest` offers a sourced suggestion when one exists; otherwise ask "What share of releases rolled back or followed by errors is healthy for your team?" Do not set it yourself.

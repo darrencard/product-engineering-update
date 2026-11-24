@@ -1,0 +1,16 @@
+{
+  "source": {
+    "title": "Accelerate State of DevOps Report 2024",
+    "publisher": "DORA, Google Cloud",
+    "published": "October 2024",
+    "url": "https://dora.dev/research/2024/dora-report/",
+    "checked": "not yet checked against the report's performance-level table"
+  },
+  "ranges": {},
+  "no_suggestion": {
+    "Lead time for change": "the skill measures pull request open to merge; DORA measures commit to production, so its ranges do not apply",
+    "Pull request review time": "no published benchmark found for this definition",
+    "Rework rate": "no published benchmark found for this definition",
+    "Developer experience index": "each survey scores differently, so no general range applies"
+  }
+}

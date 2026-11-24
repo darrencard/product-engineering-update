@@ -349,7 +349,17 @@ class Draft:
             }
         ]
         speed, quality = self.change(shown["Speed"][0]), self.change(shown["Quality, the pair for every speed metric"][0])
-        self.fill("09", f"{speed} {quality}", blocks, refs, self.systems("source_control", "incidents", "survey"))
+        asof = self.systems("source_control", "incidents", "survey")
+        # A range the user accepted from a suggestion names where the suggestion came from.
+        sourced = self.intake.get("range_sources") or {}
+        shown_labels = [r["metric"] for r in rows if "metric" in r]
+        by_source: dict[str, list[str]] = {}
+        for label in shown_labels:
+            if label in sourced:
+                by_source.setdefault(sourced[label]["source"], []).append(label)
+        for source, labels in by_source.items():
+            asof += f" Healthy ranges for {', '.join(labels)} accepted from {source}."
+        self.fill("09", f"{speed} {quality}", blocks, refs, asof)
 
     def held_speed(self) -> str:
         """Why the delivery slide is a gap when speed was measured: speed never shows without a quality pair and a range."""

@@ -54,9 +54,9 @@ def script(name: str, *args: str) -> subprocess.CompletedProcess[str]:
     return subprocess.run([sys.executable, "-I", str(SCRIPTS / name), *args], capture_output=True, text=True, check=False)  # noqa: S603
 
 
-def run_fixture(name: str, work: Path) -> tuple[Json, Json]:
+def run_fixture(name: str, work: Path, base: Path = FIXTURES) -> tuple[Json, Json]:
     """Collect, compute and draft one fixture. Returns (deck, metrics)."""
-    fixture = FIXTURES / name
+    fixture = base / name
     run = work / name
     run.mkdir(parents=True)
     shutil.copy(fixture / "intake.json", run / "intake.json")
@@ -754,6 +754,74 @@ class PlainTitles(unittest.TestCase):
         warned = [w for w in validate.check(deck)["warnings"] if w["rule"] == "jargon-in-title"]
         self.assertEqual(len(warned), 1)
         self.assertIn("ktlo", warned[0]["message"])
+
+
+class SuggestedRanges(unittest.TestCase):
+    """Healthy ranges can be suggested with a named source. They are never applied without the user's yes."""
+
+    def setUp(self) -> None:
+        self.work = Path(tempfile.mkdtemp(prefix="peu-rng-"))
+        self.intake = self.work / "intake.json"
+        intake = json.loads((FIXTURES / "complete" / "intake.json").read_text(encoding="utf-8"))
+        intake["delivery_ranges"] = {}
+        self.intake.write_text(json.dumps(intake), encoding="utf-8")
+        self.suggestions = self.work / "suggested.json"
+        self.suggestions.write_text(
+            json.dumps(
+                {
+                    "source": {"title": "Test benchmark", "publisher": "Test body", "published": "2024", "url": "https://example.com", "checked": "test"},
+                    "ranges": {"Deploys per week": {"range": "1+", "basis": "a test cluster"}},
+                    "no_suggestion": {"Lead time for change": "definitions differ"},
+                }
+            ),
+            encoding="utf-8",
+        )
+
+    def tearDown(self) -> None:
+        shutil.rmtree(self.work, ignore_errors=True)
+
+    def intake_cmd(self, *args: str) -> subprocess.CompletedProcess[str]:
+        return script("intake.py", *args, "--suggestions", str(self.suggestions))
+
+    def test_suggest_names_the_source_and_changes_nothing(self) -> None:
+        before = self.intake.read_text(encoding="utf-8")
+        out = self.intake_cmd("suggest", str(self.intake)).stdout
+        self.assertIn('Deploys per week: "1+"  (a test cluster; Test benchmark (Test body, 2024))', out)
+        self.assertIn("no source Lead time for change: definitions differ", out)
+        self.assertIn("Never accept one for them", out)
+        self.assertEqual(self.intake.read_text(encoding="utf-8"), before)
+
+    def test_accept_records_the_suggestion_the_choice_and_the_source(self) -> None:
+        self.assertEqual(self.intake_cmd("accept", str(self.intake), "Deploys per week", "--range", "2+").returncode, 0)
+        intake = json.loads(self.intake.read_text(encoding="utf-8"))
+        self.assertEqual(intake["delivery_ranges"]["Deploys per week"], "2+")
+        self.assertEqual(
+            intake["range_sources"]["Deploys per week"],
+            {"suggested": "1+", "accepted": "2+", "edited": True, "source": "Test benchmark (Test body, 2024)"},
+        )
+
+    def test_a_metric_with_no_suggestion_needs_the_users_own_range(self) -> None:
+        done = self.intake_cmd("accept", str(self.intake), "Rework rate")
+        self.assertNotEqual(done.returncode, 0)
+        self.assertIn("Ask the user for one", done.stderr)
+
+    def test_the_delivery_slide_names_where_an_accepted_range_came_from(self) -> None:
+        intake = json.loads((FIXTURES / "complete" / "intake.json").read_text(encoding="utf-8"))
+        intake["range_sources"] = {"Deploys per week": {"suggested": "3+", "accepted": "3+", "edited": False, "source": "Test benchmark (Test body, 2024)"}}
+        fixture = self.work / "fixture"
+        shutil.copytree(FIXTURES / "complete", fixture)
+        (fixture / "intake.json").write_text(json.dumps(intake), encoding="utf-8")
+        deck, _ = run_fixture("fixture", self.work / "out", base=self.work)
+        self.assertIn("Healthy ranges for Deploys per week accepted from Test benchmark (Test body, 2024).", slide(deck, "09")["asof"])
+
+    def test_the_shipped_suggestions_name_their_source(self) -> None:
+        shipped = json.loads((SKILL / "assets" / "suggested_ranges.json").read_text(encoding="utf-8"))
+        for field in ("title", "publisher", "published", "url", "checked"):
+            self.assertTrue(shipped["source"].get(field), field)
+        for metric, s in shipped["ranges"].items():
+            with self.subTest(metric=metric):
+                self.assertTrue(s["range"] and s["basis"])
+                self.assertIsNotNone(validate.RANGE.search(s["range"]), "a suggestion must be a range, never a single point")
 
 
 class Safety(unittest.TestCase):

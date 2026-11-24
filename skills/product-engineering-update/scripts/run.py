@@ -173,6 +173,13 @@ def main() -> int:
     for line in collect_all(args, run):
         print(line)
     print(step("compute_metrics.py", "--run", str(run)))
+    offers = [line for line in intake_mod.suggest(intake, intake_mod.load_suggestions()) if line.startswith("suggest")]
+    if offers and not intake.get("delivery_ranges"):
+        # Delivery stays a gap without healthy ranges. Offer the sourced suggestions; never apply them.
+        print("run: the delivery slide needs a healthy range for each metric. Put these to the user to accept or edit:")
+        for line in offers:
+            print(f"  {line}")
+        print(f'run: record each yes with `intake.py accept {path} "<metric>"` (add --range to edit), then run this again.')
     step("draft.py", "--run", str(run))
     print(step("validate.py", str(run / "deck.json")))
     outputs = [step("render.py", str(run / "deck.json"), "--out", str(run / "update.html"))]

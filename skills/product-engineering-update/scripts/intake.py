@@ -4,6 +4,9 @@
 Usage:
   python3 scripts/intake.py init run/intake.json        # write an empty intake
   python3 scripts/intake.py check run/intake.json       # list what is still Unknown, by slide
+  python3 scripts/intake.py suggest run/intake.json     # suggested healthy ranges to put to the user
+  python3 scripts/intake.py accept run/intake.json "Deploys per week" [--range "3+"]
+                                                        # record a range the user said yes to, as suggested or edited
 
 Anything the person does not supply stays null. Null means Unknown: the deck
 shows a data_needed block for it. Never fill a null with a guess.
@@ -48,7 +51,12 @@ EMPTY: Json = {
     "connected": [],  # source keys that have data: "tracker", "billing", ...
     # When two sources disagree on a figure, the user names the one that owns it: {"ARR": "billing"}. Never fill this in for them.
     "source_of_truth": {},
+    # Where each healthy range came from, when the user accepted it from a suggestion:
+    # {"Deploys per week": {"suggested": "1+", "accepted": "1+", "edited": false, "source": "..."}}
+    "range_sources": {},
 }
+
+SUGGESTIONS = Path(__file__).resolve().parent.parent / "assets" / "suggested_ranges.json"
 
 # Which slide goes without data when a field is Unknown.
 FIELD_SLIDES = [
@@ -138,6 +146,48 @@ def read_intake(path: Path) -> Json:
     return intake
 
 
+def load_suggestions(path: Path = SUGGESTIONS) -> Json:
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as e:
+        raise SystemExit(f"intake: cannot read the suggested ranges in {path} ({e}). Reinstall the skill.") from None
+
+
+def citation(source: Json) -> str:
+    return f"{source['title']} ({source['publisher']}, {source['published']})"
+
+
+def suggest(intake: Json, suggestions: Json) -> list[str]:
+    """The suggestions to put to the user, one line each, for metrics that have no range yet. Nothing is applied."""
+    have = intake.get("delivery_ranges") or {}
+    lines = []
+    for metric, s in suggestions["ranges"].items():
+        if metric in have:
+            continue
+        lines.append(f'suggest   {metric}: "{s["range"]}"  ({s["basis"]}; {citation(suggestions["source"])})')
+    for metric, reason in suggestions.get("no_suggestion", {}).items():
+        if metric not in have:
+            lines.append(f"no source {metric}: {reason}")
+    return lines
+
+
+def accept(intake: Json, suggestions: Json, metric: str, edited: str | None) -> Json:
+    """Record a range the user said yes to. The intake keeps what was suggested, what was accepted and the source."""
+    s = suggestions["ranges"].get(metric)
+    if s is None and edited is None:
+        raise SystemExit(f'intake: there is no suggested range for "{metric}". Ask the user for one and pass it with --range.')
+    final = edited or s["range"]
+    intake.setdefault("delivery_ranges", {})[metric] = final
+    if s is not None:
+        intake.setdefault("range_sources", {})[metric] = {
+            "suggested": s["range"],
+            "accepted": final,
+            "edited": final != s["range"],
+            "source": citation(suggestions["source"]),
+        }
+    return intake
+
+
 def init(path: Path) -> int:
     if path.exists():
         raise SystemExit(f"intake: {path} already exists. It holds interview answers, so it is not overwritten. Edit it, or delete it first.")
@@ -149,14 +199,38 @@ def init(path: Path) -> int:
     return 0
 
 
+def write_intake(path: Path, intake: Json) -> None:
+    path.write_text(json.dumps(intake, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description="Build and check the intake.")
-    ap.add_argument("command", choices=["init", "check"])
+    ap.add_argument("command", choices=["init", "check", "suggest", "accept"])
     ap.add_argument("path")
+    ap.add_argument("metric", nargs="?", help="accept: the metric whose range the user said yes to")
+    ap.add_argument("--range", help="accept: the range as the user edited it, if they changed the suggestion")
+    ap.add_argument("--suggestions", default=str(SUGGESTIONS), help=argparse.SUPPRESS)
     args = ap.parse_args()
     path = Path(args.path)
     if args.command == "init":
         return init(path)
+    if args.command == "suggest":
+        lines = suggest(read_intake(path), load_suggestions(Path(args.suggestions)))
+        for line in lines:
+            print(line)
+        print(
+            "intake: put each suggestion to the user and ask them to accept or edit it. Never accept one for them."
+            if any(x.startswith("suggest") for x in lines)
+            else "intake: no suggestions left to offer."
+        )
+        return 0
+    if args.command == "accept":
+        if not args.metric:
+            raise SystemExit('intake: accept needs the metric name, for example accept run/intake.json "Deploys per week".')
+        intake = accept(read_intake(path), load_suggestions(Path(args.suggestions)), args.metric, args.range)
+        write_intake(path, intake)
+        print(f'intake: "{args.metric}" range set to "{intake["delivery_ranges"][args.metric]}".')
+        return 0
     blocking, unknown = check(read_intake(path))
     for problem in blocking:
         print(f"BLOCKING  {problem}")

@@ -63,6 +63,8 @@ Ask in small batches of 3 or 4 questions, in this order:
 6. Bets (each needs appetite, confidence, a stop rule, an objective and a cause), risks, what was stopped, and the decisions needed.
 7. Which systems have data, and whether a connector or a CSV export will supply each.
 
+For healthy ranges, run `python3 scripts/intake.py suggest run/intake.json`. It lists a suggested range for each delivery metric that has a published benchmark, with its source and date, and says where none applies. Put each one to the user and ask them to accept or edit it. Record each yes with `python3 scripts/intake.py accept run/intake.json "<metric>"` (add `--range "<their range>"` if they edited it). Never accept one for them. The intake keeps what was suggested, what was accepted and the source, and the delivery slide names that source.
+
 Anything the user does not supply stays `null`. Do not infer it. Run `python3 scripts/intake.py check run/intake.json`; it lists what is still Unknown and which slide will show a gap. Blocking items must be answered before you go on.
 
 ### 2. Collect

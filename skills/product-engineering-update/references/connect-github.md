@@ -42,7 +42,7 @@ It prints how many pull requests and deploys it found and how many pull requests
 | Pull requests with no reviews (a solo repository) | A gap. Speed is measured and held back, because nothing pairs with it |
 | Deployments only | A gap, for the same reason |
 
-The slide also needs a healthy range for each metric, from `delivery_ranges` in the intake. Ask for them: "What is a healthy lead time, review time and rework rate for your team?" Do not supply ranges yourself.
+The slide also needs a healthy range for each metric, from `delivery_ranges` in the intake. Run `intake.py suggest` and put its sourced suggestions to the user to accept or edit; ask for the rest: "What is a healthy lead time, review time and rework rate for your team?" Do not set a range yourself.
 
 ## What GitHub cannot tell you
 
