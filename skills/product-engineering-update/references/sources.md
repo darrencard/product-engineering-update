@@ -4,6 +4,22 @@ Each source, the columns `scripts/collect.py` needs, and the slides it feeds. A 
 
 Get the rows from whatever connector the session has, or from a CSV export. `collect.py` does not call any system itself.
 
+Systems with a converter read the system's own export and write the source for you, mapping only fields that exist. Every other system works through a CSV with the columns below.
+
+| Source | Converters |
+|---|---|
+| docs | [Notion](connect-notion.md) (`from_notion.py`), [Google Drive](connect-gdrive.md) (`from_gdrive.py`) |
+| tracker | [Linear](connect-linear.md) (`from_linear.py`), [Jira](connect-jira.md) (`from_jira.py`), [GitHub Projects](connect-github-projects.md) (`from_github_projects.py`) |
+| finance | [Anthropic and OpenAI API costs (plan added by you)](connect-ai-spend.md) (`from_ai_spend.py`) |
+| billing | [Stripe](connect-stripe.md) (`from_stripe.py`) |
+| analytics | [PostHog](connect-posthog.md) (`from_posthog.py`), [Amplitude](connect-amplitude.md) (`from_amplitude.py`), [Mixpanel](connect-mixpanel.md) (`from_mixpanel.py`) |
+| crm | [HubSpot](connect-hubspot.md) (`from_hubspot.py`), [Salesforce](connect-salesforce.md) (`from_salesforce.py`) |
+| support | [Intercom](connect-intercom.md) (`from_intercom.py`), [Zendesk](connect-zendesk.md) (`from_zendesk.py`) |
+| source_control | [GitHub](connect-github.md) (`from_github.py`), [Vercel (labelled quality proxy)](connect-vercel.md) (`from_vercel.py`), [Sentry (labelled quality proxy)](connect-sentry.md) (`from_sentry.py`) |
+| incidents | [incident.io](connect-incidentio.md) (`from_incidentio.py`), [PagerDuty](connect-pagerduty.md) (`from_pagerduty.py`) |
+| ai_tools | [GitHub Copilot and Cursor](connect-ai-spend.md) (`from_ai_spend.py`) |
+| customer_requests | [Linear customer requests](connect-linear.md) (`from_linear.py`) |
+
 ## Contents
 
 - [Documents](#docs)
@@ -27,7 +43,7 @@ Get the rows from whatever connector the session has, or from a CSV export. `col
 <a id="docs"></a>
 ## Documents (`docs`)
 
-Examples: Notion, Google Drive. Feeds slides: 2, 10, 14, 15, 16, 9b.
+Examples: Notion, Google Drive. Feeds slides: 2, 10, 14, 15, 16, 9b. Converters: Notion, Google Drive.
 
 | Column | Type | Required |
 |---|---|---|
@@ -47,7 +63,7 @@ What the slides read from it:
 <a id="tracker"></a>
 ## Issue tracker (`tracker`)
 
-Examples: Linear, Jira. Feeds slides: 3, 4, 5, 8, 9b.
+Examples: Linear, Jira, GitHub Projects. Feeds slides: 3, 4, 5, 8, 9b. Converters: Linear, Jira, GitHub Projects.
 
 | Column | Type | Required |
 |---|---|---|
@@ -71,7 +87,7 @@ What the slides read from it:
 <a id="finance"></a>
 ## Finance actuals (`finance`)
 
-Examples: Finance close, Provider invoices. Feeds slides: 4, 5, 12.
+Examples: Finance close, Provider invoices, Anthropic and OpenAI cost reports. Feeds slides: 4, 5, 12. Converters: Anthropic and OpenAI API costs (plan added by you).
 
 | Column | Type | Required |
 |---|---|---|
@@ -90,7 +106,7 @@ What the slides read from it:
 <a id="billing"></a>
 ## Billing (`billing`)
 
-Examples: Stripe. Feeds slides: 11.
+Examples: Stripe. Feeds slides: 11. Converters: Stripe.
 
 | Column | Type | Required |
 |---|---|---|
@@ -105,7 +121,7 @@ What the slides read from it:
 <a id="analytics"></a>
 ## Product analytics (`analytics`)
 
-Examples: PostHog, Amplitude, Mixpanel. Feeds slides: 8, 11, 9b.
+Examples: PostHog, Amplitude, Mixpanel. Feeds slides: 8, 11, 9b. Converters: PostHog, Amplitude, Mixpanel.
 
 | Column | Type | Required |
 |---|---|---|
@@ -138,7 +154,7 @@ What the slides read from it:
 <a id="crm"></a>
 ## CRM (`crm`)
 
-Examples: Your CRM. Feeds slides: 7, 11.
+Examples: HubSpot, Salesforce. Feeds slides: 7, 11. Converters: HubSpot, Salesforce.
 
 | Column | Type | Required |
 |---|---|---|
@@ -154,7 +170,7 @@ What the slides read from it:
 <a id="support"></a>
 ## Support desk (`support`)
 
-Examples: Your support tool. Feeds slides: 7.
+Examples: Intercom, Zendesk. Feeds slides: 7. Converters: Intercom, Zendesk.
 
 | Column | Type | Required |
 |---|---|---|
@@ -186,7 +202,7 @@ What the slides read from it:
 <a id="source_control"></a>
 ## Source control and CI (`source_control`)
 
-Examples: GitHub, Your CI. Feeds slides: 9, 13, 9b.
+Examples: GitHub, Vercel, Sentry. Feeds slides: 9, 13, 9b. Converters: GitHub, Vercel (labelled quality proxy), Sentry (labelled quality proxy).
 
 | Column | Type | Required |
 |---|---|---|
@@ -208,7 +224,7 @@ What the slides read from it:
 <a id="incidents"></a>
 ## Incidents and status (`incidents`)
 
-Examples: Incident tool, Status page. Feeds slides: 9, 10, 9b.
+Examples: incident.io, PagerDuty. Feeds slides: 9, 10, 9b. Converters: incident.io, PagerDuty.
 
 | Column | Type | Required |
 |---|---|---|
@@ -259,7 +275,7 @@ What the slides read from it:
 <a id="ai_tools"></a>
 ## AI tool admin data (`ai_tools`)
 
-Examples: Tool admin exports. Feeds slides: 13, 9b.
+Examples: GitHub Copilot, Cursor. Feeds slides: 13, 9b. Converters: GitHub Copilot and Cursor.
 
 | Column | Type | Required |
 |---|---|---|
