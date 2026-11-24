@@ -300,9 +300,8 @@ def main() -> int:
             writer = csv.DictWriter(f, fieldnames=list(COMMITMENT_COLUMNS))
             writer.writeheader()
             writer.writerows(found)
-        print(
-            f"from_jira: {len(found)} commitment(s) from {args.commitments_from}, written to {path}. Fill each metric, show the rows to the person, then intake.py import --commitments."
-        )
+        print(f"from_jira: {len(found)} commitment(s) from {args.commitments_from}, written to {path}.")
+        print("from_jira: fill each metric, show the rows to the person, then intake.py import --commitments.")
     if not rows and not args.commitments_from:
         raise fail("found no done issues with an estimate and a resolution date. The tracker stays Unknown; no file was written.")
     return 0
