@@ -426,5 +426,101 @@ class CustomerSystems(Base):
         self.assertEqual(self.rows("support"), [{"ticket": "515", "theme": "Billing", "account": "A001"}])
 
 
+class Incidents(Base):
+    def fixture(self) -> list[Json]:
+        with (FIXTURES / "complete" / "csv" / "incidents.csv").open(encoding="utf-8") as f:
+            return list(csv.DictReader(f))
+
+    def collected(self) -> list[Json]:
+        done = script(
+            "collect.py", "incidents", "--csv", str(FIXTURES / "complete" / "csv" / "incidents.csv"), "--system", "CSV", "--run", str(self.work / "csv")
+        )
+        self.assertEqual(done.returncode, 0, done.stderr)
+        return json.loads((self.work / "csv" / "data" / "incidents.json").read_text(encoding="utf-8"))["rows"]
+
+    def test_pagerduty_rebuilds_the_fixture_incidents_and_time_to_restore(self) -> None:
+        incidents = [
+            {
+                "id": f"P{r['id']}",
+                "incident_number": r["id"],
+                "status": "resolved",
+                "urgency": "high",
+                "created_at": r["started_at"] + "Z",
+                "resolved_at": r["restored_at"] + "Z",
+                "priority": {"type": "priority_reference", "summary": r["severity"]},
+                "service": {"summary": "Dispatch API"},
+            }
+            for r in self.fixture()
+        ]
+        incidents.append(
+            {
+                "id": "OPEN",
+                "incident_number": 9,
+                "status": "triggered",
+                "created_at": "2026-08-01T00:00:00Z",
+                "resolved_at": None,
+                "service": {"summary": "Dispatch API"},
+            }
+        )
+        incidents.append(
+            {
+                "id": "NOISE",
+                "incident_number": 10,
+                "status": "resolved",
+                "created_at": "2026-08-01T00:00:00Z",
+                "resolved_at": "2026-08-01T05:00:00Z",
+                "service": {"summary": "Office wifi"},
+            }
+        )
+        out = self.ok(
+            "from_pagerduty.py",
+            "--incidents",
+            self.save("pd.json", {"incidents": incidents, "limit": 100, "offset": 0, "more": False}),
+            "--severity-from",
+            "priority",
+            "--service",
+            "Dispatch API",
+            "--account",
+            "acme",
+        )
+        self.assertIn("1 incident(s) are not resolved", out)
+        expected = [{**r, "started_at": r["started_at"] + "+00:00", "restored_at": r["restored_at"] + "+00:00"} for r in self.collected()]
+        self.assertEqual(self.rows("incidents"), expected)
+
+    def test_incidentio_uses_the_named_timestamps(self) -> None:
+        def value(name: str, at: str) -> Json:
+            return {"incident_timestamp": {"id": name, "name": name, "rank": 1}, "value": {"value": at}}
+
+        data = {
+            "incidents": [
+                {
+                    "id": "01F",
+                    "reference": "INC-1",
+                    "created_at": "2026-08-01T09:00:00.000000Z",
+                    "severity": {"name": "Major", "rank": 2},
+                    "incident_timestamp_values": [value("Impact started", "2026-08-01T08:30:00.000000Z"), value("Resolved", "2026-08-01T10:00:00.000000Z")],
+                },
+                {
+                    "id": "01G",
+                    "reference": "INC-2",
+                    "created_at": "2026-08-02T09:00:00Z",
+                    "incident_timestamp_values": [value("Impact started", "2026-08-02T08:00:00Z")],
+                },
+            ],
+            "pagination_meta": {"page_size": 25},
+        }
+        path = self.save("inc.json", data)
+        out = self.ok("from_incidentio.py", "--incidents", path, "--started", "Impact started", "--restored", "Resolved", "--organization", "acme")
+        self.assertIn("1 incident(s) have no start or restore time", out)
+        self.assertEqual(
+            self.rows("incidents"),
+            [{"id": "INC-1", "started_at": "2026-08-01T08:30:00+00:00", "restored_at": "2026-08-01T10:00:00+00:00", "severity": "Major"}],
+        )
+        self.assertIn(
+            "Check the timestamp names",
+            self.refused("from_incidentio.py", "--incidents", path, "--started", "Detected", "--restored", "Closed", "--organization", "acme"),
+        )
+
+
 if __name__ == "__main__":
     unittest.main()

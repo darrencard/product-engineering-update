@@ -182,6 +182,7 @@ To run the draft every week, follow [references/weekly-rhythm.md](references/wee
 - [references/github-action.md](references/github-action.md): a weekly GitHub Action that builds the Leadership and Staff cuts in the team's own CI.
 - [references/connect-vercel.md](references/connect-vercel.md): a labelled quality proxy from Vercel, for repositories with no reviews.
 - [references/connect-sentry.md](references/connect-sentry.md): the same labelled quality proxy from Sentry, on any host.
+- [references/connect-incidentio.md](references/connect-incidentio.md) and [references/connect-pagerduty.md](references/connect-pagerduty.md): time to restore from incident.io or PagerDuty.
 - [references/connect-stripe.md](references/connect-stripe.md): ARR, retention and expansion from Stripe.
 - [references/connect-ai-spend.md](references/connect-ai-spend.md): AI tool seats, weekly use and cost from Copilot and Cursor, and model API spend from Anthropic and OpenAI.
 - [references/connect-linear.md](references/connect-linear.md): the investment slides, shipped vs impact, line of sight and customer requests from Linear.
