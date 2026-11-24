@@ -154,20 +154,23 @@ class Pace(unittest.TestCase):
         self.assertEqual(draft.pace(40, 35, 50, True, "2026-12-31", PERIOD), "Projected: 2 more periods, after 2026-12-31")
 
     def test_no_prior_or_no_target_projects_nothing(self) -> None:
-        self.assertEqual(draft.pace(40, None, 50, True, None, PERIOD), "No prior period")
+        self.assertEqual(draft.pace(40, None, 50, True, None, PERIOD), "No prior period to project from")
         self.assertEqual(draft.pace(40, 35, None, True, None, PERIOD), "No target")
 
-    def test_the_outcome_slide_carries_the_column(self) -> None:
+    def test_the_pace_sits_under_the_scorecard_and_not_in_it(self) -> None:
         work = Path(tempfile.mkdtemp())
         try:
             deck, _ = run_fixture("complete", work)
         finally:
             shutil.rmtree(work)
-        card = next(b for b in slide(deck, "11")["blocks"] if b["type"] == "scorecard")
-        self.assertEqual(card["labels"]["extra"][0], "At this pace")
-        for r in (r for r in card["rows"] if "metric" in r):
-            self.assertEqual(len(r["extra"]), 3)
-            self.assertRegex(r["extra"][0], r"^(Met|No target|No prior period|Projected: .+)$")
+        s11 = slide(deck, "11")
+        card = next(b for b in s11["blocks"] if b["type"] == "scorecard")
+        self.assertEqual(card["labels"]["extra"], ["Benchmark", "Owner"])
+        self.assertNotIn("Projected", json.dumps(card))
+        note = next(i for b in s11["blocks"] for i in b.get("items", []) if i.get("title") == "At this pace (Projected)")
+        missed = [r["metric"] for r in card["rows"] if "metric" in r and r["status"] != "landed"]
+        self.assertEqual([line.split(":")[0] for line in note["body"][0]["list"]], missed)
+        self.assertIn("never a result", note["body"][1])
 
 
 class Capitalisable(unittest.TestCase):

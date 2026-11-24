@@ -114,7 +114,7 @@ def pace(value: float, prior: float | None, target: float | None, higher_is_bett
     if (value >= target) if higher_is_better else (value <= target):
         return "Met"
     if prior is None:
-        return "No prior period"
+        return "No prior period to project from"
     step = value - prior if higher_is_better else prior - value
     if step <= 0:
         return "Projected: not on pace"
@@ -547,6 +547,7 @@ class Draft:
         rows: list[Json] = []
         refs: list[str] = []
         gaps: list[str] = []
+        paces: list[str] = []
         for want in wanted:
             name = want.get("metric")
             if not name:
@@ -563,6 +564,9 @@ class Draft:
             better = want.get("higher_is_better", metric.get("higher_is_better", True))
             unit = want.get("unit", "")
             # The user's own wording of a definition wins over the one the analytics system carries.
+            projected = pace(metric["value"], metric["prior"], target if isinstance(target, (int, float)) else None, better, want.get("by"), self.intake["period"])
+            if projected not in ("Met", "No target"):
+                paces.append(f"{name}: {lower_first(projected.removeprefix('Projected: '))}.")
             rows.append(
                 described(
                     {
@@ -571,18 +575,7 @@ class Draft:
                         "actual": metric["display"],
                         "target": want.get("target_display") or (f"{target:g}{unit}" if isinstance(target, (int, float)) else (target or "Not set")),
                         "status": status_for(metric["value"], metric["prior"], target if isinstance(target, (int, float)) else None, better),
-                        "extra": [
-                            pace(
-                                metric["value"],
-                                metric["prior"],
-                                target if isinstance(target, (int, float)) else None,
-                                better,
-                                want.get("by"),
-                                self.intake["period"],
-                            ),
-                            "None external",
-                            want.get("owner") or "Owner not stated",
-                        ],
+                        "extra": ["None external", want.get("owner") or "Owner not stated"],
                     },
                     want.get("definition") or metric.get("definition"),
                     metric.get("coverage"),
@@ -602,11 +595,16 @@ class Draft:
                         "actual": "This period",
                         "target": "Target",
                         "status": "Status",
-                        "extra": ["At this pace", "Benchmark", "Owner"],
+                        "extra": ["Benchmark", "Owner"],
                     },
                     "rows": rows,
                 }
             )
+        if paces:
+            # Under the table, never in it: a projection sits apart from the actual and the status, and an eighth
+            # column would push the scorecard into a sideways scroll on a laptop screen.
+            note = "This period's change, repeated. A rough guide, never a result or a commitment."
+            blocks.append({"type": "cards", "columns": 1, "items": [{"title": "At this pace (Projected)", "body": [{"list": paces}, note]}]})
         if gaps:
             blocks.append({"type": "cards", "columns": 1, "items": [self.gap(" ".join(gaps))]})
         landed = [r for r in rows if r["status"] == "landed"]
