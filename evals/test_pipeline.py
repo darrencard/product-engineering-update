@@ -647,7 +647,8 @@ class Vercel(unittest.TestCase):
         self.assertEqual(validate.check(deck)["errors"], [])
         html = render.render_deck(deck)
         self.assertIn(
-            '66.7%<span class="t3" style="display:block;font-size:12px;line-height:1.4;margin-top:2px">Covers 9 Jul to 23 Jul 2026, 3 of 4 releases</span>', html
+            '66.7%<span class="t3" style="display:block;font-size:12px;line-height:1.4;margin-top:2px">Covers 9 Jul to 23 Jul 2026, 3 of 4 releases</span>',
+            html,
         )
 
     def test_a_partial_figure_on_a_slide_that_hides_its_coverage_is_blocked(self) -> None:
@@ -1055,6 +1056,89 @@ class Imports(unittest.TestCase):
         self.assertNotEqual(again.returncode, 0)
         self.assertIn("--replace", again.stderr)
         self.assertEqual(script("intake.py", "import", str(self.intake), "--stopped", stopped, "--replace").returncode, 0)
+
+
+class Proposals(unittest.TestCase):
+    """Answers drafted from the team's documents are held apart, carry a source and a quote, and count only once confirmed."""
+
+    def setUp(self) -> None:
+        self.work = Path(tempfile.mkdtemp(prefix="peu-prop-"))
+        self.intake = self.work / "intake.json"
+        self.assertEqual(script("intake.py", "init", str(self.intake)).returncode, 0)
+        self.doc = self.work / "strategy.md"
+        self.doc.write_text(
+            "# Strategy\n\n## Diagnosis\n\nBuilding software got cheap.\nJudgment did not.\n\n## Risks\n\nOne model provider carries most spend.\n",
+            encoding="utf-8",
+        )
+
+    def tearDown(self) -> None:
+        shutil.rmtree(self.work, ignore_errors=True)
+
+    def drafted(self, proposals: list[Json]) -> str:
+        path = self.work / "drafted.json"
+        path.write_text(json.dumps({"proposals": proposals}), encoding="utf-8")
+        return str(path)
+
+    def good(self) -> list[Json]:
+        return [
+            {
+                "field": "strategy.diagnosis",
+                "value": "Building software got cheap; judgment did not.",
+                "source": f"{self.doc}#Diagnosis",
+                "quote": "Building software got cheap. Judgment did not.",
+            },
+            {
+                "field": "risks",
+                "value": [{"risk": "One model provider", "likelihood": None, "impact": None, "mitigation": None, "due": None}],
+                "source": f"{self.doc}#Risks",
+                "quote": "One model provider carries most spend.",
+            },
+        ]
+
+    def test_proposals_are_held_apart_and_listed_by_check(self) -> None:
+        before = self.intake.read_text(encoding="utf-8")
+        done = script("intake.py", "propose", str(self.intake), self.drafted(self.good()))
+        self.assertEqual(done.returncode, 0, done.stderr)
+        self.assertEqual(self.intake.read_text(encoding="utf-8"), before, "a proposal is never an answer")
+        self.assertTrue((self.work / "proposals.json").exists())
+        out = script("intake.py", "check", str(self.intake)).stdout
+        self.assertIn("proposed  strategy.diagnosis", out)
+        self.assertIn("unknown   strategy.diagnosis", out, "an unconfirmed proposal leaves the field Unknown, so draft ignores it")
+
+    def test_confirm_applies_the_named_fields_with_who_and_where(self) -> None:
+        script("intake.py", "propose", str(self.intake), self.drafted(self.good()))
+        done = script("intake.py", "confirm", str(self.intake), "--by", "Darren Card", "--field", "strategy.diagnosis")
+        self.assertEqual(done.returncode, 0, done.stderr)
+        intake = json.loads(self.intake.read_text(encoding="utf-8"))
+        self.assertEqual(intake["strategy"]["diagnosis"], "Building software got cheap; judgment did not.")
+        self.assertEqual(intake["provenance"]["strategy.diagnosis"]["confirmed_by"], "Darren Card")
+        self.assertEqual(intake["provenance"]["strategy.diagnosis"]["source"], f"{self.doc}#Diagnosis")
+        self.assertEqual(intake["risks"], [], "a proposal not named stays pending")
+        self.assertIn("proposed  risks", script("intake.py", "check", str(self.intake)).stdout)
+
+    def test_confirm_can_apply_an_edit_and_needs_a_name(self) -> None:
+        script("intake.py", "propose", str(self.intake), self.drafted(self.good()))
+        self.assertNotEqual(script("intake.py", "confirm", str(self.intake)).returncode, 0)
+        done = script("intake.py", "confirm", str(self.intake), "--by", "Darren Card", "--edit", "strategy.diagnosis=Judgment is the scarce part.")
+        self.assertEqual(done.returncode, 0, done.stderr)
+        intake = json.loads(self.intake.read_text(encoding="utf-8"))
+        self.assertEqual(intake["strategy"]["diagnosis"], "Judgment is the scarce part.")
+        self.assertTrue(intake["provenance"]["strategy.diagnosis"]["edited"])
+
+    def test_a_proposal_without_source_or_quote_or_with_a_made_up_quote_is_refused(self) -> None:
+        for spoil, why in (
+            ({"source": ""}, "has no source"),
+            ({"quote": ""}, "has no quote"),
+            ({"quote": "Our moat is the data."}, "does not appear in strategy.md"),
+            ({"field": "vibes"}, "names no intake field"),
+        ):
+            with self.subTest(why=why):
+                bad = self.good()
+                bad[0].update(spoil)
+                done = script("intake.py", "propose", str(self.intake), self.drafted(bad))
+                self.assertNotEqual(done.returncode, 0)
+                self.assertIn(why, done.stderr)
+                self.assertFalse((self.work / "proposals.json").exists(), "a refused file stores nothing")
 
 
 class Safety(unittest.TestCase):

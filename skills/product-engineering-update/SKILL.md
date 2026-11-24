@@ -51,9 +51,19 @@ Work in a run directory, `run/` by default. Run every script from the skill's ro
 
 ### 1. Interview
 
-Run `python3 scripts/intake.py init run/intake.json`, then fill it in from the conversation. If the user already has an intake file, copy it to `run/intake.json` and skip `init`.
+Run `python3 scripts/intake.py init run/intake.json`. If the user already has an intake file, copy it to `run/intake.json` and skip `init`.
 
-Ask in small batches of 3 or 4 questions, in this order:
+**Start from what the team already keeps.**
+
+1. Ask where the team keeps its strategy, decision log, risk register and roadmap.
+2. Read them, and draft an answer for each intake field they cover. Write the drafts to a file as `{"proposals": [{"field", "value", "source", "quote"}]}`. `source` is the file path plus a heading or line (`strategy.md#Diagnosis`, `decisions.md:412`), or a URL. `quote` is the short passage, word for word, that supports the value.
+3. Run `python3 scripts/intake.py propose run/intake.json <drafts>`. It stores them in `run/proposals.json`, apart from the intake. It refuses the whole file if any proposal lacks a source or quote, or quotes a local file wrongly. Proposals are not answers: `check` lists them as pending, and `draft.py` never reads them.
+4. Show the user every proposal in one table (field, value, source, quote) and ask for one confirmation. They may accept all, some, or edit any.
+5. Run `python3 scripts/intake.py confirm run/intake.json --by "<their name>"`. Add `--field <field>` for each one they accepted if not all, and `--edit "<field>=<value>"` for each they changed. The intake records who confirmed each answer and its source.
+
+Draft only what a document says. A field no document covers stays for the interview.
+
+**Then interview for the rest**, or for everything if the team keeps no documents. Ask in small batches of 3 or 4 questions, in this order:
 
 1. Company, period (label, start and end dates), the as-of date, the audience, and who owns gaps and by when.
 2. Objectives and targets. Strategy: diagnosis, guiding policy, actions and non-goals.

@@ -9,6 +9,10 @@ Usage:
                                                         # record a range the user said yes to, as suggested or edited
   python3 scripts/intake.py import run/intake.json --decisions log.md --risks risks.csv --stopped stop.md
                                                         # read the team's own decision log, risk register and stop list
+  python3 scripts/intake.py propose run/intake.json drafted.json
+                                                        # hold answers drafted from documents, each with its source and quote
+  python3 scripts/intake.py confirm run/intake.json --by "Name" [--field F ...] [--edit F=JSON]
+                                                        # apply the proposals the user said yes to
 
 Anything the person does not supply stays null. Null means Unknown: the deck
 shows a data_needed block for it. Never fill a null with a guess.
@@ -59,7 +63,12 @@ EMPTY: Json = {
     # Where each healthy range came from, when the user accepted it from a suggestion:
     # {"Deploys per week": {"suggested": "1+", "accepted": "1+", "edited": false, "source": "..."}}
     "range_sources": {},
+    # Answers confirmed from a drafted proposal: {"strategy.diagnosis": {"source", "quote", "confirmed_by", "edited"}}
+    "provenance": {},
 }
+
+# A quote is short evidence, not a copy of the document.
+MAX_QUOTE = 400
 
 SUGGESTIONS = Path(__file__).resolve().parent.parent / "assets" / "suggested_ranges.json"
 
@@ -262,21 +271,127 @@ def import_documents(intake: Json, files: dict[str, Path], replace: bool) -> tup
     return intake, read
 
 
+def proposals_path(intake_path: Path) -> Path:
+    """Proposals live beside the intake, apart from it, and never count as answers."""
+    return intake_path.with_name("proposals.json")
+
+
+def known_field(path: str) -> bool:
+    """A field the intake has: a top-level key, or one level down such as strategy.diagnosis."""
+    head, _, rest = path.partition(".")
+    if head not in EMPTY or head in ("provenance", "range_sources", "source_of_truth"):
+        return False
+    return not rest or (isinstance(EMPTY[head], dict) and rest in EMPTY[head])
+
+
+def squash(text: str) -> str:
+    return re.sub(r"\s+", " ", text).strip().lower()
+
+
+def check_proposal(p: Any, base: Path) -> str | None:
+    """Why a proposal is refused, or None. Every proposal names a known field, a source and a short quote;
+    a quote from a local file must appear in that file."""
+    if not isinstance(p, dict):
+        return "is not an object"
+    field, source, quote = p.get("field"), p.get("source"), p.get("quote")
+    if not isinstance(field, str) or not known_field(field):
+        return f"names no intake field it can fill ({field!r})"
+    if "value" not in p or p["value"] in (None, "", [], {}):
+        return f"{field}: has no value"
+    if not isinstance(source, str) or not source.strip():
+        return f"{field}: has no source. Name the file and heading or line, or the URL."
+    if not isinstance(quote, str) or not quote.strip():
+        return f"{field}: has no quote of the evidence."
+    if len(quote) > MAX_QUOTE:
+        return f"{field}: the quote is over {MAX_QUOTE} characters. Quote the evidence, not the document."
+    if not re.match(r"https?://", source):
+        file = Path(source.split("#", 1)[0].split(":", 1)[0]).expanduser()
+        file = file if file.is_absolute() else base / file
+        try:
+            text = file.read_text(encoding="utf-8")
+        except (OSError, UnicodeDecodeError):
+            return f"{field}: its source {source!r} cannot be read. Give a path that exists, or a URL."
+        if squash(quote) not in squash(text):
+            return f"{field}: its quote does not appear in {file.name}. Quote the document word for word."
+    return None
+
+
+def propose(intake_path: Path, drafted: Path) -> list[Json]:
+    """Store drafted answers apart from the intake. A file with any proposal lacking a source or quote is refused whole."""
+    try:
+        data = json.loads(drafted.read_text(encoding="utf-8"))
+    except (OSError, UnicodeDecodeError, json.JSONDecodeError) as e:
+        raise SystemExit(f"intake: cannot read the proposals in {drafted} ({e}).") from None
+    items = data.get("proposals") if isinstance(data, dict) else data
+    if not isinstance(items, list) or not items:
+        raise SystemExit(f'intake: {drafted} holds no proposals. Write {{"proposals": [{{"field", "value", "source", "quote"}}]}}.')
+    problems = [f"proposal {i}: {why}" for i, p in enumerate(items, start=1) if (why := check_proposal(p, drafted.parent))]
+    if problems:
+        raise SystemExit("intake: no proposals were stored, because:\n  " + "\n  ".join(problems))
+    store = proposals_path(intake_path)
+    held = json.loads(store.read_text(encoding="utf-8"))["proposals"] if store.exists() else []
+    held = [h for h in held if h["status"] != "pending" or h["field"] not in {p["field"] for p in items}]
+    new = [{"field": p["field"], "value": p["value"], "source": p["source"], "quote": p["quote"], "status": "pending"} for p in items]
+    store.write_text(json.dumps({"proposals": held + new}, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    return new
+
+
+def put(d: Json, path: str, value: Any) -> None:
+    head, _, rest = path.partition(".")
+    if rest:
+        d.setdefault(head, {})[rest] = value
+    else:
+        d[head] = value
+
+
+def confirm(intake_path: Path, intake: Json, by: str, fields: list[str], edits: dict[str, Any]) -> list[Json]:
+    """Apply the pending proposals the user said yes to: the named fields, or all of them when none are named."""
+    store = proposals_path(intake_path)
+    if not store.exists():
+        raise SystemExit(f"intake: there are no proposals beside {intake_path}. Run propose first.")
+    data = json.loads(store.read_text(encoding="utf-8"))
+    pending = [p for p in data["proposals"] if p["status"] == "pending"]
+    unknown = [f for f in fields + list(edits) if f not in {p["field"] for p in pending}]
+    if unknown:
+        raise SystemExit(f"intake: no pending proposal for {', '.join(unknown)}. `intake.py check` lists them.")
+    chosen = [p for p in pending if not fields or p["field"] in fields or p["field"] in edits]
+    for p in chosen:
+        value = edits.get(p["field"], p["value"])
+        put(intake, p["field"], value)
+        intake.setdefault("provenance", {})[p["field"]] = {
+            "source": p["source"],
+            "quote": p["quote"],
+            "confirmed_by": by,
+            "edited": p["field"] in edits,
+        }
+        p["status"] = "confirmed"
+    store.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    return chosen
+
+
+def pending_proposals(intake_path: Path) -> list[Json]:
+    store = proposals_path(intake_path)
+    return [p for p in json.loads(store.read_text(encoding="utf-8"))["proposals"] if p["status"] == "pending"] if store.exists() else []
+
+
 def write_intake(path: Path, intake: Json) -> None:
     path.write_text(json.dumps(intake, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 
 
 def main() -> int:
     ap = argparse.ArgumentParser(description="Build and check the intake.")
-    ap.add_argument("command", choices=["init", "check", "suggest", "accept", "import"])
+    ap.add_argument("command", choices=["init", "check", "suggest", "accept", "import", "propose", "confirm"])
     ap.add_argument("path")
-    ap.add_argument("metric", nargs="?", help="accept: the metric whose range the user said yes to")
+    ap.add_argument("metric", nargs="?", help="accept: the metric whose range the user said yes to; propose: the drafted proposals file")
     ap.add_argument("--range", help="accept: the range as the user edited it, if they changed the suggestion")
     ap.add_argument("--suggestions", default=str(SUGGESTIONS), help=argparse.SUPPRESS)
     ap.add_argument("--decisions", help="import: a decision log with columns ask, options, recommendation, deadline")
     ap.add_argument("--risks", help="import: a risk register with columns risk, likelihood, impact, mitigation, due")
     ap.add_argument("--stopped", help="import: a stop list with columns what, why")
     ap.add_argument("--replace", action="store_true", help="import: replace a list the intake already holds")
+    ap.add_argument("--by", help="confirm: the name of the person who said yes")
+    ap.add_argument("--field", action="append", default=[], help="confirm: a field to apply; repeat it. None named means all pending")
+    ap.add_argument("--edit", action="append", default=[], metavar="FIELD=JSON", help="confirm: apply a proposal as the user edited it")
     args = ap.parse_args()
     path = Path(args.path)
     if args.command == "init":
@@ -290,6 +405,34 @@ def main() -> int:
             if any(x.startswith("suggest") for x in lines)
             else "intake: no suggestions left to offer."
         )
+        return 0
+    if args.command == "propose":
+        if not args.metric:
+            raise SystemExit("intake: propose needs the drafted file, for example propose run/intake.json drafted.json.")
+        read_intake(path)
+        stored = propose(path, Path(args.metric))
+        print(f"intake: {len(stored)} proposal(s) stored in {proposals_path(path)}. None of them is an answer yet:")
+        for p in stored:
+            print(f"  - {p['field']}: {json.dumps(p['value'], ensure_ascii=False)[:120]}  (from {p['source']})")
+        print("intake: show them to the user in one table with each source and quote, then run confirm with their name.")
+        return 0
+    if args.command == "confirm":
+        if not (args.by or "").strip():
+            raise SystemExit("intake: confirm needs --by with the name of the person who said yes.")
+        edits = {}
+        for e in args.edit:
+            field, sep, raw = e.partition("=")
+            if not sep:
+                raise SystemExit(f'intake: --edit takes FIELD=VALUE, for example --edit "strategy.policy=Sell the judgment". Got {e!r}.')
+            try:
+                edits[field] = json.loads(raw)
+            except json.JSONDecodeError:
+                edits[field] = raw
+        intake = read_intake(path)
+        done = confirm(path, intake, args.by.strip(), args.field, edits)
+        write_intake(path, intake)
+        for p in done:
+            print(f"confirmed {p['field']}{' (edited)' if p['field'] in edits else ''}, by {args.by.strip()}, from {p['source']}")
         return 0
     if args.command == "import":
         files = {k: Path(v) for k, v in (("decisions", args.decisions), ("risks", args.risks), ("stopped", args.stopped)) if v}
@@ -311,6 +454,8 @@ def main() -> int:
         print(f'intake: "{args.metric}" range set to "{intake["delivery_ranges"][args.metric]}".')
         return 0
     blocking, unknown = check(read_intake(path))
+    for p in pending_proposals(path):
+        print(f"proposed  {p['field']}  (from {p['source']}; not an answer until confirmed)")
     for problem in blocking:
         print(f"BLOCKING  {problem}")
     for field, slide in unknown:
