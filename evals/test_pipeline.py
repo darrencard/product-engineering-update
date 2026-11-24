@@ -613,6 +613,18 @@ class Vercel(unittest.TestCase):
         self.assertNotIn("Change failure rate", names)
         self.assertNotIn("speed-without-quality", rules(validate.check(deck)))
 
+    def test_deployments_that_start_after_the_period_are_flagged_and_pages_merge(self) -> None:
+        dep, errors, rollbacks = self.exports()
+        late = self.work / "late.json"
+        late.write_text(json.dumps([{"id": "dpl_9", "created": self.ms("2026-08-20T10:00:00Z"), "state": "READY", "target": "production"}]), encoding="utf-8")
+        args = ["--deployments", str(late), str(dep), "--errors", str(errors), "--errors-from", "2026-07-05", "--rollbacks", str(rollbacks), str(rollbacks)]
+        done = script("from_vercel.py", *args, "--project", "kestrel-web", "--run", str(self.run))
+        self.assertEqual(done.returncode, 0, done.stderr)
+        self.assertIn("5 live production deploys", done.stdout)
+        self.assertIn("WARNING the deployments supplied start on 2026-07-02, after the reporting period starts (2026-07-01)", done.stdout)
+        self.assertIn("after the prior period starts (2026-03-31)", done.stdout)
+        self.assertIn("WARNING the error reports start on 2026-07-05", done.stdout)
+
     def test_deployments_alone_are_refused(self) -> None:
         dep, _, _ = self.exports()
         done = script("from_vercel.py", "--deployments", str(dep), "--project", "kestrel-web", "--run", str(self.run))

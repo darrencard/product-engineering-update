@@ -10,9 +10,11 @@ The metric is **Deploys rolled back or followed by errors**. It is a proxy for c
 
 **The Vercel connector in the session.** Find the team and project with `list_teams` and `list_projects`, then:
 
-1. `list_deployments` with `target: production`, `since` the start of the prior period, `limit: 100`. Save each page as it stands. If the session saves a large result to a file, copy that file. For the next page pass `until` as the page's `pagination.next`.
-2. `get_runtime_errors` for the project, one call per 7-day window (its limit) across the reporting period. Save each report as it stands, one file per window.
-3. Rollbacks, if the connector can read team events. Many accounts return 403 here; then leave rollbacks out and say so.
+1. `list_deployments` with `target: production`, `since` the start of the prior period, `limit: 100`. Save each page as it stands. If the session saves a large result to a file, copy that file. For the next page pass `until` as the page's `pagination.next`, and keep going until a page comes back empty. Pages may overlap; the script keeps one row per deployment.
+2. `get_runtime_errors` for the project, one call per 7-day window (its limit) across the prior and reporting periods. Save each report as it stands, one file per window.
+3. Rollbacks, every page, if the connector can read team events. Many accounts return 403 here; then leave rollbacks out and say so.
+
+Vercel keeps deployments for a limited time, so its oldest one may be well after the prior period starts. `from_vercel.py` reads the period from the intake and warns when the deployments or error reports start late; deploys before them stay Unknown, never clean. Say so on the slide.
 
 **The Vercel command line.** `vercel api "/v6/deployments?projectId=<id>&target=production&limit=100"` and save the output.
 
@@ -23,7 +25,7 @@ Note the first day the error reports cover. Deploys before it are left Unknown, 
 Run `from_github.py` first if you have GitHub data, so speed and the pull request metrics are there. Then:
 
 ```bash
-python3 scripts/from_vercel.py --deployments run/vercel/deployments-01.json --errors run/vercel/errors-*.md --errors-from YYYY-MM-DD --project NAME --retrieved-at YYYY-MM-DD --run run
+python3 scripts/from_vercel.py --deployments run/vercel/deployments-*.json --errors run/vercel/errors-*.md --errors-from YYYY-MM-DD --project NAME --retrieved-at YYYY-MM-DD --run run
 ```
 
 With GitHub data already collected, each GitHub deploy that matches a Vercel deploy within 10 minutes takes the flag; the rest stay Unknown and the rate is over the deploys Vercel covers. Without it, the Vercel deploys become the deploy rows.

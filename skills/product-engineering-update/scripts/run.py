@@ -124,7 +124,10 @@ def collect_all(args: argparse.Namespace, run: Path) -> list[str]:
         if args.vercel_errors and not args.vercel_errors_from:
             raise SystemExit("run: --vercel-errors needs --vercel-errors-from, the first day the error reports cover.")
         errors = ["--errors", *args.vercel_errors, "--errors-from", args.vercel_errors_from] if args.vercel_errors else []
-        done.append(step("from_vercel.py", "--deployments", *args.vercel_deployments, *errors, "--project", args.vercel_project, *dated, "--run", str(run)))
+        rolled = ["--rollbacks", *args.vercel_rollbacks] if args.vercel_rollbacks else []
+        done.append(
+            step("from_vercel.py", "--deployments", *args.vercel_deployments, *errors, *rolled, "--project", args.vercel_project, *dated, "--run", str(run))
+        )
     if args.linear_issues:
         typed = (["--work-type-prefix", args.linear_work_type_prefix] if args.linear_work_type_prefix else []) + [
             x for pair in args.linear_work_type for x in ("--work-type", pair)
@@ -155,6 +158,7 @@ def main() -> int:
     ap.add_argument("--vercel-deployments", nargs="+", help="production deployments, as Vercel returns them")
     ap.add_argument("--vercel-errors", nargs="*", default=[], help="runtime error reports, as Vercel returns them")
     ap.add_argument("--vercel-errors-from", help="YYYY-MM-DD, the first day the error reports cover")
+    ap.add_argument("--vercel-rollbacks", nargs="*", default=[], help="rolled-back deployment IDs, as JSON, one file per page")
     ap.add_argument("--vercel-project", help="the Vercel project name")
     ap.add_argument("--linear-issues", nargs="+", help="completed issues, as Linear returns them, one file per page")
     ap.add_argument("--linear-work-type-prefix", help='the label prefix that names a work type in Linear, for example "type:"')

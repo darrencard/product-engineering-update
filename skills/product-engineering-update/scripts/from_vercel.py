@@ -12,7 +12,10 @@ Inputs are what Vercel already gives you, saved to a file as it stands:
                   (its markdown report) or the same data as JSON. One file per window.
   --errors-from   the first day the error files cover. Deploys before it are left Unknown.
   --rollbacks     optional: deployment IDs that were rolled back, as JSON (a list of IDs, or
-                  objects with a deploymentId or id field).
+                  objects with a deploymentId or id field), one file per page.
+
+It warns when the deployments or error reports supplied start after the reporting period, or the
+one before it, begins (read from run/intake.json): deploys outside them stay Unknown.
 
 What it derives, in code, for each production deploy that was live:
   troubled   yes when the deploy was rolled back, or a runtime error group was first seen
@@ -119,15 +122,39 @@ def read_error_times(paths: list[Path]) -> list[datetime.datetime]:
     return times
 
 
-def read_rollbacks(path: Path | None) -> set[str]:
-    if path is None:
-        return set()
+def read_rollbacks(paths: list[Path]) -> set[str]:
+    """Rolled-back deployment IDs from every page given: a list of IDs, or objects with deploymentId or id."""
+    found: set[str] = set()
+    for path in paths:
+        try:
+            data = json.loads(read_text(path))
+        except json.JSONDecodeError as e:
+            raise fail(f"{path} is not valid JSON ({e.msg}).") from None
+        items = data if isinstance(data, list) else (data.get("events") or data.get("rollbacks") or []) if isinstance(data, dict) else []
+        found |= {x if isinstance(x, str) else str(x.get("deploymentId") or x.get("id")) for x in items if x}
+    return found
+
+
+def coverage_warnings(run: Path, deploys: list[Json], since: datetime.date | None) -> list[str]:
+    """What the exports leave uncovered in the reporting period and the one before, read from the intake."""
+    path = run / "intake.json"
     try:
-        data = json.loads(read_text(path))
-    except json.JSONDecodeError as e:
-        raise fail(f"{path} is not valid JSON ({e.msg}).") from None
-    items = data if isinstance(data, list) else []
-    return {x if isinstance(x, str) else str(x.get("deploymentId") or x.get("id")) for x in items if x}
+        period = json.loads(path.read_text(encoding="utf-8")).get("period") or {}
+        start, end = datetime.date.fromisoformat(period["start"]), datetime.date.fromisoformat(period["end"])
+    except (OSError, ValueError, KeyError, TypeError, json.JSONDecodeError):
+        return []
+    prior_start = start - (end - start) - datetime.timedelta(days=1)
+    first = stamp(deploys[0].get("created") or deploys[0].get("createdAt")).date()
+    out = []
+    if first > prior_start:
+        which = "the reporting period" if first > start else "the prior period"
+        out.append(
+            f"WARNING the deployments supplied start on {first}, after {which} starts ({start if first > start else prior_start}). "
+            "Deploys before then stay Unknown. Export every page back to that date; if Vercel holds no older deployments, say so on the slide."
+        )
+    if since and since > prior_start:
+        out.append(f"WARNING the error reports start on {since}, after the prior period starts ({prior_start}). Deploys before {since} stay Unknown.")
+    return out
 
 
 def flags(
@@ -185,7 +212,7 @@ def main() -> int:
     ap.add_argument("--deployments", nargs="+", required=True, help="production deployments as JSON, one file per page")
     ap.add_argument("--errors", nargs="*", default=[], help="runtime error reports, one file per window")
     ap.add_argument("--errors-from", help="YYYY-MM-DD, the first day the error files cover")
-    ap.add_argument("--rollbacks", help="rolled-back deployment IDs as JSON (optional)")
+    ap.add_argument("--rollbacks", nargs="*", default=[], help="rolled-back deployment IDs as JSON, one file per page (optional)")
     ap.add_argument("--project", required=True, help="the Vercel project name, for the ledger")
     ap.add_argument("--retrieved-at", help="YYYY-MM-DD; defaults to the first deployments file's modified date")
     ap.add_argument("--run", default="run")
@@ -197,7 +224,7 @@ def main() -> int:
     deploys = read_deployments([Path(p) for p in args.deployments])
     if not deploys:
         raise fail("found no live production deployments. Export with target production, then run this again.")
-    rollbacks = read_rollbacks(Path(args.rollbacks) if args.rollbacks else None)
+    rollbacks = read_rollbacks([Path(p) for p in args.rollbacks])
     if not args.errors and not rollbacks:
         raise fail("supply --errors or --rollbacks. Deployments alone say nothing about quality.")
     flagged = flags(deploys, read_error_times([Path(p) for p in args.errors]), rollbacks, since)
@@ -223,6 +250,8 @@ def main() -> int:
     print(f"from_vercel: {troubled} rolled back or followed by errors. This is a proxy for change failure rate, labelled as one.")
     if not rollbacks:
         print("from_vercel: no rollback data supplied, so only runtime errors count.")
+    for warning in coverage_warnings(Path(args.run), deploys, since):
+        print(f"from_vercel: {warning}")
     return 0
 
 
