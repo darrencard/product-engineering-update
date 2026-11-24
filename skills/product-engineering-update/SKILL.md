@@ -4,7 +4,7 @@ description: Builds a product and engineering update deck for leadership, the bo
 license: MIT for the scripts, CC BY 4.0 for the instructions, references and template. See LICENSE and LICENSE-CONTENT.md in the repository root.
 metadata:
   author: Dacard
-  version: "0.5.0"
+  version: "0.6.0"
 ---
 
 # Product & Engineering Update
@@ -181,10 +181,17 @@ To run the draft every week, follow [references/weekly-rhythm.md](references/wee
 - [references/connect-github.md](references/connect-github.md): pull delivery data straight from GitHub.
 - [references/github-action.md](references/github-action.md): a weekly GitHub Action that builds the Leadership and Staff cuts in the team's own CI.
 - [references/connect-vercel.md](references/connect-vercel.md): a labelled quality proxy from Vercel, for repositories with no reviews.
+- [references/connect-sentry.md](references/connect-sentry.md): the same labelled quality proxy from Sentry, on any host.
+- [references/connect-incidentio.md](references/connect-incidentio.md) and [references/connect-pagerduty.md](references/connect-pagerduty.md): time to restore from incident.io or PagerDuty.
+- [references/connect-stripe.md](references/connect-stripe.md): ARR, retention and expansion from Stripe.
+- [references/connect-ai-spend.md](references/connect-ai-spend.md): AI tool seats, weekly use and cost from Copilot and Cursor, and model API spend from Anthropic and OpenAI.
 - [references/connect-linear.md](references/connect-linear.md): the investment slides, shipped vs impact, line of sight and customer requests from Linear.
 - [references/weekly-rhythm.md](references/weekly-rhythm.md): drafting the update every week on a schedule.
 - [references/connect-posthog.md](references/connect-posthog.md): the outcome scorecard from PostHog.
+- [references/connect-amplitude.md](references/connect-amplitude.md) and [references/connect-mixpanel.md](references/connect-mixpanel.md): the outcome scorecard from Amplitude or Mixpanel.
+- [references/connect-hubspot.md](references/connect-hubspot.md), [connect-salesforce.md](references/connect-salesforce.md), [connect-intercom.md](references/connect-intercom.md), [connect-zendesk.md](references/connect-zendesk.md): win and loss reasons and support themes for slide 7.
 - [references/connect-jira.md](references/connect-jira.md): the investment slides, and commitments from epics or versions, from Jira.
+- [references/connect-notion.md](references/connect-notion.md) and [references/connect-gdrive.md](references/connect-gdrive.md): the team's documents, listed and quoted in intake proposals.
 - [references/connect-github-projects.md](references/connect-github-projects.md): the investment slides from a GitHub project board.
 - [references/frameworks.md](references/frameworks.md): the reading behind each slide.
 - Slide contracts: [01](references/slides/01.md), [02](references/slides/02.md), [03](references/slides/03.md), [04](references/slides/04.md), [05](references/slides/05.md), [06](references/slides/06.md), [07](references/slides/07.md), [08](references/slides/08.md), [09](references/slides/09.md), [09b](references/slides/09b.md), [10](references/slides/10.md), [11](references/slides/11.md), [12](references/slides/12.md), [13](references/slides/13.md), [14](references/slides/14.md), [15](references/slides/15.md), [16](references/slides/16.md), [17](references/slides/17.md), [18](references/slides/18.md).

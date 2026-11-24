@@ -98,7 +98,8 @@
         "label": "Issue tracker",
         "examples": [
           "Linear",
-          "Jira"
+          "Jira",
+          "GitHub Projects"
         ],
         "csv": "One row per issue or epic with objective, work type, product line, owner and status"
       },
@@ -107,7 +108,8 @@
         "label": "Finance actuals",
         "examples": [
           "Finance close",
-          "Provider invoices"
+          "Provider invoices",
+          "Anthropic and OpenAI cost reports"
         ],
         "csv": "Plan and actual by line and period, ARR by product line"
       },
@@ -143,7 +145,8 @@
         "key": "crm",
         "label": "CRM",
         "examples": [
-          "Your CRM"
+          "HubSpot",
+          "Salesforce"
         ],
         "csv": "Closed deals with outcome and reason"
       },
@@ -151,7 +154,8 @@
         "key": "support",
         "label": "Support desk",
         "examples": [
-          "Your support tool"
+          "Intercom",
+          "Zendesk"
         ],
         "csv": "Tickets with theme and account"
       },
@@ -169,7 +173,8 @@
         "label": "Source control and CI",
         "examples": [
           "GitHub",
-          "Your CI"
+          "Vercel",
+          "Sentry"
         ],
         "csv": "Deploys and pull requests with timestamps and outcome"
       },
@@ -177,8 +182,8 @@
         "key": "incidents",
         "label": "Incidents and status",
         "examples": [
-          "Incident tool",
-          "Status page"
+          "incident.io",
+          "PagerDuty"
         ],
         "csv": "Incidents with start, restore time and service, plus each availability objective"
       },
@@ -203,7 +208,8 @@
         "key": "ai_tools",
         "label": "AI tool admin data",
         "examples": [
-          "Tool admin exports"
+          "GitHub Copilot",
+          "Cursor"
         ],
         "csv": "Seats, weekly use and cost by tool"
       },
@@ -1390,7 +1396,7 @@
         {
           "type": "strip",
           "label": "Status.",
-          "text": "The template is ready to use by hand today. The skill is published as version 0.5.0 at github.com/darrencard/product-engineering-update. It has been tested on synthetic companies and on one real repository's GitHub and Vercel history, not yet on a real company's full data."
+          "text": "The template is ready to use by hand today. The skill is published as version 0.6.0 at github.com/darrencard/product-engineering-update. It has been tested on synthetic companies and on one real repository's GitHub and Vercel history, not yet on a real company's full data."
         },
         {
           "type": "steps",

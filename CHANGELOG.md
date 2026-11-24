@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.6.0 (2026-11-24)
+
+Converters for the systems teams already run. Each reads the system's own export (API JSON as the connector or REST API returns it), writes an existing source, maps only fields that exist, and leaves out and counts what it cannot place. None has run on a live account yet; each is tested on fixtures shaped like the vendor's documented response, and most rebuild the Kestrel test company's data exactly.
+
+- **Sentry** (`from_sentry.py`): a release deployed to production is flagged when an error was first seen while it was live, or Sentry names it as the issue's first release. It feeds the existing quality proxy, labelled as one, with coverage stated. Sentry's public API documents no incident list, so nothing goes to incidents.
+- **Stripe** (`from_stripe.py`): ARR per account per month from invoices (annualised by whole months, net of discounts) or subscriptions (by interval, before discounts), into the billing source. The test gets the same ARR, net and gross retention and expansion as the CSV.
+- **AI spend** (`from_ai_spend.py`): GitHub Copilot and Cursor seats, weekly active people and cost into ai_tools (Copilot's cost needs your stated seat price; its API has none). Anthropic and OpenAI API costs become finance lines with the plan left for you. No usage count is ever written as productivity.
+- **Amplitude and Mixpanel** (`from_amplitude.py`, `from_mixpanel.py`): one value per period from a chart's daily series, by the sum, mean or last you choose.
+- **HubSpot and Salesforce** (`from_hubspot.py`, `from_salesforce.py`): closed deals with won or lost reason into crm. Salesforce's reason field is the one your team names; its docs could not be read for this release.
+- **Intercom and Zendesk** (`from_intercom.py`, `from_zendesk.py`): tickets with a theme from a tag prefix, named tags or a field into support. Neither picks a tag for you.
+- **incident.io and PagerDuty** (`from_incidentio.py`, `from_pagerduty.py`): incidents into the incidents source, for a real time to restore. They do not say which deploy caused an incident, so change failure rate is not derived from them; the guides say so.
+- **Notion and Google Drive** (`from_notion.py`, `from_gdrive.py`): documents into the docs source, and Notion's Markdown export as quotable input for `intake.py propose`.
+- `references/sources.md` and the deck's source list name every system with a converter. Each converter has a `connect-<system>.md` that names its Claude connector where one exists.
+- Also in this release, from the security review: the GitHub Action runs with least privilege and pinned actions, never on pull requests; source text is data, never instructions, in both skills, with tests; `tools/release.sh` builds a reproducible release zip and SHA256SUMS.
+- 145 tests.
+
 ## 0.5.0 (2026-11-23)
 
 - **A weekly GitHub Action.** `action.yml` at the repository root is a composite action a team adds to its own repository, with `examples/product-engineering-update.yml` running it every Monday and by hand. It exports the repository's merged pull requests and deployments with the workflow's own token, collects any CSVs in `.update/` named after their source, reads `.update/intake.json`, and renders the Leadership and Staff cuts to an artifact or a branch through `scripts/ci.py`. It never renders the Board cut and never writes an intake answer; an intake missing a required answer stops the job, and a repository with nothing merged still gets a deck with delivery as a gap. `references/github-action.md` gives a 10-minute setup. Tested by running its steps locally on real exports; not yet run in GitHub's CI.
