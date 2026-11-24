@@ -284,5 +284,64 @@ class AISpend(Base):
         self.assertFalse((self.run / "data" / "ai_tools.json").exists(), "API spend has no seats, so it is never an ai_tools row")
 
 
+class ProductAnalytics(Base):
+    PERIODS = ("--period", "2026-Q2=2026-04-01..2026-06-30", "--period", "2026-Q3=2026-07-01..2026-09-30")
+
+    def test_amplitude_segmentation_becomes_one_value_per_period(self) -> None:
+        chart = self.save(
+            "amp.json",
+            {
+                "data": {
+                    "series": [[10, 20, 40, 50], [1, 1, 1, 1]],
+                    "seriesLabels": ["Dispatchers", "Admins"],
+                    "xValues": ["2026-05-01", "2026-06-01", "2026-07-01", "2026-08-01"],
+                    "seriesCollapsed": [[{"value": 120}]],
+                }
+            },
+        )
+        refused = self.refused(
+            "from_amplitude.py", "--chart", chart, "--metric", "Weekly active dispatchers", *self.PERIODS, "--aggregate", "mean", "--project", "acme"
+        )
+        self.assertIn("Pick one with --series", refused)
+        self.ok(
+            "from_amplitude.py",
+            "--chart",
+            chart,
+            "--series",
+            "Dispatchers",
+            "--metric",
+            "Weekly active dispatchers",
+            *self.PERIODS,
+            "--aggregate",
+            "mean",
+            "--definition",
+            "Dispatchers active in a week",
+            "--project",
+            "acme",
+        )
+        self.assertEqual([(r["period"], r["value"]) for r in self.rows("analytics")], [("2026-Q2", 15.0), ("2026-Q3", 45.0)])
+
+    def test_mixpanel_insights_and_segmentation_both_read_and_keep_other_metrics(self) -> None:
+        insights = self.save(
+            "mp.json",
+            {
+                "computed_at": "2026-10-01T00:00:00+00:00",
+                "headers": ["$event"],
+                "series": {"Signed up": {"2026-06-01T00:00:00-07:00": 5, "2026-07-06T00:00:00-07:00": 7, "2026-08-03T00:00:00-07:00": 8}},
+            },
+        )
+        self.ok("from_mixpanel.py", "--chart", insights, "--metric", "Signups", *self.PERIODS, "--aggregate", "sum", "--project", "acme")
+        seg = self.save(
+            "seg.json", {"data": {"series": ["2026-06-02", "2026-07-02"], "values": {"Activated": {"2026-07-02": 3, "2026-06-02": 2}}}, "legend_size": 1}
+        )
+        self.ok("from_mixpanel.py", "--chart", seg, "--metric", "Activations", *self.PERIODS, "--aggregate", "sum", "--project", "acme")
+        got = {(r["metric"], r["period"]): r["value"] for r in self.rows("analytics")}
+        self.assertEqual(got, {("Signups", "2026-Q2"): 5.0, ("Signups", "2026-Q3"): 15.0, ("Activations", "2026-Q2"): 2.0, ("Activations", "2026-Q3"): 3.0})
+        self.assertIn(
+            "required: --aggregate",
+            script("from_mixpanel.py", "--chart", seg, "--metric", "x", *self.PERIODS, "--project", "acme", "--run", str(self.run)).stderr,
+        )
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -11,6 +11,7 @@ Standard library only. Runs on Python 3.9 or later. It makes no network calls.
 
 from __future__ import annotations
 
+import argparse
 import csv
 import datetime
 import io
@@ -147,3 +148,35 @@ def pairs(values: list[str], flag: str, tool: str) -> dict[str, str]:
         a, b = v.split("=", 1)
         out[a.strip()] = b.strip()
     return out
+
+
+def series_rows(by_label: dict[str, dict[str, float]], tool: str, args: argparse.Namespace) -> list[Json]:
+    """One analytics row per period from a chart's daily series: the series the user picked, aggregated as they said."""
+    if args.series is None and len(by_label) > 1:
+        raise fail(tool, f"the chart has {len(by_label)} series ({', '.join(sorted(by_label))}). Pick one with --series.")
+    label = args.series if args.series is not None else next(iter(by_label), None)
+    if label not in by_label:
+        raise fail(tool, f'the chart has no series named "{label}".')
+    points = sorted((day(d), float(v)) for d, v in by_label[label].items() if day(d) is not None and v is not None)
+    rows = []
+    for text in args.period:
+        name, start, end = period(text, tool)
+        values = [v for d, v in points if inside(d, start, end)]
+        if not values:
+            raise fail(tool, f"the chart holds no days inside {name}. Widen its date range and export again.")
+        rows.append({"metric": args.metric, "period": name, "value": round(aggregate(values, args.aggregate), 4), "definition": args.definition or ""})
+    return rows
+
+
+def analytics_args(description: str) -> argparse.ArgumentParser:
+    ap = argparse.ArgumentParser(description=description)
+    ap.add_argument("--chart", nargs="+", required=True, help="the query result as the system returns it")
+    ap.add_argument("--metric", required=True, help="the metric's name, as the intake names it")
+    ap.add_argument("--series", help="the series to use, when the chart has several")
+    ap.add_argument("--period", action="append", required=True, help="LABEL=START..END; repeat for each period")
+    ap.add_argument("--aggregate", required=True, choices=["sum", "mean", "last"], help="how a period's daily values become one: the script does not choose")
+    ap.add_argument("--definition", help="what the metric counts, in one plain-English sentence")
+    ap.add_argument("--project", required=True, help="the project, for the ledger")
+    ap.add_argument("--retrieved-at", help="YYYY-MM-DD; defaults to the file's modified date")
+    ap.add_argument("--run", default="run")
+    return ap
