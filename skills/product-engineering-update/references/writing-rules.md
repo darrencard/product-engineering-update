@@ -13,6 +13,10 @@ A title is one assertion sentence that the slide's evidence supports. A reader w
 
 `draft.py` writes a plain title from the computed change. Improve the wording if you can. Do not change what it claims.
 
+## Definitions
+
+Each metric carries one sentence that says what it counts, printed under its name. Write it for a board member outside engineering: plain words, no acronyms, no formula. "Share of releases that caused a problem in production", not "CFR, failed deploys over total deploys". A definition describes the metric; it never states a result or a cause.
+
 ## Status words
 
 Only these 3, always printed as a word beside the mark:

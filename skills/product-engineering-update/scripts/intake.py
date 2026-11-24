@@ -36,7 +36,9 @@ EMPTY: Json = {
     "investment_plan": {},  # {"New capabilities": 35, "Keep the lights on": 15}  percent of capacity, by work type
     "rd_lines": [],  # finance lines that count as R&D spend, for R&D as a share of revenue: ["R&D payroll", "Cloud"]
     "north_star": {"metric": None, "definition": None, "target": None, "owner": None},
-    "inputs": [],  # [{"metric": "Activation", "unit": "%", "target": 50, "target_display": "50%", "higher_is_better": true, "owner": "..."}]
+    # Each input: {"metric": "Activation", "definition": "Accounts with a first automated load inside 14 days",
+    #              "unit": "%", "target": 50, "target_display": "50%", "higher_is_better": true, "owner": "..."}
+    "inputs": [],
     "delivery_ranges": {},  # {"Deploys per week": "35+", "Change failure rate": "under 3.5%"}  healthy ranges, never single points
     "ai_features": None,  # [{"name": "Dispatch Agent", "eval_set": "v14"}]  [] means none in production; null means not asked yet
     "bets": [],  # [{"bet", "commitment", "appetite", "expected", "confidence", "stop_rule", "objective", "cause", "owner"}]
@@ -102,6 +104,12 @@ def check(intake: Json) -> tuple[list[str], list[tuple[str, str]]]:
         if v and not is_date(v):
             blocking.append(f"{p} (must be YYYY-MM-DD, got {v!r})")
     unknown = [(p, slide) for p, slide in FIELD_SLIDES if is_unknown(get(intake, p))]
+    # A metric with no definition still shows, but a reader outside the team cannot tell what it counts.
+    if get(intake, "north_star.metric") and is_unknown(get(intake, "north_star.definition")):
+        unknown.append(("north_star.definition", "11"))
+    for i, metric in enumerate(intake.get("inputs") or []):
+        if isinstance(metric, dict) and metric.get("metric") and is_unknown(metric.get("definition")):
+            unknown.append((f'inputs[{i}].definition ("{metric["metric"]}")', "11"))
     for bet in intake.get("bets") or []:
         name = bet.get("bet", "?")
         for field in BET_FIELDS:
@@ -153,7 +161,8 @@ def main() -> int:
     for problem in blocking:
         print(f"BLOCKING  {problem}")
     for field, slide in unknown:
-        print(f"unknown   {field}  (slide {slide.lstrip('0')} will show data needed)")
+        effect = "will show the metric with no definition" if "definition" in field else "will show data needed"
+        print(f"unknown   {field}  (slide {slide.lstrip('0')} {effect})")
     print(f"intake: {len(blocking)} blocking, {len(unknown)} unknown.")
     return 1 if blocking else 0
 

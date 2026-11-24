@@ -100,7 +100,7 @@ def table_rows(columns: list[Json], rows: list[Any]) -> str:
         if isinstance(r, dict):
             body.append(f'<tr class="grp"><td colspan="{len(columns)}">{rich(r["group"])}</td></tr>')
             continue
-        cells = [f"<td{cell_class(columns[i] if i < len(columns) else {})}>{rich(cell)}</td>" for i, cell in enumerate(r)]
+        cells = [f"<td{cell_class(columns[i] if i < len(columns) else {})}>{cell_html(cell)}</td>" for i, cell in enumerate(r)]
         body.append(f"<tr>{''.join(cells)}</tr>")
     joined = "\n".join(body)
     return f"<table>\n<tr>{head}</tr>\n{joined}\n</table>"
@@ -115,8 +115,20 @@ def scorecard_as_table(b: Json) -> Table:
         {"label": labels["target"], "align": "num"},
         {"label": labels["status"]},
     ] + [{"label": x} for x in labels.get("extra", [])]
-    rows = [r if "group" in r else [r["metric"], r["prior"], r["actual"], r["target"], f"[[status:{r['status']}]]"] + r.get("extra", []) for r in b["rows"]]
+    rows = [r if "group" in r else [metric_cell(r), r["prior"], r["actual"], r["target"], f"[[status:{r['status']}]]"] + r.get("extra", []) for r in b["rows"]]
     return columns, rows
+
+
+def metric_cell(r: Json) -> Any:
+    """The metric's name, with its definition beneath it when the row carries one."""
+    return {"text": r["metric"], "sub": r["definition"]} if r.get("definition") else r["metric"]
+
+
+def cell_html(cell: Any) -> str:
+    """A table cell's content. A cell with a sub line shows it beneath, smaller and muted, so a reader sees what the figure counts."""
+    if isinstance(cell, dict):
+        return f'{rich(cell["text"])}<span class="t3" style="display:block;font-size:12px;line-height:1.4;margin-top:2px">{rich(cell["sub"])}</span>'
+    return rich(cell)
 
 
 def ledger_as_table(deck: Json) -> Table:

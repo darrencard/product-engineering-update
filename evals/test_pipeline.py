@@ -4,10 +4,11 @@
 Usage:
   python3 -m unittest discover -s evals -v
 
-Three groups:
+Four groups:
   Fixtures      5 synthetic companies run through collect, compute, draft,
                 validate and render, each with its expected outcome.
   Adversarial   requests that push for an overclaim. Each must be blocked.
+  Definitions   each metric says what it counts, in plain words.
   Safety        the security properties: escaping, link schemes, CSV
                 formulas, no network code, parity with the site's renderer.
 
@@ -448,6 +449,69 @@ class Adversarial(unittest.TestCase):
         done = script("validate.py", str(run / "deck.json"))
         self.assertNotEqual(done.returncode, 0)
         self.assertIn("point-target", done.stdout)
+
+
+class Definitions(unittest.TestCase):
+    """A reader outside engineering sees what each metric counts, in plain words."""
+
+    deck: Json
+    work: Path
+
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.work = Path(tempfile.mkdtemp(prefix="peu-def-"))
+        cls.deck, _ = run_fixture("complete", cls.work)
+
+    @classmethod
+    def tearDownClass(cls) -> None:
+        shutil.rmtree(cls.work, ignore_errors=True)
+
+    def rows(self, slide_id: str) -> dict[str, Json]:
+        board = next(b for b in slide(self.deck, slide_id)["blocks"] if b["type"] == "scorecard")
+        return {r["metric"]: r for r in board["rows"] if "metric" in r}
+
+    def test_every_scorecard_row_on_the_delivery_and_outcome_slides_has_a_definition(self) -> None:
+        for slide_id in ("09", "11"):
+            for name, row in self.rows(slide_id).items():
+                with self.subTest(slide=slide_id, metric=name):
+                    self.assertTrue(row.get("definition"))
+
+    def test_the_intake_wording_wins_then_the_analytics_row_then_the_built_in_one(self) -> None:
+        outcomes = self.rows("11")
+        self.assertEqual(outcomes["Loads cleared per week"]["definition"], "Loads cleared with no manual touch")
+        self.assertEqual(outcomes["Activation"]["definition"], "Accounts with a first automated load inside 14 days, percent")
+        self.assertIn("median", self.rows("09")["Lead time for change"]["definition"])
+
+    def test_the_ai_figures_carry_their_definition_as_a_note(self) -> None:
+        tiles = next(b for b in slide(self.deck, "12")["blocks"] if b["type"] == "tiles")
+        self.assertTrue(all(t.get("note") for t in tiles["items"]))
+
+    def test_a_definition_renders_under_the_metric_and_is_escaped(self) -> None:
+        deck = copy.deepcopy(self.deck)
+        board = next(b for b in slide(deck, "11")["blocks"] if b["type"] == "scorecard")
+        board["rows"][0]["definition"] = 'Loads <img src=x onerror="alert(1)"> cleared'
+        html = render.render_deck(deck)
+        self.assertNotIn("<img", html)
+        self.assertIn("Loads &lt;img src=x", html)
+        self.assertIn(self.rows("09")["Lead time for change"]["definition"], html)
+
+    def test_an_outcome_with_no_definition_warns_and_still_renders(self) -> None:
+        deck = copy.deepcopy(self.deck)
+        board = next(b for b in slide(deck, "11")["blocks"] if b["type"] == "scorecard")
+        board["rows"][0].pop("definition")
+        report = validate.check(deck)
+        self.assertTrue(report["ok"], report["errors"])
+        self.assertIn("undefined-metric", {w["rule"] for w in report["warnings"]})
+
+    def test_intake_check_lists_metrics_with_no_definition(self) -> None:
+        intake = json.loads((FIXTURES / "complete" / "intake.json").read_text(encoding="utf-8"))
+        intake["north_star"]["definition"] = None
+        path = self.work / "intake.json"
+        path.write_text(json.dumps(intake), encoding="utf-8")
+        out = script("intake.py", "check", str(path)).stdout
+        self.assertIn("north_star.definition", out)
+        self.assertIn('inputs[0].definition ("Activation")', out)
+        self.assertIn("will show the metric with no definition", out)
 
 
 class Safety(unittest.TestCase):

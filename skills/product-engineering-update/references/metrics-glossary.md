@@ -2,6 +2,8 @@
 
 Every metric `scripts/compute_metrics.py` computes, with its formula. The period is `period.start` to `period.end` from the intake. The prior period is the same length, ending the day before the period starts.
 
+Every scorecard row prints a one-sentence definition under the metric's name, and the AI slide prints one under each figure, so a reader outside engineering knows what the number counts. Computed metrics take theirs from `DEFINITIONS` in `scripts/compute_metrics.py`, which matches the formulas below. Outcome metrics take the intake's `definition` first (the team's own words), then the `definition` column of the analytics rows. An outcome with neither renders without one, and `validate.py` warns (`undefined-metric`).
+
 ## Contents
 
 - [Confidence labels](#confidence-labels)

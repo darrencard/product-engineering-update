@@ -40,6 +40,28 @@ CONFLICT_TOLERANCE = 0.005
 # The win and loss slide and the support slide each show the five most common reasons; a longer list stops being a summary.
 TOP_REASONS = 5
 
+# One plain-English sentence per computed metric, printed under its name on the slide so a reader
+# outside engineering knows what it counts. Each matches its formula in references/metrics-glossary.md.
+DEFINITIONS = {
+    "traced_pct": "Share of the team's estimated work that is tied to a company objective.",
+    "deploys_per_week": "How many times a week new code was released to customers.",
+    "lead_time": "Typical (median) time from a code change being proposed to it being accepted.",
+    "change_failure_rate": "Share of releases that caused a problem in production.",
+    "review_time": "Typical (median) time a code change spent in review by a colleague.",
+    "rework_rate": "Share of accepted code changes that had to be reworked.",
+    "time_to_restore": "Typical (median) time to restore the service after an incident started.",
+    "arr": "Annual recurring revenue: the yearly value of all active subscriptions in the period's last month.",
+    "nrr": "Revenue now from customers we already had, as a share of what they paid before. Over 100% means they grew.",
+    "grr": "Revenue now from customers we already had, counting losses but not growth, as a share of what they paid before.",
+    "expansion_arr": "New yearly revenue from existing customers who bought more.",
+    "rd_share": "Spend on research and development as a share of revenue.",
+    "eval_pass_rate": "Share of test cases the AI feature got right, on the named test set.",
+    "cost_per_task": "What the AI feature costs to run for each task it completes successfully.",
+    "ai_tool_cost": "Spend on AI tools for the team in the period.",
+    "ai_weekly_use": "Share of paid AI tool licences used at least once a week.",
+    "dev_experience": "Average score from the developer survey.",
+}
+
 
 def read_json(path: Path, fix: str) -> Any:
     """Load a JSON file, or exit with one line that says what to do about it."""
@@ -179,7 +201,16 @@ class Run:
         return lid
 
     def metric(
-        self, key: str, label: str, value: float | None, prior: float | None, unit: str, src: Json, confidence: str = "Derived", higher_is_better: bool = True
+        self,
+        key: str,
+        label: str,
+        value: float | None,
+        prior: float | None,
+        unit: str,
+        src: Json,
+        confidence: str = "Derived",
+        higher_is_better: bool = True,
+        definition: str | None = None,
     ) -> None:
         if value is None:
             return
@@ -195,6 +226,7 @@ class Run:
             "ledger": lid,
             "source": src["source"],
             "higher_is_better": higher_is_better,
+            "definition": definition or DEFINITIONS.get(key),
         }
 
 
@@ -329,10 +361,13 @@ def unit_for(r: Run, metric: str) -> str:
 def analytics(r: Run) -> None:
     """Analytics and warehouse rows are the same shape; a disagreement between them is a conflict."""
     found: dict[str, dict[str, list[tuple[float, Json]]]] = {}
+    described: dict[str, str] = {}
     for source in ("analytics", "warehouse"):
         src = r.data(source)
         for x in src["rows"] if src else []:
             found.setdefault(x["metric"], {}).setdefault(x["period"], []).append((x["value"], src))
+            if x.get("definition"):
+                described.setdefault(x["metric"], x["definition"])
     r.extra["analytics_metrics"] = []
     for name in sorted(found):
         periods = found[name]
@@ -350,7 +385,7 @@ def analytics(r: Run) -> None:
             earlier = sorted(p for p in periods if p < r.label)
             prior_owned = [v for v, s in periods[earlier[-1]] if owned_by(s, owner or "")] if earlier else []
             value, src = owned[0]
-            r.metric("analytics:" + name, name, value, prior_owned[0] if prior_owned else None, unit, src, "Verified")
+            r.metric("analytics:" + name, name, value, prior_owned[0] if prior_owned else None, unit, src, "Verified", definition=described.get(name))
             r.ledger[-1]["claim"] += f" ({src['system']} owns this figure, named in the intake; {others})"
             r.extra["analytics_metrics"].append("analytics:" + name)
             continue
@@ -373,7 +408,7 @@ def analytics(r: Run) -> None:
         earlier = sorted(p for p in periods if p < r.label)
         prior = periods[earlier[-1]][0][0] if earlier else None
         value, src = values[0]
-        r.metric("analytics:" + name, name, value, prior, unit, src, "Verified")
+        r.metric("analytics:" + name, name, value, prior, unit, src, "Verified", definition=described.get(name))
         r.extra["analytics_metrics"].append("analytics:" + name)
 
 

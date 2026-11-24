@@ -391,6 +391,13 @@ def _check_scorecard(b: Json, sid: str, found: Findings) -> None:
     rows = [r for r in b["rows"] if "metric" in r]
     if b["target_kind"] != "range":
         for r in rows:
+            if not r.get("definition"):
+                found.warn(
+                    "undefined-metric",
+                    sid,
+                    f'"{r["metric"]}" has no definition. Add one plain-English sentence to the intake (north_star.definition or the input\'s'
+                    " definition) so a reader outside the team knows what it counts.",
+                )
             if ADOPTION.search(r["metric"]):
                 found.err(
                     "adoption-as-outcome",

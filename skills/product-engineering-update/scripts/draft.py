@@ -90,6 +90,21 @@ def status_for(value: float, prior: float | None, target: float | None, higher_i
     return "watch" if improving else "stalled"
 
 
+def described(row: Json, definition: str | None) -> Json:
+    """A scorecard row, with the metric's plain-English definition when one is known. Rows without one stay as they were."""
+    if definition:
+        row["definition"] = definition
+    return row
+
+
+def described_tile(metric: Json) -> Json:
+    """A figure tile, with the metric's definition as its note when one is known."""
+    tile: Json = {"value": metric["display"], "label": metric["label"]}
+    if metric.get("definition"):
+        tile["note"] = metric["definition"]
+    return tile
+
+
 class Draft:
     def __init__(self, run: Path) -> None:
         self.intake = load(run / "intake.json")
@@ -265,13 +280,16 @@ class Draft:
             for k in picked:
                 metric = self.metrics[k]
                 rows.append(
-                    {
-                        "metric": metric["label"],
-                        "prior": metric["prior_display"] or "No prior",
-                        "actual": metric["display"],
-                        "target": ranges[metric["label"]],
-                        "status": range_status(metric["value"], metric["prior"], ranges[metric["label"]], metric.get("higher_is_better", True)),
-                    }
+                    described(
+                        {
+                            "metric": metric["label"],
+                            "prior": metric["prior_display"] or "No prior",
+                            "actual": metric["display"],
+                            "target": ranges[metric["label"]],
+                            "status": range_status(metric["value"], metric["prior"], ranges[metric["label"]], metric.get("higher_is_better", True)),
+                        },
+                        metric.get("definition"),
+                    )
                 )
                 refs.append(metric["ledger"])
         if "Speed" not in shown or "Quality, the pair for every speed metric" not in shown:
@@ -324,15 +342,19 @@ class Draft:
                 continue
             better = want.get("higher_is_better", metric.get("higher_is_better", True))
             unit = want.get("unit", "")
+            # The user's own wording of a definition wins over the one the analytics system carries.
             rows.append(
-                {
-                    "metric": name,
-                    "prior": metric["prior_display"] or "No prior",
-                    "actual": metric["display"],
-                    "target": want.get("target_display") or (f"{target:g}{unit}" if isinstance(target, (int, float)) else (target or "Not set")),
-                    "status": status_for(metric["value"], metric["prior"], target if isinstance(target, (int, float)) else None, better),
-                    "extra": ["None external", want.get("owner") or "Owner not stated"],
-                }
+                described(
+                    {
+                        "metric": name,
+                        "prior": metric["prior_display"] or "No prior",
+                        "actual": metric["display"],
+                        "target": want.get("target_display") or (f"{target:g}{unit}" if isinstance(target, (int, float)) else (target or "Not set")),
+                        "status": status_for(metric["value"], metric["prior"], target if isinstance(target, (int, float)) else None, better),
+                        "extra": ["None external", want.get("owner") or "Owner not stated"],
+                    },
+                    want.get("definition") or metric.get("definition"),
+                )
             )
         if not rows and not gaps:
             return
@@ -368,7 +390,7 @@ class Draft:
         self.fill("11", title, blocks, refs, self.systems("analytics", "billing", "warehouse"))
 
     def ai_in_product(self) -> None:
-        tiles = [{"value": self.metrics[k]["display"], "label": self.metrics[k]["label"]} for k in ("eval_pass_rate", "cost_per_task") if k in self.metrics]
+        tiles = [described_tile(self.metrics[k]) for k in ("eval_pass_rate", "cost_per_task") if k in self.metrics]
         if not tiles:
             return
         refs = [self.metrics[k]["ledger"] for k in ("eval_pass_rate", "cost_per_task") if k in self.metrics]

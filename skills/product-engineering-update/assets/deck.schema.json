@@ -764,6 +764,10 @@
                   },
                   "extra": {
                     "$ref": "#/$defs/strings"
+                  },
+                  "definition": {
+                    "type": "string",
+                    "description": "What the metric counts, in one plain-English sentence. Printed under the metric's name."
                   }
                 }
               },

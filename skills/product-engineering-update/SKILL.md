@@ -46,7 +46,7 @@ Ask in small batches of 3 or 4 questions, in this order:
 1. Company, period (label, start and end dates), the as-of date, the audience, and who owns gaps and by when.
 2. Objectives and targets. Strategy: diagnosis, guiding policy, actions and non-goals.
 3. Product lines and their stage. The investment plan as percent of capacity by work type.
-4. The North Star and its input metrics, each with a target and an owner. Healthy ranges for delivery metrics.
+4. The North Star and its input metrics, each with a target, an owner and a one-sentence definition in plain English (what it counts, for a reader outside the team). Healthy ranges for delivery metrics.
 5. AI features in production and their eval sets. An empty list means none.
 6. Bets (each needs appetite, confidence, a stop rule, an objective and a cause), risks, what was stopped, and the decisions needed.
 7. Which systems have data, and whether a connector or a CSV export will supply each.
