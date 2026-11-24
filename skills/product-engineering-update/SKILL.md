@@ -75,7 +75,7 @@ Read `assets/contracts.json` or [references/sources.md](references/sources.md) f
 2. Save the rows as CSV or JSON with the columns `python3 scripts/collect.py --list` shows for that source.
 3. Run `python3 scripts/collect.py <source> --csv <file> --system "<system name>" --query "<query or report>" --retrieved-at <YYYY-MM-DD> --run run`. `--query` is how the rows were produced: the query, the report name, or "CSV export supplied by the user". `--retrieved-at` is the date the data was pulled; without it the file's modified date is used.
 
-For GitHub there is a shortcut that needs no CSV: follow [references/connect-github.md](references/connect-github.md). It is the fastest way to a first real slide. A solo repository has no reviews to pair with speed; if it runs on Vercel, add a labelled proxy with [references/connect-vercel.md](references/connect-vercel.md).
+For GitHub there is a shortcut that needs no CSV: follow [references/connect-github.md](references/connect-github.md). It is the fastest way to a first real slide. A solo repository has no reviews to pair with speed; if it runs on Vercel, add a labelled proxy with [references/connect-vercel.md](references/connect-vercel.md). Linear and PostHog have converters too: [connect-linear.md](references/connect-linear.md) and [connect-posthog.md](references/connect-posthog.md).
 
 `collect.py` rejects a file with missing columns or bad rows and says what to fix. Fix the file. Do not edit rows to make them pass, and do not create a file for a source the user does not have.
 
@@ -150,6 +150,8 @@ Each render writes the HTML file and the ledger as CSV beside it. Give the user 
 - [references/sources.md](references/sources.md): each source, the columns it needs and the slides it feeds.
 - [references/connect-github.md](references/connect-github.md): pull delivery data straight from GitHub.
 - [references/connect-vercel.md](references/connect-vercel.md): a labelled quality proxy from Vercel, for repositories with no reviews.
+- [references/connect-linear.md](references/connect-linear.md): the investment slides from Linear.
+- [references/connect-posthog.md](references/connect-posthog.md): the outcome scorecard from PostHog.
 - [references/frameworks.md](references/frameworks.md): the reading behind each slide.
 - Slide contracts: [01](references/slides/01.md), [02](references/slides/02.md), [03](references/slides/03.md), [04](references/slides/04.md), [05](references/slides/05.md), [06](references/slides/06.md), [07](references/slides/07.md), [08](references/slides/08.md), [09](references/slides/09.md), [09b](references/slides/09b.md), [10](references/slides/10.md), [11](references/slides/11.md), [12](references/slides/12.md), [13](references/slides/13.md), [14](references/slides/14.md), [15](references/slides/15.md), [16](references/slides/16.md), [17](references/slides/17.md), [18](references/slides/18.md).
 

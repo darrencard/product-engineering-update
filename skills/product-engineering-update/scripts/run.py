@@ -125,6 +125,13 @@ def collect_all(args: argparse.Namespace, run: Path) -> list[str]:
             raise SystemExit("run: --vercel-errors needs --vercel-errors-from, the first day the error reports cover.")
         errors = ["--errors", *args.vercel_errors, "--errors-from", args.vercel_errors_from] if args.vercel_errors else []
         done.append(step("from_vercel.py", "--deployments", *args.vercel_deployments, *errors, "--project", args.vercel_project, *dated, "--run", str(run)))
+    if args.linear_issues:
+        typed = (["--work-type-prefix", args.linear_work_type_prefix] if args.linear_work_type_prefix else []) + [
+            x for pair in args.linear_work_type for x in ("--work-type", pair)
+        ]
+        done.append(step("from_linear.py", "--issues", *args.linear_issues, *typed, *dated, "--run", str(run)))
+    if args.posthog_query:
+        done.append(step("from_posthog.py", "--query", args.posthog_query, *dated, "--run", str(run)))
     return done
 
 
@@ -149,6 +156,10 @@ def main() -> int:
     ap.add_argument("--vercel-errors", nargs="*", default=[], help="runtime error reports, as Vercel returns them")
     ap.add_argument("--vercel-errors-from", help="YYYY-MM-DD, the first day the error reports cover")
     ap.add_argument("--vercel-project", help="the Vercel project name")
+    ap.add_argument("--linear-issues", nargs="+", help="completed issues, as Linear returns them, one file per page")
+    ap.add_argument("--linear-work-type-prefix", help='the label prefix that names a work type in Linear, for example "type:"')
+    ap.add_argument("--linear-work-type", action="append", default=[], metavar="LABEL=TYPE", help="a Linear label that stands for a work type")
+    ap.add_argument("--posthog-query", help="a PostHog HogQL query result with metric, period and value columns")
     ap.add_argument("--retrieved-at", help="YYYY-MM-DD, the day the data was pulled")
     ap.add_argument("--staff", action="store_true", help="also render the Staff cut")
     ap.add_argument("--board", action="store_true", help="also render the Board cut (needs --signed-off-by)")

@@ -824,6 +824,132 @@ class SuggestedRanges(unittest.TestCase):
                 self.assertIsNotNone(validate.RANGE.search(s["range"]), "a suggestion must be a range, never a single point")
 
 
+class Converters(unittest.TestCase):
+    """Linear and PostHog exports, in their own shapes, become the same rows a CSV would."""
+
+    def setUp(self) -> None:
+        self.work = Path(tempfile.mkdtemp(prefix="peu-cv-"))
+        self.run = self.work / "run"
+        self.run.mkdir()
+
+    def tearDown(self) -> None:
+        shutil.rmtree(self.work, ignore_errors=True)
+
+    def csv_rows(self, source: str) -> list[Json]:
+        done = script("collect.py", source, "--csv", str(FIXTURES / "complete" / "csv" / f"{source}.csv"), "--system", "CSV", "--run", str(self.work / "csv"))
+        self.assertEqual(done.returncode, 0, done.stderr)
+        return json.loads((self.work / "csv" / "data" / f"{source}.json").read_text(encoding="utf-8"))["rows"]
+
+    def linear_pages(self) -> list[Path]:
+        """The fixture's tracker rows as Linear's connector returns them, in 2 pages, plus 2 issues to leave out."""
+        with (FIXTURES / "complete" / "csv" / "tracker.csv").open(encoding="utf-8") as f:
+            issues = [
+                {
+                    "id": r["id"],
+                    "title": r["title"],
+                    "estimate": float(r["estimate"]),
+                    "completedAt": r["completed_at"],
+                    "status": r["status"],
+                    "statusType": "completed",
+                    "labels": [f"type: {r['work_type']}", f"objective: {r['objective']}"] if r["objective"] else [f"type: {r['work_type']}"],
+                    "project": r["product_line"] or None,
+                    "assignee": r["owner"] or None,
+                }
+                for r in csv.DictReader(f)
+            ]
+        issues.append({"id": "X-1", "title": "No estimate", "estimate": None, "completedAt": "2026-08-01", "statusType": "completed", "labels": []})
+        issues.append({"id": "X-2", "title": "Canceled", "estimate": 3, "completedAt": None, "statusType": "canceled", "labels": []})
+        half = len(issues) // 2
+        pages = []
+        for i, chunk in enumerate((issues[:half], issues[half:])):
+            path = self.work / f"linear-{i}.json"
+            path.write_text(json.dumps({"issues": chunk, "hasNextPage": i == 0, "cursor": "c"}), encoding="utf-8")
+            pages.append(path)
+        return pages
+
+    def test_linear_issues_become_the_same_tracker_rows_as_the_csv(self) -> None:
+        done = script(
+            "from_linear.py",
+            "--issues",
+            *map(str, self.linear_pages()),
+            "--work-type-prefix",
+            "type:",
+            "--objective-prefix",
+            "objective:",
+            "--run",
+            str(self.run),
+        )
+        self.assertEqual(done.returncode, 0, done.stderr)
+        self.assertIn("1 completed issue(s) have no estimate and are left out", done.stdout)
+        rows = json.loads((self.run / "data" / "tracker.json").read_text(encoding="utf-8"))["rows"]
+        self.assertEqual(rows, self.csv_rows("tracker"))
+
+    def test_an_issue_with_no_work_type_label_is_counted_as_unlabelled(self) -> None:
+        page = self.work / "one.json"
+        page.write_text(
+            json.dumps(
+                {
+                    "data": {
+                        "issues": {
+                            "nodes": [
+                                {
+                                    "identifier": "A-1",
+                                    "title": "t",
+                                    "estimate": 2,
+                                    "completedAt": "2026-08-01",
+                                    "state": {"name": "Done", "type": "completed"},
+                                    "labels": {"nodes": []},
+                                }
+                            ]
+                        }
+                    }
+                }
+            ),
+            encoding="utf-8",
+        )
+        done = script("from_linear.py", "--issues", str(page), "--work-type-prefix", "type:", "--run", str(self.run))
+        self.assertEqual(done.returncode, 0, done.stderr)
+        rows = json.loads((self.run / "data" / "tracker.json").read_text(encoding="utf-8"))["rows"]
+        self.assertEqual(rows[0]["work_type"], "Unlabelled")
+
+    def test_no_completed_issues_is_refused_and_writes_nothing(self) -> None:
+        page = self.work / "empty.json"
+        page.write_text(json.dumps({"issues": [], "hasNextPage": False}), encoding="utf-8")
+        done = script("from_linear.py", "--issues", str(page), "--run", str(self.run))
+        self.assertNotEqual(done.returncode, 0)
+        self.assertFalse((self.run / "data" / "tracker.json").exists())
+
+    def test_a_posthog_query_result_becomes_the_same_analytics_rows_as_the_csv(self) -> None:
+        with (FIXTURES / "complete" / "csv" / "analytics.csv").open(encoding="utf-8") as f:
+            rows = list(csv.DictReader(f))
+        result = {
+            "columns": ["metric", "period", "value", "definition"],
+            "results": [[r["metric"], r["period"], float(r["value"]), r["definition"]] for r in rows],
+            "types": [],
+        }
+        path = self.work / "query.json"
+        path.write_text(json.dumps(result), encoding="utf-8")
+        done = script("from_posthog.py", "--query", str(path), "--run", str(self.run))
+        self.assertEqual(done.returncode, 0, done.stderr)
+        self.assertEqual(json.loads((self.run / "data" / "analytics.json").read_text(encoding="utf-8"))["rows"], self.csv_rows("analytics"))
+
+    def test_a_posthog_trend_is_aggregated_per_period_as_told(self) -> None:
+        days = [f"2026-0{m}-{d:02d}" for m in (4, 7) for d in (1, 2, 3)]
+        trend = {"result": [{"label": "dispatchers", "days": days, "data": [10, 20, 30, 40, 50, 60]}]}
+        path = self.work / "trend.json"
+        path.write_text(json.dumps(trend), encoding="utf-8")
+        periods = ["--period", "2026-Q2=2026-04-01..2026-06-30", "--period", "2026-Q3=2026-07-01..2026-09-30"]
+        done = script(
+            "from_posthog.py", "--insight", str(path), "--metric", "Weekly active dispatchers", *periods, "--aggregate", "mean", "--run", str(self.run)
+        )
+        self.assertEqual(done.returncode, 0, done.stderr)
+        rows = json.loads((self.run / "data" / "analytics.json").read_text(encoding="utf-8"))["rows"]
+        self.assertEqual([(r["period"], r["value"]) for r in rows], [("2026-Q2", 20.0), ("2026-Q3", 50.0)])
+        refused = script("from_posthog.py", "--insight", str(path), "--metric", "x", *periods, "--run", str(self.run))
+        self.assertNotEqual(refused.returncode, 0)
+        self.assertIn("does not choose them", refused.stderr)
+
+
 class Safety(unittest.TestCase):
     def example(self) -> Json:
         return json.loads((ROOT / "examples" / "harborline.deck.json").read_text(encoding="utf-8"))
