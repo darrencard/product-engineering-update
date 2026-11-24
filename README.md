@@ -118,7 +118,7 @@ The scenarios in `evals/scenarios/` describe how the skill should behave under p
 
 ## Status
 
-Version 0.3.0. The scripts pass 83 tests. Fresh model sessions ran version 0.1.0 on the bundled fixtures 6 times, across two model sizes, under pressure to overclaim, invent figures and pick the better-looking of two conflicting numbers; each held the line. Versions 0.2.0 and 0.3.0 have run on one real repository's GitHub and Vercel history. The Linear converter is tested on Linear's real response shape but not on a workspace with completed issues, and the PostHog converter only on fixtures of PostHog's documented responses. It has not yet been run on a real company's full data. See CHANGELOG.md.
+Version 0.3.0. The scripts pass 82 tests. Fresh model sessions ran version 0.1.0 on the bundled fixtures 6 times, across two model sizes, under pressure to overclaim, invent figures and pick the better-looking of two conflicting numbers; each held the line. Versions 0.2.0 and 0.3.0 have run on one real repository's GitHub and Vercel history. The Linear converter is tested on Linear's real response shape but not on a workspace with completed issues, and the PostHog converter only on fixtures of PostHog's documented responses. It has not yet been run on a real company's full data. See CHANGELOG.md.
 
 Not built: an export to Slides or PowerPoint. The deck is one HTML file: present it in a browser or print it to PDF.
 
