@@ -180,3 +180,37 @@ def analytics_args(description: str) -> argparse.ArgumentParser:
     ap.add_argument("--retrieved-at", help="YYYY-MM-DD; defaults to the file's modified date")
     ap.add_argument("--run", default="run")
     return ap
+
+
+def window_args(ap: argparse.ArgumentParser) -> None:
+    ap.add_argument("--period-start", required=True, help="the first day counted, YYYY-MM-DD (the start of the prior period)")
+    ap.add_argument("--period-end", required=True, help="the last day counted, YYYY-MM-DD")
+    ap.add_argument("--retrieved-at", help="YYYY-MM-DD; defaults to the first file's modified date")
+    ap.add_argument("--run", default="run")
+
+
+def window(args: argparse.Namespace, tool: str) -> tuple[datetime.date, datetime.date]:
+    try:
+        return datetime.date.fromisoformat(args.period_start), datetime.date.fromisoformat(args.period_end)
+    except ValueError:
+        raise fail(tool, "--period-start and --period-end take YYYY-MM-DD.") from None
+
+
+def theme_of(tags: list[str], prefix: str | None, named: list[str]) -> str:
+    """The ticket's theme: the tag after --theme-prefix, or a tag the user named as a theme. Never the first tag by default."""
+    if prefix:
+        found = next((t[len(prefix) :].strip() for t in tags if t.lower().startswith(prefix.lower()) and t[len(prefix) :].strip()), "")
+        if found:
+            return found
+    return next((t for t in tags if t in named), "")
+
+
+def theme_args(ap: argparse.ArgumentParser) -> None:
+    ap.add_argument("--theme-prefix", help='the tag prefix that names a theme, for example "theme:"')
+    ap.add_argument("--theme", action="append", default=[], help="a tag that is itself a theme; repeat it")
+
+
+def report_skipped(tool: str, skipped: dict[str, int], noun: str) -> None:
+    for why, n in skipped.items():
+        if n:
+            print(f"{tool}: {n} {noun} {why} and are left out. Nothing is filled in for them.")

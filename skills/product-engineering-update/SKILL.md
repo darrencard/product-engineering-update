@@ -188,6 +188,7 @@ To run the draft every week, follow [references/weekly-rhythm.md](references/wee
 - [references/weekly-rhythm.md](references/weekly-rhythm.md): drafting the update every week on a schedule.
 - [references/connect-posthog.md](references/connect-posthog.md): the outcome scorecard from PostHog.
 - [references/connect-amplitude.md](references/connect-amplitude.md) and [references/connect-mixpanel.md](references/connect-mixpanel.md): the outcome scorecard from Amplitude or Mixpanel.
+- [references/connect-hubspot.md](references/connect-hubspot.md), [connect-salesforce.md](references/connect-salesforce.md), [connect-intercom.md](references/connect-intercom.md), [connect-zendesk.md](references/connect-zendesk.md): win and loss reasons and support themes for slide 7.
 - [references/connect-jira.md](references/connect-jira.md): the investment slides, and commitments from epics or versions, from Jira.
 - [references/connect-github-projects.md](references/connect-github-projects.md): the investment slides from a GitHub project board.
 - [references/frameworks.md](references/frameworks.md): the reading behind each slide.

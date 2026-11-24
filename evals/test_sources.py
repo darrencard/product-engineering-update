@@ -343,5 +343,88 @@ class ProductAnalytics(Base):
         )
 
 
+class CustomerSystems(Base):
+    WINDOW = ("--period-start", "2026-07-01", "--period-end", "2026-09-30")
+
+    def fixture(self, name: str) -> list[Json]:
+        with (FIXTURES / "complete" / "csv" / f"{name}.csv").open(encoding="utf-8") as f:
+            return list(csv.DictReader(f))
+
+    def test_hubspot_deals_rebuild_the_fixture_crm(self) -> None:
+        results = []
+        for r in self.fixture("crm"):
+            won = r["outcome"] == "won"
+            props = {
+                "dealname": r["deal"],
+                "hs_is_closed": "true",
+                "hs_is_closed_won": "true" if won else "false",
+                "closedate": "2026-08-15T10:00:00.000Z",
+                "closed_won_reason": r["reason"] if won else None,
+                "closed_lost_reason": None if won else r["reason"],
+            }
+            results.append({"id": r["deal"], "properties": props, "createdAt": "2026-07-01T00:00:00.000Z", "archived": False})
+        results.append({"id": "OPEN", "properties": {"hs_is_closed": "false", "closedate": "2026-08-15T00:00:00Z"}})
+        results.append({"id": "NOREASON", "properties": {"hs_is_closed": "true", "hs_is_closed_won": "false", "closedate": "2026-08-15T00:00:00Z"}})
+        results.append(
+            {"id": "OLD", "properties": {"hs_is_closed": "true", "hs_is_closed_won": "true", "closedate": "2025-01-01T00:00:00Z", "closed_won_reason": "x"}}
+        )
+        out = self.ok("from_hubspot.py", "--deals", self.save("deals.json", {"total": len(results), "results": results}), "--portal", "acme", *self.WINDOW)
+        self.assertIn("1 closed deal(s) have no reason", out)
+        self.assertEqual(self.rows("crm"), self.fixture("crm"))
+
+    def test_salesforce_needs_the_named_reason_field(self) -> None:
+        records = {
+            "totalSize": 2,
+            "done": True,
+            "records": [
+                {"attributes": {"type": "Opportunity"}, "Id": "006A", "IsClosed": True, "IsWon": False, "CloseDate": "2026-08-01", "Loss_Reason__c": "Price"},
+                {"attributes": {"type": "Opportunity"}, "Id": "006B", "IsClosed": False, "IsWon": False, "CloseDate": "2026-08-01", "Loss_Reason__c": None},
+            ],
+        }
+        path = self.save("opps.json", records)
+        self.ok("from_salesforce.py", "--records", path, "--reason-field", "Loss_Reason__c", "--org", "acme", *self.WINDOW)
+        self.assertEqual(self.rows("crm"), [{"deal": "006A", "outcome": "lost", "reason": "Price"}])
+        self.assertIn(
+            "have no Reason__c field", self.refused("from_salesforce.py", "--records", path, "--reason-field", "Reason__c", "--org", "acme", *self.WINDOW)
+        )
+
+    def test_zendesk_tickets_rebuild_the_fixture_support(self) -> None:
+        tickets = [
+            {"id": r["ticket"], "created_at": "2026-08-01T10:00:00Z", "tags": ["vip", f"theme_{r['theme']}"], "organization_id": r["account"] or None}
+            for r in self.fixture("support")
+        ]
+        tickets.append({"id": "untagged", "created_at": "2026-08-01T10:00:00Z", "tags": ["vip"]})
+        out = self.ok(
+            "from_zendesk.py",
+            "--tickets",
+            self.save("tickets.json", {"tickets": tickets, "meta": {"has_more": False}}),
+            "--theme-prefix",
+            "theme_",
+            "--subdomain",
+            "acme",
+            *self.WINDOW,
+        )
+        self.assertIn("1 ticket(s) have no theme", out)
+        self.assertEqual(self.rows("support"), self.fixture("support"))
+
+    def test_intercom_reads_named_theme_tags_and_never_picks_one(self) -> None:
+        conv = {
+            "type": "conversation.list",
+            "conversations": [
+                {
+                    "id": "515",
+                    "created_at": 1785600000,
+                    "tags": {"type": "tag.list", "tags": [{"type": "tag", "name": "Billing"}, {"name": "vip"}]},
+                    "custom_attributes": {"Account": "A001"},
+                },
+                {"id": "516", "created_at": 1785600000, "tags": {"tags": [{"name": "vip"}]}},
+            ],
+        }
+        path = self.save("conv.json", conv)
+        self.assertIn("does not choose a tag", self.refused("from_intercom.py", "--conversations", path, "--workspace", "acme", *self.WINDOW))
+        self.ok("from_intercom.py", "--conversations", path, "--theme", "Billing", "--account-attribute", "Account", "--workspace", "acme", *self.WINDOW)
+        self.assertEqual(self.rows("support"), [{"ticket": "515", "theme": "Billing", "account": "A001"}])
+
+
 if __name__ == "__main__":
     unittest.main()
