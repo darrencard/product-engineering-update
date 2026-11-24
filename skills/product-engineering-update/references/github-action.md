@@ -11,16 +11,20 @@ Status: the steps are tested by running them locally against real exports, inclu
 3. **Add the workflow (2 minutes).** Copy `examples/product-engineering-update.yml` from this repository to `.github/workflows/product-engineering-update.yml` in yours and commit it.
 4. **Run it once (3 minutes).** In the Actions tab, open "Product & engineering update" and choose "Run workflow". When it finishes, the run summary says how many slides show data, and the deck is under Artifacts.
 
-## Choose where the deck goes
+## Where the deck goes
 
-| `output` | Where the deck lands | Permission it needs |
-|---|---|---|
-| `artifact` (default) | A workflow artifact, kept 30 days | `contents: read` |
-| `branch` | `updates/<date>/` on the branch named in `branch` | `contents: write` |
+Each run uploads the deck as a workflow artifact, kept 30 days. To also keep every week's deck on a branch, set a repository variable `PEU_DECK_BRANCH` (Settings, Secrets and variables, Actions, Variables) to the branch name. The example's `publish` job then commits the deck to `updates/<date>/` on that branch.
+
+## Permissions and safety
+
+- The `build` job reads only: `contents: read`, `pull-requests: read` and `deployments: read`. The `publish` job is the only one with `contents: write`, and it runs no code from the deck.
+- The workflow runs on a schedule or by hand, never on `pull_request` or `pull_request_target`, so a fork cannot trigger it.
+- Every third-party action is pinned to a full commit SHA, and this action to a release tag. Update the tag when you move to a new release.
+- Text from pull requests is data. The export keeps only numbers and dates; no title or body reaches a shell command.
 
 ## What each run does
 
-1. Exports merged pull requests with `gh pr list` and deployments with `gh api`, using the workflow's token.
+1. Exports merged pull requests (number, dates and reviews only) with `gh pr list` and deployments with `gh api`, using the workflow's token.
 2. Runs `scripts/ci.py`: copies the intake into a temporary run folder, collects the CSVs and the GitHub exports, computes, drafts and validates. Any validator error stops the run.
 3. Renders `leadership.html` and `staff.html`, their ledgers and `deck.json`.
 

@@ -1211,6 +1211,22 @@ class Action(unittest.TestCase):
         self.assertIn("workflow_dispatch", example)
         self.assertRegex(example, r"schedule:\s*\n\s*- cron:")
 
+    def test_the_workflow_is_least_privilege_pinned_and_never_runs_on_pull_requests(self) -> None:
+        action = (ROOT / "action.yml").read_text(encoding="utf-8")
+        example = (ROOT / "examples" / "product-engineering-update.yml").read_text(encoding="utf-8")
+        self.assertNotRegex(example, r"\bpull_request(_target)?\b\s*:")
+        self.assertRegex(example, r"\npermissions:\n  contents: read\n")
+        self.assertEqual(example.count("contents: write"), 1, "only the publish job may write")
+        for text in (action, example):
+            for ref in re.findall(r"uses:\s*(\S+)", text):
+                with self.subTest(uses=ref):
+                    if ref.startswith("darrencard/product-engineering-update@"):
+                        self.assertRegex(ref, r"@v\d+\.\d+\.\d+$", "this action is pinned to a release tag, never main")
+                    else:
+                        self.assertRegex(ref, r"@[0-9a-f]{40}$", "a third-party action is pinned to a full commit SHA")
+            self.assertNotIn("github.event", text, "no event text, such as a pull request title, reaches a shell")
+        self.assertIn("--json number,createdAt,mergedAt,reviews", action)
+
 
 class TrackerReaders(unittest.TestCase):
     """Jira and GitHub Projects exports, in their documented shapes, become the same tracker rows as the CSV."""

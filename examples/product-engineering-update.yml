@@ -2,6 +2,9 @@
 # Every Monday at 14:00 UTC, and whenever you run it by hand, it builds the Leadership and Staff
 # cuts from this repository's pull requests and deployments, plus any CSVs in .update/.
 # Your data stays in your CI. The Board cut is never rendered here: it needs a named person's yes.
+#
+# It runs only on a schedule or by hand, never on pull_request or pull_request_target, so a fork
+# cannot run it. Every action is pinned: this one to a release tag, third-party ones to a commit SHA.
 name: Product & engineering update
 
 on:
@@ -10,17 +13,55 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read        # use write if output is branch
-  pull-requests: read
-  deployments: read
+  contents: read
 
 jobs:
-  update:
+  build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: read
+      deployments: read
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
       - uses: darrencard/product-engineering-update@v0.5.0
         with:
           intake: .update/intake.json
           data-dir: .update
-          output: artifact      # or: branch
+
+  # Optional: keep each week's deck on a branch. Delete this job to keep the artifact only.
+  # It is the only job with write access, and it runs no code from the deck.
+  publish:
+    needs: build
+    if: vars.PEU_DECK_BRANCH != ''
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: product-engineering-update
+          path: deck
+      - name: Commit the deck to the branch
+        env:
+          BRANCH: ${{ vars.PEU_DECK_BRANCH }}
+        run: |
+          set -euo pipefail
+          day="$(date -u +%F)"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git ls-remote --exit-code --heads origin "$BRANCH" > /dev/null; then
+            git fetch origin "$BRANCH"
+            git worktree add "$RUNNER_TEMP/branch" "origin/$BRANCH"
+            git -C "$RUNNER_TEMP/branch" switch -c "$BRANCH"
+          else
+            git worktree add --orphan -b "$BRANCH" "$RUNNER_TEMP/branch"
+          fi
+          mkdir -p "$RUNNER_TEMP/branch/updates/$day"
+          cp deck/* "$RUNNER_TEMP/branch/updates/$day/"
+          git -C "$RUNNER_TEMP/branch" add updates
+          git -C "$RUNNER_TEMP/branch" commit -m "Product & engineering update, $day" || echo "Nothing changed since the last run."
+          git -C "$RUNNER_TEMP/branch" push origin "$BRANCH"
