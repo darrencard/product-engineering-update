@@ -37,7 +37,7 @@
           {
             "title": "Not reported",
             "body": [
-              "3 slides lack data this period: What we learned, Shipped vs impact, Platform & security."
+              "1 slide lack data this period: Platform & security."
             ]
           }
         ]
@@ -269,15 +269,67 @@
         ]
       }
     ],
+    "06": [
+      {
+        "type": "strip",
+        "label": "Title",
+        "text": "4 customers made 7 requests this period, linked to 3 issues and projects. The most requested is Multi-stop reroutes, with 4 requests from 3 customers."
+      },
+      {
+        "type": "table",
+        "columns": [
+          {
+            "label": "Issue or project"
+          },
+          {
+            "label": "Requests",
+            "align": "num"
+          },
+          {
+            "label": "Customers",
+            "align": "num"
+          }
+        ],
+        "rows": [
+          [
+            "[Multi-stop reroutes](https://linear.app/kestrel/project/multi-stop-reroutes)",
+            "4",
+            "3"
+          ],
+          [
+            "[KES-412 Bulk load import](https://linear.app/kestrel/issue/KES-412)",
+            "2",
+            "2"
+          ],
+          [
+            "KES-388 Carrier rating export",
+            "1",
+            "1"
+          ]
+        ]
+      },
+      {
+        "type": "cards",
+        "columns": 1,
+        "items": [
+          {
+            "title": "What this does not show",
+            "body": [
+              "Requests are what customers asked for. They are not a tested result: no interview, prototype or experiment is counted here."
+            ]
+          }
+        ]
+      }
+    ],
     "07": [
       {
         "type": "strip",
         "label": "Title",
-        "text": "The most cited reason in 39 closed deals: Agent clears exceptions. The most cited reason in 55 support tickets: Integration errors."
+        "text": "The most cited reason in 39 closed deals: Agent clears exceptions. The most cited reason in 55 support tickets: Integration errors. The most requested item in 7 customer requests: Multi-stop reroutes."
       },
       {
         "type": "tiles",
-        "columns": 2,
+        "columns": 3,
         "items": [
           {
             "value": "22 of 39",
@@ -286,6 +338,118 @@
           {
             "value": "30 of 55",
             "label": "Support tickets citing: Integration errors"
+          },
+          {
+            "value": "4 of 7",
+            "label": "Customer requests linked to: Multi-stop reroutes"
+          }
+        ]
+      }
+    ],
+    "08": [
+      {
+        "type": "strip",
+        "label": "Title",
+        "text": "We shipped 6 of 7 commitments. 4 have moved their target metric so far."
+      },
+      {
+        "type": "table",
+        "columns": [
+          {
+            "label": "Commitment"
+          },
+          {
+            "label": "Owner"
+          },
+          {
+            "label": "Shipped"
+          },
+          {
+            "label": "Metric, before to after"
+          },
+          {
+            "label": "Result"
+          }
+        ],
+        "rows": [
+          {
+            "group": "Activation"
+          },
+          [
+            "Guided activation",
+            "Activation team",
+            "Yes",
+            "39% to 41%",
+            "Moved"
+          ],
+          [
+            "Self-serve carrier onboarding",
+            "Activation team",
+            "No",
+            "39% to 41%",
+            "Not shipped"
+          ],
+          {
+            "group": "Loads cleared per week"
+          },
+          [
+            "Multi-stop reroutes",
+            "Agent team",
+            "Yes",
+            "18.4K to 23.1K",
+            "Moved"
+          ],
+          {
+            "group": "Weekly active dispatchers"
+          },
+          [
+            "Dispatcher inbox",
+            "Core dispatch",
+            "Yes",
+            "5,890 to 6,120",
+            "Moved"
+          ],
+          {
+            "group": "Cost per successful task"
+          },
+          [
+            "Cheaper agent retries",
+            "Agent team",
+            "Yes",
+            "$0.41 to $0.33",
+            "Moved"
+          ],
+          {
+            "group": "Change failure rate"
+          },
+          [
+            "Release checklist",
+            "Platform",
+            "Yes",
+            "5.1% to 7.7%",
+            "Moved the wrong way"
+          ],
+          {
+            "group": "No movement"
+          },
+          [
+            "Audit log export",
+            "Platform",
+            "Yes",
+            "No target metric named",
+            "No movement: no metric was named before launch"
+          ]
+        ]
+      },
+      {
+        "type": "cards",
+        "columns": 1,
+        "items": [
+          {
+            "title": "What moved means",
+            "body": [
+              "Moved means the target metric went the right way this period. It is not proof that the commitment caused it."
+            ]
           }
         ]
       }

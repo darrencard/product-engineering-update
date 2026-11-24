@@ -37,6 +37,7 @@
   "risks": [],
   "stopped": [],
   "decisions": [],
+  "commitments": [],
   "connected": [
     "tracker"
   ]

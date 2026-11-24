@@ -3,6 +3,7 @@
   "analytics": "PostHog",
   "billing": "Stripe",
   "crm": "CRM",
+  "customer_requests": "Linear",
   "evals": "Eval harness",
   "finance": "Finance close",
   "hr": "HR system",

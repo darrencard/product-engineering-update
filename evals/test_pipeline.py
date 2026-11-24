@@ -198,7 +198,7 @@ class Fixtures(unittest.TestCase):
         deck = self.decks["complete"]
         cover = json.dumps(slide(deck, "00"))
         self.assertNotIn("Fill in each slide", cover)
-        self.assertIn("16 of 19 slides show data", cover)
+        self.assertIn("18 of 19 slides show data", cover)
         rows = {r["metric"]: r for r in slide(deck, "11")["blocks"][0]["rows"] if "metric" in r}
         self.assertEqual((rows["Activation"]["prior"], rows["Activation"]["actual"]), ("39%", "41%"))
         self.assertIn("data_needed", block_types(slide(deck, "12")), "slide 12 must show the AI margin gap")

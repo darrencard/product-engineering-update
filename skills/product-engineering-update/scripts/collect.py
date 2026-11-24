@@ -59,6 +59,10 @@ SOURCES = {
     "warehouse": {"label": "Warehouse", "columns": {"metric": "str", "period": "str", "value": "num", "query": "str"}},
     "crm": {"label": "CRM", "columns": {"deal": "str", "outcome": "str", "reason": "str"}},
     "support": {"label": "Support desk", "columns": {"ticket": "str", "theme": "str", "account": "str?"}},
+    "customer_requests": {
+        "label": "Customer requests",
+        "columns": {"request": "str", "customer": "str", "linked_to": "str", "link": "str?", "created_at": "date"},
+    },
     "research": {"label": "Research and call notes", "columns": {"id": "str", "date": "date", "finding": "str", "kind": "str?"}},
     "source_control": {
         "label": "Source control and CI",

@@ -38,6 +38,11 @@ Json = dict[str, Any]
 # The one line a generated deck carries about where it came from. The licence asks for credit; this is it.
 CREDIT = "Made with [the Product & Engineering Update](https://www.dacard.ai/update) by Dacard."
 
+# The most items a list slide shows; a longer list stops being a summary.
+TOP_ITEMS = 5
+# A link drafted from data: a web address with no characters that could end the link markup early.
+DATA_LINK = re.compile(r"https://[^\s()\[\]<>\"']+")
+
 # Slides that only make sense when AI features are in production.
 AI_SLIDES = ("12", "13")
 
@@ -387,6 +392,92 @@ class Draft:
         rows = ", ".join(self.metrics[k]["ledger"] for k in speed)
         return f"Speed was measured (ledger {rows}) and is held back. This slide needs {' and '.join(missing)}."
 
+    def find_metric(self, name: str) -> Json | None:
+        """A collected metric by the name an intake uses: an analytics metric, or any computed metric's label."""
+        return self.metrics.get(f"analytics:{name}") or next((m for m in self.metrics.values() if m["label"] == name), None)
+
+    def better_for(self, name: str, metric: Json) -> bool:
+        """Which way is better for a metric: the intake's own north star or input wins, then the metric's."""
+        wanted = [self.intake.get("north_star") or {}] + list(self.intake.get("inputs") or [])
+        want = next((w for w in wanted if isinstance(w, dict) and w.get("metric") == name), {})
+        return bool(want.get("higher_is_better", metric.get("higher_is_better", True)))
+
+    def shipped_vs_impact(self) -> None:
+        """Slide 8: last period's commitments, grouped by the outcome each named before launch.
+
+        "Moved" means the metric went the right way this period. It never says the commitment caused it.
+        A commitment with no metric, or whose metric was not collected or is disputed, goes under "No movement"
+        with the reason. A commitment that was not shipped says so."""
+        commitments = [c for c in self.intake.get("commitments") or [] if isinstance(c, dict) and c.get("commitment")]
+        if not commitments:
+            return
+        groups: dict[str, list[list[str]]] = {}
+        still: list[list[str]] = []
+        refs: list[str] = []
+        covers: dict[str, str] = {}
+        moved = 0
+        for c in commitments:
+            shipped = str(c.get("shipped") or "").strip().lower() == "yes"
+            name = (c.get("metric") or "").strip()
+            row = [c["commitment"], c.get("owner") or "Owner not stated", "Yes" if shipped else "No"]
+            metric = self.find_metric(name) if name else None
+            if not name:
+                still.append([*row, "No target metric named", "Not shipped" if not shipped else "No movement: no metric was named before launch"])
+                continue
+            if not metric:
+                still.append([*row, f"{name}: not collected", "Not shipped" if not shipped else "No movement: the metric was not collected"])
+                continue
+            refs.append(metric["ledger"])
+            if metric.get("conflict") or metric["value"] is None:
+                still.append([*row, f"{name}: two sources disagree", "Not shipped" if not shipped else f"No movement: see ledger row {metric['ledger']}"])
+                continue
+            # A figure built from less than the window says so on the figure and in the title.
+            coverage = metric.get("coverage")
+            covered = f"{coverage['text'][0].lower()}{coverage['text'][1:]}" if coverage else ""
+            note = f" ({covered})" if covered else ""
+            if covered:
+                covers[name] = f"{name} {covered}."
+            figure = f"{metric['prior_display'] or 'No prior'} to {metric['display']}{note}"
+            if not shipped:
+                result = "Not shipped"
+            elif metric["prior"] is None:
+                result = "Too early to call: no prior period"
+            elif metric["value"] == metric["prior"]:
+                result = "Flat"
+            elif (metric["value"] > metric["prior"]) == self.better_for(name, metric):
+                result = "Moved"
+                moved += 1
+            else:
+                result = "Moved the wrong way"
+            groups.setdefault(name, []).append([*row, figure, result])
+        rows: list[Json | list[str]] = []
+        for outcome, items in groups.items():
+            rows.append({"group": outcome})
+            rows.extend(items)
+        if still:
+            rows.append({"group": "No movement"})
+            rows.extend(still)
+        table: Json = {
+            "type": "table",
+            "columns": [{"label": c} for c in ("Commitment", "Owner", "Shipped", "Metric, before to after", "Result")],
+            "rows": rows,
+        }
+        note = {
+            "title": "What moved means",
+            "body": ["Moved means the target metric went the right way this period. It is not proof that the commitment caused it."],
+        }
+        shipped_count = sum(1 for c in commitments if str(c.get("shipped") or "").strip().lower() == "yes")
+        has = "has" if moved == 1 else "have"
+        title = f"We shipped {shipped_count} of {plural(len(commitments), 'commitment')}. {moved} {has} moved their target metric so far."
+        if covers:
+            title += " " + " ".join(covers.values())
+        sources = list(dict.fromkeys(str(c["source"]).strip() for c in commitments if c.get("source")))
+        said = f"Commitments from {', '.join(sources)}." if sources else "Commitments as stated in the intake interview."
+        period = self.m["period"]
+        used = {m["source"] for m in self.metrics.values() if m["ledger"] in refs}
+        asof = f"{said} {self.systems(*used)}" if used else f"{said} {period['label']}, {period['start']} to {period['end']}."
+        self.fill("08", title, [table, {"type": "cards", "columns": 1, "items": [note]}], refs, asof)
+
     def outcomes(self) -> None:
         north = self.intake.get("north_star") or {}
         wanted = [north] + list(self.intake.get("inputs") or [])
@@ -397,7 +488,7 @@ class Draft:
             name = want.get("metric")
             if not name:
                 continue
-            metric = self.metrics.get(f"analytics:{name}") or next((m for m in self.metrics.values() if m["label"] == name), None)
+            metric = self.find_metric(name)
             target = want.get("target")
             if not metric:
                 gaps.append(f"{name}: not collected.")
@@ -471,9 +562,45 @@ class Draft:
         blocks.append({"type": "cards", "columns": 1, "items": [self.gap("AI revenue and cost of revenue, for AI gross margin.")]})
         self.fill("12", title, blocks, refs, self.systems("evals"))
 
+    def learned(self) -> None:
+        """Slide 6, from customer requests: what customers asked for, counted in code, each linked to its issue or
+        project. Requests are what customers asked for; the slide never calls them a tested result."""
+        asks = self.extra.get("customer_requests")
+        if not asks:
+            return
+        items = asks["items"][:TOP_ITEMS]
+
+        def named(i: Json) -> str:
+            label = re.sub(r"[\[\]]", "", i["linked_to"])
+            return f"[{label}]({i['link']})" if i.get("link") and DATA_LINK.fullmatch(i["link"]) else i["linked_to"]
+
+        table: Json = {
+            "type": "table",
+            "columns": [{"label": "Issue or project"}, {"label": "Requests", "align": "num"}, {"label": "Customers", "align": "num"}],
+            "rows": [[named(i), str(i["requests"]), str(i["customers"])] for i in items],
+        }
+        note = {
+            "title": "What this does not show",
+            "body": ["Requests are what customers asked for. They are not a tested result: no interview, prototype or experiment is counted here."],
+        }
+        top = asks["items"][0]
+        linked = len(asks["items"])
+        title = (
+            f"{plural(asks['customers'], 'customer')} made {plural(asks['total'], 'request')} this period, linked to "
+            f"{linked} {'issue or project' if linked == 1 else 'issues and projects'}. The most requested is {top['linked_to']}, "
+            f"with {plural(top['requests'], 'request')} from {plural(top['customers'], 'customer')}."
+        )
+        self.fill("06", title, [table, {"type": "cards", "columns": 1, "items": [note]}], [asks["ledger"]], self.systems_of(asks["ledger"]))
+
+    def systems_of(self, *ledger_ids: str) -> str:
+        """The sources line for figures that are ledger rows but not metrics."""
+        names = sorted({row["source_system"] for row in self.m["ledger"] if row["id"] in ledger_ids})
+        period = self.m["period"]
+        return f"Sources: {', '.join(names) or 'see the ledger'}. {period['label']}, {period['start']} to {period['end']}."
+
     def signal(self) -> None:
-        crm, support = self.extra.get("crm"), self.extra.get("support")
-        if not crm and not support:
+        crm, support, asks = self.extra.get("crm"), self.extra.get("support"), self.extra.get("customer_requests")
+        if not crm and not support and not asks:
             return
         tiles: list[Json] = []
         refs: list[str] = []
@@ -485,7 +612,13 @@ class Draft:
             tiles.append({"value": f"{count} of {found['total']}", "label": f"{noun.capitalize()} citing: {reason}"})
             claims.append(f"The most cited reason in {found['total']} {noun}: {reason}.")
             refs.append(found["ledger"])
-        self.fill("07", " ".join(claims), [{"type": "tiles", "columns": 3 if len(tiles) > 2 else 2, "items": tiles}], refs, self.systems("crm", "support"))
+        if asks:
+            top = asks["items"][0]
+            tiles.append({"value": f"{top['requests']} of {asks['total']}", "label": f"Customer requests linked to: {top['linked_to']}"})
+            claims.append(f"The most requested item in {asks['total']} customer requests: {top['linked_to']}.")
+            refs.append(asks["ledger"])
+        sources = self.systems_of(*refs)
+        self.fill("07", " ".join(claims), [{"type": "tiles", "columns": 3 if len(tiles) > 2 else 2, "items": tiles}], refs, sources)
 
     def ai_in_build(self) -> None:
         use, cost = self.metrics.get("ai_weekly_use"), self.metrics.get("ai_tool_cost")
@@ -653,7 +786,9 @@ class Draft:
             self.portfolio,
             self.investment_mix,
             self.delivery,
+            self.shipped_vs_impact,
             self.outcomes,
+            self.learned,
             self.signal,
             self.ai_in_product,
             self.ai_in_build,

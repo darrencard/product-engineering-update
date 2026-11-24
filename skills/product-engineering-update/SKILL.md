@@ -4,7 +4,7 @@ description: Builds a product and engineering update deck for leadership, the bo
 license: MIT for the scripts, CC BY 4.0 for the instructions, references and template. See LICENSE and LICENSE-CONTENT.md in the repository root.
 metadata:
   author: Dacard
-  version: "0.3.0"
+  version: "0.4.0"
 ---
 
 # Product & Engineering Update
@@ -45,6 +45,7 @@ Copy this checklist and tick each step as you finish it.
 - [ ] 5. Validate     scripts/validate.py until it reports 0 errors
 - [ ] 6. Review       scripts/review.py, then an explicit sign-off
 - [ ] 7. Render       scripts/render.py
+- [ ] 8. Write back   scripts/summary.py, posted only after a yes
 ```
 
 Work in a run directory, `run/` by default. Run every script from the skill's root.
@@ -75,7 +76,9 @@ Draft only what a document says. A field no document covers stays for the interv
 
 For healthy ranges, run `python3 scripts/intake.py suggest run/intake.json`. It lists a suggested range for each delivery metric that has a published benchmark, with its source and date, and says where none applies. Put each one to the user and ask them to accept or edit it. Record each yes with `python3 scripts/intake.py accept run/intake.json "<metric>"` (add `--range "<their range>"` if they edited it). Never accept one for them. The intake keeps what was suggested, what was accepted and the source, and the delivery slide names that source.
 
-If the team already keeps a decision log, risk register or stop list, import it instead of retyping: `python3 scripts/intake.py import run/intake.json --decisions <file> --risks <file> --stopped <file>`. Each file is CSV or a Markdown table with named columns (decisions: ask, options, recommendation, deadline; risks: risk, likelihood, impact, mitigation, due; stopped: what, why). A file without those columns is refused; nothing is read from free text. Show the user the imported rows it lists and ask them to confirm.
+If the team already keeps a decision log, risk register, stop list or list of last period's commitments, import it instead of retyping: `python3 scripts/intake.py import run/intake.json --decisions <file> --risks <file> --stopped <file> --commitments <file>`. Each file is CSV or a Markdown table with named columns (decisions: ask, options, recommendation, deadline; risks: risk, likelihood, impact, mitigation, due; stopped: what, why; commitments: commitment, shipped, metric, owner, source). A file without those columns is refused; nothing is read from free text. A commitment's `shipped` is yes or no, and its `metric` is the outcome metric named before launch, by the name the intake or the analytics source uses, or empty if none was named. `--targets <file>` (columns metric, target, better, by, owner, source) adds stated target metrics to the inputs. A file with any bad row is refused whole. Show the user the imported rows it lists and ask them to confirm.
+
+Commitments feed slide 8, shipped vs impact. "Moved" there means the metric went the right way this period, never that the commitment caused it. Do not reword the slide to claim cause.
 
 Anything the user does not supply stays `null`. Do not infer it. Run `python3 scripts/intake.py check run/intake.json`; it lists what is still Unknown and which slide will show a gap. Blocking items must be answered before you go on.
 
@@ -87,7 +90,7 @@ Read `assets/contracts.json` or [references/sources.md](references/sources.md) f
 2. Save the rows as CSV or JSON with the columns `python3 scripts/collect.py --list` shows for that source.
 3. Run `python3 scripts/collect.py <source> --csv <file> --system "<system name>" --query "<query or report>" --retrieved-at <YYYY-MM-DD> --run run`. `--query` is how the rows were produced: the query, the report name, or "CSV export supplied by the user". `--retrieved-at` is the date the data was pulled; without it the file's modified date is used.
 
-For GitHub there is a shortcut that needs no CSV: follow [references/connect-github.md](references/connect-github.md). It is the fastest way to a first real slide. A solo repository has no reviews to pair with speed; if it runs on Vercel, add a labelled proxy with [references/connect-vercel.md](references/connect-vercel.md). Linear and PostHog have converters too: [connect-linear.md](references/connect-linear.md) and [connect-posthog.md](references/connect-posthog.md).
+For GitHub there is a shortcut that needs no CSV: follow [references/connect-github.md](references/connect-github.md). It is the fastest way to a first real slide. A solo repository has no reviews to pair with speed; if it runs on Vercel, add a labelled proxy with [references/connect-vercel.md](references/connect-vercel.md). Linear and PostHog have converters too: [connect-linear.md](references/connect-linear.md) and [connect-posthog.md](references/connect-posthog.md). The Linear converter also reads projects (commitments for slide 8, and stated targets for slide 11), initiatives (slide 3) and customer requests (slides 6 and 7). Its projects and targets come out as files for `intake.py import`, so the person confirms each row.
 
 `collect.py` rejects a file with missing columns or bad rows and says what to fix. Fix the file. Do not edit rows to make them pass, and do not create a file for a source the user does not have.
 
@@ -155,6 +158,14 @@ Render the cuts the user asked for; with no cut named, render the full deck (the
 
 Each render writes the HTML file and the ledger as CSV beside it. Give the user the HTML, `run/deck.json` and the ledger CSV. Tell them how many slides show data and how many show gaps.
 
+### 8. Write back
+
+To share the update in Linear, run `python3 scripts/summary.py run/deck.json --out run/summary.md` (add `--cut L` or `--cut S`, and `--link <url>` if the HTML is shared somewhere). It lists each slide's title with its ledger IDs, the gaps, and the cited ledger rows. It refuses a deck with validator errors, and refuses the board cut without `--signed-off-by "<name>"`.
+
+Show the user the summary word for word. Post it only after they say yes, through the Linear connector: `save_document` for a document, or `save_status_update` for a project update. Never auto-post the board cut, not even from a scheduled run: a named person signs it off in that session, and you post it only after they say yes to posting.
+
+To run the draft every week, follow [references/weekly-rhythm.md](references/weekly-rhythm.md). The schedule lives outside the scripts and never renders, summarises or posts the board cut.
+
 ## Reference files
 
 - [references/writing-rules.md](references/writing-rules.md): titles, status words, banned claims.
@@ -163,7 +174,8 @@ Each render writes the HTML file and the ledger as CSV beside it. Give the user 
 - [references/sources.md](references/sources.md): each source, the columns it needs and the slides it feeds.
 - [references/connect-github.md](references/connect-github.md): pull delivery data straight from GitHub.
 - [references/connect-vercel.md](references/connect-vercel.md): a labelled quality proxy from Vercel, for repositories with no reviews.
-- [references/connect-linear.md](references/connect-linear.md): the investment slides from Linear.
+- [references/connect-linear.md](references/connect-linear.md): the investment slides, shipped vs impact, line of sight and customer requests from Linear.
+- [references/weekly-rhythm.md](references/weekly-rhythm.md): drafting the update every week on a schedule.
 - [references/connect-posthog.md](references/connect-posthog.md): the outcome scorecard from PostHog.
 - [references/frameworks.md](references/frameworks.md): the reading behind each slide.
 - Slide contracts: [01](references/slides/01.md), [02](references/slides/02.md), [03](references/slides/03.md), [04](references/slides/04.md), [05](references/slides/05.md), [06](references/slides/06.md), [07](references/slides/07.md), [08](references/slides/08.md), [09](references/slides/09.md), [09b](references/slides/09b.md), [10](references/slides/10.md), [11](references/slides/11.md), [12](references/slides/12.md), [13](references/slides/13.md), [14](references/slides/14.md), [15](references/slides/15.md), [16](references/slides/16.md), [17](references/slides/17.md), [18](references/slides/18.md).

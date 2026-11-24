@@ -126,6 +126,16 @@ INTAKE: dict[str, Any] = {
             "deadline": "4 Nov 2026",
         }
     ],
+    # Last period's commitments, each with the outcome metric named before launch (slide 8).
+    "commitments": [
+        {"commitment": "Guided activation", "shipped": "yes", "metric": "Activation", "owner": "Activation team", "source": "Linear (Kestrel)"},
+        {"commitment": "Multi-stop reroutes", "shipped": "yes", "metric": "Loads cleared per week", "owner": "Agent team", "source": "Linear (Kestrel)"},
+        {"commitment": "Dispatcher inbox", "shipped": "yes", "metric": "Weekly active dispatchers", "owner": "Core dispatch", "source": "Linear (Kestrel)"},
+        {"commitment": "Cheaper agent retries", "shipped": "yes", "metric": "Cost per successful task", "owner": "Agent team", "source": "Linear (Kestrel)"},
+        {"commitment": "Release checklist", "shipped": "yes", "metric": "Change failure rate", "owner": "Platform", "source": "Linear (Kestrel)"},
+        {"commitment": "Self-serve carrier onboarding", "shipped": "no", "metric": "Activation", "owner": "Activation team", "source": "Linear (Kestrel)"},
+        {"commitment": "Audit log export", "shipped": "yes", "metric": None, "owner": "Platform", "source": "Linear (Kestrel)"},
+    ],
     "connected": [],
 }
 
@@ -272,6 +282,23 @@ def support() -> Rows:
     return [{"ticket": f"T{i + 1}", "theme": theme, "account": f"A{(i % 40) + 1:03d}"} for i, theme in enumerate(themes)]
 
 
+def customer_requests() -> Rows:
+    """Customer requests from Linear, each linked to an issue or project. One falls before the period and is not counted."""
+    asks = [
+        ("Multi-stop reroutes", "https://linear.app/kestrel/project/multi-stop-reroutes", ["Northwind", "Haulwell", "Bluepeak", "Northwind"]),
+        ("KES-412 Bulk load import", "https://linear.app/kestrel/issue/KES-412", ["Haulwell", "Tidewater"]),
+        ("KES-388 Carrier rating export", None, ["Bluepeak"]),
+    ]
+    rows: Rows = []
+    for linked, link, customers in asks:
+        for i, customer in enumerate(customers):
+            rows.append(
+                {"request": f"R-{len(rows) + 1:03d}", "customer": customer, "linked_to": linked, "link": link or "", "created_at": f"2026-08-{i + 3:02d}"}
+            )
+    rows.append({"request": "R-999", "customer": "Tidewater", "linked_to": "KES-388 Carrier rating export", "link": "", "created_at": "2026-05-02"})
+    return rows
+
+
 def survey() -> Rows:
     return [
         {"question": "Developer experience index", "period": PRIOR_LABEL, "score": 68},
@@ -292,6 +319,7 @@ ALL = {
     "crm": crm,
     "support": support,
     "survey": survey,
+    "customer_requests": customer_requests,
 }
 SYSTEMS = {
     "tracker": "Linear",
@@ -307,6 +335,7 @@ SYSTEMS = {
     "crm": "CRM",
     "support": "Support desk",
     "survey": "Developer survey",
+    "customer_requests": "Linear",
 }
 
 
@@ -328,11 +357,24 @@ def write(name: str, intake: dict[str, Any], sources: dict[str, Rows], expect: d
 
 def main() -> None:
     everything = {key: make() for key, make in ALL.items()}
-    full = ["02", "03", "04", "05", "09", "11", "12", "14", "16", "17", "18"]
+    full = ["02", "03", "04", "05", "06", "07", "08", "09", "11", "12", "14", "16", "17", "18"]
     write("complete", INTAKE, everything, {"valid": True, "filled": full, "absent": [], "conflicts": [], "board_slides": 8})
 
     thin = copy.deepcopy(INTAKE)
-    for key in ("strategy", "objectives", "product_lines", "investment_plan", "rd_lines", "inputs", "delivery_ranges", "bets", "risks", "stopped", "decisions"):
+    for key in (
+        "strategy",
+        "objectives",
+        "product_lines",
+        "investment_plan",
+        "rd_lines",
+        "inputs",
+        "delivery_ranges",
+        "bets",
+        "risks",
+        "stopped",
+        "decisions",
+        "commitments",
+    ):
         thin[key] = {"diagnosis": None, "policy": None, "actions": [], "non_goals": []} if key == "strategy" else ({} if isinstance(thin[key], dict) else [])
     thin["north_star"] = {"metric": None, "definition": None, "target": None, "owner": None}
     write("sparse", thin, {"tracker": everything["tracker"]}, {"valid": True, "filled": [], "absent": [], "conflicts": [], "board_slides": 8, "min_gaps": 15})

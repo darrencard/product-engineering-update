@@ -2,6 +2,7 @@
   "analytics": "PostHog",
   "billing": "Stripe",
   "crm": "CRM",
+  "customer_requests": "Linear",
   "finance": "Finance close",
   "hr": "HR system",
   "incidents": "Incident tool",

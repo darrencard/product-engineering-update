@@ -544,6 +544,29 @@ def counts(r: Run, source: str, column: str, key: str, label: str) -> None:
     r.extra[key] = {"top": top, "total": len(src["rows"]), "ledger": lid}
 
 
+def customer_requests(r: Run) -> None:
+    """Customer requests made in the period, counted by the issue or project each is linked to, with how many
+    distinct customers asked. Each item keeps its link so a reader can open it."""
+    src = r.data("customer_requests")
+    if not src:
+        return
+    rows = [x for x in src["rows"] if r.in_period(x["created_at"])]
+    if not rows:
+        return
+    by_item: dict[str, Json] = {}
+    for x in rows:
+        item = by_item.setdefault(x["linked_to"], {"linked_to": x["linked_to"], "link": x.get("link"), "requests": 0, "customers": set()})
+        item["requests"] += 1
+        item["customers"].add(x["customer"])
+        item["link"] = item["link"] or x.get("link")
+    ranked = sorted(by_item.values(), key=lambda i: (-i["requests"], -len(i["customers"]), i["linked_to"]))
+    items = [{**i, "customers": len(i["customers"])} for i in ranked]
+    customers = len({x["customer"] for x in rows})
+    top = ", ".join(f"{i['linked_to']} ({i['requests']})" for i in items[:TOP_REASONS])
+    lid = r.row(f"Customer requests by linked issue or project: {top}", len(rows), "count", src, "Derived")
+    r.extra["customer_requests"] = {"items": items, "total": len(rows), "customers": customers, "ledger": lid}
+
+
 def survey(r: Run) -> None:
     src = r.data("survey")
     if not src:
@@ -569,6 +592,7 @@ def main() -> int:
             step(r)
         counts(r, "crm", "reason", "crm", "Win and loss reasons")
         counts(r, "support", "theme", "support", "Support themes")
+        customer_requests(r)
     except KeyError as e:
         # collect.py writes every column of a source, so a missing one means the file was edited by hand or is from an older run.
         raise SystemExit(f"compute: a data file in {r.data_dir} has no {e} column. Run collect.py again for that source, then run this again.") from None

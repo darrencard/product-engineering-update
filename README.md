@@ -12,6 +12,11 @@ See the worked example and the template at https://www.dacard.ai/update.
 - **A ledger.** Each figure has an ID, a source, a window and a confidence label: Verified, Derived, Estimated or Unknown.
 - **Checks that block a render.** A speed metric with no quality metric beside it, a productivity claim with no baseline, an adoption count in an outcome slot, a bet with no stop rule, a figure with no ledger row, and 8 more.
 - **Gaps that stay visible.** Missing data shows as a "data needed" block with an owner and a date.
+- **Shipped vs impact.** Slide 8 lists last period's commitments by the outcome each named before launch, and says which moved, without claiming the work caused it.
+- **Linear projects, initiatives and customer requests.** `from_linear.py` turns them into commitments and stated targets (for you to confirm), line of sight, and counted customer requests.
+- **Write back.** `summary.py` writes a Markdown summary with ledger IDs, to post to Linear after a yes. It refuses the board cut without a named sign-off.
+- **A weekly draft.** `references/weekly-rhythm.md` sets the update up as a scheduled job that drafts the Leadership and Staff cuts each week and never renders or posts the board cut.
+- **A landing brief kit for Linear.** `skills/landing-brief/` is a free project template (problem, definition of good, non-goals, cost budget, the line) and a script that drafts a landed, watch or stalled project update from it.
 
 ## Privacy
 
@@ -26,6 +31,8 @@ Copy the skill folder into your skills directory:
 ```bash
 cp -r skills/product-engineering-update ~/.claude/skills/
 ```
+
+The landing brief kit installs the same way: `cp -r skills/landing-brief ~/.claude/skills/`.
 
 Or install it as a plugin:
 
@@ -96,7 +103,8 @@ GitHub alone can fill the delivery slide, because pull requests carry both speed
 | Path | What it is |
 |---|---|
 | `skills/product-engineering-update/SKILL.md` | The workflow Claude follows |
-| `skills/product-engineering-update/scripts/` | `intake`, `collect`, `from_github`, `compute_metrics`, `draft`, `validate`, `review`, `render` |
+| `skills/product-engineering-update/scripts/` | `intake`, `collect`, `from_github`, `from_linear`, `from_posthog`, `from_vercel`, `compute_metrics`, `draft`, `validate`, `review`, `render`, `summary`, `run` |
+| `skills/landing-brief/` | The landing brief kit: the Linear project template, `landing_brief.py`, and its SKILL.md |
 | `skills/product-engineering-update/references/` | Writing rules, audience cuts, the metrics glossary, sources, reading, and one contract per slide |
 | `skills/product-engineering-update/assets/` | The page template, the deck schema, the blank deck and the slide contracts |
 | `examples/` | Harborline, the fictional worked example, as data and as a rendered deck |
@@ -118,7 +126,7 @@ The scenarios in `evals/scenarios/` describe how the skill should behave under p
 
 ## Status
 
-Version 0.3.0. The scripts pass 82 tests. Fresh model sessions ran version 0.1.0 on the bundled fixtures 6 times, across two model sizes, under pressure to overclaim, invent figures and pick the better-looking of two conflicting numbers; each held the line. Versions 0.2.0 and 0.3.0 have run on one real repository's GitHub and Vercel history. The Linear converter is tested on Linear's real response shape but not on a workspace with completed issues, and the PostHog converter only on fixtures of PostHog's documented responses. It has not yet been run on a real company's full data. See CHANGELOG.md.
+Version 0.4.0. The scripts pass 113 tests. Fresh model sessions ran version 0.1.0 on the bundled fixtures 6 times, across two model sizes, under pressure to overclaim, invent figures and pick the better-looking of two conflicting numbers; each held the line. Versions 0.2.0 and 0.3.0 have run on one real repository's GitHub and Vercel history. The Linear converter is tested on Linear's real response shape but not on a workspace with completed issues, and the PostHog converter only on fixtures of PostHog's documented responses. The Linear projects, project updates, initiatives and customer requests readers (0.4.0) are tested only on fixtures built from Linear's documented fields. It has not yet been run on a real company's full data. See CHANGELOG.md.
 
 Not built: an export to Slides or PowerPoint. The deck is one HTML file: present it in a browser or print it to PDF.
 

@@ -1,0 +1,9 @@
+request,customer,linked_to,link,created_at
+R-001,Northwind,Multi-stop reroutes,https://linear.app/kestrel/project/multi-stop-reroutes,2026-08-03
+R-002,Haulwell,Multi-stop reroutes,https://linear.app/kestrel/project/multi-stop-reroutes,2026-08-04
+R-003,Bluepeak,Multi-stop reroutes,https://linear.app/kestrel/project/multi-stop-reroutes,2026-08-05
+R-004,Northwind,Multi-stop reroutes,https://linear.app/kestrel/project/multi-stop-reroutes,2026-08-06
+R-005,Haulwell,KES-412 Bulk load import,https://linear.app/kestrel/issue/KES-412,2026-08-03
+R-006,Tidewater,KES-412 Bulk load import,https://linear.app/kestrel/issue/KES-412,2026-08-04
+R-007,Bluepeak,KES-388 Carrier rating export,,2026-08-03
+R-999,Tidewater,KES-388 Carrier rating export,,2026-05-02

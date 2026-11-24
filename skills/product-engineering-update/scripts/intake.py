@@ -7,8 +7,8 @@ Usage:
   python3 scripts/intake.py suggest run/intake.json     # suggested healthy ranges to put to the user
   python3 scripts/intake.py accept run/intake.json "Deploys per week" [--range "3+"]
                                                         # record a range the user said yes to, as suggested or edited
-  python3 scripts/intake.py import run/intake.json --decisions log.md --risks risks.csv --stopped stop.md
-                                                        # read the team's own decision log, risk register and stop list
+  python3 scripts/intake.py import run/intake.json --decisions log.md --risks risks.csv --stopped stop.md --commitments c.csv
+                                                        # read the team's own decision log, risk register, stop list and commitments
   python3 scripts/intake.py propose run/intake.json drafted.json
                                                         # hold answers drafted from documents, each with its source and quote
   python3 scripts/intake.py confirm run/intake.json --by "Name" [--field F ...] [--edit F=JSON]
@@ -31,6 +31,10 @@ import re
 import sys
 from pathlib import Path
 from typing import Any
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+
+from landing_brief import number  # noqa: E402  (a sibling script, found through the path above)
 
 Json = dict[str, Any]
 
@@ -57,6 +61,10 @@ EMPTY: Json = {
     "risks": [],  # [{"risk", "likelihood", "impact", "mitigation", "due"}]
     "stopped": [],  # [{"what", "why"}]
     "decisions": [],  # [{"ask", "options", "recommendation", "deadline"}]
+    # Last period's commitments, each with the outcome metric named before launch, for slide 8:
+    # [{"commitment", "shipped": "yes"|"no", "metric", "owner", "source"}]. metric is a north_star or input
+    # metric name, or a collected metric's label; null when none was named.
+    "commitments": [],
     "connected": [],  # source keys that have data: "tracker", "billing", ...
     # When two sources disagree on a figure, the user names the one that owns it: {"ARR": "billing"}. Never fill this in for them.
     "source_of_truth": {},
@@ -82,6 +90,7 @@ FIELD_SLIDES = [
     ("bets", "03"),
     ("product_lines", "04"),
     ("investment_plan", "05"),
+    ("commitments", "08"),
     ("delivery_ranges", "09"),
     ("north_star.metric", "11"),
     ("north_star.target", "11"),
@@ -139,6 +148,8 @@ def check(intake: Json) -> tuple[list[str], list[tuple[str, str]]]:
                 blocking.append(f'bet "{name}" has no {field}')
         if is_unknown(bet.get("cause")):
             blocking.append(f'bet "{name}" states no cause linking it to an objective')
+    commitments = intake.get("commitments") or []
+    blocking += bad_commitments(commitments) if isinstance(commitments, list) else ["commitments must be a list"]
     return blocking, unknown
 
 
@@ -219,7 +230,30 @@ IMPORTS = {
     "decisions": ("ask", "options", "recommendation", "deadline"),
     "risks": ("risk", "likelihood", "impact", "mitigation", "due"),
     "stopped": ("what", "why"),
+    "commitments": ("commitment", "shipped", "metric", "owner", "source"),
 }
+# Target metrics stated outside the interview, such as in a Linear project's landing brief. Imported into inputs.
+TARGET_COLUMNS = ("metric", "target", "better", "by", "owner", "source")
+
+# A commitment was shipped or it was not. Anything else is refused, never read as one or the other.
+SHIPPED = {"yes": "yes", "no": "no"}
+
+
+def bad_commitments(rows: list[Json]) -> list[str]:
+    """Why a list of commitments cannot be used, one line per problem. Empty when every row is sound."""
+    problems = []
+    for n, r in enumerate(rows, start=1):
+        if not isinstance(r, dict):
+            problems.append(f"commitment {n} is not an object")
+            continue
+        name = r.get("commitment")
+        if not isinstance(name, str) or not name.strip():
+            problems.append(f"commitment {n} has no commitment")
+        if str(r.get("shipped") or "").strip().lower() not in SHIPPED:
+            problems.append(f'commitment {n} ("{name or "?"}") has shipped {r.get("shipped")!r}; write yes or no')
+        if r.get("metric") is not None and not isinstance(r.get("metric"), str):
+            problems.append(f'commitment {n} ("{name or "?"}") names its metric as {r.get("metric")!r}; write the metric\'s name, or leave it empty')
+    return problems
 
 
 def markdown_tables(text: str) -> list[list[list[str]]]:
@@ -266,9 +300,57 @@ def import_documents(intake: Json, files: dict[str, Path], replace: bool) -> tup
         if intake.get(key) and not replace:
             raise SystemExit(f"intake: the intake already holds {len(intake[key])} {key}. Pass --replace to replace them with {path.name}.")
         read[key] = read_table(path, IMPORTS[key])
+        if key == "commitments":
+            problems = bad_commitments(read[key])
+            if problems:
+                raise SystemExit(f"intake: {path} was not imported, because:\n  " + "\n  ".join(problems))
+            for r in read[key]:
+                r["shipped"] = SHIPPED[r["shipped"].strip().lower()]
     for key, rows in read.items():
         intake[key] = rows
     return intake, read
+
+
+def import_targets(intake: Json, path: Path, replace: bool) -> tuple[Json, list[Json]]:
+    """Add each stated target metric to the inputs. The file is refused whole if any row has no metric, a target
+    that is not one number, no direction, or names one metric twice with two different targets. A metric the
+    intake already holds is only replaced when asked."""
+    rows = read_table(path, TARGET_COLUMNS)
+    problems, seen = [], {}
+    for n, r in enumerate(rows, start=2):
+        if number(r["target"] or "") is None:
+            problems.append(f"row {n} ({r['metric']}): target {r['target']!r} is not one number, such as 50% or 40h")
+        if (r["better"] or "").lower() not in ("higher", "lower"):
+            problems.append(f"row {n} ({r['metric']}): better is {r['better']!r}; write higher or lower")
+        if r["metric"] in seen and seen[r["metric"]] != r["target"]:
+            problems.append(f"{r['metric']} has two targets, {seen[r['metric']]} and {r['target']}. Ask which bar the update reports, and keep one row")
+        seen[r["metric"]] = r["target"]
+    held = {i.get("metric") for i in intake.get("inputs") or [] if isinstance(i, dict)} | {get(intake, "north_star.metric")}
+    clash = sorted({r["metric"] for r in rows} & held)
+    if clash and not replace:
+        problems.append(f"the intake already holds {', '.join(clash)}. Pass --replace to replace them")
+    if problems:
+        raise SystemExit(f"intake: {path} was not imported, because:\n  " + "\n  ".join(problems))
+    added = []
+    for r in {r["metric"]: r for r in rows}.values():
+        prefix, value, unit = number(r["target"])
+        added.append(
+            {
+                "metric": r["metric"],
+                "unit": unit,
+                "target": value,
+                "target_display": r["target"],
+                "higher_is_better": r["better"].lower() == "higher",
+                "owner": r["owner"],
+                "by": r["by"],
+                "source": r["source"],
+            }
+        )
+    names = {a["metric"] for a in added}
+    if get(intake, "north_star.metric") in names:
+        raise SystemExit(f"intake: {path} names the North Star, {get(intake, 'north_star.metric')}. Change the North Star in the interview, not by import.")
+    intake["inputs"] = [i for i in intake.get("inputs") or [] if not (isinstance(i, dict) and i.get("metric") in names)] + added
+    return intake, added
 
 
 def proposals_path(intake_path: Path) -> Path:
@@ -400,6 +482,8 @@ def main() -> int:
     ap.add_argument("--decisions", help="import: a decision log with columns ask, options, recommendation, deadline")
     ap.add_argument("--risks", help="import: a risk register with columns risk, likelihood, impact, mitigation, due")
     ap.add_argument("--stopped", help="import: a stop list with columns what, why")
+    ap.add_argument("--commitments", help="import: last period's commitments with columns commitment, shipped (yes or no), metric, owner, source")
+    ap.add_argument("--targets", help="import: target metrics with columns metric, target, better, by, owner, source; added to the inputs")
     ap.add_argument("--replace", action="store_true", help="import: replace a list the intake already holds")
     ap.add_argument("--by", help="confirm: the name of the person who said yes")
     ap.add_argument("--field", action="append", default=[], help="confirm: a field to apply; repeat it. None named means all pending")
@@ -448,10 +532,16 @@ def main() -> int:
             print(f"confirmed {p['field']}{' (edited)' if p['field'] in edits else ''}, by {args.by.strip()}, from {where}")
         return 0
     if args.command == "import":
-        files = {k: Path(v) for k, v in (("decisions", args.decisions), ("risks", args.risks), ("stopped", args.stopped)) if v}
-        if not files:
-            raise SystemExit("intake: import needs --decisions, --risks or --stopped.")
+        named = {"decisions": args.decisions, "risks": args.risks, "stopped": args.stopped, "commitments": args.commitments}
+        files = {k: Path(v) for k, v in named.items() if v}
+        if not files and not args.targets:
+            raise SystemExit("intake: import needs --decisions, --risks, --stopped, --commitments or --targets.")
         intake, read = import_documents(read_intake(path), files, args.replace)
+        if args.targets:
+            intake, added = import_targets(intake, Path(args.targets), args.replace)
+            for a in added:
+                way = "higher" if a["higher_is_better"] else "lower"
+                print(f"imported  target {a['metric']}: {a['target_display']}, {way} is better, by {a['by'] or 'no date'} ({a['source'] or 'no source'})")
         write_intake(path, intake)
         for key, rows in read.items():
             print(f"imported  {len(rows)} {key} from {files[key].name}:")

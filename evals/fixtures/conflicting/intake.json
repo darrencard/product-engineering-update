@@ -141,11 +141,63 @@
       "deadline": "4 Nov 2026"
     }
   ],
+  "commitments": [
+    {
+      "commitment": "Guided activation",
+      "shipped": "yes",
+      "metric": "Activation",
+      "owner": "Activation team",
+      "source": "Linear (Kestrel)"
+    },
+    {
+      "commitment": "Multi-stop reroutes",
+      "shipped": "yes",
+      "metric": "Loads cleared per week",
+      "owner": "Agent team",
+      "source": "Linear (Kestrel)"
+    },
+    {
+      "commitment": "Dispatcher inbox",
+      "shipped": "yes",
+      "metric": "Weekly active dispatchers",
+      "owner": "Core dispatch",
+      "source": "Linear (Kestrel)"
+    },
+    {
+      "commitment": "Cheaper agent retries",
+      "shipped": "yes",
+      "metric": "Cost per successful task",
+      "owner": "Agent team",
+      "source": "Linear (Kestrel)"
+    },
+    {
+      "commitment": "Release checklist",
+      "shipped": "yes",
+      "metric": "Change failure rate",
+      "owner": "Platform",
+      "source": "Linear (Kestrel)"
+    },
+    {
+      "commitment": "Self-serve carrier onboarding",
+      "shipped": "no",
+      "metric": "Activation",
+      "owner": "Activation team",
+      "source": "Linear (Kestrel)"
+    },
+    {
+      "commitment": "Audit log export",
+      "shipped": "yes",
+      "metric": null,
+      "owner": "Platform",
+      "source": "Linear (Kestrel)"
+    }
+  ],
   "connected": [
     "ai_tools",
     "analytics",
     "billing",
     "crm",
+    "customer_requests",
     "evals",
     "finance",
     "hr",
