@@ -90,18 +90,23 @@ def status_for(value: float, prior: float | None, target: float | None, higher_i
     return "watch" if improving else "stalled"
 
 
-def described(row: Json, definition: str | None) -> Json:
-    """A scorecard row, with the metric's plain-English definition when one is known. Rows without one stay as they were."""
+def described(row: Json, definition: str | None, coverage: Json | None = None) -> Json:
+    """A scorecard row, with the metric's plain-English definition when one is known, and what the figure covers
+    when that is less than the window. Rows without either stay as they were."""
     if definition:
         row["definition"] = definition
+    if coverage:
+        row["coverage"] = coverage["text"]
     return row
 
 
 def described_tile(metric: Json) -> Json:
     """A figure tile, with the metric's definition as its note when one is known."""
     tile: Json = {"value": metric["display"], "label": metric["label"]}
-    if metric.get("definition"):
-        tile["note"] = metric["definition"]
+    covers = f"{metric['coverage']['text']}." if metric.get("coverage") else None
+    note = " ".join(x for x in (metric.get("definition"), covers) if x)
+    if note:
+        tile["note"] = note
     return tile
 
 
@@ -195,12 +200,14 @@ class Draft:
         if not metric or metric.get("conflict") or metric["display"] is None:
             return None
         subject = PLAIN_SUBJECTS.get(key, metric["label"])
+        # A figure built from less than the window says so wherever it is cited, title included.
+        covers = f" ({metric['coverage']['text'][0].lower()}{metric['coverage']['text'][1:]})" if metric.get("coverage") else ""
         if metric["prior_display"] is None:
-            return f"{subject} is {metric['display']}."
+            return f"{subject} is {metric['display']}{covers}."
         if metric["value"] == metric["prior"]:
-            return f"{subject} held at {metric['display']}."
+            return f"{subject} held at {metric['display']}{covers}."
         verb = "rose" if metric["value"] > metric["prior"] else "fell"
-        return f"{subject} {verb} from {metric['prior_display']} to {metric['display']}."
+        return f"{subject} {verb} from {metric['prior_display']} to {metric['display']}{covers}."
 
     # ---- slides ----------------------------------------------------------
 
@@ -335,6 +342,7 @@ class Draft:
                             "status": range_status(metric["value"], metric["prior"], ranges[metric["label"]], metric.get("higher_is_better", True)),
                         },
                         metric.get("definition"),
+                        metric.get("coverage"),
                     )
                 )
                 refs.append(metric["ledger"])
@@ -412,6 +420,7 @@ class Draft:
                         "extra": ["None external", want.get("owner") or "Owner not stated"],
                     },
                     want.get("definition") or metric.get("definition"),
+                    metric.get("coverage"),
                 )
             )
         if not rows and not gaps:

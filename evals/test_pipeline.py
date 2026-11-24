@@ -625,6 +625,44 @@ class Vercel(unittest.TestCase):
         self.assertIn("after the prior period starts (2026-03-31)", done.stdout)
         self.assertIn("WARNING the error reports start on 2026-07-05", done.stdout)
 
+    def test_a_figure_from_part_of_the_window_says_so_on_the_figure_and_in_the_title(self) -> None:
+        self.assertEqual(self.convert().returncode, 0)
+        for step in ("compute_metrics.py", "draft.py"):
+            self.assertEqual(script(step, "--run", str(self.run)).returncode, 0)
+        metrics = json.loads((self.run / "metrics.json").read_text(encoding="utf-8"))
+        cover = metrics["metrics"]["troubled_deploy_rate"]["coverage"]
+        self.assertEqual(
+            cover,
+            {"from": "2026-07-09", "to": "2026-07-23", "counted": 3, "total": 4, "unit": "deploys", "text": "Covers 9 Jul to 23 Jul 2026, 3 of 4 deploys"},
+        )
+        row = next(r for r in metrics["ledger"] if r["id"] == metrics["metrics"]["troubled_deploy_rate"]["ledger"])
+        self.assertEqual(row["coverage"], cover)
+        self.assertIn("Covers 9 Jul to 23 Jul 2026, 3 of 4 deploys", row["claim"])
+        deck = json.loads((self.run / "deck.json").read_text(encoding="utf-8"))
+        delivery = slide(deck, "09")
+        board = next(b for b in delivery["blocks"] if b["type"] == "scorecard")
+        proxy = next(r for r in board["rows"] if r.get("metric") == "Deploys rolled back or followed by errors")
+        self.assertEqual(proxy["coverage"], cover["text"])
+        self.assertIn("(covers 9 Jul to 23 Jul 2026, 3 of 4 deploys)", delivery["title"])
+        self.assertEqual(validate.check(deck)["errors"], [])
+        html = render.render_deck(deck)
+        self.assertIn(
+            '66.7%<span class="t3" style="display:block;font-size:12px;line-height:1.4;margin-top:2px">Covers 9 Jul to 23 Jul 2026, 3 of 4 deploys</span>', html
+        )
+
+    def test_a_partial_figure_on_a_slide_that_hides_its_coverage_is_blocked(self) -> None:
+        self.assertEqual(self.convert().returncode, 0)
+        for step in ("compute_metrics.py", "draft.py"):
+            self.assertEqual(script(step, "--run", str(self.run)).returncode, 0)
+        deck = json.loads((self.run / "deck.json").read_text(encoding="utf-8"))
+        delivery = slide(deck, "09")
+        delivery["title"] = "Releases rose. The share of releases rolled back or followed by errors is 66.7%."
+        for b in delivery["blocks"]:
+            for r in b.get("rows", []):
+                if isinstance(r, dict):
+                    r.pop("coverage", None)
+        self.assertIn("coverage-unstated", rules(validate.check(deck)))
+
     def test_deployments_alone_are_refused(self) -> None:
         dep, _, _ = self.exports()
         done = script("from_vercel.py", "--deployments", str(dep), "--project", "kestrel-web", "--run", str(self.run))

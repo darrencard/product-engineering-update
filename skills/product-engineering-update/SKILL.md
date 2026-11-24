@@ -125,6 +125,7 @@ Run `python3 scripts/validate.py run/deck.json`. Repeat until it reports 0 error
 | `sample-not-illustrative` | A sample block not tagged illustrative |
 | `sample-beside-data` | A sample on a slide that shows real data |
 | `sample-cites-ledger` | A sample that cites a ledger row |
+| `coverage-unstated` | A figure built from less than the reporting window, on a slide that does not say what it covers |
 
 ### 6. Review
 

@@ -115,13 +115,20 @@ def scorecard_as_table(b: Json) -> Table:
         {"label": labels["target"], "align": "num"},
         {"label": labels["status"]},
     ] + [{"label": x} for x in labels.get("extra", [])]
-    rows = [r if "group" in r else [metric_cell(r), r["prior"], r["actual"], r["target"], f"[[status:{r['status']}]]"] + r.get("extra", []) for r in b["rows"]]
+    rows = [
+        r if "group" in r else [metric_cell(r), r["prior"], actual_cell(r), r["target"], f"[[status:{r['status']}]]"] + r.get("extra", []) for r in b["rows"]
+    ]
     return columns, rows
 
 
 def metric_cell(r: Json) -> Any:
     """The metric's name, with its definition beneath it when the row carries one."""
     return {"text": r["metric"], "sub": r["definition"]} if r.get("definition") else r["metric"]
+
+
+def actual_cell(r: Json) -> Any:
+    """The figure, with what it covers beneath it when that is less than the reporting window."""
+    return {"text": r["actual"], "sub": r["coverage"]} if r.get("coverage") else r["actual"]
 
 
 def cell_html(cell: Any) -> str:

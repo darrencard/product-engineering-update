@@ -771,6 +771,10 @@
                   "definition": {
                     "type": "string",
                     "description": "What the metric counts, in one plain-English sentence. Printed under the metric's name."
+                  },
+                  "coverage": {
+                    "type": "string",
+                    "description": "What the figure covers when that is less than the window, printed under the value."
                   }
                 }
               },
@@ -1071,6 +1075,9 @@
         "stale": {
           "description": "True when the figure is older than the reporting window. A stale figure is shown as stale, never as current.",
           "type": "boolean"
+        },
+        "coverage": {
+          "$ref": "#/$defs/coverage"
         }
       }
     },
@@ -1165,6 +1172,39 @@
           "items": {
             "$ref": "#/$defs/sampleContent"
           }
+        }
+      }
+    },
+    "coverage": {
+      "description": "What the figure was built from, when that is less than the reporting window. The slide must state its text.",
+      "type": "object",
+      "required": [
+        "from",
+        "to",
+        "counted",
+        "total",
+        "unit",
+        "text"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "from": {
+          "type": "string"
+        },
+        "to": {
+          "type": "string"
+        },
+        "counted": {
+          "type": "number"
+        },
+        "total": {
+          "type": "number"
+        },
+        "unit": {
+          "type": "string"
+        },
+        "text": {
+          "type": "string"
         }
       }
     }

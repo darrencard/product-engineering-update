@@ -85,5 +85,7 @@ Use and spend are inputs. The deck reports no productivity figure unless it has 
 
 ## Conflicts and staleness
 
+- A figure built from less than the window (for example the Vercel proxy, counted only over deploys the error reports cover) carries a coverage record: first and last day, and how many of how many. The ledger row keeps it, the figure prints it beneath its value, a title that cites the figure says it, and `validate.py` blocks a slide that cites the figure without it (`coverage-unstated`). A figure that covers its whole window carries none.
+
 - Two sources agree when their values are within 0.5%. Beyond that the figure is a conflict: it is recorded as Unknown with both values, and shown as a gap until the user says which source owns it.
 - A figure is stale when it was retrieved more than 92 days before the deck's as-of date. `validate.py` blocks it unless its ledger row is marked `stale: true` and the slide says so.

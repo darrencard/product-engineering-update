@@ -212,11 +212,15 @@ class Run:
         confidence: str = "Derived",
         higher_is_better: bool = True,
         definition: str | None = None,
+        coverage: Json | None = None,
     ) -> None:
         if value is None:
             return
         text = show(value, unit)
-        lid = self.row(f"{label} {text}", round(value, 4), unit, src, confidence)
+        claim = f"{label} {text}" + (f" ({coverage['text']})" if coverage else "")
+        lid = self.row(claim, round(value, 4), unit, src, confidence)
+        if coverage:
+            self.ledger[-1]["coverage"] = coverage
         self.metrics[key] = {
             "label": label,
             "value": round(value, 4),
@@ -228,7 +232,30 @@ class Run:
             "source": src["source"],
             "higher_is_better": higher_is_better,
             "definition": definition or DEFINITIONS.get(key),
+            **({"coverage": coverage} if coverage else {}),
         }
+
+
+def short_day(d: datetime.date, with_year: bool) -> str:
+    return f"{d.day} {d.strftime('%b')}" + (f" {d.year}" if with_year else "")
+
+
+def coverage_of(counted: list[Json], total: int, stamp_key: str, noun: str) -> Json | None:
+    """What a figure was built from, when that is less than everything in the window: dates, and how many of how many.
+    None when the figure covers every row in the window, so a full figure carries no caveat."""
+    if not counted or len(counted) >= total:
+        return None
+    days = sorted(day(x[stamp_key]) for x in counted)
+    first, last = days[0], days[-1]
+    span = f"{short_day(first, first.year != last.year)} to {short_day(last, True)}"
+    return {
+        "from": first.isoformat(),
+        "to": last.isoformat(),
+        "counted": len(counted),
+        "total": total,
+        "unit": noun,
+        "text": f"Covers {span}, {len(counted)} of {total} {noun}",
+    }
 
 
 def median(values: list[float]) -> float | None:
@@ -295,7 +322,7 @@ def source_control(r: Run) -> None:
         return
     weeks = max(((r.end - r.start).days + 1) / 7.0, 1.0)
 
-    def stats(prior: bool) -> dict[str, float | None]:
+    def stats(prior: bool) -> dict[str, Any]:
         deploys = [x for x in src["rows"] if x["kind"] == "deploy" and r.in_period(x["deployed_at"], prior)]
         prs = [x for x in src["rows"] if x["kind"] == "pull_request" and r.in_period(x["merged_at"], prior)]
         return {
@@ -307,6 +334,7 @@ def source_control(r: Run) -> None:
             # Only deploys whose outcome is known count: a deploy the hosting export says nothing about is not a clean one.
             "troubled": share_flagged([x for x in deploys if x.get("troubled") is not None], "troubled"),
             "troubled_known": sum(1 for x in deploys if x.get("troubled") is not None),
+            "troubled_coverage": coverage_of([x for x in deploys if x.get("troubled") is not None], len(deploys), "deployed_at", "deploys"),
         }
 
     now, before = stats(False), stats(True)
@@ -316,9 +344,10 @@ def source_control(r: Run) -> None:
     r.metric("review_time", "Pull request review time", now["review"], before["review"], "h", src, higher_is_better=False)
     r.metric("rework_rate", "Rework rate", now["rework"], before["rework"], "%", src, higher_is_better=False)
     # A proxy, named as one. It is never relabelled change failure rate.
-    r.metric("troubled_deploy_rate", "Deploys rolled back or followed by errors", now["troubled"], before["troubled"], "%", src, higher_is_better=False)
+    proxy_label = "Deploys rolled back or followed by errors"
+    r.metric("troubled_deploy_rate", proxy_label, now["troubled"], before["troubled"], "%", src, higher_is_better=False, coverage=now["troubled_coverage"])
     if "troubled_deploy_rate" in r.metrics:
-        r.ledger[-1]["claim"] += f" (proxy for change failure rate, over the {now['troubled_known']} deploys the hosting export covers)"
+        r.ledger[-1]["claim"] += " (proxy for change failure rate)"
 
 
 def incidents(r: Run) -> None:

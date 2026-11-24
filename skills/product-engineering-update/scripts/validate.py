@@ -60,6 +60,7 @@ RULES = {
     "sample-not-illustrative": "A sample block is not tagged illustrative.",
     "sample-beside-data": "A sample block sits on a slide that shows real data.",
     "sample-cites-ledger": "A sample block cites a ledger row, so it would pass for evidence.",
+    "coverage-unstated": "A figure built from less than the reporting window sits on a slide that does not say what it covers.",
 }
 
 SPEED = re.compile(r"\b(deploys?|deployment frequency|lead time|cycle time|throughput|velocity|merge frequency|pull requests? merged|time to merge)\b", re.I)
@@ -537,6 +538,15 @@ def _check_slide(s: Json, deck: Json, contract: Json | None, found: Findings) ->
 
     _check_sentences(text, sid, found)
     _check_samples(s, types, found)
+    covered = {r["id"]: r["coverage"] for r in deck["ledger"] if r.get("coverage")}
+    said = " ".join(text).lower()
+    for ref in sorted(set(ledger_refs(s))):
+        if ref in covered and covered[ref]["text"].lower() not in said:
+            found.err(
+                "coverage-unstated",
+                sid,
+                f'cites {ref}, which is built from less than the window, but does not say "{covered[ref]["text"]}". Put it on the figure.',
+            )
     jargon = sorted({m.group(0).lower() for m in JARGON.finditer(s.get("title", ""))})
     if jargon:
         found.warn("jargon-in-title", sid, f"the title uses {', '.join(jargon)}. Say what it means for a reader outside the team; keep the term in the table.")
