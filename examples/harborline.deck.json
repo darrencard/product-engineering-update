@@ -2551,8 +2551,8 @@
           "type": "steps",
           "items": [
             {
-              "title": "Interview",
-              "text": "Objectives, strategy, non-goals, plan, audience, period."
+              "title": "Read and confirm",
+              "text": "Answers drafted from the strategy, decision log and risk register you already keep, each with its source. You confirm them; an interview covers the rest."
             },
             {
               "title": "Collect",
@@ -2590,7 +2590,8 @@
                     "An AI productivity claim with no baseline and window",
                     "An adoption number in an outcome slot",
                     "A metric older than its reporting window",
-                    "A bet with no stop rule"
+                    "A bet with no stop rule",
+                    "A figure from part of the period that does not say so"
                   ]
                 }
               ]
