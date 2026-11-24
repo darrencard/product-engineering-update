@@ -65,6 +65,12 @@ EMPTY: Json = {
     # [{"commitment", "shipped": "yes"|"no", "metric", "owner", "source"}]. metric is a north_star or input
     # metric name, or a collected metric's label; null when none was named.
     "commitments": [],
+    # Why a status moved since the last update, one line per metric: {"Activation": "The new onboarding shipped in week 2"}.
+    # Needed for every status that moved when the deck is drafted with --previous. Written by the person, never inferred.
+    "status_reasons": {},
+    # The capitalisable estimate on slide 5. work_types are investment_plan types that finance treats as capitalisable,
+    # cost_lines are the finance lines the share applies to. Both come from finance; confirmed_by names who checked it.
+    "capitalisation": {"work_types": [], "cost_lines": [], "confirmed_by": None},
     "connected": [],  # source keys that have data: "tracker", "billing", ...
     # When two sources disagree on a figure, the user names the one that owns it: {"ARR": "billing"}. Never fill this in for them.
     "source_of_truth": {},

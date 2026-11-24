@@ -2,10 +2,13 @@
 """Draft the deck from the intake and the computed metrics.
 
 Usage:
-  python3 scripts/draft.py --run run
+  python3 scripts/draft.py --run run [--previous last/deck.json]
 
 Reads run/intake.json and run/metrics.json, starts from assets/blank.deck.json
-and writes run/deck.json.
+and writes run/deck.json. With --previous, slide 1 lists what changed since that
+deck: each status that moved, each target that moved, and each metric added or
+dropped. A status that moved needs a reason in the intake's status_reasons, or
+the validator blocks the deck.
 
 What it does, and what it leaves to you:
   - A slide with computed data gets its blocks, its ledger references and a
@@ -17,7 +20,8 @@ What it does, and what it leaves to you:
 
 Every figure placed on a slide comes from metrics.json with its ledger row.
 This script does no arithmetic of its own beyond comparing a value to its
-target to choose a status word.
+target to choose a status word, and projecting this period's change forward to
+the target, which prints as Projected and never as a result.
 
 Standard library only. Runs on Python 3.9 or later.
 """
@@ -26,7 +30,9 @@ from __future__ import annotations
 
 import argparse
 import copy
+import datetime
 import json
+import math
 import re
 import sys
 from pathlib import Path
@@ -45,6 +51,11 @@ DATA_LINK = re.compile(r"https://[^\s()\[\]<>\"']+")
 
 # Slides that only make sense when AI features are in production.
 AI_SLIDES = ("12", "13")
+# The slides whose scorecards carry a status word, compared with the previous deck.
+SCORED_SLIDES = ("09", "11")
+# Printed where a moved status has no reason. validate.py blocks a deck that still holds it.
+REASON_NEEDED = "[reason needed]"
+NO_CHANGE = "No status or target changed, and no metric was added or dropped."
 
 
 def load(path: Path) -> Json:
@@ -93,6 +104,29 @@ def status_for(value: float, prior: float | None, target: float | None, higher_i
         return "watch"
     improving = value > prior if higher_is_better else value < prior
     return "watch" if improving else "stalled"
+
+
+def pace(value: float, prior: float | None, target: float | None, higher_is_better: bool, by: str | None, period: Json) -> str:
+    """Where this period's change, repeated, takes a metric: Projected, in periods, and against the target date when
+    one was stated. A straight line from one period is a rough guide, so the column says Projected and never Met."""
+    if target is None:
+        return "No target"
+    if (value >= target) if higher_is_better else (value <= target):
+        return "Met"
+    if prior is None:
+        return "No prior period"
+    step = value - prior if higher_is_better else prior - value
+    if step <= 0:
+        return "Projected: not on pace"
+    n = math.ceil(abs(target - value) / step)
+    text = f"Projected: {n} more {'period' if n == 1 else 'periods'}"
+    try:
+        start, end, due = (datetime.date.fromisoformat(x) for x in (period["start"], period["end"], by or ""))
+    except (KeyError, TypeError, ValueError):
+        return text
+    # Whole periods left before the date. Rounded, because calendar quarters differ by a day or two.
+    left = round((due - end).days / ((end - start).days + 1))
+    return f"{text}, {'before' if n <= left else 'after'} {due.isoformat()}"
 
 
 def described(row: Json, definition: str | None, coverage: Json | None = None) -> Json:
@@ -159,8 +193,9 @@ def plain_work_type(label: str) -> str:
 
 
 class Draft:
-    def __init__(self, run: Path) -> None:
+    def __init__(self, run: Path, previous: Path | None = None) -> None:
         self.intake = load(run / "intake.json")
+        self.previous: Json | None = load(previous) if previous else None
         self.m = load(run / "metrics.json")
         self.metrics: Json = self.m["metrics"]
         self.extra: Json = self.m["extra"]
@@ -315,6 +350,34 @@ class Draft:
             else "The team's time went where the plan said it would, within 3 points on every type of work."
         )
         blocks: list[Json] = [{"type": "cards", "columns": "2:1" if len(items) == 2 else 1, "items": items}]
+        capex = self.extra.get("capex")
+        if capex:
+            confirmed = f"Confirmed by {capex['confirmed_by']}." if capex.get("confirmed_by") else "Not yet confirmed by finance."
+            blocks.append(
+                {
+                    "type": "cards",
+                    "columns": 1,
+                    "items": [
+                        {
+                            "title": "Capitalisable cost, an estimate for finance to confirm",
+                            "body": [
+                                {
+                                    "type": "table",
+                                    "columns": [{"label": "Estimate"}, {"label": "This period", "align": "num"}],
+                                    "rows": [
+                                        ["Capitalisable, estimated", capex["capitalisable"]],
+                                        ["Expensed, estimated", capex["expensed"]],
+                                        [f"Cost the estimate covers ({', '.join(capex['cost_lines'])})", capex["cost"]],
+                                    ],
+                                },
+                                f"Basis: {capex['share']} of the team's time went to {', '.join(capex['work_types'])}, applied to that cost. "
+                                f"What may be capitalised is the company's accounting policy. {confirmed}",
+                            ],
+                        }
+                    ],
+                }
+            )
+            refs.append(capex["ledger"])
         if "arr" not in self.metrics or not finance:
             blocks.append({"type": "cards", "columns": 1, "items": [self.gap("Cash, net burn and runway in months. A board cut needs all three.")]})
         self.fill("05", title, blocks, refs, self.systems("tracker", "finance"))
@@ -508,7 +571,18 @@ class Draft:
                         "actual": metric["display"],
                         "target": want.get("target_display") or (f"{target:g}{unit}" if isinstance(target, (int, float)) else (target or "Not set")),
                         "status": status_for(metric["value"], metric["prior"], target if isinstance(target, (int, float)) else None, better),
-                        "extra": ["None external", want.get("owner") or "Owner not stated"],
+                        "extra": [
+                            pace(
+                                metric["value"],
+                                metric["prior"],
+                                target if isinstance(target, (int, float)) else None,
+                                better,
+                                want.get("by"),
+                                self.intake["period"],
+                            ),
+                            "None external",
+                            want.get("owner") or "Owner not stated",
+                        ],
                     },
                     want.get("definition") or metric.get("definition"),
                     metric.get("coverage"),
@@ -528,7 +602,7 @@ class Draft:
                         "actual": "This period",
                         "target": "Target",
                         "status": "Status",
-                        "extra": ["Benchmark", "Owner"],
+                        "extra": ["At this pace", "Benchmark", "Owner"],
                     },
                     "rows": rows,
                 }
@@ -622,23 +696,38 @@ class Draft:
 
     def ai_in_build(self) -> None:
         use, cost = self.metrics.get("ai_weekly_use"), self.metrics.get("ai_tool_cost")
-        if not use or not cost:
+        agent = self.metrics.get("agent_authored_share")
+        if not (use and cost) and not agent:
             return
+        rows: list[list[str]] = []
+        refs: list[str] = []
+        if use and cost:
+            rows += [["AI tool seats used weekly", use["display"]], ["AI tool spend in the period", cost["display"]]]
+            refs += [use["ledger"], cost["ledger"]]
+        if agent:
+            covers = f" ({lower_first(agent['coverage']['text'])})" if agent.get("coverage") else ""
+            rows.append([f"Accepted changes written by an agent{covers}", agent["display"]])
+            refs.append(agent["ledger"])
         table: Json = {
             "type": "table",
             "columns": [{"label": "Measure"}, {"label": "This period", "align": "num"}],
-            "rows": [["AI tool seats used weekly", use["display"]], ["AI tool spend in the period", cost["display"]]],
+            "rows": rows,
         }
         note = {
             "title": "What we do not claim",
             "body": ["Use and spend are inputs. This slide reports no productivity figure, because none has a baseline and a window yet."],
         }
+        said = []
+        if use and cost:
+            said.append(f"{use['display']} of AI tool licences are used each week, at {cost['display']} this period.")
+        if agent:
+            said.append(f"Agents wrote {agent['display']} of accepted changes.")
         self.fill(
             "13",
-            f"{use['display']} of AI tool licences are used each week, at {cost['display']} this period. We make no claim that the team got faster.",
+            " ".join(said) + " We make no claim that the team got faster.",
             [table, {"type": "cards", "columns": 1, "items": [note]}],
-            [use["ledger"], cost["ledger"]],
-            self.systems("ai_tools"),
+            refs,
+            self.systems("ai_tools", "source_control"),
         )
 
     def stopped(self) -> None:
@@ -691,13 +780,50 @@ class Draft:
         if notes:
             items.append({"title": "Not reported", "body": notes})
         title = self.slides["11"]["title"] if "11" in self.filled else points[0][0]
+        blocks: list[Json] = [{"type": "cards", "columns": 3 if len(items) == 3 else 2, "items": items}]
+        since = self.since_last()
+        if since is not None:
+            blocks.append({"type": "cards", "columns": 1, "items": [{"title": "Since the last update", "body": [{"list": since}] if since else [NO_CHANGE]}]})
         self.fill(
             "01",
             title,
-            [{"type": "cards", "columns": 3 if len(items) == 3 else 2, "items": items}],
+            blocks,
             [ref for _, ref in points[:4]],
             f"Data as of {self.intake['as_of']}. Status words: landed, watch, stalled.",
         )
+
+    def scorecard_rows(self, slides: list[Json]) -> dict[str, Json]:
+        """Each metric row on the delivery and outcome scorecards, by metric name."""
+        rows: dict[str, Json] = {}
+        for s in slides:
+            if s.get("id") not in SCORED_SLIDES:
+                continue
+            for b in s.get("blocks", []):
+                if b.get("type") == "scorecard":
+                    rows.update({r["metric"]: r for r in b["rows"] if "metric" in r})
+        return rows
+
+    def since_last(self) -> list[str] | None:
+        """What moved since the previous deck: statuses, targets, and metrics added or dropped. None without a
+        previous deck. A status that moved carries the reason from the intake, or a marker the validator blocks."""
+        if self.previous is None:
+            return None
+        before = self.scorecard_rows(self.previous.get("slides", []))
+        now = self.scorecard_rows(self.deck["slides"])
+        reasons: Json = self.intake.get("status_reasons") or {}
+        lines: list[str] = []
+        for name, row in now.items():
+            old = before.get(name)
+            if old is None:
+                lines.append(f"{name}: newly reported, {row['status']}.")
+                continue
+            if old["status"] != row["status"]:
+                reason = (reasons.get(name) or "").strip() or REASON_NEEDED
+                lines.append(f"{name}: {old['status']} to {row['status']}. Reason: {reason}")
+            if old["target"] != row["target"]:
+                lines.append(f"{name}: the target moved from {old['target']} to {row['target']}.")
+        lines += [f"{name}: no longer reported (was {old['status']})." for name, old in before.items() if name not in now]
+        return lines
 
     def bets(self) -> None:
         bets = self.intake.get("bets") or []
@@ -855,12 +981,16 @@ class Draft:
 def main() -> int:
     ap = argparse.ArgumentParser(description="Draft the deck from the intake and the computed metrics.")
     ap.add_argument("--run", default="run")
+    ap.add_argument("--previous", help="the last update's deck.json, to list what changed since it")
     args = ap.parse_args()
     run = Path(args.run)
+    previous = Path(args.previous) if args.previous else None
+    if previous and not previous.exists():
+        raise SystemExit(f"draft: {previous} is missing. Pass the deck.json from the last update, or leave --previous out.")
     for name in ("intake.json", "metrics.json"):
         if not (run / name).exists():
             raise SystemExit(f"draft: {run / name} is missing. Run intake.py, collect.py and compute_metrics.py first.")
-    draft = Draft(run)
+    draft = Draft(run, previous)
     deck = draft.build()
     out = run / "deck.json"
     out.write_text(json.dumps(deck, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")

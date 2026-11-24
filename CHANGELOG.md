@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.7.0 (2026-11-24)
+
+Five additions, picked from how Linear, Atlassian, Swarmia, Jellyfish and LinearB report status, each computed locally from data the skill already reads.
+
+- **What changed since the last update.** `draft.py --previous <last deck.json>` (and `run.py --previous`) adds a "Since the last update" card to slide 1: each status that moved on the delivery and outcome scorecards, each target that moved, and each metric added or dropped. Nothing moved says so in one line.
+- **A reason for every moved status.** A new intake field, `status_reasons`, holds one line per metric from the person. A moved status without one prints `[reason needed]`, and the new validator rule `status-change-unexplained` blocks the deck. The weekly rhythm asks the owner and never writes the reason.
+- **A capitalisable estimate on slide 5.** A new intake field, `capitalisation` (`work_types`, `cost_lines`, `confirmed_by`), from finance. The slide shows capitalisable and expensed amounts, the basis, and who confirmed it, always labelled an estimate for finance to confirm; `capex-not-estimate` blocks one that is not. Nothing is shown until finance names the work types.
+- **The pace to each target on slide 11.** An "At this pace" column: periods to the target if this period's change repeats, and before or after the target's date when it has one. It prints as Projected, apart from the actual and the status.
+- **Changes written by an agent on slide 13.** A new optional `source_control` column, `agent_authored`. `from_github.py --agent-labels` and `--agent-authors` set it from labels or accounts the team names; without them it stays Unknown. The share counts only marked changes and states its coverage. Slide 13 still makes no speed claim.
+- 163 tests, up from 145.
+
 ## 0.6.0 (2026-11-24)
 
 Converters for the systems teams already run. Each reads the system's own export (API JSON as the connector or REST API returns it), writes an existing source, maps only fields that exist, and leaves out and counts what it cannot place. None has run on a live account yet; each is tested on fixtures shaped like the vendor's documented response, and most rebuild the Kestrel test company's data exactly.

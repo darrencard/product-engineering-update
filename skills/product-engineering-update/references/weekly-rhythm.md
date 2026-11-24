@@ -8,7 +8,7 @@ Each week, the job:
 
 1. Pulls fresh exports with the connectors the session has (Linear, GitHub, PostHog and so on) and saves them as they stand into a dated run folder, for example `runs/2026-11-23/`.
 2. Copies the last confirmed `intake.json` into it. The job never answers an intake question, never confirms a proposal and never accepts a suggested range: those need a person.
-3. Runs the converters, then `compute_metrics.py`, `draft.py`, `validate.py` and `review.py --previous <last week's deck.json>`.
+3. Runs the converters, then `compute_metrics.py`, `draft.py --previous <last week's deck.json>`, `validate.py` and `review.py --previous <last week's deck.json>`. A status that moved since last week needs a reason from the owner; the job reports the validator error and asks, and never writes the reason.
 4. Renders the Leadership and Staff cuts only, and writes `summary.py` output for them.
 5. Tells the owner what changed, which slides gained or lost data, and any validator errors. It stops there.
 

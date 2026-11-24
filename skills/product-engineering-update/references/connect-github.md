@@ -11,7 +11,7 @@ Use whichever is available. Check before you choose.
 **The `gh` command line** (Claude Code, or any shell signed in to GitHub). The output goes straight to a file:
 
 ```bash
-gh pr list --repo OWNER/NAME --state merged --limit 1000 --json number,createdAt,mergedAt,reviews > run/github-prs.json
+gh pr list --repo OWNER/NAME --state merged --limit 1000 --json number,createdAt,mergedAt,reviews,labels,author > run/github-prs.json
 ```
 
 ```bash
@@ -31,6 +31,8 @@ python3 scripts/from_github.py --prs run/github-prs.json --deployments run/githu
 ```
 
 Leave out `--deployments` if there are none. If deploys go to an environment with another name, pass `--environment "<name>"`.
+
+To report the share of changes an agent wrote (slide 13), ask the user what marks them: a label, such as `ai-generated`, or the account an agent opens pull requests from, such as `claude[bot]`. Pass `--agent-labels "<label>,<label>"` and `--agent-authors "<login>,<login>"`. Without either, the share stays Unknown; never guess it from commit messages or authorship.
 
 It prints how many pull requests and deploys it found and how many pull requests had a review. Then run `compute_metrics.py` as usual.
 
