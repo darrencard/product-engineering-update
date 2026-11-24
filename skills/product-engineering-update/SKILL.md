@@ -178,6 +178,8 @@ To run the draft every week, follow [references/weekly-rhythm.md](references/wee
 - [references/connect-linear.md](references/connect-linear.md): the investment slides, shipped vs impact, line of sight and customer requests from Linear.
 - [references/weekly-rhythm.md](references/weekly-rhythm.md): drafting the update every week on a schedule.
 - [references/connect-posthog.md](references/connect-posthog.md): the outcome scorecard from PostHog.
+- [references/connect-jira.md](references/connect-jira.md): the investment slides, and commitments from epics or versions, from Jira.
+- [references/connect-github-projects.md](references/connect-github-projects.md): the investment slides from a GitHub project board.
 - [references/frameworks.md](references/frameworks.md): the reading behind each slide.
 - Slide contracts: [01](references/slides/01.md), [02](references/slides/02.md), [03](references/slides/03.md), [04](references/slides/04.md), [05](references/slides/05.md), [06](references/slides/06.md), [07](references/slides/07.md), [08](references/slides/08.md), [09](references/slides/09.md), [09b](references/slides/09b.md), [10](references/slides/10.md), [11](references/slides/11.md), [12](references/slides/12.md), [13](references/slides/13.md), [14](references/slides/14.md), [15](references/slides/15.md), [16](references/slides/16.md), [17](references/slides/17.md), [18](references/slides/18.md).
 

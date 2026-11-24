@@ -1212,6 +1212,168 @@ class Action(unittest.TestCase):
         self.assertRegex(example, r"schedule:\s*\n\s*- cron:")
 
 
+class TrackerReaders(unittest.TestCase):
+    """Jira and GitHub Projects exports, in their documented shapes, become the same tracker rows as the CSV."""
+
+    def setUp(self) -> None:
+        self.work = Path(tempfile.mkdtemp(prefix="peu-tr-"))
+        self.run = self.work / "run"
+        with (FIXTURES / "complete" / "csv" / "tracker.csv").open(encoding="utf-8") as f:
+            self.rows = list(csv.DictReader(f))
+
+    def tearDown(self) -> None:
+        shutil.rmtree(self.work, ignore_errors=True)
+
+    def csv_rows(self) -> list[Json]:
+        done = script("collect.py", "tracker", "--csv", str(FIXTURES / "complete" / "csv" / "tracker.csv"), "--system", "CSV", "--run", str(self.work / "csv"))
+        self.assertEqual(done.returncode, 0, done.stderr)
+        return json.loads((self.work / "csv" / "data" / "tracker.json").read_text(encoding="utf-8"))["rows"]
+
+    def written(self) -> list[Json]:
+        return json.loads((self.run / "data" / "tracker.json").read_text(encoding="utf-8"))["rows"]
+
+    def test_jira_search_pages_become_the_same_rows(self) -> None:
+        issues = [
+            {
+                "key": r["id"],
+                "fields": {
+                    "summary": r["title"],
+                    "issuetype": {"name": "Story"},
+                    "status": {"name": r["status"], "statusCategory": {"key": "done"}},
+                    "resolutiondate": f"{r['completed_at']}T10:00:00.000+0000",
+                    "customfield_10016": float(r["estimate"]),
+                    "labels": [f"type:{r['work_type']}"] + ([f"objective:{r['objective']}"] if r["objective"] else []),
+                    "components": [{"name": r["product_line"]}] if r["product_line"] else [],
+                    "assignee": {"displayName": r["owner"]} if r["owner"] else None,
+                },
+            }
+            for r in self.rows
+        ]
+        issues.append({"key": "X-1", "fields": {"summary": "open", "status": {"name": "To Do", "statusCategory": {"key": "new"}}}})
+        issues.append(
+            {
+                "key": "X-2",
+                "fields": {
+                    "summary": "no points",
+                    "status": {"name": "Done", "statusCategory": {"key": "done"}},
+                    "resolutiondate": "2026-08-01T10:00:00.000+0000",
+                },
+            }
+        )
+        half = len(issues) // 2
+        pages = []
+        for i, chunk in enumerate((issues[:half], issues[half:])):
+            path = self.work / f"jira-{i}.json"
+            path.write_text(json.dumps({"startAt": i * half, "total": len(issues), "issues": chunk}), encoding="utf-8")
+            pages.append(str(path))
+        args = ["--search", *pages, "--estimate-field", "customfield_10016", "--work-type-from", "label", "--work-type-prefix", "type:"]
+        done = script("from_jira.py", *args, "--product-line-from", "component", "--objective-prefix", "objective:", "--run", str(self.run))
+        self.assertEqual(done.returncode, 0, done.stderr)
+        self.assertIn("1 done issue(s) have no estimate", done.stdout)
+        self.assertEqual(self.written(), self.csv_rows())
+
+    def test_jira_csv_export_with_repeated_columns_and_epic_commitments(self) -> None:
+        path = self.work / "jira.csv"
+        path.write_text(
+            "Issue key,Summary,Issue Type,Status,Resolved,Story Points,Labels,Labels,Component/s,Assignee,Due date\n"
+            "A-1,Fix login,Bug,Done,14/Oct/26 9:30 AM,3,team-a,objective:Grow,Web,Ana,\n"
+            "A-2,Billing epic,Epic,Done,20/Oct/26 2:00 PM,8,,,Web,Ben,31/Oct/26\n"
+            "A-3,Search epic,Epic,In Progress,,5,,,Web,Cy,15/Nov/26\n",
+            encoding="utf-8",
+        )
+        args = ["--csv", str(path), "--estimate-field", "Story Points", "--work-type-from", "issuetype", "--work-type", "Bug=Keep the lights on"]
+        done = script(
+            "from_jira.py",
+            *args,
+            "--objective-prefix",
+            "objective:",
+            "--commitments-from",
+            "epics",
+            "--period-start",
+            "2026-10-01",
+            "--period-end",
+            "2026-11-23",
+            "--run",
+            str(self.run),
+        )
+        self.assertEqual(done.returncode, 0, done.stderr)
+        rows = {r["id"]: r for r in self.written()}
+        self.assertEqual(rows["A-1"]["work_type"], "Keep the lights on")
+        self.assertEqual(rows["A-1"]["objective"], "Grow")
+        self.assertEqual(rows["A-1"]["completed_at"], "2026-10-14T00:00:00")
+        with (self.run / "jira" / "commitments.csv").open(encoding="utf-8") as f:
+            found = {r["commitment"]: r for r in csv.DictReader(f)}
+        self.assertEqual(found["Billing epic"]["shipped"], "yes")
+        self.assertEqual(found["Search epic"]["shipped"], "no")
+        self.assertEqual(found["Search epic"]["metric"], "", "Jira holds no target metric; the person fills it")
+
+    def test_jira_refuses_a_csv_without_the_estimate_column(self) -> None:
+        path = self.work / "bad.csv"
+        path.write_text("Issue key,Status,Resolved\nA-1,Done,2026-10-01\n", encoding="utf-8")
+        done = script("from_jira.py", "--csv", str(path), "--estimate-field", "Story Points", "--work-type-from", "issuetype", "--run", str(self.run))
+        self.assertNotEqual(done.returncode, 0)
+        self.assertIn("'Story Points'", done.stderr)
+
+    def test_github_project_items_become_the_same_rows(self) -> None:
+        items, closed = [], []
+        for r in self.rows:
+            url = f"https://github.com/acme/app/issues/{r['id']}"
+            item = {
+                "id": r["id"],
+                "title": r["title"],
+                "status": "Done",
+                "labels": [],
+                "content": {"type": "Issue", "url": url, "title": r["title"]},
+                "estimate": float(r["estimate"]),
+                "type": r["work_type"],
+            }
+            if r["product_line"]:
+                item["productline"] = r["product_line"]
+            if r["objective"]:
+                item["objective"] = r["objective"]
+            if r["owner"]:
+                item["assignees"] = [r["owner"]]
+            items.append(item)
+            closed.append({"url": url, "closedAt": f"{r['completed_at']}T00:00:00Z"})
+        items.append({"id": "open", "title": "open", "status": "In Progress", "content": {"url": "u"}})
+        (self.work / "items.json").write_text(json.dumps({"items": items, "totalCount": len(items)}), encoding="utf-8")
+        (self.work / "closed.json").write_text(json.dumps(closed), encoding="utf-8")
+        args = [
+            "--items",
+            str(self.work / "items.json"),
+            "--closed",
+            str(self.work / "closed.json"),
+            "--estimate-field",
+            "Estimate",
+            "--work-type-field",
+            "Type",
+        ]
+        done = script("from_github_projects.py", *args, "--product-line-field", "Product Line", "--objective-field", "Objective", "--run", str(self.run))
+        self.assertEqual(done.returncode, 0, done.stderr)
+        expected = [{**r, "id": f"https://github.com/acme/app/issues/{r['id']}"} for r in self.csv_rows()]
+        self.assertEqual(self.written(), expected)
+
+    def test_github_projects_needs_a_completion_date_and_a_work_type_source(self) -> None:
+        (self.work / "items.json").write_text(
+            json.dumps({"items": [{"id": "1", "title": "t", "status": "Done", "estimate": 2, "content": {"url": "u"}}]}), encoding="utf-8"
+        )
+        nowhere = script("from_github_projects.py", "--items", str(self.work / "items.json"), "--estimate-field", "estimate", "--run", str(self.run))
+        self.assertIn("--work-type-field or --work-type-prefix", nowhere.stderr)
+        undated = script(
+            "from_github_projects.py",
+            "--items",
+            str(self.work / "items.json"),
+            "--estimate-field",
+            "estimate",
+            "--work-type-prefix",
+            "type:",
+            "--run",
+            str(self.run),
+        )
+        self.assertNotEqual(undated.returncode, 0)
+        self.assertIn("1 done item(s) have no completion date", undated.stdout)
+
+
 class Safety(unittest.TestCase):
     def example(self) -> Json:
         return json.loads((ROOT / "examples" / "harborline.deck.json").read_text(encoding="utf-8"))
