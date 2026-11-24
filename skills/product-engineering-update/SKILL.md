@@ -65,6 +65,8 @@ Ask in small batches of 3 or 4 questions, in this order:
 
 For healthy ranges, run `python3 scripts/intake.py suggest run/intake.json`. It lists a suggested range for each delivery metric that has a published benchmark, with its source and date, and says where none applies. Put each one to the user and ask them to accept or edit it. Record each yes with `python3 scripts/intake.py accept run/intake.json "<metric>"` (add `--range "<their range>"` if they edited it). Never accept one for them. The intake keeps what was suggested, what was accepted and the source, and the delivery slide names that source.
 
+If the team already keeps a decision log, risk register or stop list, import it instead of retyping: `python3 scripts/intake.py import run/intake.json --decisions <file> --risks <file> --stopped <file>`. Each file is CSV or a Markdown table with named columns (decisions: ask, options, recommendation, deadline; risks: risk, likelihood, impact, mitigation, due; stopped: what, why). A file without those columns is refused; nothing is read from free text. Show the user the imported rows it lists and ask them to confirm.
+
 Anything the user does not supply stays `null`. Do not infer it. Run `python3 scripts/intake.py check run/intake.json`; it lists what is still Unknown and which slide will show a gap. Blocking items must be answered before you go on.
 
 ### 2. Collect

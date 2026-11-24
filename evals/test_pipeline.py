@@ -962,6 +962,63 @@ class Converters(unittest.TestCase):
         self.assertIn("does not choose them", refused.stderr)
 
 
+class Imports(unittest.TestCase):
+    """intake.py import reads the team's own decision log, risk register and stop list, by named columns only."""
+
+    def setUp(self) -> None:
+        self.work = Path(tempfile.mkdtemp(prefix="peu-imp-"))
+        self.intake = self.work / "intake.json"
+        self.assertEqual(script("intake.py", "init", str(self.intake)).returncode, 0)
+
+    def tearDown(self) -> None:
+        shutil.rmtree(self.work, ignore_errors=True)
+
+    def write(self, name: str, text: str) -> str:
+        path = self.work / name
+        path.write_text(text, encoding="utf-8")
+        return str(path)
+
+    def test_markdown_and_csv_tables_import_and_are_listed_for_confirmation(self) -> None:
+        decisions = self.write(
+            "decisions.md",
+            "# Decision log\n\nSome notes.\n\n| Ask | Options | Recommendation | Deadline | Notes |\n|---|---|---|---|---|\n"
+            "| Approve a pilot | Pilot, or wait | Pilot with 10 customers | 2026-12-01 | x |\n| Hire a designer | Now \\| later | |  | |\n",
+        )
+        risks = self.write("risks.csv", "Risk,Likelihood,Impact,Mitigation,Due\nOne model provider,Medium,High,Add a second,2026-12-31\n")
+        stopped = self.write("stop.md", "| What | Why |\n|---|---|\n| Carrier marketplace | It did not serve the strategy |\n")
+        done = script("intake.py", "import", str(self.intake), "--decisions", decisions, "--risks", risks, "--stopped", stopped)
+        self.assertEqual(done.returncode, 0, done.stderr)
+        intake = json.loads(self.intake.read_text(encoding="utf-8"))
+        self.assertEqual(intake["decisions"][1], {"ask": "Hire a designer", "options": "Now | later", "recommendation": None, "deadline": None})
+        self.assertEqual(intake["risks"][0]["mitigation"], "Add a second")
+        self.assertEqual(intake["stopped"], [{"what": "Carrier marketplace", "why": "It did not serve the strategy"}])
+        self.assertIn("imported  2 decisions from decisions.md:", done.stdout)
+        self.assertIn("recommendation: not stated", done.stdout)
+        self.assertIn("confirm each imported row with the user", done.stdout)
+
+    def test_a_document_without_the_named_columns_is_refused_and_nothing_is_written(self) -> None:
+        before = self.intake.read_text(encoding="utf-8")
+        risks = self.write("risks.md", "| Risk | Owner |\n|---|---|\n| Provider | Platform |\n")
+        done = script("intake.py", "import", str(self.intake), "--risks", risks)
+        self.assertNotEqual(done.returncode, 0)
+        self.assertIn("has no table with the columns risk, likelihood, impact, mitigation, due", done.stderr)
+        self.assertEqual(self.intake.read_text(encoding="utf-8"), before)
+
+    def test_a_row_with_no_item_is_refused(self) -> None:
+        stopped = self.write("stop.csv", "what,why\n,No reason\n")
+        done = script("intake.py", "import", str(self.intake), "--stopped", stopped)
+        self.assertNotEqual(done.returncode, 0)
+        self.assertIn("rows with no what", done.stderr)
+
+    def test_answers_already_in_the_intake_are_only_replaced_when_asked(self) -> None:
+        stopped = self.write("stop.csv", "what,why\nA,B\n")
+        self.assertEqual(script("intake.py", "import", str(self.intake), "--stopped", stopped).returncode, 0)
+        again = script("intake.py", "import", str(self.intake), "--stopped", stopped)
+        self.assertNotEqual(again.returncode, 0)
+        self.assertIn("--replace", again.stderr)
+        self.assertEqual(script("intake.py", "import", str(self.intake), "--stopped", stopped, "--replace").returncode, 0)
+
+
 class Safety(unittest.TestCase):
     def example(self) -> Json:
         return json.loads((ROOT / "examples" / "harborline.deck.json").read_text(encoding="utf-8"))

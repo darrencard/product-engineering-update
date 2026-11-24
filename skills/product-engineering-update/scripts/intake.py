@@ -7,6 +7,8 @@ Usage:
   python3 scripts/intake.py suggest run/intake.json     # suggested healthy ranges to put to the user
   python3 scripts/intake.py accept run/intake.json "Deploys per week" [--range "3+"]
                                                         # record a range the user said yes to, as suggested or edited
+  python3 scripts/intake.py import run/intake.json --decisions log.md --risks risks.csv --stopped stop.md
+                                                        # read the team's own decision log, risk register and stop list
 
 Anything the person does not supply stays null. Null means Unknown: the deck
 shows a data_needed block for it. Never fill a null with a guess.
@@ -17,8 +19,11 @@ Standard library only. Runs on Python 3.9 or later.
 from __future__ import annotations
 
 import argparse
+import csv
 import datetime
+import io
 import json
+import re
 import sys
 from pathlib import Path
 from typing import Any
@@ -199,17 +204,79 @@ def init(path: Path) -> int:
     return 0
 
 
+# What each kept document must hold, by column name. A document without these columns is refused,
+# never read by guessing: the first column names the item and must be filled in every row.
+IMPORTS = {
+    "decisions": ("ask", "options", "recommendation", "deadline"),
+    "risks": ("risk", "likelihood", "impact", "mitigation", "due"),
+    "stopped": ("what", "why"),
+}
+
+
+def markdown_tables(text: str) -> list[list[list[str]]]:
+    """Every pipe table in a Markdown file, as rows of cells, without the separator row."""
+    tables, current = [], []
+    for line in text.splitlines() + [""]:
+        stripped = line.strip()
+        if stripped.startswith("|"):
+            cells = [c.strip().replace("\\|", "|") for c in re.split(r"(?<!\\)\|", stripped.strip("|"))]
+            if not all(re.fullmatch(r":?-{3,}:?", c) for c in cells):
+                current.append(cells)
+        elif current:
+            tables.append(current)
+            current = []
+    return tables
+
+
+def read_table(path: Path, columns: tuple[str, ...]) -> list[Json]:
+    """The rows of the first table in a CSV or Markdown file that has every named column."""
+    try:
+        text = path.read_text(encoding="utf-8-sig")
+    except (OSError, UnicodeDecodeError) as e:
+        raise SystemExit(f"intake: cannot read {path} ({e}). Save it as UTF-8 CSV or Markdown.") from None
+    tables = markdown_tables(text) if path.suffix.lower() in (".md", ".markdown") else [list(csv.reader(io.StringIO(text)))]
+    for table in tables:
+        if not table:
+            continue
+        header = [h.strip().lower() for h in table[0]]
+        if all(c in header for c in columns):
+            at = {c: header.index(c) for c in columns}
+            rows = [{c: (r[i].strip() if i < len(r) else "") or None for c, i in at.items()} for r in table[1:] if any(x.strip() for x in r)]
+            blank = [n for n, r in enumerate(rows, start=2) if not r[columns[0]]]
+            if blank:
+                raise SystemExit(f"intake: {path} has rows with no {columns[0]} (table rows {', '.join(map(str, blank))}). Fill them in or delete them.")
+            return rows
+    found = ", ".join(header for header in (" | ".join(t[0]) for t in tables if t)) or "no table"
+    raise SystemExit(f"intake: {path} has no table with the columns {', '.join(columns)}. Found: {found}. Rename the columns; nothing was imported.")
+
+
+def import_documents(intake: Json, files: dict[str, Path], replace: bool) -> tuple[Json, dict[str, list[Json]]]:
+    """Read each kept document into the intake. A list the intake already holds is only replaced when asked."""
+    read = {}
+    for key, path in files.items():
+        if intake.get(key) and not replace:
+            raise SystemExit(f"intake: the intake already holds {len(intake[key])} {key}. Pass --replace to replace them with {path.name}.")
+        read[key] = read_table(path, IMPORTS[key])
+    for key, rows in read.items():
+        intake[key] = rows
+    return intake, read
+
+
 def write_intake(path: Path, intake: Json) -> None:
     path.write_text(json.dumps(intake, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 
 
 def main() -> int:
     ap = argparse.ArgumentParser(description="Build and check the intake.")
-    ap.add_argument("command", choices=["init", "check", "suggest", "accept"])
+    ap.add_argument("command", choices=["init", "check", "suggest", "accept", "import"])
     ap.add_argument("path")
     ap.add_argument("metric", nargs="?", help="accept: the metric whose range the user said yes to")
     ap.add_argument("--range", help="accept: the range as the user edited it, if they changed the suggestion")
     ap.add_argument("--suggestions", default=str(SUGGESTIONS), help=argparse.SUPPRESS)
+    ap.add_argument("--decisions", help="import: a decision log with columns ask, options, recommendation, deadline")
+    ap.add_argument("--risks", help="import: a risk register with columns risk, likelihood, impact, mitigation, due")
+    ap.add_argument("--stopped", help="import: a stop list with columns what, why")
+    ap.add_argument("--replace", action="store_true", help="import: replace a list the intake already holds")
     args = ap.parse_args()
     path = Path(args.path)
     if args.command == "init":
@@ -223,6 +290,18 @@ def main() -> int:
             if any(x.startswith("suggest") for x in lines)
             else "intake: no suggestions left to offer."
         )
+        return 0
+    if args.command == "import":
+        files = {k: Path(v) for k, v in (("decisions", args.decisions), ("risks", args.risks), ("stopped", args.stopped)) if v}
+        if not files:
+            raise SystemExit("intake: import needs --decisions, --risks or --stopped.")
+        intake, read = import_documents(read_intake(path), files, args.replace)
+        write_intake(path, intake)
+        for key, rows in read.items():
+            print(f"imported  {len(rows)} {key} from {files[key].name}:")
+            for r in rows:
+                print("  - " + "; ".join(f"{c}: {r[c] or 'not stated'}" for c in IMPORTS[key]))
+        print("intake: confirm each imported row with the user. If any is wrong, fix the document and import again with --replace.")
         return 0
     if args.command == "accept":
         if not args.metric:
