@@ -210,5 +210,79 @@ class Stripe(Base):
         self.assertIn("is in eur, not usd", self.refused("from_stripe.py", "--invoices", self.save("eur.json", bad), "--months", "2026-07..2026-07"))
 
 
+class AISpend(Base):
+    PERIOD = "2026-Q3=2026-07-01..2026-09-30"
+
+    def team_exports(self) -> list[str]:
+        billing = self.save("billing.json", {"seat_breakdown": {"total": 40, "active_this_cycle": 38}, "plan_type": "business"})
+        report = self.save(
+            "report.ndjson",
+            "\n".join(
+                json.dumps({"day": d, "weekly_active_users": w, "loc_added_sum": 9999}) for d, w in (("2026-09-29", 31), ("2026-09-30", 33), ("2026-10-02", 50))
+            ),
+        )
+        members = self.save(
+            "members.json", {"teamMembers": [{"id": "u1", "isRemoved": False}, {"id": "u2", "isRemoved": False}, {"id": "u3", "isRemoved": True}]}
+        )
+        daily = self.save(
+            "daily.json",
+            {
+                "data": [{"day": "2026-09-28", "userId": 1, "isActive": True, "totalLinesAdded": 500}, {"day": "2026-09-01", "userId": 2, "isActive": True}],
+                "pagination": {"hasNextPage": False},
+            },
+        )
+        spend = self.save(
+            "spend.json", {"teamMemberSpend": [{"userId": 1, "overallSpendCents": 4000.5}, {"userId": 2, "overallSpendCents": 3999.5}], "totalMembers": 2}
+        )
+        return ["--copilot-billing", billing, "--copilot-report", report, "--cursor-members", members, "--cursor-daily", daily, "--cursor-spend", spend]
+
+    def test_team_tools_become_seats_weekly_active_and_cost_and_nothing_else(self) -> None:
+        out = self.ok("from_ai_spend.py", "--period", self.PERIOD, *self.team_exports(), "--copilot-seat-price", "19")
+        rows = {r["tool"]: r for r in self.rows("ai_tools")}
+        self.assertEqual(rows["GitHub Copilot"], {"tool": "GitHub Copilot", "period": "2026-Q3", "seats": 40.0, "weekly_active": 33.0, "cost": 2280.0})
+        self.assertEqual(rows["Cursor"], {"tool": "Cursor", "period": "2026-Q3", "seats": 2.0, "weekly_active": 1.0, "cost": 80.0})
+        self.assertIn("from the price you stated", out)
+        written = json.dumps(self.rows("ai_tools"))
+        for word in ("loc", "lines", "accept", "productiv"):
+            self.assertNotIn(word, written.lower())
+
+    def test_copilot_without_a_stated_price_writes_no_row(self) -> None:
+        out = self.ok("from_ai_spend.py", "--period", self.PERIOD, *self.team_exports())
+        self.assertIn("the API states no price", out)
+        self.assertEqual([r["tool"] for r in self.rows("ai_tools")], ["Cursor"])
+
+    def test_model_api_spend_goes_to_finance_lines_with_the_plan_left_to_the_person(self) -> None:
+        anthropic = self.save(
+            "anthropic.json",
+            {
+                "data": [
+                    {"starting_at": "2026-07-01T00:00:00Z", "ending_at": "2026-07-02T00:00:00Z", "results": [{"amount": "123456.78", "currency": "USD"}]},
+                    {"starting_at": "2026-10-01T00:00:00Z", "results": [{"amount": "99999", "currency": "USD"}]},
+                ],
+                "has_more": False,
+            },
+        )
+        openai = self.save(
+            "openai.json",
+            {
+                "object": "page",
+                "data": [{"object": "bucket", "start_time": 1782864000, "end_time": 1782950400, "results": [{"amount": {"value": 12.5, "currency": "usd"}}]}],
+                "has_more": False,
+            },
+        )
+        out = self.ok("from_ai_spend.py", "--period", self.PERIOD, "--anthropic-cost", anthropic, "--openai-costs", openai)
+        self.assertIn("Add each plan with the person", out)
+        with (self.run / "ai_spend" / "finance.csv").open(encoding="utf-8") as f:
+            lines = list(csv.DictReader(f))
+        self.assertEqual(
+            lines,
+            [
+                {"line": "Model API: Anthropic", "period": "2026-Q3", "plan": "", "actual": "1234.57"},
+                {"line": "Model API: OpenAI", "period": "2026-Q3", "plan": "", "actual": "12.5"},
+            ],
+        )
+        self.assertFalse((self.run / "data" / "ai_tools.json").exists(), "API spend has no seats, so it is never an ai_tools row")
+
+
 if __name__ == "__main__":
     unittest.main()

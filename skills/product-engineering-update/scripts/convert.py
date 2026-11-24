@@ -136,7 +136,7 @@ def write_csv(path: Path, columns: tuple[str, ...], rows: list[Json]) -> None:
         writer = csv.DictWriter(f, fieldnames=list(columns))
         writer.writeheader()
         for r in rows:
-            writer.writerow({k: ("'" + v if isinstance(v, str) and v[:1] in "=+-@" else v) for k, v in r.items()})
+            writer.writerow({k: ("'" + v if isinstance(v, str) and v and v[0] in "=+-@" else v) for k, v in r.items()})
 
 
 def pairs(values: list[str], flag: str, tool: str) -> dict[str, str]:
