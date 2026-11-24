@@ -26,7 +26,6 @@ from __future__ import annotations
 import argparse
 import contextlib
 import io
-import json
 import shutil
 import sys
 import tempfile
