@@ -9,7 +9,7 @@ metadata:
 
 # Landing brief
 
-Coding agents stop at merge. A landing brief says, before the work starts, what would show it landed, so the update after it ships is a check, not a story.
+Most coding agents stop at merge. A landing brief says, before the work starts, what would show it landed, so the update after it ships is a check, not a story.
 
 The script reads a file and prints text. It makes no network calls and installs nothing. Anything posted to Linear goes through the Linear connector in this session, and only after the person confirms.
 

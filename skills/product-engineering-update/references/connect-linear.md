@@ -33,7 +33,7 @@ The cycle is not used: the deck reads the period from the intake, not Linear's c
 
 ## Projects: shipped vs impact (slide 8)
 
-Coding agents stop at merge. Slide 8 asks whether the merged work landed: for each commitment, did it ship, and did the metric it named before launch move.
+Most coding agents stop at merge. Slide 8 asks whether the merged work landed: for each commitment, did it ship, and did the metric it named before launch move.
 
 **Get the raw JSON.** With the Linear connector, call `list_projects` with `fields`: `id`, `name`, `description`, `url`, `status`, `targetDate`, `completedAt`, `canceledAt`, `lead`, `initiatives`, and `includeArchived: true` so finished projects are not missed. Save each page; follow `cursor` while `hasNextPage` is true. Optionally save each project's latest updates with `get_status_updates`. A CSV export works too, read by column name: `Name` and `Status` are required; `Target date`, `Completed` (or `Completed at`), `Lead`, `Description`, `URL` and `Initiatives` (separated by `;`) are read when present. A CSV without name and status columns is refused. With the API, query `projects { nodes { name description content url status { name type } targetDate completedAt lead { name } initiatives { nodes { name } } } }`.
 
