@@ -1,14 +1,28 @@
 {
   "source": {
-    "title": "Accelerate State of DevOps Report 2024",
+    "title": "Accelerate State of DevOps Report 2024, page 13 (Performance levels)",
     "publisher": "DORA, Google Cloud",
     "published": "October 2024",
-    "url": "https://dora.dev/research/2024/dora-report/",
-    "checked": "not yet checked against the report's performance-level table"
+    "url": "https://services.google.com/fh/files/misc/2024_final_dora_report.pdf",
+    "checked": "Checked against the report's performance-levels table on page 13 (v. 2024.3) on 2026-11-23"
   },
-  "ranges": {},
+  "ranges": {
+    "Deploys per week": {
+      "range": "1+",
+      "basis": "DORA's High cluster deploys between once a day and once a week; Elite deploys on demand, several times a day; Medium between once a week and once a month"
+    },
+    "Change failure rate": {
+      "range": "up to 20%",
+      "basis": "DORA's change fail rate is 5% for Elite, 20% for High, 10% for Medium and 40% for Low; 20% is the High cluster's"
+    },
+    "Deploys rolled back or followed by errors": {
+      "range": "up to 20%",
+      "basis": "a stand-in for change fail rate, held to DORA's High cluster figure of 20% (Elite 5%, Medium 10%, Low 40%); DORA measures change fail rate, not this proxy"
+    }
+  },
   "no_suggestion": {
     "Lead time for change": "the skill measures pull request open to merge; DORA measures commit to production, so its ranges do not apply",
+    "Time to restore": "the skill measures every incident from start to restore; DORA's failed deployment recovery time counts only failures a deployment caused, so its ranges do not apply",
     "Pull request review time": "no published benchmark found for this definition",
     "Rework rate": "no published benchmark found for this definition",
     "Developer experience index": "each survey scores differently, so no general range applies"
