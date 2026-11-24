@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.0 (2026-11-23)
+
+- **Coverage on the figure.** A figure built from less than the reporting window carries a coverage record (first and last day, how many of how many) in its metric and ledger row. The slide prints it under the figure, and any title or rollup that cites the figure says it, for example "covers 2 Nov to 23 Nov 2026, 113 of 514 releases". New validator error `coverage-unstated` blocks a slide that cites a partial figure without it. The Vercel proxy is the first figure to carry one; any metric can.
+- **Drafted answers, held to their sources.** `intake.py propose` stores intake answers the agent drafted from the team's own documents in `run/proposals.json`, apart from the intake. Each names a field and its evidence (a file with a heading or line, or a URL, and a word-for-word quote, checked against a local file). A file with any proposal lacking evidence is refused whole. `intake.py confirm --by <name>` applies the ones the user accepts, all, by field or edited, and records who confirmed each and where it came from. Pending proposals leave their fields Unknown, and `draft.py` never reads them. Step 1 of the skill now starts from the team's documents and keeps the interview for the rest.
+- 83 tests, up from 75.
+
 ## 0.2.0 (2026-11-23)
 
 ### What a reader sees
