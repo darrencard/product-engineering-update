@@ -13,6 +13,8 @@ Standard library only. Runs on Python 3.9 or later.
 
 from __future__ import annotations
 
+import csv
+import datetime
 import json
 import shutil
 import sys
@@ -24,7 +26,7 @@ from typing import Any
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 
-from test_pipeline import script  # noqa: E402  (the shared helpers, beside this file)
+from test_pipeline import FIXTURES, run_fixture, script  # noqa: E402  (the shared helpers, beside this file)
 
 Json = dict[str, Any]
 
@@ -98,6 +100,114 @@ class Sentry(Base):
             "found no release deployed to production",
             self.refused("from_sentry.py", "--releases", empty, "--issues", issues, "--errors-from", "2026-07-01", "--organization", "acme"),
         )
+
+
+def epoch(d: datetime.date) -> int:
+    return int(datetime.datetime(d.year, d.month, d.day, tzinfo=datetime.timezone.utc).timestamp())
+
+
+class Stripe(Base):
+    def billing_rows(self) -> list[Json]:
+        with (FIXTURES / "complete" / "csv" / "billing.csv").open(encoding="utf-8") as f:
+            return list(csv.DictReader(f))
+
+    def invoices(self) -> str:
+        """The fixture's ARR as Stripe would bill it: one paid monthly invoice per account and month, plus noise to skip."""
+        data = []
+        for i, r in enumerate(self.billing_rows()):
+            start = datetime.date.fromisoformat(r["month"] + "-01")
+            end = (start.replace(day=28) + datetime.timedelta(days=4)).replace(day=1)
+            line = {
+                "id": f"il_{i}",
+                "amount": round(float(r["arr"]) * 100 / 12),
+                "currency": "usd",
+                "period": {"start": epoch(start), "end": epoch(end)},
+                "parent": {"type": "subscription_item_details", "subscription_item_details": {"subscription": "sub_x", "proration": False}},
+            }
+            data.append(
+                {
+                    "id": f"in_{i}",
+                    "object": "invoice",
+                    "customer": r["account"],
+                    "status": "paid",
+                    "currency": "usd",
+                    "lines": {"object": "list", "data": [line], "has_more": False},
+                }
+            )
+        data.append({"id": "in_void", "customer": "A001", "status": "void", "currency": "usd", "lines": {"data": []}})
+        proration = {
+            "amount": 999,
+            "period": {"start": epoch(datetime.date(2026, 9, 10)), "end": epoch(datetime.date(2026, 10, 1))},
+            "parent": {"type": "subscription_item_details", "subscription_item_details": {"proration": True}},
+        }
+        data.append({"id": "in_pro", "customer": "A001", "status": "paid", "currency": "usd", "lines": {"data": [proration]}})
+        return self.save("invoices.json", {"object": "list", "data": data, "has_more": False, "url": "/v1/invoices"})
+
+    def test_invoices_reproduce_the_fixture_billing_and_its_revenue_figures(self) -> None:
+        months = sorted({r["month"] for r in self.billing_rows()})
+        out = self.ok("from_stripe.py", "--invoices", self.invoices(), "--months", f"{months[0]}..{months[-1]}")
+        self.assertIn("1 line(s) or item(s) are a proration", out)
+        rebuilt = {(r["account"], r["month"]): r["arr"] for r in self.rows("billing")}
+        expected = {(r["account"], r["month"]): float(r["arr"]) for r in self.billing_rows()}
+        self.assertEqual(rebuilt.keys(), expected.keys())
+        for key, value in expected.items():
+            self.assertAlmostEqual(rebuilt[key], value, delta=0.12, msg=str(key))
+        _, from_csv = run_fixture("complete", self.work / "csv")
+        run = self.work / "csv" / "complete"
+        shutil.copy(self.run / "data" / "billing.json", run / "data" / "billing.json")
+        self.assertEqual(script("compute_metrics.py", "--run", str(run)).returncode, 0)
+        from_stripe = json.loads((run / "metrics.json").read_text(encoding="utf-8"))
+        for key in ("arr", "nrr", "grr", "expansion_arr"):
+            with self.subTest(metric=key):
+                self.assertEqual(from_stripe["metrics"][key]["display"], from_csv["metrics"][key]["display"])
+
+    def test_subscriptions_count_active_items_at_each_month_end_and_skip_metered(self) -> None:
+        subs = [
+            {
+                "id": "sub_1",
+                "customer": "cus_a",
+                "status": "active",
+                "start_date": epoch(datetime.date(2026, 7, 15)),
+                "ended_at": None,
+                "items": {
+                    "data": [
+                        {
+                            "quantity": 3,
+                            "price": {
+                                "currency": "usd",
+                                "unit_amount": 2000,
+                                "recurring": {"interval": "month", "interval_count": 1, "usage_type": "licensed"},
+                            },
+                        },
+                        {"quantity": 1, "price": {"currency": "usd", "unit_amount": None, "recurring": {"interval": "month", "usage_type": "metered"}}},
+                    ]
+                },
+            },
+            {"id": "sub_2", "customer": "cus_b", "status": "trialing", "start_date": epoch(datetime.date(2026, 7, 1)), "items": {"data": []}},
+            {
+                "id": "sub_3",
+                "customer": "cus_c",
+                "status": "active",
+                "start_date": epoch(datetime.date(2026, 1, 1)),
+                "items": {
+                    "data": [{"quantity": 1, "price": {"currency": "usd", "unit_amount": 120000, "recurring": {"interval": "year", "interval_count": 1}}}]
+                },
+            },
+        ]
+        out = self.ok("from_stripe.py", "--subscriptions", self.save("subs.json", {"object": "list", "data": subs}), "--months", "2026-06..2026-07")
+        self.assertIn("1 line(s) or item(s) are a usage-based price", out)
+        self.assertEqual(
+            self.rows("billing"),
+            [
+                {"account": "cus_a", "month": "2026-07", "arr": 720.0},
+                {"account": "cus_c", "month": "2026-06", "arr": 1200.0},
+                {"account": "cus_c", "month": "2026-07", "arr": 1200.0},
+            ],
+        )
+
+    def test_another_currency_is_refused_not_converted(self) -> None:
+        bad = {"data": [{"id": "in_1", "customer": "x", "status": "paid", "currency": "eur", "lines": {"data": []}}]}
+        self.assertIn("is in eur, not usd", self.refused("from_stripe.py", "--invoices", self.save("eur.json", bad), "--months", "2026-07..2026-07"))
 
 
 if __name__ == "__main__":
