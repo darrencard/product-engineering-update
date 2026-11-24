@@ -56,7 +56,7 @@ Run `python3 scripts/intake.py init run/intake.json`. If the user already has an
 **Start from what the team already keeps.**
 
 1. Ask where the team keeps its strategy, decision log, risk register and roadmap.
-2. Read them, and draft an answer for each intake field they cover. Write the drafts to a file as `{"proposals": [{"field", "value", "source", "quote"}]}`. `source` is the file path plus a heading or line (`strategy.md#Diagnosis`, `decisions.md:412`), or a URL. `quote` is the short passage, word for word, that supports the value.
+2. Read them, and draft an answer for each intake field they cover. Write the drafts to a file as `{"proposals": [{"field", "value", "source", "quote"}]}`. `source` is the file path plus a heading or line (`strategy.md#Diagnosis`, `decisions.md:412`), or a URL. `quote` is the short passage, word for word, that supports the value. A value drawn from several places takes `evidence: [{"source", "quote"}, ...]` instead.
 3. Run `python3 scripts/intake.py propose run/intake.json <drafts>`. It stores them in `run/proposals.json`, apart from the intake. It refuses the whole file if any proposal lacks a source or quote, or quotes a local file wrongly. Proposals are not answers: `check` lists them as pending, and `draft.py` never reads them.
 4. Show the user every proposal in one table (field, value, source, quote) and ask for one confirmation. They may accept all, some, or edit any.
 5. Run `python3 scripts/intake.py confirm run/intake.json --by "<their name>"`. Add `--field <field>` for each one they accepted if not all, and `--edit "<field>=<value>"` for each they changed. The intake records who confirmed each answer and its source.

@@ -63,7 +63,7 @@ EMPTY: Json = {
     # Where each healthy range came from, when the user accepted it from a suggestion:
     # {"Deploys per week": {"suggested": "1+", "accepted": "1+", "edited": false, "source": "..."}}
     "range_sources": {},
-    # Answers confirmed from a drafted proposal: {"strategy.diagnosis": {"source", "quote", "confirmed_by", "edited"}}
+    # Answers confirmed from a drafted proposal: {"strategy.diagnosis": {"evidence": [{"source", "quote"}], "confirmed_by", "edited"}}
     "provenance": {},
 }
 
@@ -288,16 +288,29 @@ def squash(text: str) -> str:
     return re.sub(r"\s+", " ", text).strip().lower()
 
 
+def evidence_of(p: Json) -> list[Json]:
+    """A proposal's evidence: its source and quote, or an evidence list when a value draws on several places."""
+    return p["evidence"] if isinstance(p.get("evidence"), list) and p["evidence"] else [{"source": p.get("source"), "quote": p.get("quote")}]
+
+
 def check_proposal(p: Any, base: Path) -> str | None:
-    """Why a proposal is refused, or None. Every proposal names a known field, a source and a short quote;
-    a quote from a local file must appear in that file."""
+    """Why a proposal is refused, or None. Every proposal names a known field, and each piece of its evidence
+    a source and a short quote; a quote from a local file must appear in that file."""
     if not isinstance(p, dict):
         return "is not an object"
-    field, source, quote = p.get("field"), p.get("source"), p.get("quote")
+    field = p.get("field")
     if not isinstance(field, str) or not known_field(field):
         return f"names no intake field it can fill ({field!r})"
     if "value" not in p or p["value"] in (None, "", [], {}):
         return f"{field}: has no value"
+    for e in evidence_of(p):
+        why = check_evidence(field, e.get("source") if isinstance(e, dict) else None, e.get("quote") if isinstance(e, dict) else None, base)
+        if why:
+            return why
+    return None
+
+
+def check_evidence(field: str, source: Any, quote: Any, base: Path) -> str | None:
     if not isinstance(source, str) or not source.strip():
         return f"{field}: has no source. Name the file and heading or line, or the URL."
     if not isinstance(quote, str) or not quote.strip():
@@ -331,7 +344,7 @@ def propose(intake_path: Path, drafted: Path) -> list[Json]:
     store = proposals_path(intake_path)
     held = json.loads(store.read_text(encoding="utf-8"))["proposals"] if store.exists() else []
     held = [h for h in held if h["status"] != "pending" or h["field"] not in {p["field"] for p in items}]
-    new = [{"field": p["field"], "value": p["value"], "source": p["source"], "quote": p["quote"], "status": "pending"} for p in items]
+    new = [{"field": p["field"], "value": p["value"], "evidence": evidence_of(p), "status": "pending"} for p in items]
     store.write_text(json.dumps({"proposals": held + new}, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     return new
 
@@ -359,8 +372,7 @@ def confirm(intake_path: Path, intake: Json, by: str, fields: list[str], edits: 
         value = edits.get(p["field"], p["value"])
         put(intake, p["field"], value)
         intake.setdefault("provenance", {})[p["field"]] = {
-            "source": p["source"],
-            "quote": p["quote"],
+            "evidence": p["evidence"],
             "confirmed_by": by,
             "edited": p["field"] in edits,
         }
@@ -413,7 +425,7 @@ def main() -> int:
         stored = propose(path, Path(args.metric))
         print(f"intake: {len(stored)} proposal(s) stored in {proposals_path(path)}. None of them is an answer yet:")
         for p in stored:
-            print(f"  - {p['field']}: {json.dumps(p['value'], ensure_ascii=False)[:120]}  (from {p['source']})")
+            print(f"  - {p['field']}: {json.dumps(p['value'], ensure_ascii=False)[:120]}  (from {', '.join(e['source'] for e in p['evidence'])})")
         print("intake: show them to the user in one table with each source and quote, then run confirm with their name.")
         return 0
     if args.command == "confirm":
@@ -432,7 +444,9 @@ def main() -> int:
         done = confirm(path, intake, args.by.strip(), args.field, edits)
         write_intake(path, intake)
         for p in done:
-            print(f"confirmed {p['field']}{' (edited)' if p['field'] in edits else ''}, by {args.by.strip()}, from {p['source']}")
+            print(
+                f"confirmed {p['field']}{' (edited)' if p['field'] in edits else ''}, by {args.by.strip()}, from {', '.join(e['source'] for e in p['evidence'])}"
+            )
         return 0
     if args.command == "import":
         files = {k: Path(v) for k, v in (("decisions", args.decisions), ("risks", args.risks), ("stopped", args.stopped)) if v}
@@ -455,7 +469,7 @@ def main() -> int:
         return 0
     blocking, unknown = check(read_intake(path))
     for p in pending_proposals(path):
-        print(f"proposed  {p['field']}  (from {p['source']}; not an answer until confirmed)")
+        print(f"proposed  {p['field']}  (from {', '.join(e['source'] for e in p['evidence'])}; not an answer until confirmed)")
     for problem in blocking:
         print(f"BLOCKING  {problem}")
     for field, slide in unknown:

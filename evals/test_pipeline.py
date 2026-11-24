@@ -1112,7 +1112,10 @@ class Proposals(unittest.TestCase):
         intake = json.loads(self.intake.read_text(encoding="utf-8"))
         self.assertEqual(intake["strategy"]["diagnosis"], "Building software got cheap; judgment did not.")
         self.assertEqual(intake["provenance"]["strategy.diagnosis"]["confirmed_by"], "Darren Card")
-        self.assertEqual(intake["provenance"]["strategy.diagnosis"]["source"], f"{self.doc}#Diagnosis")
+        self.assertEqual(
+            intake["provenance"]["strategy.diagnosis"]["evidence"],
+            [{"source": f"{self.doc}#Diagnosis", "quote": "Building software got cheap. Judgment did not."}],
+        )
         self.assertEqual(intake["risks"], [], "a proposal not named stays pending")
         self.assertIn("proposed  risks", script("intake.py", "check", str(self.intake)).stdout)
 
@@ -1124,6 +1127,20 @@ class Proposals(unittest.TestCase):
         intake = json.loads(self.intake.read_text(encoding="utf-8"))
         self.assertEqual(intake["strategy"]["diagnosis"], "Judgment is the scarce part.")
         self.assertTrue(intake["provenance"]["strategy.diagnosis"]["edited"])
+
+    def test_a_value_drawn_from_several_places_names_each_and_each_quote_is_checked(self) -> None:
+        both = [
+            {
+                "field": "strategy.non_goals",
+                "value": ["A", "B"],
+                "evidence": [{"source": f"{self.doc}#Diagnosis", "quote": "Judgment did not."}, {"source": f"{self.doc}#Risks", "quote": "One model provider"}],
+            }
+        ]
+        self.assertEqual(script("intake.py", "propose", str(self.intake), self.drafted(both)).returncode, 0)
+        both[0]["evidence"][1]["quote"] = "Not in the file."
+        done = script("intake.py", "propose", str(self.intake), self.drafted(both))
+        self.assertNotEqual(done.returncode, 0)
+        self.assertIn("does not appear", done.stderr)
 
     def test_a_proposal_without_source_or_quote_or_with_a_made_up_quote_is_refused(self) -> None:
         for spoil, why in (
