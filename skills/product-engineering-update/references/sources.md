@@ -215,6 +215,7 @@ Examples: GitHub, Vercel, Sentry. Feeds slides: 9, 13, 9b. Converters: GitHub, V
 | `failed` | bool | No |
 | `reworked` | bool | No |
 | `troubled` | bool | No |
+| `agent_authored` | bool | No |
 
 What the slides read from it:
 

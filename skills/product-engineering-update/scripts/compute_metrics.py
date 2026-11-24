@@ -61,6 +61,7 @@ DEFINITIONS = {
     "ai_tool_cost": "Spend on AI tools for the team in the period.",
     "ai_weekly_use": "Share of paid AI tool licences used at least once a week.",
     "dev_experience": "Average score from the developer survey.",
+    "agent_authored_share": "Share of accepted code changes marked as written by an agent, by a label or account the team named.",
 }
 
 
@@ -311,6 +312,8 @@ def tracker(r: Run) -> None:
     r.extra["mix"] = {"rows": mix, "ledger": lid, "has_plan": bool(plan)}
     traced = sum(x["estimate"] for x in done if x.get("objective"))
     r.metric("traced_pct", "Capacity traced to an objective", pct(traced, total), None, "%", src)
+    # Unrounded shares, for the capitalisable estimate. The slide shows the rounded mix.
+    r.extra["mix_share"] = {k: pct(v, total) for k, v in by_type.items()}
     lines = total_by(done, "product_line", "estimate")
     if lines:
         r.extra["capacity_by_line"] = {k: round(pct(v, total)) for k, v in sorted(lines.items())}
@@ -335,6 +338,9 @@ def source_control(r: Run) -> None:
             "troubled": share_flagged([x for x in deploys if x.get("troubled") is not None], "troubled"),
             "troubled_known": sum(1 for x in deploys if x.get("troubled") is not None),
             "troubled_coverage": coverage_of([x for x in deploys if x.get("troubled") is not None], len(deploys), "deployed_at", "releases"),
+            # Only pull requests the team's own marker says something about count, so an unmarked one is never read as human work.
+            "agent": share_flagged([x for x in prs if x.get("agent_authored") is not None], "agent_authored"),
+            "agent_coverage": coverage_of([x for x in prs if x.get("agent_authored") is not None], len(prs), "merged_at", "pull requests"),
         }
 
     now, before = stats(False), stats(True)
@@ -348,6 +354,7 @@ def source_control(r: Run) -> None:
     r.metric("troubled_deploy_rate", proxy_label, now["troubled"], before["troubled"], "%", src, higher_is_better=False, coverage=now["troubled_coverage"])
     if "troubled_deploy_rate" in r.metrics:
         r.ledger[-1]["claim"] += " (proxy for change failure rate)"
+    r.metric("agent_authored_share", "Changes written by an agent", now["agent"], before["agent"], "%", src, coverage=now["agent_coverage"])
 
 
 def incidents(r: Run) -> None:
@@ -467,6 +474,7 @@ def finance(r: Run) -> None:
     if revenue and rd_lines and all(line in by_line for line in rd_lines):
         rd_spend = sum(by_line[line]["actual"] for line in rd_lines)
         r.metric("rd_share", "R&D as a share of revenue", pct(rd_spend, revenue["actual"]), None, "%", src, higher_is_better=False)
+    capitalisable(r, src, by_line)
     stated = by_line.get("arr")
     billed = r.metrics.get("arr")
     if stated and billed and abs(stated["actual"] - billed["value"]) > CONFLICT_TOLERANCE * abs(billed["value"]):
@@ -494,6 +502,38 @@ def finance(r: Run) -> None:
             if row["id"] == billed["ledger"]:
                 row.update(claim=claim, value=None, confidence="Unknown")
         billed.update(value=None, display=None, conflict=True)
+
+
+def capitalisable(r: Run, src: Json, by_line: dict[str, Json]) -> None:
+    """An estimate of the cost that could be capitalised: the share of the team's time on the work types the
+    intake names, applied to the cost lines it names. It is labelled an estimate for finance to confirm,
+    because what may be capitalised is the company's accounting policy, not something the data decides."""
+    cap = r.intake.get("capitalisation") or {}
+    types, lines = cap.get("work_types") or [], [x.lower() for x in cap.get("cost_lines") or []]
+    share_by_type = r.extra.get("mix_share")
+    if not types or not lines or not share_by_type or not all(x in by_line for x in lines):
+        return
+    cost = sum(by_line[x]["actual"] for x in lines)
+    share = sum(share_by_type.get(t, 0.0) for t in types)
+    amount = cost * share / 100.0
+    named = ", ".join(cap["cost_lines"])
+    lid = r.row(
+        f"Capitalisable estimate {money(amount)} of {money(cost)} ({named}): {trim(share, 0)}% of the team's time on {', '.join(types)}",
+        rounded(amount),
+        "$",
+        src,
+        "Derived",
+    )
+    r.extra["capex"] = {
+        "capitalisable": money(amount),
+        "expensed": money(cost - amount),
+        "cost": money(cost),
+        "share": f"{trim(share, 0)}%",
+        "work_types": types,
+        "cost_lines": cap["cost_lines"],
+        "confirmed_by": cap.get("confirmed_by"),
+        "ledger": lid,
+    }
 
 
 def evals(r: Run) -> None:

@@ -4,7 +4,7 @@ description: Builds a product and engineering update deck for leadership, the bo
 license: MIT for the scripts, CC BY 4.0 for the instructions, references and template. See LICENSE and LICENSE-CONTENT.md in the repository root.
 metadata:
   author: Dacard
-  version: "0.6.0"
+  version: "0.7.0"
 ---
 
 # Product & Engineering Update
@@ -116,6 +116,12 @@ Titles are drafted in plain board language. Improve them, following [references/
 
 Titles are the only thing you edit in `run/deck.json`. Do not change blocks, figures, status words or the ledger by hand. If a slide looks wrong, the intake or the data is wrong: fix that and run the steps again, or tell the user what you found.
 
+**What changed since the last update.** When there is a previous update, pass its deck: `python3 scripts/draft.py --run run --previous <last deck.json>`. Slide 1 then lists each status that moved on the delivery and outcome scorecards, each target that moved, and each metric added or dropped. Every status that moved needs a reason: ask the user for one line per metric and record it in `status_reasons` in `run/intake.json`, for example `{"Activation": "The new onboarding shipped in week 2"}`, then draft again. Never write the reason yourself; until it is there, the line reads `[reason needed]` and the validator blocks the deck.
+
+**The capitalisable estimate (slide 5).** If finance says which work types it treats as capitalisable and which cost lines the share applies to, record them in `capitalisation` (`work_types`, `cost_lines`, and `confirmed_by` once finance has checked it). The slide shows the estimate beside the spend, labelled an estimate for finance to confirm. Never pick the work types yourself: what may be capitalised is the company's accounting policy.
+
+**The pace to each target (slide 11).** The outcome scorecard's "At this pace" column repeats this period's change until the target is reached and, when the target has a date (`by`), says whether that lands before or after it. It prints as Projected. Never quote it as a result or a forecast the team committed to.
+
 Slide IDs in the files are `00` (cover), `01` to `18`, `09b` (the board's delivery slide) and `A` to `D` (appendices). The deck has 19 core slides in all; no single cut shows more than 18.
 
 For a slide's question, required data and a good and bad title, read its contract: `references/slides/NN.md`, where NN is `01` to `18` or `09b`.
@@ -143,6 +149,8 @@ Run `python3 scripts/validate.py run/deck.json`. Repeat until it reports 0 error
 | `sample-beside-data` | A sample on a slide that shows real data |
 | `sample-cites-ledger` | A sample that cites a ledger row |
 | `coverage-unstated` | A figure built from less than the reporting window, on a slide that does not say what it covers |
+| `status-change-unexplained` | A status that moved since the last update with no reason in `status_reasons` |
+| `capex-not-estimate` | A capitalisable figure that is not labelled an estimate |
 
 ### 6. Review
 

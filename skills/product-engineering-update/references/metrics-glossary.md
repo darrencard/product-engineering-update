@@ -50,6 +50,7 @@ Each takes a healthy range from `delivery_ranges` in the intake, such as "under 
 | Capacity traced to an objective | Estimates on items with an `objective`, as a percent of all estimates | `tracker` |
 | Capacity by product line | Each product line's `estimate` as a percent of all estimates | `tracker` |
 | R&D as a share of revenue | Sum of the actuals on the intake's `rd_lines`, as a percent of the `Revenue` line | `finance` |
+| Capitalisable estimate | The share of estimates on the intake's `capitalisation.work_types`, applied to the sum of the actuals on `capitalisation.cost_lines`. Expensed is the rest. An estimate for finance to confirm, never an accounting figure | `tracker` and `finance` |
 
 ## Revenue
 
@@ -64,6 +65,8 @@ Each takes a healthy range from `delivery_ranges` in the intake, such as "under 
 
 Analytics and warehouse metrics are read as supplied, one row per metric and period, and are Verified. The prior value is the most recent earlier period. The status word compares the value to the target in the intake.
 
+At this pace (Projected): the periods needed to reach the target if this period's change repeats, rounded up; before or after the target's `by` date when there is one. "Not on pace" when the metric was flat or moved the wrong way.
+
 ## AI in the product and in how we build
 
 | Metric | Formula | Source |
@@ -72,6 +75,7 @@ Analytics and warehouse metrics are read as supplied, one row per metric and per
 | Cost per successful task | `cost_per_task`, latest run against the run before | `evals` |
 | AI tool spend | Sum of `cost` for the period | `ai_tools` |
 | Seats used weekly | Sum of `weekly_active` as a percent of the sum of `seats` | `ai_tools` |
+| Changes written by an agent | Merged pull requests with `agent_authored` yes, as a percent of those marked yes or no. Unmarked ones are left out and the coverage says so | `source_control` |
 
 Use and spend are inputs. The deck reports no productivity figure unless it has a baseline and a window.
 

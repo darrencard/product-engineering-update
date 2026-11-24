@@ -117,7 +117,8 @@ def collect_all(args: argparse.Namespace, run: Path) -> list[str]:
         if not args.repo:
             raise SystemExit("run: --github-prs needs --repo OWNER/NAME, for the ledger.")
         deploys = ["--deployments", args.github_deployments] if args.github_deployments else []
-        done.append(step("from_github.py", "--prs", args.github_prs, *deploys, "--repo", args.repo, *dated, "--run", str(run)))
+        agents = [x for flag, value in (("--agent-labels", args.agent_labels), ("--agent-authors", args.agent_authors)) if value for x in (flag, value)]
+        done.append(step("from_github.py", "--prs", args.github_prs, *deploys, "--repo", args.repo, *dated, *agents, "--run", str(run)))
     if args.vercel_deployments:
         if not args.vercel_project:
             raise SystemExit("run: --vercel-deployments needs --vercel-project NAME, for the ledger.")
@@ -165,6 +166,9 @@ def main() -> int:
     ap.add_argument("--linear-work-type", action="append", default=[], metavar="LABEL=TYPE", help="a Linear label that stands for a work type")
     ap.add_argument("--posthog-query", help="a PostHog HogQL query result with metric, period and value columns")
     ap.add_argument("--retrieved-at", help="YYYY-MM-DD, the day the data was pulled")
+    ap.add_argument("--previous", help="the last update's deck.json; slide 1 then lists what changed since it")
+    ap.add_argument("--agent-labels", default="", help="GitHub labels that mark a pull request as written by an agent, comma separated")
+    ap.add_argument("--agent-authors", default="", help="GitHub logins that mark a pull request as written by an agent, comma separated")
     ap.add_argument("--staff", action="store_true", help="also render the Staff cut")
     ap.add_argument("--board", action="store_true", help="also render the Board cut (needs --signed-off-by)")
     ap.add_argument("--signed-off-by", help="the named person who gave an explicit yes to the board cut")
@@ -195,7 +199,7 @@ def main() -> int:
         for line in offers:
             print(f"  {line}")
         print(f'run: record each yes with `intake.py accept {path} "<metric>"` (add --range to edit), then run this again.')
-    step("draft.py", "--run", str(run))
+    step("draft.py", "--run", str(run), *(["--previous", args.previous] if args.previous else []))
     print(step("validate.py", str(run / "deck.json")))
     outputs = [step("render.py", str(run / "deck.json"), "--out", str(run / "update.html"))]
     if args.staff:

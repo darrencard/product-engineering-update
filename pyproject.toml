@@ -1,6 +1,6 @@
 [project]
 name = "product-engineering-update"
-version = "0.6.0"
+version = "0.7.0"
 description = "A skill that builds a product and engineering update deck from a team's own data."
 requires-python = ">=3.9"
 # Standard library only, on purpose: the scripts run inside sandboxes that cannot install packages.

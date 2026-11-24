@@ -1,6 +1,6 @@
 {
   "name": "product-engineering-update",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "Build a product and engineering update for leadership, the board and all staff from your own data. Every figure is computed in code and carries an evidence ledger row, and a deck that overclaims does not render.",
   "author": { "name": "Dacard" }
 }

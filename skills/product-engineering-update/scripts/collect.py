@@ -76,6 +76,7 @@ SOURCES = {
             "failed": "bool?",
             "reworked": "bool?",
             "troubled": "bool?",
+            "agent_authored": "bool?",
         },
     },
     "incidents": {"label": "Incidents and status", "columns": {"id": "str", "started_at": "date", "restored_at": "date", "severity": "str?"}},

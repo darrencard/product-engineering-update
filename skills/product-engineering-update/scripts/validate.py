@@ -509,6 +509,23 @@ def _check_slide(s: Json, deck: Json, contract: Json | None, found: Findings) ->
     if shows_figures and not ledger_refs(s) and not s.get("rolls_up"):
         found.err("no-ledger-row", sid, "shows figures and cites no ledger row. Add the row and reference it, for example [[L01]] or ledger_refs.")
 
+    # a status that moved since the last update, with no reason given
+    joined = " ".join(strings([s.get("title", ""), s["blocks"]]))
+    if "[reason needed]" in joined:
+        found.err(
+            "status-change-unexplained",
+            sid,
+            "a status moved since the last update and no reason is given. Add one line per metric to the intake's status_reasons, then draft again.",
+        )
+
+    # a capitalisation figure that does not say it is an estimate
+    if re.search(r"capitali[sz]", joined, re.I) and not re.search(r"estimate", joined, re.I):
+        found.err(
+            "capex-not-estimate",
+            sid,
+            "states a capitalisable figure without calling it an estimate. What may be capitalised is the company's accounting policy; label it an estimate for finance to confirm.",
+        )
+
     # minimum evidence, or a data_needed block in its place
     if contract and not (set(contract["evidence_blocks"]) & types) and "data_needed" not in types:
         found.err(

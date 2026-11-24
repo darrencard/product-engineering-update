@@ -5,8 +5,10 @@ Usage:
   python3 scripts/from_github.py --prs prs.json --deployments deployments.json --repo owner/name --run run
 
 Inputs are the JSON GitHub already gives you, saved to a file as it stands:
-  --prs          merged pull requests, from `gh pr list --state merged --json number,createdAt,mergedAt,reviews`
+  --prs          merged pull requests, from `gh pr list --state merged --json number,createdAt,mergedAt,reviews,labels,author`
                  or the same fields from a GitHub connector
+  --agent-labels optional: labels that mark a pull request as written by an agent, comma separated
+  --agent-authors optional: logins that mark it, such as an agent's bot account, comma separated
   --deployments  optional: deployments, from `gh api repos/OWNER/NAME/deployments --paginate`
 
 It writes run/data/source_control.json, the same file collect.py writes, so
@@ -15,6 +17,8 @@ compute_metrics.py runs next as usual.
 What it derives, in code:
   review_hours   hours from a pull request opening to its first review
   reworked       whether any review asked for changes
+  agent_authored whether a label or author you named marks it as written by an agent;
+                 empty when you name none, so nothing is guessed
   deploys        one row per deployment to the named environment
 
 What it leaves empty on purpose: `failed`. GitHub can say a deployment did
@@ -79,7 +83,18 @@ def field(row: Json, *names: str) -> Any:
     return next((row[n] for n in names if row.get(n) is not None), None)
 
 
-def pull_request_rows(prs: list[Json]) -> list[Json]:
+def agent_mark(pr: Json, labels: set[str], authors: set[str]) -> str:
+    """yes or no when the person named what marks agent work; empty when they named nothing, so the share stays Unknown."""
+    if not labels and not authors:
+        return ""
+    names = {(x.get("name") if isinstance(x, dict) else str(x)).lower() for x in pr.get("labels") or []}
+    author = pr.get("author") or pr.get("user") or {}
+    login = ((author.get("login") or "") if isinstance(author, dict) else str(author)).lower()
+    return "yes" if names & labels or login in authors else "no"
+
+
+def pull_request_rows(prs: list[Json], labels: set[str] | None = None, authors: set[str] | None = None) -> list[Json]:
+    labels, authors = labels or set(), authors or set()
     rows: list[Json] = []
     for pr in prs:
         opened, merged = field(pr, "createdAt", "created_at"), field(pr, "mergedAt", "merged_at")
@@ -99,6 +114,7 @@ def pull_request_rows(prs: list[Json]) -> list[Json]:
                 "deployed_at": "",
                 "failed": "",
                 "reworked": reworked,
+                "agent_authored": agent_mark(pr, labels, authors),
             }
         )
     return rows
@@ -129,11 +145,16 @@ def main() -> int:
     ap.add_argument("--environment", default="Production", help="the deployment environment that counts as a deploy (default: Production)")
     ap.add_argument("--repo", required=True, help="owner/name, for the ledger")
     ap.add_argument("--retrieved-at", help="YYYY-MM-DD; defaults to the pull request file's modified date")
+    ap.add_argument("--agent-labels", default="", help="labels that mark a pull request as written by an agent, comma separated")
+    ap.add_argument("--agent-authors", default="", help="logins that mark a pull request as written by an agent, comma separated")
     ap.add_argument("--run", default="run")
     args = ap.parse_args()
 
+    def names(text: str) -> set[str]:
+        return {x.strip().lower() for x in text.split(",") if x.strip()}
+
     prs_path = Path(args.prs)
-    rows = pull_request_rows(read_arrays(prs_path))
+    rows = pull_request_rows(read_arrays(prs_path), names(args.agent_labels), names(args.agent_authors))
     reviewed = sum(1 for r in rows if r["review_hours"] != "")
     deploys: list[Json] = []
     if args.deployments:
@@ -142,7 +163,7 @@ def main() -> int:
         raise SystemExit("from_github: found no merged pull requests and no deployments. Check the export, then run this again.")
 
     retrieved = collect.retrieved_date(args.retrieved_at, str(prs_path))
-    query = "gh pr list --state merged --json number,createdAt,mergedAt,reviews" + ("; gh api repos/.../deployments" if args.deployments else "")
+    query = "gh pr list --state merged --json number,createdAt,mergedAt,reviews,labels,author" + ("; gh api repos/.../deployments" if args.deployments else "")
     data = collect.collect("source_control", deploys + rows, f"GitHub ({args.repo})", query, retrieved, prs_path.name)
     out = Path(args.run) / "data" / "source_control.json"
     out.parent.mkdir(parents=True, exist_ok=True)
@@ -151,6 +172,9 @@ def main() -> int:
     print(f"from_github: {len(rows)} merged pull requests ({reviewed} with a review) and {len(deploys)} deploys to {args.environment}, written to {out}")
     if rows and not reviewed:
         print("from_github: no pull request has a review, so there is no review time or rework rate. Speed will be held back until a quality metric exists.")
+    marked = [r for r in rows if r["agent_authored"] == "yes"]
+    if args.agent_labels or args.agent_authors:
+        print(f"from_github: {len(marked)} of {len(rows)} merged pull requests are marked as written by an agent.")
     if not deploys:
         print("from_github: no deployments supplied, so there is no deploys per week.")
     return 0
