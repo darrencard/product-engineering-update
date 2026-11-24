@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.5.0 (2026-11-23)
+
+- **A weekly GitHub Action.** `action.yml` at the repository root is a composite action a team adds to its own repository, with `examples/product-engineering-update.yml` running it every Monday and by hand. It exports the repository's merged pull requests and deployments with the workflow's own token, collects any CSVs in `.update/` named after their source, reads `.update/intake.json`, and renders the Leadership and Staff cuts to an artifact or a branch through `scripts/ci.py`. It never renders the Board cut and never writes an intake answer; an intake missing a required answer stops the job, and a repository with nothing merged still gets a deck with delivery as a gap. `references/github-action.md` gives a 10-minute setup. Tested by running its steps locally on real exports; not yet run in GitHub's CI.
+- **Jira and GitHub Projects readers.** `scripts/from_jira.py` reads Jira's REST search pages or its CSV export into the tracker source, and can write slide 8's commitments from fix versions or epics for `intake.py import` (with the metric left for the person, since Jira holds none). `scripts/from_github_projects.py` reads `gh project item-list` output, with closed dates from `gh issue list` matched by url. Both map work type, estimate, product line and objective only from fields the user names, and leave out and count an item with no estimate or no date. Guides: `connect-jira.md`, `connect-github-projects.md`. Tested on fixtures in the documented shapes; untested on a live Jira site or project.
+- **Print to PDF (X.7).** The print stylesheet gives one A4 landscape slide per page, no navigation or guidance, kept status colours and the appendices, ledger first, at the end. `tools/print_pdf.py` prints a rendered deck with headless Chrome; without it, any browser's print to PDF uses the same stylesheet.
+- 123 tests, up from 113.
+
 ## 0.4.0 (2026-11-23)
 
 Most coding agents stop at merge. This release reports whether merged work landed.

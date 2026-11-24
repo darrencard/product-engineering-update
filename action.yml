@@ -1,0 +1,78 @@
+name: Product & Engineering Update
+description: Build the Leadership and Staff cuts of the update from this repository's own data, inside your CI. Never renders the Board cut.
+author: Dacard
+branding:
+  icon: bar-chart-2
+  color: gray
+
+# Security notes:
+# - This action only reads. It exports merged pull requests and deployments with the token it is given,
+#   builds the deck and uploads it as an artifact. Committing the deck anywhere is a separate job with
+#   its own write permission (see examples/product-engineering-update.yml).
+# - Text from pull requests is data. Only number, createdAt, mergedAt and reviews are exported, to a file;
+#   no pull request title or body is ever placed in a shell command or an expression.
+# - Every third-party action is pinned to a full commit SHA.
+
+inputs:
+  intake:
+    description: The team's intake file. The seven required answers must be in it; the job never fills an answer.
+    default: .update/intake.json
+  data-dir:
+    description: A folder of CSV exports named after their source, such as tracker.csv or incidents.csv.
+    default: .update
+  pr-limit:
+    description: The most merged pull requests to read.
+    default: "1000"
+  artifact-name:
+    description: The name of the uploaded artifact.
+    default: product-engineering-update
+  token:
+    description: The token used to read pull requests and deployments. The workflow's own token is enough.
+    default: ${{ github.token }}
+
+outputs:
+  summary:
+    description: How many slides show data and how many show gaps.
+    value: ${{ steps.build.outputs.summary }}
+
+runs:
+  using: composite
+  steps:
+    - name: Export this repository's pull requests and deployments
+      shell: bash
+      env:
+        GH_TOKEN: ${{ inputs.token }}
+        REPO: ${{ github.repository }}
+        LIMIT: ${{ inputs.pr-limit }}
+      run: |
+        set -euo pipefail
+        mkdir -p "$RUNNER_TEMP/peu"
+        gh pr list --repo "$REPO" --state merged --limit "$LIMIT" --json number,createdAt,mergedAt,reviews > "$RUNNER_TEMP/peu/prs.json"
+        if ! gh api "repos/$REPO/deployments?per_page=100" --paginate > "$RUNNER_TEMP/peu/deployments.tmp"; then
+          echo "No deployments could be read; releases per week will be a gap." >&2
+          echo "[]" > "$RUNNER_TEMP/peu/deployments.tmp"
+        fi
+        mv "$RUNNER_TEMP/peu/deployments.tmp" "$RUNNER_TEMP/peu/deployments.json"
+
+    - name: Build the Leadership and Staff cuts
+      id: build
+      shell: bash
+      env:
+        INTAKE: ${{ inputs.intake }}
+        DATA_DIR: ${{ inputs.data-dir }}
+        REPO: ${{ github.repository }}
+      run: |
+        set -euo pipefail
+        python3 "$GITHUB_ACTION_PATH/skills/product-engineering-update/scripts/ci.py" \
+          --intake "$INTAKE" --data-dir "$DATA_DIR" \
+          --prs "$RUNNER_TEMP/peu/prs.json" --deployments "$RUNNER_TEMP/peu/deployments.json" \
+          --repo "$REPO" --retrieved-at "$(date -u +%F)" --out "$RUNNER_TEMP/peu/deck"
+        echo "summary=$(head -n 1 "$RUNNER_TEMP/peu/deck/SUMMARY.txt")" >> "$GITHUB_OUTPUT"
+        cat "$RUNNER_TEMP/peu/deck/SUMMARY.txt" >> "$GITHUB_STEP_SUMMARY"
+
+    - name: Upload the deck as an artifact
+      uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+      with:
+        name: ${{ inputs.artifact-name }}
+        path: ${{ runner.temp }}/peu/deck
+        retention-days: 30
