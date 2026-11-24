@@ -522,5 +522,67 @@ class Incidents(Base):
         )
 
 
+class Documents(Base):
+    def test_notion_pages_and_drive_files_list_documents_side_by_side(self) -> None:
+        pages = {
+            "object": "list",
+            "results": [
+                {
+                    "object": "page",
+                    "id": "b55c",
+                    "url": "https://www.notion.so/Strategy-b55c",
+                    "last_edited_time": "2026-11-01T09:15:00.000Z",
+                    "in_trash": False,
+                    "properties": {"Name": {"id": "title", "type": "title", "title": [{"type": "text", "plain_text": "Strategy 2026"}]}},
+                },
+                {"object": "page", "id": "x", "properties": {}, "in_trash": False},
+            ],
+        }
+        out = self.ok("from_notion.py", "--pages", self.save("notion.json", pages), "--kind", "strategy", "--workspace", "acme")
+        self.assertIn("1 page(s) have no title", out)
+        files = {
+            "kind": "drive#fileList",
+            "files": [
+                {
+                    "id": "1",
+                    "name": "Risk register",
+                    "mimeType": "application/vnd.google-apps.spreadsheet",
+                    "modifiedTime": "2026-10-20T12:00:00.000Z",
+                    "webViewLink": "https://docs.google.com/x",
+                },
+                {"id": "2", "name": "Folder", "mimeType": "application/vnd.google-apps.folder"},
+            ],
+        }
+        self.ok("from_gdrive.py", "--files", self.save("drive.json", files), "--kind", "risk register", "--drive", "acme")
+        self.assertEqual(
+            self.rows("docs"),
+            [
+                {"document": "Strategy 2026", "kind": "strategy", "updated_at": "2026-11-01T09:15:00+00:00", "location": "https://www.notion.so/Strategy-b55c"},
+                {"document": "Risk register", "kind": "risk register", "updated_at": "2026-10-20T12:00:00+00:00", "location": "https://docs.google.com/x"},
+            ],
+        )
+
+    def test_a_notion_markdown_export_lists_pages_and_backs_a_quoted_proposal(self) -> None:
+        folder = self.work / "export"
+        folder.mkdir()
+        (folder / "Strategy 1a2b.md").write_text("# Strategy\n\n## Diagnosis\n\nBuyers trust the record, not the pitch.\n", encoding="utf-8")
+        self.ok("from_notion.py", "--markdown", str(folder), "--kind", "strategy", "--workspace", "acme")
+        self.assertEqual(self.rows("docs"), [{"document": "Strategy", "kind": "strategy", "updated_at": None, "location": "Strategy 1a2b.md"}])
+        intake = self.work / "intake.json"
+        self.assertEqual(script("intake.py", "init", str(intake)).returncode, 0)
+        source = f"{folder / 'Strategy 1a2b.md'}#Diagnosis"
+        good = self.save(
+            "good.json",
+            {
+                "proposals": [
+                    {"field": "strategy.diagnosis", "value": "Buyers trust the record.", "source": source, "quote": "Buyers trust the record, not the pitch."}
+                ]
+            },
+        )
+        self.assertEqual(script("intake.py", "propose", str(intake), good).returncode, 0)
+        bad = self.save("bad.json", {"proposals": [{"field": "strategy.diagnosis", "value": "x", "source": source, "quote": "Buyers love us."}]})
+        self.assertIn("does not appear", script("intake.py", "propose", str(intake), bad).stderr)
+
+
 if __name__ == "__main__":
     unittest.main()
