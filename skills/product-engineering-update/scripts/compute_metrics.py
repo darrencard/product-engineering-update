@@ -334,7 +334,7 @@ def source_control(r: Run) -> None:
             # Only deploys whose outcome is known count: a deploy the hosting export says nothing about is not a clean one.
             "troubled": share_flagged([x for x in deploys if x.get("troubled") is not None], "troubled"),
             "troubled_known": sum(1 for x in deploys if x.get("troubled") is not None),
-            "troubled_coverage": coverage_of([x for x in deploys if x.get("troubled") is not None], len(deploys), "deployed_at", "deploys"),
+            "troubled_coverage": coverage_of([x for x in deploys if x.get("troubled") is not None], len(deploys), "deployed_at", "releases"),
         }
 
     now, before = stats(False), stats(True)
