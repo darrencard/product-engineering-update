@@ -1,0 +1,26 @@
+# Copy to .github/workflows/product-engineering-update.yml in your repository.
+# Every Monday at 14:00 UTC, and whenever you run it by hand, it builds the Leadership and Staff
+# cuts from this repository's pull requests and deployments, plus any CSVs in .update/.
+# Your data stays in your CI. The Board cut is never rendered here: it needs a named person's yes.
+name: Product & engineering update
+
+on:
+  schedule:
+    - cron: "0 14 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read        # use write if output is branch
+  pull-requests: read
+  deployments: read
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: darrencard/product-engineering-update@v0.5.0
+        with:
+          intake: .update/intake.json
+          data-dir: .update
+          output: artifact      # or: branch

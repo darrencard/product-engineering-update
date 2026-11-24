@@ -1158,6 +1158,60 @@ class Proposals(unittest.TestCase):
                 self.assertFalse((self.work / "proposals.json").exists(), "a refused file stores nothing")
 
 
+class Action(unittest.TestCase):
+    """The GitHub Action: the team's intake and data in, the Leadership and Staff cuts out, never the Board cut."""
+
+    def setUp(self) -> None:
+        self.work = Path(tempfile.mkdtemp(prefix="peu-ci-"))
+        self.data = self.work / ".update"
+        shutil.copytree(FIXTURES / "complete" / "csv", self.data)
+        shutil.copy(FIXTURES / "complete" / "intake.json", self.data / "intake.json")
+
+    def tearDown(self) -> None:
+        shutil.rmtree(self.work, ignore_errors=True)
+
+    def ci(self, *extra: str) -> subprocess.CompletedProcess[str]:
+        args = ["--intake", str(self.data / "intake.json"), "--data-dir", str(self.data), "--retrieved-at", "2026-09-30", "--out", str(self.work / "out")]
+        return script("ci.py", *args, *extra)
+
+    def test_the_run_writes_leadership_and_staff_only_and_leaves_the_intake_alone(self) -> None:
+        before = (self.data / "intake.json").read_text(encoding="utf-8")
+        done = self.ci()
+        self.assertEqual(done.returncode, 0, done.stdout + done.stderr)
+        out = self.work / "out"
+        self.assertEqual(
+            sorted(p.name for p in out.iterdir()), ["SUMMARY.txt", "deck.json", "leadership.html", "leadership.ledger.csv", "staff.html", "staff.ledger.csv"]
+        )
+        self.assertNotIn('data-aud="B"', (out / "leadership.html").read_text(encoding="utf-8").split("<main>")[1].split('class="slide')[0])
+        self.assertEqual((self.data / "intake.json").read_text(encoding="utf-8"), before, "the job never writes an answer back")
+        self.assertIn("The Board cut is not rendered here", (out / "SUMMARY.txt").read_text(encoding="utf-8"))
+
+    def test_an_intake_missing_a_required_answer_stops_the_job(self) -> None:
+        intake = json.loads((self.data / "intake.json").read_text(encoding="utf-8"))
+        intake["gap_owner"] = None
+        (self.data / "intake.json").write_text(json.dumps(intake), encoding="utf-8")
+        done = self.ci()
+        self.assertNotEqual(done.returncode, 0)
+        self.assertIn("A scheduled job does not fill answers", done.stderr)
+        self.assertFalse((self.work / "out").exists())
+
+    def test_a_repository_with_nothing_merged_still_gets_a_deck(self) -> None:
+        empty = self.work / "prs.json"
+        empty.write_text("[]", encoding="utf-8")
+        done = self.ci("--prs", str(empty), "--deployments", str(empty), "--repo", "acme/app")
+        self.assertEqual(done.returncode, 0, done.stderr)
+        self.assertIn("delivery shows as a gap", done.stdout)
+
+    def test_the_action_and_its_example_never_ask_for_the_board_cut(self) -> None:
+        action = (ROOT / "action.yml").read_text(encoding="utf-8")
+        example = (ROOT / "examples" / "product-engineering-update.yml").read_text(encoding="utf-8")
+        for text in (action, example):
+            self.assertNotRegex(text, r"--board|signed-off-by|--cut B")
+        self.assertIn("scripts/ci.py", action)
+        self.assertIn("workflow_dispatch", example)
+        self.assertRegex(example, r"schedule:\s*\n\s*- cron:")
+
+
 class Safety(unittest.TestCase):
     def example(self) -> Json:
         return json.loads((ROOT / "examples" / "harborline.deck.json").read_text(encoding="utf-8"))

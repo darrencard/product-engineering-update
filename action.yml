@@ -1,0 +1,97 @@
+name: Product & Engineering Update
+description: Build the Leadership and Staff cuts of the update from this repository's own data, inside your CI. Never renders the Board cut.
+author: Dacard
+branding:
+  icon: bar-chart-2
+  color: gray
+
+inputs:
+  intake:
+    description: The team's intake file. The seven required answers must be in it; the job never fills an answer.
+    default: .update/intake.json
+  data-dir:
+    description: A folder of CSV exports named after their source, such as tracker.csv or incidents.csv.
+    default: .update
+  output:
+    description: "artifact (default) uploads the deck as a workflow artifact; branch commits it to the branch below."
+    default: artifact
+  branch:
+    description: The branch the deck is committed to when output is branch.
+    default: product-engineering-update
+  pr-limit:
+    description: The most merged pull requests to read.
+    default: "1000"
+  token:
+    description: The token used to read pull requests and deployments. The workflow's own token is enough.
+    default: ${{ github.token }}
+
+outputs:
+  summary:
+    description: How many slides show data and how many show gaps.
+    value: ${{ steps.build.outputs.summary }}
+
+runs:
+  using: composite
+  steps:
+    - name: Export this repository's pull requests and deployments
+      shell: bash
+      env:
+        GH_TOKEN: ${{ inputs.token }}
+        REPO: ${{ github.repository }}
+        LIMIT: ${{ inputs.pr-limit }}
+      run: |
+        set -euo pipefail
+        mkdir -p "$RUNNER_TEMP/peu"
+        gh pr list --repo "$REPO" --state merged --limit "$LIMIT" --json number,createdAt,mergedAt,reviews > "$RUNNER_TEMP/peu/prs.json"
+        if ! gh api "repos/$REPO/deployments?per_page=100" --paginate > "$RUNNER_TEMP/peu/deployments.tmp"; then
+          echo "No deployments could be read; releases per week will be a gap." >&2
+          echo "[]" > "$RUNNER_TEMP/peu/deployments.tmp"
+        fi
+        mv "$RUNNER_TEMP/peu/deployments.tmp" "$RUNNER_TEMP/peu/deployments.json"
+
+    - name: Build the Leadership and Staff cuts
+      id: build
+      shell: bash
+      env:
+        INTAKE: ${{ inputs.intake }}
+        DATA_DIR: ${{ inputs.data-dir }}
+        REPO: ${{ github.repository }}
+      run: |
+        set -euo pipefail
+        python3 "$GITHUB_ACTION_PATH/skills/product-engineering-update/scripts/ci.py" \
+          --intake "$INTAKE" --data-dir "$DATA_DIR" \
+          --prs "$RUNNER_TEMP/peu/prs.json" --deployments "$RUNNER_TEMP/peu/deployments.json" \
+          --repo "$REPO" --retrieved-at "$(date -u +%F)" --out "$RUNNER_TEMP/peu/deck"
+        echo "summary=$(head -n 1 "$RUNNER_TEMP/peu/deck/SUMMARY.txt")" >> "$GITHUB_OUTPUT"
+        cat "$RUNNER_TEMP/peu/deck/SUMMARY.txt" >> "$GITHUB_STEP_SUMMARY"
+
+    - name: Upload the deck as an artifact
+      if: inputs.output == 'artifact'
+      uses: actions/upload-artifact@v4
+      with:
+        name: product-engineering-update
+        path: ${{ runner.temp }}/peu/deck
+        retention-days: 30
+
+    - name: Commit the deck to a branch
+      if: inputs.output == 'branch'
+      shell: bash
+      env:
+        BRANCH: ${{ inputs.branch }}
+      run: |
+        set -euo pipefail
+        day="$(date -u +%F)"
+        git config user.name "github-actions[bot]"
+        git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+        if git ls-remote --exit-code --heads origin "$BRANCH" > /dev/null; then
+          git fetch origin "$BRANCH"
+          git worktree add "$RUNNER_TEMP/peu/branch" "origin/$BRANCH"
+          git -C "$RUNNER_TEMP/peu/branch" switch -c "$BRANCH"
+        else
+          git worktree add --orphan -b "$BRANCH" "$RUNNER_TEMP/peu/branch"
+        fi
+        mkdir -p "$RUNNER_TEMP/peu/branch/updates/$day"
+        cp "$RUNNER_TEMP/peu/deck/"* "$RUNNER_TEMP/peu/branch/updates/$day/"
+        git -C "$RUNNER_TEMP/peu/branch" add updates
+        git -C "$RUNNER_TEMP/peu/branch" commit -m "Product & engineering update, $day" || echo "Nothing changed since the last run."
+        git -C "$RUNNER_TEMP/peu/branch" push origin "$BRANCH"
