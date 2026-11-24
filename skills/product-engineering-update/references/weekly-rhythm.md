@@ -24,7 +24,7 @@ Each week, the job:
 Any scheduler that can start a Claude session with this skill and the connectors works, for example:
 
 - A scheduled Claude task (in Claude Code, `/schedule`; in the desktop app, a scheduled task) with a prompt such as: "Run the weekly product and engineering update draft for Acme into runs/<today>/, following references/weekly-rhythm.md. Render the Leadership and Staff cuts. Do not render or post the board cut. Send me the change list."
-- A recurring agent run started from Linear, if your workspace has one, with the same prompt.
+- A Linear Loop. [linear-loop.md](linear-loop.md) has one ready to paste: a weekly landing check that drafts one document from each project's landing brief and posts nothing.
 
 Whichever you use, check that it runs with the same skill version each week, and that its run folder is kept, so `review.py --previous` has last week's deck to compare against.
 
