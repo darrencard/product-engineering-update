@@ -181,6 +181,7 @@ To run the draft every week, follow [references/weekly-rhythm.md](references/wee
 - [references/connect-github.md](references/connect-github.md): pull delivery data straight from GitHub.
 - [references/github-action.md](references/github-action.md): a weekly GitHub Action that builds the Leadership and Staff cuts in the team's own CI.
 - [references/connect-vercel.md](references/connect-vercel.md): a labelled quality proxy from Vercel, for repositories with no reviews.
+- [references/connect-sentry.md](references/connect-sentry.md): the same labelled quality proxy from Sentry, on any host.
 - [references/connect-linear.md](references/connect-linear.md): the investment slides, shipped vs impact, line of sight and customer requests from Linear.
 - [references/weekly-rhythm.md](references/weekly-rhythm.md): drafting the update every week on a schedule.
 - [references/connect-posthog.md](references/connect-posthog.md): the outcome scorecard from PostHog.
