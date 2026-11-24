@@ -1439,6 +1439,16 @@ class Safety(unittest.TestCase):
             with self.subTest(script=path.name):
                 self.assertIsNone(banned.search(path.read_text(encoding="utf-8")))
 
+    def test_a_rendered_deck_prints_one_slide_per_page_with_no_navigation(self) -> None:
+        html = render.render_deck(self.example())
+        printed = html[html.index("@media print{") :]
+        printed = printed[: printed.index("\n}\n")]
+        self.assertIn("@page{size:A4 landscape", html)
+        self.assertIn(".rail,.bar,.guide,#g{display:none!important}", printed)
+        self.assertIn("break-after:page", printed)
+        self.assertIn("print-color-adjust:exact", printed)
+        self.assertNotIn("subprocess", (SKILL / "scripts" / "render.py").read_text(encoding="utf-8"))
+
     def test_the_rendered_file_makes_no_network_calls(self) -> None:
         html = render.render_deck(self.example())
         self.assertIsNone(re.search(r"<link\b|<script[^>]+src=|<img\b|<iframe\b|@import|url\((?!data:)", html))

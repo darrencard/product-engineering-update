@@ -156,7 +156,9 @@ python3 scripts/render.py run/deck.json --out run/staff.html --cut S
 
 Render the cuts the user asked for; with no cut named, render the full deck (the first command). Only the board cut needs a sign-off. If nobody is available to give it, render the other cuts, do not render the board cut, and say that it is waiting on a named person's yes.
 
-Each render writes the HTML file and the ledger as CSV beside it. Give the user the HTML, `run/deck.json` and the ledger CSV. Tell them how many slides show data and how many show gaps.
+Each render writes the HTML file and the ledger as CSV beside it.
+
+To hand someone a PDF, open the HTML in a browser and print to PDF: the deck's print stylesheet gives one landscape slide per page, no navigation or guidance, and the appendices (the ledger first) at the end. With Chrome installed, `python3 ../../tools/print_pdf.py run/staff.html run/staff.pdf` does the same headless from the repository root. A Board cut is only printed after its sign-off. Give the user the HTML, `run/deck.json` and the ledger CSV. Tell them how many slides show data and how many show gaps.
 
 ### 8. Write back
 

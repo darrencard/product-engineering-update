@@ -163,12 +163,19 @@ body.guides .guide{display:block}
   .guide dl{grid-template-columns:1fr}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+@page{size:A4 landscape;margin:12mm 14mm}
 @media print{
-  .rail,.bar{display:none} main{margin:0}
-  body{background:#fff;color:#0A0A0A}
+  .rail,.bar,.guide,#g{display:none!important} main{margin:0}
+  body{background:#fff;color:#0A0A0A;-webkit-print-color-adjust:exact;print-color-adjust:exact}
   :root{color-scheme:light;--bg:#fff;--band:#fff;--s1:#fff;--s2:#F2F2EF;--s3:#E6E6E2;--line:#ddd;--line2:#bbb;--line3:#999;--t1:#0A0A0A;--t2:#3C3C3A;--t3:#585855;--brass:#9A6B12;--brass-bg:#fbf6ea;--agent:#A6A6A2;--agent-mid:#A6A6A2;--landed:#1E7A45;--watch:#585855;--stalled:#B5371F}
-  .slide{page-break-after:always;min-height:0;border:0}
+  main{zoom:.72}
+  .slide{break-after:page;page-break-after:always;min-height:0;max-width:none;padding:0;border:0}
+  .slide>:last-child,.foot>:last-child{margin-bottom:0}
+  .slide[data-skip],section.slide:last-of-type{break-after:auto;page-break-after:auto}
+  .tablewrap{overflow:visible}
+  tr,.card,.tree,.strip{break-inside:avoid}
   details>*{display:block}
+  details summary{display:none}
 }
 </style>
 </head>
