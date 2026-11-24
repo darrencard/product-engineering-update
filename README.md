@@ -11,7 +11,7 @@ See the worked example and the template at https://www.dacard.ai/update.
 Paste this into Claude Code, replace `OWNER/REPO`, and answer the few questions it asks. It needs the `gh` command line signed in to GitHub. Your data stays on your machine.
 
 ```text
-Install the Product & Engineering Update skill from the v0.4.0 release at https://github.com/darrencard/product-engineering-update/releases/tag/v0.4.0, and check the download against its SHA256SUMS before installing. Then build an update for OWNER/REPO from its GitHub history, using the skill's GitHub shortcut. If the repository has no pull request reviews and runs on Vercel, add Vercel's release and error records as the quality stand-in. Ask me only for what you cannot find, show every gap with an owner and a date, and render the full deck.
+Install the Product & Engineering Update skill from the v0.5.0 release at https://github.com/darrencard/product-engineering-update/releases/tag/v0.5.0, and check the download against its SHA256SUMS before installing. Then build an update for OWNER/REPO from its GitHub history, using the skill's GitHub shortcut. If the repository has no pull request reviews and runs on Vercel, add Vercel's release and error records as the quality stand-in. Ask me only for what you cannot find, show every gap with an owner and a date, and render the full deck.
 ```
 
 The prompt names a fixed release, so a later change to the repository can't reach you until you choose a newer one. Something wrong or missing? [Open an issue](https://github.com/darrencard/product-engineering-update/issues).
