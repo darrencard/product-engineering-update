@@ -4,7 +4,7 @@ description: Builds a product and engineering update deck for leadership, the bo
 license: MIT for the scripts, CC BY 4.0 for the instructions, references and template. See LICENSE and LICENSE-CONTENT.md in the repository root.
 metadata:
   author: Dacard
-  version: "0.7.0"
+  version: "0.7.1"
 ---
 
 # Product & Engineering Update
@@ -120,7 +120,7 @@ Titles are the only thing you edit in `run/deck.json`. Do not change blocks, fig
 
 **The capitalisable estimate (slide 5).** If finance says which work types it treats as capitalisable and which cost lines the share applies to, record them in `capitalisation` (`work_types`, `cost_lines`, and `confirmed_by` once finance has checked it). The slide shows the estimate beside the spend, labelled an estimate for finance to confirm. Never pick the work types yourself: what may be capitalised is the company's accounting policy.
 
-**The pace to each target (slide 11).** The outcome scorecard's "At this pace" column repeats this period's change until the target is reached and, when the target has a date (`by`), says whether that lands before or after it. It prints as Projected. Never quote it as a result or a forecast the team committed to.
+**The pace to each target (slide 11).** The "At this pace (Projected)" note under the outcome scorecard repeats this period's change until the target is reached and, when the target has a date (`by`), says whether that lands before or after it. It prints as Projected. Never quote it as a result or a forecast the team committed to.
 
 Slide IDs in the files are `00` (cover), `01` to `18`, `09b` (the board's delivery slide) and `A` to `D` (appendices). The deck has 19 core slides in all; no single cut shows more than 18.
 

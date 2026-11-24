@@ -562,7 +562,6 @@
           "target": "Target",
           "status": "Status",
           "extra": [
-            "At this pace",
             "Benchmark",
             "Owner"
           ]
@@ -575,7 +574,6 @@
             "target": "22K",
             "status": "landed",
             "extra": [
-              "Met",
               "None external",
               "Agent team"
             ],
@@ -588,7 +586,6 @@
             "target": "50%",
             "status": "watch",
             "extra": [
-              "Projected: 5 more periods",
               "None external",
               "Activation team"
             ],
@@ -601,11 +598,27 @@
             "target": "6,000",
             "status": "landed",
             "extra": [
-              "Met",
               "None external",
               "Core dispatch"
             ],
             "definition": "Dispatchers active in a week"
+          }
+        ]
+      },
+      {
+        "type": "cards",
+        "columns": 1,
+        "items": [
+          {
+            "title": "At this pace (Projected)",
+            "body": [
+              {
+                "list": [
+                  "Activation: 5 more periods."
+                ]
+              },
+              "This period's change, repeated. A rough guide, never a result or a commitment."
+            ]
           }
         ]
       }

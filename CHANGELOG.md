@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.7.1 (2026-11-24)
+
+- **The pace moves under the outcome scorecard.** In 0.7.0 it was an eighth column, which pushed slide 11 into a sideways scroll at laptop widths (about 1024px) and squeezed outcome names to 90px. It is now an "At this pace (Projected)" note under the table, listing only the outcomes not yet at their target. Checked in a browser at 1440 and 1024px: the table fits its frame with no scroll.
+
 ## 0.7.0 (2026-11-24)
 
 Five additions, picked from how Linear, Atlassian, Swarmia, Jellyfish and LinearB report status, each computed locally from data the skill already reads.
