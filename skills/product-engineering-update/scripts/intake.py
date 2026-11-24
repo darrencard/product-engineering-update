@@ -444,9 +444,8 @@ def main() -> int:
         done = confirm(path, intake, args.by.strip(), args.field, edits)
         write_intake(path, intake)
         for p in done:
-            print(
-                f"confirmed {p['field']}{' (edited)' if p['field'] in edits else ''}, by {args.by.strip()}, from {', '.join(e['source'] for e in p['evidence'])}"
-            )
+            where = ", ".join(e["source"] for e in p["evidence"])
+            print(f"confirmed {p['field']}{' (edited)' if p['field'] in edits else ''}, by {args.by.strip()}, from {where}")
         return 0
     if args.command == "import":
         files = {k: Path(v) for k, v in (("decisions", args.decisions), ("risks", args.risks), ("stopped", args.stopped)) if v}
