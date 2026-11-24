@@ -105,6 +105,49 @@ def described_tile(metric: Json) -> Json:
     return tile
 
 
+# How a title names a computed metric, for a reader outside engineering. A title says what the number
+# means, never the engineering term for it (writing-rules.md). The metric's own label stays in the tables.
+PLAIN_SUBJECTS = {
+    "traced_pct": "The share of the team's time tied to a company objective",
+    "deploys_per_week": "Releases to customers per week",
+    "lead_time": "The time from a code change being proposed to it being accepted",
+    "change_failure_rate": "The share of releases that caused a problem in production",
+    "troubled_deploy_rate": "The share of releases rolled back or followed by errors",
+    "review_time": "The time a code change spent in review",
+    "rework_rate": "The share of code changes that had to be redone",
+    "time_to_restore": "The time to restore the service after an incident",
+    "arr": "Yearly recurring revenue",
+    "nrr": "Revenue from existing customers, against what they paid before,",
+    "grr": "Revenue kept from existing customers",
+    "expansion_arr": "New yearly revenue from existing customers",
+    "rd_share": "Research and development spend as a share of revenue",
+    "eval_pass_rate": "The share of quality tests the AI feature passes",
+    "cost_per_task": "The cost of each task the AI feature completes",
+    "ai_tool_cost": "Spend on AI tools for the team",
+    "ai_weekly_use": "The share of AI tool licences used each week",
+    "dev_experience": "The developer survey score",
+}
+# Work types as a board member would say them. A team's own work type names pass through unchanged.
+PLAIN_WORK_TYPES = {
+    "keep the lights on": "Basic upkeep",
+    "ktlo": "Basic upkeep",
+    "new capabilities": "New features",
+    "improve the core": "Improving what we already sell",
+    "platform & scale": "Platform work",
+    "platform and scale": "Platform work",
+    "growth": "Growth work",
+}
+
+
+def lower_first(text: str) -> str:
+    """ "Approve a pilot" reads as "approve a pilot" mid-sentence; "AI pricing" keeps its capitals."""
+    return text[:1].lower() + text[1:] if text[1:2].islower() else text
+
+
+def plain_work_type(label: str) -> str:
+    return PLAIN_WORK_TYPES.get(label.strip().lower(), label)
+
+
 class Draft:
     def __init__(self, run: Path) -> None:
         self.intake = load(run / "intake.json")
@@ -112,6 +155,8 @@ class Draft:
         self.metrics: Json = self.m["metrics"]
         self.extra: Json = self.m["extra"]
         self.deck = copy.deepcopy(load(ASSETS / "blank.deck.json"))
+        samples = ASSETS / "samples.json"
+        self.samples: Json = load(samples) if samples.exists() else {"source": "", "slides": {}}
         self.slides = {s["id"]: s for s in self.deck["slides"]}
         self.filled: list[str] = []
 
@@ -149,12 +194,13 @@ class Draft:
         metric = self.metrics.get(key)
         if not metric or metric.get("conflict") or metric["display"] is None:
             return None
+        subject = PLAIN_SUBJECTS.get(key, metric["label"])
         if metric["prior_display"] is None:
-            return f"{metric['label']} is {metric['display']}."
+            return f"{subject} is {metric['display']}."
         if metric["value"] == metric["prior"]:
-            return f"{metric['label']} held at {metric['display']}."
+            return f"{subject} held at {metric['display']}."
         verb = "rose" if metric["value"] > metric["prior"] else "fell"
-        return f"{metric['label']} {verb} from {metric['prior_display']} to {metric['display']}."
+        return f"{subject} {verb} from {metric['prior_display']} to {metric['display']}."
 
     # ---- slides ----------------------------------------------------------
 
@@ -200,7 +246,7 @@ class Draft:
         traced = self.metrics.get("traced_pct")
         refs = [traced["ledger"]] if traced else []
         title = (
-            f"{traced['display']} of capacity traces to a company objective through a stated cause."
+            f"{traced['display']} of the team's time goes to work tied to a company objective, each with a stated reason it should pay off."
             if traced
             else f"{len(bets)} bets trace to {len(trees)} objectives, each through a stated cause."
         )
@@ -220,9 +266,9 @@ class Draft:
         }
         top = max(lines, key=lambda line: capacity.get(line["name"], 0))
         title = (
-            f"{top['name']} takes {capacity.get(top['name'], 0)}% of capacity."
+            f"{top['name']} takes {capacity.get(top['name'], 0)}% of the team's time."
             if len(lines) == 1
-            else f"{top['name']} takes the largest share of capacity at {capacity.get(top['name'], 0)}%."
+            else f"{top['name']} takes the largest share of the team's time, at {capacity.get(top['name'], 0)}%."
         )
         self.fill("04", title, [table], [mix["ledger"]], self.systems("tracker"))
 
@@ -252,9 +298,9 @@ class Draft:
             refs.append(finance["ledger"])
         over = [r for r in mix["rows"] if r["over"]]
         title = (
-            f"{over[0]['label']} was planned at {over[0]['plan']}% of capacity and took {over[0]['actual']}%."
+            f"{plain_work_type(over[0]['label'])} was planned at {over[0]['plan']}% of the team's time and took {over[0]['actual']}%."
             if over
-            else "Capacity went where the plan said it would, within 3 points on every line."
+            else "The team's time went where the plan said it would, within 3 points on every type of work."
         )
         blocks: list[Json] = [{"type": "cards", "columns": "2:1" if len(items) == 2 else 1, "items": items}]
         if "arr" not in self.metrics or not finance:
@@ -265,7 +311,7 @@ class Draft:
         ranges: Json = self.intake.get("delivery_ranges") or {}
         groups = [
             ("Speed", ["deploys_per_week", "lead_time"]),
-            ("Quality, the pair for every speed metric", ["change_failure_rate", "time_to_restore", "review_time", "rework_rate"]),
+            ("Quality, the pair for every speed metric", ["change_failure_rate", "troubled_deploy_rate", "time_to_restore", "review_time", "rework_rate"]),
             ("Effectiveness", ["dev_experience"]),
         ]
         rows: list[Json] = []
@@ -308,12 +354,14 @@ class Draft:
     def held_speed(self) -> str:
         """Why the delivery slide is a gap when speed was measured: speed never shows without a quality pair and a range."""
         speed = [k for k in ("deploys_per_week", "lead_time") if k in self.metrics]
-        quality = [k for k in ("change_failure_rate", "time_to_restore", "review_time", "rework_rate") if k in self.metrics]
+        quality = [k for k in ("change_failure_rate", "troubled_deploy_rate", "time_to_restore", "review_time", "rework_rate") if k in self.metrics]
         if not speed:
             return ""
         missing = []
         if not quality:
-            missing.append("a quality metric to pair with speed (change failure rate, time to restore, review time or rework)")
+            missing.append(
+                "a quality metric to pair with speed (change failure rate, time to restore, review time, rework, or deploys rolled back or followed by errors)"
+            )
         if not self.intake.get("delivery_ranges"):
             missing.append("a healthy range for each delivery metric")
         if not missing:
@@ -377,12 +425,16 @@ class Draft:
             )
         if gaps:
             blocks.append({"type": "cards", "columns": 1, "items": [self.gap(" ".join(gaps))]})
-        landed = [r["metric"] for r in rows if r["status"] == "landed"]
-        missed = [r["metric"] for r in rows if r["status"] != "landed"]
+        landed = [r for r in rows if r["status"] == "landed"]
+        missed = [r for r in rows if r["status"] != "landed"]
         if not rows:
             title = "Outcomes are not reported this period. The sources disagree or are missing."
         elif landed and missed:
-            title = f"{landed[0]} met its target. {missed[0]} did not."
+            hit, short = landed[0], missed[0]
+            title = (
+                f"{hit['metric']} reached {hit['actual']}, against a target of {hit['target']}. "
+                f"{short['metric']}, at {short['actual']} against {short['target']}, did not."
+            )
         elif landed:
             title = f"All {len(landed)} reported outcomes met their targets."
         else:
@@ -412,7 +464,7 @@ class Draft:
                 continue
             reason, count = found["top"][0]
             tiles.append({"value": f"{count} of {found['total']}", "label": f"{noun.capitalize()} citing: {reason}"})
-            claims.append(f"{reason} is the most cited reason in {found['total']} {noun}.")
+            claims.append(f"The most cited reason in {found['total']} {noun}: {reason}.")
             refs.append(found["ledger"])
         self.fill("07", " ".join(claims), [{"type": "tiles", "columns": 3 if len(tiles) > 2 else 2, "items": tiles}], refs, self.systems("crm", "support"))
 
@@ -431,7 +483,7 @@ class Draft:
         }
         self.fill(
             "13",
-            f"{use['display']} of AI tool seats are used weekly, at {cost['display']} for the period. We report no productivity figure.",
+            f"{use['display']} of AI tool licences are used each week, at {cost['display']} this period. We make no claim that the team got faster.",
             [table, {"type": "cards", "columns": 1, "items": [note]}],
             [use["ledger"], cost["ledger"]],
             self.systems("ai_tools"),
@@ -444,7 +496,9 @@ class Draft:
         cards = [{"title": x["what"], "body": [x.get("why") or "No reason recorded."]} for x in items]
         self.fill(
             "15",
-            f"We stopped {plural(len(items), 'thing')} this period.",
+            f"We stopped one thing this period: {lower_first(items[0]['what'])}."
+            if len(items) == 1
+            else f"We stopped {plural(len(items), 'thing')} this period.",
             [{"type": "cards", "columns": min(max(len(cards), 2), 3), "items": cards}],
             [],
             "Decision log as stated in the intake interview.",
@@ -504,7 +558,8 @@ class Draft:
                 [b["bet"], b.get("commitment") or "Not stated", b["appetite"], b.get("expected") or "Not stated", b["confidence"], b["stop_rule"]] for b in bets
             ],
         }
-        self.fill("16", f"{plural(len(bets), 'bet')}, each with an appetite and a stop rule.", [table], [], "Bets as stated in the intake interview.")
+        title = f"We are making {plural(len(bets), 'bet')}, each with a set budget of time and people and a stated point at which we stop."
+        self.fill("16", title, [table], [], "Bets as stated in the intake interview.")
 
     def risks(self) -> None:
         risks = self.intake.get("risks") or []
@@ -518,7 +573,8 @@ class Draft:
                 for r in risks
             ],
         }
-        self.fill("14", f"{plural(len(risks), 'risk')}, each with an owner and a date.", [table], [], "Risk register as stated in the intake interview.")
+        title = f"One risk: {lower_first(risks[0]['risk'])}." if len(risks) == 1 else f"{plural(len(risks), 'risk')}, each with an owner and a date."
+        self.fill("14", title, [table], [], "Risk register as stated in the intake interview.")
 
     def people(self) -> None:
         hr = self.extra.get("hr")
@@ -549,7 +605,7 @@ class Draft:
         ]
         self.fill(
             "18",
-            f"{plural(len(asks), 'decision')} to make at this meeting.",
+            f"One decision for you today: {lower_first(asks[0]['ask'])}." if len(asks) == 1 else f"{plural(len(asks), 'decision')} for you today.",
             [{"type": "cards", "columns": min(max(len(items), 2), 3), "items": items}],
             [],
             "Decisions as stated in the intake interview.",
@@ -614,6 +670,17 @@ class Draft:
                         item["owner"] = intake.get("gap_owner") or item["owner"]
                         item["due"] = intake.get("gap_due") or item["due"]
             s["asof"] = f"No data collected for {intake['period']['label']}."
+            sample = self.samples["slides"].get(s["id"])
+            if sample:
+                # Shows what the slide would hold, greyed and tagged. It is never evidence and cites no ledger row.
+                s["blocks"].append(
+                    {
+                        "type": "sample",
+                        "illustrative": True,
+                        "label": f"What this slide looks like with data. A sample from {self.samples['source']}; none of it is yours.",
+                        "blocks": copy.deepcopy(sample),
+                    }
+                )
         core = [s for s in deck["slides"] if s["kind"] == "slide"]
         cover["blocks"] = [
             {

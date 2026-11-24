@@ -8,6 +8,7 @@ A title is one assertion sentence that the slide's evidence supports. A reader w
 - Use only figures that are on the slide and in the ledger.
 - Do not add a cause the data does not show. "Activation rose from 39% to 41%" is a claim. "Activation rose because of the new onboarding" needs evidence for the "because".
 - A label is not a title. "Outcome scorecard" claims nothing.
+- Say what the number means, not the engineering term for it. "The share of releases that caused a problem in production rose from 5.1% to 7.7%", not "Change failure rate rose". "Basic upkeep", not "keep the lights on". "The team's time", not "capacity". Keep the precise term in the table. `validate.py` warns on shorthand in a title (`jargon-in-title`).
 - When a slide has no data, say so: "Platform & security is not reported this period. The data is missing."
 - Write the first slide's title last. It restates the most important change and adds nothing new.
 

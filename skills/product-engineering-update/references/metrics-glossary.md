@@ -33,6 +33,7 @@ A speed metric never appears without a quality metric on the same slide.
 | Deploys per week | Deploys in the period, divided by weeks in the period | `source_control`, rows with kind `deploy` | Speed |
 | Lead time for change | Median hours from `opened_at` to `merged_at`, pull requests merged in the period | `source_control`, kind `pull_request` | Speed |
 | Change failure rate | Failed deploys as a percent of deploys in the period | `source_control`, `failed` | Quality |
+| Deploys rolled back or followed by errors | Deploys flagged by `from_vercel.py` (rolled back, or a runtime error group first seen while the deploy was live) as a percent of deploys whose outcome is known. A proxy for change failure rate, never relabelled as one | `source_control`, `troubled` | Quality (proxy) |
 | Time to restore | Median minutes from `started_at` to `restored_at`, incidents started in the period | `incidents` | Quality |
 | Pull request review time | Median `review_hours`, pull requests merged in the period | `source_control` | Quality |
 | Rework rate | Reworked pull requests as a percent of those merged in the period | `source_control`, `reworked` | Quality |

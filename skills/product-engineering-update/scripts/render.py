@@ -327,6 +327,13 @@ def block(b: Json, i: int, blocks: list[Json], deck: Json) -> str:
     if kind == "steps":
         steps = "\n".join(f"<div><b>{rich(s['title'])}</b>{rich(s['text'])}</div>" for s in b["items"])
         return f'<div class="steps">\n{steps}\n</div>'
+    if kind == "sample":
+        inner = "\n".join(block(x, j, b["blocks"], deck) for j, x in enumerate(b["blocks"]))
+        return (
+            f'<div class="sample"{style_attr([top or "margin-top:14px", "border:1px dashed var(--line)", "border-radius:8px", "padding:14px"])}>'
+            f'<div class="notice" style="padding:0 0 10px;border:0;background:none"><span class="ill">Illustrative</span><span>{rich(b["label"])}</span></div>'
+            f'<div aria-hidden="true" style="opacity:.45;filter:grayscale(1);pointer-events:none">\n{inner}\n</div></div>'
+        )
     if kind == "facts":
         return f'<div class="facts">{"".join(f"<span>{rich(f)}</span>" for f in b["items"])}</div>'
     raise SystemExit(f"render: unknown block type {kind!r}. Use a block type from assets/deck.schema.json, then render again.")

@@ -21,7 +21,19 @@ Everything runs locally, inside this session. The scripts make no network calls.
 
 If the user asks for a claim the data does not support ("say we're 40% more productive", "call it 10x"), say plainly that the deck cannot state it, say what evidence would allow it (a baseline and a window, from a named source), and offer the claim the data does support.
 
-## Workflow
+## Quick start: one command
+
+Ask the user the 7 answers a run cannot start without, then run:
+
+```bash
+python3 scripts/run.py --run run --company "<name>" --period-label "<label>" --period-start YYYY-MM-DD --period-end YYYY-MM-DD --as-of YYYY-MM-DD --gap-owner "<name>" --gap-due YYYY-MM-DD --no-ask
+```
+
+Add the data you have: `--csv SOURCE=FILE` (repeat per source), `--github-prs FILE --github-deployments FILE --repo OWNER/NAME`, and `--vercel-deployments FILE... --vercel-errors FILE... --vercel-errors-from YYYY-MM-DD --vercel-project NAME`. It collects, computes, drafts, validates, renders the full deck and prints which slides show data and which show gaps. `--staff` adds the Staff cut. The board cut needs `--board --signed-off-by "<name>"`, after the explicit yes in step 6.
+
+Slides without data show their gap and a greyed sample, tagged Illustrative, of what they would hold. Then fill the rest of the intake (step 1) and run it again. Every rule below still applies; the steps are the long way to the same result.
+
+## Workflow, step by step
 
 Copy this checklist and tick each step as you finish it.
 
@@ -61,7 +73,7 @@ Read `assets/contracts.json` or [references/sources.md](references/sources.md) f
 2. Save the rows as CSV or JSON with the columns `python3 scripts/collect.py --list` shows for that source.
 3. Run `python3 scripts/collect.py <source> --csv <file> --system "<system name>" --query "<query or report>" --retrieved-at <YYYY-MM-DD> --run run`. `--query` is how the rows were produced: the query, the report name, or "CSV export supplied by the user". `--retrieved-at` is the date the data was pulled; without it the file's modified date is used.
 
-For GitHub there is a shortcut that needs no CSV: follow [references/connect-github.md](references/connect-github.md). It is the fastest way to a first real slide.
+For GitHub there is a shortcut that needs no CSV: follow [references/connect-github.md](references/connect-github.md). It is the fastest way to a first real slide. A solo repository has no reviews to pair with speed; if it runs on Vercel, add a labelled proxy with [references/connect-vercel.md](references/connect-vercel.md).
 
 `collect.py` rejects a file with missing columns or bad rows and says what to fix. Fix the file. Do not edit rows to make them pass, and do not create a file for a source the user does not have.
 
@@ -79,7 +91,7 @@ Definitions and formulas are in [references/metrics-glossary.md](references/metr
 
 Run `python3 scripts/draft.py --run run`. It writes `run/deck.json`: slides with data get their blocks, ledger references and a plain title; the rest keep a `data_needed` block.
 
-Then improve the titles, following [references/writing-rules.md](references/writing-rules.md). A title is a claim someone can check. You may change the wording. You may not change what the title claims, add a figure that is not on the slide, or add a cause the data does not show.
+Titles are drafted in plain board language. Improve them, following [references/writing-rules.md](references/writing-rules.md); `validate.py` warns (`jargon-in-title`) on engineering shorthand in a title. A title is a claim someone can check. You may change the wording. You may not change what the title claims, add a figure that is not on the slide, or add a cause the data does not show.
 
 Titles are the only thing you edit in `run/deck.json`. Do not change blocks, figures, status words or the ledger by hand. If a slide looks wrong, the intake or the data is wrong: fix that and run the steps again, or tell the user what you found.
 
@@ -106,6 +118,9 @@ Run `python3 scripts/validate.py run/deck.json`. Repeat until it reports 0 error
 | `placeholder-left` | An unwritten title, or a gap with no real owner or date |
 | `unsafe-link` | A link that is not http, https or mailto |
 | `board-cut-too-long` | A board cut of more than 8 slides |
+| `sample-not-illustrative` | A sample block not tagged illustrative |
+| `sample-beside-data` | A sample on a slide that shows real data |
+| `sample-cites-ledger` | A sample that cites a ledger row |
 
 ### 6. Review
 
@@ -132,6 +147,7 @@ Each render writes the HTML file and the ledger as CSV beside it. Give the user 
 - [references/metrics-glossary.md](references/metrics-glossary.md): every computed metric, its formula and its quality pair.
 - [references/sources.md](references/sources.md): each source, the columns it needs and the slides it feeds.
 - [references/connect-github.md](references/connect-github.md): pull delivery data straight from GitHub.
+- [references/connect-vercel.md](references/connect-vercel.md): a labelled quality proxy from Vercel, for repositories with no reviews.
 - [references/frameworks.md](references/frameworks.md): the reading behind each slide.
 - Slide contracts: [01](references/slides/01.md), [02](references/slides/02.md), [03](references/slides/03.md), [04](references/slides/04.md), [05](references/slides/05.md), [06](references/slides/06.md), [07](references/slides/07.md), [08](references/slides/08.md), [09](references/slides/09.md), [09b](references/slides/09b.md), [10](references/slides/10.md), [11](references/slides/11.md), [12](references/slides/12.md), [13](references/slides/13.md), [14](references/slides/14.md), [15](references/slides/15.md), [16](references/slides/16.md), [17](references/slides/17.md), [18](references/slides/18.md).
 

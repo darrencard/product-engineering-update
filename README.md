@@ -43,6 +43,14 @@ claude plugin install product-engineering-update@dacard
 2. Open Customize, then Skills, then "+", then "Create skill", then "Upload a skill".
 3. Code execution must be on.
 
+## One command
+
+```bash
+python3 scripts/run.py --run run --company "Acme" --period-label 2026-Q4 --period-start 2026-10-01 --period-end 2026-12-31 --as-of 2026-12-31 --gap-owner "CPO" --gap-due 2027-01-15 --csv tracker=linear.csv --no-ask
+```
+
+Run from `skills/product-engineering-update`. It asks only for the 7 answers a run needs, then collects, computes, drafts, validates and renders the full deck, and prints which slides show data and which show gaps. Slides without data show a greyed sample, tagged Illustrative, of what they would hold. The board cut needs `--board --signed-off-by "<name>"`.
+
 ## Quick start: 2 minutes, CSV only
 
 This uses the bundled test company, Kestrel Labs, which is fictional.

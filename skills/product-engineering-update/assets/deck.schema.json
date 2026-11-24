@@ -400,6 +400,9 @@
         },
         {
           "$ref": "#/$defs/facts"
+        },
+        {
+          "$ref": "#/$defs/sample"
         }
       ]
     },
@@ -1095,6 +1098,73 @@
         },
         "cited_on": {
           "$ref": "#/$defs/ids"
+        }
+      }
+    },
+    "sampleContent": {
+      "description": "A block a sample may hold: any block except another sample.",
+      "oneOf": [
+        {
+          "$ref": "#/$defs/text"
+        },
+        {
+          "$ref": "#/$defs/cards"
+        },
+        {
+          "$ref": "#/$defs/tiles"
+        },
+        {
+          "$ref": "#/$defs/table"
+        },
+        {
+          "$ref": "#/$defs/scorecard"
+        },
+        {
+          "$ref": "#/$defs/ledger"
+        },
+        {
+          "$ref": "#/$defs/sourcesNeeded"
+        },
+        {
+          "$ref": "#/$defs/tree"
+        },
+        {
+          "$ref": "#/$defs/strip"
+        },
+        {
+          "$ref": "#/$defs/steps"
+        },
+        {
+          "$ref": "#/$defs/facts"
+        }
+      ]
+    },
+    "sample": {
+      "description": "A greyed sample of what a slide looks like with data, from a made-up company. Sits only beside a data_needed block, never counts as data and cites no ledger row.",
+      "type": "object",
+      "required": [
+        "type",
+        "illustrative",
+        "label",
+        "blocks"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "sample"
+        },
+        "illustrative": {
+          "type": "boolean"
+        },
+        "label": {
+          "type": "string"
+        },
+        "blocks": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/sampleContent"
+          }
         }
       }
     }

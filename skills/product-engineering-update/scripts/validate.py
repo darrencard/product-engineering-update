@@ -57,12 +57,25 @@ RULES = {
     "placeholder-left": "A filled deck still holds a template title, or a gap with no real owner or date.",
     "unsafe-link": "A link is not http, https or mailto.",
     "board-cut-too-long": f"The board cut holds more than {MAX_BOARD_SLIDES} slides.",
+    "sample-not-illustrative": "A sample block is not tagged illustrative.",
+    "sample-beside-data": "A sample block sits on a slide that shows real data.",
+    "sample-cites-ledger": "A sample block cites a ledger row, so it would pass for evidence.",
 }
 
 SPEED = re.compile(r"\b(deploys?|deployment frequency|lead time|cycle time|throughput|velocity|merge frequency|pull requests? merged|time to merge)\b", re.I)
-QUALITY = re.compile(r"\b(change failure|failure rate|time to restore|restore|rework|defects?|incidents?|review time|rollbacks?|escaped|bug)", re.I)
+QUALITY = re.compile(
+    r"\b(change failure|failure rate|time to restore|restore|rework|defects?|incidents?|review time|rollbacks?|rolled back|followed by errors|escaped|bug)",
+    re.I,
+)
 ADOPTION = re.compile(
     r"\b(adoption|feature usage|usage count|pilots? started|seats?|sign-?ups?|logins?|page ?views?|downloads?|prompts? sent|tokens? used|licen[cs]es?)\b", re.I
+)
+# Engineering and finance shorthand a board member outside the team may not know. In a title it warns:
+# say what the number means instead (writing-rules.md). Tables keep the precise names.
+JARGON = re.compile(
+    r"\b(change failure rate|lead time|cycle time|keep the lights on|KTLO|capacity|ARR|NRR|GRR|MTTR|SLOs?|DORA|p9[059]|"
+    r"throughput|velocity|story points|rework rate|evals?|eval pass rate|deploys?|PRs?|pull requests?|tech debt)\b",
+    re.I,
 )
 PRODUCTIVITY = re.compile(r"(productiv|faster|speed-?up|time saved|hours saved|efficien)", re.I)
 HAS_NUMBER = re.compile(r"\d+(\.\d+)?\s?(%|x\b|×)", re.I)
@@ -228,9 +241,14 @@ def walk_blocks(blocks: list[Json]) -> Iterator[Json]:
                         yield part
 
 
+def real_blocks(blocks: list[Json]) -> list[Json]:
+    """A slide's own blocks. A sample shows what the slide could look like; it is never the slide's evidence."""
+    return [b for b in blocks if b.get("type") != "sample"]
+
+
 def slide_text(s: Json) -> list[str]:
-    """The claims a slide makes: its title and blocks. Guidance and reading are not claims."""
-    return [s.get("title", ""), s.get("asof", "")] + strings(s.get("blocks", []))
+    """The claims a slide makes: its title and blocks. Guidance, reading and samples are not claims."""
+    return [s.get("title", ""), s.get("asof", "")] + strings(real_blocks(s.get("blocks", [])))
 
 
 def sentences(text: str) -> list[str]:
@@ -463,14 +481,30 @@ def _check_sentences(text: list[str], sid: str, found: Findings) -> None:
                     found.err("banned-phrase", sid, f'uses {name} in: "{quote}"')
 
 
+def _check_samples(s: Json, types: set[str], found: Findings) -> None:
+    """A sample shows a reader what a gap would look like filled. It must never pass for the slide's own data."""
+    sid = s["id"]
+    for b in s["blocks"]:
+        if b.get("type") != "sample":
+            continue
+        if b["illustrative"] is not True:
+            found.err("sample-not-illustrative", sid, "has a sample block that is not tagged illustrative. Set illustrative to true.")
+        if (types - {"cards", "data_needed", "text"}) or s.get("ledger_refs"):
+            found.err("sample-beside-data", sid, "shows real data and a sample. A sample may only sit beside a data_needed block; remove it.")
+        if any(re.search(r"\[\[L\d+\]\]", t) for t in strings(b["blocks"])):
+            found.err("sample-cites-ledger", sid, "has a sample that cites a ledger row. Sample figures are made up and cite nothing.")
+        _check_sentences(strings(b["blocks"]), sid, found)
+
+
 def _check_slide(s: Json, deck: Json, contract: Json | None, found: Findings) -> None:
     sid = s["id"]
-    blocks = list(walk_blocks(s["blocks"]))
+    own = real_blocks(s["blocks"])
+    blocks = list(walk_blocks(own))
     types = {b["type"] for b in blocks if b.get("type")}
     text = slide_text(s)
 
     # a figure with no ledger row
-    shows_figures = any(t in types for t in FIGURE_BLOCKS) or has_numeric_table(s["blocks"])
+    shows_figures = any(t in types for t in FIGURE_BLOCKS) or has_numeric_table(own)
     if shows_figures and not ledger_refs(s) and not s.get("rolls_up"):
         found.err("no-ledger-row", sid, "shows figures and cites no ledger row. Add the row and reference it, for example [[L01]] or ledger_refs.")
 
@@ -483,7 +517,7 @@ def _check_slide(s: Json, deck: Json, contract: Json | None, found: Findings) ->
         )
 
     # What the slide shows, without its sources line: naming an incident tool as a source is not a quality metric.
-    shown = " ".join(strings(s["blocks"]))
+    shown = " ".join(strings(own))
     for b in blocks:
         kind = b.get("type")
         if kind == "scorecard":
@@ -502,6 +536,10 @@ def _check_slide(s: Json, deck: Json, contract: Json | None, found: Findings) ->
                 found.err("speed-without-quality", sid, "shows a speed metric in a table with no quality metric on the slide.")
 
     _check_sentences(text, sid, found)
+    _check_samples(s, types, found)
+    jargon = sorted({m.group(0).lower() for m in JARGON.finditer(s.get("title", ""))})
+    if jargon:
+        found.warn("jargon-in-title", sid, f"the title uses {', '.join(jargon)}. Say what it means for a reader outside the team; keep the term in the table.")
 
     if s["illustrative"] is False and deck["meta"]["notice"]["illustrative"]:
         found.warn("illustrative", sid, "the deck is marked illustrative but this slide is not.")

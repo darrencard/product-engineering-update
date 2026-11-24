@@ -71,6 +71,7 @@ SOURCES = {
             "deployed_at": "date?",
             "failed": "bool?",
             "reworked": "bool?",
+            "troubled": "bool?",
         },
     },
     "incidents": {"label": "Incidents and status", "columns": {"id": "str", "started_at": "date", "restored_at": "date", "severity": "str?"}},

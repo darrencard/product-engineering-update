@@ -47,6 +47,7 @@ DEFINITIONS = {
     "deploys_per_week": "How many times a week new code was released to customers.",
     "lead_time": "Typical (median) time from a code change being proposed to it being accepted.",
     "change_failure_rate": "Share of releases that caused a problem in production.",
+    "troubled_deploy_rate": ("A stand-in for change failure rate: share of releases that were rolled back, or after which the live site logged a new error."),
     "review_time": "Typical (median) time a code change spent in review by a colleague.",
     "rework_rate": "Share of accepted code changes that had to be reworked.",
     "time_to_restore": "Typical (median) time to restore the service after an incident started.",
@@ -303,6 +304,9 @@ def source_control(r: Run) -> None:
             "lead": median([hours_between(x["opened_at"], x["merged_at"]) for x in prs if x["opened_at"]]),
             "review": median([x["review_hours"] for x in prs if x["review_hours"] is not None]),
             "rework": share_flagged(prs, "reworked"),
+            # Only deploys whose outcome is known count: a deploy the hosting export says nothing about is not a clean one.
+            "troubled": share_flagged([x for x in deploys if x.get("troubled") is not None], "troubled"),
+            "troubled_known": sum(1 for x in deploys if x.get("troubled") is not None),
         }
 
     now, before = stats(False), stats(True)
@@ -311,6 +315,10 @@ def source_control(r: Run) -> None:
     r.metric("change_failure_rate", "Change failure rate", now["cfr"], before["cfr"], "%", src, higher_is_better=False)
     r.metric("review_time", "Pull request review time", now["review"], before["review"], "h", src, higher_is_better=False)
     r.metric("rework_rate", "Rework rate", now["rework"], before["rework"], "%", src, higher_is_better=False)
+    # A proxy, named as one. It is never relabelled change failure rate.
+    r.metric("troubled_deploy_rate", "Deploys rolled back or followed by errors", now["troubled"], before["troubled"], "%", src, higher_is_better=False)
+    if "troubled_deploy_rate" in r.metrics:
+        r.ledger[-1]["claim"] += f" (proxy for change failure rate, over the {now['troubled_known']} deploys the hosting export covers)"
 
 
 def incidents(r: Run) -> None:

@@ -198,6 +198,7 @@ Examples: GitHub, Your CI. Feeds slides: 9, 13, 9b.
 | `deployed_at` | date | No |
 | `failed` | bool | No |
 | `reworked` | bool | No |
+| `troubled` | bool | No |
 
 What the slides read from it:
 

@@ -4,11 +4,15 @@
 Usage:
   python3 -m unittest discover -s evals -v
 
-Four groups:
+Groups:
   Fixtures      5 synthetic companies run through collect, compute, draft,
                 validate and render, each with its expected outcome.
   Adversarial   requests that push for an overclaim. Each must be blocked.
   Definitions   each metric says what it counts, in plain words.
+  Vercel        a labelled quality proxy for repositories with no reviews.
+  Samples       gap slides show a tagged sample that never counts as data.
+  OneCommand    run.py from the 7 required answers to a rendered deck.
+  PlainTitles   drafted titles in board language, with no added cause.
   Safety        the security properties: escaping, link schemes, CSV
                 formulas, no network code, parity with the site's renderer.
 
@@ -81,7 +85,8 @@ def slide(deck: Json, slide_id: str) -> Json:
 
 
 def block_types(s: Json) -> set[str]:
-    return {b["type"] for b in validate.walk_blocks(s["blocks"]) if b.get("type")}
+    """The slide's own block types. A sample is not the slide's content, so it is left out."""
+    return {b["type"] for b in validate.walk_blocks(validate.real_blocks(s["blocks"])) if b.get("type")}
 
 
 class Fixtures(unittest.TestCase):
@@ -318,7 +323,8 @@ class GitHub(unittest.TestCase):
         delivery = slide(deck, "09")
         self.assertEqual(block_types(delivery), {"cards", "data_needed"})
         self.assertIn("Speed was measured", json.dumps(delivery))
-        self.assertNotIn("38h", json.dumps(delivery))
+        # The measured lead time stays off the slide's own blocks; a sample beside the gap is made up and tagged.
+        self.assertNotIn("38h", json.dumps(validate.real_blocks(delivery["blocks"])))
 
     def test_a_broken_export_is_refused_in_one_line(self) -> None:
         bad = self.work / "bad.json"
@@ -512,6 +518,242 @@ class Definitions(unittest.TestCase):
         self.assertIn("north_star.definition", out)
         self.assertIn('inputs[0].definition ("Activation")', out)
         self.assertIn("will show the metric with no definition", out)
+
+
+class Vercel(unittest.TestCase):
+    """A solo repository's quality pair: Vercel's own records, labelled as a proxy, never as change failure rate."""
+
+    def setUp(self) -> None:
+        self.work = Path(tempfile.mkdtemp(prefix="peu-vc-"))
+        self.run = self.work / "run"
+        self.run.mkdir()
+        intake = json.loads((FIXTURES / "complete" / "intake.json").read_text(encoding="utf-8"))
+        intake["delivery_ranges"]["Deploys rolled back or followed by errors"] = "under 10%"
+        (self.run / "intake.json").write_text(json.dumps(intake), encoding="utf-8")
+
+    def tearDown(self) -> None:
+        shutil.rmtree(self.work, ignore_errors=True)
+
+    def ms(self, stamp: str) -> int:
+        return int(render_time(stamp).replace(tzinfo=dt.timezone.utc).timestamp() * 1000)
+
+    def exports(self) -> tuple[Path, Path, Path]:
+        """4 production deploys in the period, one preview, one failed build; one error group, one rollback."""
+        times = ["2026-07-02T10:00:00Z", "2026-07-09T10:00:00Z", "2026-07-16T10:00:00Z", "2026-07-23T10:00:00Z"]
+        deployments = [{"id": f"dpl_{i}", "created": self.ms(t), "state": "READY", "target": "production"} for i, t in enumerate(times)]
+        deployments += [
+            {"id": "dpl_preview", "created": self.ms("2026-07-10T10:00:00Z"), "state": "READY", "target": None},
+            {"id": "dpl_broken", "created": self.ms("2026-07-11T10:00:00Z"), "state": "ERROR", "target": "production"},
+        ]
+        dep = self.work / "deployments.json"
+        dep.write_text(json.dumps({"result": {"deployments": {"pagination": {}, "deployments": deployments}}}), encoding="utf-8")
+        errors = self.work / "errors.md"
+        errors.write_text(
+            "## Runtime Errors\n\n### [checkout] boom\ncount=3 users=1 routes=/api/x\nfirst=2026-07-10T12:00:00.000Z last=2026-07-11T12:00:00.000Z\n",
+            encoding="utf-8",
+        )
+        rollbacks = self.work / "rollbacks.json"
+        rollbacks.write_text(json.dumps([{"deploymentId": "dpl_3"}]), encoding="utf-8")
+        return dep, errors, rollbacks
+
+    def convert(self, *extra: str) -> subprocess.CompletedProcess[str]:
+        dep, errors, rollbacks = self.exports()
+        args = ["--deployments", str(dep), "--errors", str(errors), "--errors-from", "2026-07-05", "--rollbacks", str(rollbacks)]
+        return script("from_vercel.py", *args, *extra, "--project", "kestrel-web", "--retrieved-at", "2026-09-30", "--run", str(self.run))
+
+    def test_errors_and_rollbacks_flag_deploys_and_older_deploys_stay_unknown(self) -> None:
+        done = self.convert()
+        self.assertEqual(done.returncode, 0, done.stderr)
+        self.assertIn("4 live production deploys, 3 with a known outcome", done.stdout)
+        self.assertEqual(script("compute_metrics.py", "--run", str(self.run)).returncode, 0)
+        metrics = json.loads((self.run / "metrics.json").read_text(encoding="utf-8"))
+        proxy = metrics["metrics"]["troubled_deploy_rate"]
+        self.assertEqual(proxy["label"], "Deploys rolled back or followed by errors")
+        self.assertAlmostEqual(proxy["value"], 200 / 3, places=2)  # dpl_1 errored, dpl_3 rolled back; dpl_0 predates the error reports
+        self.assertIn("stand-in for change failure rate", proxy["definition"])
+        self.assertNotIn("change_failure_rate", metrics["metrics"])
+        row = next(r for r in metrics["ledger"] if r["id"] == proxy["ledger"])
+        self.assertIn("proxy for change failure rate", row["claim"])
+        self.assertEqual(row["confidence"], "Derived")
+
+    def test_the_proxy_pairs_with_speed_on_a_solo_repository(self) -> None:
+        github = GitHub()
+        github.work, github.run = self.work, self.run
+        prs, deployments = github.exports(reviewed=False)
+        self.assertEqual(github.convert(prs, deployments).returncode, 0)
+        times = sorted(
+            d["created_at"] for d in json.loads("[" + deployments.read_text(encoding="utf-8").replace("][", ",")[1:]) if d["environment"] == "Production"
+        )
+        vercel = [{"id": f"dpl_{i}", "created": self.ms(t), "state": "READY", "target": "production"} for i, t in enumerate(times)]
+        dep = self.work / "vercel.json"
+        dep.write_text(json.dumps(vercel), encoding="utf-8")
+        errors = self.work / "errors.json"
+        errors.write_text(json.dumps([{"first": times[2].replace("12:00", "13:00")}]), encoding="utf-8")
+        done = script(
+            "from_vercel.py",
+            "--deployments",
+            str(dep),
+            "--errors",
+            str(errors),
+            "--errors-from",
+            "2026-04-01",
+            "--project",
+            "kestrel-web",
+            "--run",
+            str(self.run),
+        )
+        self.assertEqual(done.returncode, 0, done.stderr)
+        for step in ("compute_metrics.py", "draft.py"):
+            self.assertEqual(script(step, "--run", str(self.run)).returncode, 0)
+        deck = json.loads((self.run / "deck.json").read_text(encoding="utf-8"))
+        delivery = slide(deck, "09")
+        board = next(b for b in delivery["blocks"] if b["type"] == "scorecard")
+        names = [r["metric"] for r in board["rows"] if "metric" in r]
+        self.assertIn("Deploys rolled back or followed by errors", names)
+        self.assertNotIn("Change failure rate", names)
+        self.assertNotIn("speed-without-quality", rules(validate.check(deck)))
+
+    def test_deployments_alone_are_refused(self) -> None:
+        dep, _, _ = self.exports()
+        done = script("from_vercel.py", "--deployments", str(dep), "--project", "kestrel-web", "--run", str(self.run))
+        self.assertNotEqual(done.returncode, 0)
+        self.assertIn("Deployments alone say nothing about quality", done.stderr)
+
+
+class Samples(unittest.TestCase):
+    """A gap slide shows a greyed sample of what it would hold. A sample never passes for data."""
+
+    deck: Json
+    work: Path
+
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.work = Path(tempfile.mkdtemp(prefix="peu-smp-"))
+        cls.deck, _ = run_fixture("sparse", cls.work)
+
+    @classmethod
+    def tearDownClass(cls) -> None:
+        shutil.rmtree(cls.work, ignore_errors=True)
+
+    def sample(self, s: Json) -> Json | None:
+        return next((b for b in s["blocks"] if b["type"] == "sample"), None)
+
+    def test_gap_slides_carry_a_tagged_sample_and_filled_slides_none(self) -> None:
+        samples = json.loads((SKILL / "assets" / "samples.json").read_text(encoding="utf-8"))["slides"]
+        for s in (x for x in self.deck["slides"] if x["kind"] == "slide"):
+            with self.subTest(slide=s["id"]):
+                gap = "is not reported this period" in s["title"]
+                found = self.sample(s)
+                if gap and s["id"] in samples:
+                    self.assertIsNotNone(found)
+                    self.assertIs(found["illustrative"], True)
+                    self.assertIn("none of it is yours", found["label"])
+                    self.assertNotRegex(json.dumps(found), r"\[\[L\d+\]\]")
+                if not gap:
+                    self.assertIsNone(found)
+        self.assertEqual(validate.check(self.deck)["errors"], [])
+
+    def test_samples_never_count_as_data(self) -> None:
+        core = [s for s in self.deck["slides"] if s["kind"] == "slide"]
+        filled = [s for s in core if "is not reported this period" not in s["title"]]
+        self.assertIn(f"{len(filled)} of {len(core)} slides show data", json.dumps(slide(self.deck, "00")))
+
+    def test_a_sample_that_could_pass_for_data_is_blocked(self) -> None:
+        gap = next(s for s in self.deck["slides"] if s["kind"] == "slide" and self.sample(s))
+        cases = {
+            "sample-not-illustrative": lambda b, s: b.update(illustrative=False),
+            "sample-cites-ledger": lambda b, s: b["blocks"].append({"type": "text", "variant": "note", "text": "ARR rose.[[L01]]"}),
+            "sample-beside-data": lambda b, s: s.update(ledger_refs=["L01"]),
+        }
+        for rule, spoil in cases.items():
+            with self.subTest(rule=rule):
+                deck = copy.deepcopy(self.deck)
+                s = slide(deck, gap["id"])
+                spoil(self.sample(s), s)
+                self.assertIn(rule, rules(validate.check(deck)))
+
+    def test_the_sample_renders_greyed_tagged_and_hidden_from_screen_readers(self) -> None:
+        html = render.render_deck(self.deck)
+        self.assertIn('<div class="sample"', html)
+        self.assertIn('aria-hidden="true" style="opacity:.45;filter:grayscale(1)', html)
+
+    def test_the_samples_asset_is_current(self) -> None:
+        sys.path.insert(0, str(ROOT / "tools"))
+        import build_samples  # noqa: PLC0415  (the tool lives outside the skill)
+
+        self.assertEqual(build_samples.build(), json.loads((SKILL / "assets" / "samples.json").read_text(encoding="utf-8")))
+
+
+class OneCommand(unittest.TestCase):
+    """run.py: the 7 required answers and the data in, a rendered deck out."""
+
+    def setUp(self) -> None:
+        self.work = Path(tempfile.mkdtemp(prefix="peu-run-"))
+
+    def tearDown(self) -> None:
+        shutil.rmtree(self.work, ignore_errors=True)
+
+    def required(self) -> list[str]:
+        return [
+            "--company", "Kestrel Labs", "--period-label", "2026-Q3", "--period-start", "2026-07-01", "--period-end", "2026-09-30",
+            "--as-of", "2026-09-30", "--gap-owner", "the VP Engineering", "--gap-due", "Q4", "--no-ask",
+        ]  # fmt: skip
+
+    def test_one_command_renders_the_full_deck_and_reports_data_and_gaps(self) -> None:
+        run = self.work / "run"
+        csvs = [f"--csv={p.stem}={p}" for p in sorted((FIXTURES / "complete" / "csv").glob("*.csv"))]
+        done = script("run.py", "--run", str(run), *self.required(), *csvs, "--retrieved-at", "2026-09-30", "--staff")
+        self.assertEqual(done.returncode, 0, done.stdout + done.stderr)
+        self.assertRegex(done.stdout, r"run: \d+ of \d+ slides show data")
+        self.assertIn("the board cut was not rendered", done.stdout)
+        self.assertTrue((run / "update.html").exists() and (run / "staff.html").exists())
+        self.assertFalse((run / "board.html").exists())
+
+    def test_a_missing_required_answer_stops_the_run(self) -> None:
+        done = script("run.py", "--run", str(self.work / "run"), "--company", "Kestrel Labs", "--no-ask")
+        self.assertNotEqual(done.returncode, 0)
+        self.assertIn("--period-label", done.stderr)
+        self.assertIn("--gap-due", done.stderr)
+
+    def test_the_board_cut_still_needs_a_named_sign_off(self) -> None:
+        done = script("run.py", "--run", str(self.work / "run"), *self.required(), "--board")
+        self.assertNotEqual(done.returncode, 0)
+        self.assertIn("--signed-off-by", done.stderr)
+        self.assertFalse((self.work / "run" / "board.html").exists())
+
+
+class PlainTitles(unittest.TestCase):
+    """Drafted titles say what a number means, for a board member outside engineering."""
+
+    deck: Json
+    work: Path
+
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.work = Path(tempfile.mkdtemp(prefix="peu-ttl-"))
+        cls.deck, _ = run_fixture("complete", cls.work)
+
+    @classmethod
+    def tearDownClass(cls) -> None:
+        shutil.rmtree(cls.work, ignore_errors=True)
+
+    def test_drafted_titles_carry_no_engineering_shorthand(self) -> None:
+        warned = [w for w in validate.check(self.deck)["warnings"] if w["rule"] == "jargon-in-title"]
+        self.assertEqual(warned, [])
+        self.assertIn("Basic upkeep was planned at 15%", slide(self.deck, "05")["title"])
+        self.assertIn("The share of releases that caused a problem in production rose from 5.1% to 7.7%", slide(self.deck, "09")["title"])
+
+    def test_plain_titles_add_no_cause(self) -> None:
+        for s in self.deck["slides"]:
+            with self.subTest(slide=s["id"]):
+                self.assertNotRegex(s.get("title", ""), r"\b(because|due to|driven by|thanks to|so that)\b")
+
+    def test_shorthand_in_a_title_warns(self) -> None:
+        deck = copy.deepcopy(self.deck)
+        slide(deck, "09")["title"] = "Change failure rate rose and KTLO took more capacity."
+        warned = [w for w in validate.check(deck)["warnings"] if w["rule"] == "jargon-in-title"]
+        self.assertEqual(len(warned), 1)
+        self.assertIn("ktlo", warned[0]["message"])
 
 
 class Safety(unittest.TestCase):

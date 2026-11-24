@@ -1,0 +1,688 @@
+{
+  "source": "Kestrel Labs, a made-up company",
+  "slides": {
+    "01": [
+      {
+        "type": "strip",
+        "label": "Title",
+        "text": "Loads cleared per week reached 23.1K, against a target of 22K. Activation, at 41% against 50%, did not."
+      },
+      {
+        "type": "cards",
+        "columns": 3,
+        "items": [
+          {
+            "title": "What happened",
+            "body": [
+              {
+                "list": [
+                  "Loads cleared per week rose from 18.4K to 23.1K.",
+                  "Yearly recurring revenue rose from $10.4M to $10.9M.",
+                  "Revenue from existing customers, against what they paid before, is 96.4%.",
+                  "The share of quality tests the AI feature passes rose from 82% to 86%."
+                ]
+              }
+            ]
+          },
+          {
+            "title": "Now what",
+            "body": [
+              {
+                "list": [
+                  "Approve a per-load pricing pilot"
+                ]
+              }
+            ]
+          },
+          {
+            "title": "Not reported",
+            "body": [
+              "3 slides lack data this period: What we learned, Shipped vs impact, Platform & security."
+            ]
+          }
+        ]
+      }
+    ],
+    "02": [
+      {
+        "type": "strip",
+        "label": "Title",
+        "text": "We win mid-market brokers by automating the exception, priced per load."
+      },
+      {
+        "type": "cards",
+        "columns": 4,
+        "items": [
+          {
+            "title": "Diagnosis",
+            "body": [
+              "Dispatchers lose most of their day to exceptions that rules engines can't handle."
+            ]
+          },
+          {
+            "title": "Guiding policy",
+            "body": [
+              "We win mid-market brokers by automating the exception, priced per load."
+            ]
+          },
+          {
+            "title": "Coherent actions",
+            "body": [
+              {
+                "list": [
+                  "Raise agent task success to 90%",
+                  "First automated load inside 14 days"
+                ]
+              }
+            ]
+          },
+          {
+            "title": "We will not",
+            "body": [
+              {
+                "list": [
+                  "Build a carrier marketplace",
+                  "Ship on-premise"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "03": [
+      {
+        "type": "strip",
+        "label": "Title",
+        "text": "78% of the team's time goes to work tied to a company objective, each with a stated reason it should pay off."
+      },
+      {
+        "type": "tree",
+        "objective": "Grow ARR to $50M",
+        "bets": [
+          {
+            "bet": "Multi-stop reroutes",
+            "owner": "Agent team",
+            "outcome": "Task success 86% to 90%",
+            "cause": "Higher task success lets accounts move more loads to the agent",
+            "confidence": "High"
+          },
+          {
+            "bet": "Guided activation",
+            "owner": "Activation team",
+            "outcome": "Activation 41% to 50%",
+            "cause": "A faster first automated load lifts trial conversion",
+            "confidence": "Medium"
+          }
+        ]
+      }
+    ],
+    "04": [
+      {
+        "type": "strip",
+        "label": "Title",
+        "text": "Platform takes the largest share of the team's time, at 43%."
+      },
+      {
+        "type": "table",
+        "columns": [
+          {
+            "label": "Product line"
+          },
+          {
+            "label": "Stage"
+          },
+          {
+            "label": "Objective served"
+          },
+          {
+            "label": "Capacity",
+            "align": "num"
+          }
+        ],
+        "rows": [
+          [
+            "Dispatch Agent",
+            "Expand",
+            "Grow ARR to $50M",
+            "31%"
+          ],
+          [
+            "Core Dispatch",
+            "Sustain",
+            "Grow ARR to $50M",
+            "26%"
+          ],
+          [
+            "Platform",
+            "Sustain",
+            "Grow ARR to $50M",
+            "43%"
+          ]
+        ]
+      }
+    ],
+    "05": [
+      {
+        "type": "strip",
+        "label": "Title",
+        "text": "Basic upkeep was planned at 15% of the team's time and took 22%."
+      },
+      {
+        "type": "cards",
+        "columns": "2:1",
+        "items": [
+          {
+            "title": "Capacity by type of work",
+            "body": [
+              {
+                "type": "plan_vs_actual",
+                "legend": {
+                  "plan": "Plan",
+                  "actual": "Actual",
+                  "over": "Over plan"
+                },
+                "rows": [
+                  {
+                    "label": "New capabilities",
+                    "plan": 35,
+                    "actual": 31
+                  },
+                  {
+                    "label": "Improve the core",
+                    "plan": 20,
+                    "actual": 18
+                  },
+                  {
+                    "label": "Growth",
+                    "plan": 10,
+                    "actual": 8
+                  },
+                  {
+                    "label": "Platform & scale",
+                    "plan": 20,
+                    "actual": 21
+                  },
+                  {
+                    "label": "Keep the lights on",
+                    "plan": 15,
+                    "actual": 22,
+                    "over": true
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "title": "Spend in the period",
+            "body": [
+              {
+                "type": "table",
+                "columns": [
+                  {
+                    "label": "Line"
+                  },
+                  {
+                    "label": "Plan",
+                    "align": "num"
+                  },
+                  {
+                    "label": "Actual",
+                    "align": "num"
+                  }
+                ],
+                "rows": [
+                  [
+                    "Revenue",
+                    "$10M",
+                    "$10.3M"
+                  ],
+                  [
+                    "R&D payroll",
+                    "$3.75M",
+                    "$3.7M"
+                  ],
+                  [
+                    "Inference (cost of revenue)",
+                    "$480K",
+                    "$612K"
+                  ],
+                  [
+                    "AI tools for the team",
+                    "$95K",
+                    "$90K"
+                  ],
+                  [
+                    "Cloud",
+                    "$400K",
+                    "$410K"
+                  ],
+                  [
+                    "R&D as a share of revenue",
+                    "",
+                    "40.8%"
+                  ]
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "07": [
+      {
+        "type": "strip",
+        "label": "Title",
+        "text": "The most cited reason in 39 closed deals: Agent clears exceptions. The most cited reason in 55 support tickets: Integration errors."
+      },
+      {
+        "type": "tiles",
+        "columns": 2,
+        "items": [
+          {
+            "value": "22 of 39",
+            "label": "Closed deals citing: Agent clears exceptions"
+          },
+          {
+            "value": "30 of 55",
+            "label": "Support tickets citing: Integration errors"
+          }
+        ]
+      }
+    ],
+    "09": [
+      {
+        "type": "strip",
+        "label": "Title",
+        "text": "Releases to customers per week rose from 3 to 4. The share of releases that caused a problem in production rose from 5.1% to 7.7%."
+      },
+      {
+        "type": "scorecard",
+        "target_kind": "range",
+        "labels": {
+          "metric": "Metric",
+          "prior": "Prior period",
+          "actual": "This period",
+          "target": "Healthy range",
+          "status": "Status"
+        },
+        "rows": [
+          {
+            "group": "Speed"
+          },
+          {
+            "metric": "Deploys per week",
+            "prior": "3",
+            "actual": "4",
+            "target": "3+",
+            "status": "landed",
+            "definition": "How many times a week new code was released to customers."
+          },
+          {
+            "metric": "Lead time for change",
+            "prior": "52h",
+            "actual": "38h",
+            "target": "under 40h",
+            "status": "landed",
+            "definition": "Typical (median) time from a code change being proposed to it being accepted."
+          },
+          {
+            "group": "Quality, the pair for every speed metric"
+          },
+          {
+            "metric": "Change failure rate",
+            "prior": "5.1%",
+            "actual": "7.7%",
+            "target": "under 5%",
+            "status": "stalled",
+            "definition": "Share of releases that caused a problem in production."
+          },
+          {
+            "metric": "Time to restore",
+            "prior": "46m",
+            "actual": "41m",
+            "target": "under 60m",
+            "status": "landed",
+            "definition": "Typical (median) time to restore the service after an incident started."
+          },
+          {
+            "metric": "Pull request review time",
+            "prior": "9h",
+            "actual": "13h",
+            "target": "under 10h",
+            "status": "stalled",
+            "definition": "Typical (median) time a code change spent in review by a colleague."
+          }
+        ]
+      }
+    ],
+    "09b": [
+      {
+        "type": "strip",
+        "label": "Title",
+        "text": "Releases to customers per week rose from 3 to 4. The share of releases that caused a problem in production rose from 5.1% to 7.7%."
+      },
+      {
+        "type": "cards",
+        "columns": 1,
+        "items": [
+          {
+            "title": "Delivery and its cost",
+            "body": [
+              {
+                "list": [
+                  "Releases to customers per week rose from 3 to 4.",
+                  "The share of releases that caused a problem in production rose from 5.1% to 7.7%.",
+                  "The time a code change spent in review rose from 9h to 13h.",
+                  "The share of AI tool licences used each week is 75%."
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "11": [
+      {
+        "type": "strip",
+        "label": "Title",
+        "text": "Loads cleared per week reached 23.1K, against a target of 22K. Activation, at 41% against 50%, did not."
+      },
+      {
+        "type": "scorecard",
+        "target_kind": "target",
+        "labels": {
+          "metric": "Outcome",
+          "prior": "Prior period",
+          "actual": "This period",
+          "target": "Target",
+          "status": "Status",
+          "extra": [
+            "Benchmark",
+            "Owner"
+          ]
+        },
+        "rows": [
+          {
+            "metric": "Loads cleared per week",
+            "prior": "18.4K",
+            "actual": "23.1K",
+            "target": "22K",
+            "status": "landed",
+            "extra": [
+              "None external",
+              "Agent team"
+            ],
+            "definition": "Loads cleared with no manual touch"
+          },
+          {
+            "metric": "Activation",
+            "prior": "39%",
+            "actual": "41%",
+            "target": "50%",
+            "status": "watch",
+            "extra": [
+              "None external",
+              "Activation team"
+            ],
+            "definition": "Accounts with a first automated load inside 14 days, percent"
+          },
+          {
+            "metric": "Weekly active dispatchers",
+            "prior": "5,890",
+            "actual": "6,120",
+            "target": "6,000",
+            "status": "landed",
+            "extra": [
+              "None external",
+              "Core dispatch"
+            ],
+            "definition": "Dispatchers active in a week"
+          }
+        ]
+      }
+    ],
+    "12": [
+      {
+        "type": "strip",
+        "label": "Title",
+        "text": "The share of quality tests the AI feature passes rose from 82% to 86%. The cost of each task the AI feature completes fell from $0.41 to $0.33."
+      },
+      {
+        "type": "tiles",
+        "columns": 3,
+        "items": [
+          {
+            "value": "86%",
+            "label": "Eval pass rate (v14)",
+            "note": "Share of test cases the AI feature got right, on the named test set."
+          },
+          {
+            "value": "$0.33",
+            "label": "Cost per successful task",
+            "note": "What the AI feature costs to run for each task it completes successfully."
+          }
+        ]
+      }
+    ],
+    "13": [
+      {
+        "type": "strip",
+        "label": "Title",
+        "text": "75% of AI tool licences are used each week, at $90K this period. We make no claim that the team got faster."
+      },
+      {
+        "type": "table",
+        "columns": [
+          {
+            "label": "Measure"
+          },
+          {
+            "label": "This period",
+            "align": "num"
+          }
+        ],
+        "rows": [
+          [
+            "AI tool seats used weekly",
+            "75%"
+          ],
+          [
+            "AI tool spend in the period",
+            "$90K"
+          ]
+        ]
+      },
+      {
+        "type": "cards",
+        "columns": 1,
+        "items": [
+          {
+            "title": "What we do not claim",
+            "body": [
+              "Use and spend are inputs. This slide reports no productivity figure, because none has a baseline and a window yet."
+            ]
+          }
+        ]
+      }
+    ],
+    "14": [
+      {
+        "type": "strip",
+        "label": "Title",
+        "text": "One risk: one model provider carries most inference spend."
+      },
+      {
+        "type": "table",
+        "columns": [
+          {
+            "label": "Risk"
+          },
+          {
+            "label": "Likelihood"
+          },
+          {
+            "label": "Impact"
+          },
+          {
+            "label": "Mitigation and owner"
+          },
+          {
+            "label": "Due"
+          }
+        ],
+        "rows": [
+          [
+            "One model provider carries most inference spend",
+            "Medium",
+            "High",
+            "Routing layer across 2 providers. Platform lead",
+            "Dec 2026"
+          ]
+        ]
+      }
+    ],
+    "15": [
+      {
+        "type": "strip",
+        "label": "Title",
+        "text": "We stopped one thing this period: carrier marketplace."
+      },
+      {
+        "type": "cards",
+        "columns": 2,
+        "items": [
+          {
+            "title": "Carrier marketplace",
+            "body": [
+              "It did not serve the strategy"
+            ]
+          }
+        ]
+      }
+    ],
+    "16": [
+      {
+        "type": "strip",
+        "label": "Title",
+        "text": "We are making 2 bets, each with a set budget of time and people and a stated point at which we stop."
+      },
+      {
+        "type": "table",
+        "columns": [
+          {
+            "label": "Bet"
+          },
+          {
+            "label": "Commitment"
+          },
+          {
+            "label": "Appetite"
+          },
+          {
+            "label": "Expected result"
+          },
+          {
+            "label": "Confidence"
+          },
+          {
+            "label": "We stop if"
+          }
+        ],
+        "rows": [
+          [
+            "Multi-stop reroutes",
+            "Promise",
+            "6 weeks, 5 engineers",
+            "Task success 86% to 90%",
+            "High",
+            "Evals gain under 2 points by week 3"
+          ],
+          [
+            "Guided activation",
+            "Experiment",
+            "4 weeks, 3 engineers",
+            "Activation 41% to 50%",
+            "Medium",
+            "No lift in a 2 week live test"
+          ]
+        ]
+      }
+    ],
+    "17": [
+      {
+        "type": "strip",
+        "label": "Title",
+        "text": "53 of 56 planned roles are filled."
+      },
+      {
+        "type": "table",
+        "columns": [
+          {
+            "label": "Function"
+          },
+          {
+            "label": "Now",
+            "align": "num"
+          },
+          {
+            "label": "Plan",
+            "align": "num"
+          },
+          {
+            "label": "Open"
+          }
+        ],
+        "rows": [
+          [
+            "Engineering",
+            "44",
+            "46",
+            "1 platform, 1 product engineer"
+          ],
+          [
+            "Product management",
+            "5",
+            "5",
+            ""
+          ],
+          [
+            "Design",
+            "4",
+            "5",
+            "1 designer"
+          ],
+          [
+            "Total",
+            "53",
+            "56",
+            ""
+          ]
+        ]
+      }
+    ],
+    "18": [
+      {
+        "type": "strip",
+        "label": "Title",
+        "text": "One decision for you today: approve a per-load pricing pilot."
+      },
+      {
+        "type": "cards",
+        "columns": 2,
+        "items": [
+          {
+            "title": "Approve a per-load pricing pilot",
+            "body": [
+              "Run the pilot with 10 customers.",
+              {
+                "p": "Options: Pilot with 10 customers, or wait a quarter. Deadline: 4 Nov 2026.",
+                "emphasis": true
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
