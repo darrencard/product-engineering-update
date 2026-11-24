@@ -4,7 +4,7 @@ description: Builds a product and engineering update deck for leadership, the bo
 license: MIT for the scripts, CC BY 4.0 for the instructions, references and template. See LICENSE and LICENSE-CONTENT.md in the repository root.
 metadata:
   author: Dacard
-  version: "0.1.0"
+  version: "0.2.0"
 ---
 
 # Product & Engineering Update
