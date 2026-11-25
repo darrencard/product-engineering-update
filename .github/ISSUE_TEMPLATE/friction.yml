@@ -13,7 +13,7 @@ body:
     attributes:
       label: Version
       description: The release you ran, from SKILL.md's metadata or the release you installed.
-      placeholder: v0.9.3
+      placeholder: v0.9.4
     validations:
       required: true
   - type: textarea
