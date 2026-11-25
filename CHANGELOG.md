@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.9.6 (2026-11-25)
+
+- **The cover title uses the full width too.** It was capped at 15 characters wide and balanced into even lines; now it fills each line like the slide titles.
+- 198 tests.
+
 ## 0.9.5 (2026-11-25)
 
 - **Ready for the GitHub Marketplace.** The Action's description is under 125 characters and its colour is one GitHub accepts. It still never renders the board cut.
