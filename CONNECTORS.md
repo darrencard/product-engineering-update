@@ -22,4 +22,4 @@ This plugin ships no connector configuration of its own. It uses the connectors 
 
 ## Where your data goes
 
-Nowhere. The scripts read files in your run folder and write files back to it. They make no network calls, and the test suite checks that. Whatever a connector fetches stays in your own session.
+Nowhere. The scripts read files in your run folder and write files back to it. They hold no network code, and a test checks that. Each reader and whether it has run on a live account is in [docs/connectors.md](docs/connectors.md). Whatever a connector fetches stays in your own session.
