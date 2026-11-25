@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.9.1 (2026-11-25)
 
 - **A shorter board page.** The board page keeps the headline, the open questions on the data, what happened and the decisions, plus one line on how many gaps there are and where the detail is. The full gap list moves to the appendix, ahead of the detail slides and the ledger. The 0.9.0 mini eval judge said the page still repeated too much.
 - **No progress to the objective while revenue and ARR disagree.** Slide 1 no longer headlines ARR's share of the objective when it also says revenue and ARR do not reconcile.
