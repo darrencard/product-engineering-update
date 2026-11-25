@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.9.0 (2026-11-25)
 
 - **Claude writes the words; the pipeline owns the numbers.** `draft.py` now also writes `run/figures.json`, every figure it computed. Claude may rewrite titles, ledes and card text, reorder slides or cut them, in the user's voice. A new blocking rule, `figure-not-computed`, refuses any printed figure that is not on that list, matched by kind (a percentage only matches a computed percentage) and within the rounding its printing implies. A hand-edited `figures.json` is refused. SKILL.md spells out what Claude may and may not change.
 - **Voice.** The intake takes an optional `voice`: a few lines on how the author writes, or a paragraph of a past update. Claude writes the prose that way; figures and checks never change.
