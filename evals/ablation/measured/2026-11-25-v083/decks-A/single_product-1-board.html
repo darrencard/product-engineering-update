@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kestrel Labs: board summary, 2026-Q3</title><style>
+:root{color-scheme:light;--page:#f9f9f7;--surface:#fcfcfb;--ink:#0b0b0b;--ink2:#52514e;--muted:#898781;--grid:#e1e0d9;--axis:#c3c2b7;--ring:rgba(11,11,11,.10);
+--s1:#2a78d6;--plan:#c3c2b7;--neg:#e34948;--good:#006300;--bad:#b42f2f;--warnbg:#fff6e0;}
+@media (prefers-color-scheme:dark){:root{color-scheme:dark;--page:#0d0d0d;--surface:#1a1a19;--ink:#fff;--ink2:#c3c2b7;--muted:#898781;--grid:#2c2c2a;--axis:#383835;--ring:rgba(255,255,255,.10);
+--s1:#3987e5;--plan:#5c5b57;--neg:#e66767;--good:#0ca30c;--bad:#e66767;--warnbg:#2a2412;}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--ink);font:15px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:920px;margin:0 auto;padding:40px 24px 64px}
+h1{font-size:28px;margin:0 0 4px;font-weight:650}
+h2{font-size:19px;margin:40px 0 10px;font-weight:650;border-top:1px solid var(--grid);padding-top:24px}
+h3{font-size:15px;margin:20px 0 6px;font-weight:650}
+.meta{color:var(--ink2);font-size:13px;margin:0}
+p,li{max-width:76ch}
+.card{background:var(--surface);border:1px solid var(--ring);border-radius:10px;padding:16px 20px;margin:12px 0}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:16px 0}
+.tile{background:var(--surface);border:1px solid var(--ring);border-radius:10px;padding:14px 16px}
+.tile .l{font-size:13px;color:var(--ink2)}
+.tile .v{font-size:26px;font-weight:600;margin:2px 0}
+.tile .d{font-size:13px;color:var(--ink2)}
+.ok{color:var(--good);font-weight:600}.miss{color:var(--bad);font-weight:600}.na{color:var(--ink2);font-weight:600}
+table{border-collapse:collapse;width:100%;font-size:14px;margin:8px 0}
+th,td{text-align:left;padding:7px 10px;border-bottom:1px solid var(--grid);vertical-align:top}
+th{font-weight:600;color:var(--ink2);font-size:12.5px}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.callout{background:var(--warnbg);border-radius:10px;padding:14px 18px;margin:12px 0}
+.small{font-size:13px;color:var(--ink2)}
+.legend{display:flex;gap:18px;font-size:13px;color:var(--ink2);margin:4px 0 6px}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+svg text{font:12.5px system-ui,-apple-system,"Segoe UI",sans-serif;fill:var(--ink2)}
+svg .val{fill:var(--ink);font-variant-numeric:tabular-nums}
+svg rect.hit:hover + path, svg path:hover{opacity:.8}
+details summary{cursor:pointer;color:var(--ink2);font-size:13px}
+.signoff{margin-top:32px;padding-top:16px;border-top:1px solid var(--grid);font-size:14px}
+@media print{body{background:#fff}.card,.tile{break-inside:avoid}}
+</style></head>
+<body><main>
+
+<h1>Kestrel Labs: Product &amp; Engineering, board summary</h1>
+<p class="meta">2026-Q3 (1 Jul – 30 Sep 2026) · Data as of 30 Sep 2026 · Prepared by the CPTO</p>
+
+<div class="tiles">
+<div class="tile"><div class="l">Loads cleared per week, no manual touch</div><div class="v">23,100</div><div class="d">Target 22K · up 26% on Q2 · <span class="ok">✓ On track</span></div></div>
+<div class="tile"><div class="l">Activation (first automated load ≤14 days)</div><div class="v">41%</div><div class="d">Target 50% · up 2 pts on Q2 · <span class="miss">▲ Off track</span></div></div>
+<div class="tile"><div class="l">Agent task success</div><div class="v">86%</div><div class="d">Target 90% · up 4 pts · <span class="miss">▲ Off track</span></div></div>
+<div class="tile"><div class="l">Q3 revenue</div><div class="v">$10.3M</div><div class="d">Plan $10.0M · +3%</div></div>
+</div>
+
+<h2>What happened</h2>
+<ul>
+<li><strong>The product is working where it counts.</strong> Our north-star metric, loads cleared with no manual touch, beat target. Weekly active dispatchers reached 6,120 against a 6,000 target. All 22 won deals cite the agent clearing exceptions.</li>
+<li><strong>Getting new customers live is the weak point.</strong> Activation is 9 points short of target. Self-serve carrier onboarding slipped, and the 4 accounts that churned all raised onboarding issues. Retention in the billing export: NRR 96.4%, GRR 89.3%.</li>
+<li><strong>Integrations are the gap the market keeps naming.</strong> Missing TMS integration lost 11 of 17 lost deals, and integration errors are the largest support theme. This goes into Q4 planning.</li>
+<li><strong>Spend is on plan except inference.</strong> R&amp;D came in at $4.20M against a $4.245M plan. Inference ran $612K against $480K (+28%) because usage grew. Unit cost per task fell 20%.</li>
+<li><strong>Engineering ships faster, with more failures.</strong> Change failure rate is 7.7% (range: under 5%). The VP Engineering owns bringing it back in range in Q4.</li>
+</ul>
+
+<h2>Risk</h2>
+<p>One model provider carries most inference spend (likelihood medium, impact high). Mitigation: a routing layer across two providers, owned by the Platform lead, due Dec 2026.</p>
+
+<h2>Decision</h2>
+<div class="callout"><strong>Decision: approve a per-load pricing pilot.</strong><br>
+Options: run the pilot with 10 customers, or wait a quarter.<br>
+<strong>Recommendation: run the pilot with 10 customers.</strong> Price was the stated reason in 6 of 17 lost deals in the CRM export, and per-load pricing is the pricing model the strategy is built on.<br>
+<span class="small">Deadline in the intake: 4 Nov 2026. That date has already passed (this document was compiled on 25 Nov 2026), and the inputs don't say whether the decision was made. Confirm its status before this goes out.</span></div>
+
+<h2>Note on ARR</h2>
+<p>We aren't reporting ARR against the $50M objective this quarter. The billing export ($10.9M ARR) and the finance close ($10.3M revenue for the quarter) don't reconcile. The VP Engineering will reconcile them with finance in Q4.</p>
+
+<div class="signoff"><strong>Sign-off:</strong> the CEO</div>
+
+</main></body></html>

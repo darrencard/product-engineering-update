@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kestrel Labs · Board update · Product &amp; Engineering · Q3 2026</title>
+<style>
+:root {
+  color-scheme: light;
+  --surface-0: #f4f3f0; --surface-1: #fcfcfb; --border: #e2e1dc;
+  --text-primary: #0b0b0b; --text-secondary: #52514e; --text-muted: #77766f;
+  --accent: #2a78d6; --good: #0ca30c; --warning: #fab219; --critical: #d03b3b; --neutral: #8a8984;
+}
+@media (prefers-color-scheme: dark) {
+  :root { color-scheme: dark; --surface-0: #111110; --surface-1: #1a1a19; --border: #383835;
+    --text-primary: #ffffff; --text-secondary: #c3c2b7; --text-muted: #9a998f; --accent: #3987e5; }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--surface-0); color: var(--text-primary);
+  font: 15px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Helvetica, Arial, sans-serif; }
+main { max-width: 860px; margin: 0 auto; padding: 40px 24px 64px; }
+.eyebrow { color: var(--text-muted); font-size: 13px; letter-spacing: .04em; text-transform: uppercase; }
+h1 { font-size: 26px; line-height: 1.25; margin: 6px 0 8px; }
+h2 { font-size: 18px; margin: 0 0 8px; }
+.meta { color: var(--text-secondary); font-size: 14px; }
+section { background: var(--surface-1); border: 1px solid var(--border); border-radius: 10px; padding: 20px 22px; margin: 16px 0; }
+ul { margin: 6px 0; padding-left: 20px; } li { margin: 6px 0; }
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top; }
+th { color: var(--text-secondary); font-size: 13px; font-weight: 600; }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.status { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; white-space: nowrap; }
+.status::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--neutral); }
+.status.good::before { background: var(--good); } .status.warn::before { background: var(--warning); } .status.bad::before { background: var(--critical); }
+.note { color: var(--text-muted); font-size: 13px; margin-top: 8px; }
+.callout { border-left: 4px solid var(--critical); padding: 10px 14px; background: var(--surface-0); border-radius: 0 6px 6px 0; margin-top: 12px; }
+.signoff { display: flex; gap: 32px; flex-wrap: wrap; font-size: 14px; color: var(--text-secondary); }
+.signoff strong { color: var(--text-primary); }
+@media print { body { background: #fff; } section { break-inside: avoid; } }
+</style>
+</head>
+<body>
+<main>
+<header>
+  <div class="eyebrow">Kestrel Labs · Board update · Product &amp; Engineering</div>
+  <h1>Q3 2026: the agent is driving results. Activation and unit cost are the next constraints.</h1>
+  <div class="meta">Period: 1 Jul – 30 Sep 2026 · Data as of 30 Sep 2026 · Prepared by the CPTO</div>
+</header>
+
+<section>
+  <h2>Headlines</h2>
+  <ul>
+    <li><strong>Automation is scaling.</strong> Loads cleared with no manual touch reached 23.1K/week, against a 22K target, up 26% on Q2. Every won deal cites the agent clearing exceptions.</li>
+    <li><strong>Activation is the gap.</strong> 41% of accounts get a first automated load inside 14 days, against a 50% target. The guided activation experiment shipped, and its result is due in Q4.</li>
+    <li><strong>Unit economics need attention.</strong> Revenue was $10.3M (plan $10.0M), but inference spend was $612K against a $480K plan. The agent's eval cost per task fell 20%, so volume is the likely driver.</li>
+    <li><strong>Retention.</strong> In the billing export, four churned accounts ($1.11M) outweighed six new ones ($0.90M). Expansion still lifted ARR 5.1%, with net revenue retention at 96%.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Scorecard</h2>
+  <table>
+    <thead><tr><th>Measure</th><th class="num">Q2</th><th class="num">Q3</th><th class="num">Target</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>Loads cleared per week (north star)</td><td class="num">18.4K</td><td class="num">23.1K</td><td class="num">22K</td><td><span class="status good">Above target</span></td></tr>
+      <tr><td>Activation</td><td class="num">39%</td><td class="num">41%</td><td class="num">50%</td><td><span class="status bad">Behind</span></td></tr>
+      <tr><td>Weekly active dispatchers</td><td class="num">5,890</td><td class="num">6,120</td><td class="num">6,000</td><td><span class="status good">Above target</span></td></tr>
+      <tr><td>Agent task success (evals)</td><td class="num">82%</td><td class="num">86%</td><td class="num">90%</td><td><span class="status warn">Improving</span></td></tr>
+      <tr><td>Inference spend</td><td class="num">—</td><td class="num">$612K</td><td class="num">$480K plan</td><td><span class="status bad">28% over</span></td></tr>
+      <tr><td>Change failure rate</td><td class="num">5.1%</td><td class="num">7.7%</td><td class="num">under 5%</td><td><span class="status bad">Out of range</span></td></tr>
+    </tbody>
+  </table>
+  <p class="note">Commitments: 6 of 7 shipped. Self-serve carrier onboarding slipped. R&amp;D spend was $4.20M against a $4.25M plan, and engineering headcount is 44 against a plan of 46.</p>
+</section>
+
+<section>
+  <h2>Decision for the board</h2>
+  <table>
+    <thead><tr><th>Ask</th><th>Options</th><th>Recommendation</th><th>Deadline</th></tr></thead>
+    <tbody><tr>
+      <td>Approve a per-load pricing pilot</td>
+      <td>Pilot with 10 customers, or wait a quarter</td>
+      <td><strong>Run the pilot with 10 customers.</strong></td>
+      <td class="num">4 Nov 2026</td>
+    </tr></tbody>
+  </table>
+  <p class="note">Why: per-load pricing is the stated strategy, and 6 of 17 lost deals cite price. Q3 inference works out to about $2 per cleared load, which gives a cost ceiling for setting the price.</p>
+  <div class="callout"><strong>Deadline status:</strong> the 4 Nov 2026 deadline has passed. If the pilot has already been decided, record the outcome here instead of the ask before this goes to the board.</div>
+</section>
+
+<section>
+  <h2>Top risk</h2>
+  <table>
+    <thead><tr><th>Risk</th><th>Likelihood · impact</th><th>Mitigation</th><th>Due</th></tr></thead>
+    <tbody><tr>
+      <td>One model provider carries most inference spend</td><td>Medium · High</td><td>Routing layer across 2 providers (Platform lead)</td><td class="num">Dec 2026</td>
+    </tr></tbody>
+  </table>
+  <p class="note">A signal to watch: 11 of 17 lost deals cite no TMS integration, and integration errors are the top support theme. Integration isn't in the current strategy, and leadership is assessing it for Q4 planning.</p>
+</section>
+
+<section>
+  <h2>Caveat</h2>
+  <p style="margin:0">ARR in the billing export ($10.9M) doesn't yet reconcile with Q3 revenue ($10.3M, roughly $41M annualised). Progress against the $50M ARR objective will be reported once the VP Engineering closes this gap with finance in Q4.</p>
+</section>
+
+<section>
+  <div class="signoff">
+    <div>Prepared by: <strong>the CPTO</strong></div>
+    <div>Signed off by: <strong>the CEO</strong></div>
+  </div>
+</section>
+</main>
+</body>
+</html>

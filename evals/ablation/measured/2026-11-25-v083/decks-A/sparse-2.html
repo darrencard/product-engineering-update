@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kestrel Labs: Product &amp; Engineering Update, 2026-Q3</title>
+<style>
+:root{color-scheme:light;--bg:#fcfcfb;--card:#ffffff;--ink:#0b0b0b;--ink2:#52514e;--muted:#7a7974;--rule:#e4e3df;--bar:#2a78d6;--warn-bg:#fff6e0;--warn-rule:#eda100;--grid:#ecebe7}
+@media (prefers-color-scheme:dark){:root{color-scheme:dark;--bg:#1a1a19;--card:#222220;--ink:#ffffff;--ink2:#c3c2b7;--muted:#9a998f;--rule:#383835;--bar:#3987e5;--warn-bg:#2d2614;--warn-rule:#c98500;--grid:#2e2e2b}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+main{max-width:860px;margin:0 auto;padding:40px 24px 64px}
+h1{font-size:26px;margin:0 0 4px;letter-spacing:-.01em}
+h2{font-size:18px;margin:36px 0 10px;padding-top:16px;border-top:1px solid var(--rule)}
+h3{font-size:15px;margin:20px 0 6px}
+.meta{color:var(--ink2);font-size:13px;margin:0 0 20px}
+.card{background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:16px 20px;margin:12px 0}
+.bluf ol{margin:6px 0 0;padding-left:20px}.bluf li{margin:6px 0}
+.note{background:var(--warn-bg);border-left:4px solid var(--warn-rule);border-radius:4px;padding:10px 14px;margin:12px 0;font-size:14px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:12px 0}
+.tile{background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:12px 14px}
+.tile .v{font-size:28px;font-weight:600;line-height:1.1}
+.tile .l{color:var(--ink2);font-size:13px;margin-top:4px}
+table{border-collapse:collapse;width:100%;font-size:14px;margin:8px 0}
+th,td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--rule);vertical-align:top}
+th{color:var(--ink2);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.03em}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+.fig{margin:8px 0 4px}
+.fig svg{width:100%;height:auto;display:block}
+.fig text{fill:var(--ink2);font-size:12px}
+.fig .val{fill:var(--ink);font-weight:600}
+.fig rect.b{fill:var(--bar)}
+.fig rect.b:hover{opacity:.8}
+.fig line.g{stroke:var(--grid);stroke-width:1}
+.cap{color:var(--muted);font-size:12px;margin:2px 0 12px}
+.src{color:var(--muted);font-size:12px}
+footer{margin-top:40px;color:var(--muted);font-size:12px;border-top:1px solid var(--rule);padding-top:12px}
+</style>
+</head>
+<body>
+<main>
+<h1>Kestrel Labs: Product &amp; Engineering Update</h1>
+<p class="meta">2026-Q3 (1 Jul to 30 Sep 2026) · From the CPTO · Data as of 30 Sep 2026 · Source: Linear export (100 issues), CPTO intake interview</p>
+
+<div class="card bluf">
+<strong>Bottom line</strong>
+<ol>
+<li><strong>The team closed 100 tracker items in Q3.</strong> 31% were new capabilities for the Dispatch Agent, 26% improved the core Dispatch product and drove growth, 21% went to platform and scale, and 22% kept the lights on.</li>
+<li><strong>Completions fell steadily through the quarter: 53 in July, 37 in August, 10 in September.</strong> In September, the only closed work was Dispatch Agent new capabilities (9 items) plus one keep-the-lights-on item. The Core Dispatch team closed nothing after 21 Aug, and the Platform team closed nothing after 2 Sep. The export can't tell us why (see <a href="#trend">§3</a>).</li>
+<li><strong>We can't yet judge whether Q3 was on track.</strong> The intake records no objectives, strategy, north-star metric, investment plan, risks or commitments, so there's nothing to measure delivery against. The VP Engineering owns closing these gaps in Q4.</li>
+<li><strong>The Dispatch Agent (AI) has a named eval set, v14, but no eval results were provided.</strong> This update says nothing about its quality.</li>
+</ol>
+</div>
+
+<div class="note"><strong>Read with care.</strong> Every item in the export has an estimate of 1 and status Done. So the counts here are <em>item counts, not effort</em>, and in-progress or planned work doesn't appear at all. The data stops at 30 Sep 2026, so nothing from Q4 to date is covered.</div>
+
+<h2 id="delivery">1. What shipped</h2>
+<div class="tiles">
+<div class="tile"><div class="v">100</div><div class="l">items closed in Q3</div></div>
+<div class="tile"><div class="v">31%</div><div class="l">new capabilities (Dispatch Agent)</div></div>
+<div class="tile"><div class="v">22%</div><div class="l">keep the lights on</div></div>
+<div class="tile"><div class="v">78%</div><div class="l">items tagged to an objective in the tracker</div></div>
+</div>
+
+<h2 id="allocation">2. Where the effort went</h2>
+<p>Items closed by work type. Each item has an estimate of 1, so share of items is the only allocation measure available.</p>
+<div class="fig" role="img" aria-label="Bar chart of Q3 items closed by work type: New capabilities 31, Keep the lights on 22, Platform and scale 21, Improve the core 18, Growth 8.">
+<svg viewBox="0 0 800 200">
+<line class="g" x1="190" y1="10" x2="190" y2="190"/>
+<text x="180" y="34" text-anchor="end">New capabilities</text><rect class="b" x="190" y="18" width="527" height="24" rx="4"><title>New capabilities: 31 items (31%)</title></rect><text class="val" x="723" y="34">31 · 31%</text>
+<text x="180" y="70" text-anchor="end">Keep the lights on</text><rect class="b" x="190" y="54" width="374" height="24" rx="4"><title>Keep the lights on: 22 items (22%)</title></rect><text class="val" x="570" y="70">22 · 22%</text>
+<text x="180" y="106" text-anchor="end">Platform &amp; scale</text><rect class="b" x="190" y="90" width="357" height="24" rx="4"><title>Platform &amp; scale: 21 items (21%)</title></rect><text class="val" x="553" y="106">21 · 21%</text>
+<text x="180" y="142" text-anchor="end">Improve the core</text><rect class="b" x="190" y="126" width="306" height="24" rx="4"><title>Improve the core: 18 items (18%)</title></rect><text class="val" x="502" y="142">18 · 18%</text>
+<text x="180" y="178" text-anchor="end">Growth</text><rect class="b" x="190" y="162" width="136" height="24" rx="4"><title>Growth: 8 items (8%)</title></rect><text class="val" x="332" y="178">8 · 8%</text>
+</svg>
+</div>
+<p class="cap">Q3 2026 items closed, by work type. Source: Linear.</p>
+
+<table>
+<thead><tr><th>Work type</th><th>Product line</th><th>Team</th><th class="n">Items</th><th class="n">Share</th></tr></thead>
+<tbody>
+<tr><td>New capabilities</td><td>Dispatch Agent</td><td>Dispatch Agent team</td><td class="n">31</td><td class="n">31%</td></tr>
+<tr><td>Improve the core</td><td>Core Dispatch</td><td>Core Dispatch team</td><td class="n">18</td><td class="n">18%</td></tr>
+<tr><td>Growth</td><td>Core Dispatch</td><td>Core Dispatch team</td><td class="n">8</td><td class="n">8%</td></tr>
+<tr><td>Platform &amp; scale</td><td>Platform</td><td>Platform team</td><td class="n">21</td><td class="n">21%</td></tr>
+<tr><td>Keep the lights on</td><td>Platform</td><td>Platform team</td><td class="n">22</td><td class="n">22%</td></tr>
+<tr><td><strong>Total</strong></td><td></td><td></td><td class="n"><strong>100</strong></td><td class="n"><strong>100%</strong></td></tr>
+</tbody>
+</table>
+<p>By team: the Platform team closed 43 items, the Dispatch Agent team 31 and the Core Dispatch team 26. All keep-the-lights-on work sat with the Platform team, which means half of that team's closed items (22 of 43) were run-the-business work.</p>
+<p><strong>There's no plan to compare against.</strong> The intake has no investment plan or target allocation, so we can't say whether a 31 / 26 / 21 / 22 split is right or how far it is from intent.</p>
+
+<h2 id="trend">3. Throughput through the quarter</h2>
+<div class="fig" role="img" aria-label="Bar chart of items closed per month: July 53, August 37, September 10.">
+<svg viewBox="0 0 800 170">
+<line class="g" x1="120" y1="10" x2="120" y2="150"/>
+<text x="110" y="40" text-anchor="end">July</text><rect class="b" x="120" y="22" width="583" height="28" rx="4"><title>July 2026: 53 items closed</title></rect><text class="val" x="709" y="41">53</text>
+<text x="110" y="85" text-anchor="end">August</text><rect class="b" x="120" y="67" width="407" height="28" rx="4"><title>August 2026: 37 items closed</title></rect><text class="val" x="533" y="86">37</text>
+<text x="110" y="130" text-anchor="end">September</text><rect class="b" x="120" y="112" width="110" height="28" rx="4"><title>September 2026: 10 items closed</title></rect><text class="val" x="236" y="131">10</text>
+</svg>
+</div>
+<p class="cap">Items closed per month, Q3 2026. Source: Linear.</p>
+
+<table>
+<thead><tr><th>Work type</th><th class="n">Jul</th><th class="n">Aug</th><th class="n">Sep</th><th>Last item closed</th></tr></thead>
+<tbody>
+<tr><td>New capabilities</td><td class="n">12</td><td class="n">10</td><td class="n">9</td><td>26 Sep</td></tr>
+<tr><td>Improve the core</td><td class="n">11</td><td class="n">7</td><td class="n">0</td><td>21 Aug</td></tr>
+<tr><td>Growth</td><td class="n">8</td><td class="n">0</td><td class="n">0</td><td>22 Jul</td></tr>
+<tr><td>Platform &amp; scale</td><td class="n">11</td><td class="n">10</td><td class="n">0</td><td>30 Aug</td></tr>
+<tr><td>Keep the lights on</td><td class="n">11</td><td class="n">10</td><td class="n">1</td><td>2 Sep</td></tr>
+<tr><td><strong>Total</strong></td><td class="n"><strong>53</strong></td><td class="n"><strong>37</strong></td><td class="n"><strong>10</strong></td><td></td></tr>
+</tbody>
+</table>
+<p><strong>The drop is the biggest signal in the data, and the data can't explain it.</strong> Because the export contains only closed items, several explanations fit equally well:</p>
+<ul>
+<li>work stalled;</li>
+<li>teams moved to larger items that hadn't closed by 30 Sep;</li>
+<li>teams were redeployed (for example, onto the Dispatch Agent);</li>
+<li>or the export is incomplete.</li>
+</ul>
+<p>Growth work stopped after 22 Jul, and keep-the-lights-on work stopped after 2 Sep. Both need an explanation: a production system with no maintenance work closed for four weeks is unusual.</p>
+
+<h2 id="ai">4. AI features</h2>
+<table>
+<thead><tr><th>Feature</th><th>Eval set</th><th>Eval results</th><th>Q3 items closed</th></tr></thead>
+<tbody><tr><td>Dispatch Agent</td><td>v14</td><td>Not provided</td><td class="n">31</td></tr></tbody>
+</table>
+<p>The Dispatch Agent was the only area still closing work in September. It had steady output all quarter, roughly one item every three days. Without v14 eval scores, though, we can't report whether quality, accuracy or safety improved.</p>
+
+<h2 id="gaps">5. What this update can't tell you yet</h2>
+<p>The intake left these fields empty. The VP Engineering owns filling them in, due in Q4.</p>
+<table>
+<thead><tr><th>Missing</th><th>Why it matters</th></tr></thead>
+<tbody>
+<tr><td>Objectives and north-star metric</td><td>Without them we can't say whether Q3 delivery moved the business. Every non-maintenance item carries the tracker tag "Grow ARR to $50M", but the intake doesn't confirm that objective. Because it's on everything, the tag also doesn't tell work apart.</td></tr>
+<tr><td>Strategy (diagnosis, policy, actions, non-goals)</td><td>Without it we can't check that the 31% going to new capabilities was a deliberate choice.</td></tr>
+<tr><td>Investment plan and R&amp;D lines</td><td>Without them there's no target allocation to compare actual effort against.</td></tr>
+<tr><td>Delivery ranges and commitments</td><td>Without them there's no forecast or commitment to report against.</td></tr>
+<tr><td>Bets, risks, stopped work and decisions</td><td>No risks or decisions are recorded, and none are proposed here.</td></tr>
+<tr><td>Dispatch Agent eval results (v14)</td><td>Without them there's no quality signal for the main AI investment.</td></tr>
+<tr><td>Open and in-progress tracker items; real estimates</td><td>Without them we can't explain the September drop or measure effort rather than item count.</td></tr>
+</tbody>
+</table>
+
+<h2 id="data">6. Data notes</h2>
+<ul>
+<li><strong>Source:</strong> one Linear export with 100 issues, all status Done, closed between 1 Jul and 26 Sep 2026. No other systems were connected.</li>
+<li><strong>Estimates:</strong> all 100 items have an estimate of 1, so points equal counts.</li>
+<li><strong>Odd entry:</strong> NEW-31 is dated 1 Jul 2026, out of sequence with NEW-1 to NEW-30. It's counted as recorded.</li>
+<li><strong>Objective tag:</strong> the 22 keep-the-lights-on items have no objective. All other items carry "Grow ARR to $50M".</li>
+<li><strong>Timeliness:</strong> data as of 30 Sep 2026. This update doesn't cover Q4 to date.</li>
+</ul>
+
+<footer>Kestrel Labs · Product &amp; Engineering Update 2026-Q3 · Prepared from the CPTO intake and the Linear export. A shorter board version is in board.html.</footer>
+</main>
+</body>
+</html>

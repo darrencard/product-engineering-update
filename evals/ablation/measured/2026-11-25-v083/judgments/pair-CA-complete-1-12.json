@@ -1,0 +1,46 @@
+{
+ "id": "pair-CA-complete-1-12",
+ "fixture": "complete",
+ "kind": "pair",
+ "matchup": "CA",
+ "x": "runs/C/complete/1",
+ "y": "runs/A/complete/1",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "Y",
+    "reason": "X annualises $10.3M Q3 revenue as $40.9M (it is $41.2M, as Y states), and puts that wrong figure on slide 1 and slide 5; Y's figures recompute correctly, including the $10.38M\u2192$10.91M ARR bridge, 4 of 52 failed deploys (7.7%), 89.3% GRR and the +27.5% inference variance."
+   },
+   "no_invented_numbers": {
+    "winner": "Y",
+    "reason": "X's 'Activation: 5 more periods' projection is labelled, but it adds a forecast the data does not contain; Y's two added risks are flagged as not in the intake and its churn-to-onboarding link is labelled 'suggestive, not proven', though its claim that CFR worsened 'after the release checklist shipped' has no ship date to support it."
+   },
+   "speed_with_quality": {
+    "winner": "Y",
+    "reason": "Both pair 4 deploys/week with the 7.7% change failure rate, but Y's delivery section also brings rework (12%\u219215%) onto the page and ties it to review time, while X leaves rework in the ledger (L07) only."
+   },
+   "gaps_shown": {
+    "winner": "Y",
+    "reason": "Y's data-gaps table names eight gaps, each with an owner and due date (the billing export not being the full book, unmeasured bet stop rules, lead time as a proxy, undated tickets, an unexplained inference overrun). X lists only 2 gaps and calls 'incident data' missing while using the incident tool for its 41m time to restore."
+   },
+   "board_cut_usable": {
+    "winner": "Y",
+    "reason": "X's board cut contains internal notes ('Check before the board sees this', 'Confirm which is right') and the wrong $40.9M, and presents the passed 4 Nov deadline as 'one decision for you today'. Y's board cut leads with the answer, the ARR bridge, the overdue decision with its outcome not recorded, the top risk and owned caveats."
+   }
+  },
+  "overall": {
+   "winner": "Y",
+   "reason": "X has a wrong headline revenue figure, contradicts itself on incident data, and its board cut still carries internal check notes that a CPTO could not send. Y's figures are correct, it names every data gap with an owner, it raises the TMS integration gap the data plainly shows, and its board cut is ready to send."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 2900,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 39926,
+  "cost_usd": 0.37741600000000003,
+  "num_turns": 2,
+  "duration_ms": 25666
+ }
+}

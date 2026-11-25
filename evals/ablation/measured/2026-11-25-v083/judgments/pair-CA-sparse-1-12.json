@@ -1,0 +1,46 @@
+{
+ "id": "pair-CA-sparse-1-12",
+ "fixture": "sparse",
+ "kind": "pair",
+ "matchup": "CA",
+ "x": "runs/C/sparse/1",
+ "y": "runs/A/sparse/1",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "Y",
+    "reason": "Y's 100 tickets, 31/22/21/18/8% split, 78% goal-linked and 53\u219237\u219210 monthly trend all recompute exactly. X says '0 of 19 slides show data' while its own ledger (L01, L02) holds tracker-derived figures, so its headline is wrong."
+   },
+   "no_invented_numbers": {
+    "winner": "Y",
+    "reason": "X fills every slide with samples (ARR $10.9M, loads 23.1K, a pricing-pilot deadline of 4 Nov 2026) credited to a made-up company also named 'Kestrel Labs', and the slide 4 and 5 samples reuse the real capacity split, which could mislead. Y's only unsupported claim is 'Signed off by the CEO'."
+   },
+   "speed_with_quality": {
+    "winner": "Y",
+    "reason": "Y's only throughput figure (tickets falling 53\u219210) is flagged as unconfirmed, not good news, and Y says that no reliability or incident data exists. X shows no real speed figures, only illustrative pairs on slide 9."
+   },
+   "gaps_shown": {
+    "winner": "Y",
+    "reason": "Y names each specific gap (no plan, no north star, no v14 eval results, no incident data, a possibly incomplete export) with the VP Engineering as owner, due Q4. X marks all 19 slides missing, including the capacity mix that the tracker data supports."
+   },
+   "board_cut_usable": {
+    "winner": "Y",
+    "reason": "Y's board cut is one page: it leads with 78% tied to the ARR goal and the unconfirmed 53\u219210 drop, shows the effort split and states that there are no asks. X produced no board cut."
+   }
+  },
+  "overall": {
+   "winner": "Y",
+   "reason": "Y turns the only connected data source into correct figures and flags the September drop and the missing data plainly, with an owner for each gap. X leaves out data that exists and fills the deck with samples credited to a made-up company with the same name, which could mislead a board."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 2002,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 18127,
+  "cost_usd": 0.1855426,
+  "num_turns": 2,
+  "duration_ms": 18140
+ }
+}

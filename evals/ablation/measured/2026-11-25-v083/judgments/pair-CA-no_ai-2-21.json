@@ -1,0 +1,46 @@
+{
+ "id": "pair-CA-no_ai-2-21",
+ "fixture": "no_ai",
+ "kind": "pair",
+ "matchup": "CA",
+ "x": "runs/A/no_ai/2",
+ "y": "runs/C/no_ai/2",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "X",
+    "reason": "X's ARR bridge ($10.38M\u2192$10.91M, +$741K expansion, \u2212$1.11M churn), NRR 96.4%, CFR 4/52=7.7%, rework 9/60 and 53/37/10 monthly throughput all recompute correctly, while Y's slide 10 wrongly lists 'incident data' as missing and slide 01 says '1 gap' when several exist."
+   },
+   "no_invented_numbers": {
+    "winner": "tie",
+    "reason": "Y's 'Activation: 5 more periods' is labelled as a projection and X's $2.04 per-load cost is labelled as an estimate; X's '$1.68 on plan' quietly uses the 22K target and its board cut promises reconciliation 'before the next update', which roughly matches Y's added forecast."
+   },
+   "speed_with_quality": {
+    "winner": "X",
+    "reason": "Both pair 4 deploys/week with the 7.7% change failure rate, but X also shows rework rising to 15% and says plainly that the Release checklist didn't bring change failure rate down."
+   },
+   "gaps_shown": {
+    "winner": "X",
+    "reason": "X's Data gaps section names agent task success, cost per successful task, the Guided activation test result, revenue vs ARR, ship dates and PR\u2192deploy linkage, each owned by the VP Engineering by Q4; Y reports only a platform and security gap and shows the bet's 86%\u219290% task success with no note that it isn't measured."
+   },
+   "board_cut_usable": {
+    "winner": "X",
+    "reason": "X's board cut is short, leads with headlines, a scorecard and the decision, and flags the passed 4 Nov deadline next to it; Y's cut keeps internal 'Check before the board sees this' notes and a ledger, and slide 18 shows the overdue decision as 'for you today'."
+   }
+  },
+  "overall": {
+   "winner": "X",
+   "reason": "X's figures all check against the raw data, it names every measurement gap with an owner, and it ties shipped work to whether the metric actually moved. Y is mostly accurate, but it undercounts gaps, says incident data is missing when it isn't, and its board cut still carries internal notes."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 3956,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 36132,
+  "cost_usd": 0.36866259999999995,
+  "num_turns": 2,
+  "duration_ms": 36129
+ }
+}

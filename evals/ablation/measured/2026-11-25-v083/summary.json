@@ -1,0 +1,316 @@
+{
+ "judgments": 34,
+ "matchups": {
+  "CA": {
+   "tested": "C",
+   "against": "A",
+   "per_judgment": {
+    "overall": {
+     "C": 0,
+     "A": 34,
+     "tie": 0,
+     "n": 34,
+     "tested_share_with_ties_half": 0.0,
+     "tested_share_of_decisive": 0.0,
+     "tested_share_of_decisive_ci95": [
+      0.0,
+      0.10151790621961015
+     ]
+    },
+    "figures_correct": {
+     "C": 0,
+     "A": 30,
+     "tie": 4,
+     "n": 34,
+     "tested_share_with_ties_half": 0.058823529411764705,
+     "tested_share_of_decisive": 0.0,
+     "tested_share_of_decisive_ci95": [
+      0.0,
+      0.113517091390478
+     ]
+    },
+    "no_invented_numbers": {
+     "C": 8,
+     "A": 16,
+     "tie": 10,
+     "n": 34,
+     "tested_share_with_ties_half": 0.38235294117647056,
+     "tested_share_of_decisive": 0.3333333333333333,
+     "tested_share_of_decisive_ci95": [
+      0.17971978688379642,
+      0.5329404050591954
+     ]
+    },
+    "speed_with_quality": {
+     "C": 0,
+     "A": 18,
+     "tie": 16,
+     "n": 34,
+     "tested_share_with_ties_half": 0.23529411764705882,
+     "tested_share_of_decisive": 0.0,
+     "tested_share_of_decisive_ci95": [
+      0.0,
+      0.1758845505823749
+     ]
+    },
+    "gaps_shown": {
+     "C": 0,
+     "A": 34,
+     "tie": 0,
+     "n": 34,
+     "tested_share_with_ties_half": 0.0,
+     "tested_share_of_decisive": 0.0,
+     "tested_share_of_decisive_ci95": [
+      0.0,
+      0.10151790621961015
+     ]
+    },
+    "board_cut_usable": {
+     "C": 0,
+     "A": 34,
+     "tie": 0,
+     "n": 34,
+     "tested_share_with_ties_half": 0.0,
+     "tested_share_of_decisive": 0.0,
+     "tested_share_of_decisive_ci95": [
+      0.0,
+      0.10151790621961015
+     ]
+    }
+   },
+   "per_pair": {
+    "C": 0,
+    "A": 17,
+    "split": 0,
+    "n": 17,
+    "tested_wins_ci95": [
+     0.0,
+     0.18432366037156456
+    ]
+   },
+   "position": {
+    "X": 17,
+    "Y": 17,
+    "tie": 0
+   },
+   "per_fixture": {
+    "complete": {
+     "C": 0,
+     "A": 6,
+     "tie": 0
+    },
+    "conflict_resolved": {
+     "C": 0,
+     "A": 6,
+     "tie": 0
+    },
+    "conflicting": {
+     "C": 0,
+     "A": 6,
+     "tie": 0
+    },
+    "no_ai": {
+     "C": 0,
+     "A": 6,
+     "tie": 0
+    },
+    "single_product": {
+     "C": 0,
+     "A": 6,
+     "tie": 0
+    },
+    "sparse": {
+     "C": 0,
+     "A": 4,
+     "tie": 0
+    }
+   }
+  }
+ },
+ "noise": {},
+ "checks": {
+  "A": {
+   "decks": 18,
+   "no_update": 0,
+   "figures": 3459,
+   "unmatched": 218,
+   "arithmetic_checked": 986,
+   "arithmetic_errors": 4,
+   "sample_figures": 0
+  },
+  "C": {
+   "decks": 17,
+   "no_update": 1,
+   "figures": 3219,
+   "unmatched": 59,
+   "arithmetic_checked": 715,
+   "arithmetic_errors": 0,
+   "sample_figures": 248
+  }
+ },
+ "chance_match_rates": {
+  "complete": {
+   "whole percent, 21 to 99": 0.631,
+   "percent to 1 decimal": 0.3875,
+   "dollars in millions to 1 decimal": 0.02,
+   "dollars in thousands": 0.051,
+   "whole hours, 21 to 99": 0.1615,
+   "4-digit count": 0.0465
+  },
+  "conflict_resolved": {
+   "whole percent, 21 to 99": 0.629,
+   "percent to 1 decimal": 0.4065,
+   "dollars in millions to 1 decimal": 0.023,
+   "dollars in thousands": 0.056,
+   "whole hours, 21 to 99": 0.1615,
+   "4-digit count": 0.0465
+  },
+  "conflicting": {
+   "whole percent, 21 to 99": 0.629,
+   "percent to 1 decimal": 0.4065,
+   "dollars in millions to 1 decimal": 0.023,
+   "dollars in thousands": 0.056,
+   "whole hours, 21 to 99": 0.1615,
+   "4-digit count": 0.0465
+  },
+  "no_ai": {
+   "whole percent, 21 to 99": 0.554,
+   "percent to 1 decimal": 0.3195,
+   "dollars in millions to 1 decimal": 0.02,
+   "dollars in thousands": 0.051,
+   "whole hours, 21 to 99": 0.1615,
+   "4-digit count": 0.0465
+  },
+  "single_product": {
+   "whole percent, 21 to 99": 0.631,
+   "percent to 1 decimal": 0.3875,
+   "dollars in millions to 1 decimal": 0.02,
+   "dollars in thousands": 0.051,
+   "whole hours, 21 to 99": 0.1615,
+   "4-digit count": 0.0465
+  },
+  "sparse": {
+   "whole percent, 21 to 99": 0.0925,
+   "percent to 1 decimal": 0.0415,
+   "dollars in millions to 1 decimal": 0.0,
+   "dollars in thousands": 0.0,
+   "whole hours, 21 to 99": 0.027,
+   "4-digit count": 0.0025
+  }
+ },
+ "cost": {
+  "generate_A": {
+   "calls": 18,
+   "input_tokens": 508,
+   "output_tokens": 410702,
+   "cache_read_input_tokens": 7774341,
+   "cache_creation_input_tokens": 860017,
+   "cost_usd": 16.6510762
+  },
+  "generate_C": {
+   "calls": 18,
+   "input_tokens": 440,
+   "output_tokens": 111930,
+   "cache_read_input_tokens": 6199779,
+   "cache_creation_input_tokens": 696049,
+   "cost_usd": 9.0487078
+  },
+  "judge": {
+   "calls": 34,
+   "input_tokens": 72,
+   "output_tokens": 110938,
+   "cache_read_input_tokens": 107561,
+   "cache_creation_input_tokens": 1161173,
+   "cost_usd": 11.5299442
+  },
+  "extract": {
+   "calls": 35,
+   "input_tokens": 70,
+   "output_tokens": 83738,
+   "cache_read_input_tokens": 64290,
+   "cache_creation_input_tokens": 312146,
+   "cost_usd": 4.185066
+  }
+ },
+ "skill_leaks_in_A": [],
+ "skill_use_in_C": {
+  "runs": 18,
+  "loaded_the_skill": 18,
+  "ran_its_scripts": 18,
+  "per_run": {
+   "runs/C/complete/1": {
+    "skill_loaded": 1,
+    "script_calls": 5
+   },
+   "runs/C/complete/2": {
+    "skill_loaded": 1,
+    "script_calls": 7
+   },
+   "runs/C/complete/3": {
+    "skill_loaded": 1,
+    "script_calls": 7
+   },
+   "runs/C/conflict_resolved/1": {
+    "skill_loaded": 1,
+    "script_calls": 6
+   },
+   "runs/C/conflict_resolved/2": {
+    "skill_loaded": 1,
+    "script_calls": 6
+   },
+   "runs/C/conflict_resolved/3": {
+    "skill_loaded": 1,
+    "script_calls": 6
+   },
+   "runs/C/conflicting/1": {
+    "skill_loaded": 1,
+    "script_calls": 6
+   },
+   "runs/C/conflicting/2": {
+    "skill_loaded": 1,
+    "script_calls": 6
+   },
+   "runs/C/conflicting/3": {
+    "skill_loaded": 1,
+    "script_calls": 6
+   },
+   "runs/C/no_ai/1": {
+    "skill_loaded": 1,
+    "script_calls": 6
+   },
+   "runs/C/no_ai/2": {
+    "skill_loaded": 1,
+    "script_calls": 7
+   },
+   "runs/C/no_ai/3": {
+    "skill_loaded": 1,
+    "script_calls": 6
+   },
+   "runs/C/single_product/1": {
+    "skill_loaded": 1,
+    "script_calls": 7
+   },
+   "runs/C/single_product/2": {
+    "skill_loaded": 1,
+    "script_calls": 5
+   },
+   "runs/C/single_product/3": {
+    "skill_loaded": 1,
+    "script_calls": 6
+   },
+   "runs/C/sparse/1": {
+    "skill_loaded": 1,
+    "script_calls": 5
+   },
+   "runs/C/sparse/2": {
+    "skill_loaded": 1,
+    "script_calls": 11
+   },
+   "runs/C/sparse/3": {
+    "skill_loaded": 1,
+    "script_calls": 7
+   }
+  }
+ },
+ "b_distinct_decks_per_fixture": {}
+}

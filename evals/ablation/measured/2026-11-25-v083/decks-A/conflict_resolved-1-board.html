@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kestrel Labs: Board summary, 2026-Q3</title>
+<style>
+:root{color-scheme:light;--page:#f9f9f7;--surface:#fcfcfb;--ink:#0b0b0b;--ink2:#52514e;--muted:#898781;--grid:#e1e0d9;--axis:#c3c2b7;--border:rgba(11,11,11,.10);--s1:#2a78d6;--good:#0ca30c;--goodtext:#006300;--warn:#fab219;--crit:#d03b3b}
+@media (prefers-color-scheme:dark){:root{color-scheme:dark;--page:#0d0d0d;--surface:#1a1a19;--ink:#fff;--ink2:#c3c2b7;--muted:#898781;--grid:#2c2c2a;--axis:#383835;--border:rgba(255,255,255,.10);--s1:#3987e5;--goodtext:#0ca30c}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--ink);font:15px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:960px;margin:0 auto;padding:32px 24px 64px}
+h1{font-size:26px;margin:0 0 4px}h2{font-size:19px;margin:36px 0 10px;padding-top:8px;border-top:1px solid var(--grid)}h3{font-size:15px;margin:18px 0 6px}
+.meta{color:var(--ink2);margin:0 0 20px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px 20px;margin:12px 0}
+.tldr li{margin:6px 0}
+table{width:100%;border-collapse:collapse;background:var(--surface);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin:10px 0;font-size:14px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--grid);vertical-align:top}
+th{color:var(--ink2);font-weight:600;font-size:13px}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+.st{white-space:nowrap;font-weight:600}
+.st::before{display:inline-block;width:1.1em;text-align:center;margin-right:4px;border-radius:50%;color:#fff;font-size:11px;line-height:1.1em}
+.ok::before{content:"✓";background:var(--good)}
+.miss::before{content:"✕";background:var(--crit)}
+.watch::before{content:"!";background:var(--warn);color:#0b0b0b}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:12px 0}
+.tile{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 16px}
+.tile .k{color:var(--ink2);font-size:13px}.tile .v{font-size:28px;font-weight:650;margin:2px 0}.tile .d{font-size:13px;color:var(--ink2)}
+.ask{border-left:4px solid var(--crit)}
+.note{color:var(--ink2);font-size:13px}
+.chart svg{width:100%;height:auto;display:block}
+.chart text{fill:var(--ink2);font-size:12px;font-family:inherit}
+.chart .lbl{fill:var(--ink);font-size:13px}
+.legend{display:flex;gap:18px;font-size:13px;color:var(--ink2);margin:4px 0 8px}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;background:var(--s1);vertical-align:-1px;margin-right:6px}
+.legend i.tick{width:3px;height:14px;border-radius:0;background:var(--ink)}
+#tip{position:fixed;pointer-events:none;background:var(--surface);color:var(--ink);border:1px solid var(--border);box-shadow:0 2px 8px rgba(0,0,0,.15);border-radius:6px;padding:6px 10px;font-size:13px;display:none}
+@media print{h2{break-after:avoid}table,.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+<main>
+<h1>Kestrel Labs: Product &amp; Engineering, board summary, 2026-Q3</h1>
+<p class="meta">Period 1 Jul to 30 Sep 2026 · Data as of 30 Sep 2026 · Prepared by the CPTO · <strong>Signed off by the CEO</strong></p>
+
+<div class="tiles">
+<div class="tile"><div class="k">Loads cleared per week (north star)</div><div class="v">23,100</div><div class="d"><span class="st ok">Hit</span> target 22K · Q2 18,400</div></div>
+<div class="tile"><div class="k">ARR (billing)</div><div class="v">$10.91M</div><div class="d"><span class="st watch">Below plan</span> plan $11.0M · NRR 96%</div></div>
+<div class="tile"><div class="k">Activation</div><div class="v">41%</div><div class="d"><span class="st miss">Miss</span> target 50% · Q2 39%</div></div>
+<div class="tile"><div class="k">Agent task success</div><div class="v">86%</div><div class="d">target 90% · Q2 82%</div></div>
+</div>
+
+<div class="card tldr">
+<h3 style="margin-top:0">What the board should know</h3>
+<ul>
+<li><strong>The product thesis is working.</strong> Loads cleared with no manual touch rose 26% and beat target. All 22 deals won in Q3 cited the agent clearing exceptions.</li>
+<li><strong>Revenue growth is held back by churn and integration.</strong> ARR grew 5.1% to $10.91M, against an objective of $50M. Four accounts churned ($1.11M), which outweighed new logos ($0.90M). Missing TMS integration lost 11 of 17 deals and drove most support tickets. It is not in the current plan. The VP Engineering will bring a plan in Q4.</li>
+<li><strong>Activation missed.</strong> It reached 41% against 50%. Guided activation shipped, but activation rose only 2 points.</li>
+<li><strong>Spend is on plan, with one exception.</strong> R&amp;D came in at $4.20M against a $4.25M plan. Inference ran 28% over plan ($612K) because volume grew, even though cost per task fell 20%. Most of that spend is with one provider, and a routing layer across two providers is due in Dec 2026.</li>
+<li><strong>Engineering shipped 6 of 7 commitments and is shipping faster.</strong> But the change failure rate rose to 7.7%, above the 5% target.</li>
+</ul>
+</div>
+
+<h2>Decision</h2>
+<div class="card ask">
+<p style="margin:0"><strong>Approve a per-load pricing pilot with 10 customers</strong>, or wait a quarter. Management recommends running the pilot. Six of 17 lost deals cited price.<br>
+The original deadline was 4 Nov 2026 and has passed. These files contain no record of a decision.</p>
+</div>
+
+<h2>Key risk</h2>
+<p>One model provider carries most inference spend. Likelihood is medium and impact is high. The mitigation is a routing layer across 2 providers, owned by the Platform lead and due in Dec 2026.</p>
+
+<p class="note">Notes:</p>
+<ul class="note">
+<li>ARR comes from billing, our source of truth. The finance close shows $10.1M, and the two still need to be reconciled (owner: the VP Engineering, Q4).</li>
+<li>The north star comes from PostHog. The warehouse shows 21,400, and that difference also needs reconciling.</li>
+<li>The full detail is in the leadership update (update.html).</li>
+</ul>
+</main>
+</body>
+</html>

@@ -1,0 +1,50 @@
+{
+ "complete": {
+  "whole percent, 21 to 99": 0.631,
+  "percent to 1 decimal": 0.3875,
+  "dollars in millions to 1 decimal": 0.02,
+  "dollars in thousands": 0.051,
+  "whole hours, 21 to 99": 0.1615,
+  "4-digit count": 0.0465
+ },
+ "conflict_resolved": {
+  "whole percent, 21 to 99": 0.629,
+  "percent to 1 decimal": 0.4065,
+  "dollars in millions to 1 decimal": 0.023,
+  "dollars in thousands": 0.056,
+  "whole hours, 21 to 99": 0.1615,
+  "4-digit count": 0.0465
+ },
+ "conflicting": {
+  "whole percent, 21 to 99": 0.629,
+  "percent to 1 decimal": 0.4065,
+  "dollars in millions to 1 decimal": 0.023,
+  "dollars in thousands": 0.056,
+  "whole hours, 21 to 99": 0.1615,
+  "4-digit count": 0.0465
+ },
+ "no_ai": {
+  "whole percent, 21 to 99": 0.554,
+  "percent to 1 decimal": 0.3195,
+  "dollars in millions to 1 decimal": 0.02,
+  "dollars in thousands": 0.051,
+  "whole hours, 21 to 99": 0.1615,
+  "4-digit count": 0.0465
+ },
+ "single_product": {
+  "whole percent, 21 to 99": 0.631,
+  "percent to 1 decimal": 0.3875,
+  "dollars in millions to 1 decimal": 0.02,
+  "dollars in thousands": 0.051,
+  "whole hours, 21 to 99": 0.1615,
+  "4-digit count": 0.0465
+ },
+ "sparse": {
+  "whole percent, 21 to 99": 0.0925,
+  "percent to 1 decimal": 0.0415,
+  "dollars in millions to 1 decimal": 0.0,
+  "dollars in thousands": 0.0,
+  "whole hours, 21 to 99": 0.027,
+  "4-digit count": 0.0025
+ }
+}

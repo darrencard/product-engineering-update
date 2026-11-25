@@ -1,0 +1,46 @@
+{
+ "id": "pair-CA-single_product-2-21",
+ "fixture": "single_product",
+ "kind": "pair",
+ "matchup": "CA",
+ "x": "runs/A/single_product/2",
+ "y": "runs/C/single_product/2",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "tie",
+    "reason": "All figures in both updates recompute against the data, e.g. Stripe ARR $10.38M to $10.91M, NRR 96.4%, change failure rate 7.7% vs 5.1%, R&D at 40.8% of revenue and 75% AI seat use."
+   },
+   "no_invented_numbers": {
+    "winner": "Y",
+    "reason": "X's board cut says inference ran 28% over plan 'as volume grew', a cause its own full update calls unconfirmed, while Y's only forecast ('Activation: 5 more periods') is labelled as a projection."
+   },
+   "speed_with_quality": {
+    "winner": "tie",
+    "reason": "Both put deploys (3 to 4 a week) and lead time (52h to 38h) next to change failure rate (5.1% to 7.7%) and review time (9h to 13h), and neither presents the speed as good news."
+   },
+   "gaps_shown": {
+    "winner": "X",
+    "reason": "X flags 6 Stripe new accounts vs 22 CRM wins, undated CRM and support exports, and the v13/v14 eval-set difference, and holds back $50M progress until Finance reconciles; Y wrongly lists incident data as missing, states $10.4M to $10.9M ARR as fact on slide 01, and gives the ARR reconciliation no owner."
+   },
+   "board_cut_usable": {
+    "winner": "X",
+    "reason": "X's board cut is short and opens with the north star, activation, revenue and the passed 4 Nov pricing decision, while Y's board cut repeats the cover metadata, internal 'Check before the board sees this' notes and the evidence ledger."
+   }
+  },
+  "overall": {
+   "winner": "X",
+   "reason": "Both updates get their figures right and pair speed with quality, but X names the real data conflicts (the ARR mismatch, CRM wins vs Stripe new accounts, the eval-set change) without picking a source, while Y invents a missing-incident-data gap and quotes Stripe ARR as fact. X's board cut is also concise and close to sendable, while Y's carries internal review notes and a ledger appendix."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 3523,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 36441,
+  "cost_usd": 0.3624746,
+  "num_turns": 2,
+  "duration_ms": 31968
+ }
+}

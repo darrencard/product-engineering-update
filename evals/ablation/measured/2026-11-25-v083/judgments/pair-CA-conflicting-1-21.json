@@ -1,0 +1,46 @@
+{
+ "id": "pair-CA-conflicting-1-21",
+ "fixture": "conflicting",
+ "kind": "pair",
+ "matchup": "CA",
+ "x": "runs/A/conflicting/1",
+ "y": "runs/C/conflicting/1",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "X",
+    "reason": "X's figures recompute correctly (ARR bridge $10.38M\u2192$10.911M, NRR 96.4%, CFR 4/52=7.7%, lead time 52h\u219238h, $1,692/$889 per active user), while Y mislabels eval cost_per_task $0.33 as 'cost per successful task' and says Multi-stop reroutes showed 'no movement' though loads rose from 18.4K under either source."
+   },
+   "no_invented_numbers": {
+    "winner": "X",
+    "reason": "Y claims incident data is missing even though it uses the incident tool's 41m time to restore, and it presents an R&D-to-revenue ratio of 40.8% without flagging that $10.3M quarterly revenue exceeds $10.1M ARR; X flags that conflict and hedges its inference-volume explanation."
+   },
+   "speed_with_quality": {
+    "winner": "tie",
+    "reason": "Both pair deploys 3\u21924 and lead time 52h\u219238h with CFR 5.1%\u21927.7%, and neither presents speed as good news on its own; X adds rework 11.7%\u219215.0%, and Y's board slide 09b pairs them too."
+   },
+   "gaps_shown": {
+    "winner": "X",
+    "reason": "X's Data conflicts table lists 8 gaps (north star 23,100 vs 21,400, ARR $10.1M vs $10.91M, revenue above ARR, lead-time proxy, item-count mix, overdue decision, uncheckable stop rules, slipped onboarding) with the VP Engineering as owner, due Q4; Y misses the revenue/ARR conflict and wrongly lists incident data as missing."
+   },
+   "board_cut_usable": {
+    "winner": "X",
+    "reason": "X's board cut is one page leading with the ARR -$0.9M headline, six key metrics, the overdue pricing decision and owned caveats, while Y's is eight slides plus a ledger that hides ARR and repeats slide 09 content."
+   }
+  },
+  "overall": {
+   "winner": "X",
+   "reason": "X's figures recompute correctly, it labels the cost-per-task proxy honestly, and it shows every source conflict with an owner, including the revenue-above-ARR anomaly that Y misses. Y mislabels eval cost, wrongly says incident data is missing, and gives a longer board cut that a CPO couldn't send as it is."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 3110,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 36766,
+  "cost_usd": 0.3568146,
+  "num_turns": 2,
+  "duration_ms": 27430
+ }
+}

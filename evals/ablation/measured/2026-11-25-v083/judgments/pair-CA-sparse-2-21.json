@@ -1,0 +1,9 @@
+{
+ "id": "pair-CA-sparse-2-21",
+ "fixture": "sparse",
+ "kind": "pair",
+ "matchup": "CA",
+ "x": "runs/A/sparse/2",
+ "y": "runs/C/sparse/2",
+ "skipped": "a run made no update"
+}

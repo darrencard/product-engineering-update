@@ -922,5 +922,31 @@ class Rerun083Causes(unittest.TestCase):
         self.assertNotIn("incident data", json.dumps(self.complete).lower().replace("incident data is", ""))
 
 
+class MiniEval(unittest.TestCase):
+    """The per-release mini eval reads a summary into one trend row and flags a regression (no model calls)."""
+
+    @classmethod
+    def setUpClass(cls) -> None:
+        import importlib.util
+
+        spec = importlib.util.spec_from_file_location("mini", SKILL.parent.parent / "evals" / "ablation" / "mini.py")
+        cls.mini = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(cls.mini)
+
+    def test_a_summary_becomes_one_trend_row(self) -> None:
+        summary = json.loads((SKILL.parent.parent / "evals" / "ablation" / "measured" / "2026-11-25" / "summary.json").read_text(encoding="utf-8"))
+        row = self.mini.row_from(summary, "0.8.0", "all", "2026-11-25")
+        self.assertEqual((row["judgments"], row["skill_wins"], row["claude_wins"]), (36, 0, 36))
+        self.assertEqual(row["skill_arithmetic_errors"], 0)
+        self.assertEqual(set(row), set(self.mini.FIELDS))
+
+    def test_an_arithmetic_error_or_a_lower_share_is_a_regression(self) -> None:
+        base = {"fixtures": "f", "version": "1", "judgments": 4, "skill_wins": 2, "ties": 0, "skill_arithmetic_errors": 0}
+        self.assertEqual(self.mini.regressions(dict(base, version="2"), base), [])
+        self.assertTrue(self.mini.regressions(dict(base, version="2", skill_wins=1), base))
+        self.assertTrue(self.mini.regressions(dict(base, version="2", skill_arithmetic_errors=1), base))
+        self.assertEqual(self.mini.regressions(dict(base, version="2", skill_wins=0, fixtures="g"), base), [], "other fixtures are not compared")
+
+
 if __name__ == "__main__":
     unittest.main()
