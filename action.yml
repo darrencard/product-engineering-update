@@ -1,9 +1,9 @@
 name: Product & Technology Leader Report
-description: Build the Leadership and Staff cuts of the update from this repository's own data, inside your CI. Never renders the Board cut.
+description: Builds the leadership and staff cuts of your report from this repository's data in CI. Every figure has a source.
 author: Dacard
 branding:
   icon: bar-chart-2
-  color: gray
+  color: gray-dark
 
 # Security notes:
 # - This action only reads. It exports merged pull requests and deployments with the token it is given,
