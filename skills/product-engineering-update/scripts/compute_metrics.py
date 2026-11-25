@@ -456,6 +456,36 @@ def analytics(r: Run) -> None:
         r.extra["analytics_metrics"].append("analytics:" + name)
 
 
+# Revenue for the period, at that rate for a year, should land near ARR. Outside this band one of the two lines is likely wrong.
+RECONCILE_BAND = (0.5, 2.0)
+
+
+def reconcile(r: Run) -> None:
+    """Flag revenue and ARR that cannot both be right, for example a quarter's revenue entered as the year's. Neither is changed.
+    Runs after billing and finance, so a disputed ARR (no value) is never quoted here."""
+    revenue = r.extra.get("revenue_line")
+    src = r.data("finance")
+    if not revenue or not src or not revenue.get("actual"):
+        return
+    billed = r.metrics.get("arr")
+    if billed and (billed.get("conflict") or billed.get("value") is None):
+        return
+    arr = billed["value"] if billed else revenue.get("stated_arr")
+    if not arr:
+        return
+    days = (r.end - r.start).days + 1
+    yearly = revenue["actual"] * 365 / days
+    ratio = yearly / arr
+    if RECONCILE_BAND[0] <= ratio <= RECONCILE_BAND[1]:
+        return
+    text = (
+        f"Revenue and ARR do not reconcile. Revenue for {r.label} is {money(revenue['actual'])}, "
+        f"which is {money(yearly)} a year at that rate; ARR is {money(arr)}."
+    )
+    lid = r.row(text, rounded(yearly), "$", src, "Derived")
+    r.extra["reconcile"] = {"text": text, "ledger": lid}
+
+
 def finance(r: Run) -> None:
     src = r.data("finance")
     if not src:
@@ -477,6 +507,8 @@ def finance(r: Run) -> None:
     capitalisable(r, src, by_line)
     stated = by_line.get("arr")
     billed = r.metrics.get("arr")
+    if revenue:
+        r.extra["revenue_line"] = {"actual": revenue["actual"], "stated_arr": stated["actual"] if stated else None}
     if stated and billed and abs(stated["actual"] - billed["value"]) > CONFLICT_TOLERANCE * abs(billed["value"]):
         bsrc = r.data("billing")
         owner = owner_of(r, "ARR")
@@ -619,7 +651,7 @@ def survey(r: Run) -> None:
         r.metric("dev_experience", "Developer experience index", score, statistics.mean(prior) if prior else None, "score", src)
 
 
-STEPS = (tracker, source_control, incidents, billing, analytics, finance, evals, ai_tools, people, survey)
+STEPS = (tracker, source_control, incidents, billing, analytics, finance, reconcile, evals, ai_tools, people, survey)
 
 
 def main() -> int:

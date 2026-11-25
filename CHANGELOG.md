@@ -4,6 +4,15 @@
 
 - **Ablation eval.** `evals/ablation/` compares the skill's pipeline with Claude alone on the same fixture data, with a blind judge, noise runs and mechanical checks. It calls the model, so it stays out of the unit tests and CI. On the 6 synthetic fixtures the judge preferred Claude alone in 36 of 36 judgments. The skill made 0 arithmetic errors and Claude alone 1 in 1,049 checked figures. The skill's behaviour is unchanged. Results and limits: `docs/ablation.md`.
 
+## 0.8.0 (2026-11-24)
+
+Four fixes from the ablation eval in `docs/ablation.md`, where a blind judge preferred Claude alone to the skill's pipeline in 36 of 36 comparisons. The judge's reasons named these.
+
+- **A team's deck carries no template material.** Drafted decks keep the evidence ledger (Appendix A) and drop the template's Appendices B, C and D: the explanation of the cuts, the pitch for this skill with its "Book a call" link, and the source list. The cover states the deck's own facts (core slides, each cut's length, the as-of date) in place of instructions to a template reader such as "Keys J and K move between slides". The blank template and the worked example keep every appendix.
+- **The board cut carries only the ledger rows its slides cite**, in both the HTML and its ledger CSV. Other cuts keep the whole ledger.
+- **Revenue is checked against ARR.** When the period's revenue, at that rate for a year, is less than half or more than twice ARR, slide 5 says the two do not reconcile, gives both figures with a ledger row, and asks for the right line before R&D as a share of revenue is read. Neither figure is changed. A disputed ARR is never quoted.
+- 173 tests.
+
 ## 0.7.4 (2026-11-24)
 
 - **Error recovery in the skill itself.** SKILL.md now holds a table of the refusals an agent meets most, each with what to do, so the fix is in the agent's context and not only in `docs/troubleshooting.md`. Facts only the user has are asked for, never filled in.
