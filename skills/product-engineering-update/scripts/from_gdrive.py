@@ -4,8 +4,10 @@
 Usage:
   python3 scripts/from_gdrive.py --files files.json --kind "risk register" --drive acme --run run
 
-Input: Drive API v3 files.list results (or the Google Drive connector), saved as they stand, one file
-per page ({"files": [...], "nextPageToken": ...}). Ask for fields
+Input: Drive API v3 files.list results, or the Claude Google Drive connector's search_files or
+list_recent_files results, saved as they stand, one file per page ({"files": [...], "nextPageToken": ...}).
+The API names a file's title and link `name` and `webViewLink`; the connector names them `title` and
+`viewUrl`. Both are read. From the API, ask for fields
 nextPageToken,files(id,name,mimeType,modifiedTime,webViewLink); without them Drive returns only id,
 name and mimeType, and updated_at and location stay empty.
 
@@ -43,13 +45,16 @@ def main() -> int:
     args = ap.parse_args()
     rows = []
     for f in convert.pages(args.files, TOOL, "files"):
-        if f.get("trashed") or f.get("mimeType") == FOLDER or not f.get("name"):
+        # The Drive API says name and webViewLink; the Claude Drive connector says title and viewUrl.
+        title = f.get("name") or f.get("title")
+        if f.get("trashed") or f.get("mimeType") == FOLDER or not title:
             continue
         modified = convert.when(f.get("modifiedTime"))
-        rows.append({"document": f["name"], "kind": args.kind, "updated_at": modified.isoformat() if modified else "", "location": f.get("webViewLink") or ""})
+        link = f.get("webViewLink") or f.get("viewUrl") or ""
+        rows.append({"document": title, "kind": args.kind, "updated_at": modified.isoformat() if modified else "", "location": link})
     if not rows:
         raise convert.fail(TOOL, "found no files. The docs source stays Unknown; no file was written.")
-    what = "Google Drive files.list (name, modifiedTime, webViewLink)"
+    what = "Google Drive file list (title, modifiedTime, link)"
     out = convert.write(
         "docs",
         rows,
