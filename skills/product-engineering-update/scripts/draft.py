@@ -592,7 +592,9 @@ class Draft:
             better = want.get("higher_is_better", metric.get("higher_is_better", True))
             unit = want.get("unit", "")
             # The user's own wording of a definition wins over the one the analytics system carries.
-            projected = pace(metric["value"], metric["prior"], target if isinstance(target, (int, float)) else None, better, want.get("by"), self.intake["period"])
+            projected = pace(
+                metric["value"], metric["prior"], target if isinstance(target, (int, float)) else None, better, want.get("by"), self.intake["period"]
+            )
             if projected not in ("Met", "No target"):
                 paces.append(f"{name}: {lower_first(projected.removeprefix('Projected: '))}.")
             rows.append(

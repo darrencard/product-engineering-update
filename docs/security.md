@@ -64,7 +64,7 @@ shasum -a 256 -c SHA256SUMS
 
 On Linux, `sha256sum -c SHA256SUMS` does the same. To compare against the source, check out the tag and run `git archive --format=zip --prefix=product-engineering-update-<version>/ v<version>` yourself.
 
-**Code quality checks.** `pyproject.toml` configures Ruff with the `S` (bandit security) rules among others. The `subprocess` imports in `tools/` carry an inline opt-out that says why. The repository has no `.github/workflows`, so these checks and the test suite are not run in CI on each change.
+**Code quality checks.** `pyproject.toml` configures Ruff with the `S` (bandit security) rules among others. The `subprocess` imports in `tools/` carry an inline opt-out that says why. `.github/workflows/tests.yml` runs the test suite on Python 3.9 and 3.13, and Ruff's lint and format checks, on every pull request and every push to `main`. It has read-only permissions and pins each action to a commit SHA.
 
 ## Prompt injection
 

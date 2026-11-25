@@ -15,11 +15,10 @@ import unittest
 from pathlib import Path
 from typing import Any
 
-from test_pipeline import FIXTURES, SCRIPTS, run_fixture, rules, script, slide
-
 import draft  # noqa: E402  (on the path through test_pipeline)
 import from_github  # noqa: E402
 import validate  # noqa: E402
+from test_pipeline import FIXTURES, rules, run_fixture, script, slide
 
 Json = dict[str, Any]
 
@@ -177,7 +176,9 @@ class Capitalisable(unittest.TestCase):
     def test_the_estimate_is_computed_labelled_and_cited(self) -> None:
         work = Path(tempfile.mkdtemp())
         try:
-            base = variant(work, {"capitalisation": {"work_types": ["New capabilities", "Improve the core"], "cost_lines": ["R&D payroll"], "confirmed_by": None}})
+            base = variant(
+                work, {"capitalisation": {"work_types": ["New capabilities", "Improve the core"], "cost_lines": ["R&D payroll"], "confirmed_by": None}}
+            )
             deck, metrics = run_fixture("complete", work / "out", base)
         finally:
             shutil.rmtree(work)

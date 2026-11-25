@@ -455,9 +455,7 @@ def cut_deck(deck: Json, key: str) -> Json:
 def sign_cover(deck: Json, signer: str) -> Json:
     """The board cut carries the name of the person who said yes, on its cover, so the sign-off travels with the file."""
     out = dict(deck)
-    out["slides"] = [
-        dict(s, meta=[*s.get("meta", []), f"Signed off by {signer}"]) if s["kind"] == "cover" else s for s in deck["slides"]
-    ]
+    out["slides"] = [dict(s, meta=[*s.get("meta", []), f"Signed off by {signer}"]) if s["kind"] == "cover" else s for s in deck["slides"]]
     return out
 
 
