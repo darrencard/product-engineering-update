@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- **Mini eval per release.** `evals/ablation/mini.py` runs Claude with the skill against Claude alone on 2 fixed fixtures (about $5), appends a row to `evals/ablation/trend.csv` and flags a regression. Seeded with the v0.8.0 and v0.8.3 full runs. `tools/release.sh` reminds the release to run it.
+
 ## 0.8.3 (2026-11-25)
 
 - **Slide 1 leads with what not to rely on.** It opens with a "Check before you rely on this" card: every figure held because two sources disagree (named by source, never by number) and the revenue against ARR check, each cited to its ledger row. It closes with every gap in the deck, each with what is missing, its owner and its date. Before, it listed only the names of empty slides. This answers the 0.8.0 ablation rerun, where the judge preferred Claude alone on showing gaps 35 to 1.
