@@ -1,0 +1,46 @@
+{
+ "id": "pair-CB-no_ai-1-21",
+ "fixture": "no_ai",
+ "kind": "pair",
+ "matchup": "CB",
+ "x": "runs/B/no_ai/1",
+ "y": "runs/C/no_ai/1",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "tie",
+    "reason": "Both state the same figures, and they recompute correctly: ARR $10.4M to $10.9M, net revenue retention 96.4%, change failure 5.1% to 7.7% (2/39 to 4/52), lead time 52h to 38h, R&D share 40.8%."
+   },
+   "no_invented_numbers": {
+    "winner": "tie",
+    "reason": "Neither invents a figure: the only forecast, slide 11's 'Activation: 5 more periods', is labelled as a projection in both (X's unsupported 'Signed off by the CEO' is a claim, not a figure)."
+   },
+   "speed_with_quality": {
+    "winner": "tie",
+    "reason": "In both, slide 09 pairs deploys 3 to 4 and lead time 52h to 38h with change failure 5.1% to 7.7% and marks change failure as stalled, so neither presents speed alone as good news."
+   },
+   "gaps_shown": {
+    "winner": "tie",
+    "reason": "Both name the Platform & security gap (owner: the VP Engineering, due Q4) on slide 10 and flag the mismatch between $10.3M revenue and $10.9M ARR on slide 05 rather than picking one source silently."
+   },
+   "board_cut_usable": {
+    "winner": "X",
+    "reason": "X delivers a 7-slide board cut that opens with loads cleared at 23.1K against the 22K target and the per-load pricing pilot ask, though it still contains the internal 'Check before the board sees this' note and an unsupported CEO sign-off; Y's board cut is only a placeholder with nothing to send."
+   }
+  },
+  "overall": {
+   "winner": "X",
+   "reason": "The two full updates are the same in substance: identical correct figures, the same pairing of speed with quality, and the same gaps flagged. X wins only because it produces a board cut that leads with the answer and the ask, though it needs the internal slide 05 note removed and the CEO sign-off confirmed, while Y produces no board cut at all."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 3387,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 34826,
+  "cost_usd": 0.3468346,
+  "num_turns": 2,
+  "duration_ms": 31559
+ }
+}

@@ -1,0 +1,46 @@
+{
+ "id": "pair-BA-no_ai-1-12",
+ "fixture": "no_ai",
+ "kind": "pair",
+ "matchup": "BA",
+ "x": "runs/B/no_ai/1",
+ "y": "runs/A/no_ai/1",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "Y",
+    "reason": "Both get the core figures right (ARR $10.38M\u2192$10.91M, NRR 96.4%, change failure rate 5.1%\u21927.7%, 4 deploys a week, 38h lead time), but X's cover says '16 of 17 slides show data' while slide 01 says 3 slides lack data, and Y's derived figures check out: 11 of 17 losses, $1.11M churned, R&D \u22121%, inference +28%."
+   },
+   "no_invented_numbers": {
+    "winner": "X",
+    "reason": "X keeps to the data and labels its 'Activation: 5 more periods' projection as a rough guide, while Y adds claims the data does not support: Guided activation 'is in a live test', 'a proposal will go to Q4 planning', a new integration risk with an invented Q4 due date, and the routing layer giving 'pricing leverage'."
+   },
+   "speed_with_quality": {
+    "winner": "X",
+    "reason": "X's board slide 09b puts 3\u21924 deploys right beside 5.1%\u21927.7% change failure and 9h\u219213h review time, while Y's board cut lists '4 deploys a week\u2026 38h lead time' under 'What is working' and leaves change failure rate to a separate section."
+   },
+   "gaps_shown": {
+    "winner": "Y",
+    "reason": "Y names the missing agent task success, cost per successful task and guided-activation live-test result with owner VP Engineering and Q4 due date, and flags the $10.3M revenue vs $10.91M ARR conflict, while X mostly reports Platform & security as missing and writes 'not collected' for cost per task with no owner."
+   },
+   "board_cut_usable": {
+    "winner": "Y",
+    "reason": "Y's board cut fits on one page, leads with the answer and the four headline metrics, and makes the pricing-pilot ask clear with its reasoning; X's board cut is a slide dump with a ledger appendix and an internal 'Check before the board sees this' note on slide 05, so it can't go out as written."
+   }
+  },
+  "overall": {
+   "winner": "Y",
+   "reason": "Y gets its figures right, shows the gaps more clearly (task success, cost per task, revenue vs ARR) with owners, and has a board cut that could be sent almost as is. X is more disciplined about invented actions and about pairing speed with quality, but its board cut is not ready to send and it says less about what it cannot see."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 3049,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 34324,
+  "cost_usd": 0.3360586,
+  "num_turns": 2,
+  "duration_ms": 27383
+ }
+}

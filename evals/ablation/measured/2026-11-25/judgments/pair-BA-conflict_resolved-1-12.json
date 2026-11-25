@@ -1,0 +1,46 @@
+{
+ "id": "pair-BA-conflict_resolved-1-12",
+ "fixture": "conflict_resolved",
+ "kind": "pair",
+ "matchup": "BA",
+ "x": "runs/B/conflict_resolved/1",
+ "y": "runs/A/conflict_resolved/1",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "tie",
+    "reason": "Recomputed figures match in both: ARR $10.91M, net revenue retention 96.4%, change failure rate 7.7%, lead time 38h, Keep the lights on at 22% and seat use at 75%; Y's added figures (inference 27.5% over plan, ARR 0.8% short, win rate 56%) also check out."
+   },
+   "no_invented_numbers": {
+    "winner": "Y",
+    "reason": "X's board cut says 'Signed off by the CEO', which nothing in the data supports, while Y labels its added risks as 'drawn from the Q3 data' and presents its other inferences as its own reading."
+   },
+   "speed_with_quality": {
+    "winner": "tie",
+    "reason": "Both put deploys rising from 3 to 4 next to change failure rate rising from 5.1% to 7.7%, with review time alongside, and neither presents speed alone as good news."
+   },
+   "gaps_shown": {
+    "winner": "Y",
+    "reason": "Y's data notes set out the ARR conflict ($10.91M against $10.1M) and the loads-cleared conflict (23.1K against 21.4K) and name the VP Engineering, with Finance on ARR, by Q4; X mentions both conflicts only in ledger rows L09 and L14 and names no owner."
+   },
+   "board_cut_usable": {
+    "winner": "Y",
+    "reason": "Y's one-page board cut leads with 'the agent is working, but retention is the problem' and then the pricing-pilot ask, while X's 8-slide cut still contains an internal 'Check before the board sees this' note on slide 05; Y also leaves a 'confirm status' note on the passed 4 Nov deadline."
+   }
+  },
+  "overall": {
+   "winner": "Y",
+   "reason": "Both updates are accurate and pair speed with quality, but Y states the ARR and loads-cleared source conflicts plainly and names an owner for each. Y's board cut is also shorter and leads with the answer, while X's still contains an internal note meant to be removed before the board sees it and a CEO sign-off the data doesn't support."
+  }
+ },
+ "usage": {
+  "input_tokens": 6,
+  "output_tokens": 3967,
+  "cache_read_input_tokens": 41786,
+  "cache_creation_input_tokens": 40259,
+  "cost_usd": 0.40979319999999997,
+  "num_turns": 3,
+  "duration_ms": 35283
+ }
+}

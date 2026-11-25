@@ -1,0 +1,606 @@
+{
+ "judgments": 120,
+ "matchups": {
+  "BA": {
+   "tested": "B",
+   "against": "A",
+   "per_judgment": {
+    "overall": {
+     "B": 0,
+     "A": 24,
+     "tie": 0,
+     "n": 24,
+     "tested_share_with_ties_half": 0.0,
+     "tested_share_of_decisive": 0.0,
+     "tested_share_of_decisive_ci95": [
+      0.0,
+      0.13798057582897535
+     ]
+    },
+    "figures_correct": {
+     "B": 1,
+     "A": 19,
+     "tie": 4,
+     "n": 24,
+     "tested_share_with_ties_half": 0.125,
+     "tested_share_of_decisive": 0.05,
+     "tested_share_of_decisive_ci95": [
+      0.008881219432873136,
+      0.23613589351256675
+     ]
+    },
+    "no_invented_numbers": {
+     "B": 4,
+     "A": 14,
+     "tie": 6,
+     "n": 24,
+     "tested_share_with_ties_half": 0.2916666666666667,
+     "tested_share_of_decisive": 0.2222222222222222,
+     "tested_share_of_decisive_ci95": [
+      0.09000781913382,
+      0.4521502645230549
+     ]
+    },
+    "speed_with_quality": {
+     "B": 4,
+     "A": 11,
+     "tie": 9,
+     "n": 24,
+     "tested_share_with_ties_half": 0.3541666666666667,
+     "tested_share_of_decisive": 0.26666666666666666,
+     "tested_share_of_decisive_ci95": [
+      0.1089727610318281,
+      0.5195088965768675
+     ]
+    },
+    "gaps_shown": {
+     "B": 0,
+     "A": 24,
+     "tie": 0,
+     "n": 24,
+     "tested_share_with_ties_half": 0.0,
+     "tested_share_of_decisive": 0.0,
+     "tested_share_of_decisive_ci95": [
+      0.0,
+      0.13798057582897535
+     ]
+    },
+    "board_cut_usable": {
+     "B": 0,
+     "A": 24,
+     "tie": 0,
+     "n": 24,
+     "tested_share_with_ties_half": 0.0,
+     "tested_share_of_decisive": 0.0,
+     "tested_share_of_decisive_ci95": [
+      0.0,
+      0.13798057582897535
+     ]
+    }
+   },
+   "per_pair": {
+    "B": 0,
+    "A": 12,
+    "split": 0,
+    "n": 12,
+    "tested_wins_ci95": [
+     0.0,
+     0.2425007574992425
+    ]
+   },
+   "position": {
+    "X": 12,
+    "Y": 12,
+    "tie": 0
+   },
+   "per_fixture": {
+    "complete": {
+     "B": 0,
+     "A": 4,
+     "tie": 0
+    },
+    "conflict_resolved": {
+     "B": 0,
+     "A": 4,
+     "tie": 0
+    },
+    "conflicting": {
+     "B": 0,
+     "A": 4,
+     "tie": 0
+    },
+    "no_ai": {
+     "B": 0,
+     "A": 4,
+     "tie": 0
+    },
+    "single_product": {
+     "B": 0,
+     "A": 4,
+     "tie": 0
+    },
+    "sparse": {
+     "B": 0,
+     "A": 4,
+     "tie": 0
+    }
+   }
+  },
+  "CA": {
+   "tested": "C",
+   "against": "A",
+   "per_judgment": {
+    "overall": {
+     "C": 0,
+     "A": 36,
+     "tie": 0,
+     "n": 36,
+     "tested_share_with_ties_half": 0.0,
+     "tested_share_of_decisive": 0.0,
+     "tested_share_of_decisive_ci95": [
+      0.0,
+      0.09642183044857634
+     ]
+    },
+    "figures_correct": {
+     "C": 2,
+     "A": 22,
+     "tie": 12,
+     "n": 36,
+     "tested_share_with_ties_half": 0.2222222222222222,
+     "tested_share_of_decisive": 0.08333333333333333,
+     "tested_share_of_decisive_ci95": [
+      0.023158327842973503,
+      0.258492152014506
+     ]
+    },
+    "no_invented_numbers": {
+     "C": 14,
+     "A": 9,
+     "tie": 13,
+     "n": 36,
+     "tested_share_with_ties_half": 0.5694444444444444,
+     "tested_share_of_decisive": 0.6086956521739131,
+     "tested_share_of_decisive_ci95": [
+      0.4078517960374599,
+      0.7784262201761787
+     ]
+    },
+    "speed_with_quality": {
+     "C": 12,
+     "A": 7,
+     "tie": 17,
+     "n": 36,
+     "tested_share_with_ties_half": 0.5694444444444444,
+     "tested_share_of_decisive": 0.631578947368421,
+     "tested_share_of_decisive_ci95": [
+      0.4103915749815672,
+      0.8085072762372616
+     ]
+    },
+    "gaps_shown": {
+     "C": 1,
+     "A": 35,
+     "tie": 0,
+     "n": 36,
+     "tested_share_with_ties_half": 0.027777777777777776,
+     "tested_share_of_decisive": 0.027777777777777776,
+     "tested_share_of_decisive_ci95": [
+      0.004920280295569679,
+      0.141700337350308
+     ]
+    },
+    "board_cut_usable": {
+     "C": 0,
+     "A": 36,
+     "tie": 0,
+     "n": 36,
+     "tested_share_with_ties_half": 0.0,
+     "tested_share_of_decisive": 0.0,
+     "tested_share_of_decisive_ci95": [
+      0.0,
+      0.09642183044857634
+     ]
+    }
+   },
+   "per_pair": {
+    "C": 0,
+    "A": 18,
+    "split": 0,
+    "n": 18,
+    "tested_wins_ci95": [
+     0.0,
+     0.1758845505823749
+    ]
+   },
+   "position": {
+    "X": 18,
+    "Y": 18,
+    "tie": 0
+   },
+   "per_fixture": {
+    "complete": {
+     "C": 0,
+     "A": 6,
+     "tie": 0
+    },
+    "conflict_resolved": {
+     "C": 0,
+     "A": 6,
+     "tie": 0
+    },
+    "conflicting": {
+     "C": 0,
+     "A": 6,
+     "tie": 0
+    },
+    "no_ai": {
+     "C": 0,
+     "A": 6,
+     "tie": 0
+    },
+    "single_product": {
+     "C": 0,
+     "A": 6,
+     "tie": 0
+    },
+    "sparse": {
+     "C": 0,
+     "A": 6,
+     "tie": 0
+    }
+   }
+  },
+  "CB": {
+   "tested": "C",
+   "against": "B",
+   "per_judgment": {
+    "overall": {
+     "C": 10,
+     "B": 14,
+     "tie": 0,
+     "n": 24,
+     "tested_share_with_ties_half": 0.4166666666666667,
+     "tested_share_of_decisive": 0.4166666666666667,
+     "tested_share_of_decisive_ci95": [
+      0.24467347246538232,
+      0.6116566235061137
+     ]
+    },
+    "figures_correct": {
+     "C": 0,
+     "B": 0,
+     "tie": 24,
+     "n": 24,
+     "tested_share_with_ties_half": 0.5,
+     "tested_share_of_decisive": null,
+     "tested_share_of_decisive_ci95": null
+    },
+    "no_invented_numbers": {
+     "C": 5,
+     "B": 0,
+     "tie": 19,
+     "n": 24,
+     "tested_share_with_ties_half": 0.6041666666666666,
+     "tested_share_of_decisive": 1.0,
+     "tested_share_of_decisive_ci95": [
+      0.5655085052479191,
+      1.0
+     ]
+    },
+    "speed_with_quality": {
+     "C": 13,
+     "B": 0,
+     "tie": 11,
+     "n": 24,
+     "tested_share_with_ties_half": 0.7708333333333334,
+     "tested_share_of_decisive": 1.0,
+     "tested_share_of_decisive_ci95": [
+      0.7718981569447083,
+      1.0
+     ]
+    },
+    "gaps_shown": {
+     "C": 9,
+     "B": 1,
+     "tie": 14,
+     "n": 24,
+     "tested_share_with_ties_half": 0.6666666666666666,
+     "tested_share_of_decisive": 0.9,
+     "tested_share_of_decisive_ci95": [
+      0.5958436145024278,
+      0.9821242504842788
+     ]
+    },
+    "board_cut_usable": {
+     "C": 5,
+     "B": 19,
+     "tie": 0,
+     "n": 24,
+     "tested_share_with_ties_half": 0.20833333333333334,
+     "tested_share_of_decisive": 0.20833333333333334,
+     "tested_share_of_decisive_ci95": [
+      0.0924468910478809,
+      0.40470844485235474
+     ]
+    }
+   },
+   "per_pair": {
+    "C": 5,
+    "B": 7,
+    "split": 0,
+    "n": 12,
+    "tested_wins_ci95": [
+     0.19325746190524656,
+     0.6804926643446272
+    ]
+   },
+   "position": {
+    "X": 12,
+    "Y": 12,
+    "tie": 0
+   },
+   "per_fixture": {
+    "complete": {
+     "C": 4,
+     "B": 0,
+     "tie": 0
+    },
+    "conflict_resolved": {
+     "C": 0,
+     "B": 4,
+     "tie": 0
+    },
+    "conflicting": {
+     "C": 0,
+     "B": 4,
+     "tie": 0
+    },
+    "no_ai": {
+     "C": 0,
+     "B": 4,
+     "tie": 0
+    },
+    "single_product": {
+     "C": 2,
+     "B": 2,
+     "tie": 0
+    },
+    "sparse": {
+     "C": 4,
+     "B": 0,
+     "tie": 0
+    }
+   }
+  }
+ },
+ "noise": {
+  "self_A": {
+   "n": 6,
+   "overall_not_tie": 0,
+   "criteria_not_tie": 0,
+   "criteria_n": 30
+  },
+  "self_C": {
+   "n": 6,
+   "overall_not_tie": 0,
+   "criteria_not_tie": 0,
+   "criteria_n": 30
+  },
+  "within_A": {
+   "n": 12,
+   "overall_not_tie": 12,
+   "criteria_not_tie": 45,
+   "criteria_n": 60,
+   "order_flips": 2
+  },
+  "within_C": {
+   "n": 12,
+   "overall_not_tie": 11,
+   "criteria_not_tie": 20,
+   "criteria_n": 60,
+   "order_flips": 1
+  }
+ },
+ "checks": {
+  "A": {
+   "decks": 18,
+   "no_update": 0,
+   "figures": 3369,
+   "unmatched": 194,
+   "arithmetic_checked": 1008,
+   "arithmetic_errors": 14,
+   "sample_figures": 0
+  },
+  "B": {
+   "decks": 18,
+   "no_update": 0,
+   "figures": 3546,
+   "unmatched": 48,
+   "arithmetic_checked": 717,
+   "arithmetic_errors": 0,
+   "sample_figures": 555
+  },
+  "C": {
+   "decks": 18,
+   "no_update": 0,
+   "figures": 2506,
+   "unmatched": 29,
+   "arithmetic_checked": 792,
+   "arithmetic_errors": 0,
+   "sample_figures": 356
+  }
+ },
+ "chance_match_rates": {
+  "complete": {
+   "whole percent, 21 to 99": 0.631,
+   "percent to 1 decimal": 0.3875,
+   "dollars in millions to 1 decimal": 0.02,
+   "dollars in thousands": 0.051,
+   "whole hours, 21 to 99": 0.1615,
+   "4-digit count": 0.0465
+  },
+  "conflict_resolved": {
+   "whole percent, 21 to 99": 0.629,
+   "percent to 1 decimal": 0.4065,
+   "dollars in millions to 1 decimal": 0.023,
+   "dollars in thousands": 0.056,
+   "whole hours, 21 to 99": 0.1615,
+   "4-digit count": 0.0465
+  },
+  "conflicting": {
+   "whole percent, 21 to 99": 0.629,
+   "percent to 1 decimal": 0.4065,
+   "dollars in millions to 1 decimal": 0.023,
+   "dollars in thousands": 0.056,
+   "whole hours, 21 to 99": 0.1615,
+   "4-digit count": 0.0465
+  },
+  "no_ai": {
+   "whole percent, 21 to 99": 0.554,
+   "percent to 1 decimal": 0.3195,
+   "dollars in millions to 1 decimal": 0.02,
+   "dollars in thousands": 0.051,
+   "whole hours, 21 to 99": 0.1615,
+   "4-digit count": 0.0465
+  },
+  "single_product": {
+   "whole percent, 21 to 99": 0.631,
+   "percent to 1 decimal": 0.3875,
+   "dollars in millions to 1 decimal": 0.02,
+   "dollars in thousands": 0.051,
+   "whole hours, 21 to 99": 0.1615,
+   "4-digit count": 0.0465
+  },
+  "sparse": {
+   "whole percent, 21 to 99": 0.0925,
+   "percent to 1 decimal": 0.0415,
+   "dollars in millions to 1 decimal": 0.0,
+   "dollars in thousands": 0.0,
+   "whole hours, 21 to 99": 0.027,
+   "4-digit count": 0.0025
+  }
+ },
+ "cost": {
+  "generate_A": {
+   "calls": 18,
+   "input_tokens": 562,
+   "output_tokens": 451233,
+   "cache_read_input_tokens": 9754285,
+   "cache_creation_input_tokens": 979699,
+   "cost_usd": 18.815357000000002
+  },
+  "generate_C": {
+   "calls": 18,
+   "input_tokens": 450,
+   "output_tokens": 122476,
+   "cache_read_input_tokens": 6467634,
+   "cache_creation_input_tokens": 714272,
+   "cost_usd": 9.459022800000001
+  },
+  "judge": {
+   "calls": 120,
+   "input_tokens": 258,
+   "output_tokens": 336809,
+   "cache_read_input_tokens": 526456,
+   "cache_creation_input_tokens": 3938084,
+   "cost_usd": 38.3471752
+  },
+  "extract": {
+   "calls": 54,
+   "input_tokens": 108,
+   "output_tokens": 129219,
+   "cache_read_input_tokens": 214217,
+   "cache_creation_input_tokens": 365054,
+   "cost_usd": 5.5480874
+  }
+ },
+ "skill_leaks_in_A": [],
+ "skill_use_in_C": {
+  "runs": 18,
+  "loaded_the_skill": 18,
+  "ran_its_scripts": 18,
+  "per_run": {
+   "runs/C/complete/1": {
+    "skill_loaded": 1,
+    "script_calls": 6
+   },
+   "runs/C/complete/2": {
+    "skill_loaded": 1,
+    "script_calls": 6
+   },
+   "runs/C/complete/3": {
+    "skill_loaded": 1,
+    "script_calls": 7
+   },
+   "runs/C/conflict_resolved/1": {
+    "skill_loaded": 1,
+    "script_calls": 6
+   },
+   "runs/C/conflict_resolved/2": {
+    "skill_loaded": 1,
+    "script_calls": 5
+   },
+   "runs/C/conflict_resolved/3": {
+    "skill_loaded": 1,
+    "script_calls": 7
+   },
+   "runs/C/conflicting/1": {
+    "skill_loaded": 1,
+    "script_calls": 6
+   },
+   "runs/C/conflicting/2": {
+    "skill_loaded": 1,
+    "script_calls": 5
+   },
+   "runs/C/conflicting/3": {
+    "skill_loaded": 1,
+    "script_calls": 6
+   },
+   "runs/C/no_ai/1": {
+    "skill_loaded": 1,
+    "script_calls": 7
+   },
+   "runs/C/no_ai/2": {
+    "skill_loaded": 1,
+    "script_calls": 5
+   },
+   "runs/C/no_ai/3": {
+    "skill_loaded": 1,
+    "script_calls": 5
+   },
+   "runs/C/single_product/1": {
+    "skill_loaded": 1,
+    "script_calls": 8
+   },
+   "runs/C/single_product/2": {
+    "skill_loaded": 1,
+    "script_calls": 7
+   },
+   "runs/C/single_product/3": {
+    "skill_loaded": 1,
+    "script_calls": 8
+   },
+   "runs/C/sparse/1": {
+    "skill_loaded": 1,
+    "script_calls": 5
+   },
+   "runs/C/sparse/2": {
+    "skill_loaded": 1,
+    "script_calls": 8
+   },
+   "runs/C/sparse/3": {
+    "skill_loaded": 1,
+    "script_calls": 7
+   }
+  }
+ },
+ "b_distinct_decks_per_fixture": {
+  "complete": 1,
+  "conflict_resolved": 1,
+  "conflicting": 1,
+  "no_ai": 1,
+  "single_product": 1,
+  "sparse": 1
+ }
+}

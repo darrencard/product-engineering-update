@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kestrel Labs: Board Summary, 2026-Q3</title>
+<style>
+:root {
+  color-scheme: light;
+  --page: #f9f9f7; --surface: #fcfcfb; --ink: #0b0b0b; --ink-2: #52514e; --muted: #898781;
+  --grid: #e1e0d9; --axis: #c3c2b7; --border: rgba(11,11,11,0.10);
+  --s1: #2a78d6; --s2: #eb6834; --neg: #e34948; --total: #52514e;
+  --good: #0ca30c; --good-text: #006300; --warning: #fab219; --critical: #d03b3b; --serious: #ec835a;
+  --wash: #f0efec;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --page: #0d0d0d; --surface: #1a1a19; --ink: #ffffff; --ink-2: #c3c2b7; --muted: #898781;
+    --grid: #2c2c2a; --axis: #383835; --border: rgba(255,255,255,0.10);
+    --s1: #3987e5; --s2: #d95926; --neg: #e66767; --total: #c3c2b7;
+    --good-text: #0ca30c; --wash: #383835;
+  }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--page); color: var(--ink); font: 15px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; }
+main { max-width: 980px; margin: 0 auto; padding: 32px 24px 64px; }
+header p { margin: 4px 0; color: var(--ink-2); }
+h1 { font-size: 28px; margin: 0 0 4px; }
+h2 { font-size: 20px; margin: 40px 0 12px; padding-top: 16px; border-top: 1px solid var(--grid); }
+h3 { font-size: 16px; margin: 20px 0 8px; }
+p, li { max-width: 78ch; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 16px 20px; margin: 12px 0; }
+.summary li { margin: 6px 0; }
+.ask { border-left: 4px solid var(--s1); }
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; }
+.kpi { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; }
+.kpi .label { font-size: 13px; color: var(--ink-2); }
+.kpi .value { font-size: 30px; font-weight: 600; line-height: 1.2; margin: 4px 0; }
+.kpi .sub { font-size: 13px; color: var(--ink-2); }
+table { border-collapse: collapse; width: 100%; font-size: 14px; background: var(--surface); }
+th, td { text-align: left; padding: 7px 10px; border-bottom: 1px solid var(--grid); vertical-align: top; }
+th { font-weight: 600; color: var(--ink-2); font-size: 13px; }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.status { white-space: nowrap; font-weight: 600; font-size: 13px; }
+.status::before { display: inline-block; width: 1.1em; text-align: center; margin-right: 4px; border-radius: 50%; color: #fff; font-size: 11px; line-height: 1.1em; }
+.st-good::before { content: "✓"; background: var(--good); }
+.st-miss::before { content: "!"; background: var(--critical); }
+.st-warn::before { content: "?"; background: var(--warning); color: #0b0b0b; }
+.st-na::before { content: "–"; background: var(--muted); }
+.note { color: var(--ink-2); font-size: 13px; }
+.flag { background: var(--surface); border: 1px solid var(--border); border-left: 4px solid var(--warning); border-radius: 8px; padding: 10px 14px; margin: 10px 0; font-size: 14px; }
+.chart { position: relative; }
+.chart svg { display: block; width: 100%; height: auto; }
+.chart text { font: 12px system-ui, -apple-system, "Segoe UI", sans-serif; fill: var(--ink-2); }
+.chart .val { fill: var(--ink); font-variant-numeric: tabular-nums; }
+.legend { display: flex; gap: 16px; font-size: 13px; color: var(--ink-2); margin: 4px 0 8px; }
+.legend span::before { content: ""; display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; vertical-align: -1px; background: var(--c); }
+.tip { position: absolute; pointer-events: none; background: var(--surface); color: var(--ink); border: 1px solid var(--border); box-shadow: 0 2px 8px rgba(0,0,0,.15); border-radius: 6px; padding: 6px 9px; font-size: 13px; white-space: nowrap; opacity: 0; transition: opacity .1s; }
+details { margin-top: 8px; font-size: 14px; }
+summary { cursor: pointer; color: var(--ink-2); }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media (max-width: 760px) { .two { grid-template-columns: 1fr; } }
+footer { margin-top: 48px; font-size: 13px; color: var(--ink-2); }
+</style>
+</head>
+<body>
+<main>
+<header>
+  <h1>Kestrel Labs: Product &amp; Engineering, 2026-Q3</h1>
+  <p>Board summary. Quarter ended 30 Sep 2026. Prepared by the CPTO. The full leadership update has sources and detail.</p>
+</header>
+
+<h2>Headline</h2>
+<div class="card summary"><ul>
+  <li><strong>ARR is $10.1M, 8% below the $11.0M plan.</strong> Net revenue retention was 96%: four churned accounts ($1.11M) outweighed $0.74M of expansion.</li>
+  <li><strong>The product is working where customers adopt it.</strong> Every won deal cites the agent clearing exceptions. Agent task success rose from 82% to 86%, and cost per task fell 20%.</li>
+  <li><strong>Our top problems are integration and onboarding.</strong> Missing TMS integration lost 11 of 17 deals, and all four churned accounts had raised onboarding issues. Activation is 41% against a 50% target.</li>
+</ul></div>
+
+<h2>Scorecard</h2>
+<table>
+  <thead><tr><th>Measure</th><th class="num">Q3</th><th class="num">Target / plan</th><th>Status</th></tr></thead>
+  <tbody>
+    <tr><td>ARR (finance close)</td><td class="num">$10.1M</td><td class="num">$11.0M</td><td><span class="status st-miss">Below plan</span></td></tr>
+    <tr><td>Loads cleared per week (north star)</td><td class="num">21.4K–23.1K</td><td class="num">22K</td><td><span class="status st-warn">Sources disagree</span></td></tr>
+    <tr><td>Activation</td><td class="num">41%</td><td class="num">50%</td><td><span class="status st-miss">Below target</span></td></tr>
+    <tr><td>Weekly active dispatchers</td><td class="num">6,120</td><td class="num">6,000</td><td><span class="status st-good">Met</span></td></tr>
+    <tr><td>Agent task success</td><td class="num">86%</td><td class="num">90%</td><td><span class="status st-miss">Below goal</span></td></tr>
+    <tr><td>R&amp;D spend</td><td class="num">$4.20M</td><td class="num">$4.25M</td><td><span class="status st-good">On plan</span></td></tr>
+    <tr><td>Inference cost</td><td class="num">$612K</td><td class="num">$480K</td><td><span class="status st-miss">27% over</span></td></tr>
+    <tr><td>Commitments shipped</td><td class="num">6 of 7</td><td class="num">7</td><td><span class="status st-good">86%</span></td></tr>
+  </tbody>
+</table>
+<p class="note">Data caveats: the north-star figure is 23.1K in PostHog and 21.4K in the warehouse, either side of target. Stripe account-level ARR sums to $10.91M against $10.1M in the finance close. Both are being reconciled (the VP Engineering, Q4). This summary uses the finance close for ARR.</p>
+
+<h2>Decision</h2>
+<div class="card ask">
+  <p><strong>Approve a per-load pricing pilot with 10 customers</strong> (the alternative is to wait a quarter). Recommendation: run the pilot. Price was the reason for 6 of 17 lost deals, and per-load pricing is core to the strategy.</p>
+  <p class="note"><span class="status st-warn">Deadline passed</span> The intake deadline was 4 Nov 2026. Confirm the outcome, or set a new date.</p>
+</div>
+
+<h2>Next quarter</h2>
+<ul>
+  <li><strong>Multi-stop reroutes</strong> (6 weeks, 5 engineers; high confidence): task success from 86% to 90%. We stop if evals gain under 2 points by week 3.</li>
+  <li><strong>Guided activation</strong> (4 weeks, 3 engineers; experiment): activation from 41% to 50%. We stop if there's no lift in a 2-week live test.</li>
+  <li><strong>Stopped:</strong> carrier marketplace (it didn't serve the strategy).</li>
+</ul>
+
+<h2>Risks</h2>
+<ul>
+  <li><strong>One model provider carries most inference spend</strong> (medium likelihood, high impact). Mitigation: a routing layer across 2 providers, due Dec 2026.</li>
+  <li><strong>Churn is outpacing expansion</strong>, and integration isn't covered by the current bets.</li>
+  <li><strong>Delivery quality slipped.</strong> Change failure rate is 7.7% (range under 5%), even though deploy frequency rose. The VP Engineering owns the fix, due Q4.</li>
+</ul>
+</main>
+</body>
+</html>

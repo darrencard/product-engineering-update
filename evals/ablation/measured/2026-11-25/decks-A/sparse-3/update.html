@@ -1,0 +1,144 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Kestrel Labs · 2026-Q3 Product &amp; Engineering update</title><style>
+:root{color-scheme:light;--page:#f9f9f7;--surface-1:#fcfcfb;--text-primary:#0b0b0b;--text-secondary:#52514e;--muted:#898781;
+--grid:#e1e0d9;--axis:#c3c2b7;--border:rgba(11,11,11,.10);--series-1:#2a78d6;--series-2:#eb6834;--series-3:#1baf7a;
+--warning:#fab219;--critical:#d03b3b;--callout:#fff8e6}
+@media (prefers-color-scheme:dark){:root:where(:not([data-theme="light"])){color-scheme:dark;--page:#0d0d0d;--surface-1:#1a1a19;--text-primary:#fff;--text-secondary:#c3c2b7;
+--grid:#2c2c2a;--axis:#383835;--border:rgba(255,255,255,.10);--series-1:#3987e5;--series-2:#d95926;--series-3:#199e70;--callout:#2a2414}}
+:root[data-theme="dark"]{color-scheme:dark;--page:#0d0d0d;--surface-1:#1a1a19;--text-primary:#fff;--text-secondary:#c3c2b7;
+--grid:#2c2c2a;--axis:#383835;--border:rgba(255,255,255,.10);--series-1:#3987e5;--series-2:#d95926;--series-3:#199e70;--callout:#2a2414}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--text-primary);font:15px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:880px;margin:0 auto;padding:40px 24px 64px}
+header .kicker{color:var(--text-secondary);font-size:13px;letter-spacing:.04em;text-transform:uppercase;margin:0}
+h1{font-size:28px;line-height:1.2;margin:4px 0 6px}
+h2{font-size:19px;margin:40px 0 8px;padding-top:16px;border-top:1px solid var(--grid)}
+h3{font-size:15px;margin:20px 0 6px}
+p,li{color:var(--text-primary)} .sub{color:var(--text-secondary);margin:0}
+.meta{color:var(--text-secondary);font-size:13px}
+.card{background:var(--surface-1);border:1px solid var(--border);border-radius:10px;padding:18px 20px;margin:14px 0}
+.bluf{border-left:4px solid var(--series-1)}
+.bluf ol{margin:6px 0 0;padding-left:20px} .bluf li{margin:6px 0}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:14px 0}
+.tile{background:var(--surface-1);border:1px solid var(--border);border-radius:10px;padding:14px 16px}
+.tile .v{font-size:30px;font-weight:600;line-height:1.1}
+.tile .l{color:var(--text-secondary);font-size:13px;margin-top:4px}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{text-align:left;padding:7px 10px;border-bottom:1px solid var(--grid);vertical-align:top}
+th{color:var(--text-secondary);font-weight:600;font-size:13px}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+.gap td:first-child{font-weight:600}
+.flag{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--text-primary);
+background:var(--callout);border:1px solid var(--border);border-radius:999px;padding:1px 9px;white-space:nowrap}
+.flag::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--warning)}
+.flag.crit::before{background:var(--critical)}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--text-secondary);margin:4px 0 8px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:10px;height:10px;border-radius:2px;display:inline-block}
+svg text{font-family:inherit}
+.tick{fill:var(--muted);font-size:12px;font-variant-numeric:tabular-nums}
+.lab{fill:var(--text-secondary);font-size:12px}
+.val{fill:var(--text-primary);font-size:12px;font-weight:600}
+.hit{fill:transparent;cursor:default} .hit:hover+.mark,.hit:focus+.mark{opacity:.8}
+#tip{position:fixed;pointer-events:none;background:var(--surface-1);color:var(--text-primary);border:1px solid var(--border);
+border-radius:6px;padding:6px 9px;font-size:12px;box-shadow:0 2px 8px rgba(0,0,0,.15);display:none;z-index:9}
+details{margin-top:8px} summary{cursor:pointer;color:var(--text-secondary);font-size:13px}
+.note{color:var(--text-secondary);font-size:13px}
+footer{margin-top:48px;color:var(--muted);font-size:12px}
+@media print{body{background:#fff}.card,.tile{break-inside:avoid}details{display:none}}
+</style></head><body><main>
+<header>
+<p class="kicker">Kestrel Labs · Product &amp; Engineering update</p>
+<h1>2026-Q3: 100 items shipped, but September output fell sharply and outcomes can't be measured yet</h1>
+<p class="sub">Period 1 Jul 2026 – 30 Sep 2026 · data as of 30 Sep 2026 · from the CPTO</p>
+<p class="meta">Source: Linear export (100 items) and the CPTO intake interview. No other systems were connected.</p>
+</header>
+
+<div class="card bluf">
+<b>Summary</b>
+<ol>
+<li><b>We completed 100 items in 2026-Q3.</b> 31% were new capabilities, all on Dispatch Agent. Another 26% improved or grew Core Dispatch, 21% went to platform &amp; scale, and 22% was keep-the-lights-on.</li>
+<li><b>Completions fell from 53 in July to 37 in August and 10 in September.</b> Core Dispatch closed nothing after 21 Aug 2026. Platform closed 1 item in September. Only Dispatch Agent kept a steady pace (9 in September). The export has no in-progress work, so we can't yet tell whether this is a real slowdown, work in flight, or a data issue. <span class="flag crit">Needs explanation</span></li>
+<li><b>We can report activity but not outcomes.</b> The intake has no objectives, north-star metric, investment plan, eval results, risks or decisions. The VP Engineering owns closing these gaps by Q4. <span class="flag">Data gap</span></li>
+</ol>
+</div>
+
+<div class="tiles">
+<div class="tile"><div class="v">100</div><div class="l">items completed in 2026-Q3</div></div>
+<div class="tile"><div class="v">31%</div><div class="l">new capabilities (all on Dispatch Agent)</div></div>
+<div class="tile"><div class="v">22%</div><div class="l">keep-the-lights-on, with no objective linked</div></div>
+<div class="tile"><div class="v">53 → 10</div><div class="l">items completed, July vs September</div></div>
+</div>
+
+<h2>Where the effort went</h2>
+<p>Effort is measured in completed items. All 100 items carry the same estimate (1), so this shows share of items, which may not match share of engineering time.</p>
+<div class="card">
+<h3 style="margin-top:0">Completed items by work type</h3>
+<svg viewBox="0 0 820 198" width="100%" role="img" aria-labelledby="c1t"><title id="c1t">Completed items by work type, 2026-Q3</title><line x1="150.0" x2="150.0" y1="2" y2="178" stroke="var(--grid)" stroke-width="1"/><text class="tick" x="150.0" y="194" text-anchor="middle">0</text><line x1="300.0" x2="300.0" y1="2" y2="178" stroke="var(--grid)" stroke-width="1"/><text class="tick" x="300.0" y="194" text-anchor="middle">10</text><line x1="450.0" x2="450.0" y1="2" y2="178" stroke="var(--grid)" stroke-width="1"/><text class="tick" x="450.0" y="194" text-anchor="middle">20</text><line x1="600.0" x2="600.0" y1="2" y2="178" stroke="var(--grid)" stroke-width="1"/><text class="tick" x="600.0" y="194" text-anchor="middle">30</text><line x1="750.0" x2="750.0" y1="2" y2="178" stroke="var(--grid)" stroke-width="1"/><text class="tick" x="750.0" y="194" text-anchor="middle">40</text><text class="lab" x="140" y="21.0" text-anchor="end">New capabilities</text><rect class="hit" x="150" y="0.0" width="600" height="34" tabindex="0" data-tip="New capabilities: 31 items (31% of 100)"/><path class="mark" d="M150,6H611.0Q615.0,6 615.0,10V24Q615.0,28 611.0,28H150Z" fill="var(--series-1)" pointer-events="none"/><text class="val" x="623.0" y="21.0">31 · 31%</text><text class="lab" x="140" y="55.0" text-anchor="end">Improve the core</text><rect class="hit" x="150" y="34.0" width="600" height="34" tabindex="0" data-tip="Improve the core: 18 items (18% of 100)"/><path class="mark" d="M150,40H416.0Q420.0,40 420.0,44V58Q420.0,62 416.0,62H150Z" fill="var(--series-1)" pointer-events="none"/><text class="val" x="428.0" y="55.0">18 · 18%</text><text class="lab" x="140" y="89.0" text-anchor="end">Growth</text><rect class="hit" x="150" y="68.0" width="600" height="34" tabindex="0" data-tip="Growth: 8 items (8% of 100)"/><path class="mark" d="M150,74H266.0Q270.0,74 270.0,78V92Q270.0,96 266.0,96H150Z" fill="var(--series-1)" pointer-events="none"/><text class="val" x="278.0" y="89.0">8 · 8%</text><text class="lab" x="140" y="123.0" text-anchor="end">Platform &amp; scale</text><rect class="hit" x="150" y="102.0" width="600" height="34" tabindex="0" data-tip="Platform &amp; scale: 21 items (21% of 100)"/><path class="mark" d="M150,108H461.0Q465.0,108 465.0,112V126Q465.0,130 461.0,130H150Z" fill="var(--series-1)" pointer-events="none"/><text class="val" x="473.0" y="123.0">21 · 21%</text><text class="lab" x="140" y="157.0" text-anchor="end">Keep the lights on</text><rect class="hit" x="150" y="136.0" width="600" height="34" tabindex="0" data-tip="Keep the lights on: 22 items (22% of 100)"/><path class="mark" d="M150,142H476.0Q480.0,142 480.0,146V160Q480.0,164 476.0,164H150Z" fill="var(--series-1)" pointer-events="none"/><text class="val" x="488.0" y="157.0">22 · 22%</text><line x1="150" x2="150" y1="2" y2="178" stroke="var(--axis)" stroke-width="1"/></svg>
+<details><summary>Table view: work type by team</summary>
+<table><thead><tr><th>Work type</th><th class="n">Items</th><th class="n">Share</th><th class="n">Dispatch Agent</th><th class="n">Core Dispatch</th><th class="n">Platform</th></tr></thead>
+<tbody><tr><td>New capabilities</td><td class="n">31</td><td class="n">31%</td><td class="n">31</td><td class="n">–</td><td class="n">–</td></tr><tr><td>Improve the core</td><td class="n">18</td><td class="n">18%</td><td class="n">–</td><td class="n">18</td><td class="n">–</td></tr><tr><td>Growth</td><td class="n">8</td><td class="n">8%</td><td class="n">–</td><td class="n">8</td><td class="n">–</td></tr><tr><td>Platform &amp; scale</td><td class="n">21</td><td class="n">21%</td><td class="n">–</td><td class="n">–</td><td class="n">21</td></tr><tr><td>Keep the lights on</td><td class="n">22</td><td class="n">22%</td><td class="n">–</td><td class="n">–</td><td class="n">22</td></tr><tr><td><b>Total</b></td><td class="n"><b>100</b></td><td class="n"><b>100%</b></td><td class="n"><b>31</b></td><td class="n"><b>26</b></td><td class="n"><b>43</b></td></tr></tbody></table>
+</details>
+</div>
+<ul>
+<li><b>Each team did one kind of work.</b> Dispatch Agent did only new capabilities (31 items). Core Dispatch split between improving the core (18) and growth (8). Platform split between platform &amp; scale (21) and keep-the-lights-on (22).</li>
+<li><b>By product line:</b> Platform 43 (43%), Dispatch Agent 31 (31%), Core Dispatch 26 (26%).</li>
+<li><b>Half of Platform's output was keep-the-lights-on</b> (22 of 43). That's 22% of all completed work. With no target mix in the intake, we can't say whether this is high or low.</li>
+<li><b>Objective linkage:</b> 78 items are tagged to “Grow ARR to $50M” in Linear. The other 22 are all keep-the-lights-on and have no objective. The intake lists no company objectives, so the tag can't be checked against an agreed goal.</li>
+</ul>
+
+<h2>Delivery through the quarter</h2>
+<div class="card">
+<h3 style="margin-top:0">Completed items per month, by team</h3>
+<div class="legend"><span><i style="background:var(--series-1)"></i>Dispatch Agent team</span><span><i style="background:var(--series-2)"></i>Core Dispatch team</span><span><i style="background:var(--series-3)"></i>Platform team</span></div>
+<svg viewBox="0 0 820 250" width="100%" role="img" aria-labelledby="c2t"><title id="c2t">Completed items per month by team, 2026-Q3</title><line x1="40" x2="810" y1="222.0" y2="222.0" stroke="var(--grid)" stroke-width="1"/><text class="tick" x="32" y="226.0" text-anchor="end">0</text><line x1="40" x2="810" y1="180.4" y2="180.4" stroke="var(--grid)" stroke-width="1"/><text class="tick" x="32" y="184.4" text-anchor="end">5</text><line x1="40" x2="810" y1="138.8" y2="138.8" stroke="var(--grid)" stroke-width="1"/><text class="tick" x="32" y="142.8" text-anchor="end">10</text><line x1="40" x2="810" y1="97.2" y2="97.2" stroke="var(--grid)" stroke-width="1"/><text class="tick" x="32" y="101.2" text-anchor="end">15</text><line x1="40" x2="810" y1="55.6" y2="55.6" stroke="var(--grid)" stroke-width="1"/><text class="tick" x="32" y="59.6" text-anchor="end">20</text><line x1="40" x2="810" y1="14.0" y2="14.0" stroke="var(--grid)" stroke-width="1"/><text class="tick" x="32" y="18.0" text-anchor="end">25</text><rect class="hit" x="114.3" y="14" width="36" height="208" tabindex="0" data-tip="Jul 2026 · Dispatch Agent team: 12 items"/><path class="mark" d="M115.33333333333334,222V126.16Q115.33333333333334,122.16 119.33333333333334,122.16H145.33333333333334Q149.33333333333334,122.16 149.33333333333334,126.16V222Z" fill="var(--series-1)" pointer-events="none"/><text class="val" x="132.3" y="117.2" text-anchor="middle">12</text><rect class="hit" x="150.3" y="14" width="36" height="208" tabindex="0" data-tip="Jul 2026 · Core Dispatch team: 19 items"/><path class="mark" d="M151.33333333333334,222V67.91999999999999Q151.33333333333334,63.91999999999999 155.33333333333334,63.91999999999999H181.33333333333334Q185.33333333333334,63.91999999999999 185.33333333333334,67.91999999999999V222Z" fill="var(--series-2)" pointer-events="none"/><text class="val" x="168.3" y="58.9" text-anchor="middle">19</text><rect class="hit" x="186.3" y="14" width="36" height="208" tabindex="0" data-tip="Jul 2026 · Platform team: 22 items"/><path class="mark" d="M187.33333333333334,222V42.96000000000001Q187.33333333333334,38.96000000000001 191.33333333333334,38.96000000000001H217.33333333333334Q221.33333333333334,38.96000000000001 221.33333333333334,42.96000000000001V222Z" fill="var(--series-3)" pointer-events="none"/><text class="val" x="204.3" y="34.0" text-anchor="middle">22</text><text class="lab" x="168.3" y="242" text-anchor="middle">Jul · 53 total</text><rect class="hit" x="371.0" y="14" width="36" height="208" tabindex="0" data-tip="Aug 2026 · Dispatch Agent team: 10 items"/><path class="mark" d="M372.0,222V142.8Q372.0,138.8 376.0,138.8H402.0Q406.0,138.8 406.0,142.8V222Z" fill="var(--series-1)" pointer-events="none"/><text class="val" x="389.0" y="133.8" text-anchor="middle">10</text><rect class="hit" x="407.0" y="14" width="36" height="208" tabindex="0" data-tip="Aug 2026 · Core Dispatch team: 7 items"/><path class="mark" d="M408.0,222V167.76Q408.0,163.76 412.0,163.76H438.0Q442.0,163.76 442.0,167.76V222Z" fill="var(--series-2)" pointer-events="none"/><text class="val" x="425.0" y="158.8" text-anchor="middle">7</text><rect class="hit" x="443.0" y="14" width="36" height="208" tabindex="0" data-tip="Aug 2026 · Platform team: 20 items"/><path class="mark" d="M444.0,222V59.599999999999994Q444.0,55.599999999999994 448.0,55.599999999999994H474.0Q478.0,55.599999999999994 478.0,59.599999999999994V222Z" fill="var(--series-3)" pointer-events="none"/><text class="val" x="461.0" y="50.6" text-anchor="middle">20</text><text class="lab" x="425.0" y="242" text-anchor="middle">Aug · 37 total</text><rect class="hit" x="627.7" y="14" width="36" height="208" tabindex="0" data-tip="Sep 2026 · Dispatch Agent team: 9 items"/><path class="mark" d="M628.6666666666667,222V151.12Q628.6666666666667,147.12 632.6666666666667,147.12H658.6666666666667Q662.6666666666667,147.12 662.6666666666667,151.12V222Z" fill="var(--series-1)" pointer-events="none"/><text class="val" x="645.7" y="142.1" text-anchor="middle">9</text><rect class="hit" x="663.7" y="14" width="36" height="208" tabindex="0" data-tip="Sep 2026 · Core Dispatch team: 0 items"/><text class="val" x="681.7" y="217.0" text-anchor="middle">0</text><rect class="hit" x="699.7" y="14" width="36" height="208" tabindex="0" data-tip="Sep 2026 · Platform team: 1 items"/><path class="mark" d="M700.6666666666667,222V217.68Q700.6666666666667,213.68 704.6666666666667,213.68H730.6666666666667Q734.6666666666667,213.68 734.6666666666667,217.68V222Z" fill="var(--series-3)" pointer-events="none"/><text class="val" x="717.7" y="208.7" text-anchor="middle">1</text><text class="lab" x="681.7" y="242" text-anchor="middle">Sep · 10 total</text><line x1="40" x2="810" y1="222" y2="222" stroke="var(--axis)" stroke-width="1"/></svg>
+<details><summary>Table view: items per month by team</summary>
+<table><thead><tr><th>Team</th><th class="n">Jul</th><th class="n">Aug</th><th class="n">Sep</th><th class="n">Q3</th><th>Last completion</th></tr></thead>
+<tbody><tr><td>Dispatch Agent team</td><td class="n">12</td><td class="n">10</td><td class="n">9</td><td class="n"><b>31</b></td><td>26 Sep 2026</td></tr><tr><td>Core Dispatch team</td><td class="n">19</td><td class="n">7</td><td class="n">0</td><td class="n"><b>26</b></td><td>21 Aug 2026</td></tr><tr><td>Platform team</td><td class="n">22</td><td class="n">20</td><td class="n">1</td><td class="n"><b>43</b></td><td>2 Sep 2026</td></tr><tr><td><b>All teams</b></td><td class="n"><b>53</b></td><td class="n"><b>37</b></td><td class="n"><b>10</b></td><td class="n"><b>100</b></td><td></td></tr></tbody></table>
+</details>
+</div>
+<ul>
+<li><b>Dispatch Agent was steady:</b> 12 / 10 / 9 items across July, August and September, with the last one on 26 Sep 2026.</li>
+<li><b>Core Dispatch slowed, then stopped:</b> 19 items in July, 7 in August, 0 in September. Growth work ended on 22 Jul 2026 and improve-the-core work on 21 Aug 2026.</li>
+<li><b>Platform held steady until late August:</b> 22 in July and 20 in August, then 1 in September (a keep-the-lights-on item on 2 Sep 2026).</li>
+<li><b>What to ask:</b> did Core Dispatch and Platform move to larger work that hasn't closed yet, were people reassigned, or is the export incomplete? An export that includes open and cancelled items would answer this.</li>
+</ul>
+
+<h2>AI feature: Dispatch Agent</h2>
+<div class="card">
+<p style="margin-top:0"><b>31 items shipped</b> (31% of all completed work), all new capabilities. It is the only team whose output held up through September.</p>
+<p style="margin-bottom:0"><b>Quality is unreported.</b> The intake names eval set <b>v14</b> but gives no scores, no comparison with earlier eval sets, and no production signals such as acceptance or override rates. Next quarter's update should report v14 results against the prior baseline. <span class="flag">Data gap</span></p>
+</div>
+
+<h2>What this update can't tell you yet</h2>
+<p>Owner: <b>the VP Engineering</b>, due <b>Q4</b>.</p>
+<div class="card" style="padding:6px 8px">
+<table><thead><tr><th style="width:24%">Missing</th><th style="width:34%">What we have</th><th>Why it matters</th></tr></thead>
+<tbody><tr class="gap"><td>Company objectives & north-star metric</td><td>Intake lists no objectives and no north-star metric, target or owner.</td><td>Work can't be tied to outcomes. The tracker tags 78 items to “Grow ARR to $50M”, but that objective isn't confirmed in the intake, and no ARR figure was provided.</td></tr><tr class="gap"><td>Investment plan / target mix</td><td>No planned allocation by work type or product line.</td><td>We can show where effort went but not whether that matches what was intended.</td></tr><tr class="gap"><td>Dispatch Agent quality results</td><td>Eval set v14 is named; no scores, baselines or production metrics were provided.</td><td>We can't say whether the 31 items shipped on Dispatch Agent improved it.</td></tr><tr class="gap"><td>In-flight and planned work</td><td>The Linear export contains only Done items — no In Progress, Todo or cancelled.</td><td>We can't see what's underway, what slipped, or whether the September drop is an export artefact.</td></tr><tr class="gap"><td>Effort sizing</td><td>Every item has estimate = 1.</td><td>Item counts are the only measure of effort. A large item and a trivial one count the same.</td></tr><tr class="gap"><td>Strategy, risks, bets, decisions, commitments</td><td>All empty in the intake.</td><td>This update has no risks to escalate and no decisions to request. That reflects missing input, not a quiet quarter.</td></tr><tr class="gap"><td>Other systems</td><td>Only the tracker (Linear) is connected.</td><td>No incident, deploy, customer or revenue data, so there's no view of reliability, delivery speed or customer impact.</td></tr></tbody></table>
+</div>
+
+<h2>Asks of leadership</h2>
+<ol>
+<li><b>Confirm the company objectives and a north-star metric</b> with targets and owners. Is “Grow ARR to $50M” the agreed objective the tracker tags suggest?</li>
+<li><b>Set a target investment mix</b> (for example, the keep-the-lights-on ceiling and the new-capabilities share) so that allocation can be judged against a plan.</li>
+<li><b>Ask for an explanation of the September drop</b> from Core Dispatch and Platform before the Q4 plan is locked.</li>
+</ol>
+<p class="note">No risks, decisions or commitments were recorded in the intake, so none are listed here. That reflects missing input, not a quarter with nothing to escalate.</p>
+
+<h2>Method &amp; data notes</h2>
+<ul class="note">
+<li>Source: one Linear export (100 rows, IDs unique). All rows are status Done, all completed between 1 Jul 2026 and 26 Sep 2026, all estimate = 1.</li>
+<li>Work type, product line, team and objective are taken as-is from the export. Months are calendar months of <code>completed_at</code>.</li>
+<li>Item titles are generic placeholders (for example, “New capabilities item 4”), so this update can't name specific features that shipped.</li>
+<li>No figures were estimated or filled in from outside these files. Anything not in the export or intake appears as a gap.</li>
+<li>Report prepared 25 Nov 2026 with data as of 30 Sep 2026. Anything after that date is not reflected.</li>
+</ul>
+<footer>Kestrel Labs · 2026-Q3 Product &amp; Engineering update · board summary: board.html</footer>
+</main><div id="tip" role="tooltip"></div><script>
+(()=>{const t=document.getElementById('tip');
+document.querySelectorAll('[data-tip]').forEach(el=>{
+const show=ev=>{t.textContent=el.dataset.tip;t.style.display='block';
+const r=el.getBoundingClientRect();const x=ev&&ev.clientX!==undefined?ev.clientX:r.left+r.width/2;const y=ev&&ev.clientY!==undefined?ev.clientY:r.top;
+t.style.left=Math.min(x+12,innerWidth-t.offsetWidth-8)+'px';t.style.top=(y-t.offsetHeight-10)+'px'};
+el.addEventListener('mousemove',show);el.addEventListener('focus',()=>show());
+el.addEventListener('mouseleave',()=>t.style.display='none');el.addEventListener('blur',()=>t.style.display='none');});})();
+</script></body></html>

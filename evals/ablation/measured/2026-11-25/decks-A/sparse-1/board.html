@@ -1,0 +1,52 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><title>Kestrel Labs — Product & Engineering, 2026-Q3 (board)</title><style>
+:root{color-scheme:light;--page:#f9f9f7;--surface:#fcfcfb;--ink:#0b0b0b;--ink2:#52514e;--muted:#898781;--grid:#e1e0d9;--axis:#c3c2b7;--border:rgba(11,11,11,.10);--s1:#2a78d6;--s1h:#1c5cab;--warn:#fab219}
+@media (prefers-color-scheme:dark){:root{color-scheme:dark;--page:#0d0d0d;--surface:#1a1a19;--ink:#fff;--ink2:#c3c2b7;--muted:#898781;--grid:#2c2c2a;--axis:#383835;--border:rgba(255,255,255,.10);--s1:#3987e5;--s1h:#86b6ef}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--ink);font:15px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:860px;margin:0 auto;padding:40px 24px 64px}
+header p{margin:.2em 0;color:var(--ink2)}
+h1{font-size:28px;margin:0 0 6px;line-height:1.2}
+h2{font-size:19px;margin:40px 0 10px;padding-top:4px}
+h3{font-size:15px;margin:20px 0 6px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:20px 22px;margin:14px 0}
+.tldr ol{margin:0;padding-left:20px}.tldr li{margin:8px 0}
+.note{color:var(--ink2);font-size:13.5px}
+.flag{display:inline-flex;align-items:center;gap:6px;font-weight:600}
+.flag::before{content:"!";display:inline-grid;place-items:center;width:18px;height:18px;border-radius:50%;background:var(--warn);color:#0b0b0b;font-size:12px;font-weight:700}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--grid);vertical-align:top}
+th{color:var(--ink2);font-weight:600;font-size:13px}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:14px 0}
+.tile{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 16px}
+.tile .l{color:var(--ink2);font-size:13px}.tile .v{font-size:28px;font-weight:600;line-height:1.2;margin-top:4px}.tile .s{color:var(--muted);font-size:12.5px}
+svg text{font-family:inherit}
+.bar rect.m{fill:var(--s1)}.bar:hover rect.m{fill:var(--s1h)}
+.bar rect.hit{fill:transparent}
+details summary{cursor:pointer;color:var(--ink2);font-size:13.5px;margin-top:8px}
+footer{margin-top:48px;color:var(--muted);font-size:12.5px}
+@media print{body{background:#fff}.card,.tile{break-inside:avoid}}
+</style></head><body><main>
+<header><h1>Kestrel Labs: Product &amp; Engineering, 2026-Q3</h1>
+<p>Board summary · From the CPTO · Data as of 2026-09-30</p></header>
+
+<div class="card tldr"><ol>
+<li><b>100 issues closed in Q3, 78% of them work other than keep-the-lights-on.</b> New Dispatch Agent capabilities were the largest share at 31%. Keep-the-lights-on took 22%.</li>
+<li><b>We can't yet report outcomes.</b> We have no north-star metric, no objective progress and no Dispatch Agent eval results. What we can report is activity, not results.</li>
+<li><b>The VP Engineering owns closing these gaps by Q4.</b> No decisions are requested from the board this quarter.</li>
+</ol></div>
+
+<h2>Where the work went</h2>
+<div class="card"><svg viewBox="0 0 760 210" width="100%" role="img" aria-labelledby="ct cd"><title id="ct">Q3 completed issues by work type</title><desc id="cd">New capabilities: 31 of 100; Platform & scale: 21 of 100; Improve the core: 18 of 100; Growth: 8 of 100; Keep the lights on: 22 of 100</desc><line x1="250" x2="250" y1="0" y2="204" stroke="var(--axis)" stroke-width="1"/><g class="bar"><title>New capabilities (Dispatch Agent): 31 issues, 31% of 100</title><rect class="hit" x="0" y="0" width="760" height="40"/><text x="238" y="19" text-anchor="end" dominant-baseline="middle" fill="var(--ink)" font-size="14">New capabilities</text><text x="238" y="35" text-anchor="end" dominant-baseline="middle" fill="var(--muted)" font-size="12">Dispatch Agent</text><path class="m" d="M250 8 H696.0 Q700.0 8 700.0 12 V26 Q700.0 30 696.0 30 H250 Z" fill="var(--s1)"/><text x="708.0" y="19" dominant-baseline="middle" fill="var(--ink)" font-size="14" font-weight="600">31%</text></g><g class="bar"><title>Platform &amp; scale (Platform): 21 issues, 21% of 100</title><rect class="hit" x="0" y="40" width="760" height="40"/><text x="238" y="59" text-anchor="end" dominant-baseline="middle" fill="var(--ink)" font-size="14">Platform &amp; scale</text><text x="238" y="75" text-anchor="end" dominant-baseline="middle" fill="var(--muted)" font-size="12">Platform</text><path class="m" d="M250 48 H550.8387096774193 Q554.8387096774193 48 554.8387096774193 52 V66 Q554.8387096774193 70 550.8387096774193 70 H250 Z" fill="var(--s1)"/><text x="562.8387096774193" y="59" dominant-baseline="middle" fill="var(--ink)" font-size="14" font-weight="600">21%</text></g><g class="bar"><title>Improve the core (Core Dispatch): 18 issues, 18% of 100</title><rect class="hit" x="0" y="80" width="760" height="40"/><text x="238" y="99" text-anchor="end" dominant-baseline="middle" fill="var(--ink)" font-size="14">Improve the core</text><text x="238" y="115" text-anchor="end" dominant-baseline="middle" fill="var(--muted)" font-size="12">Core Dispatch</text><path class="m" d="M250 88 H507.2903225806452 Q511.2903225806452 88 511.2903225806452 92 V106 Q511.2903225806452 110 507.2903225806452 110 H250 Z" fill="var(--s1)"/><text x="519.2903225806451" y="99" dominant-baseline="middle" fill="var(--ink)" font-size="14" font-weight="600">18%</text></g><g class="bar"><title>Growth (Core Dispatch): 8 issues, 8% of 100</title><rect class="hit" x="0" y="120" width="760" height="40"/><text x="238" y="139" text-anchor="end" dominant-baseline="middle" fill="var(--ink)" font-size="14">Growth</text><text x="238" y="155" text-anchor="end" dominant-baseline="middle" fill="var(--muted)" font-size="12">Core Dispatch</text><path class="m" d="M250 128 H362.1290322580645 Q366.1290322580645 128 366.1290322580645 132 V146 Q366.1290322580645 150 362.1290322580645 150 H250 Z" fill="var(--s1)"/><text x="374.1290322580645" y="139" dominant-baseline="middle" fill="var(--ink)" font-size="14" font-weight="600">8%</text></g><g class="bar"><title>Keep the lights on (Platform): 22 issues, 22% of 100</title><rect class="hit" x="0" y="160" width="760" height="40"/><text x="238" y="179" text-anchor="end" dominant-baseline="middle" fill="var(--ink)" font-size="14">Keep the lights on</text><text x="238" y="195" text-anchor="end" dominant-baseline="middle" fill="var(--muted)" font-size="12">Platform</text><path class="m" d="M250 168 H565.3548387096774 Q569.3548387096774 168 569.3548387096774 172 V186 Q569.3548387096774 190 565.3548387096774 190 H250 Z" fill="var(--s1)"/><text x="577.3548387096774" y="179" dominant-baseline="middle" fill="var(--ink)" font-size="14" font-weight="600">22%</text></g></svg><details><summary>Show as a table</summary><table><tr><th>Work type</th><th>Product line</th><th class=n>Issues</th><th class=n>Share</th></tr><tr><td>New capabilities</td><td>Dispatch Agent</td><td class=n>31</td><td class=n>31%</td></tr><tr><td>Platform &amp; scale</td><td>Platform</td><td class=n>21</td><td class=n>21%</td></tr><tr><td>Improve the core</td><td>Core Dispatch</td><td class=n>18</td><td class=n>18%</td></tr><tr><td>Growth</td><td>Core Dispatch</td><td class=n>8</td><td class=n>8%</td></tr><tr><td>Keep the lights on</td><td>Platform</td><td class=n>22</td><td class=n>22%</td></tr><tr><td><b>Total</b></td><td></td><td class=n><b>100</b></td><td class=n>100%</td></tr></table></details></div>
+<p class="note">These are ticket counts. Every issue is sized at 1, so the shares show how many things were done, not how much effort they took.</p>
+
+<h2>What next quarter's update will add</h2>
+<ul>
+<li>An outcome metric with a target, so the board can see whether customers and revenue are better off</li>
+<li>Progress against the company's objectives</li>
+<li>Dispatch Agent quality results on eval set v14</li>
+<li>Top risks and Q4 commitments</li>
+</ul>
+
+<footer>Source: one Linear export (100 completed issues, 2026-07-01 to 2026-09-30) and the CPTO intake interview. Nothing else was available. The full leadership update has the detail behind each point.</footer>
+</main></body></html>

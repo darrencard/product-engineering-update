@@ -1,0 +1,46 @@
+{
+ "id": "pair-CA-conflict_resolved-1-21",
+ "fixture": "conflict_resolved",
+ "kind": "pair",
+ "matchup": "CA",
+ "x": "runs/A/conflict_resolved/1",
+ "y": "runs/C/conflict_resolved/1",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "X",
+    "reason": "X's figures all recompute correctly (ARR $10.91M, churn $1.11M, net retention 96.4%, change failure 7.7%, total R&D $4,200K vs $4,245K). Y's Platform & security slide 10 wrongly says incident data is missing, and Y puts R&D at 40.8% of revenue using a revenue line it flags itself as unreliable."
+   },
+   "no_invented_numbers": {
+    "winner": "tie",
+    "reason": "Neither invents a figure. X labels its integration recommendation and its extra risks as its own reading of the data, and Y labels its 'Activation: 5 more periods' as a rough projection. Each has a small overreach: X calls volume 'high enough to price against', and Y's slide 3 says every objective-linked item has 'a stated reason it should pay off'."
+   },
+   "speed_with_quality": {
+    "winner": "tie",
+    "reason": "Both put deploys (3\u21924/wk) and lead time (52h\u219238h) next to change failure (5.1%\u21927.7%) and review time (9h\u219213h). X does this in its delivery table and summary, Y on slides 9 and 9b, and neither calls the speed gain good news."
+   },
+   "gaps_shown": {
+    "winner": "X",
+    "reason": "X's data notes plainly flag both conflicts, Stripe $10.91M vs finance $10.1M and PostHog 23,100 vs warehouse 21,400, plus the odd revenue line, and name the VP Engineering and Finance as owners for Q4. X also notes the 4 Nov decision deadline has already passed. Y mentions the ARR and loads conflicts only inside ledger rows L09 and L14, and its listed gaps are partly wrong (incident data does exist)."
+   },
+   "board_cut_usable": {
+    "winner": "X",
+    "reason": "X's board cut leads with the headline, the four key metrics and the pricing-pilot decision, followed by short went-well and needs-attention lists. Y's 'board cut' is an internal review document: a 20-row metric table, slide titles, an unticked checklist and a render.py sign-off instruction."
+   }
+  },
+  "overall": {
+   "winner": "X",
+   "reason": "Both are mostly accurate and both pair speed with quality, but X shows the ARR and loads-cleared conflicts with owners and adds analysis the data supports, such as churn ($1.11M) outweighing new business ($0.90M). Y's board cut is an internal checklist that could not be sent to a board, and some of its 'data needed' gaps are wrong."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 3273,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 35422,
+  "cost_usd": 0.3493226,
+  "num_turns": 2,
+  "duration_ms": 30025
+ }
+}

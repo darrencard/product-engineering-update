@@ -1,0 +1,46 @@
+{
+ "id": "pair-CB-conflict_resolved-2-12",
+ "fixture": "conflict_resolved",
+ "kind": "pair",
+ "matchup": "CB",
+ "x": "runs/C/conflict_resolved/2",
+ "y": "runs/B/conflict_resolved/2",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "tie",
+    "reason": "Both carry identical figures (ARR $10.9M, NRR 96.4%, change failure 7.7% from 4 of 52 releases), and both share the same error on slide 05, where $10.3M of quarterly revenue is annualised as $40.9M instead of $41.2M."
+   },
+   "no_invented_numbers": {
+    "winner": "tie",
+    "reason": "Both use the same sourced figures and the same labelled 'At this pace (Projected)' Activation estimate on slide 11, and neither adds a target or benchmark that is not in the data."
+   },
+   "speed_with_quality": {
+    "winner": "X",
+    "reason": "Both pair deploys per week (3 to 4) with change failure (5.1% to 7.7%), but X's slide 09 headline says 'but more releases caused a problem\u2026 outside the healthy range of under 5%' and its slide 08 headline names the release checklist going the wrong way, which frames speed less as good news."
+   },
+   "gaps_shown": {
+    "winner": "tie",
+    "reason": "Both flag the Platform & security gap (VP Engineering, Q4) and the revenue/ARR mismatch on slide 05, and both leave the Stripe $10.9M versus Finance $10.1M ARR conflict only in ledger row L09, with no owner."
+   },
+   "board_cut_usable": {
+    "winner": "Y",
+    "reason": "X produced no board cut; Y's 8-slide cut leads with the answer on slide 01 and the pricing-pilot ask, but it would need editing before sending because it keeps the internal 'Check before the board sees this' note and the unsupported 'Signed off by the CEO' line."
+   }
+  },
+  "overall": {
+   "winner": "Y",
+   "reason": "The two full updates are almost identical in figures, ledger and gap handling, with X ahead only on headline wording about speed versus quality. Y is the one a CPO could take to the board, because it includes a short board cut that leads with the result and the pricing-pilot decision, while X has none."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 2347,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 36850,
+  "cost_usd": 0.3422266,
+  "num_turns": 2,
+  "duration_ms": 21042
+ }
+}

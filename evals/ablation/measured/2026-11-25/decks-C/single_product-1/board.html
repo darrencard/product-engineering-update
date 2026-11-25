@@ -1,0 +1,11 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Kestrel Labs 2026-Q3 board cut: waiting on sign-off</title>
+<style>body{font:16px/1.5 system-ui,sans-serif;max-width:46rem;margin:4rem auto;padding:0 1.5rem;color:#222}code{background:#f3f3f3;padding:.1rem .3rem;border-radius:3px}h1{font-size:1.5rem}</style></head>
+<body>
+<h1>Board cut: not rendered yet. It needs a named person's sign-off.</h1>
+<p>The 2026-Q3 board cut (8 slides) is drafted and passes validation. It renders only after a named person reviews the change list and gives an explicit yes. This run was non-interactive, so nobody could give that sign-off.</p>
+<p>Before you sign off, review <code>review.md</code> (the change list, the gaps and a checklist). It flags one item to resolve first: quarterly revenue ($10.3M, about $41M a year at that rate) and ARR ($10.9M) do not reconcile.</p>
+<p>After sign-off, run this from the skill's root:</p>
+<p><code>python3 scripts/render.py out/deck.json --out out/board.html --cut B --signed-off-by "&lt;name&gt;"</code></p>
+<p>The full leadership update is in <code>update.html</code>.</p>
+</body></html>

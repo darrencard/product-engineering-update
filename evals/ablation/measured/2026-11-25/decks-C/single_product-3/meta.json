@@ -1,0 +1,34 @@
+{
+ "condition": "C",
+ "fixture": "single_product",
+ "run": 3,
+ "model": "claude-opus-5-5",
+ "usage": {
+  "input_tokens": 30,
+  "output_tokens": 7067,
+  "cache_read_input_tokens": 442202,
+  "cache_creation_input_tokens": 37372,
+  "cost_usd": 0.5288763999999999,
+  "num_turns": 16,
+  "duration_ms": 70169
+ },
+ "decks": [
+  "board.html",
+  "review.md",
+  "update.html"
+ ],
+ "skill_use": {
+  "skill_available": true,
+  "skill_loaded": 1,
+  "script_calls": [
+   "run.py",
+   "intake.py",
+   "collect.py",
+   "draft.py",
+   "validate.py",
+   "render.py",
+   "render.py",
+   "render.py"
+  ]
+ }
+}

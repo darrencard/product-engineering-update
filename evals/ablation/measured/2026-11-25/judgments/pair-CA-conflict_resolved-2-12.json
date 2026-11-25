@@ -1,0 +1,46 @@
+{
+ "id": "pair-CA-conflict_resolved-2-12",
+ "fixture": "conflict_resolved",
+ "kind": "pair",
+ "matchup": "CA",
+ "x": "runs/C/conflict_resolved/2",
+ "y": "runs/A/conflict_resolved/2",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "tie",
+    "reason": "Both get the recomputed figures right (ARR $10.91M, NRR 96.4%/96%, change failure rate 7.7% vs 5.1%, 53 of 56 roles, Platform 43%); the only quibbles are X's day-based '$40.9M a year' and Y rounding a 27.5% inference overrun to 27%."
+   },
+   "no_invented_numbers": {
+    "winner": "tie",
+    "reason": "X adds a labelled projection ('Activation: 5 more periods'), and Y adds an unsourced compile date ('24 Nov 2026') plus two new risks it labels as coming from this quarter's data; neither states an unlabelled target or benchmark."
+   },
+   "speed_with_quality": {
+    "winner": "tie",
+    "reason": "Both pair 4 deploys/week and 38h lead time with the 7.7% change failure rate and 13h review time (X slide 9/9b, Y Engineering delivery table), and neither presents the speed gains alone as good news."
+   },
+   "gaps_shown": {
+    "winner": "Y",
+    "reason": "Y puts the PostHog 23.1K vs warehouse 21.4K and billing $10.91M vs finance $10.10M conflicts in its summary and its board cut, with the VP Engineering as owner, due Q4; X shows a single 23.1K and $10.9M on its headline slide and leaves both conflicts to ledger rows L09 and L14."
+   },
+   "board_cut_usable": {
+    "winner": "Y",
+    "reason": "X produced no separate board cut, while Y's board summary opens with ARR $10.91M vs the $11.0M plan and the per-load pricing pilot decision (including that its 4 Nov deadline has passed), and is short enough to send."
+   }
+  },
+  "overall": {
+   "winner": "Y",
+   "reason": "Both are accurate on the figures, but Y shows both source conflicts and who owns them up front, and its board cut is ready to send. X has no board cut, and its headline reports single figures for loads cleared and ARR, leaving the source conflicts in the ledger."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 3490,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 34283,
+  "cost_usd": 0.3445506,
+  "num_turns": 2,
+  "duration_ms": 32072
+ }
+}

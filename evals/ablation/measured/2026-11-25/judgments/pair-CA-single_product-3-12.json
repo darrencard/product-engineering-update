@@ -1,0 +1,46 @@
+{
+ "id": "pair-CA-single_product-3-12",
+ "fixture": "single_product",
+ "kind": "pair",
+ "matchup": "CA",
+ "x": "runs/C/single_product/3",
+ "y": "runs/A/single_product/3",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "tie",
+    "reason": "Both get ARR $10.38M\u2192$10.91M, NRR 96.4%, CFR 5.1%\u21927.7%, lead time 52h\u219238h and R&D 40.8% of revenue right; each has only small labelling slips (X calls the $0.33 eval cost 'per successful task')."
+   },
+   "no_invented_numbers": {
+    "winner": "X",
+    "reason": "Y asserts inference was 28% over plan 'because volume grew' and invents VP Engineering commitments to fix CFR and lead-time linking in Q4, while X labels its 'Activation: 5 more periods' as a projection."
+   },
+   "speed_with_quality": {
+    "winner": "tie",
+    "reason": "Both pair 4 deploys/week and 38h lead time with the 7.7% change failure rate and 13h review time, and neither presents speed alone as good news."
+   },
+   "gaps_shown": {
+    "winner": "X",
+    "reason": "X names the VP Engineering and Q4 for the platform & security gap (slide 10) and the AI gross margin gap (slide 12), while Y omits the platform & security gap and leaves the $10.3M revenue vs $10.9M ARR mismatch without an owner."
+   },
+   "board_cut_usable": {
+    "winner": "Y",
+    "reason": "X's board cut is a placeholder that says 'Do not send it to the board', while Y's leads with the per-load pricing pilot decision and flags that the 4 Nov deadline has passed."
+   }
+  },
+  "overall": {
+   "winner": "Y",
+   "reason": "X is more disciplined about invented causes and named gap owners, but its board cut is an unsendable placeholder. Y delivers a correct, board-ready cut that leads with the ask, though its causal claim on inference overspend and invented VP Engineering commitments should be removed before sending."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 4281,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 33822,
+  "cost_usd": 0.35668259999999996,
+  "num_turns": 2,
+  "duration_ms": 36761
+ }
+}

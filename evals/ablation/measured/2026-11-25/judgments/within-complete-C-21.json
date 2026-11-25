@@ -1,0 +1,45 @@
+{
+ "id": "within-complete-C-21",
+ "fixture": "complete",
+ "kind": "within_C",
+ "x": "runs/C/complete/2",
+ "y": "runs/C/complete/1",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "tie",
+    "reason": "Both decks have the same correct figures, including ARR $10.9M, NRR 96.4%, change failure rate 7.7% (4 of 52 deploys) and eval pass rate 86% (430/500)."
+   },
+   "no_invented_numbers": {
+    "winner": "tie",
+    "reason": "Both label the only forward-looking figure, slide 11's 'Activation: 5 more periods', as a projection, and both state 'None external' for benchmarks instead of inventing one."
+   },
+   "speed_with_quality": {
+    "winner": "tie",
+    "reason": "Slides 9 and 9b in both decks put deploys rising from 3 to 4 a week beside change failure rising from 5.1% to 7.7%, under the same 'but' framing."
+   },
+   "gaps_shown": {
+    "winner": "Y",
+    "reason": "Y's board cut lists both missing-data items (Platform & security on slide 10, and AI gross margin on slide 12) with the VP Engineering as owner and flags that 'Q4' needs a real date; X's board cut mentions only the $10.3M vs $10.9M reconciliation."
+   },
+   "board_cut_usable": {
+    "winner": "Y",
+    "reason": "Neither board cut is rendered, but Y's holding page puts all the pre-sign-off fixes first, including the Revenue/ARR mismatch tied to the 40.8% R&D share and both data gaps, so it is closer to sendable."
+   }
+  },
+  "overall": {
+   "winner": "Y",
+   "reason": "The full decks are substantively identical and equally correct, so the decision comes down to the board cut. Y's holding page shows the board reviewer every gap with its owner and the vague 'Q4' due date before sign-off, while X shows only the revenue reconciliation."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 2520,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 34878,
+  "cost_usd": 0.3299106,
+  "num_turns": 2,
+  "duration_ms": 22273
+ }
+}

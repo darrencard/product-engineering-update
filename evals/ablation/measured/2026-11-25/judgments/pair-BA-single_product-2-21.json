@@ -1,0 +1,46 @@
+{
+ "id": "pair-BA-single_product-2-21",
+ "fixture": "single_product",
+ "kind": "pair",
+ "matchup": "BA",
+ "x": "runs/A/single_product/2",
+ "y": "runs/B/single_product/2",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "X",
+    "reason": "X's figures check out on recomputation (ARR bridge $1.64M added vs $1.11M churned, NRR 96%, CFR 4/52 = 7.7%, rework 9/60, KTLO 22/100). Y's figures are mostly right too, but its slide 12 calls the eval harness's cost_per_task of $0.33 'cost per successful task', and its slide 10 says incident data is missing when the incident export exists."
+   },
+   "no_invented_numbers": {
+    "winner": "X",
+    "reason": "Y's board cut says 'Signed off by the CEO', which nothing in the data supports. X's only stretches are a compile date and the inferred cause 'loads grew faster than unit cost fell', which is explained in the text rather than presented as data."
+   },
+   "speed_with_quality": {
+    "winner": "X",
+    "reason": "Both pair deploys (3\u21924/week) with change failure rate (5.1%\u21927.7%). X goes further and frames it as 'We ship faster but less safely', and adds rework (12%\u219215%) and the review-agent adoption detail, while Y tags speed 'landed' and lead time does not appear on its board slide."
+   },
+   "gaps_shown": {
+    "winner": "X",
+    "reason": "X's Data gaps section, owned by the VP Engineering and due Q4, covers ARR vs revenue ($10.9M vs $10.3M a quarter), the lead-time proxy, generic tracker items, stop rules that can't be checked yet, the unlinked R-007/R-999 requests and the cost-per-successful-task ambiguity. Y flags the ARR mismatch without naming an owner, and still opens with 'ARR rose from $10.4M to $10.9M' without a caveat."
+   },
+   "board_cut_usable": {
+    "winner": "X",
+    "reason": "X's board cut opens with the pricing-pilot ask, the recommendation and the 4 Nov deadline, then gives a 4-metric scorecard and short points. Y's 8-slide cut plus ledger still carries the internal 'Check before the board sees this' note and states the ask on slide 1 without the recommendation, so it can't be sent as it is."
+   }
+  },
+  "overall": {
+   "winner": "X",
+   "reason": "X is accurate, names its gaps with an owner, and its board cut leads with the decision and could be sent today. Y has a sound evidence ledger, but its board cut contains an internal pre-send note and an invented CEO sign-off, and it presents ARR growth up front despite the reconciliation problem."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 3171,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 36565,
+  "cost_usd": 0.3564266,
+  "num_turns": 2,
+  "duration_ms": 29478
+ }
+}

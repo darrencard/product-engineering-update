@@ -1,0 +1,46 @@
+{
+ "id": "pair-BA-no_ai-1-21",
+ "fixture": "no_ai",
+ "kind": "pair",
+ "matchup": "BA",
+ "x": "runs/A/no_ai/1",
+ "y": "runs/B/no_ai/1",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "X",
+    "reason": "X's ARR ($10.38M\u2192$10.91M), NRR 96%, churn $1.11M, CFR 4/52=7.7% and rework 15.0% all recompute correctly (only the 'churn cancelled out most of the expansion' wording is off, since $1.11M churn exceeds $741K expansion), while Y states that $10.3M quarterly revenue is '$40.9M a year' when it is $41.2M, and Y's commitments table attributes the 39%\u219241% activation change to the unshipped Self-serve carrier onboarding."
+   },
+   "no_invented_numbers": {
+    "winner": "tie",
+    "reason": "Neither invents targets or benchmarks: Y's 'Activation: 5 more periods' is clearly labelled as a projection, and X's inference reasoning ('explains only a small part of a 28% overrun') is inference built on data figures rather than a new number."
+   },
+   "speed_with_quality": {
+    "winner": "Y",
+    "reason": "Y's board slide 09b puts deploys 3\u21924 directly beside CFR 5.1%\u21927.7% and review time 9h\u219213h, while X's board cut lists '4 deploys a week\u2026 38h lead time' under 'What is working' and keeps the CFR rise in a separate section."
+   },
+   "gaps_shown": {
+    "winner": "X",
+    "reason": "X names each missing measure (agent task success, cost per successful task, the guided-activation live-test result) with the VP Engineering as owner, due Q4, and flags the Finance $10.3M vs Stripe $10.91M mismatch; Y flags the revenue mismatch and Platform & security, but never says task success or cost per task are missing, and it calls incident data missing when the export has it."
+   },
+   "board_cut_usable": {
+    "winner": "X",
+    "reason": "X's board cut opens with a headline answer, four KPIs, working/not-working sections with actions, and the single pricing-pilot ask with its 4 Nov deadline; Y's board cut is a set of slide fragments with self-referential notes ('16 of 17 slides', 'Check before the board sees this') and a ledger appendix, the ask buried at slide 18, and an unsupported 'Signed off by the CEO'."
+   }
+  },
+  "overall": {
+   "winner": "X",
+   "reason": "X's figures recompute correctly almost everywhere, it names each data gap with an owner, and its board cut leads with the answer and the pricing ask. Y does pair speed with quality better on the board slide, but it has an arithmetic error ($40.9M), misses the task-success and cost-per-task gaps, and its board cut is not ready to send."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 2790,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 34324,
+  "cost_usd": 0.3308786,
+  "num_turns": 2,
+  "duration_ms": 23969
+ }
+}

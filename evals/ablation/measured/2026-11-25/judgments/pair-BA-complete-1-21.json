@@ -1,0 +1,46 @@
+{
+ "id": "pair-BA-complete-1-21",
+ "fixture": "complete",
+ "kind": "pair",
+ "matchup": "BA",
+ "x": "runs/A/complete/1",
+ "y": "runs/B/complete/1",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "X",
+    "reason": "Both get the core figures right (ARR $10.38M\u2192$10.91M, NRR 96.4%, CFR 4/52=7.7%, R&D 40.8%), but Y's slide 08 marks Guided activation as 'Moved' on 39%\u219241% even though the bet's own baseline is 41%, which misreads the result; X's churn analysis (A037\u2013A040 were the 4 largest and raised only onboarding tickets) and cost per weekly-active user ($1,692 and $889) both check out."
+   },
+   "no_invented_numbers": {
+    "winner": "X",
+    "reason": "Y adds an 'Activation: 5 more periods' projection and a 'Signed off by the CEO' line that nothing in the data supports; X's only inference, that the inference overrun is volume-driven, is explicitly marked as unconfirmed."
+   },
+   "speed_with_quality": {
+    "winner": "X",
+    "reason": "Both pair 4 deploys a week with the 7.7% change failure rate, but X also puts rework (12%\u219215%) and time to restore (41m) beside speed and says plainly 'we ship faster but less safely' with an owner; Y's board slide 09b drops lead time and time to restore."
+   },
+   "gaps_shown": {
+    "winner": "X",
+    "reason": "X flags the mismatch between $10.9M billing ARR and $41M annualised revenue and declines to report progress toward $50M, notes the uniform review times and incident durations as a likely export artefact, the missing week-3 eval and live-test result, the undated CRM and support exports, and the overdue 4 Nov decision; Y flags the ARR mismatch with no owner, never says the decision is overdue, and marks Platform & security as missing even though incident data exists."
+   },
+   "board_cut_usable": {
+    "winner": "X",
+    "reason": "X's board cut leads with the North Star, the activation miss, integrations, inference cost and the overdue pricing decision, and could be sent as it is; Y's board cut still carries an internal 'Check before the board sees this' note, slide numbers, ledger IDs and an appendix, and puts the ask under 'Now what' without saying the 4 Nov deadline has passed."
+   }
+  },
+  "overall": {
+   "winner": "X",
+   "reason": "Both get the arithmetic right, but X reads the data more honestly: it flags guided activation as showing no lift beyond its 41% baseline, names integrations as an unplanned gap behind 11 of 17 lost deals, and notes that the pricing decision is overdue. Y adds an unsupported projection and a CEO sign-off, and its board cut contains an internal review note, so it can't be sent as it is."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 2865,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 36844,
+  "cost_usd": 0.35253860000000004,
+  "num_turns": 2,
+  "duration_ms": 24287
+ }
+}

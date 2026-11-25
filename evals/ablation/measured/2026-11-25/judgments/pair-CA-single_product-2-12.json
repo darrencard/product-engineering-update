@@ -1,0 +1,46 @@
+{
+ "id": "pair-CA-single_product-2-12",
+ "fixture": "single_product",
+ "kind": "pair",
+ "matchup": "CA",
+ "x": "runs/C/single_product/2",
+ "y": "runs/A/single_product/2",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "tie",
+    "reason": "Both get the core figures right when recomputed: ARR $10.4M to $10.9M, NRR 96.4%, GRR 89%, change failure rate 5.1% to 7.7% (4 of 52), capacity split 31/18/8/21/22, R&D 40.8% of revenue ($4.2M), and AI seats used 75%. Neither has a material arithmetic error."
+   },
+   "no_invented_numbers": {
+    "winner": "X",
+    "reason": "Y says inference ran $612K against $480K 'because loads grew faster than unit cost fell', which is a cause the data does not support. Loads rose 26% while cost per task fell 20%, which nets to roughly flat, and that comparison is quarter on quarter, not actual against plan. X's only projection ('Activation: 5 more periods') is clearly labelled as a rough guide."
+   },
+   "speed_with_quality": {
+    "winner": "Y",
+    "reason": "Both pair deploys (3 to 4 a week) with change failure rate (7.7%), including on the board slides. Y also puts rework (12% to 15%) on the page and links slower review (13h) to low use of the review agent, while X keeps rework at 15% in its evidence ledger only."
+   },
+   "gaps_shown": {
+    "winner": "Y",
+    "reason": "Y has a Data gaps section with an owner (VP Engineering, due Q4) for the ARR/revenue mismatch, the PR-opened-to-merged lead time proxy, item-count capacity, missing bet readouts, unlinked requests and per-task versus per-successful-task cost. X flags the $10.3M against $10.9M mismatch without naming an owner, and it gives an owner only for the Platform & security gap and the AI gross margin gap."
+   },
+   "board_cut_usable": {
+    "winner": "Y",
+    "reason": "X's board cut was not rendered ('awaiting sign-off'), so there is nothing to send. Y's board summary opens with the per-load pricing pilot ask and the 4 Nov deadline, then gives a short scorecard (23,100 loads, 41% activation) and the ARR caveat."
+   }
+  },
+  "overall": {
+   "winner": "Y",
+   "reason": "Both updates are numerically sound, but Y gives a board cut that can be sent, names owners for every data gap, and shows rework next to speed, while X's board cut does not exist yet. Y's one unsupported causal claim about the inference overrun is a smaller fault than X having nothing a CPO could send to the board."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 3124,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 34039,
+  "cost_usd": 0.3352786,
+  "num_turns": 2,
+  "duration_ms": 28116
+ }
+}

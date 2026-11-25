@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kestrel Labs · Product &amp; Engineering update · 2026-Q3</title>
+<style>
+:root{
+  color-scheme:light;
+  --page:#f9f9f7;--surface:#fcfcfb;--ink:#0b0b0b;--ink2:#52514e;--muted:#898781;
+  --grid:#e1e0d9;--axis:#c3c2b7;--ring:rgba(11,11,11,.10);
+  --s1:#2a78d6;--s2:#eb6834;
+  --good:#0ca30c;--good-text:#006300;--warn:#fab219;--serious:#ec835a;--crit:#d03b3b;--crit-text:#b02a2a;
+  --plan:#52514e;
+}
+@media (prefers-color-scheme:dark){
+  :root:where(:not([data-theme="light"])){
+    color-scheme:dark;
+    --page:#0d0d0d;--surface:#1a1a19;--ink:#fff;--ink2:#c3c2b7;--muted:#898781;
+    --grid:#2c2c2a;--axis:#383835;--ring:rgba(255,255,255,.10);
+    --s1:#3987e5;--s2:#d95926;--good-text:#0ca30c;--crit-text:#e66767;--plan:#c3c2b7;
+  }
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--ink);font:15px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 24px 80px}
+h1{font-size:28px;margin:0 0 4px;letter-spacing:-.01em}
+h2{font-size:19px;margin:44px 0 6px;padding-top:18px;border-top:1px solid var(--grid)}
+h3{font-size:15px;margin:22px 0 6px}
+p{margin:6px 0 10px}
+.sub{color:var(--ink2);margin:0}
+.lede{color:var(--ink2);margin:0 0 14px}
+.card{background:var(--surface);border:1px solid var(--ring);border-radius:10px;padding:18px 20px;margin:14px 0}
+.tldr li{margin:6px 0}
+.ask{border-left:4px solid var(--s1)}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:14px 0}
+.tile{background:var(--surface);border:1px solid var(--ring);border-radius:10px;padding:14px 16px}
+.tile .k{font-size:13px;color:var(--ink2)}
+.tile .v{font-size:28px;font-weight:600;margin:2px 0}
+.tile .t{font-size:13px;color:var(--ink2)}
+.st{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;font-weight:600;white-space:nowrap}
+.st::before{content:"";width:9px;height:9px;border-radius:50%;background:currentColor;display:inline-block}
+.st.good{color:var(--good-text)} .st.good::before{background:var(--good)}
+.st.bad{color:var(--crit-text)} .st.bad::before{background:var(--crit)}
+.st.watch{color:var(--ink2)} .st.watch::before{background:var(--warn)}
+.st.na{color:var(--muted)} .st.na::before{background:var(--axis)}
+table{width:100%;border-collapse:collapse;font-size:14px;margin:8px 0}
+th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--grid);vertical-align:top}
+th{font-weight:600;color:var(--ink2);font-size:12.5px;border-bottom:1px solid var(--axis)}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.note{font-size:13px;color:var(--ink2)}
+.src{font-size:12px;color:var(--muted)}
+/* charts */
+.chart{margin:10px 0 4px}
+.row{display:grid;grid-template-columns:150px 1fr 120px;align-items:center;gap:10px;height:34px}
+.row .lab{font-size:13.5px;color:var(--ink)}
+.row .val{font-size:13px;color:var(--ink2);font-variant-numeric:tabular-nums;text-align:right}
+.track{position:relative;height:100%;border-left:1px solid var(--axis)}
+.bar{position:absolute;top:9px;height:16px;border-radius:0 4px 4px 0;background:var(--s1)}
+.bar.neg{background:var(--s2);border-radius:4px 0 0 4px}
+.bar.base{background:var(--muted)}
+.tick{position:absolute;top:4px;height:26px;width:2px;background:var(--plan)}
+.legend{display:flex;gap:18px;font-size:12.5px;color:var(--ink2);margin:4px 0}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.sw{width:12px;height:12px;border-radius:3px;display:inline-block}
+.sw.tk{width:2px;height:14px;border-radius:0;background:var(--plan)}
+[data-tip]{cursor:default}
+#tip{position:fixed;pointer-events:none;background:var(--surface);color:var(--ink);border:1px solid var(--ring);box-shadow:0 4px 14px rgba(0,0,0,.12);border-radius:6px;padding:6px 9px;font-size:12.5px;display:none;max-width:260px;z-index:9}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:720px){.two{grid-template-columns:1fr}.row{grid-template-columns:110px 1fr 90px}}
+</style>
+</head>
+<body>
+<main>
+<h1>Product &amp; Engineering — board summary, 2026-Q3</h1>
+<p class="sub">Kestrel Labs · from the CPTO · quarter 1 Jul – 30 Sep 2026 · data as of 30 Sep 2026</p>
+
+<div class="card tldr">
+<ul>
+  <li><b>The North Star beat target.</b> The agent cleared 23,100 loads a week with no manual touch, against a 22,000 target. That's up 26% on Q2.</li>
+  <li><b>Customers are getting started too slowly.</b> Activation is 41% against a 50% target. One activation feature shipped without lifting it yet, and a second slipped.</li>
+  <li><b>Integrations are the commercial gap.</b> They're the reason for 11 of 17 lost deals and the top support theme. There's no plan for them yet.</li>
+  <li><b>Inference cost ran 28% over plan</b> ($612K against $480K), and most of it sits with one model provider. A mitigation is due in December.</li>
+</ul>
+</div>
+
+<div class="tiles">
+  <div class="tile"><div class="k">Loads cleared per week · North Star</div><div class="v">23,100</div><div class="t">Target 22K · Q2 18,400</div><span class="st good">Above target</span></div>
+  <div class="tile"><div class="k">Activation</div><div class="v">41%</div><div class="t">Target 50% · Q2 39%</div><span class="st bad">Below target</span></div>
+  <div class="tile"><div class="k">Weekly active dispatchers</div><div class="v">6,120</div><div class="t">Target 6,000 · Q2 5,890</div><span class="st good">Above target</span></div>
+  <div class="tile"><div class="k">Agent task success</div><div class="v">86%</div><div class="t">Goal 90% · prior eval 82%</div><span class="st watch">Short of goal</span></div>
+</div>
+
+<div class="card ask">
+<h3 style="margin-top:0">Decision requested: per-load pricing pilot</h3>
+<p>Management recommends <b>running a per-load pricing pilot with 10 customers</b> rather than waiting a quarter. Per-load pricing is part of the strategy, and price was the reason for 6 of 17 lost deals in Q3.</p>
+<p class="note">The decision deadline was 4 Nov 2026, which has already passed. Please confirm whether the decision has been made.</p>
+</div>
+
+<h2>Commercial</h2>
+<table>
+<tr><th>Measure</th><th class="n">Q3</th><th>Note</th></tr>
+<tr><td>Revenue against plan</td><td class="n">$10.3M / $10.0M</td><td>+3%</td></tr>
+<tr><td>Win rate</td><td class="n">56% (22/39)</td><td>Every win cites agent exception handling. Losses: 11 integration, 6 price.</td></tr>
+<tr><td>Net revenue retention (billing cohort)</td><td class="n">96%</td><td>The 4 largest accounts churned (−$1.11M). Expansion (+$0.74M) and new business (+$0.90M) more than made up for it.</td></tr>
+</table>
+<p class="note">The billing export ($10.9M ARR) doesn't reconcile with finance revenue (about $41M annualised), so it's probably a subset of accounts. Progress toward the $50M ARR objective will be reported once the two are reconciled.</p>
+
+<h2>Spend and team</h2>
+<table>
+<tr><th>Line</th><th class="n">Plan</th><th class="n">Actual</th><th class="n">Variance</th></tr>
+<tr><td>R&amp;D (payroll, cloud, AI tools)</td><td class="n">$4.25M</td><td class="n">$4.20M</td><td class="n">−1.1%</td></tr>
+<tr><td>Inference (cost of revenue)</td><td class="n">$480K</td><td class="n">$612K</td><td class="n">+27.5%</td></tr>
+<tr><td>Headcount (engineering, product, design)</td><td class="n">56</td><td class="n">53</td><td class="n">3 open roles</td></tr>
+</table>
+<p class="note">R&amp;D came to 40.8% of revenue. Inference came to 5.9% of revenue against 4.8% planned, even though the cost of each eval task fell 20%.</p>
+
+<h2>Delivery</h2>
+<p>We ship more often (4 deploys a week, up from 3) and changes reach production faster (38h, down from 52h). Reliability slipped: 7.7% of changes failed, against a target of under 5%, and code review takes 13h, against under 10h. The VP Engineering owns closing both gaps in Q4. Recovery from incidents stayed fast, at 41 minutes.</p>
+
+<h2>Top risk</h2>
+<table>
+<tr><th>Risk</th><th>Likelihood · impact</th><th>Mitigation</th><th>Due</th></tr>
+<tr><td>One model provider carries most inference spend</td><td>Medium · High</td><td>Routing layer across 2 providers (Platform lead)</td><td>Dec 2026</td></tr>
+</table>
+
+<h2>Focus for Q4</h2>
+<ul>
+  <li>Get activation from 41% to 50%. That means deciding whether to stop or continue guided activation, and shipping self-serve carrier onboarding.</li>
+  <li>Get agent task success from 86% to 90%.</li>
+  <li>Decide on integration work. It's the most common reason we lose deals.</li>
+  <li>Bring change failure rate and review time back into range.</li>
+  <li>Bring inference cost back to plan by finishing the routing layer.</li>
+</ul>
+<p class="note">Stopped this quarter: carrier marketplace, because it didn't serve the strategy. The full leadership update has the detail and data notes.</p>
+</main>
+</body>
+</html>

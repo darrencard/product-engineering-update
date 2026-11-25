@@ -1,0 +1,46 @@
+{
+ "id": "pair-CB-sparse-2-12",
+ "fixture": "sparse",
+ "kind": "pair",
+ "matchup": "CB",
+ "x": "runs/C/sparse/2",
+ "y": "runs/B/sparse/2",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "tie",
+    "reason": "Both Appendix A ledgers state the same tracker-derived split (31/18/8/21/22%) and 78% traced to an objective, all correct against the 100 Linear rows."
+   },
+   "no_invented_numbers": {
+    "winner": "tie",
+    "reason": "All other figures (e.g. $10.9M ARR, 5.1%\u21927.7% change failure) sit in labelled samples in both; both equally mislead by calling the slide 4/5 samples 'made-up' while reusing the real 31/26/43 and 22% shares."
+   },
+   "speed_with_quality": {
+    "winner": "tie",
+    "reason": "Both slide 9 samples pair deploys 3\u21924 and lead time with change failure 5.1%\u21927.7% and time to restore, and Y's 9b keeps that pairing."
+   },
+   "gaps_shown": {
+    "winner": "X",
+    "reason": "X names what specifically is missing (e.g. slide 12: Dispatch Agent with eval set v14 but no results) while Y repeats a generic 'not reported, the data is missing'; both name the VP Engineering, due Q4."
+   },
+   "board_cut_usable": {
+    "winner": "Y",
+    "reason": "X produced no board cut, while Y has an 8-slide cut. It is not sendable as is: it leads with 'The answer is not reported', has no real asks, has an empty ledger and claims an unsupported CEO sign-off."
+   }
+  },
+  "overall": {
+   "winner": "X",
+   "reason": "The two decks share identical correct figures and the same flaw of leaving real tracker data (31/18/8/21/22%, 78%) off the slides, but X's gap statements say specifically what is missing. Y's extra board cut is an empty shell with an unsupported CEO sign-off and an empty ledger, so it adds little a careful CPO could send."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 2479,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 25763,
+  "cost_usd": 0.2561706,
+  "num_turns": 2,
+  "duration_ms": 23408
+ }
+}

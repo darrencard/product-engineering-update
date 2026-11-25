@@ -1,0 +1,46 @@
+{
+ "id": "pair-BA-conflicting-2-12",
+ "fixture": "conflicting",
+ "kind": "pair",
+ "matchup": "BA",
+ "x": "runs/B/conflicting/2",
+ "y": "runs/A/conflicting/2",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "tie",
+    "reason": "Both decks' key figures recompute correctly (NRR 96.4%, CFR 4/52 = 7.7%, lead time 52h to 38h, R&D 40.8% of revenue, Stripe ARR $10.91M), with no material errors in either."
+   },
+   "no_invented_numbers": {
+    "winner": "X",
+    "reason": "X's only forward figure ('Activation: 5 more periods') is labelled a projection, while Y states unlabelled causes not in the data, such as 'volume is growing faster than unit cost is falling' and revenue 'probably' being annualised."
+   },
+   "speed_with_quality": {
+    "winner": "tie",
+    "reason": "Both pair deploys 3 to 4 with change failure rate 5.1% to 7.7% and review time 9h to 13h on the delivery slides and in the board cut, and neither frames speed as a win."
+   },
+   "gaps_shown": {
+    "winner": "Y",
+    "reason": "Y gives the ARR disagreement ($10.1M finance vs $10.91M Stripe) an owner and Q4 due date, and also flags the $10.3M quarterly revenue anomaly, unlinked request R-007 and unverifiable shipped status, while X only lists ARR as 'held' with no owner."
+   },
+   "board_cut_usable": {
+    "winner": "Y",
+    "reason": "Y's board cut opens with ARR $10.1M vs $11.0M plan, gives a short scorecard and the pricing decision, and flags the passed 4 Nov deadline, while X's board cut runs eight slides plus a ledger, carries layout text, and never shows the ARR miss."
+   }
+  },
+  "overall": {
+   "winner": "Y",
+   "reason": "Both are numerically sound, but Y puts the ARR shortfall, the churn and the open data gaps in front of the board with named owners, while X's board cut leaves ARR out entirely. X is slightly cleaner on unlabelled inference, but that does not outweigh Y's better gap handling and a board cut that is ready to send."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 3810,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 36944,
+  "cost_usd": 0.3722386,
+  "num_turns": 2,
+  "duration_ms": 32841
+ }
+}

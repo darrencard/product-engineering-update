@@ -1,0 +1,46 @@
+{
+ "id": "pair-CA-conflicting-1-12",
+ "fixture": "conflicting",
+ "kind": "pair",
+ "matchup": "CA",
+ "x": "runs/C/conflicting/1",
+ "y": "runs/A/conflicting/1",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "Y",
+    "reason": "Both get NRR 96.4%, CFR 7.7% and lead time 38h right, but X's slide 6 says all 7 requests are 'linked to 3 issues' when R-007 is unlinked, and X's 40.8% R&D/revenue rests on a $10.3M revenue line that exceeds ARR."
+   },
+   "no_invented_numbers": {
+    "winner": "X",
+    "reason": "X's only projection ('Activation: 5 more periods') is labelled as a rough guide, while Y's board cut states 'We are also sizing an integration bet', a commitment not in the data."
+   },
+   "speed_with_quality": {
+    "winner": "tie",
+    "reason": "Both pair 4 deploys a week and 38h lead time with the 7.7% change failure rate and 13h review time, and neither presents speed as good news on its own."
+   },
+   "gaps_shown": {
+    "winner": "Y",
+    "reason": "Y shows the 21.4K\u201323.1K north-star range, both ARR figures ($10.1M vs $10.91M), revenue exceeding ARR, the unlinked R-007 and the undated tickets; X gives Platform & security an owner but holds ARR without showing it against plan, and uses the revenue line without questioning it."
+   },
+   "board_cut_usable": {
+    "winner": "Y",
+    "reason": "X's board cut was not rendered ('waiting on sign-off'), while Y's one-page cut starts with ARR at $10.1M against an $11.0M plan, gives the pricing-pilot decision, and flags that the deadline has passed."
+   }
+  },
+  "overall": {
+   "winner": "Y",
+   "reason": "Y's figures check out, and it shows more of the gaps and contradictions in the data, such as revenue exceeding ARR and the split north star, without hiding ARR being behind plan. X has a tidy ledger but no board cut to send, and it uses the questionable revenue line in a ratio without comment."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 3823,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 33586,
+  "cost_usd": 0.34563459999999996,
+  "num_turns": 2,
+  "duration_ms": 35290
+ }
+}

@@ -1,0 +1,46 @@
+{
+ "id": "pair-CA-sparse-1-21",
+ "fixture": "sparse",
+ "kind": "pair",
+ "matchup": "CA",
+ "x": "runs/A/sparse/1",
+ "y": "runs/C/sparse/1",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "X",
+    "reason": "X's 100 issues, 31/21/18/8/22 split, 78% non-KTLO, 53/37/10 monthly closures, 9 of 10 September closures on Dispatch Agent and Platform's 51% KTLO share all recompute correctly, while Y puts the real 31%/43%/78% figures only inside illustrative samples next to invented plan numbers."
+   },
+   "no_invented_numbers": {
+    "winner": "X",
+    "reason": "X states nothing beyond the tracker data, whereas Y's samples (e.g. 15% KTLO plan, $10.3M revenue, 86% eval pass on v14) are labelled as from 'Kestrel Labs, a made-up company', which is the real company's name and could mislead a reader."
+   },
+   "speed_with_quality": {
+    "winner": "X",
+    "reason": "X's only throughput figure (53\u219237\u219210 closures) is caveated as a likely date artifact rather than presented as good news, and X notes 31 new-capability issues shipped with no eval quality evidence; Y has no real speed figures and pairs speed with quality only in a sample."
+   },
+   "gaps_shown": {
+    "winner": "X",
+    "reason": "X's gap table names specific gaps (the mechanical 3-day completion dates, estimates all at 1, 78 issues tagged to an objective that is absent from the intake, no v14 eval scores), all owned by the VP Engineering and due Q4, while Y lists generic 'data needed' blocks, marks the investment mix as missing despite having tracker data, and misses the date anomaly."
+   },
+   "board_cut_usable": {
+    "winner": "X",
+    "reason": "X's board cut leads with 100 issues and 31% new capabilities, states plainly that outcomes are not yet reportable, and says no decisions are requested; Y's board cut is 'held, not rendered', so there is nothing to send."
+   }
+  },
+  "overall": {
+   "winner": "X",
+   "reason": "X reports what the Linear export actually shows, with correct figures, honest caveats about the 3-day date pattern, and an owned gap list. Y shows data on 0 of 19 slides, fills them with samples attributed to the real company's name, and produces no board cut."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 2577,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 18833,
+  "cost_usd": 0.2026906,
+  "num_turns": 2,
+  "duration_ms": 22478
+ }
+}

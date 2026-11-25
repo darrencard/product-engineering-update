@@ -1,0 +1,46 @@
+{
+ "id": "pair-BA-sparse-1-21",
+ "fixture": "sparse",
+ "kind": "pair",
+ "matchup": "BA",
+ "x": "runs/A/sparse/1",
+ "y": "runs/B/sparse/1",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "X",
+    "reason": "X's 100 issues, 31/21/18/8/22% mix, 78% non-KTLO, 53/37/10 monthly closures and 51% KTLO share of Platform all recompute correctly, while Y's cover says '0 of 19 slides show data' despite its own ledger rows L01/L02 holding real figures."
+   },
+   "no_invented_numbers": {
+    "winner": "X",
+    "reason": "Y places invented revenue ($10.3M), ARR ($10.9M), a 15% KTLO plan and an 86% v14 eval pass rate under the company's real name, next to its real 31%/22%/78% figures, and adds 'Signed off by the CEO', while X states nothing the tracker doesn't support."
+   },
+   "speed_with_quality": {
+    "winner": "tie",
+    "reason": "Neither has real deploy or lead-time data; X does not present the 53/37/10 closure pace as good news and notes the missing quality evidence, while Y pairs speed with change failure rate only in illustrative slide 9."
+   },
+   "gaps_shown": {
+    "winner": "X",
+    "reason": "X's gap table lists eight gaps, each owned by the VP Engineering and due in Q4, and flags the 3-day completion-date pattern, while Y marks even the work-type split as missing when the tracker supplies it."
+   },
+   "board_cut_usable": {
+    "winner": "X",
+    "reason": "X's board cut leads with '100 issues, 78% non-KTLO, can't yet report outcomes, no asks' on one page, while Y's eight-slide cut is all greyed-out samples, including a fake per-load pricing pilot ask, plus an empty ledger."
+   }
+  },
+  "overall": {
+   "winner": "X",
+   "reason": "X reports the real tracker data correctly, flags the suspicious date pattern, and gives every gap an owner and a due date. Y discards the real data and fills both cuts with samples that use the company's real name, which could mislead a board."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 2293,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 21798,
+  "cost_usd": 0.2207306,
+  "num_turns": 2,
+  "duration_ms": 20065
+ }
+}

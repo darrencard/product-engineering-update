@@ -1,0 +1,45 @@
+{
+ "id": "within-no_ai-C-12",
+ "fixture": "no_ai",
+ "kind": "within_C",
+ "x": "runs/C/no_ai/1",
+ "y": "runs/C/no_ai/2",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "tie",
+    "reason": "Both carry identical, recomputable figures, e.g. change failure rate 5.1% to 7.7% (2/39, 4/52), ARR $10.4M to $10.9M, net revenue retention 96.4%, R&D 40.8% of revenue."
+   },
+   "no_invented_numbers": {
+    "winner": "tie",
+    "reason": "Both use only data-backed or intake-stated figures, and both label the slide 11 'Activation: 5 more periods' projection as a rough guide."
+   },
+   "speed_with_quality": {
+    "winner": "tie",
+    "reason": "Both slide 09 tables pair deploys (3 to 4) and lead time (52h to 38h) with change failure rate 7.7% and time to restore 41m; Y also adds review time 9h to 13h to its headline and board slide 09b."
+   },
+   "gaps_shown": {
+    "winner": "tie",
+    "reason": "Both flag the revenue $10.3M vs ARR $10.9M mismatch on slide 05 and the missing Platform & security data with owner VP Engineering due Q4 on slide 10, and both miss the unlinked request R-007."
+   },
+   "board_cut_usable": {
+    "winner": "Y",
+    "reason": "X's board cut is only a 'waiting on sign-off' note with nothing to send, while Y marks a 7-slide board set (01, 05, 09b, 11, 14, 16, 18) that leads with the answer and the pricing-pilot ask, though slide 05 still carries an internal check note."
+   }
+  },
+  "overall": {
+   "winner": "Y",
+   "reason": "The two full updates are the same in figures, sourcing and gap handling, so the content is a wash. Y wins narrowly because it delivers a 7-slide board set with a slide (09b) that pairs speed and quality, while X delivers no board cut at all."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 2850,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 32364,
+  "cost_usd": 0.3163986,
+  "num_turns": 2,
+  "duration_ms": 25814
+ }
+}

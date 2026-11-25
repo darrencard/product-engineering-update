@@ -1,0 +1,90 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kestrel Labs · Board update · 2026-Q3</title><style>
+:root{color-scheme:light;--page:#f9f9f7;--surface:#fcfcfb;--ink:#0b0b0b;--ink2:#52514e;--muted:#898781;--grid:#e1e0d9;--base:#c3c2b7;
+--border:rgba(11,11,11,.10);--s1:#2a78d6;--neg:#e34948;--total:#898781;--good:#006300;--crit:#b42e2e;--warnbg:#fff6e0;--critbg:#fdecec;--goodbg:#e9f6e9;--waitbg:#eef3fb}
+@media (prefers-color-scheme:dark){:root{color-scheme:dark;--page:#0d0d0d;--surface:#1a1a19;--ink:#fff;--ink2:#c3c2b7;--muted:#898781;--grid:#2c2c2a;--base:#383835;
+--border:rgba(255,255,255,.10);--s1:#3987e5;--neg:#e66767;--total:#6f6e69;--good:#0ca30c;--crit:#e66767;--warnbg:#2e2614;--critbg:#2e1a1a;--goodbg:#14261a;--waitbg:#16202e}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--ink);font:15px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:920px;margin:0 auto;padding:40px 24px 64px}
+header .eyebrow{color:var(--ink2);font-size:13px;letter-spacing:.02em}
+h1{font-size:28px;line-height:1.25;margin:6px 0 4px;font-weight:650}
+h2{font-size:19px;margin:44px 0 6px;font-weight:650;padding-top:16px;border-top:1px solid var(--grid)}
+h3{font-size:15px;margin:22px 0 6px;font-weight:650}
+p{margin:8px 0}
+.sub{color:var(--ink2);margin:0 0 6px}
+.muted{color:var(--muted);fill:var(--muted)}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:18px 20px;margin:14px 0}
+.tldr ol{margin:6px 0 0;padding-left:20px}.tldr li{margin:6px 0}
+.ask{border-left:4px solid var(--s1)}
+.ask .label{font-size:12px;font-weight:650;letter-spacing:.06em;text-transform:uppercase;color:var(--ink2)}
+.flag{background:var(--warnbg);border-radius:6px;padding:8px 12px;margin:10px 0;font-size:14px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:14px 0}
+.kpi{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 16px}
+.kpi .l{font-size:13px;color:var(--ink2)}
+.kpi .v{font-size:28px;font-weight:600;line-height:1.2;margin:4px 0}
+.kpi .c{font-size:13px;color:var(--ink2)}
+.delta{font-weight:600;font-variant-numeric:tabular-nums}.delta.up{color:var(--good)}.delta.down{color:var(--crit)}.delta.flat{color:var(--ink2)}
+.st{display:inline-flex;gap:5px;align-items:center;font-size:13px;font-weight:600;padding:1px 8px;border-radius:999px;white-space:nowrap}
+.st i{font-style:normal}
+.st.ok{background:var(--goodbg);color:var(--good)}.st.bad{background:var(--critbg);color:var(--crit)}.st.wait{background:var(--waitbg);color:var(--ink2)}
+table{width:100%;border-collapse:collapse;font-size:14px;margin:8px 0}
+th{text-align:left;font-weight:600;color:var(--ink2);font-size:12.5px;border-bottom:1px solid var(--base);padding:6px 8px}
+td{border-bottom:1px solid var(--grid);padding:7px 8px;vertical-align:top}
+.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+details{margin:6px 0 0;font-size:14px}summary{cursor:pointer;color:var(--ink2)}
+.chart{width:100%;height:auto;display:block;margin:6px 0}
+.chart text{font-family:inherit}
+.chart .tick{font-size:11.5px;fill:var(--muted);font-variant-numeric:tabular-nums}
+.chart .lbl{font-size:13px;fill:var(--ink)}
+.chart .val{font-size:12.5px;fill:var(--ink);font-weight:600}
+.chart .val .muted{font-weight:400}
+.chart .grid{stroke:var(--grid);stroke-width:1}
+.chart .base{stroke:var(--base);stroke-width:1}
+.chart .connector{stroke:var(--base);stroke-width:1}
+.chart .plan-tick{stroke:var(--ink);stroke-width:2;stroke-linecap:round}
+.s-actual,.s-up{fill:var(--s1)}.s-down{fill:var(--neg)}.s-total{fill:var(--total)}
+.chart .hit:hover path,.chart .hit:focus path{opacity:.85}
+.chart .hit:focus{outline:none}
+.legend{display:flex;gap:18px;font-size:13px;color:var(--ink2);margin-top:8px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.sw{width:12px;height:12px;border-radius:3px;display:inline-block}
+.s-actual-bg,.s-up-bg{background:var(--s1)}.s-down-bg{background:var(--neg)}.s-total-bg{background:var(--total)}
+.sw-tick{width:2px;height:14px;background:var(--ink);display:inline-block;border-radius:1px}
+#tip{position:fixed;pointer-events:none;background:var(--surface);color:var(--ink);border:1px solid var(--border);box-shadow:0 4px 16px rgba(0,0,0,.12);
+border-radius:8px;padding:6px 10px;font-size:13px;opacity:0;transition:opacity .08s;max-width:300px;z-index:10}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}@media (max-width:720px){.two{grid-template-columns:1fr}}
+ul.tight{margin:6px 0;padding-left:20px}ul.tight li{margin:4px 0}
+.notes{font-size:13.5px;color:var(--ink2)}.notes li{margin:5px 0}
+footer{margin-top:40px;font-size:12.5px;color:var(--muted)}
+@media print{body{background:#fff}.card,.kpi{break-inside:avoid}details{display:none}h2{break-after:avoid}}
+</style></head><body><main><header><div class="eyebrow">Kestrel Labs · Board update · Product &amp; Engineering · Q3 2026</div>
+<h1>The agent is winning deals. To grow ARR, we need to stop onboarding churn and close the TMS integration gap.</h1>
+<p class="sub">From the CPTO · Data as of 30 Sep 2026</p></header><div class="kpis">
+<div class="kpi"><div class="l">ARR</div><div class="v">$10.91M</div><div class="c"><span class="delta up">+0.53M</span> vs 30 Jun · objective $50M</div></div>
+<div class="kpi"><div class="l">Net revenue retention</div><div class="v">96%</div><div class="c">Gross 89% · 4 accounts churned ($1.11M)</div></div>
+<div class="kpi"><div class="l">Loads cleared / week</div><div class="v">23.1K</div><div class="c"><span class="delta up">+4.7K</span> vs Q2 · target 22K<br><span class="st ok"><i aria-hidden="true">✓</i> On target</span></div></div>
+<div class="kpi"><div class="l">Activation</div><div class="v">41%</div><div class="c"><span class="delta up">+2 pts</span> vs Q2 · target 50%<br><span class="st bad"><i aria-hidden="true">✕</i> Off target</span></div></div>
+</div><div class="card ask"><div class="label">Decision needed</div>
+<h3 style="margin-top:4px">Approve a per-load pricing pilot</h3>
+<p><b>Options:</b> Pilot with 10 customers, or wait a quarter.<br><b>Recommendation:</b> Run the pilot with 10 customers.</p>
+<p><b>Why:</b> the strategy says we are “priced per load”, and price is the second-biggest reason we lose: 6 of 17 lost deals in the CRM export cite price. A 10-customer pilot tests per-load pricing before we roll it out to everyone.</p>
+<div class="flag"><b>Deadline:</b> 4 Nov 2026. That date has passed (this update was prepared 25 Nov 2026 from data as of 30 Sep). If the decision hasn’t been taken, we need a new date at this meeting.</div>
+</div><div class="card"><h3 style="margin-top:0">What’s working</h3><ul class="tight">
+<li>Every one of the 22 deals we won cites the agent clearing exceptions. The no-touch north star is 23.1K loads a week, above the 22K target.</li>
+<li>Agent task success rose to 86% (the target is 90%), and cost per task fell 20%.</li>
+<li>We shipped 6 of 7 commitments. We’re deploying 4.0 times a week, and R&amp;D spend is 1.1% under plan.</li></ul>
+<h3>What isn’t working</h3><ul class="tight">
+<li><b>Churn:</b> 4 accounts ($1.11M ARR) churned, and every one had raised onboarding tickets. Self-serve onboarding slipped, and activation is 41% against a 50% target.</li>
+<li><b>Integration:</b> “No TMS integration” is the reason for 11 of 17 lost deals. Integration errors affect accounts holding 77% of ARR. Nothing in the plan addresses this yet. The VP Engineering owns the plan, due in Q4.</li>
+<li><b>Quality:</b> change failure rate is 7.7% against a target under 5%.</li></ul>
+<h3>Top risk</h3><p>One model provider carries most inference spend. Inference is 27% over plan. Mitigation: routing layer across 2 providers, due Dec 2026.</p></div>
+<div class="card"><h3 style="margin-top:0">ARR bridge, Q3</h3><div class="legend"><span><i class="sw s-total-bg"></i>Balance</span><span><i class="sw s-up-bg"></i>Added</span><span><i class="sw s-down-bg"></i>Lost</span></div><svg viewBox="0 0 640 300" role="img" aria-labelledby="arr-t" class="chart"><title id="arr-t">ARR bridge from 30 June to 30 September 2026</title><line x1="56" x2="630" y1="256.0" y2="256.0" class="base"/><text x="48" y="260.0" class="tick" text-anchor="end">$0M</text><line x1="56" x2="630" y1="179.2" y2="179.2" class="grid"/><text x="48" y="183.2" class="tick" text-anchor="end">$4M</text><line x1="56" x2="630" y1="102.4" y2="102.4" class="grid"/><text x="48" y="106.4" class="tick" text-anchor="end">$8M</text><line x1="56" x2="630" y1="25.600000000000023" y2="25.600000000000023" class="grid"/><text x="48" y="29.600000000000023" class="tick" text-anchor="end">$12M</text><g class="hit" data-tip="ARR 30 Jun: $10.38M" tabindex="0"><rect x="60.00000000000001" y="16" width="106.8" height="240" fill="transparent"/><path d="M101.4,256.0 v-195.296 a4,4 0 0 1 4,-4 h16 a4,4 0 0 1 4,4 v195.296 z" class="s-total"/><text x="113.4" y="48.70400000000001" class="val" text-anchor="middle">$10.38M</text><text x="113.4" y="276" class="tick" text-anchor="middle">ARR 30 Jun</text></g><line x1="125.4" x2="216.2" y1="56.70400000000001" y2="56.70400000000001" class="connector"/><g class="hit" data-tip="New (6 logos): +$900K" tabindex="0"><rect x="174.8" y="16" width="106.8" height="240" fill="transparent"/><path d="M216.20000000000002,56.70400000000001 v-13.280000000000001 a4,4 0 0 1 4,-4 h16 a4,4 0 0 1 4,4 v13.280000000000001 z" class="s-up"/><text x="228.20000000000002" y="31.424000000000007" class="val" text-anchor="middle">+$900K</text><text x="228.20000000000002" y="276" class="tick" text-anchor="middle">New (6 logos)</text></g><line x1="240.20000000000002" x2="331.0" y1="39.42400000000001" y2="39.42400000000001" class="connector"/><g class="hit" data-tip="Expansion (15 accts): +$741K" tabindex="0"><rect x="289.6" y="16" width="106.8" height="240" fill="transparent"/><path d="M331.0,39.42400000000001 v-10.22720000000001 a4,4 0 0 1 4,-4 h16 a4,4 0 0 1 4,4 v10.22720000000001 z" class="s-up"/><text x="343.0" y="17.196799999999996" class="val" text-anchor="middle">+$741K</text><text x="343.0" y="276" class="tick" text-anchor="middle">Expansion (15 accts)</text></g><line x1="355.0" x2="445.8" y1="25.196799999999996" y2="25.196799999999996" class="connector"/><g class="hit" data-tip="Churn (4 accts): −$1.11M" tabindex="0"><rect x="404.4" y="16" width="106.8" height="240" fill="transparent"/><path d="M445.79999999999995,25.196799999999996 h24 v17.312000000000012 a4,4 0 0 1 -4,4 h-16 a4,4 0 0 1 -4,-4 z" class="s-down"/><text x="457.79999999999995" y="62.50880000000001" class="val" text-anchor="middle">−$1.11M</text><text x="457.79999999999995" y="276" class="tick" text-anchor="middle">Churn (4 accts)</text></g><line x1="469.79999999999995" x2="560.5999999999999" y1="46.50880000000001" y2="46.50880000000001" class="connector"/><g class="hit" data-tip="ARR 30 Sep: $10.91M" tabindex="0"><rect x="519.2" y="16" width="106.8" height="240" fill="transparent"/><path d="M560.6,256.0 v-205.4912 a4,4 0 0 1 4,-4 h16 a4,4 0 0 1 4,4 v205.4912 z" class="s-total"/><text x="572.6" y="38.50880000000001" class="val" text-anchor="middle">$10.91M</text><text x="572.6" y="276" class="tick" text-anchor="middle">ARR 30 Sep</text></g></svg><details><summary>Show as table</summary><table><thead><tr><th>Step</th><th class='n'>ARR</th></tr></thead><tbody><tr><td>ARR 30 Jun</td><td class='n'>$10.38M</td></tr><tr><td>New (6 logos)</td><td class='n'>+$900K</td></tr><tr><td>Expansion (15 accts)</td><td class='n'>+$741K</td></tr><tr><td>Churn (4 accts)</td><td class='n'>−$1.11M</td></tr><tr><td>ARR 30 Sep</td><td class='n'>$10.91M</td></tr></tbody></table></details></div>
+<p class="notes">ARR comes from Stripe. The Q3 revenue figure from finance close ($10.30M) doesn’t yet reconcile with Stripe ARR. Finance needs to reconcile them. Win/loss figures come from CRM, whose export has no deal dates. Full detail is in the leadership update.</p></main><div id="tip" role="tooltip"></div><script>
+(()=>{const t=document.getElementById('tip');
+const show=(e,el)=>{t.textContent=el.dataset.tip;t.style.opacity=1;const r=el.getBoundingClientRect();
+const x=e&&e.clientX!=null?e.clientX:r.left+r.width/2,y=e&&e.clientY!=null?e.clientY:r.top;
+t.style.left=Math.min(x+14,innerWidth-t.offsetWidth-8)+'px';t.style.top=(y-t.offsetHeight-10)+'px';};
+document.querySelectorAll('[data-tip]').forEach(el=>{el.addEventListener('mousemove',e=>show(e,el));
+el.addEventListener('focus',()=>show(null,el));['mouseleave','blur'].forEach(v=>el.addEventListener(v,()=>t.style.opacity=0));});})();
+</script></body></html>

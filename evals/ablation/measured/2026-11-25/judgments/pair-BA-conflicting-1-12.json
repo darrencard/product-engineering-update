@@ -1,0 +1,46 @@
+{
+ "id": "pair-BA-conflicting-1-12",
+ "fixture": "conflicting",
+ "kind": "pair",
+ "matchup": "BA",
+ "x": "runs/B/conflicting/1",
+ "y": "runs/A/conflicting/1",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "Y",
+    "reason": "Y's recomputable figures all check out (NRR 96.4%, GRR 89.3%, Stripe ARR $10.91M, CFR 4/52 = 7.7%, rework 9/60 = 15%, loads up 16\u201326%), while X shows an R&D-to-revenue ratio of 40.8% on a $10.3M quarterly revenue that exceeds the $10.1M ARR, and its slide 08 labels Multi-stop reroutes 'No movement' when both sources rose from 18.4K."
+   },
+   "no_invented_numbers": {
+    "winner": "tie",
+    "reason": "Each adds one unsupported claim: X's board cut says 'Signed off by the CEO', which no source records, and Y's board cut turns a recommendation into a plan ('We are also sizing an integration bet'). Each labels its other extrapolations, X's 'Activation: 5 more periods' projection and Y's 'more likely, the agent handled more volume'."
+   },
+   "speed_with_quality": {
+    "winner": "tie",
+    "reason": "Both put deploys (3\u21924) and lead time (52h\u219238h) beside change failure rate (5.1%\u21927.7%) and review time (9h\u219213h), and neither treats speed alone as good news. Y also adds rework (11.7%\u219215%)."
+   },
+   "gaps_shown": {
+    "winner": "Y",
+    "reason": "Y states both disputed figures (loads 21.4K vs 23.1K, ARR $10.1M vs $10.91M), says which ARR figure it used and why, and also flags revenue exceeding ARR, undated support tickets, the unlinked R-007 request and generic tracker titles. X holds the ARR figure without showing it on the board slides and misses the revenue/ARR conflict, though X names an owner and Q4 due date more consistently."
+   },
+   "board_cut_usable": {
+    "winner": "Y",
+    "reason": "Y's one-page board cut opens with ARR $10.1M against an $11.0M plan, the north star range and the pricing decision, and flags that the 4 Nov deadline has passed. X's board cut runs eight slides plus a ledger, opens with weekly active dispatchers, never shows the ARR shortfall, and gives the decision as a one-line slide."
+   }
+  },
+  "overall": {
+   "winner": "Y",
+   "reason": "Y's figures all reconcile with the data, and it surfaces the conflicts X misses or hides: revenue above ARR, the ARR shortfall against plan, and the 11 of 17 deals lost to missing TMS integration. Its board cut leads with the answer and the overdue decision, so a careful CPO could send it nearly as is."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 3408,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 36083,
+  "cost_usd": 0.3573106,
+  "num_turns": 2,
+  "duration_ms": 30260
+ }
+}

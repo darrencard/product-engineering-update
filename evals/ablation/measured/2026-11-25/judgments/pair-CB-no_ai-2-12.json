@@ -1,0 +1,46 @@
+{
+ "id": "pair-CB-no_ai-2-12",
+ "fixture": "no_ai",
+ "kind": "pair",
+ "matchup": "CB",
+ "x": "runs/C/no_ai/2",
+ "y": "runs/B/no_ai/2",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "tie",
+    "reason": "Both use the same figures, and each one I checked recomputes correctly: 4 vs 3 deploys a week, change failure rate 7.7% (4/52) vs 5.1% (2/39), ARR $10.4M to $10.9M, NRR 96.4%, R&D share of revenue 40.8%, and 53 of 56 roles filled."
+   },
+   "no_invented_numbers": {
+    "winner": "tie",
+    "reason": "Neither adds a target or benchmark that isn't in the data, and both label the Activation '5 more periods' figure on slide 11 as a rough projection; Y's 'Signed off by the CEO' line isn't supported by the data, but it is not a number."
+   },
+   "speed_with_quality": {
+    "winner": "X",
+    "reason": "Both delivery tables pair each speed metric with a quality metric, but X's headlines on slides 01 and 09 put the rise in releases (3 to 4) next to the rise in change failure rate (5.1% to 7.7%) with an explicit 'but', while Y's opener leads with loads beating target and leaves change failure rate in the body."
+   },
+   "gaps_shown": {
+    "winner": "tie",
+    "reason": "Both give the Platform & security gap an owner (the VP Engineering) and a due date (Q4), and both flag the revenue/ARR mismatch ($10.3M a quarter vs $10.9M ARR) without picking a side; neither notices that R-007 has no Linear link."
+   },
+   "board_cut_usable": {
+    "winner": "Y",
+    "reason": "X has no separate board cut, while Y gives a 7-slide cut that opens with the loads result against target, includes the slide 18 pricing-pilot ask and a trimmed ledger; it still contains the 'Check before the board sees this' note, so it needs one edit before sending."
+   }
+  },
+  "overall": {
+   "winner": "Y",
+   "reason": "The two decks match on every figure and every gap, and X's headlines pair speed with quality slightly more sharply. Y wins because it provides a short board cut built around the 4 Nov pricing-pilot decision that is nearly ready to send, and X provides none."
+  }
+ },
+ "usage": {
+  "input_tokens": 4,
+  "output_tokens": 3350,
+  "cache_read_input_tokens": 39489,
+  "cache_creation_input_tokens": 37663,
+  "cost_usd": 0.3762178,
+  "num_turns": 3,
+  "duration_ms": 28699
+ }
+}

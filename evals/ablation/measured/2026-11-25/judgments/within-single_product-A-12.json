@@ -1,0 +1,45 @@
+{
+ "id": "within-single_product-A-12",
+ "fixture": "single_product",
+ "kind": "within_A",
+ "x": "runs/A/single_product/1",
+ "y": "runs/A/single_product/2",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "X",
+    "reason": "Both compute NRR 96.4%, GRR 89.3%, CFR 5.1%\u21927.7% and lead time 52h\u219238h correctly, but Y says KES-388 'has 2 requests' while one (R-999) is dated May, whereas X correctly counts 1 in Q3 and excludes R-999."
+   },
+   "no_invented_numbers": {
+    "winner": "X",
+    "reason": "Y states the inference overrun was 'because loads grew faster than unit cost fell' as fact and assigns invented likelihood/impact ratings ('High \u00b7 High') to two new risks, whereas X labels the volume explanation 'most likely' and says the export can't confirm it."
+   },
+   "speed_with_quality": {
+    "winner": "tie",
+    "reason": "Both pair 4 deploys/week and 38h lead time with the 7.7% change failure rate, 13h review time and rework rate, and both frame it as 'faster but less safe'."
+   },
+   "gaps_shown": {
+    "winner": "tie",
+    "reason": "Both flag the $10.9M billing ARR vs $10.3M Finance revenue mismatch with the VP Engineering owning it due Q4, plus the lead-time proxy, missing bet readouts and cost-per-task vs cost-per-successful-task gap."
+   },
+   "board_cut_usable": {
+    "winner": "Y",
+    "reason": "Y's board cut opens with the per-load pricing pilot ask and handles the passed 4 Nov deadline as a sendable 'treat as a record' note, while X's board cut contains an internal 'Check before sending' instruction that cannot go to a board as is."
+   }
+  },
+  "overall": {
+   "winner": "X",
+   "reason": "Both updates are numerically sound and honest about the ARR reconciliation gap, but Y asserts an unconfirmed cause for the inference overrun and invents risk ratings, which the rubric weighs heavily. Y's board cut is more sendable, but X's stricter handling of what the data supports makes it the safer update to send."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 2833,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 33545,
+  "cost_usd": 0.3255066,
+  "num_turns": 2,
+  "duration_ms": 25501
+ }
+}

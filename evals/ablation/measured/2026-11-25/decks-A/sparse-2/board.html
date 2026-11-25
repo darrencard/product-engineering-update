@@ -1,0 +1,63 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kestrel Labs — Product &amp; Engineering, 2026-Q3 (board)</title><style>
+:root{--surface-1:#fcfcfb;--surface-2:#f4f3f0;--text-primary:#0b0b0b;--text-secondary:#52514e;--text-muted:#6f6e69;
+--rule:#e4e3df;--grid:#ebeae6;--s1:#2a78d6;--s2:#eb6834;--s3:#1baf7a;--s4:#eda100;--s5:#e87ba4;--warn-bg:#fdf6e3;--warn-ink:#7a5200;color-scheme:light}
+@media (prefers-color-scheme:dark){:root{--surface-1:#1a1a19;--surface-2:#242422;--text-primary:#fff;--text-secondary:#c3c2b7;--text-muted:#9a9990;
+--rule:#383835;--grid:#2c2c2a;--s1:#3987e5;--s2:#d95926;--s3:#199e70;--s4:#c98500;--s5:#d55181;--warn-bg:#2e2716;--warn-ink:#e8c46a;color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--surface-1);color:var(--text-primary);font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif}
+main{max-width:860px;margin:0 auto;padding:40px 24px 64px}
+header{border-bottom:1px solid var(--rule);padding-bottom:16px;margin-bottom:28px}
+.eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted);margin:0 0 6px}
+h1{font-size:28px;line-height:1.2;margin:0 0 6px}
+h2{font-size:19px;margin:40px 0 10px;padding-top:4px}
+h3{font-size:15px;margin:22px 0 6px}
+.meta{color:var(--text-secondary);font-size:13px;margin:0}
+p,li{color:var(--text-primary)}
+.muted{color:var(--text-secondary)}
+.small{font-size:13px}
+ol.tldr{padding-left:20px;margin:8px 0}
+ol.tldr li{margin:0 0 10px}
+.callout{background:var(--warn-bg);color:var(--warn-ink);border-radius:8px;padding:12px 16px;margin:16px 0;font-size:14px}
+.callout b{color:inherit}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin:16px 0}
+.tile{background:var(--surface-2);border-radius:8px;padding:14px 16px}
+.tile .v{font-size:28px;font-weight:600;line-height:1.1;font-variant-numeric:tabular-nums}
+.tile .l{font-size:13px;color:var(--text-secondary);margin-top:4px}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0 4px;font-variant-numeric:tabular-nums}
+th,td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--rule)}
+th{color:var(--text-secondary);font-weight:600}
+td.n,th.n{text-align:right}
+figure{margin:12px 0 4px}
+figcaption{font-size:13px;color:var(--text-secondary);margin-bottom:6px}
+svg text{fill:var(--text-secondary);font-size:12px}
+svg .val{fill:var(--text-primary)}
+details{margin:6px 0 0}
+summary{cursor:pointer;font-size:13px;color:var(--text-secondary)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:13px;color:var(--text-secondary);margin:4px 0 8px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+.tip{position:fixed;pointer-events:none;background:var(--text-primary);color:var(--surface-1);font-size:12px;padding:6px 8px;border-radius:6px;opacity:0;transition:opacity .08s;white-space:nowrap;z-index:9}
+.gap td:first-child{font-weight:600;width:34%}
+footer{margin-top:48px;border-top:1px solid var(--rule);padding-top:12px;font-size:12px;color:var(--text-muted)}
+@media print{.tip{display:none}details{display:block}details>*{display:block}}
+ main{max-width:720px}</style></head><body><main>
+<header><p class="eyebrow">Kestrel Labs · Product &amp; Engineering · Board summary</p>
+<h1>Q3 2026: delivery is concentrated on Dispatch Agent; outcome reporting comes in Q4</h1>
+<p class="meta">2026-07-01 to 2026-09-30 · From the CPTO · Source: Linear issue tracker only</p></header>
+
+<div class="tiles">
+<div class="tile"><div class="v">100</div><div class="l">issues completed in Q3</div></div>
+<div class="tile"><div class="v">31%</div><div class="l">went to new Dispatch Agent capability</div></div>
+<div class="tile"><div class="v" style="white-space:nowrap;font-size:24px">53 → 37 → 10</div><div class="l">completed per month, Jul → Aug → Sep</div></div>
+</div>
+
+<h2 style="margin-top:8px">Summary</h2>
+<ol class="tldr">
+<li><b>Dispatch Agent, our AI feature, was the main focus.</b> It got 31% of completed work and kept a steady pace all quarter. Platform and upkeep took 43%, improving the core product 18%, and growth 8%.</li>
+<li><b>Overall output fell across the quarter, and we’re finding out why.</b> Completions dropped from 53 in July to 10 in September. By September only Dispatch Agent work was still closing. The data can’t yet tell us whether this reflects reassigned people, open work not yet finished, or a tracking issue. That’s the first thing to check.</li>
+<li><b>We can’t yet report outcomes.</b> This quarter’s data covers delivery activity only. We don’t yet have objectives with targets, a north-star metric, Dispatch Agent quality results, or a risk register. The VP Engineering owns putting them in place, due Q4.</li>
+</ol>
+
+<p class="small muted">No decisions are requested from the board this quarter. Shares are by issue count; every issue carries the same estimate, so they don’t measure effort. The full leadership update has the detail.</p>
+<footer>Source: Linear export (100 issues, completed Jul 1–Sep 26 2026). Intake answers from the CPTO. Data as of 2026-09-30.</footer>
+</main></body></html>

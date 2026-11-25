@@ -1,0 +1,109 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kestrel Labs — Product &amp; Engineering update, 2026-Q3</title><style>
+:root{--surface-1:#fcfcfb;--surface-2:#f4f3f0;--text-primary:#0b0b0b;--text-secondary:#52514e;--text-muted:#6f6e69;
+--rule:#e4e3df;--grid:#ebeae6;--s1:#2a78d6;--s2:#eb6834;--s3:#1baf7a;--s4:#eda100;--s5:#e87ba4;--warn-bg:#fdf6e3;--warn-ink:#7a5200;color-scheme:light}
+@media (prefers-color-scheme:dark){:root{--surface-1:#1a1a19;--surface-2:#242422;--text-primary:#fff;--text-secondary:#c3c2b7;--text-muted:#9a9990;
+--rule:#383835;--grid:#2c2c2a;--s1:#3987e5;--s2:#d95926;--s3:#199e70;--s4:#c98500;--s5:#d55181;--warn-bg:#2e2716;--warn-ink:#e8c46a;color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--surface-1);color:var(--text-primary);font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif}
+main{max-width:860px;margin:0 auto;padding:40px 24px 64px}
+header{border-bottom:1px solid var(--rule);padding-bottom:16px;margin-bottom:28px}
+.eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted);margin:0 0 6px}
+h1{font-size:28px;line-height:1.2;margin:0 0 6px}
+h2{font-size:19px;margin:40px 0 10px;padding-top:4px}
+h3{font-size:15px;margin:22px 0 6px}
+.meta{color:var(--text-secondary);font-size:13px;margin:0}
+p,li{color:var(--text-primary)}
+.muted{color:var(--text-secondary)}
+.small{font-size:13px}
+ol.tldr{padding-left:20px;margin:8px 0}
+ol.tldr li{margin:0 0 10px}
+.callout{background:var(--warn-bg);color:var(--warn-ink);border-radius:8px;padding:12px 16px;margin:16px 0;font-size:14px}
+.callout b{color:inherit}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin:16px 0}
+.tile{background:var(--surface-2);border-radius:8px;padding:14px 16px}
+.tile .v{font-size:28px;font-weight:600;line-height:1.1;font-variant-numeric:tabular-nums}
+.tile .l{font-size:13px;color:var(--text-secondary);margin-top:4px}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0 4px;font-variant-numeric:tabular-nums}
+th,td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--rule)}
+th{color:var(--text-secondary);font-weight:600}
+td.n,th.n{text-align:right}
+figure{margin:12px 0 4px}
+figcaption{font-size:13px;color:var(--text-secondary);margin-bottom:6px}
+svg text{fill:var(--text-secondary);font-size:12px}
+svg .val{fill:var(--text-primary)}
+details{margin:6px 0 0}
+summary{cursor:pointer;font-size:13px;color:var(--text-secondary)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:13px;color:var(--text-secondary);margin:4px 0 8px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+.tip{position:fixed;pointer-events:none;background:var(--text-primary);color:var(--surface-1);font-size:12px;padding:6px 8px;border-radius:6px;opacity:0;transition:opacity .08s;white-space:nowrap;z-index:9}
+.gap td:first-child{font-weight:600;width:34%}
+footer{margin-top:48px;border-top:1px solid var(--rule);padding-top:12px;font-size:12px;color:var(--text-muted)}
+@media print{.tip{display:none}details{display:block}details>*{display:block}}
+</style></head><body><main>
+<header><p class="eyebrow">Kestrel Labs · Product &amp; Engineering · Leadership update</p>
+<h1>Q3 2026: 100 issues shipped, but the monthly count fell from 53 in July to 10 in September</h1>
+<p class="meta">Period 2026-07-01 to 2026-09-30 · Data as of 2026-09-30 · From the CPTO · Only source: Linear issue tracker</p></header>
+
+<h2 style="margin-top:0">Summary</h2>
+<ol class="tldr">
+<li><b>100 issues were completed in Q3.</b> 31 (31%) were new capabilities, all on Dispatch Agent. 43 (43%) went to keep-the-lights-on and platform work, 18 (18%) to improving the core product, and 8 (8%) to growth.</li>
+<li><b>Completions fell every month: 53 in July, 37 in August, 10 in September.</b> By September only Dispatch Agent feature work was still closing (9 of 10 issues). The last Growth issue closed Jul 22, the last Improve-the-core issue Aug 21, and the last Platform issue Aug 30. We don’t yet know whether this is a real slowdown, a shift of people onto Dispatch Agent, or work finished but not marked Done. <b>This is the main open question.</b></li>
+<li><b>This update reports activity, not outcomes.</b> The intake had no objectives, north-star metric, strategy, plan, risks, or commitments, and the tracker is the only connected system. So this update can’t say whether Q3 moved the business. The VP Engineering owns closing these gaps in Q4.</li>
+</ol>
+
+<div class="tiles">
+<div class="tile"><div class="v">100</div><div class="l">issues completed in Q3</div></div>
+<div class="tile"><div class="v">31%</div><div class="l">new capabilities (all Dispatch Agent)</div></div>
+<div class="tile"><div class="v">43%</div><div class="l">KTLO + platform &amp; scale</div></div>
+<div class="tile"><div class="v">53 → 10</div><div class="l">issues completed, Jul → Sep</div></div>
+</div>
+
+<div class="callout"><b>How to read the numbers.</b> All 100 issues have an estimate of 1, so every share here is a share of <i>issue count</i>, not of effort or headcount. One large issue and one trivial issue count the same.</div>
+
+<h2>Where the work went</h2>
+<figure><figcaption>Completed issues by work type, Q3 2026 (n = 100)</figcaption><svg viewBox="0 0 820 174" width="100%" role="img" aria-label="Completed issues by work type, Q3"><g data-tip="New capabilities: 31 issues (31%)"><rect x="0" y="3" width="820" height="30" fill="transparent"/><text x="150" y="21" text-anchor="end">New capabilities</text><path d="M160,10 h556.0 a4,4 0 0 1 4,4 v8 a4,4 0 0 1 -4,4 h-556.0 z" fill="var(--s1)"/><text class="val" x="728.0" y="21">31 · 31%</text></g><g data-tip="Keep the lights on: 22 issues (22%)"><rect x="0" y="33" width="820" height="30" fill="transparent"/><text x="150" y="51" text-anchor="end">Keep the lights on</text><path d="M160,40 h393.4193548387097 a4,4 0 0 1 4,4 v8 a4,4 0 0 1 -4,4 h-393.4193548387097 z" fill="var(--s1)"/><text class="val" x="565.4193548387098" y="51">22 · 22%</text></g><g data-tip="Platform &amp; scale: 21 issues (21%)"><rect x="0" y="63" width="820" height="30" fill="transparent"/><text x="150" y="81" text-anchor="end">Platform &amp; scale</text><path d="M160,70 h375.35483870967744 a4,4 0 0 1 4,4 v8 a4,4 0 0 1 -4,4 h-375.35483870967744 z" fill="var(--s1)"/><text class="val" x="547.3548387096774" y="81">21 · 21%</text></g><g data-tip="Improve the core: 18 issues (18%)"><rect x="0" y="93" width="820" height="30" fill="transparent"/><text x="150" y="111" text-anchor="end">Improve the core</text><path d="M160,100 h321.16129032258067 a4,4 0 0 1 4,4 v8 a4,4 0 0 1 -4,4 h-321.16129032258067 z" fill="var(--s1)"/><text class="val" x="493.16129032258067" y="111">18 · 18%</text></g><g data-tip="Growth: 8 issues (8%)"><rect x="0" y="123" width="820" height="30" fill="transparent"/><text x="150" y="141" text-anchor="end">Growth</text><path d="M160,130 h140.51612903225808 a4,4 0 0 1 4,4 v8 a4,4 0 0 1 -4,4 h-140.51612903225808 z" fill="var(--s1)"/><text class="val" x="312.51612903225805" y="141">8 · 8%</text></g><line x1="160" x2="160" y1="2" y2="160" stroke="var(--rule)"/></svg></figure>
+<details><summary>Table view</summary><table><thead><tr><th>Work type</th><th class=n>Issues</th><th class=n>Share</th><th>Product line</th><th>Last completion</th></tr></thead><tbody><tr><td>New capabilities</td><td class=n>31</td><td class=n>31%</td><td>Dispatch Agent</td><td>Sep 26</td></tr><tr><td>Keep the lights on</td><td class=n>22</td><td class=n>22%</td><td>Platform</td><td>Sep 2</td></tr><tr><td>Platform &amp; scale</td><td class=n>21</td><td class=n>21%</td><td>Platform</td><td>Aug 30</td></tr><tr><td>Improve the core</td><td class=n>18</td><td class=n>18%</td><td>Core Dispatch</td><td>Aug 21</td></tr><tr><td>Growth</td><td class=n>8</td><td class=n>8%</td><td>Core Dispatch</td><td>Jul 22</td></tr><tr><td><b>Total</b></td><td class=n><b>100</b></td><td class=n>100%</td><td></td><td></td></tr></tbody></table></details>
+<p>78 of 100 issues are tagged to one objective in Linear, “Grow ARR to $50M”. The other 22 are all Keep the lights on and have no objective, which is normal for that kind of work. That objective doesn’t appear anywhere in the intake, so we can’t confirm it’s the company’s current goal or report progress against it.</p>
+<p>There’s no investment plan to compare against, so we can’t call this mix right or wrong yet. The plain reading is that about a third of the work went to new Dispatch Agent capability, a little over two-fifths went to platform and upkeep, and Growth got the smallest share at 8%.</p>
+
+<h3>By product line</h3>
+<table><thead><tr><th>Product line (team)</th><th class=n>Issues</th><th class=n>Share</th><th>What it was</th></tr></thead><tbody><tr><td>Platform</td><td class=n>43</td><td class=n>43%</td><td>Keep the lights on 22; Platform &amp; scale 21</td></tr><tr><td>Dispatch Agent</td><td class=n>31</td><td class=n>31%</td><td>New capabilities 31</td></tr><tr><td>Core Dispatch</td><td class=n>26</td><td class=n>26%</td><td>Improve the core 18; Growth 8</td></tr></tbody></table>
+<p class="small muted">Each product line maps one-to-one to a team in the export: Platform team, Dispatch Agent team, Core Dispatch team.</p>
+
+<h2>Pace over the quarter</h2>
+<figure><figcaption>Completed issues per month, by work type</figcaption><div class="legend"><span><i style="background:var(--s1)"></i>New capabilities</span><span><i style="background:var(--s2)"></i>Improve the core</span><span><i style="background:var(--s3)"></i>Growth</span><span><i style="background:var(--s4)"></i>Platform &amp; scale</span><span><i style="background:var(--s5)"></i>Keep the lights on</span></div><svg viewBox="0 0 820 300" width="100%" role="img" aria-label="Completed issues per month by work type"><line x1="40" x2="820" y1="270.0" y2="270.0" stroke="var(--grid)"/><text x="32" y="274.0" text-anchor="end">0</text><line x1="40" x2="820" y1="227.66666666666666" y2="227.66666666666666" stroke="var(--grid)"/><text x="32" y="231.66666666666666" text-anchor="end">10</text><line x1="40" x2="820" y1="185.33333333333331" y2="185.33333333333331" stroke="var(--grid)"/><text x="32" y="189.33333333333331" text-anchor="end">20</text><line x1="40" x2="820" y1="143.0" y2="143.0" stroke="var(--grid)"/><text x="32" y="147.0" text-anchor="end">30</text><line x1="40" x2="820" y1="100.66666666666666" y2="100.66666666666666" stroke="var(--grid)"/><text x="32" y="104.66666666666666" text-anchor="end">40</text><line x1="40" x2="820" y1="58.33333333333334" y2="58.33333333333334" stroke="var(--grid)"/><text x="32" y="62.33333333333334" text-anchor="end">50</text><line x1="40" x2="820" y1="16.0" y2="16.0" stroke="var(--grid)"/><text x="32" y="20.0" text-anchor="end">60</text><path d="M100,221.2 h150 v48.8 h-150 z" fill="var(--s1)" data-tip="Jul: New capabilities — 12 of 53"/><path d="M100,174.63333333333333 h150 v44.56666666666667 h-150 z" fill="var(--s2)" data-tip="Jul: Improve the core — 11 of 53"/><path d="M100,140.76666666666665 h150 v31.866666666666667 h-150 z" fill="var(--s3)" data-tip="Jul: Growth — 8 of 53"/><path d="M100,94.19999999999999 h150 v44.56666666666667 h-150 z" fill="var(--s4)" data-tip="Jul: Platform &amp; scale — 11 of 53"/><path d="M100,92.19999999999999 v-42.56666666666667 a4,4 0 0 1 4,-4 h142 a4,4 0 0 1 4,4 v42.56666666666667 z" fill="var(--s5)" data-tip="Jul: Keep the lights on — 11 of 53"/><text class="val" x="175.0" y="39.63333333333332" text-anchor="middle">53</text><text x="175.0" y="290" text-anchor="middle">Jul 2026</text><path d="M360,229.66666666666666 h150 v40.333333333333336 h-150 z" fill="var(--s1)" data-tip="Aug: New capabilities — 10 of 37"/><path d="M360,200.03333333333333 h150 v27.633333333333333 h-150 z" fill="var(--s2)" data-tip="Aug: Improve the core — 7 of 37"/><path d="M360,157.7 h150 v40.333333333333336 h-150 z" fill="var(--s4)" data-tip="Aug: Platform &amp; scale — 10 of 37"/><path d="M360,155.7 v-38.333333333333336 a4,4 0 0 1 4,-4 h142 a4,4 0 0 1 4,4 v38.333333333333336 z" fill="var(--s5)" data-tip="Aug: Keep the lights on — 10 of 37"/><text class="val" x="435.0" y="107.36666666666665" text-anchor="middle">37</text><text x="435.0" y="290" text-anchor="middle">Aug 2026</text><path d="M620,233.9 h150 v36.1 h-150 z" fill="var(--s1)" data-tip="Sep: New capabilities — 9 of 10"/><path d="M620,231.9 v-0.2333333333333334 a4,4 0 0 1 4,-4 h142 a4,4 0 0 1 4,4 v0.2333333333333334 z" fill="var(--s5)" data-tip="Sep: Keep the lights on — 1 of 10"/><text class="val" x="695.0" y="221.66666666666669" text-anchor="middle">10</text><text x="695.0" y="290" text-anchor="middle">Sep 2026</text><line x1="40" x2="820" y1="270" y2="270" stroke="var(--rule)"/></svg></figure>
+<details><summary>Table view</summary><table><thead><tr><th>Work type</th><th class=n>Jul</th><th class=n>Aug</th><th class=n>Sep</th></tr></thead><tbody><tr><td>New capabilities</td><td class=n>12</td><td class=n>10</td><td class=n>9</td></tr><tr><td>Improve the core</td><td class=n>11</td><td class=n>7</td><td class=n>0</td></tr><tr><td>Growth</td><td class=n>8</td><td class=n>0</td><td class=n>0</td></tr><tr><td>Platform &amp; scale</td><td class=n>11</td><td class=n>10</td><td class=n>0</td></tr><tr><td>Keep the lights on</td><td class=n>11</td><td class=n>10</td><td class=n>1</td></tr><tr><td><b>Total</b></td><td class=n><b>53</b></td><td class=n><b>37</b></td><td class=n><b>10</b></td></tr></tbody></table></details>
+<p>Every work type except new capabilities stopped closing issues before the quarter ended:</p>
+<ul>
+<li><b>Growth</b> closed 8 issues, all in July. The last one was Jul 22.</li>
+<li><b>Improve the core</b> closed nothing after Aug 21.</li>
+<li><b>Platform &amp; scale</b> closed nothing after Aug 30. <b>Keep the lights on</b> closed nothing after Sep 2.</li>
+<li><b>New capabilities (Dispatch Agent)</b> kept a steady pace all quarter: 12 / 10 / 9 issues.</li>
+</ul>
+<p>The export has only Done issues, with no in-progress, backlog, or cancelled ones. That means we can’t tell whether the other teams stopped, moved to Dispatch Agent, or are carrying open work. The KTLO drop needs a check of its own: either upkeep demand fell or upkeep is no longer being tracked.</p>
+<p class="small muted">Also worth checking: 6 issues are dated Jul 1, the first day of the quarter, more than on any other day. One of them (NEW-31) is out of sequence with the rest of its series. That could mean a bulk close or carry-over from Q2, which would push the July count up.</p>
+
+<h2>Dispatch Agent (AI feature)</h2>
+<p>Dispatch Agent is the only AI feature listed at intake. It got all 31 new-capability issues in Q3 and was the only area still shipping in September. Eval set <b>v14</b> is named, but no eval scores, regression results, or cost or latency figures were provided. We can show how much work went into it, but not whether its quality improved.</p>
+
+<h2>What this update can’t tell you yet</h2>
+<p>These intake fields were empty, or have no connected source. They’re listed so the gaps are visible rather than papered over. <b>Owner: the VP Engineering, by Q4.</b></p>
+<table class="gap"><tbody><tr><td>Objectives & key results</td><td>Whether Q3 work moved any company outcome. The tracker tags 78 issues to “Grow ARR to $50M”, but no objective, baseline, or target was given at intake, so this update can’t say whether ARR moved.</td></tr><tr><td>North-star metric</td><td>No metric, definition, target, or owner was provided.</td></tr><tr><td>Strategy & non-goals</td><td>Without a stated policy, the 31 / 18 / 8 / 21 / 22 mix can’t be judged as on-plan or off-plan.</td></tr><tr><td>Investment plan</td><td>No planned allocation by work type or product line, so there’s nothing to compare the actual mix against.</td></tr><tr><td>Delivery commitments & dates</td><td>No commitments or delivery ranges. Every exported issue is already Done, so there’s no in-flight or backlog work to forecast from.</td></tr><tr><td>Dispatch Agent quality</td><td>Eval set v14 is named, but no eval results were provided. AI quality, regressions, and cost are unknown.</td></tr><tr><td>Risks, bets, decisions, asks</td><td>None were recorded, so this update raises no decisions for leadership.</td></tr><tr><td>Reliability, incidents, people</td><td>No incident, on-call, hiring, or attrition source is connected.</td></tr></tbody></table>
+
+<h2>Next steps</h2>
+<ol>
+<li><b>Explain the Q3 drop</b> in Growth, Improve-the-core, Platform, and KTLO completions. Re-export Linear with all statuses (in progress, backlog, cancelled) and check whether people were moved onto Dispatch Agent.</li>
+<li><b>Give issues real estimates</b>, or add cycle time, so next quarter’s mix reflects effort and not just issue count.</li>
+<li><b>Set objectives with baselines and targets</b>, including whether “Grow ARR to $50M” is the company goal, plus a north-star metric and an investment plan, so the next update can report outcomes against plan.</li>
+<li><b>Connect Dispatch Agent eval results</b> (v14) so AI quality is reported alongside delivery.</li>
+</ol>
+<p class="small muted">Owner for all four: the VP Engineering, Q4.</p>
+
+<footer>Source: Linear export (100 issues, completed Jul 1–Sep 26 2026). Intake answers from the CPTO. Data as of 2026-09-30. Shares are rounded and may not sum to exactly 100%. The board version is board.html.</footer>
+</main><div class="tip" id="tip" role="tooltip"></div><script>
+(function(){var t=document.getElementById('tip');document.querySelectorAll('[data-tip]').forEach(function(el){
+el.addEventListener('mousemove',function(ev){t.textContent=el.getAttribute('data-tip');t.style.opacity=1;
+var x=ev.clientX+12,y=ev.clientY+12;if(x+t.offsetWidth>innerWidth-8)x=ev.clientX-t.offsetWidth-12;t.style.left=x+'px';t.style.top=y+'px';});
+el.addEventListener('mouseleave',function(){t.style.opacity=0;});});})();
+</script></body></html>

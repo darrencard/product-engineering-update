@@ -1,0 +1,76 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Kestrel Labs — Board summary, Q3 2026</title><style>
+:root{color-scheme:light;--page:#f9f9f7;--surface:#fcfcfb;--ink:#0b0b0b;--ink2:#52514e;--muted:#898781;--grid:#e1e0d9;--axis:#c3c2b7;
+--border:rgba(11,11,11,.10);--s1:#2a78d6;--s1wash:rgba(42,120,214,.10);--neg:#e34948;--good:#0ca30c;--goodtxt:#006300;--warn:#fab219;--crit:#d03b3b;--crittxt:#b02a2a;--warntxt:#8a5a00}
+@media (prefers-color-scheme:dark){:root:where(:not([data-theme="light"])){color-scheme:dark;--page:#0d0d0d;--surface:#1a1a19;--ink:#fff;--ink2:#c3c2b7;--muted:#898781;
+--grid:#2c2c2a;--axis:#383835;--border:rgba(255,255,255,.10);--s1:#3987e5;--s1wash:rgba(57,135,229,.14);--neg:#e66767;--goodtxt:#0ca30c;--crittxt:#e66767;--warntxt:#fab219}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--ink);font:15px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:880px;margin:0 auto;padding:40px 24px 80px}
+header .meta{color:var(--ink2);font-size:13px;margin:0}
+h1{font-size:28px;line-height:1.2;margin:4px 0 6px;font-weight:650}
+h2{font-size:19px;margin:44px 0 10px;font-weight:650;padding-top:16px;border-top:1px solid var(--grid)}
+h3{font-size:15px;margin:22px 0 6px;font-weight:650}
+p,li{color:var(--ink)} .sub{color:var(--ink2)} .muted{fill:var(--muted);color:var(--muted)}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:18px 20px;margin:14px 0}
+.tldr li{margin:6px 0}
+.decision{border-left:4px solid var(--s1)}
+.decision dl{display:grid;grid-template-columns:130px 1fr;gap:6px 14px;margin:8px 0 0}
+.decision dt{color:var(--ink2)} .decision dd{margin:0}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:14px 0}
+.tile{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 16px}
+.tile .label{font-size:13px;color:var(--ink2)} .tile .value{font-size:28px;font-weight:600;line-height:1.2;margin:4px 0}
+.tile .foot{font-size:13px;color:var(--ink2)}
+.hero{font-size:52px;font-weight:600;line-height:1.05}
+table{border-collapse:collapse;width:100%;font-size:14px;margin:8px 0}
+th,td{text-align:left;padding:7px 10px 7px 0;border-bottom:1px solid var(--grid);vertical-align:top}
+th{color:var(--ink2);font-weight:600;font-size:13px} td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.badge{display:inline-flex;gap:5px;align-items:center;font-size:12.5px;font-weight:600;white-space:nowrap;color:var(--ink)}
+.badge span{display:inline-grid;place-items:center;width:17px;height:17px;border-radius:50%;font-size:10px;color:#fff}
+.badge.good span{background:var(--good)} .badge.critical span{background:var(--crit)} .badge.warning span{background:var(--warn);color:#0b0b0b}
+.delta{font-weight:600;font-size:13px;white-space:nowrap} .delta.up{color:var(--goodtxt)} .delta.down{color:var(--crittxt)} .delta.flat{color:var(--ink2)}
+svg{width:100%;height:auto;display:block;overflow:visible}
+svg text{font:12px system-ui,-apple-system,"Segoe UI",sans-serif} .tick{fill:var(--muted)} .cat{fill:var(--ink2);font-size:13px}
+.val{fill:var(--ink);font-weight:600} .reflabel{fill:var(--ink2)}
+.grid{stroke:var(--grid);stroke-width:1} .axis{stroke:var(--axis);stroke-width:1} .conn{stroke:var(--axis);stroke-width:1}
+.ref{stroke:var(--ink2);stroke-width:1.5;stroke-dasharray:4 3} .plan{stroke:var(--ink);stroke-width:2.5;stroke-linecap:round}
+.m-total{fill:var(--s1)} .m-up{fill:var(--s1);opacity:.55} .m-down{fill:var(--neg)}
+.hit{cursor:default;outline:none} .hit:hover path,.hit:focus path{filter:brightness(1.12)}
+.legend{display:flex;flex-wrap:wrap;gap:16px;font-size:12.5px;color:var(--ink2);margin:6px 0 0}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.sw{display:inline-block;width:12px;height:12px;border-radius:3px} .sw.m-total{background:var(--s1)} .sw.m-up{background:var(--s1);opacity:.55}
+.sw.m-down{background:var(--neg)} .sw.ref{height:0;width:16px;border-top:2px dashed var(--ink2);border-radius:0} .sw.planline{width:3px;height:14px;background:var(--ink);border-radius:2px}
+details{margin-top:8px;font-size:13px} summary{cursor:pointer;color:var(--ink2)}
+#tip{position:fixed;pointer-events:none;background:var(--surface);color:var(--ink);border:1px solid var(--border);box-shadow:0 4px 16px rgba(0,0,0,.12);
+border-radius:8px;padding:7px 10px;font-size:13px;max-width:300px;opacity:0;transition:opacity .08s;z-index:10}
+.note{font-size:13px;color:var(--ink2)} .src{font-size:12px;color:var(--muted)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px} @media (max-width:700px){.two{grid-template-columns:1fr}}
+@media print{body{background:#fff} .card,.tile{break-inside:avoid} details{display:none}}
+</style></head><body><main><header><p class="meta">Kestrel Labs · Product &amp; Engineering · board summary</p>
+<h1>Q3 2026: the agent is working, and activation and integrations are now the constraints</h1>
+<p class="meta">1 Jul – 30 Sep 2026 · data as of 2026-09-30</p></header><div class="tiles">
+<div class="tile"><div class="label">ARR, September (billing)</div><div class="value">$10.91M</div><div class="foot">Plan $11.0M · 22% of the $50M objective</div></div>
+<div class="tile"><div class="label">Loads cleared per week</div><div class="value">23.1K</div><div class="foot">Target 22K · <span class="delta up">+4.7K</span> vs Q2</div></div>
+<div class="tile"><div class="label">Activation</div><div class="value">41%</div><div class="foot">Target 50% · <span class="badge critical"><span aria-hidden="true">✕</span> Missed</span></div></div>
+<div class="tile"><div class="label">Agent task success</div><div class="value">86%</div><div class="foot">Target 90% · <span class="delta up">+4 pts</span> vs v13</div></div>
+</div><div class="card"><h3 style="margin-top:0">What happened</h3><ul>
+<li><b>The strategy is working where we've applied it.</b> Every one of the 22 won deals cited the agent clearing exceptions. Loads cleared with no manual touch rose 26% and beat target. Cost per agent task fell 20%.</li>
+<li><b>ARR was $10.91M, against an $11.0M plan.</b> We added $0.90M from new accounts and $0.74M from expansion. We lost $1.11M when 4 accounts churned. Net revenue retention was 96% for the quarter.</li>
+<li><b>Activation missed</b> at 41% against 50%. Guided activation shipped but hasn't shown a lift yet, and self-serve carrier onboarding slipped.</li>
+<li><b>Integration is the open gap.</b> It was the top reason we lost deals (11 of 17) and the top support theme (30 of 55 tickets).</li>
+<li>We shipped 6 of 7 commitments. R&amp;D spend was $4.20M, on plan. Inference spend ran 27% over plan.</li></ul></div><div class="card decision"><h3 style="margin-top:0">Decision: Approve a per-load pricing pilot</h3><dl>
+<dt>Options</dt><dd>Pilot with 10 customers, or wait a quarter</dd><dt>Recommendation</dt><dd><b>Run the pilot with 10 customers.</b> This tests per-load pricing, which is central to the strategy. Price was the reason in 6 lost deals this quarter.</dd>
+<dt>Deadline</dt><dd>4 Nov 2026 (passed). If it has not been decided yet, it is overdue</dd></dl></div><h2>Risks</h2><ul>
+<li><b>Model provider concentration</b> (medium likelihood, high impact). One provider carries most inference spend. Mitigation: a routing layer across two providers, due Dec 2026.</li>
+<li><b>Activation.</b> If the guided-activation test shows no lift, the 50% target slips again.</li>
+<li><b>Reliability.</b> Change failure rate is 7.7% against a target under 5%. Time to restore is healthy at 41 minutes.</li></ul>
+<h2>Q4 focus</h2><ol><li>Lift activation toward 50%.</li><li>Push agent task success toward 90%.</li><li>Scope an integration bet.</li><li>Bring change failure rate back under 5%.</li></ol>
+<p class="note">Data caveats. The warehouse reports 21.4K loads/week, against 23.1K in PostHog. The finance close reports $10.10M ARR, against $10.91M in billing. We are reporting the system of record for each. Both gaps are being reconciled by the VP Engineering in Q4. The full leadership update has the details.</p></main><div id="tip" role="tooltip"></div><script>
+(()=>{const t=document.getElementById('tip');
+const show=(el,x,y)=>{t.textContent=el.dataset.tip;t.style.opacity=1;const r=t.getBoundingClientRect();
+t.style.left=Math.min(x+14,innerWidth-r.width-8)+'px';t.style.top=Math.max(8,y-r.height-10)+'px'};
+document.querySelectorAll('[data-tip]').forEach(el=>{
+el.addEventListener('mousemove',e=>show(el,e.clientX,e.clientY));
+el.addEventListener('mouseleave',()=>t.style.opacity=0);
+el.addEventListener('focus',()=>{const b=el.getBoundingClientRect();show(el,b.left+b.width/2,b.top)});
+el.addEventListener('blur',()=>t.style.opacity=0);});})();
+</script></body></html>

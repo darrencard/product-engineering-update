@@ -1,0 +1,46 @@
+{
+ "id": "pair-BA-conflict_resolved-1-21",
+ "fixture": "conflict_resolved",
+ "kind": "pair",
+ "matchup": "BA",
+ "x": "runs/A/conflict_resolved/1",
+ "y": "runs/B/conflict_resolved/1",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "X",
+    "reason": "X's figures all recompute correctly ($10.91M ARR, churn $1.11M, NRR 96.4%, R&D total $4,200K at -1.1%, $2.0K per engineer), while Y annualizes $10.3M quarterly revenue as $40.9M (\u00d74 gives $41.2M) and says 7 requests were 'linked to 3 issues' although KES-388 has no link."
+   },
+   "no_invented_numbers": {
+    "winner": "tie",
+    "reason": "Neither invents anything material: X's integration bet and the churn-onboarding pattern are labelled as its own reading, and Y's 'Activation: 5 more periods' is labelled as a projection; X's '24 Nov' prepared date is the only unsourced detail."
+   },
+   "speed_with_quality": {
+    "winner": "tie",
+    "reason": "Both put deploys 3\u21924 and lead time 52h\u219238h next to change failure 5.1%\u21927.7% and review time 9h\u219213h; X says outright 'throughput went up while quality went down', and Y labels its table 'the pair for every speed metric'."
+   },
+   "gaps_shown": {
+    "winner": "X",
+    "reason": "X has a data-notes section that sets out Stripe $10.91M against finance $10.1M and PostHog 23.1K against warehouse 21.4K, shows the effect of each (an 8% ARR shortfall, the north star missed by 600) and names the VP Engineering as owner for Q4; Y puts these conflicts only in ledger rows L09/L14."
+   },
+   "board_cut_usable": {
+    "winner": "X",
+    "reason": "X's board cut leads with the answer and the pricing-pilot ask, flags that the 4 Nov deadline has passed, and covers the $1.11M churn and the ARR shortfall against plan; Y's 8-slide cut repeats template boilerplate ('18 of 19 slides'), leaves out churn and the ARR plan, and shows an R&D-to-revenue figure (40.8%) beside a 'check before the board sees this' warning."
+   }
+  },
+  "overall": {
+   "winner": "X",
+   "reason": "X is accurate, states the two source conflicts and the passed deadline openly with owners, and shows the board the real story: churn of $1.11M outweighing new business, along with the activation and integration gaps. Y is mostly correct but has small figure errors, keeps its gaps in an appendix, and has a board cut that omits churn and still carries unresolved warnings, so it is not ready to send."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 3008,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 37000,
+  "cost_usd": 0.3566466,
+  "num_turns": 2,
+  "duration_ms": 27245
+ }
+}

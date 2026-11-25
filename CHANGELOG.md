@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- **Ablation eval, third condition.** The eval now also runs Claude with the skill installed (condition C), loaded with `--plugin-dir`, and judges C against Claude alone, C against the pipeline, and the pipeline against Claude alone. Claude and Claude-with-skill runs read project settings only, so no user output style reaches them. On v0.8.0 and the 6 synthetic fixtures, the judge preferred Claude alone to Claude with the skill in 36 of 36 judgments, mostly because the skill holds the board cut back without a sign-off in an unattended run. Claude with the skill made 0 arithmetic errors against 2 for Claude alone. The skill's behaviour is unchanged. Results: `docs/ablation.md`.
 - **Ablation eval.** `evals/ablation/` compares the skill's pipeline with Claude alone on the same fixture data, with a blind judge, noise runs and mechanical checks. It calls the model, so it stays out of the unit tests and CI. On the 6 synthetic fixtures the judge preferred Claude alone in 36 of 36 judgments. The skill made 0 arithmetic errors and Claude alone 1 in 1,049 checked figures. The skill's behaviour is unchanged. Results and limits: `docs/ablation.md`.
 
 ## 0.8.0 (2026-11-24)
