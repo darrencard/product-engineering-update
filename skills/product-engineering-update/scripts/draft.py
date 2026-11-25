@@ -67,6 +67,33 @@ def load(path: Path) -> Json:
         return json.load(f)
 
 
+MONTHS = {m: i + 1 for i, m in enumerate(("jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"))}
+
+
+def due_date(text: object) -> datetime.date | None:
+    """The last day a free-text due date allows: "2026-11-04", "4 Nov 2026", "Nov 4, 2026" or "Nov 2026" (end of
+    month). Anything vaguer, such as "Q4", gives None, so it is never called overdue."""
+    if not isinstance(text, str):
+        return None
+    t = text.strip().lower().replace(",", "")
+    try:
+        return datetime.date.fromisoformat(t)
+    except ValueError:
+        pass
+    words = t.split()
+    try:
+        if len(words) == 3 and words[1][:3] in MONTHS:
+            return datetime.date(int(words[2]), MONTHS[words[1][:3]], int(words[0]))
+        if len(words) == 3 and words[0][:3] in MONTHS:
+            return datetime.date(int(words[2]), MONTHS[words[0][:3]], int(words[1]))
+        if len(words) == 2 and words[0][:3] in MONTHS:
+            year, month = int(words[1]), MONTHS[words[0][:3]]
+            return datetime.date(year + month // 12, month % 12 + 1, 1) - datetime.timedelta(days=1)
+    except ValueError:
+        return None
+    return None
+
+
 def needs(slide: Json) -> list[Json]:
     """The data_needed items a slide holds directly, in its card blocks. Samples are not searched."""
     return [item for b in slide["blocks"] if b.get("type") == "cards" for item in b.get("items", []) if item.get("type") == "data_needed"]
@@ -275,6 +302,13 @@ class Draft:
         if check:
             checks.append(f"{check['text']} Confirm which is right before reading any ratio to revenue.[[{check['ledger']}]]")
             refs.append(check["ledger"])
+        # A deadline that has passed by the day the deck is drafted, which can be later than the data date.
+        today = max(datetime.date.fromisoformat(self.intake["as_of"]), datetime.date.today())
+        for kind, items, name, when in (("Decision", "decisions", "ask", "deadline"), ("Risk", "risks", "risk", "due")):
+            for item in self.intake.get(items) or []:
+                due = due_date(item.get(when))
+                if due and due < today:
+                    checks.append(f"{kind} \u201c{item[name]}\u201d was due {item[when]}, which has passed. Settle it now or set a new date.")
         missing = [
             f"{s['nav']}: {item['text']} Owner {item['owner']}, due {item['due']}."
             for s in self.deck["slides"]
