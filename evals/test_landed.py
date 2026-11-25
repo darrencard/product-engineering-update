@@ -782,8 +782,15 @@ class GapRegister(unittest.TestCase):
         self.assertTrue(gaps, "the fixture has at least one gap")
         register = json.dumps(slide(deck, "01"))
         for nav, item in gaps:
-            self.assertIn(json.dumps(f"{nav}: {item['text']} Owner {item['owner']}, due {item['due']}.")[1:-1], register)
+            text = draft.HELD_CONFLICT.sub("", item["text"]).strip()
+            if text:
+                self.assertIn(json.dumps(f"{nav}: {text} Owner: {item['owner']}. Due: {item['due']}.")[1:-1], register)
         self.assertNotIn("Not reported", register)
+
+    def test_a_conflict_on_the_check_card_is_not_listed_again_as_a_gap(self) -> None:
+        deck, _ = run_fixture("conflicting", self.work)
+        blocks = slide(deck, "01")["blocks"]
+        self.assertNotIn("two sources disagree", json.dumps(blocks[-1]))
 
     def test_a_figure_held_for_disagreeing_sources_leads_slide_1(self) -> None:
         deck, _ = run_fixture("conflicting", self.work)
@@ -804,9 +811,25 @@ class GapRegister(unittest.TestCase):
         path.write_text(json.dumps(intake), encoding="utf-8")
         deck, _ = run_fixture("complete", self.work / "second", base)
         self.assertTrue(all(i["owner"] == "Priya Shah, finance" for i in draft.needs(slide(deck, sid))))
-        self.assertIn("Owner Priya Shah, finance", json.dumps(slide(deck, "01")))
+        self.assertIn("Owner: Priya Shah, finance.", json.dumps(slide(deck, "01")))
         others = [i["owner"] for s in deck["slides"] if s["kind"] == "slide" and s["id"] not in (sid, "01") for i in draft.needs(s)]
         self.assertTrue(all(o == intake["gap_owner"] for o in others))
+
+    def test_a_decision_past_its_deadline_is_flagged_on_slide_1(self) -> None:
+        deck, _ = run_fixture("conflicting", self.work)
+        first = json.dumps(slide(deck, "01")["blocks"][0], ensure_ascii=False)
+        self.assertIn("\u201cApprove a per-load pricing pilot\u201d was due 4 Nov 2026", first)
+
+    def test_due_dates_are_read_only_when_they_name_a_day_or_a_month(self) -> None:
+        import datetime as dt
+
+        self.assertEqual(draft.due_date("4 Nov 2026"), dt.date(2026, 11, 4))
+        self.assertEqual(draft.due_date("Nov 4, 2026"), dt.date(2026, 11, 4))
+        self.assertEqual(draft.due_date("2026-11-04"), dt.date(2026, 11, 4))
+        self.assertEqual(draft.due_date("Dec 2026"), dt.date(2026, 12, 31))
+        self.assertEqual(draft.due_date("Feb 2027"), dt.date(2027, 2, 28))
+        for vague in ("Q4", "next quarter", "", None, "31 Feb 2026"):
+            self.assertIsNone(draft.due_date(vague))
 
 
 if __name__ == "__main__":
