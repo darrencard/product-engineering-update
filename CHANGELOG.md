@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- **Lead time is named for what it measures.** Pull request data runs from open to merge, not from change to release, so the metric is now "Time to merge (stand-in for lead time)", with a definition that says it understates lead time. An intake's "Lead time for change" range still applies, but the stand-in is never marked landed against it. The 0.9.1 mini eval judge caught the old label.
+- 198 tests.
+
 ## 0.9.1 (2026-11-25)
 
 - **A shorter board page.** The board page keeps the headline, the open questions on the data, what happened and the decisions, plus one line on how many gaps there are and where the detail is. The full gap list moves to the appendix, ahead of the detail slides and the ledger. The 0.9.0 mini eval judge said the page still repeated too much.

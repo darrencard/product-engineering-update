@@ -46,7 +46,7 @@ TOP_REASONS = 5
 DEFINITIONS = {
     "traced_pct": "Share of the team's estimated work that is tied to a company objective.",
     "deploys_per_week": "How many times a week new code was released to customers.",
-    "lead_time": "Typical (median) time from a code change being proposed to it being accepted.",
+    "lead_time": "Typical (median) time from a pull request being opened to it being merged. It stops at merge, not at release, so it understates lead time.",
     "change_failure_rate": "Share of releases that caused a problem in production.",
     "troubled_deploy_rate": ("A stand-in for change failure rate: share of releases that were rolled back, or after which the live site logged a new error."),
     "review_time": "Typical (median) time a code change spent in review by a colleague.",
@@ -346,7 +346,7 @@ def source_control(r: Run) -> None:
 
     now, before = stats(False), stats(True)
     r.metric("deploys_per_week", "Deploys per week", now["deploys"], before["deploys"], "per week", src)
-    r.metric("lead_time", "Lead time for change", now["lead"], before["lead"], "h", src, higher_is_better=False)
+    r.metric("lead_time", LEAD_TIME_LABEL, now["lead"], before["lead"], "h", src, higher_is_better=False)
     r.metric("change_failure_rate", "Change failure rate", now["cfr"], before["cfr"], "%", src, higher_is_better=False)
     r.metric("review_time", "Pull request review time", now["review"], before["review"], "h", src, higher_is_better=False)
     r.metric("rework_rate", "Rework rate", now["rework"], before["rework"], "%", src, higher_is_better=False)
@@ -455,6 +455,10 @@ def analytics(r: Run) -> None:
         value, src = values[0]
         r.metric("analytics:" + name, name, value, prior, unit, src, "Verified", definition=described.get(name))
         r.extra["analytics_metrics"].append("analytics:" + name)
+
+
+# Pull request data measures open to merge, not change to release, so it is named for what it is.
+LEAD_TIME_LABEL = "Time to merge (stand-in for lead time)"
 
 
 def per_year(r: Run) -> float:

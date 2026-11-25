@@ -1006,5 +1006,21 @@ class Mini090Causes(unittest.TestCase):
         self.assertEqual(validate.NO_RANGE, draft.NO_RANGE)
 
 
+class LeadTimeStandIn(unittest.TestCase):
+    """Pull request data measures open to merge, not lead time; the 0.9.1 mini eval judge caught the label."""
+
+    def test_it_is_named_for_what_it_measures_and_never_called_landed(self) -> None:
+        work = Path(tempfile.mkdtemp())
+        self.addCleanup(shutil.rmtree, work)
+        deck, _ = run_fixture("complete", work)
+        rows = [r for b in slide(deck, "09")["blocks"] if b["type"] == "scorecard" for r in b["rows"] if "metric" in r]
+        merge = next(r for r in rows if r["metric"].startswith("Time to merge"))
+        self.assertEqual(merge["metric"], "Time to merge (stand-in for lead time)")
+        self.assertEqual(merge["target"], "under 40h", "the intake's lead time range still applies")
+        self.assertNotEqual(merge["status"], "landed")
+        self.assertNotIn('"Lead time for change"', json.dumps(deck["slides"]))
+        self.assertEqual(validate.check(deck)["errors"], [])
+
+
 if __name__ == "__main__":
     unittest.main()
