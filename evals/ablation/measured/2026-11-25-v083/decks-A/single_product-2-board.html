@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kestrel Labs: Board update, 2026-Q3</title>
+<style>
+:root{
+  color-scheme:light;
+  --page:#f9f9f7; --surface:#fcfcfb; --ink:#0b0b0b; --ink2:#52514e; --muted:#898781;
+  --grid:#e1e0d9; --axis:#c3c2b7; --border:rgba(11,11,11,.10);
+  --s1:#2a78d6; --s2:#eb6834;
+  --good:#0ca30c; --good-text:#006300; --warn:#fab219; --crit:#d03b3b; --crit-text:#b02a2a;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    color-scheme:dark;
+    --page:#0d0d0d; --surface:#1a1a19; --ink:#fff; --ink2:#c3c2b7; --muted:#898781;
+    --grid:#2c2c2a; --axis:#383835; --border:rgba(255,255,255,.10);
+    --s1:#3987e5; --s2:#d95926; --good-text:#0ca30c; --crit-text:#e66767;
+  }
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--ink);font:15px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:960px;margin:0 auto;padding:32px 20px 64px}
+h1{font-size:28px;margin:0 0 4px}
+h2{font-size:19px;margin:40px 0 10px;padding-top:8px;border-top:1px solid var(--grid)}
+h3{font-size:15px;margin:20px 0 6px}
+p{margin:6px 0 10px}
+.meta{color:var(--ink2);font-size:13px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px 18px;margin:12px 0}
+.tldr li{margin:4px 0}
+table{width:100%;border-collapse:collapse;font-size:14px;margin:8px 0}
+th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--grid);vertical-align:top}
+th{color:var(--ink2);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.03em}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:12px 0}
+.kpi{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 16px}
+.kpi .l{font-size:13px;color:var(--ink2)}
+.kpi .v{font-size:30px;font-weight:650;margin:2px 0}
+.kpi .d{font-size:13px;color:var(--ink2)}
+.st{display:inline-flex;align-items:center;gap:5px;font-weight:600;font-size:13px;white-space:nowrap}
+.st i{font-style:normal;display:inline-grid;place-items:center;width:16px;height:16px;border-radius:50%;font-size:11px;color:#fff}
+.ok{color:var(--good-text)} .ok i{background:var(--good)}
+.miss{color:var(--crit-text)} .miss i{background:var(--crit)}
+.watch{color:var(--ink2)} .watch i{background:var(--warn);color:#0b0b0b}
+.src{color:var(--muted);font-size:12px}
+.callout{border-left:4px solid var(--warn);padding:10px 14px;background:var(--surface);border-radius:0 8px 8px 0;margin:12px 0}
+.legend{display:flex;gap:16px;font-size:13px;color:var(--ink2);margin:4px 0 6px}
+.legend span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px;background:var(--c)}
+#mix svg{width:100%;height:auto;display:block}
+#mix .tip{position:fixed;pointer-events:none;background:var(--ink);color:var(--surface);font-size:12px;padding:6px 8px;border-radius:6px;opacity:0;transition:opacity .1s}
+details summary{cursor:pointer;color:var(--ink2);font-size:13px}
+@media print{h2{break-after:avoid}.card,table{break-inside:avoid}}
+</style>
+</head>
+<body>
+<main>
+<h1>Board update: Product &amp; Engineering, 2026-Q3</h1>
+<p class="meta">Kestrel Labs · 1 Jul – 30 Sep 2026 · Data as of 30 Sep 2026 · Author: the CPTO · <b>Signed off: the CEO</b></p>
+
+<div class="kpis">
+  <div class="kpi"><div class="l">Loads cleared per week (north star)</div><div class="v">23,100</div>
+    <div class="d">Target 22K · up 25.5% from Q2 · <span class="st ok"><i>✓</i>Hit</span></div></div>
+  <div class="kpi"><div class="l">Activation</div><div class="v">41%</div>
+    <div class="d">Target 50% · up from 39% · <span class="st miss"><i>✕</i>Missed</span></div></div>
+  <div class="kpi"><div class="l">Q3 revenue (Finance close)</div><div class="v">$10.3M</div>
+    <div class="d">Plan $10.0M · <span class="st ok"><i>✓</i>+3%</span></div></div>
+</div>
+
+<h2>Decision requested</h2>
+<p><b>Approve a per-load pricing pilot with 10 customers</b> (the alternative is to wait a quarter). Management recommends the pilot. Per-load pricing is central to the strategy, and price was the reason for 6 of 17 lost deals.</p>
+<div class="callout">The original deadline was 4 Nov 2026 and has passed. The source files don't record whether the decision was made. Confirm the status before the meeting.</div>
+
+<h2>What happened</h2>
+<ul>
+<li><b>The agent is clearing more of the work.</b> 6 of 7 product commitments shipped, including multi-stop reroutes. Agent task success reached 86% on the latest eval set (target 90%), and cost per task fell 20%.</li>
+<li><b>Onboarding is the weak spot.</b> Activation missed target, and self-serve carrier onboarding didn't ship. All 4 accounts that churned this quarter had filed onboarding tickets.</li>
+<li><b>Integration is the main reason we lose deals.</b> "No TMS integration" caused 11 of 17 losses and accounts for 55% of support tickets. No current bet addresses it.</li>
+<li><b>Engineering ships faster, but quality slipped.</b> Deploys rose to 4 a week and lead time fell to 38h. Change failure rate rose to 7.7% (target under 5%). The VP Engineering owns the fix, due Q4.</li>
+<li><b>Spend:</b> R&amp;D came in on plan ($4.20M vs $4.245M). Inference ran 28% over plan ($612K vs $480K) as volume grew.</li>
+</ul>
+
+<h2>Top risk</h2>
+<p>One model provider carries most inference spend (likelihood medium, impact high). Mitigation: a routing layer across 2 providers, owned by the Platform lead, due Dec 2026.</p>
+
+<h2>Caveat on ARR</h2>
+<p>Progress toward the $50M ARR objective isn't stated here because the source systems disagree. Stripe sums to $10.9M ARR (net retention 96%), while Finance's $10.3M quarterly revenue implies about $41M a year. The two need reconciling before this figure is reported.</p>
+
+<h2>Next quarter</h2>
+<p>Two bets: push agent task success from 86% to 90% (stop if evals gain under 2 points by week 3), and lift activation from 41% to 50% (stop if a 2-week live test shows no lift). We stopped the carrier marketplace because it didn't serve the strategy.</p>
+<p class="meta" style="margin-top:32px">Full detail: Product &amp; Engineering update, 2026-Q3 (update.html). Board cut signed off by the CEO.</p>
+</main>
+</body>
+</html>

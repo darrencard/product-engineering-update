@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kestrel Labs: Product &amp; Engineering, Q3 2026 (Board)</title>
+<style>
+:root{color-scheme:light;--page:#f9f9f7;--surface:#fcfcfb;--ink:#0b0b0b;--ink2:#52514e;--grid:#e1e0d9;--border:rgba(11,11,11,.10);--good-text:#006300;--crit-text:#b02a2a;--warning:#fab219}
+@media (prefers-color-scheme:dark){:root{color-scheme:dark;--page:#0d0d0d;--surface:#1a1a19;--ink:#fff;--ink2:#c3c2b7;--grid:#2c2c2a;--border:rgba(255,255,255,.10);--good-text:#0ca30c;--crit-text:#e66767}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--ink);font:15px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:820px;margin:0 auto;padding:40px 24px 64px}
+h1{font-size:26px;margin:0 0 4px}
+h2{font-size:18px;margin:32px 0 10px;padding-top:14px;border-top:1px solid var(--grid)}
+.meta,.small{color:var(--ink2);font-size:13px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:12px 0}
+.tile{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 16px}
+.k{font-size:13px;color:var(--ink2)} .v{font-size:26px;font-weight:600;margin:2px 0} .s{font-size:13px;color:var(--ink2)}
+.st{font-weight:600;white-space:nowrap}
+.ok{color:var(--good-text)} .ok::before{content:"✓ "}
+.miss{color:var(--crit-text)} .miss::before{content:"✗ "}
+.unk{color:var(--ink2)} .unk::before{content:"? "}
+.card{background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--warning);border-radius:10px;padding:14px 18px;margin:12px 0}
+table{width:100%;border-collapse:collapse;font-size:14px;background:var(--surface)}
+th,td{text-align:left;padding:7px 10px;border-bottom:1px solid var(--grid);vertical-align:top}
+th{font-size:12.5px;color:var(--ink2);text-transform:uppercase;letter-spacing:.03em}
+.signoff{margin-top:36px;padding:12px 16px;border:1px solid var(--border);border-radius:10px;background:var(--surface);font-size:14px}
+</style>
+</head>
+<body>
+<main>
+<h1>Kestrel Labs: Product &amp; Engineering, Q3 2026</h1>
+<div class="meta">Board cut · 1 Jul to 30 Sep 2026 · Author: the CPTO · Data as of 30 Sep 2026</div>
+
+<h2 style="border-top:0">Headline</h2>
+<p>Customers are buying the agent: every Q3 win cites "Agent clears exceptions". But ARR is <b>$0.9M behind plan</b>. Churn of $1.1M outweighed expansion of $0.7M. Most lost deals cite missing TMS integration, and we have no plan item for it. We shipped 6 of 7 commitments, and two of the three outcome metrics we can measure are still short of target.</p>
+
+<div class="tiles">
+  <div class="tile"><div class="k">ARR</div><div class="v">$10.1M</div><div class="s">Plan $11.0M <span class="st miss">−$0.9M</span><br>Goal $50M</div></div>
+  <div class="tile"><div class="k">Net revenue retention</div><div class="v">96%</div><div class="s">4 churned · 15 expanded · 6 new</div></div>
+  <div class="tile"><div class="k">Loads cleared / week</div><div class="v">21.4K–23.1K</div><div class="s">Target 22K <span class="st unk">Sources disagree</span></div></div>
+  <div class="tile"><div class="k">Agent task success</div><div class="v">86%</div><div class="s">Up from 82% · target 90%</div></div>
+  <div class="tile"><div class="k">Activation</div><div class="v">41%</div><div class="s">Up from 39% · target 50%</div></div>
+  <div class="tile"><div class="k">Weekly active dispatchers</div><div class="v">6,120</div><div class="s">Target 6,000 <span class="st ok">Met</span></div></div>
+</div>
+
+<div class="card">
+<b>Decision: approve a per-load pricing pilot</b><br>
+Options: pilot with 10 customers, or wait a quarter. <b>Recommendation:</b> run the pilot with 10 customers.<br>
+The deadline was 4 Nov 2026 and has passed. No outcome is recorded in the source data, so management needs to confirm the status. Price was the reason for 6 of 17 Q3 losses.
+</div>
+
+<h2>What we learned</h2>
+<ul>
+  <li><b>Win/loss:</b> we won 22 of 39 deals (56%). 11 losses cited no TMS integration and 6 cited price. Integration errors are also the largest support theme (30 of 55 tickets).</li>
+  <li><b>Churn:</b> four accounts ($1.11M ARR) left, and all of them had raised onboarding tickets. The self-serve carrier onboarding work slipped and didn't ship this quarter.</li>
+  <li><b>Cost:</b> R&amp;D spend was on plan ($4.20M vs $4.25M). Inference cost ran <b>27.5% over plan</b> ($612K vs $480K), even though cost per agent task fell 20%.</li>
+  <li><b>Engineering:</b> we're shipping faster (4 deploys a week, up from 3), but more releases are failing (7.7% vs a 5% ceiling).</li>
+</ul>
+
+<h2>Risk</h2>
+<table>
+<tr><th>Risk</th><th>Likelihood / impact</th><th>Mitigation</th><th>Due</th></tr>
+<tr><td>One model provider carries most inference spend</td><td>Medium / High</td><td>Routing layer across 2 providers (Platform lead)</td><td>Dec 2026</td></tr>
+</table>
+
+<h2>Caveats on the numbers</h2>
+<p class="small">Our two sources for loads cleared per week disagree: 23,100 in product analytics and 21,400 in the data warehouse. We aren't reporting the 22K target as met until they're reconciled. ARR is taken from finance close ($10.1M). Stripe billing shows $10.91M, and the gap hasn't been reconciled. The VP Engineering owns both reconciliations, due Q4.</p>
+
+<div class="signoff"><b>Sign-off:</b> the CEO</div>
+</main>
+</body>
+</html>

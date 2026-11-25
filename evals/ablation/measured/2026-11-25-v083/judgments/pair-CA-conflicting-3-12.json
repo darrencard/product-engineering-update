@@ -1,0 +1,46 @@
+{
+ "id": "pair-CA-conflicting-3-12",
+ "fixture": "conflicting",
+ "kind": "pair",
+ "matchup": "CA",
+ "x": "runs/C/conflicting/3",
+ "y": "runs/A/conflicting/3",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "Y",
+    "reason": "Every figure I recomputed in both updates is correct, including ARR $10.91M vs $10.10M, NRR 96.4%, CFR 7.7% (4/52) and capacity 31/18/8/21/22. But X's slide 10 says incident data is missing while slide 9 uses incident data for time to restore. X also reports R&D at 40.8% of revenue without questioning the $10.3M revenue line, which Y rightly flags because it is higher than $10.1M ARR."
+   },
+   "no_invented_numbers": {
+    "winner": "tie",
+    "reason": "Every number in both updates traces to the data. X's 'Activation: 5 more periods' is labelled as a projection. Y labels its causal guesses (inference volume, KTLO hurting onboarding) and its added churn and integration risks as 'raised by this analysis' or unconfirmed."
+   },
+   "speed_with_quality": {
+    "winner": "tie",
+    "reason": "Both pair deploys rising from 3 to 4 a week and lead time of 38h with change failure rate rising to 7.7% and review time to 13h, and neither presents speed alone as good news. Y also adds rework rising from 11.7% to 15.0%."
+   },
+   "gaps_shown": {
+    "winner": "Y",
+    "reason": "Both surface the north star disagreement (23,100 vs 21,400) and the ARR disagreement with an owner. Y also flags the implausible $10.3M revenue line, the missing churn reasons for A037\u2013A040, the thin September tracker export (10 items) and the unlinked KES-388 requests, and it states openly that it treats finance close as the book of record. X wrongly lists incident data as missing."
+   },
+   "board_cut_usable": {
+    "winner": "Y",
+    "reason": "Y's board cut is one page that leads with ARR $10.1M against an $11.0M plan, the churn of the four largest accounts and the overdue pricing decision. X's board cut runs to 8 slides plus a ledger, leaves the internal instruction 'Name the source that owns it' on slide 1, and on slide 18 still says 'one decision for you today' with the 4 Nov deadline shown as if it had not passed."
+   }
+  },
+  "overall": {
+   "winner": "Y",
+   "reason": "Y's figures are all correct, and it catches real problems X misses, such as the revenue line being higher than ARR, churn concentrated in the four largest accounts, and integrations driving 11 of 17 losses. Its board cut is short, leads with the answer and the ask, and could go to the board as it is, while X's cut contains leftover internal instructions and a contradiction about the decision deadline."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 3325,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 36832,
+  "cost_usd": 0.3616426,
+  "num_turns": 2,
+  "duration_ms": 29013
+ }
+}

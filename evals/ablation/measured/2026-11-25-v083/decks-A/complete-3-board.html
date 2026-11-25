@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kestrel Labs: Board Update, Product &amp; Engineering, 2026-Q3</title>
+<style>
+:root{color-scheme:light;--bg:#fcfcfb;--card:#f4f3ef;--ink:#0b0b0b;--ink2:#52514e;--muted:#7a7974;--rule:#e2e0d9;--s1:#2a78d6;--good:#0a7d32;--warn:#a86400;--bad:#c0332f}
+@media (prefers-color-scheme:dark){:root{color-scheme:dark;--bg:#1a1a19;--card:#242422;--ink:#fff;--ink2:#c3c2b7;--muted:#9a998f;--rule:#3a3936;--s1:#3987e5;--good:#4cc27a;--warn:#e0a640;--bad:#ef7472}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:860px;margin:0 auto;padding:40px 24px 64px}
+h1{font-size:26px;margin:0 0 4px}h2{font-size:18px;margin:34px 0 8px;padding-top:14px;border-top:1px solid var(--rule)}
+.meta{color:var(--ink2);font-size:14px}
+p,li{max-width:76ch}
+table{border-collapse:collapse;width:100%;margin:8px 0;font-size:14px}
+th,td{text-align:left;padding:7px 10px;border-bottom:1px solid var(--rule);vertical-align:top}
+th{color:var(--ink2);font-weight:600;font-size:13px}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+.st{font-weight:600;white-space:nowrap}.ok{color:var(--good)}.no{color:var(--bad)}.wa{color:var(--warn)}
+.callout{background:var(--card);border-left:4px solid var(--s1);padding:12px 16px;border-radius:4px;margin:12px 0}
+.signoff{margin-top:36px;padding:12px 16px;background:var(--card);border-radius:6px;font-size:14px}
+.src{color:var(--muted);font-size:12.5px}
+</style>
+</head>
+<body><main>
+<h1>Kestrel Labs: Product &amp; Engineering</h1>
+<div class="meta">Board update · 2026-Q3 (1 Jul – 30 Sep 2026) · Author: the CPTO · Data as of 30 Sep 2026</div>
+
+<h2 style="border-top:0;margin-top:20px">Headlines</h2>
+<ul>
+<li><strong>The core agent bet is working.</strong> Loads cleared with no manual touch averaged 23,100 a week, above the 22K target and up 25.5% on the prior quarter. Every deal we won cited the agent clearing exceptions.</li>
+<li><strong>Activation missed</strong> (41% against a 50% target). Onboarding problems are linked to churn: all 4 churned accounts had filed onboarding tickets. Guided activation is a Q4 experiment with a stop rule.</li>
+<li><strong>Inference cost ran 27.5% over plan</strong> ($612K against $480K) as volume grew, and most of that spend sits with one provider. A routing layer across 2 providers is due Dec 2026.</li>
+<li><strong>The most common reason we lose deals is missing TMS integration</strong> (11 of 17 losses). No Q4 bet addresses it yet.</li>
+</ul>
+
+<h2>Scorecard</h2>
+<table>
+<tr><th>Measure</th><th class="n">Q2</th><th class="n">Q3</th><th class="n">Target</th><th>Status</th></tr>
+<tr><td>Loads cleared per week (North Star)</td><td class="n">18,400</td><td class="n">23,100</td><td class="n">22K</td><td class="st ok">✓ Met</td></tr>
+<tr><td>Activation (first automated load inside 14 days)</td><td class="n">39%</td><td class="n">41%</td><td class="n">50%</td><td class="st no">✗ Missed</td></tr>
+<tr><td>Weekly active dispatchers</td><td class="n">5,890</td><td class="n">6,120</td><td class="n">6,000</td><td class="st ok">✓ Met</td></tr>
+<tr><td>Agent task success (eval)</td><td class="n">82%</td><td class="n">86%</td><td class="n">90%</td><td class="st wa">◐ Short of goal</td></tr>
+<tr><td>Change failure rate</td><td class="n">5.1%</td><td class="n">7.7%</td><td class="n">under 5%</td><td class="st no">✗ Out of range</td></tr>
+<tr><td>Commitments shipped</td><td class="n">n/a</td><td class="n">6 of 7</td><td class="n">n/a</td><td>Self-serve carrier onboarding slipped</td></tr>
+</table>
+
+<h2>Spend, Q3</h2>
+<table>
+<tr><th>Line</th><th class="n">Plan</th><th class="n">Actual</th><th class="n">Variance</th></tr>
+<tr><td>R&amp;D (payroll, AI tools, cloud)</td><td class="n">$4.25M</td><td class="n">$4.20M</td><td class="n">−1.1%</td></tr>
+<tr><td>Inference (cost of revenue)</td><td class="n">$0.48M</td><td class="n">$0.61M</td><td class="n no">+27.5%</td></tr>
+<tr><td>Revenue</td><td class="n">$10.0M</td><td class="n">$10.3M</td><td class="n">+3.0%</td></tr>
+</table>
+<p>Engineering headcount is 44 against a plan of 46. Keep-the-lights-on work took 22% of effort against a planned 15%, which left less time for new capabilities.</p>
+<p class="src"><strong>On ARR:</strong> Stripe shows $10.9M ARR, but Finance shows $10.3M of revenue for the quarter alone. The two don't reconcile, so this update doesn't report progress toward the $50M ARR objective. The VP Engineering is reconciling the figures in Q4.</p>
+
+<h2>Q4 bets</h2>
+<table>
+<tr><th>Bet</th><th>Appetite</th><th>Expected result</th><th>Stop rule</th></tr>
+<tr><td>Multi-stop reroutes (Promise)</td><td>6 weeks, 5 engineers</td><td>Task success 86% → 90%</td><td>Eval gain under 2 points by week 3</td></tr>
+<tr><td>Guided activation (Experiment)</td><td>4 weeks, 3 engineers</td><td>Activation 41% → 50%</td><td>No lift in a 2-week live test</td></tr>
+</table>
+<p>We stopped work on the carrier marketplace because it did not serve the strategy.</p>
+
+<h2>Decision</h2>
+<div class="callout">
+<p><strong>Approve a per-load pricing pilot.</strong> The options are a pilot with 10 customers, or waiting a quarter. <strong>We recommend running the pilot with 10 customers.</strong> Price was cited in 6 of 17 lost deals, and per-load pricing is part of our strategy.</p>
+<p>The original deadline was 4 Nov 2026, which has passed. The outcome needs to be confirmed or the deadline re-set.</p>
+</div>
+
+<div class="signoff">Signed off by: the CEO</div>
+</main></body></html>

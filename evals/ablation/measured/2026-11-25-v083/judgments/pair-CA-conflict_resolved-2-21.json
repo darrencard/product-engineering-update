@@ -1,0 +1,46 @@
+{
+ "id": "pair-CA-conflict_resolved-2-21",
+ "fixture": "conflict_resolved",
+ "kind": "pair",
+ "matchup": "CA",
+ "x": "runs/A/conflict_resolved/2",
+ "y": "runs/C/conflict_resolved/2",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "tie",
+    "reason": "X's ARR bridge ($10.38M to $10.911M, 96.4% NRR, 89.3% GRR), 4 of 52 failed deploys (7.7%) and 40.8% R&D share all recompute correctly, as do Y's matching figures; Y's $40.9M annualised revenue is a defensible day-based run rate."
+   },
+   "no_invented_numbers": {
+    "winner": "tie",
+    "reason": "Neither invents a figure: Y's 'Activation: 5 more periods' is labelled as a projection, and X's remark that the eval set changed between v13 and v14 is a hedged inference, not a number."
+   },
+   "speed_with_quality": {
+    "winner": "tie",
+    "reason": "Both pair 4 deploys a week with the 7.7% change failure rate; Y labels quality as 'the pair for every speed metric' on slides 9 and 9b, and X puts change failure and 13h review time beside throughput in its summary and board cut."
+   },
+   "gaps_shown": {
+    "winner": "X",
+    "reason": "X states both source conflicts up front with their owner and Q4 due date (PostHog 23,100 vs warehouse 21,400; billing $10.91M vs finance $10.1M) and lists the missing stop-rule readings, while Y buries those conflicts in ledger rows L09 and L14 and its slide 10 wrongly says incident data is missing; Y does catch the revenue-vs-ARR mismatch that X misses."
+   },
+   "board_cut_usable": {
+    "winner": "X",
+    "reason": "X's board cut is short and leads with the north star, ARR and the TMS gap before the pricing ask, while Y's board cut still contains the internal note 'Check before the board sees this' on slide 05, repeats boilerplate and includes the full ledger."
+   }
+  },
+  "overall": {
+   "winner": "X",
+   "reason": "Both updates are numerically accurate, but X shows the PostHog/warehouse and billing/finance conflicts plainly with an owner and date, and surfaces the TMS loss pattern, which Y never mentions. Y's one advantage, flagging that $10.3M of quarterly revenue doesn't fit with $10.9M ARR, does not outweigh its buried conflicts, its wrong 'incident data missing' slide, and a board cut that still contains internal notes."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 3819,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 37498,
+  "cost_usd": 0.3768506,
+  "num_turns": 2,
+  "duration_ms": 34147
+ }
+}

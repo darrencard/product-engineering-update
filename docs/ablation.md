@@ -1,9 +1,36 @@
 # Ablation: the skill against Claude alone
 
-Two measured runs, on synthetic fixtures only. The harness is in [evals/ablation/](../evals/ablation/README.md).
+Three measured runs, on synthetic fixtures only. The harness is in [evals/ablation/](../evals/ablation/README.md).
 
+- **25 November 2026, v0.8.3**, Claude with the skill against Claude alone, both told the CEO signs off the board cut. Raw data in `evals/ablation/measured/2026-11-25-v083/`.
 - **25 November 2026, v0.8.0**, 3 conditions: Claude alone, the skill's pipeline with no model, and Claude with the skill installed. Raw data in `evals/ablation/measured/2026-11-25/`.
 - **24 November 2026, v0.7.4**, 2 conditions: Claude alone and the pipeline. Raw data in `evals/ablation/measured/2026-11-24/`.
+
+## v0.8.3: Claude with the skill against Claude alone, with a named signer
+
+### The answer
+
+No, and the gap did not close. On the same 6 synthetic companies, the judge preferred Claude alone in 34 of 34 judgments and 17 of 17 pairs (95% Wilson interval for the skill 0% to 18% per pair). One Claude-with-skill run wrote no deck, so 17 pairs, not 18. Both conditions were told, in the task, that the CEO signs off the board cut; the skill still lost the board cut 0 to 34.
+
+| Criterion | Claude with the skill | Claude alone | Tie |
+|---|---|---|---|
+| Overall | 0 | 34 | 0 |
+| Figures correct | 0 | 30 | 4 |
+| No invented numbers | 8 | 16 | 10 |
+| Speed paired with quality | 0 | 18 | 16 |
+| Gaps shown | 0 | 34 | 0 |
+| Board cut usable | 0 | 34 | 0 |
+
+Mechanical checks (raw, before hand review): the skill made 0 arithmetic errors in 715 checked figures; Claude alone 4 in 986. Run cost: $41.41 ($16.65 Claude alone, $9.05 with the skill, $11.53 judging, $4.19 extraction).
+
+### Why it lost, from the judge's reasons
+
+1. **One wrong figure, repeated.** The skill annualised a quarter's $10.3M revenue by days ($40.9M); the judge counted 4 times a quarter ($41.2M) as right. It appears on slides 1 and 5, so it cost "figures correct" in most pairs.
+2. **The board cut is not sendable.** It carries the internal "Check before the board sees this" card, the ledger appendix, and a duplicated slide 1 and 11; Claude alone wrote one page that leads with the answer, the ARR bridge and the overdue decision.
+3. **Gaps are thinner.** Claude alone listed about 8 data caveats per deck, each with an owner (a partial billing export, a proxy for lead time, undated exports, an unexplained overrun, unmeasured stop rules). The skill lists missing slides only, gives its conflict lines no owner, and slide 10 says incident data is missing while slide 9 uses it.
+4. **Sparse data.** On the sparse company the skill's cover said 0 of 19 slides show data while its ledger held tracker figures.
+
+The 0.8.3 changes (checks first on slide 1, every gap with an owner) were present but not enough: the judge weighed the wrong annualised figure, the unsendable board cut and the thinner caveats more.
 
 ## v0.8.0: Claude with the skill against Claude alone
 

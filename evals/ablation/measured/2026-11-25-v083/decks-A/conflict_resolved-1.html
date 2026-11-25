@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kestrel Labs: Product &amp; Engineering update, 2026-Q3</title>
+<style>
+:root{color-scheme:light;--page:#f9f9f7;--surface:#fcfcfb;--ink:#0b0b0b;--ink2:#52514e;--muted:#898781;--grid:#e1e0d9;--axis:#c3c2b7;--border:rgba(11,11,11,.10);--s1:#2a78d6;--good:#0ca30c;--goodtext:#006300;--warn:#fab219;--crit:#d03b3b}
+@media (prefers-color-scheme:dark){:root{color-scheme:dark;--page:#0d0d0d;--surface:#1a1a19;--ink:#fff;--ink2:#c3c2b7;--muted:#898781;--grid:#2c2c2a;--axis:#383835;--border:rgba(255,255,255,.10);--s1:#3987e5;--goodtext:#0ca30c}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--ink);font:15px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:960px;margin:0 auto;padding:32px 24px 64px}
+h1{font-size:26px;margin:0 0 4px}h2{font-size:19px;margin:36px 0 10px;padding-top:8px;border-top:1px solid var(--grid)}h3{font-size:15px;margin:18px 0 6px}
+.meta{color:var(--ink2);margin:0 0 20px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px 20px;margin:12px 0}
+.tldr li{margin:6px 0}
+table{width:100%;border-collapse:collapse;background:var(--surface);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin:10px 0;font-size:14px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--grid);vertical-align:top}
+th{color:var(--ink2);font-weight:600;font-size:13px}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+.st{white-space:nowrap;font-weight:600}
+.st::before{display:inline-block;width:1.1em;text-align:center;margin-right:4px;border-radius:50%;color:#fff;font-size:11px;line-height:1.1em}
+.ok::before{content:"✓";background:var(--good)}
+.miss::before{content:"✕";background:var(--crit)}
+.watch::before{content:"!";background:var(--warn);color:#0b0b0b}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:12px 0}
+.tile{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 16px}
+.tile .k{color:var(--ink2);font-size:13px}.tile .v{font-size:28px;font-weight:650;margin:2px 0}.tile .d{font-size:13px;color:var(--ink2)}
+.ask{border-left:4px solid var(--crit)}
+.note{color:var(--ink2);font-size:13px}
+.chart svg{width:100%;height:auto;display:block}
+.chart text{fill:var(--ink2);font-size:12px;font-family:inherit}
+.chart .lbl{fill:var(--ink);font-size:13px}
+.legend{display:flex;gap:18px;font-size:13px;color:var(--ink2);margin:4px 0 8px}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;background:var(--s1);vertical-align:-1px;margin-right:6px}
+.legend i.tick{width:3px;height:14px;border-radius:0;background:var(--ink)}
+#tip{position:fixed;pointer-events:none;background:var(--surface);color:var(--ink);border:1px solid var(--border);box-shadow:0 2px 8px rgba(0,0,0,.15);border-radius:6px;padding:6px 10px;font-size:13px;display:none}
+@media print{h2{break-after:avoid}table,.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+<main>
+<h1>Kestrel Labs: Product &amp; Engineering update, 2026-Q3</h1>
+<p class="meta">Period 1 Jul to 30 Sep 2026 · Data as of 30 Sep 2026 · Compiled 25 Nov 2026 · Author: the CPTO<br>
+Company objective: <strong>Grow ARR to $50M</strong> (owner: CEO)</p>
+
+<div class="card tldr">
+<h3 style="margin-top:0">Summary</h3>
+<ul>
+<li><strong>We hit the north star.</strong> We cleared 23,100 loads per week with no manual touch, against a 22K target. That is up 26% from 18,400 in Q2. One caveat: the warehouse reports 21,400 for the same metric, which would be a miss (see <a href="#data">data notes</a>).</li>
+<li><strong>ARR is $10.91M</strong> in billing, up 5.1% on the quarter but $89K short of the $11.0M plan. Four accounts churned, taking $1.11M. That is more than the $0.90M we added from new logos. Net revenue retention was 96.4%.</li>
+<li><strong>Activation is the biggest miss.</strong> It reached 41% against a 50% target. Guided activation shipped, but activation rose only 2 points.</li>
+<li><strong>Our plan doesn't address TMS integration.</strong> It explains 11 of 17 lost deals and 30 of 55 support tickets. No current bet covers it. The VP Engineering owns it, with a plan due in Q4.</li>
+<li><strong>Delivery is faster but less stable.</strong> Lead time fell from 52h to 38h, and deploys rose from 3.0 to 4.0 a week. But change failure rate rose from 5.1% to 7.7%, and review time rose from 9h to 13h. Both are now outside their target ranges.</li>
+<li><strong>Inference spend was 28% over plan</strong> ($612K against $480K), even though cost per agent task fell 20%. Load volume drove the overrun.</li>
+<li><strong>The pricing-pilot decision is overdue.</strong> Its deadline was 4 Nov 2026, and these files don't record a decision.</li>
+</ul>
+</div>
+
+<h2>Decision needed</h2>
+<div class="card ask">
+<p style="margin-top:0"><strong>Approve a per-load pricing pilot.</strong> The options are to pilot with 10 customers or to wait a quarter.<br>
+<strong>Recommendation:</strong> Run the pilot with 10 customers.<br>
+<strong>Deadline:</strong> 4 Nov 2026. <strong>This has passed.</strong> These files contain no record of a decision, so please confirm the outcome or set a new date.</p>
+<p class="note" style="margin-bottom:0">Why now: 6 of the 17 deals lost in Q3 cited price. Per-load pricing is our stated policy ("automating the exception, priced per load").</p>
+</div>
+
+<h2>Strategy on one page</h2>
+<table>
+<tr><th style="width:22%">Diagnosis</th><td>Dispatchers lose most of their day to exceptions that rules engines can't handle.</td></tr>
+<tr><th>Policy</th><td>We win mid-market brokers by automating the exception, priced per load.</td></tr>
+<tr><th>Actions</th><td>Raise agent task success to 90% (now 86%) · Get the first automated load inside 14 days (activation is now 41%)</td></tr>
+<tr><th>Non-goals</th><td>Build a carrier marketplace (stopped in Q3) · Ship on-premise</td></tr>
+<tr><th>Product lines</th><td>Dispatch Agent: Expand · Core Dispatch: Sustain · Platform: Sustain. All three serve "Grow ARR to $50M".</td></tr>
+</table>
+<p class="note">The strategy holds. Q3 sales give some evidence for it: all 22 won deals cited "Agent clears exceptions".</p>
+
+<h2>Outcomes</h2>
+<div class="tiles">
+<div class="tile"><div class="k">Loads cleared per week (north star)</div><div class="v">23,100</div><div class="d"><span class="st ok">Hit</span> target 22K · Q2 18,400</div></div>
+<div class="tile"><div class="k">ARR (billing)</div><div class="v">$10.91M</div><div class="d"><span class="st watch">Below plan</span> plan $11.0M · Q2 $10.38M</div></div>
+<div class="tile"><div class="k">Activation</div><div class="v">41%</div><div class="d"><span class="st miss">Miss</span> target 50% · Q2 39%</div></div>
+<div class="tile"><div class="k">Weekly active dispatchers</div><div class="v">6,120</div><div class="d"><span class="st ok">Hit</span> target 6,000 · Q2 5,890</div></div>
+</div>
+<table>
+<tr><th>Metric</th><th>Definition</th><th class="n">Q2</th><th class="n">Q3</th><th class="n">Target</th><th>Status</th><th>Owner</th></tr>
+<tr><td>Loads cleared per week</td><td>Loads cleared with no manual touch, weekly average (PostHog)</td><td class="n">18,400</td><td class="n">23,100</td><td class="n">22,000</td><td><span class="st ok">Hit</span></td><td>Agent team</td></tr>
+<tr><td>Activation</td><td>Accounts with a first automated load inside 14 days</td><td class="n">39%</td><td class="n">41%</td><td class="n">50%</td><td><span class="st miss">Miss</span></td><td>Activation team</td></tr>
+<tr><td>Weekly active dispatchers</td><td>Dispatchers active in a week</td><td class="n">5,890</td><td class="n">6,120</td><td class="n">6,000</td><td><span class="st ok">Hit</span></td><td>Core dispatch</td></tr>
+</table>
+
+<h2>Revenue and customers</h2>
+<p>Source of truth for ARR is billing (Stripe). We are at 22% of the $50M objective. The intake doesn't give a date for reaching $50M.</p>
+<table>
+<tr><th>ARR bridge, Jun to Sep 2026</th><th class="n">ARR</th><th>Accounts</th></tr>
+<tr><td>Opening ARR (June)</td><td class="n">$10,380,000</td><td>40</td></tr>
+<tr><td>+ New logos</td><td class="n">+$900,000</td><td>6 (N01–N06, $150K each)</td></tr>
+<tr><td>+ Expansion</td><td class="n">+$741,000</td><td>15 (A001–A015, each up 20%)</td></tr>
+<tr><td>− Churn</td><td class="n">−$1,110,000</td><td>4 (A037–A040)</td></tr>
+<tr><td><strong>Closing ARR (September)</strong></td><td class="n"><strong>$10,911,000</strong></td><td>42</td></tr>
+</table>
+<p class="note">Net revenue retention was 96.4% and gross revenue retention 89.3%. Of the 40 June accounts, 21 were flat (A016–A036). All 4 churned accounts raised an onboarding ticket in Q3.</p>
+
+<h3>Win/loss (CRM, 39 deals)</h3>
+<table>
+<tr><th>Outcome</th><th>Reason</th><th class="n">Deals</th></tr>
+<tr><td>Won</td><td>Agent clears exceptions</td><td class="n">22</td></tr>
+<tr><td>Lost</td><td>No TMS integration</td><td class="n">11</td></tr>
+<tr><td>Lost</td><td>Price</td><td class="n">6</td></tr>
+</table>
+<p class="note">Win rate was 56%. TMS integration accounts for 65% of losses.</p>
+
+<h3>Support themes (55 tickets)</h3>
+<table>
+<tr><th>Theme</th><th class="n">Tickets</th><th>Accounts</th></tr>
+<tr><td>Integration errors</td><td class="n">30</td><td>A001–A030</td></tr>
+<tr><td>Onboarding</td><td class="n">18</td><td>A031–A040, A001–A008. This includes all 4 churned accounts.</td></tr>
+<tr><td>Billing</td><td class="n">7</td><td>A009–A015</td></tr>
+</table>
+
+<div class="card">
+<strong>Gap: TMS integration.</strong> Integration problems show up in lost deals (11 of 17), support (30 of 55 tickets) and onboarding friction, and onboarding friction is where the churned accounts were. Neither bet nor any listed action addresses it. Self-serve carrier onboarding, the one Q3 commitment that targeted onboarding, did not ship.<br>
+<strong>Owner:</strong> the VP Engineering · <strong>Due:</strong> Q4, with a plan to close or explicitly de-scope the gap.
+</div>
+
+<h2>Bets</h2>
+<table>
+<tr><th>Bet</th><th>Type · appetite</th><th>Expected</th><th>Q3 result</th><th>Stop rule</th><th>Owner</th></tr>
+<tr><td>Multi-stop reroutes</td><td>Promise · 6 weeks, 5 engineers · High confidence</td><td>Task success up from 86% to 90%</td><td><span class="st watch">Not yet measured</span><br>Shipped. The latest eval (v14, 22 Sep) shows 86%, the bet's own baseline. There is no later eval run in the files.</td><td>Evals gain under 2 points by week 3</td><td>Agent team</td></tr>
+<tr><td>Guided activation</td><td>Experiment · 4 weeks, 3 engineers · Medium confidence</td><td>Activation up from 41% to 50%</td><td><span class="st miss">Short of expected</span><br>Shipped. Quarterly activation rose 2 points, from 39% to 41%, so it is still at the bet's starting point. The 2-week live-test result isn't in these files.</td><td>No lift in a 2-week live test</td><td>Activation team</td></tr>
+</table>
+<p class="note">Both bets give the same causal link to ARR: more task success or faster activation means more loads, which means more revenue. The win/loss data says the next ARR lever may be integration, not either bet.</p>
+
+<h2>What we committed to and shipped</h2>
+<p>6 of 7 commitments shipped. Shipped status comes from Linear via the intake. The tracker export uses generic item titles, so I couldn't cross-check items against it.</p>
+<table>
+<tr><th>Commitment</th><th>Shipped</th><th>Metric it should move</th><th>What the metric did</th><th>Owner</th></tr>
+<tr><td>Guided activation</td><td><span class="st ok">Yes</span></td><td>Activation</td><td>39% → 41% (target 50%)</td><td>Activation team</td></tr>
+<tr><td>Multi-stop reroutes</td><td><span class="st ok">Yes</span></td><td>Loads cleared per week</td><td>18,400 → 23,100</td><td>Agent team</td></tr>
+<tr><td>Dispatcher inbox</td><td><span class="st ok">Yes</span></td><td>Weekly active dispatchers</td><td>5,890 → 6,120</td><td>Core dispatch</td></tr>
+<tr><td>Cheaper agent retries</td><td><span class="st ok">Yes</span></td><td>Cost per successful task</td><td>$0.41 → $0.33 (−20%)</td><td>Agent team</td></tr>
+<tr><td>Release checklist</td><td><span class="st ok">Yes</span></td><td>Change failure rate</td><td>5.1% → 7.7%: <strong>worse</strong></td><td>Platform</td></tr>
+<tr><td>Self-serve carrier onboarding</td><td><span class="st miss">No</span></td><td>Activation</td><td>None; this did not ship</td><td>Activation team</td></tr>
+<tr><td>Audit log export</td><td><span class="st ok">Yes</span></td><td><em>None named</em></td><td>None; no metric was named</td><td>Platform</td></tr>
+</table>
+
+<h3>Stopped</h3>
+<p>Carrier marketplace: it did not serve the strategy. It is now an explicit non-goal.</p>
+
+<h3>Customer requests (Linear)</h3>
+<p>There were 7 customer requests in Q3:</p>
+<ul>
+<li>Multi-stop reroutes: 4 requests from Northwind (2), Haulwell and Bluepeak. It shipped.</li>
+<li>KES-412 Bulk load import: 2 requests, from Haulwell and Tidewater. Its status is not in these files.</li>
+<li>KES-388 Carrier rating export: 1 request, from Bluepeak. It has no Linear link.</li>
+</ul>
+<p class="note">I excluded R-999 (Tidewater, KES-388) because it was created on 2 May 2026, which is before the quarter.</p>
+
+<h2>AI feature quality: Dispatch Agent</h2>
+<table>
+<tr><th>Eval set</th><th>Run</th><th class="n">Cases</th><th class="n">Task success</th><th class="n">Cost per task</th></tr>
+<tr><td>v13</td><td>20 Jun 2026</td><td class="n">500</td><td class="n">82% (410)</td><td class="n">$0.41</td></tr>
+<tr><td>v14 (current)</td><td>22 Sep 2026</td><td class="n">500</td><td class="n">86% (430)</td><td class="n">$0.33</td></tr>
+</table>
+<p class="note">Task success rose 4 points and cost per task fell 20%. The target is 90%. The two runs use different eval-set versions, so the comparison is indicative rather than like-for-like.</p>
+
+<h2>Where engineering time went</h2>
+<div class="card chart" id="mix">
+<div class="legend"><span><i></i>Q3 actual share</span><span><i class="tick"></i>Plan</span></div>
+<svg viewBox="0 0 900 230" role="img" aria-label="Investment mix, Q3 actual against plan. The data is in the table below.">
+<g id="bars"></g>
+</svg>
+</div>
+<table>
+<tr><th>Work type</th><th class="n">Plan</th><th class="n">Actual</th><th class="n">Gap</th></tr>
+<tr><td>New capabilities</td><td class="n">35%</td><td class="n">31%</td><td class="n">−4</td></tr>
+<tr><td>Improve the core</td><td class="n">20%</td><td class="n">18%</td><td class="n">−2</td></tr>
+<tr><td>Growth</td><td class="n">10%</td><td class="n">8%</td><td class="n">−2</td></tr>
+<tr><td>Platform &amp; scale</td><td class="n">20%</td><td class="n">21%</td><td class="n">+1</td></tr>
+<tr><td>Keep the lights on</td><td class="n">15%</td><td class="n">22%</td><td class="n"><strong>+7</strong></td></tr>
+</table>
+<p class="note">These shares are from the 100 tracker items completed in Q3. Every item carries an estimate of 1, so the shares are by item count, not by effort. Keep the lights on ran 7 points over plan, and that time came out of new capabilities and growth. All 22 of those items belong to the Platform team, which completed 43 of the 100 items.</p>
+
+<h2>Delivery health</h2>
+<table>
+<tr><th>Measure</th><th class="n">Q2</th><th class="n">Q3</th><th class="n">Target range</th><th>Status</th></tr>
+<tr><td>Deploys per week</td><td class="n">3.0</td><td class="n">4.0</td><td class="n">3+</td><td><span class="st ok">In range</span></td></tr>
+<tr><td>Lead time for change (median)</td><td class="n">52h</td><td class="n">38h</td><td class="n">under 40h</td><td><span class="st ok">In range</span></td></tr>
+<tr><td>Change failure rate</td><td class="n">5.1%</td><td class="n">7.7%</td><td class="n">under 5%</td><td><span class="st miss">Out of range</span></td></tr>
+<tr><td>Time to restore (median)</td><td class="n">46m</td><td class="n">41m</td><td class="n">under 60m</td><td><span class="st ok">In range</span></td></tr>
+<tr><td>Pull request review time (median)</td><td class="n">9h</td><td class="n">13h</td><td class="n">under 10h</td><td><span class="st miss">Out of range</span></td></tr>
+</table>
+<p class="note">Q3 counts:</p>
+<ul class="note">
+<li>Deploys: 52, of which 4 failed.</li>
+<li>Merged pull requests: 60. 15% were reworked, up from 11.7%.</li>
+<li>Incidents: 5, all Sev-2. Q2 also had 5.</li>
+</ul>
+<p class="note">Lead time is measured from when a pull request is opened to when it merges, because the export doesn't link commits to deploys. Failure rate and rework went up after the release checklist shipped. I'd treat the higher review time and the AI review agent's 61% adoption as the first places to look.</p>
+
+<h2>Team and spend</h2>
+<div class="tiles">
+<div class="tile"><div class="k">R&amp;D spend</div><div class="v">$4.20M</div><div class="d">plan $4.25M · 41% of revenue</div></div>
+<div class="tile"><div class="k">Inference (cost of revenue)</div><div class="v">$612K</div><div class="d"><span class="st miss">28% over</span> plan $480K</div></div>
+<div class="tile"><div class="k">Engineering headcount</div><div class="v">44</div><div class="d">plan 46 · 2 open roles</div></div>
+<div class="tile"><div class="k">Developer experience index</div><div class="v">71</div><div class="d">Q2 68</div></div>
+</div>
+<table>
+<tr><th>Line (Q3)</th><th class="n">Plan</th><th class="n">Actual</th><th class="n">Variance</th></tr>
+<tr><td>Revenue</td><td class="n">$10,000,000</td><td class="n">$10,300,000</td><td class="n">+3.0%</td></tr>
+<tr><td>R&amp;D payroll</td><td class="n">$3,750,000</td><td class="n">$3,700,000</td><td class="n">−1.3%</td></tr>
+<tr><td>AI tools for the team</td><td class="n">$95,000</td><td class="n">$90,000</td><td class="n">−5.3%</td></tr>
+<tr><td>Cloud</td><td class="n">$400,000</td><td class="n">$410,000</td><td class="n">+2.5%</td></tr>
+<tr><td><strong>R&amp;D total</strong></td><td class="n">$4,245,000</td><td class="n">$4,200,000</td><td class="n">−1.1%</td></tr>
+<tr><td>Inference (cost of revenue)</td><td class="n">$480,000</td><td class="n">$612,000</td><td class="n"><strong>+27.5%</strong></td></tr>
+</table>
+<p class="note">Inference rose from 4.8% of revenue at plan to 5.9% actual. Unit cost fell, so the overrun comes from volume: loads cleared rose 26%. Plan for the next quarter should be rebased on loads.</p>
+<table>
+<tr><th>Function</th><th class="n">Now</th><th class="n">Plan</th><th>Open roles</th></tr>
+<tr><td>Engineering</td><td class="n">44</td><td class="n">46</td><td>1 platform, 1 product engineer</td></tr>
+<tr><td>Product management</td><td class="n">5</td><td class="n">5</td><td>None</td></tr>
+<tr><td>Design</td><td class="n">4</td><td class="n">5</td><td>1 designer</td></tr>
+</table>
+<table>
+<tr><th>AI tool</th><th class="n">Seats</th><th class="n">Weekly active</th><th class="n">Q3 cost</th></tr>
+<tr><td>Code assistant</td><td class="n">44</td><td class="n">39 (89%)</td><td class="n">$66,000</td></tr>
+<tr><td>Review agent</td><td class="n">44</td><td class="n">27 (61%)</td><td class="n">$24,000</td></tr>
+</table>
+
+<h2>Risks</h2>
+<table>
+<tr><th>Risk</th><th>Likelihood</th><th>Impact</th><th>Mitigation · owner</th><th>Due</th></tr>
+<tr><td>One model provider carries most inference spend</td><td>Medium</td><td>High</td><td>Build a routing layer across 2 providers · Platform lead</td><td>Dec 2026</td></tr>
+<tr><td>The ARR source of truth disagrees with finance, and the warehouse disagrees with PostHog on the north star <em>(added from the data review, not part of the intake)</em></td><td>Not rated</td><td>Not rated</td><td>Reconcile the definitions · the VP Engineering</td><td>Q4</td></tr>
+</table>
+<p class="note">The inference overrun makes the provider risk more pressing: spend is growing faster than plan, and most of it sits with one vendor.</p>
+
+<h2 id="data">Data notes</h2>
+<ul class="note">
+<li><strong>ARR.</strong> Billing (Stripe, the source of truth) shows $10.91M at September. The finance close shows $10.1M, so the two differ by $811K. This update uses billing.</li>
+<li><strong>North star.</strong> PostHog (the source of truth) shows 23,100. The warehouse (<code>select avg(loads) from ns_weekly</code>) shows 21,400, which is 7% lower and below the target. This update uses PostHog. Until the two are reconciled, treat the "hit" as provisional.</li>
+<li><strong>Timing.</strong> The data is as of 30 Sep 2026, and the update was compiled on 25 Nov 2026. Anything after the quarter end, including the pricing-pilot decision, is not reflected.</li>
+<li><strong>Delivery definitions.</strong> Each measure is computed from the GitHub export for pull requests merged, or deploys made, inside each quarter. Q2 runs from 1 Apr to 30 Jun and Q3 from 1 Jul to 30 Sep. Time to restore comes from the incident tool.</li>
+<li><strong>Sources.</strong> All 14 connected systems supplied data: tool admin exports, PostHog, Stripe, CRM, Linear (requests and tracker), the eval harness, the finance close, the HR system, the incident tool, GitHub, the support desk, the developer survey, and the warehouse.</li>
+</ul>
+</main>
+<div id="tip" role="tooltip"></div>
+<script>
+(function(){
+  var d=[["New capabilities",35,31],["Improve the core",20,18],["Growth",10,8],["Platform & scale",20,21],["Keep the lights on",15,22]];
+  var g=document.getElementById('bars'),ns='http://www.w3.org/2000/svg',x0=170,w=640,max=40,rowH=40,tip=document.getElementById('tip');
+  function el(t,a){var e=document.createElementNS(ns,t);for(var k in a)e.setAttribute(k,a[k]);return e}
+  [0,10,20,30,40].forEach(function(v){var x=x0+v/max*w;g.appendChild(el('line',{x1:x,x2:x,y1:6,y2:5*rowH+4,stroke:'var(--grid)','stroke-width':1}));var t=el('text',{x:x,y:5*rowH+20,'text-anchor':'middle'});t.textContent=v+'%';g.appendChild(t)});
+  g.appendChild(el('line',{x1:x0,x2:x0,y1:6,y2:5*rowH+4,stroke:'var(--axis)','stroke-width':1}));
+  d.forEach(function(r,i){
+    var y=i*rowH+12,bw=r[2]/max*w,px=x0+r[1]/max*w;
+    var l=el('text',{x:x0-10,y:y+15,'text-anchor':'end','class':'lbl'});l.textContent=r[0];g.appendChild(l);
+    g.appendChild(el('path',{d:'M'+x0+','+y+'h'+(bw-4)+'a4,4 0 0 1 4,4v14a4,4 0 0 1 -4,4h-'+(bw-4)+'z',fill:'var(--s1)'}));
+    g.appendChild(el('line',{x1:px,x2:px,y1:y-4,y2:y+26,stroke:'var(--ink)','stroke-width':2}));
+    var v=el('text',{x:Math.max(x0+bw,px)+8,y:y+15});var gap=r[2]-r[1];v.textContent=r[2]+'% ('+(gap>0?'+':'')+gap+' vs plan)';g.appendChild(v);
+    var hit=el('rect',{x:0,y:y-8,width:900,height:rowH,fill:'transparent'});
+    hit.addEventListener('mousemove',function(e){tip.style.display='block';tip.style.left=(e.clientX+14)+'px';tip.style.top=(e.clientY+10)+'px';tip.innerHTML='<strong>'+r[0]+'</strong><br>Actual '+r[2]+'% · Plan '+r[1]+'%'});
+    hit.addEventListener('mouseleave',function(){tip.style.display='none'});
+    g.appendChild(hit);
+  });
+})();
+</script>
+</body>
+</html>

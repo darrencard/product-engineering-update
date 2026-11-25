@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kestrel Labs: Product &amp; Engineering, 2026-Q3 (Board)</title>
+<style>
+  :root { color-scheme: light; --surface:#fcfcfb; --surface-2:#f3f2ef; --rule:#e1e0dc; --text-primary:#0b0b0b; --text-secondary:#52514e; --text-muted:#6f6e69; --good:#0a7a3d; --warn:#9a6200; --bad:#c0392b; }
+  @media (prefers-color-scheme: dark) { :root { color-scheme: dark; --surface:#1a1a19; --surface-2:#242422; --rule:#3a3a37; --text-primary:#fff; --text-secondary:#c3c2b7; --text-muted:#9d9c93; --good:#4cc27f; --warn:#e0a640; --bad:#f07a6e; } }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--surface); color:var(--text-primary); font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; }
+  main { max-width: 760px; margin: 0 auto; padding: 40px 24px 60px; }
+  h1 { font-size: 26px; line-height: 1.2; margin: 0 0 6px; }
+  h2 { font-size: 17px; margin: 30px 0 8px; padding-top: 12px; border-top: 1px solid var(--rule); }
+  .meta { color: var(--text-secondary); font-size: 13px; }
+  .small { font-size: 13px; } .muted { color: var(--text-muted); }
+  table { width:100%; border-collapse:collapse; font-size:14px; margin:6px 0; }
+  th, td { text-align:left; padding:7px 8px; border-bottom:1px solid var(--rule); vertical-align:top; }
+  th { font-size:12px; text-transform:uppercase; letter-spacing:.03em; color:var(--text-secondary); font-weight:600; }
+  td.num, th.num { text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap; }
+  .s { font-weight:600; font-size:13px; white-space:nowrap; } .good{color:var(--good)} .warn{color:var(--warn)} .bad{color:var(--bad)}
+  .ask { border:2px solid var(--text-primary); border-radius:8px; padding:14px 18px; margin:10px 0; }
+  .flag { border-left:3px solid var(--warn); background:var(--surface-2); padding:8px 12px; font-size:14px; margin:8px 0; }
+  ul { padding-left: 20px; } li { margin: 4px 0; }
+  .signoff { margin-top: 36px; padding: 12px 16px; background: var(--surface-2); border-radius: 8px; font-size: 14px; }
+</style>
+</head>
+<body>
+<main>
+<p class="meta">Kestrel Labs · Product &amp; Engineering · Board update</p>
+<h1>2026-Q3: the agent beat its north-star target; activation is behind</h1>
+<p class="meta">Period 1 Jul – 30 Sep 2026 · Data as of 30 Sep 2026 · Author: the CPTO · Full leadership update: <code>update.html</code></p>
+
+<h2>Headlines</h2>
+<ul>
+  <li><strong>The core bet is working.</strong> Loads cleared with no manual touch averaged <strong>23,100/week</strong>, against a 22K target (Q2: 18,400). All 22 won deals cite "Agent clears exceptions."</li>
+  <li><strong>Activation missed.</strong> It reached <strong>41%</strong> against a 50% target. The 4 churned accounts ($1.11M ARR) had all raised onboarding tickets.</li>
+  <li><strong>Integration is the gap to close.</strong> It drives most support tickets and 11 of 17 lost deals ("No TMS integration").</li>
+  <li><strong>Inference ran 28% over plan</strong> ($612K vs $480K) and is concentrated with one model provider.</li>
+</ul>
+
+<h2>Scorecard</h2>
+<table>
+  <tr><th>Metric</th><th class="num">Q2</th><th class="num">Q3</th><th class="num">Target</th><th>Status</th></tr>
+  <tr><td>Loads cleared per week <span class="muted">(north star)</span></td><td class="num">18,400</td><td class="num">23,100</td><td class="num">22K</td><td><span class="s good">✓ Met</span></td></tr>
+  <tr><td>Activation <span class="muted">(first automated load in 14 days)</span></td><td class="num">39%</td><td class="num">41%</td><td class="num">50%</td><td><span class="s bad">✕ Missed</span></td></tr>
+  <tr><td>Weekly active dispatchers</td><td class="num">5,890</td><td class="num">6,120</td><td class="num">6,000</td><td><span class="s good">✓ Met</span></td></tr>
+  <tr><td>Q3 commitments shipped</td><td class="num"></td><td class="num">6 of 7</td><td class="num"></td><td class="small">Self-serve carrier onboarding slipped</td></tr>
+  <tr><td>R&amp;D spend vs plan</td><td class="num"></td><td class="num">$4.20M</td><td class="num">$4.25M</td><td><span class="s good">✓ On plan</span></td></tr>
+  <tr><td>Inference spend vs plan</td><td class="num"></td><td class="num">$612K</td><td class="num">$480K</td><td><span class="s bad">✕ +27.5%</span></td></tr>
+</table>
+<div class="flag"><strong>ARR toward the $50M objective isn't reported this quarter.</strong> The billing export ($10.9M ARR across 46 accounts, +5.1% Jun→Sep) doesn't reconcile with finance-reported Q3 revenue of $10.3M. Finance and billing will reconcile before the next update.</div>
+
+<h2>Decision</h2>
+<div class="ask">
+  <p style="margin:0 0 6px"><strong>Approve a per-load pricing pilot.</strong></p>
+  <p style="margin:0 0 4px"><span class="muted">Options:</span> Pilot with 10 customers, or wait a quarter.</p>
+  <p style="margin:0 0 4px"><span class="muted">Recommendation:</span> Run the pilot with 10 customers.</p>
+  <p style="margin:0"><span class="muted">Deadline:</span> 4 Nov 2026. <span class="s warn">! Passed.</span> <span class="small">The source material doesn't record the outcome. Confirm whether the decision was made.</span></p>
+</div>
+<p class="small">Supporting evidence: 6 of 17 lost deals cite price. Inference cost per no-touch load is running above plan, so a per-load price has to cover it.</p>
+
+<h2>Top risk</h2>
+<table>
+  <tr><th>Risk</th><th>Likelihood · Impact</th><th>Mitigation</th><th>Due</th></tr>
+  <tr><td>One model provider carries most inference spend</td><td>Medium · High</td><td>Routing layer across 2 providers (Platform lead)</td><td>Dec 2026</td></tr>
+</table>
+
+<h2>Focus for Q4</h2>
+<ul>
+  <li>Lift activation. Read the Guided activation test against its stop rule, and ship Self-serve carrier onboarding.</li>
+  <li>Bring change failure rate back under 5%. It rose to 7.7% in Q3.</li>
+  <li>Close the measurement gaps: agent task success, cost per successful task, and reconciling ARR with revenue. Owner: the VP Engineering, due Q4.</li>
+  <li>Kept out of scope: carrier marketplace (stopped) and on-premise.</li>
+</ul>
+
+<div class="signoff"><strong>Sign-off:</strong> the CEO</div>
+</main>
+</body>
+</html>

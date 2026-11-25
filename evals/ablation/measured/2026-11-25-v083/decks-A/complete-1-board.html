@@ -1,0 +1,84 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Kestrel Labs · Board update · 2026-Q3</title><style>
+:root{color-scheme:light;--bg:#fcfcfb;--card:#ffffff;--ink:#0b0b0b;--ink2:#52514e;--muted:#6f6e69;--line:#e4e3df;--grid:#ecebe7;
+--s1:#2a78d6;--s2:#eb6834;--neu:#8a8984;--good:#0ca30c;--warning:#fab219;--critical:#d03b3b;--chip:#f3f2ef}
+@media (prefers-color-scheme:dark){:root:where(:not([data-theme="light"])){color-scheme:dark;--bg:#1a1a19;--card:#222221;--ink:#ffffff;--ink2:#c3c2b7;--muted:#9c9b93;--line:#3a3a37;--grid:#2e2e2c;
+--s1:#3987e5;--s2:#d95926;--neu:#8a8984;--chip:#2c2c2a}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#1a1a19;--card:#222221;--ink:#ffffff;--ink2:#c3c2b7;--muted:#9c9b93;--line:#3a3a37;--grid:#2e2e2c;--s1:#3987e5;--s2:#d95926;--neu:#8a8984;--chip:#2c2c2a}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+main{max-width:920px;margin:0 auto;padding:40px 24px 80px}
+header.top{border-bottom:1px solid var(--line);padding-bottom:18px;margin-bottom:28px}
+.eyebrow{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink2)}
+h1{font-size:28px;line-height:1.2;margin:6px 0 8px}h2{font-size:20px;margin:40px 0 6px;padding-top:8px;border-top:1px solid var(--line)}
+h3{font-size:16px;margin:22px 0 6px}p{margin:8px 0}.muted{color:var(--muted)}.meta{color:var(--ink2);font-size:13px}
+.lede{font-size:13px;color:var(--ink2);margin-bottom:12px}
+.bluf{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px 22px}
+.bluf ol{margin:6px 0 0;padding-left:20px}.bluf li{margin:6px 0}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:14px 0}
+.tile{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.tile .k{font-size:12px;color:var(--ink2)}.tile .v{font-size:28px;font-weight:650;line-height:1.15;margin:4px 0;font-variant-numeric:tabular-nums}
+.tile .d{font-size:12px;color:var(--ink2)}
+table{border-collapse:collapse;width:100%;font-size:13.5px;margin:10px 0;font-variant-numeric:tabular-nums}
+th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:top}th{font-weight:600;color:var(--ink2);font-size:12px}
+.st{white-space:nowrap;font-size:12.5px;color:var(--ink)}.st b{display:inline-block;width:17px;height:17px;border-radius:50%;text-align:center;line-height:17px;font-size:11px;color:#fff;margin-right:3px}
+.st-good b{background:var(--good)}.st-warning b{background:var(--warning);color:#0b0b0b}.st-critical b{background:var(--critical)}.st-na b{background:var(--neu)}
+.figure{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:14px 0}
+.figure .cap{font-weight:600;font-size:14px}.figure .sub{font-size:12.5px;color:var(--ink2);margin-bottom:6px}
+svg.chart{width:100%;height:auto;display:block;overflow:visible}
+.grid{stroke:var(--grid);stroke-width:1}.ax{fill:var(--muted);font-size:11px}.lab{fill:var(--ink);font-size:12.5px}.val{fill:var(--ink);font-size:12.5px;font-weight:600}
+.val .muted{fill:var(--muted);font-weight:400}
+.s1{fill:var(--s1)}.s2{fill:var(--s2)}.neu{fill:var(--neu)}.plan{stroke:var(--ink);stroke-width:2}
+.hit:hover .s1,.hit:hover .s2,.hit:hover .neu,.hit:focus .s1,.hit:focus .s2,.hit:focus .neu{opacity:.82}.hit{outline:none}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:12px;color:var(--ink2);margin:4px 0 8px}.legend span{display:inline-flex;align-items:center;gap:6px}
+.sw{width:12px;height:12px;border-radius:3px;display:inline-block}.s1bg{background:var(--s1)}.s2bg{background:var(--s2)}.neubg{background:var(--neu)}
+.tick{width:2px;height:14px;background:var(--ink);display:inline-block}
+details{font-size:13px;margin-top:6px}summary{cursor:pointer;color:var(--ink2)}
+#tip{position:fixed;pointer-events:none;background:var(--ink);color:var(--bg);font-size:12px;padding:6px 9px;border-radius:6px;max-width:300px;opacity:0;transition:opacity .08s;z-index:9}
+.callout{border-left:3px solid var(--critical);padding:6px 12px;background:var(--card);margin:12px 0}
+.signoff{margin-top:36px;padding:14px 18px;border:1px solid var(--line);border-radius:10px;background:var(--card);font-size:13.5px}
+.chip{background:var(--chip);border-radius:4px;padding:1px 6px;font-size:12px}
+.themebtn{float:right;font-size:12px;background:var(--card);color:var(--ink2);border:1px solid var(--line);border-radius:6px;padding:4px 8px;cursor:pointer}
+footer{margin-top:40px;font-size:12px;color:var(--muted)}
+@media print{.themebtn,details summary{display:none}details{display:block}h2{break-after:avoid}.figure,.tile,tr{break-inside:avoid}}
+</style></head><body><main>
+<header class="top"><button class="themebtn" type="button">Toggle light/dark</button>
+<div class="eyebrow">Kestrel Labs · Board update · Product &amp; Engineering · 2026-Q3</div>
+<h1>Automation is ahead of plan. Activation and integration are what hold back growth.</h1>
+<div class="meta">Period 2026-07-01 to 2026-09-30 · Data as of 30 Sep 2026 · Author: the CPTO. A shorter version of the leadership update.</div>
+</header>
+<div class="tiles">
+<div class="tile"><div class="k">Loads cleared per week (north star)</div><div class="v">23,100</div><div class="d">Target 22K · +26% vs Q2</div><div style=margin-top:6px><span class="st st-good"><b aria-hidden="true">✓</b> On target</span></div></div>
+<div class="tile"><div class="k">Activation</div><div class="v">41%</div><div class="d">Target 50% · Q2 39%</div><div style=margin-top:6px><span class="st st-critical"><b aria-hidden="true">✕</b> Off target</span></div></div>
+<div class="tile"><div class="k">Revenue vs plan</div><div class="v">$10.30M</div><div class="d">Plan $10.00M · +3%</div><div style=margin-top:6px><span class="st st-good"><b aria-hidden="true">✓</b> Ahead of plan</span></div></div>
+<div class="tile"><div class="k">Inference cost vs plan</div><div class="v">$612K</div><div class="d">Plan $480K</div><div style=margin-top:6px><span class="st st-critical"><b aria-hidden="true">✕</b> +27% over</span></div></div>
+</div>
+<section class="bluf"><div class="eyebrow">What the board should know</div><ol>
+<li><b>The agent is working.</b> Loads cleared with no manual touch averaged <b>23,100/week</b>, above the 22K target and up 26% on Q2. Agent task success on eval set v14 rose to <b>86%</b> (v13: 82%), and cost per task fell 20% to $0.33.</li>
+<li><b>Activation missed its target.</b> It reached <b>41%</b> against a 50% target, up 2 points. Guided activation shipped, but self-serve carrier onboarding did not. All 4 accounts that churned ($1.11M ARR) had filed onboarding tickets.</li>
+<li>For the accounts in the billing export, net revenue retention is <b>96%</b> and gross is 89%. 15 accounts expanded and 6 new accounts were added. These figures don’t cover the whole customer base, so we aren’t reporting company ARR against the $50M objective here.</li>
+<li><b>Integration is the biggest gap, and nothing in the plan targets it.</b> “No TMS integration” was the reason for 11 of 17 lost deals. Integration errors were also the top support theme (30 of 55 tickets). No Q3 commitment or current bet addresses either.</li>
+<li><b>Inference spend ran 27% over plan</b> ($612K vs $480K), even though cost per task fell. Most of that spend sits with one model provider. The mitigation, a routing layer across 2 providers, is due Dec 2026.</li>
+<li>6 of 7 commitments shipped. Engineering is at 44 of 46 planned. R&amp;D spend was $4.20M, under the $4.25M plan.</li>
+</ol></section>
+<div class="figure"><div class="cap">Expansion and new accounts more than offset churn</div><div class="sub">ARR bridge, June → September 2026, accounts in billing export</div><div class="legend"><span><i class="sw neubg"></i>Starting / ending ARR</span><span><i class="sw s1bg"></i>Added</span><span><i class="sw s2bg"></i>Lost</span><span class="muted">Axis starts at $9.0M to show the movements.</span></div><svg viewBox="0 0 640 260" role="img" aria-labelledby="cb-t" class="chart"><title id="cb-t">ARR bridge for accounts in the billing export, June to September 2026</title><line x1="60" x2="640" y1="210.0" y2="210.0" class="grid"/><text x="56" y="214.0" class="ax" text-anchor="end">$9.0M</text><line x1="60" x2="640" y1="172.0" y2="172.0" class="grid"/><text x="56" y="176.0" class="ax" text-anchor="end">$9.5M</text><line x1="60" x2="640" y1="134.0" y2="134.0" class="grid"/><text x="56" y="138.0" class="ax" text-anchor="end">$10.0M</text><line x1="60" x2="640" y1="96.0" y2="96.0" class="grid"/><text x="56" y="100.0" class="ax" text-anchor="end">$10.5M</text><line x1="60" x2="640" y1="58.0" y2="58.0" class="grid"/><text x="56" y="62.0" class="ax" text-anchor="end">$11.0M</text><line x1="60" x2="640" y1="20.0" y2="20.0" class="grid"/><text x="56" y="24.0" class="ax" text-anchor="end">$11.5M</text><g class="hit" data-tip="June ARR: $10.38M · 40 accounts" tabindex="0"><rect x="51.0" y="0" width="122" height="260" fill="transparent"/><rect x="70" y="105.11999999999999" width="84" height="104.88000000000001" rx="3" class="neu"/><text x="112.0" y="99.11999999999999" class="val" text-anchor="middle">$10.38M</text><text x="112.0" y="228" class="lab" text-anchor="middle">June ARR</text><text x="112.0" y="244" class="ax" text-anchor="middle">40 accounts</text></g><g class="hit" data-tip="Churned: −$1.11M · 4 accounts" tabindex="0"><rect x="173.0" y="0" width="122" height="260" fill="transparent"/><rect x="192" y="105.11999999999999" width="84" height="84.36" rx="3" class="s2"/><text x="234.0" y="99.11999999999999" class="val" text-anchor="middle">−$1.11M</text><text x="234.0" y="228" class="lab" text-anchor="middle">Churned</text><text x="234.0" y="244" class="ax" text-anchor="middle">4 accounts</text></g><g class="hit" data-tip="Expansion: +$741K · 15 accounts" tabindex="0"><rect x="295.0" y="0" width="122" height="260" fill="transparent"/><rect x="314" y="133.164" width="84" height="56.316" rx="3" class="s1"/><text x="356.0" y="127.16399999999999" class="val" text-anchor="middle">+$741K</text><text x="356.0" y="228" class="lab" text-anchor="middle">Expansion</text><text x="356.0" y="244" class="ax" text-anchor="middle">15 accounts</text></g><g class="hit" data-tip="New: +$900K · 6 accounts" tabindex="0"><rect x="417.0" y="0" width="122" height="260" fill="transparent"/><rect x="436" y="64.76400000000001" width="84" height="68.39999999999998" rx="3" class="s1"/><text x="478.0" y="58.76400000000001" class="val" text-anchor="middle">+$900K</text><text x="478.0" y="228" class="lab" text-anchor="middle">New</text><text x="478.0" y="244" class="ax" text-anchor="middle">6 accounts</text></g><g class="hit" data-tip="Sept ARR: $10.91M · 42 accounts" tabindex="0"><rect x="539.0" y="0" width="122" height="260" fill="transparent"/><rect x="558" y="64.76400000000001" width="84" height="145.236" rx="3" class="neu"/><text x="600.0" y="58.76400000000001" class="val" text-anchor="middle">$10.91M</text><text x="600.0" y="228" class="lab" text-anchor="middle">Sept ARR</text><text x="600.0" y="244" class="ax" text-anchor="middle">42 accounts</text></g></svg><details><summary>Table view</summary><table class="data"><tr><th>Step</th><th>ARR</th><th>Accounts</th></tr><tr><td>June ARR</td><td>$10.38M</td><td>40 accounts</td></tr><tr><td>Churned</td><td>−$1.11M</td><td>4 accounts</td></tr><tr><td>Expansion</td><td>+$741K</td><td>15 accounts</td></tr><tr><td>New</td><td>+$900K</td><td>6 accounts</td></tr><tr><td>Sept ARR</td><td>$10.91M</td><td>42 accounts</td></tr></table></details></div>
+<h2>Decision</h2>
+<table><tr><th>Ask</th><th>Recommendation</th><th>Deadline</th></tr>
+<tr><td><b>Approve a per-load pricing pilot</b><br><span class="muted">Options: Pilot with 10 customers, or wait a quarter</span></td><td>Run the pilot with 10 customers. Price lost 6 of 17 deals. The inference overrun should be explained before prices are set.</td><td>4 Nov 2026<br><span class="st st-critical"><b aria-hidden="true">✕</b> Passed; outcome not recorded</span></td></tr></table>
+<h2>Top risk</h2>
+<p>One model provider carries most inference spend (likelihood medium, impact high). Mitigation: Routing layer across 2 providers. Platform lead, due Dec 2026. The 27% inference overrun makes this more urgent.</p>
+<h2>Data caveats</h2>
+<p class="muted">The data is as of 30 Sep 2026. Company ARR can’t be derived from the billing export. The two bets’ outcomes haven’t been measured yet. The VP Engineering owns closing these gaps by Q4.</p>
+<div class="signoff"><b>Sign-off.</b> Board cut signed off by the CEO, who read the leadership draft. Prepared by the CPTO.</div>
+</main>
+<div id="tip" role="tooltip"></div>
+<script>
+(function(){var t=document.getElementById('tip');
+function show(el,x,y){t.textContent=el.getAttribute('data-tip');t.style.opacity=1;var w=t.offsetWidth;t.style.left=Math.min(x+12,innerWidth-w-8)+'px';t.style.top=(y+14)+'px';}
+document.querySelectorAll('[data-tip]').forEach(function(el){
+el.addEventListener('mousemove',function(ev){show(el,ev.clientX,ev.clientY)});
+el.addEventListener('mouseleave',function(){t.style.opacity=0});
+el.addEventListener('focus',function(){var r=el.getBoundingClientRect();show(el,r.left,r.top+r.height/2)});
+el.addEventListener('blur',function(){t.style.opacity=0});});
+var b=document.querySelector('.themebtn');if(b)b.addEventListener('click',function(){var d=document.documentElement;
+var dark=d.getAttribute('data-theme')?d.getAttribute('data-theme')==='dark':matchMedia('(prefers-color-scheme: dark)').matches;d.setAttribute('data-theme',dark?'light':'dark');});
+})();
+</script></body></html>

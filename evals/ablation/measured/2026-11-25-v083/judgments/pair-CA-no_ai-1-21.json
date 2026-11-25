@@ -1,0 +1,46 @@
+{
+ "id": "pair-CA-no_ai-1-21",
+ "fixture": "no_ai",
+ "kind": "pair",
+ "matchup": "CA",
+ "x": "runs/A/no_ai/1",
+ "y": "runs/C/no_ai/1",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "X",
+    "reason": "X's numbers all recompute (ARR $10.38M\u2192$10.91M, NRR 96.4%, GRR 89.3%, 14 retained onboarding accounts); its one error is a claim, not a number: 'every item is mapped to the $50M ARR objective', though the 22 KTLO items have no objective. Y annualizes $10.3M to $40.9M instead of ~$41.2M, and lists incident data as missing while reporting a 41m time to restore from it."
+   },
+   "no_invented_numbers": {
+    "winner": "X",
+    "reason": "Y's ledger gives the CRM win/loss data a 2026-07-01 to 09-30 window that the undated CRM export doesn't support, and adds an 'Activation: 5 more periods' projection; X flags the missing CRM dates, and its one unsupported inference ('KTLO overrun is probably reactive work') is hedged."
+   },
+   "speed_with_quality": {
+    "winner": "X",
+    "reason": "Both pair 4 deploys a week and 38h lead time with the 7.7% change failure rate and 13h review time, but X also shows rework rising from 11.7% to 15.0% and notes that lead time leaves out merge-to-deploy."
+   },
+   "gaps_shown": {
+    "winner": "X",
+    "reason": "X's data gaps table names the VP Engineering as owner (due Q4) for each gap: revenue vs ARR, missing task success, cost per task, the Guided activation test, and undated CRM deals. Y claims only '1 gap' (Platform & security), wrongly includes incident data in it, and gives the revenue/ARR conflict no owner."
+   },
+   "board_cut_usable": {
+    "winner": "X",
+    "reason": "X's board cut is short: a headline, a scorecard, the decision with its passed 4 Nov deadline, and a data caveat with an owner. Y's board cut repeats the slides, keeps an internal 'Check before the board sees this' note, attaches a ledger appendix, and on slide 18 asks for the decision 'today' without saying the deadline has passed."
+   }
+  },
+  "overall": {
+   "winner": "X",
+   "reason": "X's figures hold up, it ties every gap to an owner, and it brings up the TMS-integration loss signal and the churn-versus-new-ARR picture that Y leaves out. Y has a wrong annualization, gives undated CRM data a Q3 window, contradicts itself on incident data, and its board cut isn't ready to send."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 3340,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 35906,
+  "cost_usd": 0.3545346,
+  "num_turns": 2,
+  "duration_ms": 29255
+ }
+}

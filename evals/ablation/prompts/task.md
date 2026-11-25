@@ -9,3 +9,5 @@ The files are in ./input:
 Write the update as one self-contained HTML file at ./out/update.html. Write the board cut to ./out/board.html.
 
 This is a non-interactive run, so you can't ask questions. Work only from these files.
+
+The CEO has read the draft and signs off the board cut. Where a sign-off is needed, record it as: the CEO.

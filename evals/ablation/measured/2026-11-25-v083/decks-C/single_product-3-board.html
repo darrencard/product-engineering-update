@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Kestrel Labs board cut, 2026-Q3: on hold, waiting for sign-off</title>
+<style>
+body{font:16px/1.5 system-ui,-apple-system,Segoe UI,sans-serif;max-width:44rem;margin:4rem auto;padding:0 1.5rem;color:#1a1a1a}
+h1{font-size:1.5rem;margin-bottom:.25rem}
+.tag{display:inline-block;background:#fdecc8;color:#6b4500;padding:.15rem .6rem;border-radius:4px;font-size:.85rem;font-weight:600}
+li{margin:.4rem 0}
+code{background:#f2f2f2;padding:.1rem .3rem;border-radius:3px}
+</style>
+</head>
+<body>
+<span class="tag">Not rendered: waiting for sign-off</span>
+<h1>Kestrel Labs board cut, 2026-Q3</h1>
+<p>This board cut has not been rendered yet. It needs a named person to give an explicit yes after they have reviewed this draft. This draft was built after the sign-off was recorded in the request, so that yes cannot cover it.</p>
+<h2>Check these before signing off</h2>
+<ul>
+<li><strong>Revenue and ARR do not reconcile.</strong> The finance close shows Q3 revenue of $10.3M. At that rate, that is about $41M a year. Stripe shows ARR of $10.9M. Slide 5 shows R&amp;D as 40.8% of revenue, which depends on the revenue line. Ledger rows L16 to L18.</li>
+<li><strong>The only decision is past its deadline.</strong> The per-load pricing pilot was due on 4 Nov 2026 (slide 18).</li>
+<li><strong>Gaps are due "Q4", not on a date.</strong> Slides 10 and 12 have no data and are assigned to the VP Engineering.</li>
+<li><strong>The data is as of 30 Sep 2026.</strong></li>
+</ul>
+<h2>What the board cut will contain</h2>
+<p>8 slides: 1, 5, 9b, 11, 12, 14, 16 and 18. These are the same slides and figures that are in <code>update.html</code>. Their titles are listed in <code>review.md</code>.</p>
+<h2>To release it</h2>
+<p>Once the named approver says yes, run:<br>
+<code>python3 scripts/render.py run/deck.json --out out/board.html --cut B --signed-off-by "&lt;name&gt;"</code></p>
+</body>
+</html>
