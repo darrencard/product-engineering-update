@@ -1,0 +1,45 @@
+{
+ "id": "pair-no_ai-3-BA",
+ "fixture": "no_ai",
+ "kind": "pair",
+ "x": "runs/B/no_ai/3",
+ "y": "runs/A/no_ai/3",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "Y",
+    "reason": "Both get ARR $10.9M, NRR 96.4%, CFR 7.7% (4/52) and KTLO 22% right, but X's cover claims '16 of 17 slides show data' while slide 1 says 3 slides lack data; Y's figures (e.g. +26% loads, $2.04/load, 5.9% inference share) all recompute, with only the $1.68 plan basis left implicit."
+   },
+   "no_invented_numbers": {
+    "winner": "Y",
+    "reason": "X's board cut asserts 'Signed off by the CEO' and lists a nonexistent slide 12, while Y's extras (two added risks, the $2.04 per-load cost floor) are explicitly labelled as added or as an upper-bound estimate."
+   },
+   "speed_with_quality": {
+    "winner": "tie",
+    "reason": "Both pair deploys 3\u21924 with change failure 5.1%\u21927.7% and review time 9h\u219213h on the delivery and board slides (X slide 9/9b, Y Delivery health and 'What we're watching'), and neither presents speed alone as good news."
+   },
+   "gaps_shown": {
+    "winner": "Y",
+    "reason": "Y plainly flags that Stripe ARR ($10.9M) disagrees with Finance revenue ($10.3M/quarter \u2248 $41M run-rate) and lists missing task success, cost per task and the live-test readout under the VP Engineering owner, while X silently presents $10.9M as ARR on slide 1 and names only the Platform & security gap."
+   },
+   "board_cut_usable": {
+    "winner": "Y",
+    "reason": "Y's board cut is about one page, opens with the headline, scorecard and pricing-pilot decision (noting the passed 4 Nov deadline), while X's board cut carries template text ('Keys J and K'), a reference to a missing slide 12, and Appendix C's product pitch with 'Book a call'."
+   }
+  },
+  "overall": {
+   "winner": "Y",
+   "reason": "Both are numerically sound, but Y shows the Stripe-versus-Finance ARR conflict and the missing agent metrics where X picks Stripe's $10.9M without comment. Y's board cut is short, leads with the answer and the overdue decision, and could go to a board as it is, while X's would need its template and marketing appendices removed first."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 3912,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 38862,
+  "cost_usd": 0.3896226,
+  "num_turns": 2,
+  "duration_ms": 37351
+ }
+}

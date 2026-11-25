@@ -1,0 +1,45 @@
+{
+ "id": "pair-sparse-2-AB",
+ "fixture": "sparse",
+ "kind": "pair",
+ "x": "runs/A/sparse/2",
+ "y": "runs/B/sparse/2",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "X",
+    "reason": "X's figures all recompute correctly (100 items, 31/18/8/21/22 split, 53/37/10 by month, 31/26/43 by line), while Y's cover line '0 of 19 slides show data' contradicts its own ledger rows L01 and L02, which hold real figures."
+   },
+   "no_invented_numbers": {
+    "winner": "X",
+    "reason": "X uses only tracker-derived figures, while Y's samples put the real Kestrel Labs splits next to invented plans (KTLO 'planned at 15%'), revenue of $10.3M and a pricing-pilot ask, which a board could take as fact even with the 'made-up company' label."
+   },
+   "speed_with_quality": {
+    "winner": "tie",
+    "reason": "Neither has real speed or quality metrics: X's monthly throughput (53/37/10) is not called good news and X says reliability is not connected, while Y's slide 9 pairing of deploys with the 5.1% to 7.7% change failure rate exists only in a sample."
+   },
+   "gaps_shown": {
+    "winner": "X",
+    "reason": "X's 'What this update can't tell you yet' table lists each gap with the VP Engineering as owner and Q4 as due date, and flags that the September drop of 10 items may be an export gap; Y says investment mix and line of sight are 'not reported' even though the tracker supports the 78% and the work-type split."
+   },
+   "board_cut_usable": {
+    "winner": "X",
+    "reason": "X's board cut is short, leads with 100 items, 78% roadmap work and the September fall-off, and says plainly there are no asks; Y's board cut is 8 slides of samples with no real data, an invented 'Signed off by the CEO' and a sample ask to approve a pricing pilot."
+   }
+  },
+  "overall": {
+   "winner": "X",
+   "reason": "X reports the quarter's tracker data accurately and states its gaps with an owner and a due date, so it could go to a board as written. Y shows no real data for the quarter, says data is missing when it is present, and puts the real company name and real splits inside 'illustrative' samples full of invented plans and asks."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 1997,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 20796,
+  "cost_usd": 0.2067946,
+  "num_turns": 2,
+  "duration_ms": 23208
+ }
+}

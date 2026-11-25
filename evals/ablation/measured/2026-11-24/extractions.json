@@ -1,0 +1,9204 @@
+{
+ "runs/A/complete/1": [
+  {
+   "metric": "deploys_per_week",
+   "which": "current",
+   "printed": "4"
+  },
+  {
+   "metric": "deploys_per_week",
+   "which": "current",
+   "printed": "4.0"
+  },
+  {
+   "metric": "deploys_per_week",
+   "which": "prior",
+   "printed": "3.0"
+  },
+  {
+   "metric": "deploys_count",
+   "which": "current",
+   "printed": "52"
+  },
+  {
+   "metric": "deploys_count",
+   "which": "prior",
+   "printed": "39"
+  },
+  {
+   "metric": "change_failure_rate",
+   "which": "current",
+   "printed": "7.7%"
+  },
+  {
+   "metric": "change_failure_rate",
+   "which": "prior",
+   "printed": "5.1%"
+  },
+  {
+   "metric": "lead_time",
+   "which": "current",
+   "printed": "38h"
+  },
+  {
+   "metric": "lead_time",
+   "which": "prior",
+   "printed": "52h"
+  },
+  {
+   "metric": "review_time",
+   "which": "current",
+   "printed": "13h"
+  },
+  {
+   "metric": "review_time",
+   "which": "prior",
+   "printed": "9h"
+  },
+  {
+   "metric": "rework_rate",
+   "which": "current",
+   "printed": "15%"
+  },
+  {
+   "metric": "rework_rate",
+   "which": "prior",
+   "printed": "12%"
+  },
+  {
+   "metric": "prs_merged",
+   "which": "current",
+   "printed": "60"
+  },
+  {
+   "metric": "prs_merged",
+   "which": "prior",
+   "printed": "60"
+  },
+  {
+   "metric": "time_to_restore",
+   "which": "current",
+   "printed": "41m"
+  },
+  {
+   "metric": "time_to_restore",
+   "which": "prior",
+   "printed": "46m"
+  },
+  {
+   "metric": "incidents",
+   "which": "current",
+   "printed": "5"
+  },
+  {
+   "metric": "incidents",
+   "which": "prior",
+   "printed": "5"
+  },
+  {
+   "metric": "arr",
+   "which": "current",
+   "printed": "$10.91M"
+  },
+  {
+   "metric": "arr",
+   "which": "prior",
+   "printed": "$10.38M"
+  },
+  {
+   "metric": "arr_growth",
+   "which": "current",
+   "printed": "+5.1%"
+  },
+  {
+   "metric": "arr_change",
+   "which": "current",
+   "printed": "$531K"
+  },
+  {
+   "metric": "nrr",
+   "which": "current",
+   "printed": "96%"
+  },
+  {
+   "metric": "nrr",
+   "which": "current",
+   "printed": "96.4%"
+  },
+  {
+   "metric": "grr",
+   "which": "current",
+   "printed": "89.3%"
+  },
+  {
+   "metric": "expansion_arr",
+   "which": "current",
+   "printed": "$741K"
+  },
+  {
+   "metric": "churned_arr",
+   "which": "current",
+   "printed": "$1.11M"
+  },
+  {
+   "metric": "new_arr",
+   "which": "current",
+   "printed": "$900K"
+  },
+  {
+   "metric": "accounts",
+   "which": "current",
+   "printed": "42"
+  },
+  {
+   "metric": "accounts",
+   "which": "prior",
+   "printed": "40"
+  },
+  {
+   "metric": "analytics:Activation",
+   "which": "current",
+   "printed": "41%"
+  },
+  {
+   "metric": "analytics:Activation",
+   "which": "prior",
+   "printed": "39%"
+  },
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "current",
+   "printed": "23,100"
+  },
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "prior",
+   "printed": "18,400"
+  },
+  {
+   "metric": "analytics:Weekly active dispatchers",
+   "which": "current",
+   "printed": "6,120"
+  },
+  {
+   "metric": "analytics:Weekly active dispatchers",
+   "which": "prior",
+   "printed": "5,890"
+  },
+  {
+   "metric": "finance:Revenue",
+   "which": "current",
+   "printed": "$10.3M"
+  },
+  {
+   "metric": "finance:R&D payroll",
+   "which": "current",
+   "printed": "$3.700M"
+  },
+  {
+   "metric": "finance:Inference (cost of revenue)",
+   "which": "current",
+   "printed": "$612K"
+  },
+  {
+   "metric": "finance:AI tools for the team",
+   "which": "current",
+   "printed": "$90K"
+  },
+  {
+   "metric": "finance:Cloud",
+   "which": "current",
+   "printed": "$410K"
+  },
+  {
+   "metric": "rd_spend",
+   "which": "current",
+   "printed": "$4.200M"
+  },
+  {
+   "metric": "rd_spend",
+   "which": "current",
+   "printed": "$4.20M"
+  },
+  {
+   "metric": "eval_pass:v13",
+   "which": "current",
+   "printed": "82%"
+  },
+  {
+   "metric": "eval_pass:v14",
+   "which": "current",
+   "printed": "86%"
+  },
+  {
+   "metric": "cost_per_task:v13",
+   "which": "current",
+   "printed": "$0.41"
+  },
+  {
+   "metric": "cost_per_task:v14",
+   "which": "current",
+   "printed": "$0.33"
+  },
+  {
+   "metric": "ai_tool_cost",
+   "which": "current",
+   "printed": "$90K"
+  },
+  {
+   "metric": "survey:Developer experience index",
+   "which": "current",
+   "printed": "71"
+  },
+  {
+   "metric": "survey:Developer experience index",
+   "which": "prior",
+   "printed": "68"
+  },
+  {
+   "metric": "deals_won",
+   "which": "current",
+   "printed": "22"
+  },
+  {
+   "metric": "win_rate",
+   "which": "current",
+   "printed": "56%"
+  },
+  {
+   "metric": "items_done",
+   "which": "current",
+   "printed": "100"
+  },
+  {
+   "metric": "mix:Growth",
+   "which": "current",
+   "printed": "8%"
+  },
+  {
+   "metric": "mix:Improve the core",
+   "which": "current",
+   "printed": "18%"
+  },
+  {
+   "metric": "mix:Keep the lights on",
+   "which": "current",
+   "printed": "22%"
+  },
+  {
+   "metric": "mix:New capabilities",
+   "which": "current",
+   "printed": "31%"
+  },
+  {
+   "metric": "mix:Platform & scale",
+   "which": "current",
+   "printed": "21%"
+  }
+ ],
+ "runs/A/complete/2": [
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "current",
+   "printed": "23,100"
+  },
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "current",
+   "printed": "23.1K"
+  },
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "prior",
+   "printed": "18,400"
+  },
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "prior",
+   "printed": "18.4K"
+  },
+  {
+   "metric": "eval_pass:v14",
+   "which": "current",
+   "printed": "86%"
+  },
+  {
+   "metric": "eval_pass:v14",
+   "which": "current",
+   "printed": "86.0%"
+  },
+  {
+   "metric": "eval_pass:v13",
+   "which": "prior",
+   "printed": "82%"
+  },
+  {
+   "metric": "eval_pass:v13",
+   "which": "prior",
+   "printed": "82.0%"
+  },
+  {
+   "metric": "cost_per_task:v14",
+   "which": "current",
+   "printed": "$0.33"
+  },
+  {
+   "metric": "cost_per_task:v13",
+   "which": "prior",
+   "printed": "$0.41"
+  },
+  {
+   "metric": "analytics:Activation",
+   "which": "current",
+   "printed": "41%"
+  },
+  {
+   "metric": "analytics:Activation",
+   "which": "prior",
+   "printed": "39%"
+  },
+  {
+   "metric": "analytics:Weekly active dispatchers",
+   "which": "current",
+   "printed": "6,120"
+  },
+  {
+   "metric": "analytics:Weekly active dispatchers",
+   "which": "prior",
+   "printed": "5,890"
+  },
+  {
+   "metric": "arr",
+   "which": "current",
+   "printed": "$10.91M"
+  },
+  {
+   "metric": "arr",
+   "which": "current",
+   "printed": "$10,911,000"
+  },
+  {
+   "metric": "arr",
+   "which": "current",
+   "printed": "$10.9M"
+  },
+  {
+   "metric": "arr",
+   "which": "prior",
+   "printed": "$10.38M"
+  },
+  {
+   "metric": "arr",
+   "which": "prior",
+   "printed": "$10,380,000"
+  },
+  {
+   "metric": "arr_growth",
+   "which": "current",
+   "printed": "+5.1%"
+  },
+  {
+   "metric": "arr_change",
+   "which": "current",
+   "printed": "+$531K"
+  },
+  {
+   "metric": "nrr",
+   "which": "current",
+   "printed": "96.4%"
+  },
+  {
+   "metric": "grr",
+   "which": "current",
+   "printed": "89.3%"
+  },
+  {
+   "metric": "new_arr",
+   "which": "current",
+   "printed": "$900K"
+  },
+  {
+   "metric": "new_arr",
+   "which": "current",
+   "printed": "+$900,000"
+  },
+  {
+   "metric": "expansion_arr",
+   "which": "current",
+   "printed": "$741K"
+  },
+  {
+   "metric": "expansion_arr",
+   "which": "current",
+   "printed": "+$741,000"
+  },
+  {
+   "metric": "churned_arr",
+   "which": "current",
+   "printed": "$1.11M"
+  },
+  {
+   "metric": "churned_arr",
+   "which": "current",
+   "printed": "\u2212$1,110,000"
+  },
+  {
+   "metric": "accounts",
+   "which": "current",
+   "printed": "42"
+  },
+  {
+   "metric": "accounts",
+   "which": "prior",
+   "printed": "40"
+  },
+  {
+   "metric": "deploys_per_week",
+   "which": "current",
+   "printed": "4.0"
+  },
+  {
+   "metric": "deploys_per_week",
+   "which": "current",
+   "printed": "4"
+  },
+  {
+   "metric": "deploys_per_week",
+   "which": "prior",
+   "printed": "3.0"
+  },
+  {
+   "metric": "deploys_count",
+   "which": "current",
+   "printed": "52"
+  },
+  {
+   "metric": "deploys_count",
+   "which": "prior",
+   "printed": "39"
+  },
+  {
+   "metric": "change_failure_rate",
+   "which": "current",
+   "printed": "7.7%"
+  },
+  {
+   "metric": "change_failure_rate",
+   "which": "prior",
+   "printed": "5.1%"
+  },
+  {
+   "metric": "lead_time",
+   "which": "current",
+   "printed": "38h"
+  },
+  {
+   "metric": "lead_time",
+   "which": "prior",
+   "printed": "52h"
+  },
+  {
+   "metric": "review_time",
+   "which": "current",
+   "printed": "13h"
+  },
+  {
+   "metric": "review_time",
+   "which": "prior",
+   "printed": "9h"
+  },
+  {
+   "metric": "rework_rate",
+   "which": "current",
+   "printed": "15.0%"
+  },
+  {
+   "metric": "rework_rate",
+   "which": "prior",
+   "printed": "11.7%"
+  },
+  {
+   "metric": "time_to_restore",
+   "which": "current",
+   "printed": "41m"
+  },
+  {
+   "metric": "time_to_restore",
+   "which": "prior",
+   "printed": "46m"
+  },
+  {
+   "metric": "incidents",
+   "which": "current",
+   "printed": "5"
+  },
+  {
+   "metric": "incidents",
+   "which": "prior",
+   "printed": "5"
+  },
+  {
+   "metric": "survey:Developer experience index",
+   "which": "current",
+   "printed": "71"
+  },
+  {
+   "metric": "survey:Developer experience index",
+   "which": "prior",
+   "printed": "68"
+  },
+  {
+   "metric": "finance:Revenue",
+   "which": "current",
+   "printed": "$10,300K"
+  },
+  {
+   "metric": "finance:Revenue",
+   "which": "current",
+   "printed": "$10.3M"
+  },
+  {
+   "metric": "finance:R&D payroll",
+   "which": "current",
+   "printed": "$3,700K"
+  },
+  {
+   "metric": "finance:Inference (cost of revenue)",
+   "which": "current",
+   "printed": "$612K"
+  },
+  {
+   "metric": "finance:AI tools for the team",
+   "which": "current",
+   "printed": "$90K"
+  },
+  {
+   "metric": "finance:Cloud",
+   "which": "current",
+   "printed": "$410K"
+  },
+  {
+   "metric": "rd_spend",
+   "which": "current",
+   "printed": "$4,200K"
+  },
+  {
+   "metric": "rd_spend",
+   "which": "current",
+   "printed": "$4.20M"
+  },
+  {
+   "metric": "ai_tool_cost",
+   "which": "current",
+   "printed": "$90K"
+  },
+  {
+   "metric": "ai_weekly_use",
+   "which": "current",
+   "printed": "89%"
+  },
+  {
+   "metric": "ai_weekly_use",
+   "which": "current",
+   "printed": "61%"
+  },
+  {
+   "metric": "deals_won",
+   "which": "current",
+   "printed": "22"
+  },
+  {
+   "metric": "win_rate",
+   "which": "current",
+   "printed": "56%"
+  },
+  {
+   "metric": "items_done",
+   "which": "current",
+   "printed": "100"
+  },
+  {
+   "metric": "mix:New capabilities",
+   "which": "current",
+   "printed": "31%"
+  },
+  {
+   "metric": "mix:Improve the core",
+   "which": "current",
+   "printed": "18%"
+  },
+  {
+   "metric": "mix:Growth",
+   "which": "current",
+   "printed": "8%"
+  },
+  {
+   "metric": "mix:Platform & scale",
+   "which": "current",
+   "printed": "21%"
+  },
+  {
+   "metric": "mix:Keep the lights on",
+   "which": "current",
+   "printed": "22%"
+  }
+ ],
+ "runs/A/complete/3": [
+  {
+   "metric": "deploys_per_week",
+   "which": "current",
+   "printed": "4"
+  },
+  {
+   "metric": "deploys_per_week",
+   "which": "current",
+   "printed": "4.0"
+  },
+  {
+   "metric": "deploys_per_week",
+   "which": "prior",
+   "printed": "3.0"
+  },
+  {
+   "metric": "deploys_count",
+   "which": "current",
+   "printed": "52"
+  },
+  {
+   "metric": "deploys_count",
+   "which": "prior",
+   "printed": "39"
+  },
+  {
+   "metric": "change_failure_rate",
+   "which": "current",
+   "printed": "7.7%"
+  },
+  {
+   "metric": "change_failure_rate",
+   "which": "prior",
+   "printed": "5.1%"
+  },
+  {
+   "metric": "lead_time",
+   "which": "current",
+   "printed": "38h"
+  },
+  {
+   "metric": "lead_time",
+   "which": "prior",
+   "printed": "52h"
+  },
+  {
+   "metric": "review_time",
+   "which": "current",
+   "printed": "13h"
+  },
+  {
+   "metric": "review_time",
+   "which": "prior",
+   "printed": "9h"
+  },
+  {
+   "metric": "rework_rate",
+   "which": "current",
+   "printed": "15%"
+  },
+  {
+   "metric": "rework_rate",
+   "which": "prior",
+   "printed": "12%"
+  },
+  {
+   "metric": "prs_merged",
+   "which": "current",
+   "printed": "60"
+  },
+  {
+   "metric": "prs_merged",
+   "which": "prior",
+   "printed": "60"
+  },
+  {
+   "metric": "time_to_restore",
+   "which": "current",
+   "printed": "41m"
+  },
+  {
+   "metric": "time_to_restore",
+   "which": "prior",
+   "printed": "46m"
+  },
+  {
+   "metric": "incidents",
+   "which": "current",
+   "printed": "5"
+  },
+  {
+   "metric": "incidents",
+   "which": "prior",
+   "printed": "5"
+  },
+  {
+   "metric": "arr",
+   "which": "current",
+   "printed": "$10.91M"
+  },
+  {
+   "metric": "arr",
+   "which": "current",
+   "printed": "$10.9M"
+  },
+  {
+   "metric": "arr",
+   "which": "prior",
+   "printed": "$10.38M"
+  },
+  {
+   "metric": "nrr",
+   "which": "current",
+   "printed": "96.4%"
+  },
+  {
+   "metric": "grr",
+   "which": "current",
+   "printed": "89.3%"
+  },
+  {
+   "metric": "expansion_arr",
+   "which": "current",
+   "printed": "+$741K"
+  },
+  {
+   "metric": "churned_arr",
+   "which": "current",
+   "printed": "\u2212$1.11M"
+  },
+  {
+   "metric": "new_arr",
+   "which": "current",
+   "printed": "$900K"
+  },
+  {
+   "metric": "accounts",
+   "which": "current",
+   "printed": "42"
+  },
+  {
+   "metric": "accounts",
+   "which": "prior",
+   "printed": "40"
+  },
+  {
+   "metric": "analytics:Activation",
+   "which": "current",
+   "printed": "41%"
+  },
+  {
+   "metric": "analytics:Activation",
+   "which": "prior",
+   "printed": "39%"
+  },
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "current",
+   "printed": "23.1K"
+  },
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "current",
+   "printed": "23,100"
+  },
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "prior",
+   "printed": "18.4K"
+  },
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "prior",
+   "printed": "18,400"
+  },
+  {
+   "metric": "analytics:Weekly active dispatchers",
+   "which": "current",
+   "printed": "6,120"
+  },
+  {
+   "metric": "analytics:Weekly active dispatchers",
+   "which": "prior",
+   "printed": "5,890"
+  },
+  {
+   "metric": "finance:Revenue",
+   "which": "current",
+   "printed": "$10.30M"
+  },
+  {
+   "metric": "finance:Revenue",
+   "which": "current",
+   "printed": "$10.3M"
+  },
+  {
+   "metric": "finance:R&D payroll",
+   "which": "current",
+   "printed": "$3,700K"
+  },
+  {
+   "metric": "finance:Inference (cost of revenue)",
+   "which": "current",
+   "printed": "$612K"
+  },
+  {
+   "metric": "finance:AI tools for the team",
+   "which": "current",
+   "printed": "$90K"
+  },
+  {
+   "metric": "finance:Cloud",
+   "which": "current",
+   "printed": "$410K"
+  },
+  {
+   "metric": "rd_share",
+   "which": "current",
+   "printed": "41%"
+  },
+  {
+   "metric": "rd_spend",
+   "which": "current",
+   "printed": "$4,200K"
+  },
+  {
+   "metric": "rd_spend",
+   "which": "current",
+   "printed": "$4.20M"
+  },
+  {
+   "metric": "eval_pass:v13",
+   "which": "prior",
+   "printed": "82%"
+  },
+  {
+   "metric": "eval_pass:v14",
+   "which": "current",
+   "printed": "86%"
+  },
+  {
+   "metric": "cost_per_task:v13",
+   "which": "prior",
+   "printed": "$0.41"
+  },
+  {
+   "metric": "cost_per_task:v14",
+   "which": "current",
+   "printed": "$0.33"
+  },
+  {
+   "metric": "ai_tool_cost",
+   "which": "current",
+   "printed": "$90K"
+  },
+  {
+   "metric": "ai_weekly_use",
+   "which": "current",
+   "printed": "89%"
+  },
+  {
+   "metric": "ai_weekly_use",
+   "which": "current",
+   "printed": "61%"
+  },
+  {
+   "metric": "headcount",
+   "which": "current",
+   "printed": "53"
+  },
+  {
+   "metric": "headcount_plan",
+   "which": "current",
+   "printed": "56"
+  },
+  {
+   "metric": "survey:Developer experience index",
+   "which": "current",
+   "printed": "71"
+  },
+  {
+   "metric": "survey:Developer experience index",
+   "which": "prior",
+   "printed": "68"
+  },
+  {
+   "metric": "deals_won",
+   "which": "current",
+   "printed": "22"
+  },
+  {
+   "metric": "win_rate",
+   "which": "current",
+   "printed": "56%"
+  },
+  {
+   "metric": "items_done",
+   "which": "current",
+   "printed": "100"
+  },
+  {
+   "metric": "mix:New capabilities",
+   "which": "current",
+   "printed": "31%"
+  },
+  {
+   "metric": "mix:Improve the core",
+   "which": "current",
+   "printed": "18%"
+  },
+  {
+   "metric": "mix:Growth",
+   "which": "current",
+   "printed": "8%"
+  },
+  {
+   "metric": "mix:Platform & scale",
+   "which": "current",
+   "printed": "21%"
+  },
+  {
+   "metric": "mix:Keep the lights on",
+   "which": "current",
+   "printed": "22%"
+  }
+ ],
+ "runs/A/conflict_resolved/1": [
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "current",
+   "printed": "23,100"
+  },
+  {
+   "metric": "warehouse:Loads cleared per week",
+   "which": "current",
+   "printed": "21,400"
+  },
+  {
+   "metric": "arr",
+   "which": "current",
+   "printed": "$10.91M"
+  },
+  {
+   "metric": "arr_change",
+   "which": "current",
+   "printed": "+$531K"
+  },
+  {
+   "metric": "churned_arr",
+   "which": "current",
+   "printed": "$1.11M"
+  },
+  {
+   "metric": "nrr",
+   "which": "current",
+   "printed": "96%"
+  },
+  {
+   "metric": "finance:ARR",
+   "which": "current",
+   "printed": "$10.1M"
+  },
+  {
+   "metric": "analytics:Activation",
+   "which": "current",
+   "printed": "41%"
+  },
+  {
+   "metric": "deploys_per_week",
+   "which": "current",
+   "printed": "4"
+  },
+  {
+   "metric": "lead_time",
+   "which": "current",
+   "printed": "38h"
+  },
+  {
+   "metric": "change_failure_rate",
+   "which": "current",
+   "printed": "7.7%"
+  },
+  {
+   "metric": "review_time",
+   "which": "current",
+   "printed": "13h"
+  },
+  {
+   "metric": "finance:Inference (cost of revenue)",
+   "which": "current",
+   "printed": "$612K"
+  },
+  {
+   "metric": "deals_won",
+   "which": "current",
+   "printed": "22"
+  },
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "current",
+   "printed": "23,100"
+  },
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "prior",
+   "printed": "18,400"
+  },
+  {
+   "metric": "arr",
+   "which": "current",
+   "printed": "$10.91M"
+  },
+  {
+   "metric": "arr",
+   "which": "prior",
+   "printed": "$10.38M"
+  },
+  {
+   "metric": "arr_growth",
+   "which": "current",
+   "printed": "+5.1%"
+  },
+  {
+   "metric": "analytics:Activation",
+   "which": "current",
+   "printed": "41%"
+  },
+  {
+   "metric": "analytics:Activation",
+   "which": "prior",
+   "printed": "39%"
+  },
+  {
+   "metric": "analytics:Weekly active dispatchers",
+   "which": "current",
+   "printed": "6,120"
+  },
+  {
+   "metric": "analytics:Weekly active dispatchers",
+   "which": "prior",
+   "printed": "5,890"
+  },
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "prior",
+   "printed": "18,400"
+  },
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "current",
+   "printed": "23,100"
+  },
+  {
+   "metric": "analytics:Activation",
+   "which": "prior",
+   "printed": "39%"
+  },
+  {
+   "metric": "analytics:Activation",
+   "which": "current",
+   "printed": "41%"
+  },
+  {
+   "metric": "analytics:Weekly active dispatchers",
+   "which": "prior",
+   "printed": "5,890"
+  },
+  {
+   "metric": "analytics:Weekly active dispatchers",
+   "which": "current",
+   "printed": "6,120"
+  },
+  {
+   "metric": "warehouse:Loads cleared per week",
+   "which": "current",
+   "printed": "21,400"
+  },
+  {
+   "metric": "arr",
+   "which": "prior",
+   "printed": "$10,380,000"
+  },
+  {
+   "metric": "accounts",
+   "which": "prior",
+   "printed": "40"
+  },
+  {
+   "metric": "new_arr",
+   "which": "current",
+   "printed": "+$900,000"
+  },
+  {
+   "metric": "expansion_arr",
+   "which": "current",
+   "printed": "+$741,000"
+  },
+  {
+   "metric": "churned_arr",
+   "which": "current",
+   "printed": "\u2212$1,110,000"
+  },
+  {
+   "metric": "arr",
+   "which": "current",
+   "printed": "$10,911,000"
+  },
+  {
+   "metric": "accounts",
+   "which": "current",
+   "printed": "42"
+  },
+  {
+   "metric": "arr_change",
+   "which": "current",
+   "printed": "+$531K"
+  },
+  {
+   "metric": "arr_growth",
+   "which": "current",
+   "printed": "+5.1%"
+  },
+  {
+   "metric": "nrr",
+   "which": "current",
+   "printed": "96.4%"
+  },
+  {
+   "metric": "grr",
+   "which": "current",
+   "printed": "89.3%"
+  },
+  {
+   "metric": "finance:ARR",
+   "which": "current",
+   "printed": "$10.1M"
+  },
+  {
+   "metric": "eval_pass:v14",
+   "which": "current",
+   "printed": "86%"
+  },
+  {
+   "metric": "eval_pass:v13",
+   "which": "current",
+   "printed": "82%"
+  },
+  {
+   "metric": "analytics:Activation",
+   "which": "current",
+   "printed": "41%"
+  },
+  {
+   "metric": "analytics:Activation",
+   "which": "prior",
+   "printed": "39%"
+  },
+  {
+   "metric": "analytics:Activation",
+   "which": "current",
+   "printed": "41%"
+  },
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "prior",
+   "printed": "18,400"
+  },
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "current",
+   "printed": "23,100"
+  },
+  {
+   "metric": "analytics:Weekly active dispatchers",
+   "which": "prior",
+   "printed": "5,890"
+  },
+  {
+   "metric": "analytics:Weekly active dispatchers",
+   "which": "current",
+   "printed": "6,120"
+  },
+  {
+   "metric": "cost_per_task:v13",
+   "which": "current",
+   "printed": "$0.41"
+  },
+  {
+   "metric": "cost_per_task:v14",
+   "which": "current",
+   "printed": "$0.33"
+  },
+  {
+   "metric": "change_failure_rate",
+   "which": "prior",
+   "printed": "5.1%"
+  },
+  {
+   "metric": "change_failure_rate",
+   "which": "current",
+   "printed": "7.7%"
+  },
+  {
+   "metric": "win_rate",
+   "which": "current",
+   "printed": "56%"
+  },
+  {
+   "metric": "deals_won",
+   "which": "current",
+   "printed": "22"
+  },
+  {
+   "metric": "mix:Keep the lights on",
+   "which": "current",
+   "printed": "22%"
+  },
+  {
+   "metric": "mix:New capabilities",
+   "which": "current",
+   "printed": "31%"
+  },
+  {
+   "metric": "mix:Improve the core",
+   "which": "current",
+   "printed": "18%"
+  },
+  {
+   "metric": "mix:Growth",
+   "which": "current",
+   "printed": "8%"
+  },
+  {
+   "metric": "mix:Platform & scale",
+   "which": "current",
+   "printed": "21%"
+  },
+  {
+   "metric": "mix:Keep the lights on",
+   "which": "current",
+   "printed": "22%"
+  },
+  {
+   "metric": "items_done",
+   "which": "current",
+   "printed": "100"
+  },
+  {
+   "metric": "deploys_per_week",
+   "which": "prior",
+   "printed": "3.0"
+  },
+  {
+   "metric": "deploys_per_week",
+   "which": "current",
+   "printed": "4.0"
+  },
+  {
+   "metric": "lead_time",
+   "which": "prior",
+   "printed": "52h"
+  },
+  {
+   "metric": "lead_time",
+   "which": "current",
+   "printed": "38h"
+  },
+  {
+   "metric": "change_failure_rate",
+   "which": "prior",
+   "printed": "5.1%"
+  },
+  {
+   "metric": "change_failure_rate",
+   "which": "current",
+   "printed": "7.7%"
+  },
+  {
+   "metric": "time_to_restore",
+   "which": "prior",
+   "printed": "46m"
+  },
+  {
+   "metric": "time_to_restore",
+   "which": "current",
+   "printed": "41m"
+  },
+  {
+   "metric": "review_time",
+   "which": "prior",
+   "printed": "9h"
+  },
+  {
+   "metric": "review_time",
+   "which": "current",
+   "printed": "13h"
+  },
+  {
+   "metric": "rework_rate",
+   "which": "prior",
+   "printed": "11.7%"
+  },
+  {
+   "metric": "rework_rate",
+   "which": "current",
+   "printed": "15.0%"
+  },
+  {
+   "metric": "deploys_count",
+   "which": "current",
+   "printed": "52"
+  },
+  {
+   "metric": "deploys_count",
+   "which": "prior",
+   "printed": "39"
+  },
+  {
+   "metric": "ai_weekly_use",
+   "which": "current",
+   "printed": "61%"
+  },
+  {
+   "metric": "incidents",
+   "which": "current",
+   "printed": "5"
+  },
+  {
+   "metric": "incidents",
+   "which": "prior",
+   "printed": "5"
+  },
+  {
+   "metric": "eval_pass:v13",
+   "which": "current",
+   "printed": "82%"
+  },
+  {
+   "metric": "eval_pass:v14",
+   "which": "current",
+   "printed": "86%"
+  },
+  {
+   "metric": "cost_per_task:v13",
+   "which": "current",
+   "printed": "$0.41"
+  },
+  {
+   "metric": "cost_per_task:v14",
+   "which": "current",
+   "printed": "$0.33"
+  },
+  {
+   "metric": "finance:Inference (cost of revenue)",
+   "which": "current",
+   "printed": "$612K"
+  },
+  {
+   "metric": "ai_weekly_use",
+   "which": "current",
+   "printed": "61%"
+  },
+  {
+   "metric": "ai_tool_cost",
+   "which": "current",
+   "printed": "$90K"
+  },
+  {
+   "metric": "survey:Developer experience index",
+   "which": "prior",
+   "printed": "68"
+  },
+  {
+   "metric": "survey:Developer experience index",
+   "which": "current",
+   "printed": "71"
+  },
+  {
+   "metric": "finance:R&D payroll",
+   "which": "current",
+   "printed": "$3,700K"
+  },
+  {
+   "metric": "finance:AI tools for the team",
+   "which": "current",
+   "printed": "$90K"
+  },
+  {
+   "metric": "finance:Cloud",
+   "which": "current",
+   "printed": "$410K"
+  },
+  {
+   "metric": "rd_spend",
+   "which": "current",
+   "printed": "$4,200K"
+  },
+  {
+   "metric": "arr",
+   "which": "current",
+   "printed": "$10.91M"
+  },
+  {
+   "metric": "finance:ARR",
+   "which": "current",
+   "printed": "$10.1M"
+  },
+  {
+   "metric": "finance:Revenue",
+   "which": "current",
+   "printed": "$10.3M"
+  },
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "current",
+   "printed": "23,100"
+  },
+  {
+   "metric": "warehouse:Loads cleared per week",
+   "which": "current",
+   "printed": "21,400"
+  },
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "current",
+   "printed": "23,100"
+  },
+  {
+   "metric": "arr",
+   "which": "current",
+   "printed": "$10.91M"
+  },
+  {
+   "metric": "arr",
+   "which": "prior",
+   "printed": "$10.38M"
+  },
+  {
+   "metric": "arr",
+   "which": "current",
+   "printed": "$10.91M"
+  },
+  {
+   "metric": "nrr",
+   "which": "current",
+   "printed": "96%"
+  },
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "prior",
+   "printed": "18,400"
+  },
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "current",
+   "printed": "23,100"
+  },
+  {
+   "metric": "analytics:Activation",
+   "which": "prior",
+   "printed": "39%"
+  },
+  {
+   "metric": "analytics:Activation",
+   "which": "current",
+   "printed": "41%"
+  },
+  {
+   "metric": "eval_pass:v13",
+   "which": "current",
+   "printed": "82%"
+  },
+  {
+   "metric": "eval_pass:v14",
+   "which": "current",
+   "printed": "86%"
+  },
+  {
+   "metric": "rd_spend",
+   "which": "current",
+   "printed": "$4.20M"
+  },
+  {
+   "metric": "finance:Inference (cost of revenue)",
+   "which": "current",
+   "printed": "$612K"
+  },
+  {
+   "metric": "finance:ARR",
+   "which": "current",
+   "printed": "$10.1M"
+  },
+  {
+   "metric": "arr",
+   "which": "current",
+   "printed": "$10.91M"
+  },
+  {
+   "metric": "warehouse:Loads cleared per week",
+   "which": "current",
+   "printed": "21,400"
+  },
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "current",
+   "printed": "23,100"
+  },
+  {
+   "metric": "arr_change",
+   "which": "current",
+   "printed": "$531K"
+  },
+  {
+   "metric": "new_arr",
+   "which": "current",
+   "printed": "$900K"
+  },
+  {
+   "metric": "expansion_arr",
+   "which": "current",
+   "printed": "$741K"
+  },
+  {
+   "metric": "churned_arr",
+   "which": "current",
+   "printed": "$1.11M"
+  },
+  {
+   "metric": "deploys_per_week",
+   "which": "current",
+   "printed": "4"
+  },
+  {
+   "metric": "change_failure_rate",
+   "which": "current",
+   "printed": "7.7%"
+  }
+ ],
+ "runs/A/conflict_resolved/2": [
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "current",
+   "printed": "23,100"
+  },
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "current",
+   "printed": "23.1K"
+  },
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "prior",
+   "printed": "18,400"
+  },
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "prior",
+   "printed": "18.4K"
+  },
+  {
+   "metric": "warehouse:Loads cleared per week",
+   "which": "current",
+   "printed": "21,400"
+  },
+  {
+   "metric": "warehouse:Loads cleared per week",
+   "which": "current",
+   "printed": "21.4K"
+  },
+  {
+   "metric": "arr",
+   "which": "current",
+   "printed": "$10.91M"
+  },
+  {
+   "metric": "arr",
+   "which": "current",
+   "printed": "$10,911,000"
+  },
+  {
+   "metric": "arr",
+   "which": "prior",
+   "printed": "$10.38M"
+  },
+  {
+   "metric": "arr",
+   "which": "prior",
+   "printed": "$10,380,000"
+  },
+  {
+   "metric": "arr_growth",
+   "which": "current",
+   "printed": "5.1%"
+  },
+  {
+   "metric": "nrr",
+   "which": "current",
+   "printed": "96%"
+  },
+  {
+   "metric": "nrr",
+   "which": "current",
+   "printed": "96.4%"
+  },
+  {
+   "metric": "grr",
+   "which": "current",
+   "printed": "89.3%"
+  },
+  {
+   "metric": "expansion_arr",
+   "which": "current",
+   "printed": "$741K"
+  },
+  {
+   "metric": "expansion_arr",
+   "which": "current",
+   "printed": "+$741,000"
+  },
+  {
+   "metric": "churned_arr",
+   "which": "current",
+   "printed": "$1.11M"
+  },
+  {
+   "metric": "churned_arr",
+   "which": "current",
+   "printed": "\u2212$1,110,000"
+  },
+  {
+   "metric": "new_arr",
+   "which": "current",
+   "printed": "+$900,000"
+  },
+  {
+   "metric": "accounts",
+   "which": "current",
+   "printed": "42"
+  },
+  {
+   "metric": "accounts",
+   "which": "prior",
+   "printed": "40"
+  },
+  {
+   "metric": "analytics:Activation",
+   "which": "current",
+   "printed": "41%"
+  },
+  {
+   "metric": "analytics:Activation",
+   "which": "prior",
+   "printed": "39%"
+  },
+  {
+   "metric": "analytics:Weekly active dispatchers",
+   "which": "current",
+   "printed": "6,120"
+  },
+  {
+   "metric": "analytics:Weekly active dispatchers",
+   "which": "prior",
+   "printed": "5,890"
+  },
+  {
+   "metric": "finance:ARR",
+   "which": "current",
+   "printed": "$10.10M"
+  },
+  {
+   "metric": "finance:Revenue",
+   "which": "current",
+   "printed": "$10.3M"
+  },
+  {
+   "metric": "finance:R&D payroll",
+   "which": "current",
+   "printed": "$3,700,000"
+  },
+  {
+   "metric": "finance:AI tools for the team",
+   "which": "current",
+   "printed": "$90,000"
+  },
+  {
+   "metric": "finance:AI tools for the team",
+   "which": "current",
+   "printed": "$90K"
+  },
+  {
+   "metric": "finance:Cloud",
+   "which": "current",
+   "printed": "$410,000"
+  },
+  {
+   "metric": "finance:Inference (cost of revenue)",
+   "which": "current",
+   "printed": "$612K"
+  },
+  {
+   "metric": "finance:Inference (cost of revenue)",
+   "which": "current",
+   "printed": "$612,000"
+  },
+  {
+   "metric": "rd_share",
+   "which": "current",
+   "printed": "40.8%"
+  },
+  {
+   "metric": "rd_spend",
+   "which": "current",
+   "printed": "$4,200,000"
+  },
+  {
+   "metric": "rd_spend",
+   "which": "current",
+   "printed": "$4.20M"
+  },
+  {
+   "metric": "eval_pass:v13",
+   "which": "prior",
+   "printed": "82%"
+  },
+  {
+   "metric": "cost_per_task:v13",
+   "which": "prior",
+   "printed": "$0.41"
+  },
+  {
+   "metric": "eval_pass:v14",
+   "which": "current",
+   "printed": "86%"
+  },
+  {
+   "metric": "cost_per_task:v14",
+   "which": "current",
+   "printed": "$0.33"
+  },
+  {
+   "metric": "ai_tool_cost",
+   "which": "current",
+   "printed": "$90K"
+  },
+  {
+   "metric": "ai_tool_cost",
+   "which": "current",
+   "printed": "$90,000"
+  },
+  {
+   "metric": "survey:Developer experience index",
+   "which": "current",
+   "printed": "71"
+  },
+  {
+   "metric": "survey:Developer experience index",
+   "which": "prior",
+   "printed": "68"
+  },
+  {
+   "metric": "deals_won",
+   "which": "current",
+   "printed": "22"
+  },
+  {
+   "metric": "win_rate",
+   "which": "current",
+   "printed": "56%"
+  },
+  {
+   "metric": "items_done",
+   "which": "current",
+   "printed": "100"
+  },
+  {
+   "metric": "mix:New capabilities",
+   "which": "current",
+   "printed": "31%"
+  },
+  {
+   "metric": "mix:Improve the core",
+   "which": "current",
+   "printed": "18%"
+  },
+  {
+   "metric": "mix:Growth",
+   "which": "current",
+   "printed": "8%"
+  },
+  {
+   "metric": "mix:Platform & scale",
+   "which": "current",
+   "printed": "21%"
+  },
+  {
+   "metric": "mix:Keep the lights on",
+   "which": "current",
+   "printed": "22%"
+  },
+  {
+   "metric": "customer_requests",
+   "which": "current",
+   "printed": "7"
+  },
+  {
+   "metric": "deploys_per_week",
+   "which": "current",
+   "printed": "4.0"
+  },
+  {
+   "metric": "deploys_per_week",
+   "which": "prior",
+   "printed": "3.0"
+  },
+  {
+   "metric": "deploys_count",
+   "which": "current",
+   "printed": "52"
+  },
+  {
+   "metric": "deploys_count",
+   "which": "prior",
+   "printed": "39"
+  },
+  {
+   "metric": "change_failure_rate",
+   "which": "current",
+   "printed": "7.7%"
+  },
+  {
+   "metric": "change_failure_rate",
+   "which": "prior",
+   "printed": "5.1%"
+  },
+  {
+   "metric": "lead_time",
+   "which": "current",
+   "printed": "38h"
+  },
+  {
+   "metric": "lead_time",
+   "which": "prior",
+   "printed": "52h"
+  },
+  {
+   "metric": "time_to_restore",
+   "which": "current",
+   "printed": "41m"
+  },
+  {
+   "metric": "time_to_restore",
+   "which": "prior",
+   "printed": "46m"
+  },
+  {
+   "metric": "review_time",
+   "which": "current",
+   "printed": "13h"
+  },
+  {
+   "metric": "review_time",
+   "which": "prior",
+   "printed": "9h"
+  },
+  {
+   "metric": "rework_rate",
+   "which": "current",
+   "printed": "15%"
+  },
+  {
+   "metric": "rework_rate",
+   "which": "prior",
+   "printed": "12%"
+  },
+  {
+   "metric": "incidents",
+   "which": "current",
+   "printed": "5"
+  },
+  {
+   "metric": "incidents",
+   "which": "prior",
+   "printed": "5"
+  }
+ ],
+ "runs/A/conflict_resolved/3": [
+  {
+   "metric": "deploys_per_week",
+   "which": "current",
+   "printed": "4"
+  },
+  {
+   "metric": "deploys_per_week",
+   "which": "current",
+   "printed": "4.0"
+  },
+  {
+   "metric": "deploys_per_week",
+   "which": "prior",
+   "printed": "3.0"
+  },
+  {
+   "metric": "deploys_count",
+   "which": "current",
+   "printed": "52"
+  },
+  {
+   "metric": "deploys_count",
+   "which": "prior",
+   "printed": "39"
+  },
+  {
+   "metric": "change_failure_rate",
+   "which": "current",
+   "printed": "7.7%"
+  },
+  {
+   "metric": "change_failure_rate",
+   "which": "prior",
+   "printed": "5.1%"
+  },
+  {
+   "metric": "lead_time",
+   "which": "current",
+   "printed": "38h"
+  },
+  {
+   "metric": "lead_time",
+   "which": "prior",
+   "printed": "52h"
+  },
+  {
+   "metric": "review_time",
+   "which": "current",
+   "printed": "13h"
+  },
+  {
+   "metric": "review_time",
+   "which": "prior",
+   "printed": "9h"
+  },
+  {
+   "metric": "rework_rate",
+   "which": "current",
+   "printed": "15.0%"
+  },
+  {
+   "metric": "rework_rate",
+   "which": "prior",
+   "printed": "11.7%"
+  },
+  {
+   "metric": "prs_merged",
+   "which": "current",
+   "printed": "60"
+  },
+  {
+   "metric": "prs_merged",
+   "which": "prior",
+   "printed": "60"
+  },
+  {
+   "metric": "time_to_restore",
+   "which": "current",
+   "printed": "41m"
+  },
+  {
+   "metric": "time_to_restore",
+   "which": "prior",
+   "printed": "46m"
+  },
+  {
+   "metric": "incidents",
+   "which": "current",
+   "printed": "5"
+  },
+  {
+   "metric": "incidents",
+   "which": "prior",
+   "printed": "5"
+  },
+  {
+   "metric": "arr",
+   "which": "current",
+   "printed": "$10.91M"
+  },
+  {
+   "metric": "arr",
+   "which": "current",
+   "printed": "$10,911,000"
+  },
+  {
+   "metric": "arr",
+   "which": "prior",
+   "printed": "$10.38M"
+  },
+  {
+   "metric": "arr",
+   "which": "prior",
+   "printed": "$10,380,000"
+  },
+  {
+   "metric": "arr_growth",
+   "which": "current",
+   "printed": "5.1%"
+  },
+  {
+   "metric": "arr_growth",
+   "which": "current",
+   "printed": "5%"
+  },
+  {
+   "metric": "nrr",
+   "which": "current",
+   "printed": "96.4%"
+  },
+  {
+   "metric": "grr",
+   "which": "current",
+   "printed": "89.3%"
+  },
+  {
+   "metric": "expansion_arr",
+   "which": "current",
+   "printed": "$741K"
+  },
+  {
+   "metric": "expansion_arr",
+   "which": "current",
+   "printed": "+$741,000"
+  },
+  {
+   "metric": "churned_arr",
+   "which": "current",
+   "printed": "$1.11M"
+  },
+  {
+   "metric": "churned_arr",
+   "which": "current",
+   "printed": "\u2212$1,110,000"
+  },
+  {
+   "metric": "new_arr",
+   "which": "current",
+   "printed": "$900K"
+  },
+  {
+   "metric": "new_arr",
+   "which": "current",
+   "printed": "+$900,000"
+  },
+  {
+   "metric": "accounts",
+   "which": "current",
+   "printed": "42"
+  },
+  {
+   "metric": "accounts",
+   "which": "prior",
+   "printed": "40"
+  },
+  {
+   "metric": "analytics:Activation",
+   "which": "current",
+   "printed": "41%"
+  },
+  {
+   "metric": "analytics:Activation",
+   "which": "prior",
+   "printed": "39%"
+  },
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "current",
+   "printed": "23,100"
+  },
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "prior",
+   "printed": "18,400"
+  },
+  {
+   "metric": "analytics:Weekly active dispatchers",
+   "which": "current",
+   "printed": "6,120"
+  },
+  {
+   "metric": "analytics:Weekly active dispatchers",
+   "which": "prior",
+   "printed": "5,890"
+  },
+  {
+   "metric": "warehouse:Loads cleared per week",
+   "which": "current",
+   "printed": "21,400"
+  },
+  {
+   "metric": "finance:Revenue",
+   "which": "current",
+   "printed": "$10.3M"
+  },
+  {
+   "metric": "finance:R&D payroll",
+   "which": "current",
+   "printed": "$3,700,000"
+  },
+  {
+   "metric": "finance:Inference (cost of revenue)",
+   "which": "current",
+   "printed": "$612,000"
+  },
+  {
+   "metric": "finance:Inference (cost of revenue)",
+   "which": "current",
+   "printed": "$612K"
+  },
+  {
+   "metric": "finance:AI tools for the team",
+   "which": "current",
+   "printed": "$90,000"
+  },
+  {
+   "metric": "finance:Cloud",
+   "which": "current",
+   "printed": "$410,000"
+  },
+  {
+   "metric": "finance:ARR",
+   "which": "current",
+   "printed": "$10.1M"
+  },
+  {
+   "metric": "rd_spend",
+   "which": "current",
+   "printed": "$4,200,000"
+  },
+  {
+   "metric": "rd_spend",
+   "which": "current",
+   "printed": "$4.20M"
+  },
+  {
+   "metric": "eval_pass:v13",
+   "which": "prior",
+   "printed": "82.0%"
+  },
+  {
+   "metric": "eval_pass:v13",
+   "which": "prior",
+   "printed": "82%"
+  },
+  {
+   "metric": "cost_per_task:v13",
+   "which": "prior",
+   "printed": "$0.41"
+  },
+  {
+   "metric": "eval_pass:v14",
+   "which": "current",
+   "printed": "86.0%"
+  },
+  {
+   "metric": "eval_pass:v14",
+   "which": "current",
+   "printed": "86%"
+  },
+  {
+   "metric": "cost_per_task:v14",
+   "which": "current",
+   "printed": "$0.33"
+  },
+  {
+   "metric": "ai_tool_cost",
+   "which": "current",
+   "printed": "$90K"
+  },
+  {
+   "metric": "headcount",
+   "which": "current",
+   "printed": "44"
+  },
+  {
+   "metric": "headcount_plan",
+   "which": "current",
+   "printed": "46"
+  },
+  {
+   "metric": "survey:Developer experience index",
+   "which": "current",
+   "printed": "71"
+  },
+  {
+   "metric": "survey:Developer experience index",
+   "which": "prior",
+   "printed": "68"
+  },
+  {
+   "metric": "deals_won",
+   "which": "current",
+   "printed": "22"
+  },
+  {
+   "metric": "win_rate",
+   "which": "current",
+   "printed": "56%"
+  },
+  {
+   "metric": "items_done",
+   "which": "current",
+   "printed": "100"
+  },
+  {
+   "metric": "mix:Growth",
+   "which": "current",
+   "printed": "8%"
+  },
+  {
+   "metric": "mix:Improve the core",
+   "which": "current",
+   "printed": "18%"
+  },
+  {
+   "metric": "mix:Keep the lights on",
+   "which": "current",
+   "printed": "22%"
+  },
+  {
+   "metric": "mix:New capabilities",
+   "which": "current",
+   "printed": "31%"
+  },
+  {
+   "metric": "mix:Platform & scale",
+   "which": "current",
+   "printed": "21%"
+  },
+  {
+   "metric": "customer_requests",
+   "which": "current",
+   "printed": "7"
+  }
+ ],
+ "runs/A/conflicting/1": [
+  {
+   "metric": "finance:ARR",
+   "which": "current",
+   "printed": "$10.1M"
+  },
+  {
+   "metric": "arr",
+   "which": "current",
+   "printed": "$10.9M"
+  },
+  {
+   "metric": "arr",
+   "which": "current",
+   "printed": "$10.91M"
+  },
+  {
+   "metric": "arr",
+   "which": "prior",
+   "printed": "$10.38M"
+  },
+  {
+   "metric": "accounts",
+   "which": "prior",
+   "printed": "40"
+  },
+  {
+   "metric": "accounts",
+   "which": "current",
+   "printed": "42"
+  },
+  {
+   "metric": "churned_arr",
+   "which": "current",
+   "printed": "$1.11M"
+  },
+  {
+   "metric": "expansion_arr",
+   "which": "current",
+   "printed": "$0.74M"
+  },
+  {
+   "metric": "new_arr",
+   "which": "current",
+   "printed": "$0.90M"
+  },
+  {
+   "metric": "nrr",
+   "which": "current",
+   "printed": "96%"
+  },
+  {
+   "metric": "nrr",
+   "which": "current",
+   "printed": "96.4%"
+  },
+  {
+   "metric": "grr",
+   "which": "current",
+   "printed": "89.3%"
+  },
+  {
+   "metric": "warehouse:Loads cleared per week",
+   "which": "current",
+   "printed": "21.4K"
+  },
+  {
+   "metric": "warehouse:Loads cleared per week",
+   "which": "current",
+   "printed": "21,400"
+  },
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "current",
+   "printed": "23.1K"
+  },
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "current",
+   "printed": "23,100"
+  },
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "prior",
+   "printed": "18.4K"
+  },
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "prior",
+   "printed": "18,400"
+  },
+  {
+   "metric": "analytics:Activation",
+   "which": "current",
+   "printed": "41%"
+  },
+  {
+   "metric": "analytics:Activation",
+   "which": "prior",
+   "printed": "39%"
+  },
+  {
+   "metric": "analytics:Weekly active dispatchers",
+   "which": "current",
+   "printed": "6,120"
+  },
+  {
+   "metric": "analytics:Weekly active dispatchers",
+   "which": "prior",
+   "printed": "5,890"
+  },
+  {
+   "metric": "eval_pass:v13",
+   "which": "prior",
+   "printed": "82%"
+  },
+  {
+   "metric": "eval_pass:v14",
+   "which": "current",
+   "printed": "86%"
+  },
+  {
+   "metric": "cost_per_task:v13",
+   "which": "prior",
+   "printed": "$0.41"
+  },
+  {
+   "metric": "cost_per_task:v14",
+   "which": "current",
+   "printed": "$0.33"
+  },
+  {
+   "metric": "finance:Inference (cost of revenue)",
+   "which": "current",
+   "printed": "$612K"
+  },
+  {
+   "metric": "deploys_per_week",
+   "which": "prior",
+   "printed": "3"
+  },
+  {
+   "metric": "deploys_per_week",
+   "which": "current",
+   "printed": "4"
+  },
+  {
+   "metric": "deploys_per_week",
+   "which": "prior",
+   "printed": "3.0"
+  },
+  {
+   "metric": "deploys_per_week",
+   "which": "current",
+   "printed": "4.0"
+  },
+  {
+   "metric": "lead_time",
+   "which": "prior",
+   "printed": "52h"
+  },
+  {
+   "metric": "lead_time",
+   "which": "current",
+   "printed": "38h"
+  },
+  {
+   "metric": "change_failure_rate",
+   "which": "current",
+   "printed": "7.7%"
+  },
+  {
+   "metric": "change_failure_rate",
+   "which": "prior",
+   "printed": "5.1%"
+  },
+  {
+   "metric": "review_time",
+   "which": "current",
+   "printed": "13h"
+  },
+  {
+   "metric": "review_time",
+   "which": "prior",
+   "printed": "9h"
+  },
+  {
+   "metric": "time_to_restore",
+   "which": "prior",
+   "printed": "46m"
+  },
+  {
+   "metric": "time_to_restore",
+   "which": "current",
+   "printed": "41m"
+  },
+  {
+   "metric": "rework_rate",
+   "which": "prior",
+   "printed": "11.7%"
+  },
+  {
+   "metric": "rework_rate",
+   "which": "current",
+   "printed": "15.0%"
+  },
+  {
+   "metric": "incidents",
+   "which": "prior",
+   "printed": "5"
+  },
+  {
+   "metric": "incidents",
+   "which": "current",
+   "printed": "5"
+  },
+  {
+   "metric": "deals_won",
+   "which": "current",
+   "printed": "22"
+  },
+  {
+   "metric": "win_rate",
+   "which": "current",
+   "printed": "56%"
+  },
+  {
+   "metric": "items_done",
+   "which": "current",
+   "printed": "100"
+  },
+  {
+   "metric": "mix:New capabilities",
+   "which": "current",
+   "printed": "31%"
+  },
+  {
+   "metric": "mix:Improve the core",
+   "which": "current",
+   "printed": "18%"
+  },
+  {
+   "metric": "mix:Growth",
+   "which": "current",
+   "printed": "8%"
+  },
+  {
+   "metric": "mix:Platform & scale",
+   "which": "current",
+   "printed": "21%"
+  },
+  {
+   "metric": "mix:Keep the lights on",
+   "which": "current",
+   "printed": "22%"
+  },
+  {
+   "metric": "ai_tool_cost",
+   "which": "current",
+   "printed": "$90K"
+  },
+  {
+   "metric": "finance:AI tools for the team",
+   "which": "current",
+   "printed": "$90K"
+  },
+  {
+   "metric": "survey:Developer experience index",
+   "which": "prior",
+   "printed": "68"
+  },
+  {
+   "metric": "survey:Developer experience index",
+   "which": "current",
+   "printed": "71"
+  },
+  {
+   "metric": "finance:R&D payroll",
+   "which": "current",
+   "printed": "$3.70M"
+  },
+  {
+   "metric": "finance:Cloud",
+   "which": "current",
+   "printed": "$410K"
+  },
+  {
+   "metric": "rd_spend",
+   "which": "current",
+   "printed": "$4.20M"
+  },
+  {
+   "metric": "finance:Revenue",
+   "which": "current",
+   "printed": "$10.3M"
+  },
+  {
+   "metric": "headcount",
+   "which": "current",
+   "printed": "44"
+  },
+  {
+   "metric": "headcount_plan",
+   "which": "current",
+   "printed": "46"
+  }
+ ],
+ "runs/A/conflicting/2": [
+  {
+   "metric": "arr",
+   "which": "current",
+   "printed": "$10.1M"
+  },
+  {
+   "metric": "finance:ARR",
+   "which": "current",
+   "printed": "$10.1M"
+  },
+  {
+   "metric": "analytics:Activation",
+   "which": "current",
+   "printed": "41%"
+  },
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "current",
+   "printed": "23.1K"
+  },
+  {
+   "metric": "warehouse:Loads cleared per week",
+   "which": "current",
+   "printed": "21.4K"
+  },
+  {
+   "metric": "arr",
+   "which": "current",
+   "printed": "$10.91M"
+  },
+  {
+   "metric": "nrr",
+   "which": "current",
+   "printed": "96%"
+  },
+  {
+   "metric": "grr",
+   "which": "current",
+   "printed": "89%"
+  },
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "current",
+   "printed": "23,100"
+  },
+  {
+   "metric": "warehouse:Loads cleared per week",
+   "which": "current",
+   "printed": "21,400"
+  },
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "prior",
+   "printed": "18,400"
+  },
+  {
+   "metric": "analytics:Weekly active dispatchers",
+   "which": "current",
+   "printed": "6,120"
+  },
+  {
+   "metric": "analytics:Activation",
+   "which": "prior",
+   "printed": "39%"
+  },
+  {
+   "metric": "eval_pass:v14",
+   "which": "current",
+   "printed": "86%"
+  },
+  {
+   "metric": "eval_pass:v13",
+   "which": "prior",
+   "printed": "82%"
+  },
+  {
+   "metric": "cost_per_task:v14",
+   "which": "current",
+   "printed": "$0.33"
+  },
+  {
+   "metric": "deploys_per_week",
+   "which": "current",
+   "printed": "4.0"
+  },
+  {
+   "metric": "time_to_restore",
+   "which": "current",
+   "printed": "41 min"
+  },
+  {
+   "metric": "change_failure_rate",
+   "which": "current",
+   "printed": "7.7%"
+  },
+  {
+   "metric": "review_time",
+   "which": "current",
+   "printed": "13h"
+  },
+  {
+   "metric": "deals_won",
+   "which": "current",
+   "printed": "22"
+  },
+  {
+   "metric": "analytics:Weekly active dispatchers",
+   "which": "prior",
+   "printed": "5,890"
+  },
+  {
+   "metric": "finance:Revenue",
+   "which": "current",
+   "printed": "$10.3M"
+  },
+  {
+   "metric": "accounts",
+   "which": "prior",
+   "printed": "40"
+  },
+  {
+   "metric": "arr",
+   "which": "prior",
+   "printed": "$10.38M"
+  },
+  {
+   "metric": "expansion_arr",
+   "which": "current",
+   "printed": "+$0.74M"
+  },
+  {
+   "metric": "churned_arr",
+   "which": "current",
+   "printed": "\u2212$1.11M"
+  },
+  {
+   "metric": "new_arr",
+   "which": "current",
+   "printed": "+$0.90M"
+  },
+  {
+   "metric": "accounts",
+   "which": "current",
+   "printed": "42"
+  },
+  {
+   "metric": "arr",
+   "which": "current",
+   "printed": "$10.10M"
+  },
+  {
+   "metric": "finance:ARR",
+   "which": "current",
+   "printed": "$10.10M"
+  },
+  {
+   "metric": "win_rate",
+   "which": "current",
+   "printed": "56%"
+  },
+  {
+   "metric": "cost_per_task:v13",
+   "which": "prior",
+   "printed": "$0.41"
+  },
+  {
+   "metric": "change_failure_rate",
+   "which": "prior",
+   "printed": "5.1%"
+  },
+  {
+   "metric": "items_done",
+   "which": "current",
+   "printed": "100"
+  },
+  {
+   "metric": "mix:New capabilities",
+   "which": "current",
+   "printed": "31%"
+  },
+  {
+   "metric": "mix:Improve the core",
+   "which": "current",
+   "printed": "18%"
+  },
+  {
+   "metric": "mix:Growth",
+   "which": "current",
+   "printed": "8%"
+  },
+  {
+   "metric": "mix:Platform & scale",
+   "which": "current",
+   "printed": "21%"
+  },
+  {
+   "metric": "mix:Keep the lights on",
+   "which": "current",
+   "printed": "22%"
+  },
+  {
+   "metric": "deploys_per_week",
+   "which": "prior",
+   "printed": "3.0"
+  },
+  {
+   "metric": "deploys_count",
+   "which": "prior",
+   "printed": "39"
+  },
+  {
+   "metric": "deploys_count",
+   "which": "current",
+   "printed": "52"
+  },
+  {
+   "metric": "time_to_restore",
+   "which": "prior",
+   "printed": "46 min"
+  },
+  {
+   "metric": "review_time",
+   "which": "prior",
+   "printed": "9h"
+  },
+  {
+   "metric": "rework_rate",
+   "which": "prior",
+   "printed": "12%"
+  },
+  {
+   "metric": "rework_rate",
+   "which": "current",
+   "printed": "15%"
+  },
+  {
+   "metric": "survey:Developer experience index",
+   "which": "prior",
+   "printed": "68"
+  },
+  {
+   "metric": "survey:Developer experience index",
+   "which": "current",
+   "printed": "71"
+  },
+  {
+   "metric": "incidents",
+   "which": "current",
+   "printed": "5"
+  },
+  {
+   "metric": "finance:R&D payroll",
+   "which": "current",
+   "printed": "$3,700K"
+  },
+  {
+   "metric": "finance:AI tools for the team",
+   "which": "current",
+   "printed": "$90K"
+  },
+  {
+   "metric": "ai_tool_cost",
+   "which": "current",
+   "printed": "$90K"
+  },
+  {
+   "metric": "finance:Cloud",
+   "which": "current",
+   "printed": "$410K"
+  },
+  {
+   "metric": "rd_spend",
+   "which": "current",
+   "printed": "$4,200K"
+  },
+  {
+   "metric": "finance:Inference (cost of revenue)",
+   "which": "current",
+   "printed": "$612K"
+  },
+  {
+   "metric": "rd_share",
+   "which": "current",
+   "printed": "41%"
+  },
+  {
+   "metric": "rd_spend",
+   "which": "current",
+   "printed": "$4.20M"
+  },
+  {
+   "metric": "deploys_per_week",
+   "which": "current",
+   "printed": "4"
+  }
+ ],
+ "runs/A/conflicting/3": [
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "current",
+   "printed": "23,100"
+  },
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "current",
+   "printed": "23.1K"
+  },
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "prior",
+   "printed": "18,400"
+  },
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "prior",
+   "printed": "18.4K"
+  },
+  {
+   "metric": "warehouse:Loads cleared per week",
+   "which": "current",
+   "printed": "21,400"
+  },
+  {
+   "metric": "warehouse:Loads cleared per week",
+   "which": "current",
+   "printed": "21.4K"
+  },
+  {
+   "metric": "analytics:Weekly active dispatchers",
+   "which": "current",
+   "printed": "6,120"
+  },
+  {
+   "metric": "analytics:Weekly active dispatchers",
+   "which": "prior",
+   "printed": "5,890"
+  },
+  {
+   "metric": "analytics:Activation",
+   "which": "current",
+   "printed": "41%"
+  },
+  {
+   "metric": "analytics:Activation",
+   "which": "prior",
+   "printed": "39%"
+  },
+  {
+   "metric": "arr",
+   "which": "current",
+   "printed": "$10.1M"
+  },
+  {
+   "metric": "arr",
+   "which": "current",
+   "printed": "$10.91M"
+  },
+  {
+   "metric": "arr",
+   "which": "current",
+   "printed": "$10.9M"
+  },
+  {
+   "metric": "arr",
+   "which": "prior",
+   "printed": "$10.38M"
+  },
+  {
+   "metric": "finance:ARR",
+   "which": "current",
+   "printed": "$10.1M"
+  },
+  {
+   "metric": "nrr",
+   "which": "current",
+   "printed": "96%"
+  },
+  {
+   "metric": "nrr",
+   "which": "current",
+   "printed": "96.4%"
+  },
+  {
+   "metric": "grr",
+   "which": "current",
+   "printed": "89.3%"
+  },
+  {
+   "metric": "expansion_arr",
+   "which": "current",
+   "printed": "$741K"
+  },
+  {
+   "metric": "churned_arr",
+   "which": "current",
+   "printed": "$1.11M"
+  },
+  {
+   "metric": "new_arr",
+   "which": "current",
+   "printed": "$900K"
+  },
+  {
+   "metric": "accounts",
+   "which": "current",
+   "printed": "40"
+  },
+  {
+   "metric": "finance:Revenue",
+   "which": "current",
+   "printed": "$10.3M"
+  },
+  {
+   "metric": "deploys_per_week",
+   "which": "current",
+   "printed": "4"
+  },
+  {
+   "metric": "deploys_per_week",
+   "which": "current",
+   "printed": "4.0"
+  },
+  {
+   "metric": "deploys_per_week",
+   "which": "prior",
+   "printed": "3.0"
+  },
+  {
+   "metric": "deploys_count",
+   "which": "current",
+   "printed": "52"
+  },
+  {
+   "metric": "deploys_count",
+   "which": "prior",
+   "printed": "39"
+  },
+  {
+   "metric": "lead_time",
+   "which": "current",
+   "printed": "38h"
+  },
+  {
+   "metric": "lead_time",
+   "which": "prior",
+   "printed": "52h"
+  },
+  {
+   "metric": "change_failure_rate",
+   "which": "current",
+   "printed": "7.7%"
+  },
+  {
+   "metric": "change_failure_rate",
+   "which": "prior",
+   "printed": "5.1%"
+  },
+  {
+   "metric": "review_time",
+   "which": "current",
+   "printed": "13h"
+  },
+  {
+   "metric": "review_time",
+   "which": "prior",
+   "printed": "9h"
+  },
+  {
+   "metric": "rework_rate",
+   "which": "current",
+   "printed": "15.0%"
+  },
+  {
+   "metric": "rework_rate",
+   "which": "prior",
+   "printed": "11.7%"
+  },
+  {
+   "metric": "time_to_restore",
+   "which": "current",
+   "printed": "41m"
+  },
+  {
+   "metric": "time_to_restore",
+   "which": "prior",
+   "printed": "46m"
+  },
+  {
+   "metric": "incidents",
+   "which": "current",
+   "printed": "Five"
+  },
+  {
+   "metric": "incidents",
+   "which": "prior",
+   "printed": "Five"
+  },
+  {
+   "metric": "survey:Developer experience index",
+   "which": "current",
+   "printed": "71"
+  },
+  {
+   "metric": "survey:Developer experience index",
+   "which": "prior",
+   "printed": "68"
+  },
+  {
+   "metric": "eval_pass:v14",
+   "which": "current",
+   "printed": "86%"
+  },
+  {
+   "metric": "cost_per_task:v14",
+   "which": "current",
+   "printed": "$0.33"
+  },
+  {
+   "metric": "eval_pass:v13",
+   "which": "prior",
+   "printed": "82%"
+  },
+  {
+   "metric": "cost_per_task:v13",
+   "which": "prior",
+   "printed": "$0.41"
+  },
+  {
+   "metric": "finance:R&D payroll",
+   "which": "current",
+   "printed": "$3.70M"
+  },
+  {
+   "metric": "finance:AI tools for the team",
+   "which": "current",
+   "printed": "$90K"
+  },
+  {
+   "metric": "finance:Cloud",
+   "which": "current",
+   "printed": "$410K"
+  },
+  {
+   "metric": "finance:Inference (cost of revenue)",
+   "which": "current",
+   "printed": "$612K"
+  },
+  {
+   "metric": "rd_spend",
+   "which": "current",
+   "printed": "$4.20M"
+  },
+  {
+   "metric": "rd_share",
+   "which": "current",
+   "printed": "41%"
+  },
+  {
+   "metric": "ai_tool_cost",
+   "which": "current",
+   "printed": "$90K"
+  },
+  {
+   "metric": "ai_weekly_use",
+   "which": "current",
+   "printed": "89%"
+  },
+  {
+   "metric": "ai_weekly_use",
+   "which": "current",
+   "printed": "61%"
+  },
+  {
+   "metric": "headcount",
+   "which": "current",
+   "printed": "44"
+  },
+  {
+   "metric": "headcount_plan",
+   "which": "current",
+   "printed": "46"
+  },
+  {
+   "metric": "deals_won",
+   "which": "current",
+   "printed": "22"
+  },
+  {
+   "metric": "win_rate",
+   "which": "current",
+   "printed": "56%"
+  },
+  {
+   "metric": "items_done",
+   "which": "current",
+   "printed": "100"
+  },
+  {
+   "metric": "mix:New capabilities",
+   "which": "current",
+   "printed": "31%"
+  },
+  {
+   "metric": "mix:Improve the core",
+   "which": "current",
+   "printed": "18%"
+  },
+  {
+   "metric": "mix:Growth",
+   "which": "current",
+   "printed": "8%"
+  },
+  {
+   "metric": "mix:Platform & scale",
+   "which": "current",
+   "printed": "21%"
+  },
+  {
+   "metric": "mix:Keep the lights on",
+   "which": "current",
+   "printed": "22%"
+  }
+ ],
+ "runs/A/no_ai/1": [
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "current",
+   "printed": "23,100"
+  },
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "prior",
+   "printed": "18,400"
+  },
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "current",
+   "printed": "23.1K"
+  },
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "prior",
+   "printed": "18.4K"
+  },
+  {
+   "metric": "analytics:Activation",
+   "which": "current",
+   "printed": "41%"
+  },
+  {
+   "metric": "analytics:Activation",
+   "which": "prior",
+   "printed": "39%"
+  },
+  {
+   "metric": "analytics:Weekly active dispatchers",
+   "which": "current",
+   "printed": "6,120"
+  },
+  {
+   "metric": "analytics:Weekly active dispatchers",
+   "which": "prior",
+   "printed": "5,890"
+  },
+  {
+   "metric": "arr",
+   "which": "current",
+   "printed": "$10.91M"
+  },
+  {
+   "metric": "arr",
+   "which": "prior",
+   "printed": "$10.38M"
+  },
+  {
+   "metric": "arr",
+   "which": "current",
+   "printed": "$10,911,000"
+  },
+  {
+   "metric": "arr",
+   "which": "prior",
+   "printed": "$10,380,000"
+  },
+  {
+   "metric": "arr",
+   "which": "current",
+   "printed": "$10.9M"
+  },
+  {
+   "metric": "arr_growth",
+   "which": "current",
+   "printed": "5%"
+  },
+  {
+   "metric": "arr_growth",
+   "which": "current",
+   "printed": "+5.1%"
+  },
+  {
+   "metric": "arr_change",
+   "which": "current",
+   "printed": "$531K"
+  },
+  {
+   "metric": "arr_change",
+   "which": "current",
+   "printed": "+$531K"
+  },
+  {
+   "metric": "nrr",
+   "which": "current",
+   "printed": "96%"
+  },
+  {
+   "metric": "nrr",
+   "which": "current",
+   "printed": "96.4%"
+  },
+  {
+   "metric": "grr",
+   "which": "current",
+   "printed": "89.3%"
+  },
+  {
+   "metric": "churned_arr",
+   "which": "current",
+   "printed": "$1.11M"
+  },
+  {
+   "metric": "churned_arr",
+   "which": "current",
+   "printed": "\u2212$1,110,000"
+  },
+  {
+   "metric": "expansion_arr",
+   "which": "current",
+   "printed": "$741,000"
+  },
+  {
+   "metric": "new_arr",
+   "which": "current",
+   "printed": "$900,000"
+  },
+  {
+   "metric": "accounts",
+   "which": "prior",
+   "printed": "40"
+  },
+  {
+   "metric": "accounts",
+   "which": "current",
+   "printed": "42"
+  },
+  {
+   "metric": "win_rate",
+   "which": "current",
+   "printed": "56%"
+  },
+  {
+   "metric": "deals_won",
+   "which": "current",
+   "printed": "22"
+  },
+  {
+   "metric": "finance:Revenue",
+   "which": "current",
+   "printed": "$10.3M"
+  },
+  {
+   "metric": "finance:Inference (cost of revenue)",
+   "which": "current",
+   "printed": "$612K"
+  },
+  {
+   "metric": "finance:R&D payroll",
+   "which": "current",
+   "printed": "$3,700K"
+  },
+  {
+   "metric": "finance:AI tools for the team",
+   "which": "current",
+   "printed": "$90K"
+  },
+  {
+   "metric": "finance:Cloud",
+   "which": "current",
+   "printed": "$410K"
+  },
+  {
+   "metric": "rd_spend",
+   "which": "current",
+   "printed": "$4,200K"
+  },
+  {
+   "metric": "rd_spend",
+   "which": "current",
+   "printed": "$4.20M"
+  },
+  {
+   "metric": "deploys_per_week",
+   "which": "current",
+   "printed": "4.0"
+  },
+  {
+   "metric": "deploys_per_week",
+   "which": "prior",
+   "printed": "3.0"
+  },
+  {
+   "metric": "deploys_per_week",
+   "which": "current",
+   "printed": "4"
+  },
+  {
+   "metric": "deploys_count",
+   "which": "current",
+   "printed": "52"
+  },
+  {
+   "metric": "lead_time",
+   "which": "current",
+   "printed": "38h"
+  },
+  {
+   "metric": "lead_time",
+   "which": "prior",
+   "printed": "52h"
+  },
+  {
+   "metric": "change_failure_rate",
+   "which": "current",
+   "printed": "7.7%"
+  },
+  {
+   "metric": "change_failure_rate",
+   "which": "prior",
+   "printed": "5.1%"
+  },
+  {
+   "metric": "review_time",
+   "which": "current",
+   "printed": "13h"
+  },
+  {
+   "metric": "review_time",
+   "which": "prior",
+   "printed": "9h"
+  },
+  {
+   "metric": "time_to_restore",
+   "which": "current",
+   "printed": "41m"
+  },
+  {
+   "metric": "time_to_restore",
+   "which": "prior",
+   "printed": "46m"
+  },
+  {
+   "metric": "incidents",
+   "which": "current",
+   "printed": "5"
+  },
+  {
+   "metric": "rework_rate",
+   "which": "current",
+   "printed": "15%"
+  },
+  {
+   "metric": "rework_rate",
+   "which": "prior",
+   "printed": "12%"
+  },
+  {
+   "metric": "prs_merged",
+   "which": "current",
+   "printed": "60"
+  },
+  {
+   "metric": "prs_merged",
+   "which": "prior",
+   "printed": "60"
+  },
+  {
+   "metric": "items_done",
+   "which": "current",
+   "printed": "100"
+  },
+  {
+   "metric": "mix:New capabilities",
+   "which": "current",
+   "printed": "31%"
+  },
+  {
+   "metric": "mix:Improve the core",
+   "which": "current",
+   "printed": "18%"
+  },
+  {
+   "metric": "mix:Growth",
+   "which": "current",
+   "printed": "8%"
+  },
+  {
+   "metric": "mix:Platform & scale",
+   "which": "current",
+   "printed": "21%"
+  },
+  {
+   "metric": "mix:Keep the lights on",
+   "which": "current",
+   "printed": "22%"
+  },
+  {
+   "metric": "survey:Developer experience index",
+   "which": "current",
+   "printed": "71"
+  },
+  {
+   "metric": "survey:Developer experience index",
+   "which": "prior",
+   "printed": "68"
+  }
+ ],
+ "runs/A/no_ai/2": [
+  {
+   "metric": "deploys_per_week",
+   "which": "current",
+   "printed": "4"
+  },
+  {
+   "metric": "deploys_per_week",
+   "which": "current",
+   "printed": "4.0"
+  },
+  {
+   "metric": "deploys_per_week",
+   "which": "prior",
+   "printed": "3.0"
+  },
+  {
+   "metric": "deploys_per_week",
+   "which": "prior",
+   "printed": "3"
+  },
+  {
+   "metric": "deploys_count",
+   "which": "current",
+   "printed": "52"
+  },
+  {
+   "metric": "deploys_count",
+   "which": "prior",
+   "printed": "39"
+  },
+  {
+   "metric": "change_failure_rate",
+   "which": "current",
+   "printed": "7.7%"
+  },
+  {
+   "metric": "change_failure_rate",
+   "which": "prior",
+   "printed": "5.1%"
+  },
+  {
+   "metric": "lead_time",
+   "which": "current",
+   "printed": "38h"
+  },
+  {
+   "metric": "lead_time",
+   "which": "prior",
+   "printed": "52h"
+  },
+  {
+   "metric": "review_time",
+   "which": "current",
+   "printed": "13h"
+  },
+  {
+   "metric": "review_time",
+   "which": "prior",
+   "printed": "9h"
+  },
+  {
+   "metric": "rework_rate",
+   "which": "current",
+   "printed": "15.0%"
+  },
+  {
+   "metric": "rework_rate",
+   "which": "prior",
+   "printed": "11.7%"
+  },
+  {
+   "metric": "time_to_restore",
+   "which": "current",
+   "printed": "41m"
+  },
+  {
+   "metric": "time_to_restore",
+   "which": "prior",
+   "printed": "46m"
+  },
+  {
+   "metric": "incidents",
+   "which": "current",
+   "printed": "5"
+  },
+  {
+   "metric": "incidents",
+   "which": "prior",
+   "printed": "5"
+  },
+  {
+   "metric": "arr",
+   "which": "current",
+   "printed": "$10.91M"
+  },
+  {
+   "metric": "arr",
+   "which": "current",
+   "printed": "10,911,000"
+  },
+  {
+   "metric": "arr",
+   "which": "prior",
+   "printed": "$10.38M"
+  },
+  {
+   "metric": "arr",
+   "which": "prior",
+   "printed": "10,380,000"
+  },
+  {
+   "metric": "arr_growth",
+   "which": "current",
+   "printed": "5.1%"
+  },
+  {
+   "metric": "arr_change",
+   "which": "current",
+   "printed": "$531K"
+  },
+  {
+   "metric": "nrr",
+   "which": "current",
+   "printed": "96.4%"
+  },
+  {
+   "metric": "grr",
+   "which": "current",
+   "printed": "89.3%"
+  },
+  {
+   "metric": "expansion_arr",
+   "which": "current",
+   "printed": "$741K"
+  },
+  {
+   "metric": "expansion_arr",
+   "which": "current",
+   "printed": "+741,000"
+  },
+  {
+   "metric": "churned_arr",
+   "which": "current",
+   "printed": "$1.11M"
+  },
+  {
+   "metric": "churned_arr",
+   "which": "current",
+   "printed": "\u22121,110,000"
+  },
+  {
+   "metric": "new_arr",
+   "which": "current",
+   "printed": "$900K"
+  },
+  {
+   "metric": "new_arr",
+   "which": "current",
+   "printed": "+900,000"
+  },
+  {
+   "metric": "accounts",
+   "which": "current",
+   "printed": "42"
+  },
+  {
+   "metric": "accounts",
+   "which": "prior",
+   "printed": "40"
+  },
+  {
+   "metric": "analytics:Activation",
+   "which": "current",
+   "printed": "41%"
+  },
+  {
+   "metric": "analytics:Activation",
+   "which": "prior",
+   "printed": "39%"
+  },
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "current",
+   "printed": "23,100"
+  },
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "prior",
+   "printed": "18,400"
+  },
+  {
+   "metric": "analytics:Weekly active dispatchers",
+   "which": "current",
+   "printed": "6,120"
+  },
+  {
+   "metric": "analytics:Weekly active dispatchers",
+   "which": "prior",
+   "printed": "5,890"
+  },
+  {
+   "metric": "finance:Revenue",
+   "which": "current",
+   "printed": "$10.3M"
+  },
+  {
+   "metric": "finance:Revenue",
+   "which": "current",
+   "printed": "$10,300K"
+  },
+  {
+   "metric": "finance:R&D payroll",
+   "which": "current",
+   "printed": "$3,700K"
+  },
+  {
+   "metric": "finance:Inference (cost of revenue)",
+   "which": "current",
+   "printed": "$612K"
+  },
+  {
+   "metric": "finance:AI tools for the team",
+   "which": "current",
+   "printed": "$90K"
+  },
+  {
+   "metric": "finance:Cloud",
+   "which": "current",
+   "printed": "$410K"
+  },
+  {
+   "metric": "rd_share",
+   "which": "current",
+   "printed": "40.8%"
+  },
+  {
+   "metric": "rd_spend",
+   "which": "current",
+   "printed": "$4,200K"
+  },
+  {
+   "metric": "rd_spend",
+   "which": "current",
+   "printed": "$4.20M"
+  },
+  {
+   "metric": "survey:Developer experience index",
+   "which": "current",
+   "printed": "71"
+  },
+  {
+   "metric": "survey:Developer experience index",
+   "which": "prior",
+   "printed": "68"
+  },
+  {
+   "metric": "deals_won",
+   "which": "current",
+   "printed": "22"
+  },
+  {
+   "metric": "win_rate",
+   "which": "current",
+   "printed": "56%"
+  },
+  {
+   "metric": "items_done",
+   "which": "current",
+   "printed": "100"
+  },
+  {
+   "metric": "mix:New capabilities",
+   "which": "current",
+   "printed": "31%"
+  },
+  {
+   "metric": "mix:Improve the core",
+   "which": "current",
+   "printed": "18%"
+  },
+  {
+   "metric": "mix:Growth",
+   "which": "current",
+   "printed": "8%"
+  },
+  {
+   "metric": "mix:Platform & scale",
+   "which": "current",
+   "printed": "21%"
+  },
+  {
+   "metric": "mix:Keep the lights on",
+   "which": "current",
+   "printed": "22%"
+  },
+  {
+   "metric": "customer_requests",
+   "which": "current",
+   "printed": "8"
+  }
+ ],
+ "runs/A/no_ai/3": [
+  {
+   "metric": "deploys_count",
+   "which": "current",
+   "printed": "52"
+  },
+  {
+   "metric": "deploys_per_week",
+   "which": "current",
+   "printed": "4"
+  },
+  {
+   "metric": "deploys_per_week",
+   "which": "current",
+   "printed": "4.0"
+  },
+  {
+   "metric": "deploys_per_week",
+   "which": "prior",
+   "printed": "3.0"
+  },
+  {
+   "metric": "change_failure_rate",
+   "which": "current",
+   "printed": "7.7%"
+  },
+  {
+   "metric": "change_failure_rate",
+   "which": "prior",
+   "printed": "5.1%"
+  },
+  {
+   "metric": "lead_time",
+   "which": "current",
+   "printed": "38h"
+  },
+  {
+   "metric": "lead_time",
+   "which": "prior",
+   "printed": "52h"
+  },
+  {
+   "metric": "review_time",
+   "which": "current",
+   "printed": "13h"
+  },
+  {
+   "metric": "review_time",
+   "which": "prior",
+   "printed": "9h"
+  },
+  {
+   "metric": "rework_rate",
+   "which": "current",
+   "printed": "15.0%"
+  },
+  {
+   "metric": "rework_rate",
+   "which": "prior",
+   "printed": "11.7%"
+  },
+  {
+   "metric": "prs_merged",
+   "which": "current",
+   "printed": "60"
+  },
+  {
+   "metric": "time_to_restore",
+   "which": "current",
+   "printed": "41m"
+  },
+  {
+   "metric": "time_to_restore",
+   "which": "prior",
+   "printed": "46m"
+  },
+  {
+   "metric": "incidents",
+   "which": "current",
+   "printed": "5"
+  },
+  {
+   "metric": "arr",
+   "which": "current",
+   "printed": "$10.91M"
+  },
+  {
+   "metric": "arr",
+   "which": "current",
+   "printed": "$10.9M"
+  },
+  {
+   "metric": "arr",
+   "which": "prior",
+   "printed": "$10.38M"
+  },
+  {
+   "metric": "arr_growth",
+   "which": "current",
+   "printed": "+5.1%"
+  },
+  {
+   "metric": "nrr",
+   "which": "current",
+   "printed": "96.4%"
+  },
+  {
+   "metric": "grr",
+   "which": "current",
+   "printed": "89.3%"
+  },
+  {
+   "metric": "expansion_arr",
+   "which": "current",
+   "printed": "+$0.74M"
+  },
+  {
+   "metric": "churned_arr",
+   "which": "current",
+   "printed": "\u2212$1.11M"
+  },
+  {
+   "metric": "churned_arr",
+   "which": "current",
+   "printed": "$1.11M"
+  },
+  {
+   "metric": "new_arr",
+   "which": "current",
+   "printed": "+$0.90M"
+  },
+  {
+   "metric": "accounts",
+   "which": "current",
+   "printed": "42"
+  },
+  {
+   "metric": "accounts",
+   "which": "prior",
+   "printed": "40"
+  },
+  {
+   "metric": "analytics:Activation",
+   "which": "current",
+   "printed": "41%"
+  },
+  {
+   "metric": "analytics:Activation",
+   "which": "prior",
+   "printed": "39%"
+  },
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "current",
+   "printed": "23,100"
+  },
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "prior",
+   "printed": "18,400"
+  },
+  {
+   "metric": "analytics:Weekly active dispatchers",
+   "which": "current",
+   "printed": "6,120"
+  },
+  {
+   "metric": "analytics:Weekly active dispatchers",
+   "which": "prior",
+   "printed": "5,890"
+  },
+  {
+   "metric": "finance:Revenue",
+   "which": "current",
+   "printed": "$10.3M"
+  },
+  {
+   "metric": "finance:R&D payroll",
+   "which": "current",
+   "printed": "$3,700K"
+  },
+  {
+   "metric": "finance:Inference (cost of revenue)",
+   "which": "current",
+   "printed": "$612K"
+  },
+  {
+   "metric": "finance:AI tools for the team",
+   "which": "current",
+   "printed": "$90K"
+  },
+  {
+   "metric": "finance:Cloud",
+   "which": "current",
+   "printed": "$410K"
+  },
+  {
+   "metric": "rd_share",
+   "which": "current",
+   "printed": "40.8%"
+  },
+  {
+   "metric": "rd_spend",
+   "which": "current",
+   "printed": "$4,200K"
+  },
+  {
+   "metric": "rd_spend",
+   "which": "current",
+   "printed": "$4.20M"
+  },
+  {
+   "metric": "headcount",
+   "which": "current",
+   "printed": "44"
+  },
+  {
+   "metric": "headcount_plan",
+   "which": "current",
+   "printed": "46"
+  },
+  {
+   "metric": "survey:Developer experience index",
+   "which": "current",
+   "printed": "71"
+  },
+  {
+   "metric": "survey:Developer experience index",
+   "which": "prior",
+   "printed": "68"
+  },
+  {
+   "metric": "deals_won",
+   "which": "current",
+   "printed": "22"
+  },
+  {
+   "metric": "win_rate",
+   "which": "current",
+   "printed": "56%"
+  },
+  {
+   "metric": "items_done",
+   "which": "current",
+   "printed": "100"
+  },
+  {
+   "metric": "mix:Growth",
+   "which": "current",
+   "printed": "8%"
+  },
+  {
+   "metric": "mix:Improve the core",
+   "which": "current",
+   "printed": "18%"
+  },
+  {
+   "metric": "mix:Keep the lights on",
+   "which": "current",
+   "printed": "22%"
+  },
+  {
+   "metric": "mix:New capabilities",
+   "which": "current",
+   "printed": "31%"
+  },
+  {
+   "metric": "mix:Platform & scale",
+   "which": "current",
+   "printed": "21%"
+  },
+  {
+   "metric": "customer_requests",
+   "which": "current",
+   "printed": "7"
+  }
+ ],
+ "runs/A/single_product/1": [
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "current",
+   "printed": "23,100"
+  },
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "prior",
+   "printed": "18,400"
+  },
+  {
+   "metric": "analytics:Weekly active dispatchers",
+   "which": "current",
+   "printed": "6,120"
+  },
+  {
+   "metric": "analytics:Weekly active dispatchers",
+   "which": "prior",
+   "printed": "5,890"
+  },
+  {
+   "metric": "analytics:Activation",
+   "which": "current",
+   "printed": "41%"
+  },
+  {
+   "metric": "analytics:Activation",
+   "which": "prior",
+   "printed": "39%"
+  },
+  {
+   "metric": "eval_pass:v13",
+   "which": "prior",
+   "printed": "82%"
+  },
+  {
+   "metric": "eval_pass:v14",
+   "which": "current",
+   "printed": "86%"
+  },
+  {
+   "metric": "cost_per_task:v13",
+   "which": "prior",
+   "printed": "$0.41"
+  },
+  {
+   "metric": "cost_per_task:v14",
+   "which": "current",
+   "printed": "$0.33"
+  },
+  {
+   "metric": "finance:Inference (cost of revenue)",
+   "which": "current",
+   "printed": "$612K"
+  },
+  {
+   "metric": "deploys_per_week",
+   "which": "current",
+   "printed": "4"
+  },
+  {
+   "metric": "deploys_per_week",
+   "which": "current",
+   "printed": "4.0"
+  },
+  {
+   "metric": "deploys_per_week",
+   "which": "prior",
+   "printed": "3.0"
+  },
+  {
+   "metric": "change_failure_rate",
+   "which": "current",
+   "printed": "7.7%"
+  },
+  {
+   "metric": "change_failure_rate",
+   "which": "prior",
+   "printed": "5.1%"
+  },
+  {
+   "metric": "review_time",
+   "which": "current",
+   "printed": "13h"
+  },
+  {
+   "metric": "review_time",
+   "which": "prior",
+   "printed": "9h"
+  },
+  {
+   "metric": "lead_time",
+   "which": "current",
+   "printed": "38h"
+  },
+  {
+   "metric": "lead_time",
+   "which": "prior",
+   "printed": "52h"
+  },
+  {
+   "metric": "time_to_restore",
+   "which": "current",
+   "printed": "41m"
+  },
+  {
+   "metric": "time_to_restore",
+   "which": "prior",
+   "printed": "46m"
+  },
+  {
+   "metric": "rework_rate",
+   "which": "current",
+   "printed": "15.0%"
+  },
+  {
+   "metric": "rework_rate",
+   "which": "prior",
+   "printed": "11.7%"
+  },
+  {
+   "metric": "survey:Developer experience index",
+   "which": "current",
+   "printed": "71"
+  },
+  {
+   "metric": "survey:Developer experience index",
+   "which": "prior",
+   "printed": "68"
+  },
+  {
+   "metric": "deploys_count",
+   "which": "current",
+   "printed": "52"
+  },
+  {
+   "metric": "prs_merged",
+   "which": "current",
+   "printed": "60"
+  },
+  {
+   "metric": "incidents",
+   "which": "current",
+   "printed": "5"
+  },
+  {
+   "metric": "mix:Keep the lights on",
+   "which": "current",
+   "printed": "22%"
+  },
+  {
+   "metric": "mix:New capabilities",
+   "which": "current",
+   "printed": "31%"
+  },
+  {
+   "metric": "mix:Improve the core",
+   "which": "current",
+   "printed": "18%"
+  },
+  {
+   "metric": "mix:Growth",
+   "which": "current",
+   "printed": "8%"
+  },
+  {
+   "metric": "mix:Platform & scale",
+   "which": "current",
+   "printed": "21%"
+  },
+  {
+   "metric": "items_done",
+   "which": "current",
+   "printed": "100"
+  },
+  {
+   "metric": "finance:Revenue",
+   "which": "current",
+   "printed": "$10.3M"
+  },
+  {
+   "metric": "accounts",
+   "which": "prior",
+   "printed": "40"
+  },
+  {
+   "metric": "accounts",
+   "which": "current",
+   "printed": "42"
+  },
+  {
+   "metric": "arr",
+   "which": "prior",
+   "printed": "$10.38M"
+  },
+  {
+   "metric": "arr",
+   "which": "current",
+   "printed": "$10.91M"
+  },
+  {
+   "metric": "arr",
+   "which": "current",
+   "printed": "$10.9M"
+  },
+  {
+   "metric": "arr_growth",
+   "which": "current",
+   "printed": "5.1%"
+  },
+  {
+   "metric": "expansion_arr",
+   "which": "current",
+   "printed": "+$0.74M"
+  },
+  {
+   "metric": "new_arr",
+   "which": "current",
+   "printed": "+$0.90M"
+  },
+  {
+   "metric": "churned_arr",
+   "which": "current",
+   "printed": "\u2212$1.11M"
+  },
+  {
+   "metric": "nrr",
+   "which": "current",
+   "printed": "96.4%"
+  },
+  {
+   "metric": "nrr",
+   "which": "current",
+   "printed": "96%"
+  },
+  {
+   "metric": "grr",
+   "which": "current",
+   "printed": "89.3%"
+  },
+  {
+   "metric": "grr",
+   "which": "current",
+   "printed": "89%"
+  },
+  {
+   "metric": "deals_won",
+   "which": "current",
+   "printed": "22"
+  },
+  {
+   "metric": "win_rate",
+   "which": "current",
+   "printed": "56%"
+  },
+  {
+   "metric": "finance:R&D payroll",
+   "which": "current",
+   "printed": "$3,700K"
+  },
+  {
+   "metric": "finance:AI tools for the team",
+   "which": "current",
+   "printed": "$90K"
+  },
+  {
+   "metric": "ai_tool_cost",
+   "which": "current",
+   "printed": "$90K"
+  },
+  {
+   "metric": "finance:Cloud",
+   "which": "current",
+   "printed": "$410K"
+  },
+  {
+   "metric": "rd_spend",
+   "which": "current",
+   "printed": "$4,200K"
+  },
+  {
+   "metric": "rd_spend",
+   "which": "current",
+   "printed": "$4.2M"
+  },
+  {
+   "metric": "rd_share",
+   "which": "current",
+   "printed": "40.8%"
+  }
+ ],
+ "runs/A/single_product/2": [
+  {
+   "metric": "deploys_count",
+   "which": "current",
+   "printed": "52"
+  },
+  {
+   "metric": "deploys_per_week",
+   "which": "current",
+   "printed": "4.0"
+  },
+  {
+   "metric": "deploys_per_week",
+   "which": "prior",
+   "printed": "3.0"
+  },
+  {
+   "metric": "change_failure_rate",
+   "which": "current",
+   "printed": "7.7%"
+  },
+  {
+   "metric": "change_failure_rate",
+   "which": "prior",
+   "printed": "5.1%"
+  },
+  {
+   "metric": "lead_time",
+   "which": "current",
+   "printed": "38h"
+  },
+  {
+   "metric": "lead_time",
+   "which": "prior",
+   "printed": "52h"
+  },
+  {
+   "metric": "review_time",
+   "which": "current",
+   "printed": "13h"
+  },
+  {
+   "metric": "review_time",
+   "which": "prior",
+   "printed": "9h"
+  },
+  {
+   "metric": "rework_rate",
+   "which": "current",
+   "printed": "15.0%"
+  },
+  {
+   "metric": "rework_rate",
+   "which": "prior",
+   "printed": "11.7%"
+  },
+  {
+   "metric": "time_to_restore",
+   "which": "current",
+   "printed": "41m"
+  },
+  {
+   "metric": "time_to_restore",
+   "which": "prior",
+   "printed": "46m"
+  },
+  {
+   "metric": "incidents",
+   "which": "current",
+   "printed": "5"
+  },
+  {
+   "metric": "arr",
+   "which": "current",
+   "printed": "$10.9M"
+  },
+  {
+   "metric": "arr",
+   "which": "current",
+   "printed": "$10.91M"
+  },
+  {
+   "metric": "arr",
+   "which": "prior",
+   "printed": "$10.38M"
+  },
+  {
+   "metric": "arr_growth",
+   "which": "current",
+   "printed": "5%"
+  },
+  {
+   "metric": "arr_growth",
+   "which": "current",
+   "printed": "+5.1%"
+  },
+  {
+   "metric": "arr_change",
+   "which": "current",
+   "printed": "+$531K"
+  },
+  {
+   "metric": "nrr",
+   "which": "current",
+   "printed": "96%"
+  },
+  {
+   "metric": "nrr",
+   "which": "current",
+   "printed": "96.4%"
+  },
+  {
+   "metric": "grr",
+   "which": "current",
+   "printed": "89.3%"
+  },
+  {
+   "metric": "expansion_arr",
+   "which": "current",
+   "printed": "+$741K"
+  },
+  {
+   "metric": "churned_arr",
+   "which": "current",
+   "printed": "\u2212$1,110K"
+  },
+  {
+   "metric": "churned_arr",
+   "which": "current",
+   "printed": "$1.1M"
+  },
+  {
+   "metric": "new_arr",
+   "which": "current",
+   "printed": "+$900K"
+  },
+  {
+   "metric": "accounts",
+   "which": "current",
+   "printed": "42"
+  },
+  {
+   "metric": "accounts",
+   "which": "prior",
+   "printed": "40"
+  },
+  {
+   "metric": "analytics:Activation",
+   "which": "current",
+   "printed": "41%"
+  },
+  {
+   "metric": "analytics:Activation",
+   "which": "prior",
+   "printed": "39%"
+  },
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "current",
+   "printed": "23,100"
+  },
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "current",
+   "printed": "23.1K"
+  },
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "prior",
+   "printed": "18,400"
+  },
+  {
+   "metric": "analytics:Weekly active dispatchers",
+   "which": "current",
+   "printed": "6,120"
+  },
+  {
+   "metric": "analytics:Weekly active dispatchers",
+   "which": "prior",
+   "printed": "5,890"
+  },
+  {
+   "metric": "finance:Revenue",
+   "which": "current",
+   "printed": "$10.3M"
+  },
+  {
+   "metric": "finance:R&D payroll",
+   "which": "current",
+   "printed": "$3,700K"
+  },
+  {
+   "metric": "finance:Inference (cost of revenue)",
+   "which": "current",
+   "printed": "$612K"
+  },
+  {
+   "metric": "finance:AI tools for the team",
+   "which": "current",
+   "printed": "$90K"
+  },
+  {
+   "metric": "finance:Cloud",
+   "which": "current",
+   "printed": "$410K"
+  },
+  {
+   "metric": "rd_spend",
+   "which": "current",
+   "printed": "$4,200K"
+  },
+  {
+   "metric": "rd_spend",
+   "which": "current",
+   "printed": "$4.20M"
+  },
+  {
+   "metric": "eval_pass:v13",
+   "which": "prior",
+   "printed": "82.0%"
+  },
+  {
+   "metric": "eval_pass:v13",
+   "which": "prior",
+   "printed": "82%"
+  },
+  {
+   "metric": "cost_per_task:v13",
+   "which": "prior",
+   "printed": "$0.41"
+  },
+  {
+   "metric": "eval_pass:v14",
+   "which": "current",
+   "printed": "86.0%"
+  },
+  {
+   "metric": "eval_pass:v14",
+   "which": "current",
+   "printed": "86%"
+  },
+  {
+   "metric": "cost_per_task:v14",
+   "which": "current",
+   "printed": "$0.33"
+  },
+  {
+   "metric": "ai_tool_cost",
+   "which": "current",
+   "printed": "$90K"
+  },
+  {
+   "metric": "survey:Developer experience index",
+   "which": "current",
+   "printed": "71"
+  },
+  {
+   "metric": "survey:Developer experience index",
+   "which": "prior",
+   "printed": "68"
+  },
+  {
+   "metric": "deals_won",
+   "which": "current",
+   "printed": "22"
+  },
+  {
+   "metric": "win_rate",
+   "which": "current",
+   "printed": "56%"
+  },
+  {
+   "metric": "items_done",
+   "which": "current",
+   "printed": "100"
+  },
+  {
+   "metric": "mix:New capabilities",
+   "which": "current",
+   "printed": "31%"
+  },
+  {
+   "metric": "mix:Improve the core",
+   "which": "current",
+   "printed": "18%"
+  },
+  {
+   "metric": "mix:Growth",
+   "which": "current",
+   "printed": "8%"
+  },
+  {
+   "metric": "mix:Platform & scale",
+   "which": "current",
+   "printed": "21%"
+  },
+  {
+   "metric": "mix:Keep the lights on",
+   "which": "current",
+   "printed": "22%"
+  },
+  {
+   "metric": "customer_requests",
+   "which": "current",
+   "printed": "7"
+  }
+ ],
+ "runs/A/single_product/3": [
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "current",
+   "printed": "23,100"
+  },
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "prior",
+   "printed": "18,400"
+  },
+  {
+   "metric": "arr",
+   "which": "prior",
+   "printed": "$10.38M"
+  },
+  {
+   "metric": "arr",
+   "which": "current",
+   "printed": "$10.91M"
+  },
+  {
+   "metric": "arr_growth",
+   "which": "current",
+   "printed": "+5.1%"
+  },
+  {
+   "metric": "nrr",
+   "which": "current",
+   "printed": "96.4%"
+  },
+  {
+   "metric": "churned_arr",
+   "which": "current",
+   "printed": "$1.11M"
+  },
+  {
+   "metric": "accounts",
+   "which": "prior",
+   "printed": "40"
+  },
+  {
+   "metric": "analytics:Activation",
+   "which": "current",
+   "printed": "41%"
+  },
+  {
+   "metric": "change_failure_rate",
+   "which": "current",
+   "printed": "7.7%"
+  },
+  {
+   "metric": "review_time",
+   "which": "current",
+   "printed": "13h"
+  },
+  {
+   "metric": "finance:Inference (cost of revenue)",
+   "which": "current",
+   "printed": "$612K"
+  },
+  {
+   "metric": "arr",
+   "which": "current",
+   "printed": "$10.91M"
+  },
+  {
+   "metric": "arr",
+   "which": "prior",
+   "printed": "$10.38M"
+  },
+  {
+   "metric": "arr_change",
+   "which": "current",
+   "printed": "+$531K"
+  },
+  {
+   "metric": "arr_growth",
+   "which": "current",
+   "printed": "+5.1%"
+  },
+  {
+   "metric": "nrr",
+   "which": "current",
+   "printed": "96.4%"
+  },
+  {
+   "metric": "grr",
+   "which": "current",
+   "printed": "89.3%"
+  },
+  {
+   "metric": "new_arr",
+   "which": "current",
+   "printed": "$900K"
+  },
+  {
+   "metric": "win_rate",
+   "which": "current",
+   "printed": "56%"
+  },
+  {
+   "metric": "deals_won",
+   "which": "current",
+   "printed": "22"
+  },
+  {
+   "metric": "arr",
+   "which": "prior",
+   "printed": "$10,380,000"
+  },
+  {
+   "metric": "accounts",
+   "which": "prior",
+   "printed": "40"
+  },
+  {
+   "metric": "expansion_arr",
+   "which": "current",
+   "printed": "+$741,000"
+  },
+  {
+   "metric": "churned_arr",
+   "which": "current",
+   "printed": "\u2212$1,110,000"
+  },
+  {
+   "metric": "new_arr",
+   "which": "current",
+   "printed": "+$900,000"
+  },
+  {
+   "metric": "arr",
+   "which": "current",
+   "printed": "$10,911,000"
+  },
+  {
+   "metric": "accounts",
+   "which": "current",
+   "printed": "42"
+  },
+  {
+   "metric": "arr_change",
+   "which": "current",
+   "printed": "$0.5M"
+  },
+  {
+   "metric": "finance:Revenue",
+   "which": "current",
+   "printed": "$10.3M"
+  },
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "prior",
+   "printed": "18,400"
+  },
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "current",
+   "printed": "23,100"
+  },
+  {
+   "metric": "analytics:Activation",
+   "which": "prior",
+   "printed": "39%"
+  },
+  {
+   "metric": "analytics:Activation",
+   "which": "current",
+   "printed": "41%"
+  },
+  {
+   "metric": "analytics:Weekly active dispatchers",
+   "which": "prior",
+   "printed": "5,890"
+  },
+  {
+   "metric": "analytics:Weekly active dispatchers",
+   "which": "current",
+   "printed": "6,120"
+  },
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "prior",
+   "printed": "18,400"
+  },
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "current",
+   "printed": "23,100"
+  },
+  {
+   "metric": "analytics:Weekly active dispatchers",
+   "which": "prior",
+   "printed": "5,890"
+  },
+  {
+   "metric": "analytics:Weekly active dispatchers",
+   "which": "current",
+   "printed": "6,120"
+  },
+  {
+   "metric": "cost_per_task:v13",
+   "which": "prior",
+   "printed": "$0.41"
+  },
+  {
+   "metric": "cost_per_task:v14",
+   "which": "current",
+   "printed": "$0.33"
+  },
+  {
+   "metric": "analytics:Activation",
+   "which": "prior",
+   "printed": "39%"
+  },
+  {
+   "metric": "analytics:Activation",
+   "which": "current",
+   "printed": "41%"
+  },
+  {
+   "metric": "change_failure_rate",
+   "which": "prior",
+   "printed": "5.1%"
+  },
+  {
+   "metric": "change_failure_rate",
+   "which": "current",
+   "printed": "7.7%"
+  },
+  {
+   "metric": "deploys_per_week",
+   "which": "prior",
+   "printed": "3.0"
+  },
+  {
+   "metric": "deploys_per_week",
+   "which": "current",
+   "printed": "4.0"
+  },
+  {
+   "metric": "change_failure_rate",
+   "which": "prior",
+   "printed": "5.1%"
+  },
+  {
+   "metric": "deploys_count",
+   "which": "prior",
+   "printed": "39"
+  },
+  {
+   "metric": "change_failure_rate",
+   "which": "current",
+   "printed": "7.7%"
+  },
+  {
+   "metric": "deploys_count",
+   "which": "current",
+   "printed": "52"
+  },
+  {
+   "metric": "time_to_restore",
+   "which": "prior",
+   "printed": "46m"
+  },
+  {
+   "metric": "time_to_restore",
+   "which": "current",
+   "printed": "41m"
+  },
+  {
+   "metric": "review_time",
+   "which": "prior",
+   "printed": "9h"
+  },
+  {
+   "metric": "review_time",
+   "which": "current",
+   "printed": "13h"
+  },
+  {
+   "metric": "rework_rate",
+   "which": "prior",
+   "printed": "12%"
+  },
+  {
+   "metric": "prs_merged",
+   "which": "prior",
+   "printed": "60"
+  },
+  {
+   "metric": "rework_rate",
+   "which": "current",
+   "printed": "15%"
+  },
+  {
+   "metric": "prs_merged",
+   "which": "current",
+   "printed": "60"
+  },
+  {
+   "metric": "survey:Developer experience index",
+   "which": "prior",
+   "printed": "68"
+  },
+  {
+   "metric": "survey:Developer experience index",
+   "which": "current",
+   "printed": "71"
+  },
+  {
+   "metric": "incidents",
+   "which": "current",
+   "printed": "5"
+  },
+  {
+   "metric": "incidents",
+   "which": "prior",
+   "printed": "5"
+  },
+  {
+   "metric": "eval_pass:v14",
+   "which": "current",
+   "printed": "86%"
+  },
+  {
+   "metric": "eval_pass:v13",
+   "which": "prior",
+   "printed": "82%"
+  },
+  {
+   "metric": "cost_per_task:v14",
+   "which": "current",
+   "printed": "$0.33"
+  },
+  {
+   "metric": "cost_per_task:v13",
+   "which": "prior",
+   "printed": "$0.41"
+  },
+  {
+   "metric": "finance:Inference (cost of revenue)",
+   "which": "current",
+   "printed": "$612K"
+  },
+  {
+   "metric": "mix:New capabilities",
+   "which": "current",
+   "printed": "31%"
+  },
+  {
+   "metric": "mix:Improve the core",
+   "which": "current",
+   "printed": "18%"
+  },
+  {
+   "metric": "mix:Growth",
+   "which": "current",
+   "printed": "8%"
+  },
+  {
+   "metric": "mix:Platform & scale",
+   "which": "current",
+   "printed": "21%"
+  },
+  {
+   "metric": "mix:Keep the lights on",
+   "which": "current",
+   "printed": "22%"
+  },
+  {
+   "metric": "items_done",
+   "which": "current",
+   "printed": "100"
+  },
+  {
+   "metric": "deals_won",
+   "which": "current",
+   "printed": "22"
+  },
+  {
+   "metric": "finance:R&D payroll",
+   "which": "current",
+   "printed": "$3,700K"
+  },
+  {
+   "metric": "finance:AI tools for the team",
+   "which": "current",
+   "printed": "$90K"
+  },
+  {
+   "metric": "ai_tool_cost",
+   "which": "current",
+   "printed": "$90K"
+  },
+  {
+   "metric": "finance:Cloud",
+   "which": "current",
+   "printed": "$410K"
+  },
+  {
+   "metric": "rd_spend",
+   "which": "current",
+   "printed": "$4,200K"
+  },
+  {
+   "metric": "finance:Inference (cost of revenue)",
+   "which": "current",
+   "printed": "$612K"
+  },
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "current",
+   "printed": "23,100"
+  },
+  {
+   "metric": "arr_growth",
+   "which": "current",
+   "printed": "5.1%"
+  },
+  {
+   "metric": "arr",
+   "which": "current",
+   "printed": "$10.91M"
+  },
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "prior",
+   "printed": "18,400"
+  },
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "current",
+   "printed": "23,100"
+  },
+  {
+   "metric": "analytics:Weekly active dispatchers",
+   "which": "prior",
+   "printed": "5,890"
+  },
+  {
+   "metric": "analytics:Weekly active dispatchers",
+   "which": "current",
+   "printed": "6,120"
+  },
+  {
+   "metric": "analytics:Activation",
+   "which": "prior",
+   "printed": "39%"
+  },
+  {
+   "metric": "analytics:Activation",
+   "which": "current",
+   "printed": "41%"
+  },
+  {
+   "metric": "arr",
+   "which": "prior",
+   "printed": "$10.38M"
+  },
+  {
+   "metric": "arr",
+   "which": "current",
+   "printed": "$10.91M"
+  },
+  {
+   "metric": "nrr",
+   "which": "current",
+   "printed": "96.4%"
+  },
+  {
+   "metric": "churned_arr",
+   "which": "current",
+   "printed": "$1.11M"
+  },
+  {
+   "metric": "eval_pass:v13",
+   "which": "prior",
+   "printed": "82%"
+  },
+  {
+   "metric": "eval_pass:v14",
+   "which": "current",
+   "printed": "86%"
+  },
+  {
+   "metric": "finance:Inference (cost of revenue)",
+   "which": "current",
+   "printed": "$612K"
+  },
+  {
+   "metric": "change_failure_rate",
+   "which": "current",
+   "printed": "7.7%"
+  },
+  {
+   "metric": "mix:Keep the lights on",
+   "which": "current",
+   "printed": "22%"
+  },
+  {
+   "metric": "rd_spend",
+   "which": "current",
+   "printed": "$4.20M"
+  },
+  {
+   "metric": "finance:Revenue",
+   "which": "current",
+   "printed": "$10.3M"
+  }
+ ],
+ "runs/A/sparse/1": [
+  {
+   "metric": "items_done",
+   "which": "current",
+   "printed": "100"
+  },
+  {
+   "metric": "items_done",
+   "which": "current",
+   "printed": "100"
+  },
+  {
+   "metric": "items_done",
+   "which": "current",
+   "printed": "100"
+  },
+  {
+   "metric": "mix:New capabilities",
+   "which": "current",
+   "printed": "31%"
+  },
+  {
+   "metric": "mix:Keep the lights on",
+   "which": "current",
+   "printed": "22%"
+  },
+  {
+   "metric": "mix:Platform & scale",
+   "which": "current",
+   "printed": "21%"
+  },
+  {
+   "metric": "mix:Improve the core",
+   "which": "current",
+   "printed": "18%"
+  },
+  {
+   "metric": "mix:Growth",
+   "which": "current",
+   "printed": "8%"
+  },
+  {
+   "metric": "mix:Growth",
+   "which": "current",
+   "printed": "8%"
+  },
+  {
+   "metric": "mix:Keep the lights on",
+   "which": "current",
+   "printed": "22%"
+  },
+  {
+   "metric": "mix:Growth",
+   "which": "current",
+   "printed": "8%"
+  },
+  {
+   "metric": "mix:New capabilities",
+   "which": "current",
+   "printed": "31%"
+  },
+  {
+   "metric": "traced_pct",
+   "which": "current",
+   "printed": "78%"
+  },
+  {
+   "metric": "mix:New capabilities",
+   "which": "current",
+   "printed": "31%"
+  },
+  {
+   "metric": "mix:Keep the lights on",
+   "which": "current",
+   "printed": "22%"
+  },
+  {
+   "metric": "mix:Platform & scale",
+   "which": "current",
+   "printed": "21%"
+  },
+  {
+   "metric": "mix:Improve the core",
+   "which": "current",
+   "printed": "18%"
+  },
+  {
+   "metric": "mix:Growth",
+   "which": "current",
+   "printed": "8%"
+  },
+  {
+   "metric": "mix:Growth",
+   "which": "current",
+   "printed": "8%"
+  },
+  {
+   "metric": "mix:New capabilities",
+   "which": "current",
+   "printed": "31%"
+  }
+ ],
+ "runs/A/sparse/2": [
+  {
+   "metric": "items_done",
+   "which": "current",
+   "printed": "100"
+  },
+  {
+   "metric": "mix:New capabilities",
+   "which": "current",
+   "printed": "31%"
+  },
+  {
+   "metric": "mix:Platform & scale",
+   "which": "current",
+   "printed": "21%"
+  },
+  {
+   "metric": "mix:Improve the core",
+   "which": "current",
+   "printed": "18%"
+  },
+  {
+   "metric": "mix:Growth",
+   "which": "current",
+   "printed": "8%"
+  },
+  {
+   "metric": "mix:Keep the lights on",
+   "which": "current",
+   "printed": "22%"
+  },
+  {
+   "metric": "traced_pct",
+   "which": "current",
+   "printed": "78%"
+  }
+ ],
+ "runs/A/sparse/3": [
+  {
+   "metric": "items_done",
+   "which": "current",
+   "printed": "100"
+  },
+  {
+   "metric": "items_done",
+   "which": "current",
+   "printed": "100"
+  },
+  {
+   "metric": "items_done",
+   "which": "current",
+   "printed": "100"
+  },
+  {
+   "metric": "items_done",
+   "which": "current",
+   "printed": "100"
+  },
+  {
+   "metric": "items_done",
+   "which": "current",
+   "printed": "100"
+  },
+  {
+   "metric": "items_done",
+   "which": "current",
+   "printed": "100"
+  },
+  {
+   "metric": "traced_pct",
+   "which": "current",
+   "printed": "78%"
+  },
+  {
+   "metric": "mix:New capabilities",
+   "which": "current",
+   "printed": "31%"
+  },
+  {
+   "metric": "mix:New capabilities",
+   "which": "current",
+   "printed": "31%"
+  },
+  {
+   "metric": "mix:Growth",
+   "which": "current",
+   "printed": "8%"
+  },
+  {
+   "metric": "mix:Growth",
+   "which": "current",
+   "printed": "8%"
+  },
+  {
+   "metric": "mix:Improve the core",
+   "which": "current",
+   "printed": "18%"
+  },
+  {
+   "metric": "mix:Improve the core",
+   "which": "current",
+   "printed": "18%"
+  },
+  {
+   "metric": "mix:Platform & scale",
+   "which": "current",
+   "printed": "21%"
+  },
+  {
+   "metric": "mix:Platform & scale",
+   "which": "current",
+   "printed": "21%"
+  },
+  {
+   "metric": "mix:Keep the lights on",
+   "which": "current",
+   "printed": "22%"
+  },
+  {
+   "metric": "mix:Keep the lights on",
+   "which": "current",
+   "printed": "22%"
+  },
+  {
+   "metric": "mix:Keep the lights on",
+   "which": "current",
+   "printed": "22%"
+  },
+  {
+   "metric": "mix:Keep the lights on",
+   "which": "current",
+   "printed": "22%"
+  },
+  {
+   "metric": "mix:Keep the lights on",
+   "which": "current",
+   "printed": "22"
+  },
+  {
+   "metric": "mix:Growth",
+   "which": "current",
+   "printed": "8"
+  },
+  {
+   "metric": "items_done",
+   "which": "current",
+   "printed": "100"
+  }
+ ],
+ "runs/B/complete/1": [
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "current",
+   "printed": "23.1K"
+  },
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "prior",
+   "printed": "18.4K"
+  },
+  {
+   "metric": "arr",
+   "which": "current",
+   "printed": "$10.9M"
+  },
+  {
+   "metric": "arr",
+   "which": "prior",
+   "printed": "$10.4M"
+  },
+  {
+   "metric": "nrr",
+   "which": "current",
+   "printed": "96.4%"
+  },
+  {
+   "metric": "grr",
+   "which": "current",
+   "printed": "89.3%"
+  },
+  {
+   "metric": "expansion_arr",
+   "which": "current",
+   "printed": "$741K"
+  },
+  {
+   "metric": "eval_pass:v14",
+   "which": "current",
+   "printed": "86%"
+  },
+  {
+   "metric": "eval_pass:v14",
+   "which": "prior",
+   "printed": "82%"
+  },
+  {
+   "metric": "cost_per_task:v14",
+   "which": "current",
+   "printed": "$0.33"
+  },
+  {
+   "metric": "cost_per_task:v14",
+   "which": "prior",
+   "printed": "$0.41"
+  },
+  {
+   "metric": "analytics:Activation",
+   "which": "current",
+   "printed": "41%"
+  },
+  {
+   "metric": "analytics:Activation",
+   "which": "prior",
+   "printed": "39%"
+  },
+  {
+   "metric": "analytics:Weekly active dispatchers",
+   "which": "current",
+   "printed": "6,120"
+  },
+  {
+   "metric": "analytics:Weekly active dispatchers",
+   "which": "prior",
+   "printed": "5,890"
+  },
+  {
+   "metric": "traced_pct",
+   "which": "current",
+   "printed": "78%"
+  },
+  {
+   "metric": "mix:New capabilities",
+   "which": "current",
+   "printed": "31%"
+  },
+  {
+   "metric": "mix:Improve the core",
+   "which": "current",
+   "printed": "18%"
+  },
+  {
+   "metric": "mix:Growth",
+   "which": "current",
+   "printed": "8%"
+  },
+  {
+   "metric": "mix:Platform & scale",
+   "which": "current",
+   "printed": "21%"
+  },
+  {
+   "metric": "mix:Keep the lights on",
+   "which": "current",
+   "printed": "22%"
+  },
+  {
+   "metric": "finance:Revenue",
+   "which": "current",
+   "printed": "$10.3M"
+  },
+  {
+   "metric": "finance:R&D payroll",
+   "which": "current",
+   "printed": "$3.7M"
+  },
+  {
+   "metric": "finance:Inference (cost of revenue)",
+   "which": "current",
+   "printed": "$612K"
+  },
+  {
+   "metric": "finance:AI tools for the team",
+   "which": "current",
+   "printed": "$90K"
+  },
+  {
+   "metric": "finance:Cloud",
+   "which": "current",
+   "printed": "$410K"
+  },
+  {
+   "metric": "rd_share",
+   "which": "current",
+   "printed": "40.8%"
+  },
+  {
+   "metric": "customer_requests",
+   "which": "current",
+   "printed": "7"
+  },
+  {
+   "metric": "deploys_per_week",
+   "which": "current",
+   "printed": "4"
+  },
+  {
+   "metric": "deploys_per_week",
+   "which": "prior",
+   "printed": "3"
+  },
+  {
+   "metric": "lead_time",
+   "which": "current",
+   "printed": "38h"
+  },
+  {
+   "metric": "lead_time",
+   "which": "prior",
+   "printed": "52h"
+  },
+  {
+   "metric": "change_failure_rate",
+   "which": "current",
+   "printed": "7.7%"
+  },
+  {
+   "metric": "change_failure_rate",
+   "which": "prior",
+   "printed": "5.1%"
+  },
+  {
+   "metric": "time_to_restore",
+   "which": "current",
+   "printed": "41m"
+  },
+  {
+   "metric": "time_to_restore",
+   "which": "prior",
+   "printed": "46m"
+  },
+  {
+   "metric": "review_time",
+   "which": "current",
+   "printed": "13h"
+  },
+  {
+   "metric": "review_time",
+   "which": "prior",
+   "printed": "9h"
+  },
+  {
+   "metric": "rework_rate",
+   "which": "current",
+   "printed": "15%"
+  },
+  {
+   "metric": "ai_weekly_use",
+   "which": "current",
+   "printed": "75%"
+  },
+  {
+   "metric": "ai_tool_cost",
+   "which": "current",
+   "printed": "$90K"
+  },
+  {
+   "metric": "headcount",
+   "which": "current",
+   "printed": "53"
+  },
+  {
+   "metric": "headcount",
+   "which": "current",
+   "printed": "44"
+  },
+  {
+   "metric": "headcount",
+   "which": "current",
+   "printed": "5"
+  },
+  {
+   "metric": "headcount",
+   "which": "current",
+   "printed": "4"
+  },
+  {
+   "metric": "headcount_plan",
+   "which": "current",
+   "printed": "56"
+  },
+  {
+   "metric": "headcount_plan",
+   "which": "current",
+   "printed": "46"
+  },
+  {
+   "metric": "headcount_plan",
+   "which": "current",
+   "printed": "5"
+  },
+  {
+   "metric": "survey:Developer experience index",
+   "which": "current",
+   "printed": "71"
+  }
+ ],
+ "runs/B/complete/2": [
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "current",
+   "printed": "23.1K"
+  },
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "prior",
+   "printed": "18.4K"
+  },
+  {
+   "metric": "arr",
+   "which": "current",
+   "printed": "$10.9M"
+  },
+  {
+   "metric": "arr",
+   "which": "prior",
+   "printed": "$10.4M"
+  },
+  {
+   "metric": "nrr",
+   "which": "current",
+   "printed": "96.4%"
+  },
+  {
+   "metric": "grr",
+   "which": "current",
+   "printed": "89.3%"
+  },
+  {
+   "metric": "expansion_arr",
+   "which": "current",
+   "printed": "$741K"
+  },
+  {
+   "metric": "eval_pass:v14",
+   "which": "current",
+   "printed": "86%"
+  },
+  {
+   "metric": "eval_pass:v14",
+   "which": "prior",
+   "printed": "82%"
+  },
+  {
+   "metric": "cost_per_task:v14",
+   "which": "current",
+   "printed": "$0.33"
+  },
+  {
+   "metric": "cost_per_task:v14",
+   "which": "prior",
+   "printed": "$0.41"
+  },
+  {
+   "metric": "analytics:Activation",
+   "which": "current",
+   "printed": "41%"
+  },
+  {
+   "metric": "analytics:Activation",
+   "which": "prior",
+   "printed": "39%"
+  },
+  {
+   "metric": "analytics:Weekly active dispatchers",
+   "which": "current",
+   "printed": "6,120"
+  },
+  {
+   "metric": "analytics:Weekly active dispatchers",
+   "which": "prior",
+   "printed": "5,890"
+  },
+  {
+   "metric": "traced_pct",
+   "which": "current",
+   "printed": "78%"
+  },
+  {
+   "metric": "mix:New capabilities",
+   "which": "current",
+   "printed": "31%"
+  },
+  {
+   "metric": "mix:Improve the core",
+   "which": "current",
+   "printed": "18%"
+  },
+  {
+   "metric": "mix:Growth",
+   "which": "current",
+   "printed": "8%"
+  },
+  {
+   "metric": "mix:Platform & scale",
+   "which": "current",
+   "printed": "21%"
+  },
+  {
+   "metric": "mix:Keep the lights on",
+   "which": "current",
+   "printed": "22%"
+  },
+  {
+   "metric": "finance:Revenue",
+   "which": "current",
+   "printed": "$10.3M"
+  },
+  {
+   "metric": "finance:R&D payroll",
+   "which": "current",
+   "printed": "$3.7M"
+  },
+  {
+   "metric": "finance:Inference (cost of revenue)",
+   "which": "current",
+   "printed": "$612K"
+  },
+  {
+   "metric": "finance:AI tools for the team",
+   "which": "current",
+   "printed": "$90K"
+  },
+  {
+   "metric": "finance:Cloud",
+   "which": "current",
+   "printed": "$410K"
+  },
+  {
+   "metric": "rd_share",
+   "which": "current",
+   "printed": "40.8%"
+  },
+  {
+   "metric": "customer_requests",
+   "which": "current",
+   "printed": "7"
+  },
+  {
+   "metric": "change_failure_rate",
+   "which": "current",
+   "printed": "7.7%"
+  },
+  {
+   "metric": "change_failure_rate",
+   "which": "prior",
+   "printed": "5.1%"
+  },
+  {
+   "metric": "deploys_per_week",
+   "which": "current",
+   "printed": "4"
+  },
+  {
+   "metric": "deploys_per_week",
+   "which": "prior",
+   "printed": "3"
+  },
+  {
+   "metric": "lead_time",
+   "which": "current",
+   "printed": "38h"
+  },
+  {
+   "metric": "lead_time",
+   "which": "prior",
+   "printed": "52h"
+  },
+  {
+   "metric": "time_to_restore",
+   "which": "current",
+   "printed": "41m"
+  },
+  {
+   "metric": "time_to_restore",
+   "which": "prior",
+   "printed": "46m"
+  },
+  {
+   "metric": "review_time",
+   "which": "current",
+   "printed": "13h"
+  },
+  {
+   "metric": "review_time",
+   "which": "prior",
+   "printed": "9h"
+  },
+  {
+   "metric": "rework_rate",
+   "which": "current",
+   "printed": "15%"
+  },
+  {
+   "metric": "ai_weekly_use",
+   "which": "current",
+   "printed": "75%"
+  },
+  {
+   "metric": "ai_tool_cost",
+   "which": "current",
+   "printed": "$90K"
+  },
+  {
+   "metric": "headcount",
+   "which": "current",
+   "printed": "53"
+  },
+  {
+   "metric": "headcount",
+   "which": "current",
+   "printed": "44"
+  },
+  {
+   "metric": "headcount",
+   "which": "current",
+   "printed": "5"
+  },
+  {
+   "metric": "headcount",
+   "which": "current",
+   "printed": "4"
+  },
+  {
+   "metric": "headcount_plan",
+   "which": "current",
+   "printed": "56"
+  },
+  {
+   "metric": "headcount_plan",
+   "which": "current",
+   "printed": "46"
+  },
+  {
+   "metric": "headcount_plan",
+   "which": "current",
+   "printed": "5"
+  },
+  {
+   "metric": "survey:Developer experience index",
+   "which": "current",
+   "printed": "71"
+  }
+ ],
+ "runs/B/complete/3": [
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "current",
+   "printed": "23.1K"
+  },
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "prior",
+   "printed": "18.4K"
+  },
+  {
+   "metric": "arr",
+   "which": "current",
+   "printed": "$10.9M"
+  },
+  {
+   "metric": "arr",
+   "which": "prior",
+   "printed": "$10.4M"
+  },
+  {
+   "metric": "nrr",
+   "which": "current",
+   "printed": "96.4%"
+  },
+  {
+   "metric": "grr",
+   "which": "current",
+   "printed": "89.3%"
+  },
+  {
+   "metric": "expansion_arr",
+   "which": "current",
+   "printed": "$741K"
+  },
+  {
+   "metric": "eval_pass:v14",
+   "which": "current",
+   "printed": "86%"
+  },
+  {
+   "metric": "eval_pass:v14",
+   "which": "prior",
+   "printed": "82%"
+  },
+  {
+   "metric": "cost_per_task:v14",
+   "which": "current",
+   "printed": "$0.33"
+  },
+  {
+   "metric": "cost_per_task:v14",
+   "which": "prior",
+   "printed": "$0.41"
+  },
+  {
+   "metric": "analytics:Activation",
+   "which": "current",
+   "printed": "41%"
+  },
+  {
+   "metric": "analytics:Activation",
+   "which": "prior",
+   "printed": "39%"
+  },
+  {
+   "metric": "analytics:Weekly active dispatchers",
+   "which": "current",
+   "printed": "6,120"
+  },
+  {
+   "metric": "analytics:Weekly active dispatchers",
+   "which": "prior",
+   "printed": "5,890"
+  },
+  {
+   "metric": "traced_pct",
+   "which": "current",
+   "printed": "78%"
+  },
+  {
+   "metric": "mix:New capabilities",
+   "which": "current",
+   "printed": "31%"
+  },
+  {
+   "metric": "mix:Improve the core",
+   "which": "current",
+   "printed": "18%"
+  },
+  {
+   "metric": "mix:Growth",
+   "which": "current",
+   "printed": "8%"
+  },
+  {
+   "metric": "mix:Platform & scale",
+   "which": "current",
+   "printed": "21%"
+  },
+  {
+   "metric": "mix:Keep the lights on",
+   "which": "current",
+   "printed": "22%"
+  },
+  {
+   "metric": "finance:Revenue",
+   "which": "current",
+   "printed": "$10.3M"
+  },
+  {
+   "metric": "finance:R&D payroll",
+   "which": "current",
+   "printed": "$3.7M"
+  },
+  {
+   "metric": "finance:Inference (cost of revenue)",
+   "which": "current",
+   "printed": "$612K"
+  },
+  {
+   "metric": "finance:AI tools for the team",
+   "which": "current",
+   "printed": "$90K"
+  },
+  {
+   "metric": "finance:Cloud",
+   "which": "current",
+   "printed": "$410K"
+  },
+  {
+   "metric": "rd_share",
+   "which": "current",
+   "printed": "40.8%"
+  },
+  {
+   "metric": "customer_requests",
+   "which": "current",
+   "printed": "7"
+  },
+  {
+   "metric": "deploys_per_week",
+   "which": "current",
+   "printed": "4"
+  },
+  {
+   "metric": "deploys_per_week",
+   "which": "prior",
+   "printed": "3"
+  },
+  {
+   "metric": "lead_time",
+   "which": "current",
+   "printed": "38h"
+  },
+  {
+   "metric": "lead_time",
+   "which": "prior",
+   "printed": "52h"
+  },
+  {
+   "metric": "change_failure_rate",
+   "which": "current",
+   "printed": "7.7%"
+  },
+  {
+   "metric": "change_failure_rate",
+   "which": "prior",
+   "printed": "5.1%"
+  },
+  {
+   "metric": "time_to_restore",
+   "which": "current",
+   "printed": "41m"
+  },
+  {
+   "metric": "time_to_restore",
+   "which": "prior",
+   "printed": "46m"
+  },
+  {
+   "metric": "review_time",
+   "which": "current",
+   "printed": "13h"
+  },
+  {
+   "metric": "review_time",
+   "which": "prior",
+   "printed": "9h"
+  },
+  {
+   "metric": "rework_rate",
+   "which": "current",
+   "printed": "15%"
+  },
+  {
+   "metric": "ai_weekly_use",
+   "which": "current",
+   "printed": "75%"
+  },
+  {
+   "metric": "ai_tool_cost",
+   "which": "current",
+   "printed": "$90K"
+  },
+  {
+   "metric": "headcount",
+   "which": "current",
+   "printed": "53"
+  },
+  {
+   "metric": "headcount",
+   "which": "current",
+   "printed": "44"
+  },
+  {
+   "metric": "headcount",
+   "which": "current",
+   "printed": "5"
+  },
+  {
+   "metric": "headcount",
+   "which": "current",
+   "printed": "4"
+  },
+  {
+   "metric": "headcount_plan",
+   "which": "current",
+   "printed": "56"
+  },
+  {
+   "metric": "headcount_plan",
+   "which": "current",
+   "printed": "46"
+  },
+  {
+   "metric": "headcount_plan",
+   "which": "current",
+   "printed": "5"
+  },
+  {
+   "metric": "survey:Developer experience index",
+   "which": "current",
+   "printed": "71"
+  }
+ ],
+ "runs/B/conflict_resolved/1": [
+  {
+   "metric": "deploys_per_week",
+   "which": "current",
+   "printed": "4"
+  },
+  {
+   "metric": "deploys_per_week",
+   "which": "prior",
+   "printed": "3"
+  },
+  {
+   "metric": "lead_time",
+   "which": "current",
+   "printed": "38h"
+  },
+  {
+   "metric": "lead_time",
+   "which": "prior",
+   "printed": "52h"
+  },
+  {
+   "metric": "change_failure_rate",
+   "which": "current",
+   "printed": "7.7%"
+  },
+  {
+   "metric": "change_failure_rate",
+   "which": "prior",
+   "printed": "5.1%"
+  },
+  {
+   "metric": "time_to_restore",
+   "which": "current",
+   "printed": "41m"
+  },
+  {
+   "metric": "time_to_restore",
+   "which": "prior",
+   "printed": "46m"
+  },
+  {
+   "metric": "review_time",
+   "which": "current",
+   "printed": "13h"
+  },
+  {
+   "metric": "review_time",
+   "which": "prior",
+   "printed": "9h"
+  },
+  {
+   "metric": "rework_rate",
+   "which": "current",
+   "printed": "15%"
+  },
+  {
+   "metric": "arr",
+   "which": "current",
+   "printed": "$10.9M"
+  },
+  {
+   "metric": "arr",
+   "which": "prior",
+   "printed": "$10.4M"
+  },
+  {
+   "metric": "finance:ARR",
+   "which": "current",
+   "printed": "$10.1M"
+  },
+  {
+   "metric": "nrr",
+   "which": "current",
+   "printed": "96.4%"
+  },
+  {
+   "metric": "grr",
+   "which": "current",
+   "printed": "89.3%"
+  },
+  {
+   "metric": "expansion_arr",
+   "which": "current",
+   "printed": "$741K"
+  },
+  {
+   "metric": "analytics:Activation",
+   "which": "current",
+   "printed": "41%"
+  },
+  {
+   "metric": "analytics:Activation",
+   "which": "prior",
+   "printed": "39%"
+  },
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "current",
+   "printed": "23.1K"
+  },
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "prior",
+   "printed": "18.4K"
+  },
+  {
+   "metric": "warehouse:Loads cleared per week",
+   "which": "current",
+   "printed": "21400"
+  },
+  {
+   "metric": "analytics:Weekly active dispatchers",
+   "which": "current",
+   "printed": "6,120"
+  },
+  {
+   "metric": "analytics:Weekly active dispatchers",
+   "which": "prior",
+   "printed": "5,890"
+  },
+  {
+   "metric": "finance:Revenue",
+   "which": "current",
+   "printed": "$10.3M"
+  },
+  {
+   "metric": "finance:R&D payroll",
+   "which": "current",
+   "printed": "$3.7M"
+  },
+  {
+   "metric": "finance:Inference (cost of revenue)",
+   "which": "current",
+   "printed": "$612K"
+  },
+  {
+   "metric": "finance:AI tools for the team",
+   "which": "current",
+   "printed": "$90K"
+  },
+  {
+   "metric": "finance:Cloud",
+   "which": "current",
+   "printed": "$410K"
+  },
+  {
+   "metric": "rd_share",
+   "which": "current",
+   "printed": "40.8%"
+  },
+  {
+   "metric": "eval_pass:v14",
+   "which": "current",
+   "printed": "86%"
+  },
+  {
+   "metric": "eval_pass:v14",
+   "which": "prior",
+   "printed": "82%"
+  },
+  {
+   "metric": "cost_per_task:v14",
+   "which": "current",
+   "printed": "$0.33"
+  },
+  {
+   "metric": "cost_per_task:v14",
+   "which": "prior",
+   "printed": "$0.41"
+  },
+  {
+   "metric": "ai_tool_cost",
+   "which": "current",
+   "printed": "$90K"
+  },
+  {
+   "metric": "ai_weekly_use",
+   "which": "current",
+   "printed": "75%"
+  },
+  {
+   "metric": "headcount",
+   "which": "current",
+   "printed": "53"
+  },
+  {
+   "metric": "headcount",
+   "which": "current",
+   "printed": "44"
+  },
+  {
+   "metric": "headcount",
+   "which": "current",
+   "printed": "5"
+  },
+  {
+   "metric": "headcount",
+   "which": "current",
+   "printed": "4"
+  },
+  {
+   "metric": "headcount_plan",
+   "which": "current",
+   "printed": "56"
+  },
+  {
+   "metric": "headcount_plan",
+   "which": "current",
+   "printed": "46"
+  },
+  {
+   "metric": "headcount_plan",
+   "which": "current",
+   "printed": "5"
+  },
+  {
+   "metric": "survey:Developer experience index",
+   "which": "current",
+   "printed": "71"
+  },
+  {
+   "metric": "mix:New capabilities",
+   "which": "current",
+   "printed": "31%"
+  },
+  {
+   "metric": "mix:Improve the core",
+   "which": "current",
+   "printed": "18%"
+  },
+  {
+   "metric": "mix:Growth",
+   "which": "current",
+   "printed": "8%"
+  },
+  {
+   "metric": "mix:Platform & scale",
+   "which": "current",
+   "printed": "21%"
+  },
+  {
+   "metric": "mix:Keep the lights on",
+   "which": "current",
+   "printed": "22%"
+  },
+  {
+   "metric": "traced_pct",
+   "which": "current",
+   "printed": "78%"
+  },
+  {
+   "metric": "customer_requests",
+   "which": "current",
+   "printed": "7"
+  }
+ ],
+ "runs/B/conflict_resolved/2": [
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "current",
+   "printed": "23.1K"
+  },
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "prior",
+   "printed": "18.4K"
+  },
+  {
+   "metric": "warehouse:Loads cleared per week",
+   "which": "current",
+   "printed": "21400"
+  },
+  {
+   "metric": "analytics:Activation",
+   "which": "current",
+   "printed": "41%"
+  },
+  {
+   "metric": "analytics:Activation",
+   "which": "prior",
+   "printed": "39%"
+  },
+  {
+   "metric": "analytics:Weekly active dispatchers",
+   "which": "current",
+   "printed": "6,120"
+  },
+  {
+   "metric": "analytics:Weekly active dispatchers",
+   "which": "prior",
+   "printed": "5,890"
+  },
+  {
+   "metric": "arr",
+   "which": "current",
+   "printed": "$10.9M"
+  },
+  {
+   "metric": "arr",
+   "which": "prior",
+   "printed": "$10.4M"
+  },
+  {
+   "metric": "finance:ARR",
+   "which": "current",
+   "printed": "$10.1M"
+  },
+  {
+   "metric": "nrr",
+   "which": "current",
+   "printed": "96.4%"
+  },
+  {
+   "metric": "grr",
+   "which": "current",
+   "printed": "89.3%"
+  },
+  {
+   "metric": "expansion_arr",
+   "which": "current",
+   "printed": "$741K"
+  },
+  {
+   "metric": "eval_pass:v14",
+   "which": "current",
+   "printed": "86%"
+  },
+  {
+   "metric": "eval_pass:v14",
+   "which": "prior",
+   "printed": "82%"
+  },
+  {
+   "metric": "cost_per_task:v14",
+   "which": "current",
+   "printed": "$0.33"
+  },
+  {
+   "metric": "cost_per_task:v14",
+   "which": "prior",
+   "printed": "$0.41"
+  },
+  {
+   "metric": "traced_pct",
+   "which": "current",
+   "printed": "78%"
+  },
+  {
+   "metric": "mix:New capabilities",
+   "which": "current",
+   "printed": "31%"
+  },
+  {
+   "metric": "mix:Improve the core",
+   "which": "current",
+   "printed": "18%"
+  },
+  {
+   "metric": "mix:Growth",
+   "which": "current",
+   "printed": "8%"
+  },
+  {
+   "metric": "mix:Platform & scale",
+   "which": "current",
+   "printed": "21%"
+  },
+  {
+   "metric": "mix:Keep the lights on",
+   "which": "current",
+   "printed": "22%"
+  },
+  {
+   "metric": "finance:Revenue",
+   "which": "current",
+   "printed": "$10.3M"
+  },
+  {
+   "metric": "finance:R&D payroll",
+   "which": "current",
+   "printed": "$3.7M"
+  },
+  {
+   "metric": "finance:Inference (cost of revenue)",
+   "which": "current",
+   "printed": "$612K"
+  },
+  {
+   "metric": "finance:AI tools for the team",
+   "which": "current",
+   "printed": "$90K"
+  },
+  {
+   "metric": "finance:Cloud",
+   "which": "current",
+   "printed": "$410K"
+  },
+  {
+   "metric": "rd_share",
+   "which": "current",
+   "printed": "40.8%"
+  },
+  {
+   "metric": "deploys_per_week",
+   "which": "current",
+   "printed": "4"
+  },
+  {
+   "metric": "deploys_per_week",
+   "which": "prior",
+   "printed": "3"
+  },
+  {
+   "metric": "lead_time",
+   "which": "current",
+   "printed": "38h"
+  },
+  {
+   "metric": "lead_time",
+   "which": "prior",
+   "printed": "52h"
+  },
+  {
+   "metric": "change_failure_rate",
+   "which": "current",
+   "printed": "7.7%"
+  },
+  {
+   "metric": "change_failure_rate",
+   "which": "prior",
+   "printed": "5.1%"
+  },
+  {
+   "metric": "time_to_restore",
+   "which": "current",
+   "printed": "41m"
+  },
+  {
+   "metric": "time_to_restore",
+   "which": "prior",
+   "printed": "46m"
+  },
+  {
+   "metric": "review_time",
+   "which": "current",
+   "printed": "13h"
+  },
+  {
+   "metric": "review_time",
+   "which": "prior",
+   "printed": "9h"
+  },
+  {
+   "metric": "rework_rate",
+   "which": "current",
+   "printed": "15%"
+  },
+  {
+   "metric": "ai_tool_cost",
+   "which": "current",
+   "printed": "$90K"
+  },
+  {
+   "metric": "ai_weekly_use",
+   "which": "current",
+   "printed": "75%"
+  },
+  {
+   "metric": "headcount",
+   "which": "current",
+   "printed": "53"
+  },
+  {
+   "metric": "headcount",
+   "which": "current",
+   "printed": "44"
+  },
+  {
+   "metric": "headcount",
+   "which": "current",
+   "printed": "5"
+  },
+  {
+   "metric": "headcount",
+   "which": "current",
+   "printed": "4"
+  },
+  {
+   "metric": "headcount_plan",
+   "which": "current",
+   "printed": "56"
+  },
+  {
+   "metric": "headcount_plan",
+   "which": "current",
+   "printed": "46"
+  },
+  {
+   "metric": "headcount_plan",
+   "which": "current",
+   "printed": "5"
+  },
+  {
+   "metric": "survey:Developer experience index",
+   "which": "current",
+   "printed": "71"
+  },
+  {
+   "metric": "customer_requests",
+   "which": "current",
+   "printed": "7"
+  }
+ ],
+ "runs/B/conflict_resolved/3": [
+  {
+   "metric": "deploys_per_week",
+   "which": "current",
+   "printed": "4"
+  },
+  {
+   "metric": "deploys_per_week",
+   "which": "prior",
+   "printed": "3"
+  },
+  {
+   "metric": "change_failure_rate",
+   "which": "current",
+   "printed": "7.7%"
+  },
+  {
+   "metric": "change_failure_rate",
+   "which": "prior",
+   "printed": "5.1%"
+  },
+  {
+   "metric": "lead_time",
+   "which": "current",
+   "printed": "38h"
+  },
+  {
+   "metric": "lead_time",
+   "which": "prior",
+   "printed": "52h"
+  },
+  {
+   "metric": "review_time",
+   "which": "current",
+   "printed": "13h"
+  },
+  {
+   "metric": "review_time",
+   "which": "prior",
+   "printed": "9h"
+  },
+  {
+   "metric": "rework_rate",
+   "which": "current",
+   "printed": "15%"
+  },
+  {
+   "metric": "time_to_restore",
+   "which": "current",
+   "printed": "41m"
+  },
+  {
+   "metric": "time_to_restore",
+   "which": "prior",
+   "printed": "46m"
+  },
+  {
+   "metric": "arr",
+   "which": "current",
+   "printed": "$10.9M"
+  },
+  {
+   "metric": "arr",
+   "which": "prior",
+   "printed": "$10.4M"
+  },
+  {
+   "metric": "finance:ARR",
+   "which": "current",
+   "printed": "$10.1M"
+  },
+  {
+   "metric": "nrr",
+   "which": "current",
+   "printed": "96.4%"
+  },
+  {
+   "metric": "grr",
+   "which": "current",
+   "printed": "89.3%"
+  },
+  {
+   "metric": "expansion_arr",
+   "which": "current",
+   "printed": "$741K"
+  },
+  {
+   "metric": "analytics:Activation",
+   "which": "current",
+   "printed": "41%"
+  },
+  {
+   "metric": "analytics:Activation",
+   "which": "prior",
+   "printed": "39%"
+  },
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "current",
+   "printed": "23.1K"
+  },
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "prior",
+   "printed": "18.4K"
+  },
+  {
+   "metric": "warehouse:Loads cleared per week",
+   "which": "current",
+   "printed": "21400"
+  },
+  {
+   "metric": "analytics:Weekly active dispatchers",
+   "which": "current",
+   "printed": "6,120"
+  },
+  {
+   "metric": "analytics:Weekly active dispatchers",
+   "which": "prior",
+   "printed": "5,890"
+  },
+  {
+   "metric": "finance:Revenue",
+   "which": "current",
+   "printed": "$10.3M"
+  },
+  {
+   "metric": "finance:R&D payroll",
+   "which": "current",
+   "printed": "$3.7M"
+  },
+  {
+   "metric": "finance:Inference (cost of revenue)",
+   "which": "current",
+   "printed": "$612K"
+  },
+  {
+   "metric": "finance:AI tools for the team",
+   "which": "current",
+   "printed": "$90K"
+  },
+  {
+   "metric": "finance:Cloud",
+   "which": "current",
+   "printed": "$410K"
+  },
+  {
+   "metric": "rd_share",
+   "which": "current",
+   "printed": "40.8%"
+  },
+  {
+   "metric": "eval_pass:v14",
+   "which": "current",
+   "printed": "86%"
+  },
+  {
+   "metric": "eval_pass:v14",
+   "which": "prior",
+   "printed": "82%"
+  },
+  {
+   "metric": "cost_per_task:v14",
+   "which": "current",
+   "printed": "$0.33"
+  },
+  {
+   "metric": "cost_per_task:v14",
+   "which": "prior",
+   "printed": "$0.41"
+  },
+  {
+   "metric": "ai_tool_cost",
+   "which": "current",
+   "printed": "$90K"
+  },
+  {
+   "metric": "ai_weekly_use",
+   "which": "current",
+   "printed": "75%"
+  },
+  {
+   "metric": "headcount",
+   "which": "current",
+   "printed": "53"
+  },
+  {
+   "metric": "headcount",
+   "which": "current",
+   "printed": "44"
+  },
+  {
+   "metric": "headcount",
+   "which": "current",
+   "printed": "5"
+  },
+  {
+   "metric": "headcount",
+   "which": "current",
+   "printed": "4"
+  },
+  {
+   "metric": "headcount_plan",
+   "which": "current",
+   "printed": "56"
+  },
+  {
+   "metric": "headcount_plan",
+   "which": "current",
+   "printed": "46"
+  },
+  {
+   "metric": "headcount_plan",
+   "which": "current",
+   "printed": "5"
+  },
+  {
+   "metric": "survey:Developer experience index",
+   "which": "current",
+   "printed": "71"
+  },
+  {
+   "metric": "mix:New capabilities",
+   "which": "current",
+   "printed": "31%"
+  },
+  {
+   "metric": "mix:Improve the core",
+   "which": "current",
+   "printed": "18%"
+  },
+  {
+   "metric": "mix:Growth",
+   "which": "current",
+   "printed": "8%"
+  },
+  {
+   "metric": "mix:Platform & scale",
+   "which": "current",
+   "printed": "21%"
+  },
+  {
+   "metric": "mix:Keep the lights on",
+   "which": "current",
+   "printed": "22%"
+  },
+  {
+   "metric": "traced_pct",
+   "which": "current",
+   "printed": "78%"
+  },
+  {
+   "metric": "customer_requests",
+   "which": "current",
+   "printed": "7"
+  }
+ ],
+ "runs/B/conflicting/1": [
+  {
+   "metric": "deploys_per_week",
+   "which": "current",
+   "printed": "4"
+  },
+  {
+   "metric": "deploys_per_week",
+   "which": "prior",
+   "printed": "3"
+  },
+  {
+   "metric": "lead_time",
+   "which": "current",
+   "printed": "38h"
+  },
+  {
+   "metric": "lead_time",
+   "which": "prior",
+   "printed": "52h"
+  },
+  {
+   "metric": "change_failure_rate",
+   "which": "current",
+   "printed": "7.7%"
+  },
+  {
+   "metric": "change_failure_rate",
+   "which": "prior",
+   "printed": "5.1%"
+  },
+  {
+   "metric": "time_to_restore",
+   "which": "current",
+   "printed": "41m"
+  },
+  {
+   "metric": "time_to_restore",
+   "which": "prior",
+   "printed": "46m"
+  },
+  {
+   "metric": "review_time",
+   "which": "current",
+   "printed": "13h"
+  },
+  {
+   "metric": "review_time",
+   "which": "prior",
+   "printed": "9h"
+  },
+  {
+   "metric": "rework_rate",
+   "which": "current",
+   "printed": "15%"
+  },
+  {
+   "metric": "arr",
+   "which": "current",
+   "printed": "$10.9M"
+  },
+  {
+   "metric": "finance:ARR",
+   "which": "current",
+   "printed": "$10.1M"
+  },
+  {
+   "metric": "nrr",
+   "which": "current",
+   "printed": "96.4%"
+  },
+  {
+   "metric": "grr",
+   "which": "current",
+   "printed": "89.3%"
+  },
+  {
+   "metric": "expansion_arr",
+   "which": "current",
+   "printed": "$741K"
+  },
+  {
+   "metric": "analytics:Activation",
+   "which": "current",
+   "printed": "41%"
+  },
+  {
+   "metric": "analytics:Activation",
+   "which": "prior",
+   "printed": "39%"
+  },
+  {
+   "metric": "analytics:Weekly active dispatchers",
+   "which": "current",
+   "printed": "6,120"
+  },
+  {
+   "metric": "analytics:Weekly active dispatchers",
+   "which": "prior",
+   "printed": "5,890"
+  },
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "current",
+   "printed": "23100"
+  },
+  {
+   "metric": "warehouse:Loads cleared per week",
+   "which": "current",
+   "printed": "21400"
+  },
+  {
+   "metric": "finance:Revenue",
+   "which": "current",
+   "printed": "$10.3M"
+  },
+  {
+   "metric": "finance:R&D payroll",
+   "which": "current",
+   "printed": "$3.7M"
+  },
+  {
+   "metric": "finance:Inference (cost of revenue)",
+   "which": "current",
+   "printed": "$612K"
+  },
+  {
+   "metric": "finance:AI tools for the team",
+   "which": "current",
+   "printed": "$90K"
+  },
+  {
+   "metric": "finance:Cloud",
+   "which": "current",
+   "printed": "$410K"
+  },
+  {
+   "metric": "rd_share",
+   "which": "current",
+   "printed": "40.8%"
+  },
+  {
+   "metric": "eval_pass:v14",
+   "which": "current",
+   "printed": "86%"
+  },
+  {
+   "metric": "eval_pass:v14",
+   "which": "prior",
+   "printed": "82%"
+  },
+  {
+   "metric": "cost_per_task:v14",
+   "which": "current",
+   "printed": "$0.33"
+  },
+  {
+   "metric": "cost_per_task:v14",
+   "which": "prior",
+   "printed": "$0.41"
+  },
+  {
+   "metric": "ai_tool_cost",
+   "which": "current",
+   "printed": "$90K"
+  },
+  {
+   "metric": "ai_weekly_use",
+   "which": "current",
+   "printed": "75%"
+  },
+  {
+   "metric": "headcount",
+   "which": "current",
+   "printed": "53"
+  },
+  {
+   "metric": "headcount",
+   "which": "current",
+   "printed": "44"
+  },
+  {
+   "metric": "headcount",
+   "which": "current",
+   "printed": "5"
+  },
+  {
+   "metric": "headcount",
+   "which": "current",
+   "printed": "4"
+  },
+  {
+   "metric": "headcount_plan",
+   "which": "current",
+   "printed": "56"
+  },
+  {
+   "metric": "headcount_plan",
+   "which": "current",
+   "printed": "46"
+  },
+  {
+   "metric": "headcount_plan",
+   "which": "current",
+   "printed": "5"
+  },
+  {
+   "metric": "survey:Developer experience index",
+   "which": "current",
+   "printed": "71"
+  },
+  {
+   "metric": "mix:New capabilities",
+   "which": "current",
+   "printed": "31%"
+  },
+  {
+   "metric": "mix:Improve the core",
+   "which": "current",
+   "printed": "18%"
+  },
+  {
+   "metric": "mix:Growth",
+   "which": "current",
+   "printed": "8%"
+  },
+  {
+   "metric": "mix:Platform & scale",
+   "which": "current",
+   "printed": "21%"
+  },
+  {
+   "metric": "mix:Keep the lights on",
+   "which": "current",
+   "printed": "22%"
+  },
+  {
+   "metric": "traced_pct",
+   "which": "current",
+   "printed": "78%"
+  },
+  {
+   "metric": "customer_requests",
+   "which": "current",
+   "printed": "7"
+  }
+ ],
+ "runs/B/conflicting/2": [
+  {
+   "metric": "deploys_per_week",
+   "which": "current",
+   "printed": "4"
+  },
+  {
+   "metric": "deploys_per_week",
+   "which": "prior",
+   "printed": "3"
+  },
+  {
+   "metric": "change_failure_rate",
+   "which": "current",
+   "printed": "7.7%"
+  },
+  {
+   "metric": "change_failure_rate",
+   "which": "prior",
+   "printed": "5.1%"
+  },
+  {
+   "metric": "lead_time",
+   "which": "current",
+   "printed": "38h"
+  },
+  {
+   "metric": "lead_time",
+   "which": "prior",
+   "printed": "52h"
+  },
+  {
+   "metric": "review_time",
+   "which": "current",
+   "printed": "13h"
+  },
+  {
+   "metric": "review_time",
+   "which": "prior",
+   "printed": "9h"
+  },
+  {
+   "metric": "rework_rate",
+   "which": "current",
+   "printed": "15%"
+  },
+  {
+   "metric": "time_to_restore",
+   "which": "current",
+   "printed": "41m"
+  },
+  {
+   "metric": "time_to_restore",
+   "which": "prior",
+   "printed": "46m"
+  },
+  {
+   "metric": "arr",
+   "which": "current",
+   "printed": "$10.9M"
+  },
+  {
+   "metric": "finance:ARR",
+   "which": "current",
+   "printed": "$10.1M"
+  },
+  {
+   "metric": "nrr",
+   "which": "current",
+   "printed": "96.4%"
+  },
+  {
+   "metric": "grr",
+   "which": "current",
+   "printed": "89.3%"
+  },
+  {
+   "metric": "expansion_arr",
+   "which": "current",
+   "printed": "$741K"
+  },
+  {
+   "metric": "analytics:Activation",
+   "which": "current",
+   "printed": "41%"
+  },
+  {
+   "metric": "analytics:Activation",
+   "which": "prior",
+   "printed": "39%"
+  },
+  {
+   "metric": "analytics:Weekly active dispatchers",
+   "which": "current",
+   "printed": "6,120"
+  },
+  {
+   "metric": "analytics:Weekly active dispatchers",
+   "which": "prior",
+   "printed": "5,890"
+  },
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "current",
+   "printed": "23100"
+  },
+  {
+   "metric": "warehouse:Loads cleared per week",
+   "which": "current",
+   "printed": "21400"
+  },
+  {
+   "metric": "finance:Revenue",
+   "which": "current",
+   "printed": "$10.3M"
+  },
+  {
+   "metric": "finance:R&D payroll",
+   "which": "current",
+   "printed": "$3.7M"
+  },
+  {
+   "metric": "finance:Inference (cost of revenue)",
+   "which": "current",
+   "printed": "$612K"
+  },
+  {
+   "metric": "finance:AI tools for the team",
+   "which": "current",
+   "printed": "$90K"
+  },
+  {
+   "metric": "finance:Cloud",
+   "which": "current",
+   "printed": "$410K"
+  },
+  {
+   "metric": "rd_share",
+   "which": "current",
+   "printed": "40.8%"
+  },
+  {
+   "metric": "eval_pass:v14",
+   "which": "current",
+   "printed": "86%"
+  },
+  {
+   "metric": "eval_pass:v14",
+   "which": "prior",
+   "printed": "82%"
+  },
+  {
+   "metric": "cost_per_task:v14",
+   "which": "current",
+   "printed": "$0.33"
+  },
+  {
+   "metric": "cost_per_task:v14",
+   "which": "prior",
+   "printed": "$0.41"
+  },
+  {
+   "metric": "ai_tool_cost",
+   "which": "current",
+   "printed": "$90K"
+  },
+  {
+   "metric": "ai_weekly_use",
+   "which": "current",
+   "printed": "75%"
+  },
+  {
+   "metric": "headcount",
+   "which": "current",
+   "printed": "53"
+  },
+  {
+   "metric": "headcount",
+   "which": "current",
+   "printed": "44"
+  },
+  {
+   "metric": "headcount",
+   "which": "current",
+   "printed": "5"
+  },
+  {
+   "metric": "headcount",
+   "which": "current",
+   "printed": "4"
+  },
+  {
+   "metric": "headcount_plan",
+   "which": "current",
+   "printed": "56"
+  },
+  {
+   "metric": "headcount_plan",
+   "which": "current",
+   "printed": "46"
+  },
+  {
+   "metric": "headcount_plan",
+   "which": "current",
+   "printed": "5"
+  },
+  {
+   "metric": "survey:Developer experience index",
+   "which": "current",
+   "printed": "71"
+  },
+  {
+   "metric": "mix:New capabilities",
+   "which": "current",
+   "printed": "31%"
+  },
+  {
+   "metric": "mix:Improve the core",
+   "which": "current",
+   "printed": "18%"
+  },
+  {
+   "metric": "mix:Growth",
+   "which": "current",
+   "printed": "8%"
+  },
+  {
+   "metric": "mix:Platform & scale",
+   "which": "current",
+   "printed": "21%"
+  },
+  {
+   "metric": "mix:Keep the lights on",
+   "which": "current",
+   "printed": "22%"
+  },
+  {
+   "metric": "traced_pct",
+   "which": "current",
+   "printed": "78%"
+  },
+  {
+   "metric": "customer_requests",
+   "which": "current",
+   "printed": "7"
+  }
+ ],
+ "runs/B/conflicting/3": [
+  {
+   "metric": "deploys_per_week",
+   "which": "current",
+   "printed": "4"
+  },
+  {
+   "metric": "deploys_per_week",
+   "which": "prior",
+   "printed": "3"
+  },
+  {
+   "metric": "lead_time",
+   "which": "current",
+   "printed": "38h"
+  },
+  {
+   "metric": "lead_time",
+   "which": "prior",
+   "printed": "52h"
+  },
+  {
+   "metric": "change_failure_rate",
+   "which": "current",
+   "printed": "7.7%"
+  },
+  {
+   "metric": "change_failure_rate",
+   "which": "prior",
+   "printed": "5.1%"
+  },
+  {
+   "metric": "time_to_restore",
+   "which": "current",
+   "printed": "41m"
+  },
+  {
+   "metric": "time_to_restore",
+   "which": "prior",
+   "printed": "46m"
+  },
+  {
+   "metric": "review_time",
+   "which": "current",
+   "printed": "13h"
+  },
+  {
+   "metric": "review_time",
+   "which": "prior",
+   "printed": "9h"
+  },
+  {
+   "metric": "rework_rate",
+   "which": "current",
+   "printed": "15%"
+  },
+  {
+   "metric": "arr",
+   "which": "current",
+   "printed": "$10.9M"
+  },
+  {
+   "metric": "finance:ARR",
+   "which": "current",
+   "printed": "$10.1M"
+  },
+  {
+   "metric": "nrr",
+   "which": "current",
+   "printed": "96.4%"
+  },
+  {
+   "metric": "grr",
+   "which": "current",
+   "printed": "89.3%"
+  },
+  {
+   "metric": "expansion_arr",
+   "which": "current",
+   "printed": "$741K"
+  },
+  {
+   "metric": "analytics:Activation",
+   "which": "current",
+   "printed": "41%"
+  },
+  {
+   "metric": "analytics:Activation",
+   "which": "prior",
+   "printed": "39%"
+  },
+  {
+   "metric": "analytics:Weekly active dispatchers",
+   "which": "current",
+   "printed": "6,120"
+  },
+  {
+   "metric": "analytics:Weekly active dispatchers",
+   "which": "prior",
+   "printed": "5,890"
+  },
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "current",
+   "printed": "23100"
+  },
+  {
+   "metric": "warehouse:Loads cleared per week",
+   "which": "current",
+   "printed": "21400"
+  },
+  {
+   "metric": "finance:Revenue",
+   "which": "current",
+   "printed": "$10.3M"
+  },
+  {
+   "metric": "finance:R&D payroll",
+   "which": "current",
+   "printed": "$3.7M"
+  },
+  {
+   "metric": "finance:Inference (cost of revenue)",
+   "which": "current",
+   "printed": "$612K"
+  },
+  {
+   "metric": "finance:AI tools for the team",
+   "which": "current",
+   "printed": "$90K"
+  },
+  {
+   "metric": "finance:Cloud",
+   "which": "current",
+   "printed": "$410K"
+  },
+  {
+   "metric": "rd_share",
+   "which": "current",
+   "printed": "40.8%"
+  },
+  {
+   "metric": "eval_pass:v14",
+   "which": "current",
+   "printed": "86%"
+  },
+  {
+   "metric": "eval_pass:v14",
+   "which": "prior",
+   "printed": "82%"
+  },
+  {
+   "metric": "cost_per_task:v14",
+   "which": "current",
+   "printed": "$0.33"
+  },
+  {
+   "metric": "cost_per_task:v14",
+   "which": "prior",
+   "printed": "$0.41"
+  },
+  {
+   "metric": "ai_tool_cost",
+   "which": "current",
+   "printed": "$90K"
+  },
+  {
+   "metric": "ai_weekly_use",
+   "which": "current",
+   "printed": "75%"
+  },
+  {
+   "metric": "headcount",
+   "which": "current",
+   "printed": "53"
+  },
+  {
+   "metric": "headcount",
+   "which": "current",
+   "printed": "44"
+  },
+  {
+   "metric": "headcount",
+   "which": "current",
+   "printed": "5"
+  },
+  {
+   "metric": "headcount",
+   "which": "current",
+   "printed": "4"
+  },
+  {
+   "metric": "headcount_plan",
+   "which": "current",
+   "printed": "56"
+  },
+  {
+   "metric": "headcount_plan",
+   "which": "current",
+   "printed": "46"
+  },
+  {
+   "metric": "headcount_plan",
+   "which": "current",
+   "printed": "5"
+  },
+  {
+   "metric": "survey:Developer experience index",
+   "which": "current",
+   "printed": "71"
+  },
+  {
+   "metric": "mix:New capabilities",
+   "which": "current",
+   "printed": "31%"
+  },
+  {
+   "metric": "mix:Improve the core",
+   "which": "current",
+   "printed": "18%"
+  },
+  {
+   "metric": "mix:Growth",
+   "which": "current",
+   "printed": "8%"
+  },
+  {
+   "metric": "mix:Platform & scale",
+   "which": "current",
+   "printed": "21%"
+  },
+  {
+   "metric": "mix:Keep the lights on",
+   "which": "current",
+   "printed": "22%"
+  },
+  {
+   "metric": "traced_pct",
+   "which": "current",
+   "printed": "78%"
+  },
+  {
+   "metric": "customer_requests",
+   "which": "current",
+   "printed": "7"
+  }
+ ],
+ "runs/B/no_ai/1": [
+  {
+   "metric": "deploys_per_week",
+   "which": "current",
+   "printed": "4"
+  },
+  {
+   "metric": "deploys_per_week",
+   "which": "prior",
+   "printed": "3"
+  },
+  {
+   "metric": "change_failure_rate",
+   "which": "current",
+   "printed": "7.7%"
+  },
+  {
+   "metric": "change_failure_rate",
+   "which": "prior",
+   "printed": "5.1%"
+  },
+  {
+   "metric": "lead_time",
+   "which": "current",
+   "printed": "38h"
+  },
+  {
+   "metric": "lead_time",
+   "which": "prior",
+   "printed": "52h"
+  },
+  {
+   "metric": "review_time",
+   "which": "current",
+   "printed": "13h"
+  },
+  {
+   "metric": "review_time",
+   "which": "prior",
+   "printed": "9h"
+  },
+  {
+   "metric": "rework_rate",
+   "which": "current",
+   "printed": "15%"
+  },
+  {
+   "metric": "time_to_restore",
+   "which": "current",
+   "printed": "41m"
+  },
+  {
+   "metric": "time_to_restore",
+   "which": "prior",
+   "printed": "46m"
+  },
+  {
+   "metric": "arr",
+   "which": "current",
+   "printed": "$10.9M"
+  },
+  {
+   "metric": "arr",
+   "which": "prior",
+   "printed": "$10.4M"
+  },
+  {
+   "metric": "nrr",
+   "which": "current",
+   "printed": "96.4%"
+  },
+  {
+   "metric": "grr",
+   "which": "current",
+   "printed": "89.3%"
+  },
+  {
+   "metric": "expansion_arr",
+   "which": "current",
+   "printed": "$741K"
+  },
+  {
+   "metric": "analytics:Activation",
+   "which": "current",
+   "printed": "41%"
+  },
+  {
+   "metric": "analytics:Activation",
+   "which": "prior",
+   "printed": "39%"
+  },
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "current",
+   "printed": "23.1K"
+  },
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "prior",
+   "printed": "18.4K"
+  },
+  {
+   "metric": "analytics:Weekly active dispatchers",
+   "which": "current",
+   "printed": "6,120"
+  },
+  {
+   "metric": "analytics:Weekly active dispatchers",
+   "which": "prior",
+   "printed": "5,890"
+  },
+  {
+   "metric": "finance:Revenue",
+   "which": "current",
+   "printed": "$10.3M"
+  },
+  {
+   "metric": "finance:R&D payroll",
+   "which": "current",
+   "printed": "$3.7M"
+  },
+  {
+   "metric": "finance:Inference (cost of revenue)",
+   "which": "current",
+   "printed": "$612K"
+  },
+  {
+   "metric": "finance:AI tools for the team",
+   "which": "current",
+   "printed": "$90K"
+  },
+  {
+   "metric": "finance:Cloud",
+   "which": "current",
+   "printed": "$410K"
+  },
+  {
+   "metric": "rd_share",
+   "which": "current",
+   "printed": "40.8%"
+  },
+  {
+   "metric": "headcount",
+   "which": "current",
+   "printed": "53"
+  },
+  {
+   "metric": "headcount",
+   "which": "current",
+   "printed": "44"
+  },
+  {
+   "metric": "headcount",
+   "which": "current",
+   "printed": "5"
+  },
+  {
+   "metric": "headcount",
+   "which": "current",
+   "printed": "4"
+  },
+  {
+   "metric": "headcount_plan",
+   "which": "current",
+   "printed": "56"
+  },
+  {
+   "metric": "headcount_plan",
+   "which": "current",
+   "printed": "46"
+  },
+  {
+   "metric": "headcount_plan",
+   "which": "current",
+   "printed": "5"
+  },
+  {
+   "metric": "survey:Developer experience index",
+   "which": "current",
+   "printed": "71"
+  },
+  {
+   "metric": "mix:New capabilities",
+   "which": "current",
+   "printed": "31%"
+  },
+  {
+   "metric": "mix:Improve the core",
+   "which": "current",
+   "printed": "18%"
+  },
+  {
+   "metric": "mix:Growth",
+   "which": "current",
+   "printed": "8%"
+  },
+  {
+   "metric": "mix:Platform & scale",
+   "which": "current",
+   "printed": "21%"
+  },
+  {
+   "metric": "mix:Keep the lights on",
+   "which": "current",
+   "printed": "22%"
+  },
+  {
+   "metric": "traced_pct",
+   "which": "current",
+   "printed": "78%"
+  },
+  {
+   "metric": "customer_requests",
+   "which": "current",
+   "printed": "7"
+  }
+ ],
+ "runs/B/no_ai/2": [
+  {
+   "metric": "deploys_per_week",
+   "which": "current",
+   "printed": "4"
+  },
+  {
+   "metric": "deploys_per_week",
+   "which": "prior",
+   "printed": "3"
+  },
+  {
+   "metric": "lead_time",
+   "which": "current",
+   "printed": "38h"
+  },
+  {
+   "metric": "lead_time",
+   "which": "prior",
+   "printed": "52h"
+  },
+  {
+   "metric": "change_failure_rate",
+   "which": "current",
+   "printed": "7.7%"
+  },
+  {
+   "metric": "change_failure_rate",
+   "which": "prior",
+   "printed": "5.1%"
+  },
+  {
+   "metric": "time_to_restore",
+   "which": "current",
+   "printed": "41m"
+  },
+  {
+   "metric": "time_to_restore",
+   "which": "prior",
+   "printed": "46m"
+  },
+  {
+   "metric": "review_time",
+   "which": "current",
+   "printed": "13h"
+  },
+  {
+   "metric": "review_time",
+   "which": "prior",
+   "printed": "9h"
+  },
+  {
+   "metric": "rework_rate",
+   "which": "current",
+   "printed": "15%"
+  },
+  {
+   "metric": "arr",
+   "which": "current",
+   "printed": "$10.9M"
+  },
+  {
+   "metric": "arr",
+   "which": "prior",
+   "printed": "$10.4M"
+  },
+  {
+   "metric": "nrr",
+   "which": "current",
+   "printed": "96.4%"
+  },
+  {
+   "metric": "grr",
+   "which": "current",
+   "printed": "89.3%"
+  },
+  {
+   "metric": "expansion_arr",
+   "which": "current",
+   "printed": "$741K"
+  },
+  {
+   "metric": "analytics:Activation",
+   "which": "current",
+   "printed": "41%"
+  },
+  {
+   "metric": "analytics:Activation",
+   "which": "prior",
+   "printed": "39%"
+  },
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "current",
+   "printed": "23.1K"
+  },
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "prior",
+   "printed": "18.4K"
+  },
+  {
+   "metric": "analytics:Weekly active dispatchers",
+   "which": "current",
+   "printed": "6,120"
+  },
+  {
+   "metric": "analytics:Weekly active dispatchers",
+   "which": "prior",
+   "printed": "5,890"
+  },
+  {
+   "metric": "finance:Revenue",
+   "which": "current",
+   "printed": "$10.3M"
+  },
+  {
+   "metric": "finance:R&D payroll",
+   "which": "current",
+   "printed": "$3.7M"
+  },
+  {
+   "metric": "finance:Inference (cost of revenue)",
+   "which": "current",
+   "printed": "$612K"
+  },
+  {
+   "metric": "finance:AI tools for the team",
+   "which": "current",
+   "printed": "$90K"
+  },
+  {
+   "metric": "finance:Cloud",
+   "which": "current",
+   "printed": "$410K"
+  },
+  {
+   "metric": "rd_share",
+   "which": "current",
+   "printed": "40.8%"
+  },
+  {
+   "metric": "headcount",
+   "which": "current",
+   "printed": "53"
+  },
+  {
+   "metric": "headcount",
+   "which": "current",
+   "printed": "44"
+  },
+  {
+   "metric": "headcount",
+   "which": "current",
+   "printed": "5"
+  },
+  {
+   "metric": "headcount",
+   "which": "current",
+   "printed": "4"
+  },
+  {
+   "metric": "headcount_plan",
+   "which": "current",
+   "printed": "56"
+  },
+  {
+   "metric": "headcount_plan",
+   "which": "current",
+   "printed": "46"
+  },
+  {
+   "metric": "headcount_plan",
+   "which": "current",
+   "printed": "5"
+  },
+  {
+   "metric": "survey:Developer experience index",
+   "which": "current",
+   "printed": "71"
+  },
+  {
+   "metric": "mix:New capabilities",
+   "which": "current",
+   "printed": "31%"
+  },
+  {
+   "metric": "mix:Improve the core",
+   "which": "current",
+   "printed": "18%"
+  },
+  {
+   "metric": "mix:Growth",
+   "which": "current",
+   "printed": "8%"
+  },
+  {
+   "metric": "mix:Platform & scale",
+   "which": "current",
+   "printed": "21%"
+  },
+  {
+   "metric": "mix:Keep the lights on",
+   "which": "current",
+   "printed": "22%"
+  },
+  {
+   "metric": "traced_pct",
+   "which": "current",
+   "printed": "78%"
+  },
+  {
+   "metric": "customer_requests",
+   "which": "current",
+   "printed": "7"
+  }
+ ],
+ "runs/B/no_ai/3": [
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "current",
+   "printed": "23.1K"
+  },
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "prior",
+   "printed": "18.4K"
+  },
+  {
+   "metric": "analytics:Activation",
+   "which": "current",
+   "printed": "41%"
+  },
+  {
+   "metric": "analytics:Activation",
+   "which": "prior",
+   "printed": "39%"
+  },
+  {
+   "metric": "analytics:Weekly active dispatchers",
+   "which": "current",
+   "printed": "6,120"
+  },
+  {
+   "metric": "analytics:Weekly active dispatchers",
+   "which": "prior",
+   "printed": "5,890"
+  },
+  {
+   "metric": "arr",
+   "which": "current",
+   "printed": "$10.9M"
+  },
+  {
+   "metric": "arr",
+   "which": "prior",
+   "printed": "$10.4M"
+  },
+  {
+   "metric": "nrr",
+   "which": "current",
+   "printed": "96.4%"
+  },
+  {
+   "metric": "grr",
+   "which": "current",
+   "printed": "89.3%"
+  },
+  {
+   "metric": "expansion_arr",
+   "which": "current",
+   "printed": "$741K"
+  },
+  {
+   "metric": "change_failure_rate",
+   "which": "current",
+   "printed": "7.7%"
+  },
+  {
+   "metric": "change_failure_rate",
+   "which": "prior",
+   "printed": "5.1%"
+  },
+  {
+   "metric": "deploys_per_week",
+   "which": "current",
+   "printed": "4"
+  },
+  {
+   "metric": "deploys_per_week",
+   "which": "prior",
+   "printed": "3"
+  },
+  {
+   "metric": "lead_time",
+   "which": "current",
+   "printed": "38h"
+  },
+  {
+   "metric": "lead_time",
+   "which": "prior",
+   "printed": "52h"
+  },
+  {
+   "metric": "time_to_restore",
+   "which": "current",
+   "printed": "41m"
+  },
+  {
+   "metric": "time_to_restore",
+   "which": "prior",
+   "printed": "46m"
+  },
+  {
+   "metric": "review_time",
+   "which": "current",
+   "printed": "13h"
+  },
+  {
+   "metric": "review_time",
+   "which": "prior",
+   "printed": "9h"
+  },
+  {
+   "metric": "rework_rate",
+   "which": "current",
+   "printed": "15%"
+  },
+  {
+   "metric": "traced_pct",
+   "which": "current",
+   "printed": "78%"
+  },
+  {
+   "metric": "mix:New capabilities",
+   "which": "current",
+   "printed": "31%"
+  },
+  {
+   "metric": "mix:Improve the core",
+   "which": "current",
+   "printed": "18%"
+  },
+  {
+   "metric": "mix:Growth",
+   "which": "current",
+   "printed": "8%"
+  },
+  {
+   "metric": "mix:Platform & scale",
+   "which": "current",
+   "printed": "21%"
+  },
+  {
+   "metric": "mix:Keep the lights on",
+   "which": "current",
+   "printed": "22%"
+  },
+  {
+   "metric": "finance:Revenue",
+   "which": "current",
+   "printed": "$10.3M"
+  },
+  {
+   "metric": "finance:R&D payroll",
+   "which": "current",
+   "printed": "$3.7M"
+  },
+  {
+   "metric": "finance:Inference (cost of revenue)",
+   "which": "current",
+   "printed": "$612K"
+  },
+  {
+   "metric": "finance:AI tools for the team",
+   "which": "current",
+   "printed": "$90K"
+  },
+  {
+   "metric": "finance:Cloud",
+   "which": "current",
+   "printed": "$410K"
+  },
+  {
+   "metric": "rd_share",
+   "which": "current",
+   "printed": "40.8%"
+  },
+  {
+   "metric": "customer_requests",
+   "which": "current",
+   "printed": "7"
+  },
+  {
+   "metric": "headcount",
+   "which": "current",
+   "printed": "53"
+  },
+  {
+   "metric": "headcount",
+   "which": "current",
+   "printed": "44"
+  },
+  {
+   "metric": "headcount",
+   "which": "current",
+   "printed": "5"
+  },
+  {
+   "metric": "headcount",
+   "which": "current",
+   "printed": "4"
+  },
+  {
+   "metric": "headcount_plan",
+   "which": "current",
+   "printed": "56"
+  },
+  {
+   "metric": "headcount_plan",
+   "which": "current",
+   "printed": "46"
+  },
+  {
+   "metric": "headcount_plan",
+   "which": "current",
+   "printed": "5"
+  },
+  {
+   "metric": "survey:Developer experience index",
+   "which": "current",
+   "printed": "71"
+  }
+ ],
+ "runs/B/single_product/1": [
+  {
+   "metric": "deploys_per_week",
+   "which": "current",
+   "printed": "4"
+  },
+  {
+   "metric": "deploys_per_week",
+   "which": "prior",
+   "printed": "3"
+  },
+  {
+   "metric": "lead_time",
+   "which": "current",
+   "printed": "38h"
+  },
+  {
+   "metric": "lead_time",
+   "which": "prior",
+   "printed": "52h"
+  },
+  {
+   "metric": "change_failure_rate",
+   "which": "current",
+   "printed": "7.7%"
+  },
+  {
+   "metric": "change_failure_rate",
+   "which": "prior",
+   "printed": "5.1%"
+  },
+  {
+   "metric": "time_to_restore",
+   "which": "current",
+   "printed": "41m"
+  },
+  {
+   "metric": "time_to_restore",
+   "which": "prior",
+   "printed": "46m"
+  },
+  {
+   "metric": "review_time",
+   "which": "current",
+   "printed": "13h"
+  },
+  {
+   "metric": "review_time",
+   "which": "prior",
+   "printed": "9h"
+  },
+  {
+   "metric": "rework_rate",
+   "which": "current",
+   "printed": "15%"
+  },
+  {
+   "metric": "arr",
+   "which": "current",
+   "printed": "$10.9M"
+  },
+  {
+   "metric": "arr",
+   "which": "prior",
+   "printed": "$10.4M"
+  },
+  {
+   "metric": "nrr",
+   "which": "current",
+   "printed": "96.4%"
+  },
+  {
+   "metric": "grr",
+   "which": "current",
+   "printed": "89.3%"
+  },
+  {
+   "metric": "expansion_arr",
+   "which": "current",
+   "printed": "$741K"
+  },
+  {
+   "metric": "analytics:Activation",
+   "which": "current",
+   "printed": "41%"
+  },
+  {
+   "metric": "analytics:Activation",
+   "which": "prior",
+   "printed": "39%"
+  },
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "current",
+   "printed": "23.1K"
+  },
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "prior",
+   "printed": "18.4K"
+  },
+  {
+   "metric": "analytics:Weekly active dispatchers",
+   "which": "current",
+   "printed": "6,120"
+  },
+  {
+   "metric": "analytics:Weekly active dispatchers",
+   "which": "prior",
+   "printed": "5,890"
+  },
+  {
+   "metric": "finance:Revenue",
+   "which": "current",
+   "printed": "$10.3M"
+  },
+  {
+   "metric": "finance:R&D payroll",
+   "which": "current",
+   "printed": "$3.7M"
+  },
+  {
+   "metric": "finance:Inference (cost of revenue)",
+   "which": "current",
+   "printed": "$612K"
+  },
+  {
+   "metric": "finance:AI tools for the team",
+   "which": "current",
+   "printed": "$90K"
+  },
+  {
+   "metric": "finance:Cloud",
+   "which": "current",
+   "printed": "$410K"
+  },
+  {
+   "metric": "rd_share",
+   "which": "current",
+   "printed": "40.8%"
+  },
+  {
+   "metric": "eval_pass:v14",
+   "which": "current",
+   "printed": "86%"
+  },
+  {
+   "metric": "eval_pass:v14",
+   "which": "prior",
+   "printed": "82%"
+  },
+  {
+   "metric": "cost_per_task:v14",
+   "which": "current",
+   "printed": "$0.33"
+  },
+  {
+   "metric": "cost_per_task:v14",
+   "which": "prior",
+   "printed": "$0.41"
+  },
+  {
+   "metric": "ai_tool_cost",
+   "which": "current",
+   "printed": "$90K"
+  },
+  {
+   "metric": "ai_weekly_use",
+   "which": "current",
+   "printed": "75%"
+  },
+  {
+   "metric": "headcount",
+   "which": "current",
+   "printed": "53"
+  },
+  {
+   "metric": "headcount",
+   "which": "current",
+   "printed": "44"
+  },
+  {
+   "metric": "headcount",
+   "which": "current",
+   "printed": "5"
+  },
+  {
+   "metric": "headcount",
+   "which": "current",
+   "printed": "4"
+  },
+  {
+   "metric": "headcount_plan",
+   "which": "current",
+   "printed": "56"
+  },
+  {
+   "metric": "headcount_plan",
+   "which": "current",
+   "printed": "46"
+  },
+  {
+   "metric": "headcount_plan",
+   "which": "current",
+   "printed": "5"
+  },
+  {
+   "metric": "survey:Developer experience index",
+   "which": "current",
+   "printed": "71"
+  },
+  {
+   "metric": "customer_requests",
+   "which": "current",
+   "printed": "7"
+  },
+  {
+   "metric": "mix:New capabilities",
+   "which": "current",
+   "printed": "31%"
+  },
+  {
+   "metric": "mix:Improve the core",
+   "which": "current",
+   "printed": "18%"
+  },
+  {
+   "metric": "mix:Growth",
+   "which": "current",
+   "printed": "8%"
+  },
+  {
+   "metric": "mix:Platform & scale",
+   "which": "current",
+   "printed": "21%"
+  },
+  {
+   "metric": "mix:Keep the lights on",
+   "which": "current",
+   "printed": "22%"
+  },
+  {
+   "metric": "traced_pct",
+   "which": "current",
+   "printed": "78%"
+  }
+ ],
+ "runs/B/single_product/2": [
+  {
+   "metric": "deploys_per_week",
+   "which": "current",
+   "printed": "4"
+  },
+  {
+   "metric": "deploys_per_week",
+   "which": "prior",
+   "printed": "3"
+  },
+  {
+   "metric": "lead_time",
+   "which": "current",
+   "printed": "38h"
+  },
+  {
+   "metric": "lead_time",
+   "which": "prior",
+   "printed": "52h"
+  },
+  {
+   "metric": "change_failure_rate",
+   "which": "current",
+   "printed": "7.7%"
+  },
+  {
+   "metric": "change_failure_rate",
+   "which": "prior",
+   "printed": "5.1%"
+  },
+  {
+   "metric": "time_to_restore",
+   "which": "current",
+   "printed": "41m"
+  },
+  {
+   "metric": "time_to_restore",
+   "which": "prior",
+   "printed": "46m"
+  },
+  {
+   "metric": "review_time",
+   "which": "current",
+   "printed": "13h"
+  },
+  {
+   "metric": "review_time",
+   "which": "prior",
+   "printed": "9h"
+  },
+  {
+   "metric": "rework_rate",
+   "which": "current",
+   "printed": "15%"
+  },
+  {
+   "metric": "arr",
+   "which": "current",
+   "printed": "$10.9M"
+  },
+  {
+   "metric": "arr",
+   "which": "prior",
+   "printed": "$10.4M"
+  },
+  {
+   "metric": "nrr",
+   "which": "current",
+   "printed": "96.4%"
+  },
+  {
+   "metric": "grr",
+   "which": "current",
+   "printed": "89.3%"
+  },
+  {
+   "metric": "expansion_arr",
+   "which": "current",
+   "printed": "$741K"
+  },
+  {
+   "metric": "analytics:Activation",
+   "which": "current",
+   "printed": "41%"
+  },
+  {
+   "metric": "analytics:Activation",
+   "which": "prior",
+   "printed": "39%"
+  },
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "current",
+   "printed": "23.1K"
+  },
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "prior",
+   "printed": "18.4K"
+  },
+  {
+   "metric": "analytics:Weekly active dispatchers",
+   "which": "current",
+   "printed": "6,120"
+  },
+  {
+   "metric": "analytics:Weekly active dispatchers",
+   "which": "prior",
+   "printed": "5,890"
+  },
+  {
+   "metric": "finance:Revenue",
+   "which": "current",
+   "printed": "$10.3M"
+  },
+  {
+   "metric": "finance:R&D payroll",
+   "which": "current",
+   "printed": "$3.7M"
+  },
+  {
+   "metric": "finance:Inference (cost of revenue)",
+   "which": "current",
+   "printed": "$612K"
+  },
+  {
+   "metric": "finance:AI tools for the team",
+   "which": "current",
+   "printed": "$90K"
+  },
+  {
+   "metric": "finance:Cloud",
+   "which": "current",
+   "printed": "$410K"
+  },
+  {
+   "metric": "rd_share",
+   "which": "current",
+   "printed": "40.8%"
+  },
+  {
+   "metric": "eval_pass:v14",
+   "which": "current",
+   "printed": "86%"
+  },
+  {
+   "metric": "eval_pass:v14",
+   "which": "prior",
+   "printed": "82%"
+  },
+  {
+   "metric": "cost_per_task:v14",
+   "which": "current",
+   "printed": "$0.33"
+  },
+  {
+   "metric": "cost_per_task:v14",
+   "which": "prior",
+   "printed": "$0.41"
+  },
+  {
+   "metric": "ai_tool_cost",
+   "which": "current",
+   "printed": "$90K"
+  },
+  {
+   "metric": "ai_weekly_use",
+   "which": "current",
+   "printed": "75%"
+  },
+  {
+   "metric": "headcount",
+   "which": "current",
+   "printed": "53"
+  },
+  {
+   "metric": "headcount",
+   "which": "current",
+   "printed": "44"
+  },
+  {
+   "metric": "headcount",
+   "which": "current",
+   "printed": "5"
+  },
+  {
+   "metric": "headcount",
+   "which": "current",
+   "printed": "4"
+  },
+  {
+   "metric": "headcount_plan",
+   "which": "current",
+   "printed": "56"
+  },
+  {
+   "metric": "headcount_plan",
+   "which": "current",
+   "printed": "46"
+  },
+  {
+   "metric": "headcount_plan",
+   "which": "current",
+   "printed": "5"
+  },
+  {
+   "metric": "survey:Developer experience index",
+   "which": "current",
+   "printed": "71"
+  },
+  {
+   "metric": "mix:New capabilities",
+   "which": "current",
+   "printed": "31%"
+  },
+  {
+   "metric": "mix:Improve the core",
+   "which": "current",
+   "printed": "18%"
+  },
+  {
+   "metric": "mix:Growth",
+   "which": "current",
+   "printed": "8%"
+  },
+  {
+   "metric": "mix:Platform & scale",
+   "which": "current",
+   "printed": "21%"
+  },
+  {
+   "metric": "mix:Keep the lights on",
+   "which": "current",
+   "printed": "22%"
+  },
+  {
+   "metric": "traced_pct",
+   "which": "current",
+   "printed": "78%"
+  },
+  {
+   "metric": "customer_requests",
+   "which": "current",
+   "printed": "7"
+  }
+ ],
+ "runs/B/single_product/3": [
+  {
+   "metric": "deploys_per_week",
+   "which": "current",
+   "printed": "4"
+  },
+  {
+   "metric": "deploys_per_week",
+   "which": "prior",
+   "printed": "3"
+  },
+  {
+   "metric": "lead_time",
+   "which": "current",
+   "printed": "38h"
+  },
+  {
+   "metric": "lead_time",
+   "which": "prior",
+   "printed": "52h"
+  },
+  {
+   "metric": "change_failure_rate",
+   "which": "current",
+   "printed": "7.7%"
+  },
+  {
+   "metric": "change_failure_rate",
+   "which": "prior",
+   "printed": "5.1%"
+  },
+  {
+   "metric": "time_to_restore",
+   "which": "current",
+   "printed": "41m"
+  },
+  {
+   "metric": "time_to_restore",
+   "which": "prior",
+   "printed": "46m"
+  },
+  {
+   "metric": "review_time",
+   "which": "current",
+   "printed": "13h"
+  },
+  {
+   "metric": "review_time",
+   "which": "prior",
+   "printed": "9h"
+  },
+  {
+   "metric": "rework_rate",
+   "which": "current",
+   "printed": "15%"
+  },
+  {
+   "metric": "arr",
+   "which": "current",
+   "printed": "$10.9M"
+  },
+  {
+   "metric": "arr",
+   "which": "prior",
+   "printed": "$10.4M"
+  },
+  {
+   "metric": "nrr",
+   "which": "current",
+   "printed": "96.4%"
+  },
+  {
+   "metric": "grr",
+   "which": "current",
+   "printed": "89.3%"
+  },
+  {
+   "metric": "expansion_arr",
+   "which": "current",
+   "printed": "$741K"
+  },
+  {
+   "metric": "analytics:Activation",
+   "which": "current",
+   "printed": "41%"
+  },
+  {
+   "metric": "analytics:Activation",
+   "which": "prior",
+   "printed": "39%"
+  },
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "current",
+   "printed": "23.1K"
+  },
+  {
+   "metric": "analytics:Loads cleared per week",
+   "which": "prior",
+   "printed": "18.4K"
+  },
+  {
+   "metric": "analytics:Weekly active dispatchers",
+   "which": "current",
+   "printed": "6,120"
+  },
+  {
+   "metric": "analytics:Weekly active dispatchers",
+   "which": "prior",
+   "printed": "5,890"
+  },
+  {
+   "metric": "finance:Revenue",
+   "which": "current",
+   "printed": "$10.3M"
+  },
+  {
+   "metric": "finance:R&D payroll",
+   "which": "current",
+   "printed": "$3.7M"
+  },
+  {
+   "metric": "finance:Inference (cost of revenue)",
+   "which": "current",
+   "printed": "$612K"
+  },
+  {
+   "metric": "finance:AI tools for the team",
+   "which": "current",
+   "printed": "$90K"
+  },
+  {
+   "metric": "finance:Cloud",
+   "which": "current",
+   "printed": "$410K"
+  },
+  {
+   "metric": "rd_share",
+   "which": "current",
+   "printed": "40.8%"
+  },
+  {
+   "metric": "eval_pass:v14",
+   "which": "current",
+   "printed": "86%"
+  },
+  {
+   "metric": "eval_pass:v14",
+   "which": "prior",
+   "printed": "82%"
+  },
+  {
+   "metric": "cost_per_task:v14",
+   "which": "current",
+   "printed": "$0.33"
+  },
+  {
+   "metric": "cost_per_task:v14",
+   "which": "prior",
+   "printed": "$0.41"
+  },
+  {
+   "metric": "ai_tool_cost",
+   "which": "current",
+   "printed": "$90K"
+  },
+  {
+   "metric": "ai_weekly_use",
+   "which": "current",
+   "printed": "75%"
+  },
+  {
+   "metric": "headcount",
+   "which": "current",
+   "printed": "53"
+  },
+  {
+   "metric": "headcount",
+   "which": "current",
+   "printed": "44"
+  },
+  {
+   "metric": "headcount",
+   "which": "current",
+   "printed": "5"
+  },
+  {
+   "metric": "headcount",
+   "which": "current",
+   "printed": "4"
+  },
+  {
+   "metric": "headcount_plan",
+   "which": "current",
+   "printed": "56"
+  },
+  {
+   "metric": "headcount_plan",
+   "which": "current",
+   "printed": "46"
+  },
+  {
+   "metric": "headcount_plan",
+   "which": "current",
+   "printed": "5"
+  },
+  {
+   "metric": "survey:Developer experience index",
+   "which": "current",
+   "printed": "71"
+  },
+  {
+   "metric": "mix:New capabilities",
+   "which": "current",
+   "printed": "31%"
+  },
+  {
+   "metric": "mix:Improve the core",
+   "which": "current",
+   "printed": "18%"
+  },
+  {
+   "metric": "mix:Growth",
+   "which": "current",
+   "printed": "8%"
+  },
+  {
+   "metric": "mix:Platform & scale",
+   "which": "current",
+   "printed": "21%"
+  },
+  {
+   "metric": "mix:Keep the lights on",
+   "which": "current",
+   "printed": "22%"
+  },
+  {
+   "metric": "traced_pct",
+   "which": "current",
+   "printed": "78%"
+  },
+  {
+   "metric": "customer_requests",
+   "which": "current",
+   "printed": "7"
+  }
+ ],
+ "runs/B/sparse/1": [
+  {
+   "metric": "mix:Growth",
+   "which": "current",
+   "printed": "8%"
+  },
+  {
+   "metric": "mix:Improve the core",
+   "which": "current",
+   "printed": "18%"
+  },
+  {
+   "metric": "mix:Keep the lights on",
+   "which": "current",
+   "printed": "22%"
+  },
+  {
+   "metric": "mix:New capabilities",
+   "which": "current",
+   "printed": "31%"
+  },
+  {
+   "metric": "mix:Platform & scale",
+   "which": "current",
+   "printed": "21%"
+  },
+  {
+   "metric": "traced_pct",
+   "which": "current",
+   "printed": "78%"
+  }
+ ],
+ "runs/B/sparse/2": [
+  {
+   "metric": "mix:Growth",
+   "which": "current",
+   "printed": "8%"
+  },
+  {
+   "metric": "mix:Improve the core",
+   "which": "current",
+   "printed": "18%"
+  },
+  {
+   "metric": "mix:Keep the lights on",
+   "which": "current",
+   "printed": "22%"
+  },
+  {
+   "metric": "mix:New capabilities",
+   "which": "current",
+   "printed": "31%"
+  },
+  {
+   "metric": "mix:Platform & scale",
+   "which": "current",
+   "printed": "21%"
+  },
+  {
+   "metric": "traced_pct",
+   "which": "current",
+   "printed": "78%"
+  }
+ ],
+ "runs/B/sparse/3": [
+  {
+   "metric": "mix:Growth",
+   "which": "current",
+   "printed": "8%"
+  },
+  {
+   "metric": "mix:Improve the core",
+   "which": "current",
+   "printed": "18%"
+  },
+  {
+   "metric": "mix:Keep the lights on",
+   "which": "current",
+   "printed": "22%"
+  },
+  {
+   "metric": "mix:New capabilities",
+   "which": "current",
+   "printed": "31%"
+  },
+  {
+   "metric": "mix:Platform & scale",
+   "which": "current",
+   "printed": "21%"
+  },
+  {
+   "metric": "traced_pct",
+   "which": "current",
+   "printed": "78%"
+  }
+ ]
+}

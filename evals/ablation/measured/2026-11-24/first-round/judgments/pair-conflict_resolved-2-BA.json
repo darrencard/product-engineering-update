@@ -1,0 +1,45 @@
+{
+ "id": "pair-conflict_resolved-2-BA",
+ "fixture": "conflict_resolved",
+ "kind": "pair",
+ "x": "runs/B/conflict_resolved/2",
+ "y": "runs/A/conflict_resolved/2",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "X",
+    "reason": "X's figures recompute cleanly (ARR $10.38M to $10.91M, NRR 96.4%, CFR 4/52 = 7.7%), while Y's AI section says cost per successful task fell from $0.50 to $0.38 but its summary and slide 5 give $0.41 to $0.33 for the same measure."
+   },
+   "no_invented_numbers": {
+    "winner": "X",
+    "reason": "X's only extrapolation, 'Activation: 5 more periods', is labelled as a projection, while Y's board cut states as fact that inference overspend was 'driven by volume', a cause the data does not show."
+   },
+   "speed_with_quality": {
+    "winner": "tie",
+    "reason": "Both pair deploys rising from 3 to 4 per week with change failure rising from 5.1% to 7.7% (X's slide 9b, Y's section 7), and neither treats speed alone as good news."
+   },
+   "gaps_shown": {
+    "winner": "Y",
+    "reason": "Y puts both source conflicts (ARR $10.91M Stripe vs $10.10M finance close; loads 23.1K PostHog vs 21.4K warehouse) in its summary and board cut, while X leaves them in ledger rows L09 and L14, though neither names an owner for reconciling them."
+   },
+   "board_cut_usable": {
+    "winner": "Y",
+    "reason": "Y's board cut is one page, leads with the pricing-pilot decision and flags that its 4 Nov deadline has passed, while X's cut calls it a decision 'for you today' and ships with the Appendix C product pitch and 'Book a call'."
+   }
+  },
+  "overall": {
+   "winner": "Y",
+   "reason": "Y gives the board what it needs: the overdue decision, $1.11M of churn outweighing $741K of expansion, the integration gap behind 11 of 17 losses, and both source conflicts in plain view. X's numbers are slightly cleaner, but its board cut hides the disagreements in a ledger, misstates the timing of the ask and includes promotional appendices, so it could not be sent as it is."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 3074,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 40126,
+  "cost_usd": 0.3829746,
+  "num_turns": 2,
+  "duration_ms": 29820
+ }
+}

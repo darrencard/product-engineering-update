@@ -1,0 +1,45 @@
+{
+ "id": "pair-no_ai-1-BA",
+ "fixture": "no_ai",
+ "kind": "pair",
+ "x": "runs/B/no_ai/1",
+ "y": "runs/A/no_ai/1",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "Y",
+    "reason": "Y's figures recompute correctly, including the ARR bridge ($10.38M + $900K + $741K \u2212 $1.11M = $10.911M), NRR 96.4%, GRR 89.3%, July/Aug/Sep item counts 53/37/10 and rework 7\u21929 of 60, while X's cover says '16 of 17 slides show data' and in the same breath says 3 slides lack data, and its 40.8% R&D ratio rests on a Finance revenue figure that conflicts with Stripe."
+   },
+   "no_invented_numbers": {
+    "winner": "tie",
+    "reason": "X's board cut says 'Signed off by the CEO', which nothing in the data supports, and Y's claim that 'cost per load is rising' stretches inference +27.5% vs plan against loads +5% vs target; each has one unsupported claim, and both label their projections ('5 more periods', 'about $2.7M')."
+   },
+   "speed_with_quality": {
+    "winner": "Y",
+    "reason": "Both pair 4 deploys/week with the 7.7% change failure rate on slide 9/9b and in Y's delivery table, but Y also shows PRs reworked rising from 12% to 15% and calls the result 'faster but less stable', while X keeps rework (L07) in the ledger only."
+   },
+   "gaps_shown": {
+    "winner": "Y",
+    "reason": "Y's Data gaps table names the VP Engineering as owner and covers missing agent task success, missing cost per successful task and the clash between Finance's $10.3M revenue and Stripe's $10.9M ARR; X only flags the Platform & security slide and quietly uses Finance revenue for its 40.8% ratio."
+   },
+   "board_cut_usable": {
+    "winner": "Y",
+    "reason": "Y's board cut opens with four plain findings and the pricing decision, and notes the 4 Nov deadline has passed; X's board cut carries the full ledger, an Appendix C sales pitch with 'Book a call' and a GitHub link, stray template text ('Keys J and K move between slides'), and lists a slide 12 that isn't in the cut."
+   }
+  },
+  "overall": {
+   "winner": "Y",
+   "reason": "Y's numbers are correct, it reconciles the ARR bridge, and it says plainly where sources disagree or data is missing, with an owner, including the Finance-versus-Stripe clash that X glosses over. Y's board cut could go to a board as it is, while X's would need its template and marketing text stripped and its internal contradictions fixed first."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 3129,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 38999,
+  "cost_usd": 0.37505859999999996,
+  "num_turns": 2,
+  "duration_ms": 28967
+ }
+}

@@ -1,0 +1,45 @@
+{
+ "id": "pair-sparse-3-AB",
+ "fixture": "sparse",
+ "kind": "pair",
+ "x": "runs/A/sparse/3",
+ "y": "runs/B/sparse/3",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "X",
+    "reason": "Every X figure checks out against tracker.csv: 31/22/21/18/8 by work type, 53/37/10 by month, 12/10/9 for Dispatch Agent and 78 tagged items. Y's headline '0 of 19 slides show data' is wrong, because the tracker supports the investment-mix split that Y lists only in its ledger (L01/L02)."
+   },
+   "no_invented_numbers": {
+    "winner": "X",
+    "reason": "X states only figures taken from the tracker. Y's board cut adds 'Signed off by the CEO', which nothing in the data supports, and fills slides 01, 05, 11 and 12 with sample ARR, revenue and eval figures ($10.9M ARR, 86% v14 pass rate) that a board reader could take as real."
+   },
+   "speed_with_quality": {
+    "winner": "Y",
+    "reason": "X reports throughput (53\u219237\u219210 completions, Dispatch Agent's 'steady pace') with no quality figure beside it, though it does not call the drop good news. Y has no real speed figures, and its samples always pair deploys (3\u21924) with change failure (5.1%\u21927.7%)."
+   },
+   "gaps_shown": {
+    "winner": "X",
+    "reason": "X's section 5 lists each missing input with the VP Engineering as owner, due Q4, and flags that the September drop to 10 items can't be explained from a done-only export. Y names the same owner but marks investment mix (slide 05) as missing even though the tracker supplies it, so it misstates the gap."
+   },
+   "board_cut_usable": {
+    "winner": "X",
+    "reason": "X's board cut fits on one page and leads with 100 items, the 39/39/22 mix and the September drop, then states 'Decisions requested: None'. Y's board cut is 8 slides that say 'not reported' and carry sample figures, so it can't be sent to a board as it is."
+   }
+  },
+  "overall": {
+   "winner": "X",
+   "reason": "X turns the only connected source into accurate, caveated findings and names who owns each gap, while Y throws away the real tracker data and fills the board cut with sample figures and an unsupported CEO sign-off. Y does better only on speed-quality pairing, and that is because it reports no speed data at all."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 1959,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 20897,
+  "cost_usd": 0.2068426,
+  "num_turns": 2,
+  "duration_ms": 19728
+ }
+}

@@ -1,0 +1,45 @@
+{
+ "id": "within-sparse-A-12",
+ "fixture": "sparse",
+ "kind": "within_A",
+ "x": "runs/A/sparse/1",
+ "y": "runs/A/sparse/2",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "Y",
+    "reason": "All of Y's monthly figures recompute correctly, e.g. Platform & scale 11/10/0 with its last item on 30 Aug and KTLO 11/10/1; X's full update says 'Platform closed one item after 2 September', but Platform's only September item (KEE-22) closed on 2 Sep and nothing closed after it."
+   },
+   "no_invented_numbers": {
+    "winner": "tie",
+    "reason": "Every figure in both updates comes from the tracker, such as 78 tagged items, 53/37/10 by month and the 31/26/43 split by line, and neither adds targets, benchmarks or forecasts."
+   },
+   "speed_with_quality": {
+    "winner": "Y",
+    "reason": "Neither has quality data, and both put Dispatch Agent's 'steady pace' (12/10/9) next to the missing v14 eval results; Y's gaps table also lists reliability and incidents as unconnected, so it names the quality figures that should sit beside throughput."
+   },
+   "gaps_shown": {
+    "winner": "X",
+    "reason": "X tells the VP Engineering to check the September drop to 10 items first, and also flags the out-of-sequence NEW-31 date; Y sends the same drop to 'team leads or a fuller export' with no single owner."
+   },
+   "board_cut_usable": {
+    "winner": "Y",
+    "reason": "Y's board cut leads with four headline lines and ends with an explicit 'Asks of the board: None this quarter', while X's board cut never says whether there are any asks, which leaves part of the rubric unanswered."
+   }
+  },
+  "overall": {
+   "winner": "Y",
+   "reason": "Y has no factual slips, puts its quality gaps beside the throughput figures and gives the board a direct answer on asks, while X has a date error about Platform's September work. X does flag individual gaps a little better, such as the Growth-vs-ARR mismatch and the NEW-31 anomaly, but that does not outweigh a wrong figure and a board cut with no asks."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 2271,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 12017,
+  "cost_usd": 0.14204260000000002,
+  "num_turns": 2,
+  "duration_ms": 23404
+ }
+}

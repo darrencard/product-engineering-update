@@ -1,0 +1,45 @@
+{
+ "id": "pair-single_product-3-AB",
+ "fixture": "single_product",
+ "kind": "pair",
+ "x": "runs/A/single_product/3",
+ "y": "runs/B/single_product/3",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "X",
+    "reason": "X's ARR bridge ($10.38M + $741K \u2212 $1.11M + $900K = $10.911M), NRR 96.4% and change failure rate 7.7% (4/52) all recompute correctly, while Y's slide 9 presents the 38h time from opening a pull request to merging it as lead time for change."
+   },
+   "no_invented_numbers": {
+    "winner": "X",
+    "reason": "X labels its $2.04-per-load figure as an upper-bound estimate and shows the working, while Y's board cut claims 'Signed off by the CEO', which nothing in the data supports."
+   },
+   "speed_with_quality": {
+    "winner": "tie",
+    "reason": "Both pair deploys rising from 3 to 4 a week with change failure rising from 5.1% to 7.7% (X's delivery table, Y's slides 9 and 9b), and neither presents speed alone as good news."
+   },
+   "gaps_shown": {
+    "winner": "X",
+    "reason": "X flags the conflict between finance's $10.3M quarterly revenue and billing's $10.91M ARR for finance to reconcile, and says lead time can't be measured (owner: VP Engineering, Q4), while Y shows both revenue figures without comment and marks lead time 'landed'."
+   },
+   "board_cut_usable": {
+    "winner": "X",
+    "reason": "X's board cut leads with the headline and the overdue pricing decision and is ready to send, while Y's board cut still includes Appendices B to D, with a GitHub link and 'Book a call'."
+   }
+  },
+  "overall": {
+   "winner": "X",
+   "reason": "Every figure in X recomputes correctly, and it flags the gaps in the data, the revenue-versus-ARR conflict and the lead-time measurement gap, with owners. Y mislabels a proxy as lead time, misses the source conflict, adds an unsupported CEO sign-off and leaves a product pitch in its board cut."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 3644,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 40653,
+  "cost_usd": 0.3985906,
+  "num_turns": 2,
+  "duration_ms": 35289
+ }
+}

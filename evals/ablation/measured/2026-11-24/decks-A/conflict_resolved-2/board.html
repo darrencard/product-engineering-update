@@ -1,0 +1,58 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Kestrel Labs: Product &amp; Engineering, Board Summary 2026-Q3</title>
+<style>
+:root{--ink:#1b1f24;--mut:#5b6470;--line:#e3e6ea;--ok:#1a7f37;--bad:#c62828;--warn:#9a6700;--bg:#fafbfc}
+*{box-sizing:border-box}body{font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;color:var(--ink);max-width:960px;margin:0 auto;padding:40px 24px 80px;background:#fff}
+h1{font-size:28px;margin:0 0 4px}h2{font-size:19px;margin:40px 0 10px;padding-top:16px;border-top:1px solid var(--line)}h3{font-size:15px;margin:20px 0 6px}
+.sub{color:var(--mut);margin:0 0 24px}p{margin:8px 0}
+table{border-collapse:collapse;width:100%;margin:8px 0 4px;font-size:14px}th,td{text-align:left;padding:7px 10px;border-bottom:1px solid var(--line);vertical-align:top}th{font-weight:600;color:var(--mut);font-size:12px;text-transform:uppercase;letter-spacing:.03em}td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+.ok{color:var(--ok);font-weight:600}.bad{color:var(--bad);font-weight:600}.warn{color:var(--warn);font-weight:600}
+.box{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:14px 18px;margin:12px 0}
+.ask{border-left:4px solid var(--bad)}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:12px 0}
+.kpi{border:1px solid var(--line);border-radius:8px;padding:12px 14px}.kpi .l{font-size:12px;color:var(--mut);text-transform:uppercase;letter-spacing:.03em}.kpi .v{font-size:26px;font-weight:700;margin:2px 0}.kpi .t{font-size:13px;color:var(--mut)}
+.bar{background:#eef1f4;height:10px;border-radius:5px;position:relative;min-width:120px}.bar i{position:absolute;left:0;top:0;bottom:0;background:#4a6fa5;border-radius:5px}.bar b{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--ink)}
+ul{margin:6px 0;padding-left:20px}li{margin:3px 0}.src{color:var(--mut);font-size:12px}
+footer{margin-top:48px;color:var(--mut);font-size:12px}
+@media print{body{padding:0}h2{break-after:avoid}}
+</style>
+</head><body>
+<h1>Product &amp; Engineering: 2026-Q3 Board Summary</h1>
+<p class="sub">Kestrel Labs · From the CPTO · 1 Jul to 30 Sep 2026 · Data as of 30 Sep 2026</p>
+
+<div class="box ask">
+<p><b>Decision: approve a per-load pricing pilot with 10 customers.</b> The other option is to wait a quarter. The recommendation is to run the pilot. <span class="bad">The decision was due 4 Nov 2026 and is now overdue.</span> The pilot tests the strategy's per-load pricing, and price was the reason for 6 of 17 lost deals.</p>
+</div>
+
+<div class="kpis">
+<div class="kpi"><div class="l">ARR</div><div class="v">$10.91M</div><div class="t">Plan $11.0M · +5.1% QoQ · NRR 96%</div></div>
+<div class="kpi"><div class="l">Loads cleared / week</div><div class="v ok">23.1K</div><div class="t">Target 22K · +26% QoQ</div></div>
+<div class="kpi"><div class="l">Activation</div><div class="v bad">41%</div><div class="t">Target 50% · Q2 39%</div></div>
+<div class="kpi"><div class="l">Agent task success</div><div class="v">86%</div><div class="t">Goal 90% · Q2 82%</div></div>
+</div>
+
+<h2>What went well</h2>
+<ul>
+<li>The north star beat its target, and every won deal cited the agent clearing exceptions.</li>
+<li>6 of 7 commitments shipped. Cost per agent task fell 20%.</li>
+<li>R&amp;D spend was $4.20M, 1% under plan.</li>
+</ul>
+
+<h2>What needs attention</h2>
+<ul>
+<li><b>Activation missed by 9 points.</b> Guided activation shipped with no lift yet, and Self-serve carrier onboarding slipped.</li>
+<li><b>Churn:</b> 4 accounts ($1.11M) left, which outweighed $741K of expansion.</li>
+<li><b>Inference cost $612K, 27.5% over plan</b>, driven by volume. It also depends mostly on one model provider. A routing layer across 2 providers is due Dec 2026.</li>
+<li><b>Integration gaps</b> caused 11 of 17 lost deals and 55% of support tickets. No current bet targets them.</li>
+<li><b>Release quality:</b> change failure rate is 7.7% against a target under 5%. The VP Engineering owns the fix, due in Q4.</li>
+</ul>
+
+<h2>Next quarter's bets</h2>
+<table>
+<tr><th>Bet</th><th>Expected</th><th>Stop rule</th></tr>
+<tr><td>Multi-stop reroutes (6 wks, 5 eng)</td><td>Task success 86% → 90%</td><td>Evals gain under 2 pts by week 3</td></tr>
+<tr><td>Guided activation (4 wks, 3 eng)</td><td>Activation 41% → 50%</td><td>No lift in a 2-week live test</td></tr>
+</table>
+<p><b>Stopped:</b> Carrier marketplace, because it did not serve the strategy.</p>
+
+<p class="src">Data caveats: ARR and loads cleared use the named sources of truth, Stripe and PostHog. The finance close shows ARR at $10.10M and the warehouse shows loads at 21.4K, which would be a miss. Both gaps are being reconciled. The full update has the details.</p>
+</body></html>

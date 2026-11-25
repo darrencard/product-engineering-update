@@ -1,0 +1,45 @@
+{
+ "id": "pair-conflict_resolved-1-BA",
+ "fixture": "conflict_resolved",
+ "kind": "pair",
+ "x": "runs/B/conflict_resolved/1",
+ "y": "runs/A/conflict_resolved/1",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "tie",
+    "reason": "I recomputed the main figures in both updates and they check out: ARR $10.91M, net revenue retention 96.4%, gross revenue retention 89.3%, change failure 4/52 = 7.7%, lead time 38h, keep-the-lights-on 22%, R&D 40.8% of revenue, and Y's extras ($811K gap, inference +28%, 14 retained accounts with onboarding tickets) are also right."
+   },
+   "no_invented_numbers": {
+    "winner": "X",
+    "reason": "Y gives causes the data does not establish, such as 'total inference spend still rose, because cleared loads grew 26%' and 'this risk grew this quarter', while X's only forward figure ('Activation: 5 more periods') is labelled as a projection."
+   },
+   "speed_with_quality": {
+    "winner": "Y",
+    "reason": "Both put change failure 5.1%\u21927.7% next to deploys 3\u21924, but Y also reports PR rework rising from 11.7% to 15.0% and says 'faster but less stable' in the board cut, while X keeps rework in its ledger (L07) and off the slides."
+   },
+   "gaps_shown": {
+    "winner": "Y",
+    "reason": "Y states plainly that billing ($10.91M) and finance close ($10.1M) disagree on ARR, and that PostHog (23,100) and the warehouse (21,400) disagree on loads, which decides whether the target was hit; it names the VP Engineering as owner with a Q4 due date, while X hides both conflicts in ledger rows L09/L14 and picks one source without saying so on the slides."
+   },
+   "board_cut_usable": {
+    "winner": "Y",
+    "reason": "Y's board cut opens with the headline, a scorecard and the pricing-pilot ask on one page, while X's board cut carries the full ledger, a vendor pitch with 'Book a call' (Appendix C) and a 'Signed off by Ablation eval, synthetic data' line, so it cannot go to a board as it is."
+   }
+  },
+  "overall": {
+   "winner": "Y",
+   "reason": "Both updates get their numbers right, but only Y tells the board plainly that ARR and the north star each have two sources that disagree, names who owns the fix, and connects the TMS integration losses (11 of 17 deals lost) to the plan. X's board cut leaves those conflicts in the appendix ledger and includes a vendor appendix (Appendix C), so a careful CPO could not send it as it is."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 3231,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 40774,
+  "cost_usd": 0.39129859999999994,
+  "num_turns": 2,
+  "duration_ms": 31060
+ }
+}

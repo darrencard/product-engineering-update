@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kestrel Labs — Board Update: Product &amp; Engineering, 2026-Q3</title>
+<style>
+:root{--ink:#1d2330;--mute:#5b6475;--line:#e2e5ea;--soft:#f6f7f9;--good:#1f7a4d;--bad:#b42318;--warn:#a15c00;--acc:#2b4c9b}
+*{box-sizing:border-box}body{font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;color:var(--ink);margin:0}
+main{max-width:820px;margin:0 auto;padding:40px 28px 60px}h1{font-size:26px;margin:0 0 4px}h2{font-size:18px;margin:30px 0 8px;padding-top:10px;border-top:2px solid var(--ink)}
+.sub{color:var(--mute);margin:0 0 20px}table{border-collapse:collapse;width:100%;font-size:14px;margin:8px 0}th,td{text-align:left;padding:7px 9px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--mute)}td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+.pill{display:inline-block;padding:1px 8px;border-radius:10px;font-size:12px;font-weight:600;white-space:nowrap}.g{background:#e3f4ea;color:var(--good)}.r{background:#fde8e6;color:var(--bad)}.a{background:#fff1dc;color:var(--warn)}.u{background:#eceef2;color:var(--mute)}
+.box{background:var(--soft);border-left:4px solid var(--acc);padding:14px 18px;margin:14px 0}.note{font-size:13px;color:var(--mute)}li{margin:5px 0}
+</style></head><body><main>
+<h1>Product &amp; Engineering — Board Update, 2026-Q3</h1>
+<p class="sub">Kestrel Labs · From the CPTO · 1 Jul – 30 Sep 2026 · Data as of 30 Sep 2026</p>
+
+<div class="box"><strong>Summary.</strong> Customers buy us because the agent clears exceptions. All 22 Q3 wins cite that reason. Usage and agent quality are improving. ARR is <strong>$10.1M against an $11.0M plan</strong>, because churn and weak activation outweighed expansion. Our biggest gap in winning deals is TMS integration.</div>
+
+<h2>Scorecard</h2>
+<table><tr><th>Measure</th><th class="n">Q3</th><th class="n">Target / plan</th><th>Status</th></tr>
+<tr><td>ARR (finance close)</td><td class="n">$10.1M</td><td class="n">$11.0M</td><td><span class="pill r">Miss</span></td></tr>
+<tr><td>Revenue (quarter)</td><td class="n">$10.3M</td><td class="n">$10.0M</td><td><span class="pill g">Beat</span></td></tr>
+<tr><td>North Star: loads cleared per week, no manual touch</td><td class="n">21.4K–23.1K</td><td class="n">22K</td><td><span class="pill u">Unresolved: two sources disagree</span></td></tr>
+<tr><td>Activation (first automated load in 14 days)</td><td class="n">41%</td><td class="n">50%</td><td><span class="pill r">Miss</span></td></tr>
+<tr><td>Weekly active dispatchers</td><td class="n">6,120</td><td class="n">6,000</td><td><span class="pill g">Hit</span></td></tr>
+<tr><td>Agent task success (eval v14)</td><td class="n">86%</td><td class="n">90%</td><td><span class="pill a">Up from 82%</span></td></tr>
+<tr><td>Net / gross revenue retention</td><td class="n">96% / 89%</td><td class="n">—</td><td><span class="pill a">4 of 40 accounts churned</span></td></tr>
+<tr><td>R&amp;D spend</td><td class="n">$4.20M</td><td class="n">$4.25M</td><td><span class="pill g">On plan</span></td></tr>
+<tr><td>Inference (cost of revenue)</td><td class="n">$612K</td><td class="n">$480K</td><td><span class="pill r">+28%</span></td></tr></table>
+<p class="note">Stripe shows September ARR of $10.91M against $10.1M at finance close. The North Star reads 23.1K in PostHog and 21.4K in the Warehouse. The VP Engineering will reconcile both in Q4.</p>
+
+<h2>Decision for the board</h2>
+<table><tr><th>Ask</th><th>Options</th><th>Recommendation</th><th>Deadline</th></tr>
+<tr><td><strong>Approve a per-load pricing pilot</strong></td><td>Pilot with 10 customers, or wait a quarter</td><td>Run the pilot with 10 customers.</td><td>4 Nov 2026 <span class="pill r">passed</span></td></tr></table>
+<p>Per-load pricing is central to our strategy, and price was the stated reason in 6 of 17 Q3 losses. <span class="note">The deadline in the intake has already passed. If this was decided, please record the outcome.</span></p>
+
+<h2>What we learned</h2>
+<ul>
+<li><strong>Integration is the biggest blocker.</strong> 11 of 17 lost deals cite "No TMS integration", and integration errors make up 55% of support tickets. No current bet addresses this.</li>
+<li><strong>Delivery is faster but less stable.</strong> Deploys rose to 4 per week, but change failure rate went up to 7.7% (target under 5%).</li>
+<li><strong>Agent unit costs fell, but total spend rose.</strong> Cost per task dropped 20%, while total inference spend ran 28% over plan.</li>
+<li><strong>6 of 7 commitments shipped.</strong> Self-serve carrier onboarding slipped. All 4 churned accounts had filed onboarding tickets.</li>
+</ul>
+
+<h2>Bets in flight</h2>
+<table><tr><th>Bet</th><th>Expected</th><th>Status</th></tr>
+<tr><td>Multi-stop reroutes (Promise, 6 wks × 5 eng)</td><td>Task success 86% → 90%</td><td>Shipped. Lift not yet shown in evals.</td></tr>
+<tr><td>Guided activation (Experiment, 4 wks × 3 eng)</td><td>Activation 41% → 50%</td><td>Shipped. Live-test result pending.</td></tr></table>
+
+<h2>Top risk</h2>
+<p>One model provider carries most inference spend (likelihood Medium, impact High). Mitigation: the Platform lead is building a routing layer across 2 providers, due Dec 2026.</p>
+<p class="note">Stopped this quarter: the carrier marketplace, because it did not serve the strategy. The full leadership update has the detail and sources.</p>
+</main></body></html>

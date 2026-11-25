@@ -1,0 +1,45 @@
+{
+ "id": "pair-sparse-1-BA",
+ "fixture": "sparse",
+ "kind": "pair",
+ "x": "runs/B/sparse/1",
+ "y": "runs/A/sparse/1",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "Y",
+    "reason": "Y's 100 items, 78 tagged to the objective, the 53/37/10 monthly completions and the per-team table (e.g. Core Dispatch 19/7/0, last completion 21 Aug) all recompute correctly; X's ledger percentages are right, but its cover says '0 of 19 slides' for an 18-slide deck and 'Board cut 8' while showing 9."
+   },
+   "no_invented_numbers": {
+    "winner": "Y",
+    "reason": "X's samples, such as ARR $10.4M to $10.9M on slide 1 and a CFR of 5.1% to 7.7% on slide 9b, are labelled as coming from 'Kestrel Labs, a made-up company', which is the real company's name, and X adds 'Signed off by the CEO' with no data behind it; Y states only figures derived from the tracker."
+   },
+   "speed_with_quality": {
+    "winner": "Y",
+    "reason": "Y reports the drop from 53 to 10 completions as a warning, not good news, and pairs it with 'we have no quality evidence for the Dispatch Agent'; X's only speed/quality pairs are in illustrative samples, not real data."
+   },
+   "gaps_shown": {
+    "winner": "Y",
+    "reason": "Y's missing-inputs table names the VP Engineering as owner, due Q4, and flags export problems X misses (only Done items, every estimate 1, NEW-31 out of sequence, the September fall-off); X repeats the same owner line on every slide but reports none of the tracker data it had."
+   },
+   "board_cut_usable": {
+    "winner": "Y",
+    "reason": "Y's board cut is one short page that leads with the 100 items, the 78% and the 53 to 37 to 10 decline; X's board cut is 8 empty slides of samples plus appendices that sell the tool ('Book a call'), so it could not go to a board."
+   }
+  },
+  "overall": {
+   "winner": "Y",
+   "reason": "Y turns the only connected source into correct, caveated findings and states plainly what is missing and who owns it. X reports nothing real and risks misleading the board with sample figures attributed to the company's own name."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 1890,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 24461,
+  "cost_usd": 0.2339746,
+  "num_turns": 2,
+  "duration_ms": 20721
+ }
+}

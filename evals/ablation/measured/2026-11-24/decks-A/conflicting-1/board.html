@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kestrel Labs: Product &amp; Engineering, Board Summary, Q3 2026</title>
+<style>
+  :root { --ink:#1b1f24; --muted:#5b6470; --line:#dde1e6; --good:#1f7a4a; --bad:#b3261e; --warn:#9a6700; --accent:#24527a; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:#fafbfc; color:var(--ink); font:15px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
+  main { max-width:820px; margin:0 auto; padding:36px 28px 60px; background:#fff; }
+  header { border-bottom:2px solid var(--ink); padding-bottom:12px; margin-bottom:20px; }
+  h1 { font-size:24px; margin:0 0 4px; }
+  h2 { font-size:17px; margin:28px 0 8px; padding-bottom:4px; border-bottom:1px solid var(--line); }
+  .meta, .src { color:var(--muted); font-size:13px; }
+  .src { font-size:12px; }
+  .kpis { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin:10px 0; }
+  .kpi { border:1px solid var(--line); border-radius:6px; padding:10px 12px; }
+  .kpi .label { font-size:12px; color:var(--muted); text-transform:uppercase; letter-spacing:.03em; }
+  .kpi .value { font-size:22px; font-weight:700; font-variant-numeric:tabular-nums; }
+  .kpi .sub { font-size:13px; color:var(--muted); }
+  .good { color:var(--good); font-weight:600; } .bad { color:var(--bad); font-weight:600; } .warn { color:var(--warn); font-weight:600; }
+  .callout { border-left:4px solid var(--bad); background:#fdf3f2; padding:12px 16px; margin:10px 0; }
+  table { width:100%; border-collapse:collapse; font-size:14px; }
+  th, td { text-align:left; padding:6px 8px; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { font-size:12px; text-transform:uppercase; color:var(--muted); font-weight:600; }
+  ul { padding-left:20px; margin:6px 0; } li { margin:3px 0; }
+  @media (max-width:640px){ .kpis { grid-template-columns:repeat(2,1fr); } }
+  @media print { body { background:#fff; } main { padding:0; } }
+</style>
+</head>
+<body>
+<main>
+<header>
+  <h1>Product &amp; Engineering: Q3 2026 Board Summary</h1>
+  <div class="meta">Kestrel Labs · From the CPTO · Data as of 30 Sep 2026</div>
+</header>
+
+<h2>Decision for the board</h2>
+<div class="callout">
+  <strong>Approve a per-load pricing pilot with 10 customers.</strong> The alternative is to wait a quarter.
+  Per-load pricing is the core of our strategy, and price cost us 6 of 17 lost deals in Q3. We recommend running the pilot now.
+  <br><span class="src">The original deadline was 4 Nov 2026 and has passed. No outcome is recorded.</span>
+</div>
+
+<h2>Scorecard</h2>
+<div class="kpis">
+  <div class="kpi"><div class="label">ARR</div><div class="value">$10.1M</div><div class="sub">Plan $11.0M · <span class="bad">−8%</span></div></div>
+  <div class="kpi"><div class="label">Loads cleared / wk</div><div class="value">21.4–23.1K</div><div class="sub">Target 22K · <span class="warn">unconfirmed</span></div></div>
+  <div class="kpi"><div class="label">Activation</div><div class="value">41%</div><div class="sub">Target 50% · <span class="bad">behind</span></div></div>
+  <div class="kpi"><div class="label">Agent task success</div><div class="value">86%</div><div class="sub">Target 90% · up from 82%</div></div>
+</div>
+<p class="src">ARR is from finance close. The billing system shows $10.9M, and reconciliation is due in Q4. Loads cleared reads 21.4K in the warehouse and 23.1K in analytics, so we aren't claiming we hit the target.</p>
+
+<h2>What happened</h2>
+<ul>
+  <li><strong>Retention held ARR back.</strong> Expansion added $0.74M and 6 new accounts added $0.90M, but 4 churned accounts took out $1.11M. Net revenue retention was 96%.</li>
+  <li><strong>The product is working where customers use it.</strong> Loads cleared with no manual touch grew 16–26% from Q2, depending on the source. Weekly active dispatchers reached 6,120, above the 6,000 target. Every won deal cited the agent clearing exceptions.</li>
+  <li><strong>We shipped 6 of 7 commitments,</strong> including both bets: multi-stop reroutes and guided activation. Neither has a measured result yet. Self-serve carrier onboarding slipped.</li>
+  <li><strong>Integration is the gap we haven't funded.</strong> Missing TMS integration explains 11 of 17 lost deals, and integration errors are over half of support tickets. We'll bring an integration proposal to Q4 planning.</li>
+</ul>
+
+<h2>Spend</h2>
+<table>
+  <tr><th>Q3</th><th>Plan</th><th>Actual</th><th></th></tr>
+  <tr><td>R&amp;D (payroll, AI tools, cloud)</td><td>$4.25M</td><td>$4.20M</td><td class="good">−1%</td></tr>
+  <tr><td>Inference (cost of revenue)</td><td>$480K</td><td>$612K</td><td class="bad">+28%</td></tr>
+</table>
+<p>Eval cost per task fell 20%, but loads grew faster than the savings. Engineering has 44 people against a plan of 46, with 2 open roles.</p>
+
+<h2>Top risks</h2>
+<ul>
+  <li><strong>Inference concentration and cost.</strong> One model provider carries most of our inference spend. A routing layer across 2 providers is due Dec 2026 (owner: Platform lead).</li>
+  <li><strong>Release quality.</strong> Change failure rate is 7.7%, against a target of under 5%, even though we're now deploying 4 times a week. The VP Engineering is fixing it in Q4.</li>
+</ul>
+
+<h2>Stopped</h2>
+<p>Carrier marketplace, because it didn't serve the strategy. On-premise remains a non-goal.</p>
+</main>
+</body>
+</html>

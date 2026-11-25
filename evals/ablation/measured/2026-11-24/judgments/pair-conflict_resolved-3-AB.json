@@ -1,0 +1,45 @@
+{
+ "id": "pair-conflict_resolved-3-AB",
+ "fixture": "conflict_resolved",
+ "kind": "pair",
+ "x": "runs/A/conflict_resolved/3",
+ "y": "runs/B/conflict_resolved/3",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "X",
+    "reason": "X's figures all check out against the data, including the $10.911M ARR bridge, 96.4% NRR, 7.7% (4/52) change failure rate and 43% Platform share; Y's figures are also arithmetically right, but it shows a 40.8% R&D-to-revenue ratio built on a $10.3M 'Revenue' line that doesn't fit as quarterly revenue, which X flags and declines to use."
+   },
+   "no_invented_numbers": {
+    "winner": "X",
+    "reason": "Y's board cut says 'Signed off by the CEO', which nothing in the data supports, and it gives a Q3 window (2026-07-01 to 09-30) for CRM and support counts that have no dates; X says those exports are undated and labels its inference-cost explanation as only 'likely'."
+   },
+   "speed_with_quality": {
+    "winner": "X",
+    "reason": "Both put deploys (3\u21924) and lead time (52h\u219238h) next to change failure rate (5.1%\u21927.7%), but X also adds rework (11.7%\u219215.0%) and says outright 'we shipped faster, but quality slipped', while Y marks the speed rows 'landed' without that judgement."
+   },
+   "gaps_shown": {
+    "winner": "X",
+    "reason": "X names the PostHog 23,100 vs warehouse 21,400 split and the billing $10.91M vs finance $10.1M split in its summary and board cut, assigns both to the VP Engineering for Q4, and notes the passed 4 Nov deadline; Y puts the two conflicts only in ledger rows L09/L14 and shows the north star as 'landed'."
+   },
+   "board_cut_usable": {
+    "winner": "X",
+    "reason": "X's board cut is one page that opens with the answer, a six-row scorecard and the pricing-pilot decision; Y's board cut carries the ledger appendix, a product pitch with 'Book a call', the line 'Now what: Not reported' and a deadline that has already passed, shown as if the decision were still open today."
+   }
+  },
+  "overall": {
+   "winner": "X",
+   "reason": "X is accurate, pairs speed with quality, states the source conflicts and the passed decision deadline plainly with an owner, and gives a board cut that can be sent as it is. Y's numbers are mostly right, but it buries the two source conflicts, adds an unsupported CEO sign-off and a misleading R&D ratio, and its board cut includes tool marketing that isn't fit for a board."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 2505,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 41243,
+  "cost_usd": 0.3805306,
+  "num_turns": 2,
+  "duration_ms": 23607
+ }
+}

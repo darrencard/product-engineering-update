@@ -1,0 +1,20 @@
+{
+ "condition": "A",
+ "fixture": "complete",
+ "run": 3,
+ "model": "claude-opus-5-5",
+ "usage": {
+  "input_tokens": 20,
+  "output_tokens": 20098,
+  "cache_read_input_tokens": 219344,
+  "cache_creation_input_tokens": 36512,
+  "cost_usd": 0.7380048,
+  "num_turns": 11,
+  "duration_ms": 189622
+ },
+ "skill_leaks": [],
+ "decks": [
+  "board.html",
+  "update.html"
+ ]
+}

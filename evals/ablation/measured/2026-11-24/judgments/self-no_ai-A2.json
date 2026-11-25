@@ -1,0 +1,45 @@
+{
+ "id": "self-no_ai-A2",
+ "fixture": "no_ai",
+ "kind": "self_A",
+ "x": "runs/A/no_ai/2",
+ "y": "runs/A/no_ai/2",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "tie",
+    "reason": "Both are identical: most figures check out (ARR $10.91M, CFR 7.7% = 4/52, lead time 38h, rework 15.0%), and both share the same error, 'all 36 retained accounts grew about 20%', when only 15 grew and 21 were flat."
+   },
+   "no_invented_numbers": {
+    "winner": "tie",
+    "reason": "Both state the same derived figures, such as the ~$41M annualized revenue and R&D at 40.8% of revenue, with identical wording. Both also attribute inference overspend 'partly' to agent volume without labelling that cause as an estimate."
+   },
+   "speed_with_quality": {
+    "winner": "tie",
+    "reason": "Both put deploys at 4/week and lead time at 38h beside change failure rate 7.7%, rework 15.0% and time to restore 41m, with the same 'faster but less stable' framing."
+   },
+   "gaps_shown": {
+    "winner": "tie",
+    "reason": "Both flag the same Stripe $10.91M vs Finance $10.3M reconciliation, the missing task success and cost-per-task metrics, and the undated CRM and support exports, all owned by the VP Engineering for Q4."
+   },
+   "board_cut_usable": {
+    "winner": "tie",
+    "reason": "Both board cuts are the same: they lead with the 4 Nov pricing-pilot decision, then a four-figure scorecard. Both include the confusing line that the deadline 'has passed relative to when this update was compiled', even though the data is as of 30 Sep."
+   }
+  },
+  "overall": {
+   "winner": "tie",
+   "reason": "Update X and Update Y are identical in every section, figure and sentence, including the board cut. They share the same strengths and the same flaws, such as the overstated '36 retained accounts grew about 20%', so neither is better in substance."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 1260,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 32553,
+  "cost_usd": 0.2861106,
+  "num_turns": 2,
+  "duration_ms": 14913
+ }
+}

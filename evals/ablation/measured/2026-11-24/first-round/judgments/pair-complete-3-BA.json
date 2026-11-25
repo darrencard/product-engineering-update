@@ -1,0 +1,45 @@
+{
+ "id": "pair-complete-3-BA",
+ "fixture": "complete",
+ "kind": "pair",
+ "x": "runs/B/complete/3",
+ "y": "runs/A/complete/3",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "Y",
+    "reason": "Both get ARR $10.9M, NRR 96.4%, GRR 89.3%, CFR 5.1%\u21927.7% and the capacity mix right, but X slides 8/12 label the raw cost_per_task $0.41\u2192$0.33 as 'cost per successful task', while Y correctly derives $0.50\u2192$0.38 and shows the division."
+   },
+   "no_invented_numbers": {
+    "winner": "X",
+    "reason": "Y asserts unsupported causes, e.g. the KTLO overrun's 'likely reason' is the CFR rise and the routing layer 'would also give us pricing leverage', whereas X's only forward figure, 'Activation: 5 more periods', is explicitly labelled a projection."
+   },
+   "speed_with_quality": {
+    "winner": "tie",
+    "reason": "Both pair deploys 3\u21924 and lead time 52h\u219238h with change failure rate 5.1%\u21927.7% and time to restore (X slide 9/9b, Y section 6), and neither presents speed alone as good news; Y also adds rework 12%\u219215%."
+   },
+   "gaps_shown": {
+    "winner": "Y",
+    "reason": "Y flags that finance revenue (~$41M annualized) doesn't reconcile with billing ARR ($10.9M), the eval set version change, undated CRM/support exports and the missing PR-to-deploy link, all owned by the VP Engineering; X silently reports Stripe ARR $10.9M and flags only Platform & security and AI gross margin."
+   },
+   "board_cut_usable": {
+    "winner": "Y",
+    "reason": "Y's board cut opens with the answer and the pricing-pilot ask (noting the 4 Nov deadline has passed), while X's board cut carries 'Signed off by Ablation eval, synthetic data', the full ledger and Appendix C's product pitch with 'Book a call', so it can't be sent as is."
+   }
+  },
+  "overall": {
+   "winner": "Y",
+   "reason": "Y is more correct on cost per successful task and handles the finance/billing ARR mismatch openly instead of picking a source silently. Its board cut is short and ready to send, which outweighs its few speculative causes."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 3276,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 40396,
+  "cost_usd": 0.3891746,
+  "num_turns": 2,
+  "duration_ms": 32135
+ }
+}

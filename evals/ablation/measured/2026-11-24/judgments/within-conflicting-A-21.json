@@ -1,0 +1,45 @@
+{
+ "id": "within-conflicting-A-21",
+ "fixture": "conflicting",
+ "kind": "within_A",
+ "x": "runs/A/conflicting/2",
+ "y": "runs/A/conflicting/1",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "tie",
+    "reason": "Both reproduce the $10.38M\u2192$10.91M Stripe bridge, 96%/89% retention, 5.1%\u21927.7% CFR and 31/18/8/21/22 effort mix correctly; X's only slip is a 27% vs 28% inference inconsistency."
+   },
+   "no_invented_numbers": {
+    "winner": "X",
+    "reason": "Y adds unsourced risk ratings (inference cost High/Medium), a Q4 goal and owner for CFR, and board-cut commitments ('VP Engineering is fixing it', 'we'll bring an integration proposal'), while X hedges its inference-volume explanation as unconfirmed."
+   },
+   "speed_with_quality": {
+    "winner": "X",
+    "reason": "Y's summary and delivery table present PR open-to-merge (52h\u219238h) as lead time 'in range' of the under-40h target, whereas X marks lead time not measurable and pairs 4 deploys/week with 7.7% CFR in the board cut."
+   },
+   "gaps_shown": {
+    "winner": "Y",
+    "reason": "Y alone flags that $10.3M quarterly revenue is inconsistent with $10.1M ARR and that 22 CRM wins vs 6 new billing accounts don't match, while X reports revenue 'beat plan by 3%' uncritically."
+   },
+   "board_cut_usable": {
+    "winner": "Y",
+    "reason": "Y's board cut opens with the per-load pricing decision and stays short, while X leads with a summary and a 9-row scorecard (including the dubious revenue 'Beat') before the ask."
+   }
+  },
+  "overall": {
+   "winner": "X",
+   "reason": "Both are equally accurate on the core figures, but Y presents a PR-merge proxy as lead time hitting target and commits the CPTO to unsourced Q4 actions in front of the board, which X avoids. Y's better gap-spotting (the revenue anomaly) and tighter board cut are easier to fix than those claims the data doesn't support."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 3467,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 33855,
+  "cost_usd": 0.34066660000000004,
+  "num_turns": 2,
+  "duration_ms": 38406
+ }
+}

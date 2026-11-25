@@ -1,0 +1,45 @@
+{
+ "id": "pair-complete-2-BA",
+ "fixture": "complete",
+ "kind": "pair",
+ "x": "runs/B/complete/2",
+ "y": "runs/A/complete/2",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "X",
+    "reason": "Y's ARR bridge says 'All 36 retained accounts grew about 20%', but only A001\u2013A015 grew and the other 21 stayed flat; X's figures (ARR $10.4M\u2192$10.9M, NRR 96.4%, CFR 5.1%\u21927.7%, 78% traced) all recompute, and its only flaw is calling the $0.33 eval cost per task a 'cost per successful task'."
+   },
+   "no_invented_numbers": {
+    "winner": "X",
+    "reason": "Y's board cut states as fact that inference ran 27.5% over plan 'because volume grew', which its own full update says the data can't confirm, and it says the VP Engineering 'owns the fix' for change failure rate, which the intake does not assign; X's only forward figure, 'Activation: 5 more periods', is labelled as a projection."
+   },
+   "speed_with_quality": {
+    "winner": "tie",
+    "reason": "Both pair the rise from 3 to 4 deploys per week with change failure rising from 5.1% to 7.7% (X slide 9b, Y board 'ships faster but less reliably'), and neither presents speed alone as good news."
+   },
+   "gaps_shown": {
+    "winner": "Y",
+    "reason": "Y's Data gaps section names the VP Engineering as owner, due Q4, and flags that $10.3M of quarterly revenue doesn't reconcile with $10.9M ARR, that 22 CRM wins don't match 6 new accounts, and that only 10 tracker items closed in September; X flags only Platform & security and AI gross margin and misses all three conflicts."
+   },
+   "board_cut_usable": {
+    "winner": "Y",
+    "reason": "Y's board cut is one page: four headline tiles, the pricing-pilot decision with a note that the 4 Nov deadline has passed, and the top risks; X's board cut carries the 26-row ledger, a template rhythm appendix, a product pitch with 'Book a call' and Appendix D source guidance, so it can't go to a board as it is."
+   }
+  },
+  "overall": {
+   "winner": "Y",
+   "reason": "Y's board cut could go to the board today, and it raises what a board needs to see: $1.11M of churn, the TMS integration gap behind 11 of 17 lost deals, and the revenue-versus-ARR mismatch. X is a little cleaner on arithmetic and causal claims, but it misses those conflicts and its board cut is padded with template and marketing material, so a careful CPO would fix Y's one wrong expansion line and send Y."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 3104,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 40699,
+  "cost_usd": 0.3881586,
+  "num_turns": 2,
+  "duration_ms": 30385
+ }
+}

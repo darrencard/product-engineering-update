@@ -1,0 +1,45 @@
+{
+ "id": "pair-sparse-2-AB",
+ "fixture": "sparse",
+ "kind": "pair",
+ "x": "runs/A/sparse/2",
+ "y": "runs/B/sparse/2",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "X",
+    "reason": "X's counts check out on recompute: 100 items, the 31/21/18/8/22 split, 78 tagged, and 53/37/10 by month. Its one slip is saying Dispatch Agent was the only line closing items in September, when its own table shows a KTLO item closed on 2 Sep. Y reports none of the tracker data it had and says '0 of 19 slides show data', which is false."
+   },
+   "no_invented_numbers": {
+    "winner": "X",
+    "reason": "X states only figures taken from the tracker. Y's samples are labelled, but they use the Kestrel Labs name and mix real figures (31/26/43, 78%) with made-up ARR ($10.9M), plans (15% KTLO) and eval scores (86% on v14), so a reader could take them as fact."
+   },
+   "speed_with_quality": {
+    "winner": "Y",
+    "reason": "X's 53/37/10 throughput figures have no quality figure beside them, although X frames the drop as a concern rather than good news. Y reports no real speed figures, and in its slide 9 sample every speed metric is paired with change failure rate."
+   },
+   "gaps_shown": {
+    "winner": "X",
+    "reason": "X's 'What this update can't tell you yet' table names each gap and why it matters, assigns it to the VP Engineering for Q4, and flags the September drop as unexplained. Y names owners too, but marks investment mix and line of sight as missing when the tracker supported both."
+   },
+   "board_cut_usable": {
+    "winner": "X",
+    "reason": "X's board cut is one page with headlines, the effort-mix table and 'Asks of the board: None', so it could go out as is. Y's board cut is eight 'not reported' slides padded with samples, a 'Signed off by Ablation eval' line and a 'Book a call' appendix."
+   }
+  },
+  "overall": {
+   "winner": "X",
+   "reason": "X reports the tracker data accurately, apart from a small slip about September KTLO, and states the gaps plainly with an owner, in a board cut ready to send. Y discards the data it had and fills the deck with Kestrel-branded samples that could mislead, so a careful CPO would send X."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 2072,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 24621,
+  "cost_usd": 0.2388946,
+  "num_turns": 2,
+  "duration_ms": 21797
+ }
+}

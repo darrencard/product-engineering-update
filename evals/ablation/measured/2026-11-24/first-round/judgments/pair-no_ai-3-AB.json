@@ -1,0 +1,45 @@
+{
+ "id": "pair-no_ai-3-AB",
+ "fixture": "no_ai",
+ "kind": "pair",
+ "x": "runs/A/no_ai/3",
+ "y": "runs/B/no_ai/3",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "X",
+    "reason": "X's recomputable figures check out (CFR 4/52=7.7%, NRR 96.4%, expansion $741K, ending ARR $10.91M, R&D 40.8%), while Y's opening says '16 of 17 slides show data' but lists 3 slides with none, and shows a 39% to 41% activation result against the unshipped Self-serve carrier onboarding."
+   },
+   "no_invented_numbers": {
+    "winner": "tie",
+    "reason": "X's $1.68 plan-per-load figure divides planned inference by target loads without saying so, and Y's 'Activation: 5 more periods' is a projection, but it is labelled as one; neither invents a target or benchmark that the data lacks."
+   },
+   "speed_with_quality": {
+    "winner": "X",
+    "reason": "Both pair deploys per week (3 to 4) with change failure (5.1% to 7.7%), but X says outright 'faster but less stable' and adds rework (11.7% to 15.0%), while Y's slide 9 tags deploys 'landed' with no caveat."
+   },
+   "gaps_shown": {
+    "winner": "X",
+    "reason": "X flags the Stripe $10.9M vs Finance $10.3M/quarter mismatch, the missing task success and cost per successful task, and the missing Guided activation readout, all owned by the VP Engineering, due Q4; Y reports 'ARR rose from $10.4M to $10.9M' on slide 1, silently picking Stripe."
+   },
+   "board_cut_usable": {
+    "winner": "X",
+    "reason": "X's board cut leads with the North Star beat and the overdue per-load pricing pilot, fits on a page and could be sent as it is; Y's board cut references a missing slide 12 and includes 'Signed off by Ablation eval, synthetic data', a product pitch with 'Book a call', and template appendices."
+   }
+  },
+  "overall": {
+   "winner": "X",
+   "reason": "X is accurate and states the gaps plainly: the ARR reconciliation, the missing task-success data and integration as the main reason deals are lost. Its board cut leads with the answer and the overdue decision. Y has correct base figures but silently picks Stripe ARR, frames the CRM data around won-deal reasons, and ships a board cut full of template and marketing material that no CPO could send."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 3272,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 38870,
+  "cost_usd": 0.3768866,
+  "num_turns": 2,
+  "duration_ms": 31221
+ }
+}

@@ -1,0 +1,45 @@
+{
+ "id": "pair-conflicting-1-BA",
+ "fixture": "conflicting",
+ "kind": "pair",
+ "x": "runs/B/conflicting/1",
+ "y": "runs/A/conflicting/1",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "tie",
+    "reason": "I recomputed the main figures and both match the data: NRR 96.4% and GRR 89.3% from billing, change failure 4/52 = 7.7% vs 2/39 = 5.1%, deploys 52/13 = 4 a week, capacity 31/18/8/21/22, and Y's own figures (ARR bridge $10.38M\u2192$10.91M, churn $1.11M, inference +28%, 11 of 17 losses, adoption 89%/61%)."
+   },
+   "no_invented_numbers": {
+    "winner": "X",
+    "reason": "X's only forward figure, 'Activation: 5 more periods', is labelled as a projection, while Y adds two risks with likelihood and impact ratings, a 'Goal' for Q4 change failure and an integration proposal for Q4 planning, none of which are in the data."
+   },
+   "speed_with_quality": {
+    "winner": "tie",
+    "reason": "Both put deploys rising from 3 to 4 a week beside change failure rising from 5.1% to 7.7% (X slide 9/9b, Y Delivery health and board Top risks), and neither presents speed alone as good news."
+   },
+   "gaps_shown": {
+    "winner": "Y",
+    "reason": "Y shows both ARR figures ($10.1M finance close vs $10.9M billing) and both north-star readings (21.4K vs 23.1K) with the VP Engineering as owner, due Q4, and also flags the odd $10.3M revenue line, the missed 4 Nov deadline and the stop rules it can't check; X leaves ARR out of its board slides with only a ledger note and no owner, and uses the $10.3M revenue figure without comment."
+   },
+   "board_cut_usable": {
+    "winner": "Y",
+    "reason": "Y's board cut opens with the pricing-pilot decision and a scorecard that includes ARR, while X's board cut never shows ARR and still carries template debris ('Keys J and K move between slides') plus Appendix C, which advertises the skill and ends with 'Book a call', so it can't go to a board as it is."
+   }
+  },
+  "overall": {
+   "winner": "Y",
+   "reason": "Both are arithmetically sound, but Y shows each source conflict with its owner, leads its board cut with the decision and ARR, and could be sent as written, while X's board cut leaves out ARR and includes product marketing. Y's unsourced risk ratings and Q4 commitments are a real flaw, but a smaller one than X's gaps in the board cut."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 3164,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 40796,
+  "cost_usd": 0.3901346,
+  "num_turns": 2,
+  "duration_ms": 30956
+ }
+}

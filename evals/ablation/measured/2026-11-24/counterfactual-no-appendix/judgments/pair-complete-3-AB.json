@@ -1,0 +1,45 @@
+{
+ "id": "pair-complete-3-AB",
+ "fixture": "complete",
+ "kind": "pair",
+ "x": "runs/A/complete/3",
+ "y": "runs/B/complete/3",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "X",
+    "reason": "X correctly derives cost per successful task as $0.50\u2192$0.38 ($0.41/0.82, $0.33/0.86), while Y's slide 12 and commitments table mislabel the $0.33 cost per task as cost per successful task."
+   },
+   "no_invented_numbers": {
+    "winner": "X",
+    "reason": "Y's board cut claims 'Signed off by the CEO' and dates undated CRM and support exports to Q3 in its ledger, whereas X's only stretch is a causal guess about keep-the-lights-on that it labels 'likely'."
+   },
+   "speed_with_quality": {
+    "winner": "X",
+    "reason": "Both pair 4 deploys/week with the 7.7% change failure rate, but X also shows rework rising from 12% to 15% and says delivery is 'faster but less stable', while Y's board slide 09b drops lead time and rework."
+   },
+   "gaps_shown": {
+    "winner": "X",
+    "reason": "X says finance revenue (about $41M annualized) and billing ARR ($10.9M) don't reconcile and names the VP Engineering as owner, while Y's slide 01 reports 'ARR rose from $10.4M to $10.9M' and picks that one source without saying so."
+   },
+   "board_cut_usable": {
+    "winner": "X",
+    "reason": "X's board cut leads with the answer and the pricing-pilot decision and flags the passed 4 Nov deadline, while Y's cut carries template text ('Appendix D', 'Keys J and K'), a full ledger and empty table rows."
+   }
+  },
+  "overall": {
+   "winner": "X",
+   "reason": "X gets every figure right and says plainly where the ARR sources conflict and who owns closing that gap, while Y mislabels cost per successful task and silently picks the billing export as company ARR. X's board cut could be sent as it is; Y's carries template text, a full ledger and an unsupported CEO sign-off."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 3190,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 36571,
+  "cost_usd": 0.35685459999999997,
+  "num_turns": 2,
+  "duration_ms": 27723
+ }
+}

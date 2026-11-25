@@ -1,0 +1,45 @@
+{
+ "id": "pair-conflicting-2-BA",
+ "fixture": "conflicting",
+ "kind": "pair",
+ "x": "runs/B/conflicting/2",
+ "y": "runs/A/conflicting/2",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "Y",
+    "reason": "Both compute deploys 3\u21924, CFR 5.1%\u21927.7%, NRR 96.4% and R&D 40.8% correctly, but X marks 'Lead time for change 38h' as landed when 38h is only PR open-to-merge time, which Y correctly reports as not measurable; Y's only slip is 27% vs 28% inference overrun rounding."
+   },
+   "no_invented_numbers": {
+    "winner": "X",
+    "reason": "X's 'Activation: 5 more periods' is explicitly labelled a projection, while Y's board cut asserts ARR missed 'because churn and weak activation outweighed expansion', a cause the data does not establish."
+   },
+   "speed_with_quality": {
+    "winner": "Y",
+    "reason": "Both pair deploys 3\u21924 with CFR 5.1%\u21927.7%, but X still labels the 38h lead time 'landed' as good news, while Y refuses to count the partial measure and states 'Delivery is faster but less stable'."
+   },
+   "gaps_shown": {
+    "winner": "Y",
+    "reason": "Y's board cut shows ARR $10.1M vs Stripe $10.91M and North Star 21.4K vs 23.1K with the VP Engineering reconciling in Q4, and flags the passed 4 Nov deadline; X's board cut only says ARR is 'held', with no owner, and misses the deadline."
+   },
+   "board_cut_usable": {
+    "winner": "Y",
+    "reason": "Y's board cut is a short summary, scorecard and decision; X's board cut drags in the full ledger, a sales appendix with 'Book a call', 'Keys J and K move between slides' and 'Signed off by Ablation eval, synthetic data'."
+   }
+  },
+  "overall": {
+   "winner": "Y",
+   "reason": "Y's board cut is accurate, shows both source disagreements (ARR, North Star) with an owner, catches the passed 4 Nov decision deadline, and is ready to send. X is careful in places but its board cut carries template and sales material and presents a partial lead-time figure as landed."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 4119,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 41053,
+  "cost_usd": 0.4112906,
+  "num_turns": 2,
+  "duration_ms": 39221
+ }
+}

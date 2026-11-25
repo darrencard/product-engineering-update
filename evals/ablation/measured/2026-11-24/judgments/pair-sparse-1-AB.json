@@ -1,0 +1,45 @@
+{
+ "id": "pair-sparse-1-AB",
+ "fixture": "sparse",
+ "kind": "pair",
+ "x": "runs/A/sparse/1",
+ "y": "runs/B/sparse/1",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "X",
+    "reason": "Every figure in X's monthly delivery table (53/37/10, Platform 22/20/1, Core Dispatch 19/7/0) and its work-type split (31/22/21/18/8) recomputes correctly, while Y presents almost no real figures and wrongly says '0 of 19 slides show data' when the tracker supports the investment mix."
+   },
+   "no_invented_numbers": {
+    "winner": "X",
+    "reason": "Y's board cut adds 'Signed off by the CEO', which the data does not support, and its slide 5 sample sets real actuals (22% Keep the lights on) beside an invented 15% plan, whereas every number X states comes from the tracker."
+   },
+   "speed_with_quality": {
+    "winner": "Y",
+    "reason": "Y reports no real speed figures and its delivery samples pair deploys with change failure; X's item counts (53/37/10) have no quality pair, although X frames them as a possible problem rather than good news."
+   },
+   "gaps_shown": {
+    "winner": "X",
+    "reason": "X says plainly that the September drop to 10 completions may be an export cut-off or open work, lists every missing input and names the VP Engineering as owner with Q4 as due date; Y names the owner too but calls the investment mix missing even though the tracker supplies it."
+   },
+   "board_cut_usable": {
+    "winner": "X",
+    "reason": "X's board cut opens with 100 items, 78% tagged to ARR and the 53\u219237\u219210 decline, then gives the gaps and the Q4 owner; Y's board cut is eight 'not reported' slides full of fictional samples plus a 'Book a call' appendix, and cannot be sent to a board."
+   }
+  },
+  "overall": {
+   "winner": "X",
+   "reason": "X turns the only data available into correct, plainly caveated findings (the 8% Growth share and the September slowdown) and gives each gap an owner and a due date. Y throws away the real tracker data, fills the board cut with made-up samples that partly reuse real figures, and adds an unsupported CEO sign-off."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 2335,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 24461,
+  "cost_usd": 0.2428746,
+  "num_turns": 2,
+  "duration_ms": 22394
+ }
+}

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kestrel Labs: Board Update, Q3 2026</title>
+<style>
+  :root { --ink:#1b1f24; --muted:#5b6470; --line:#dde1e6; --bg:#fff; --soft:#f5f7f9;
+          --good:#1a7f37; --bad:#c62828; --warn:#a15c00; --accent:#24527a; }
+  * { box-sizing:border-box; }
+  body { font:15px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+         color:var(--ink); background:var(--bg); margin:0; }
+  main { max-width:920px; margin:0 auto; padding:40px 28px 64px; }
+  header { border-bottom:2px solid var(--ink); padding-bottom:14px; margin-bottom:28px; }
+  header .kicker { text-transform:uppercase; letter-spacing:.08em; font-size:12px; color:var(--muted); }
+  h1 { font-size:28px; margin:4px 0 6px; }
+  header .meta { color:var(--muted); font-size:13px; }
+  h2 { font-size:19px; margin:40px 0 10px; padding-top:8px; border-top:1px solid var(--line); }
+  h3 { font-size:15px; margin:20px 0 6px; }
+  p { margin:8px 0; }
+  .muted { color:var(--muted); }
+  .small { font-size:13px; }
+  table { width:100%; border-collapse:collapse; margin:10px 0 6px; font-size:14px; }
+  th, td { text-align:left; padding:7px 10px; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { font-size:12px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); font-weight:600; }
+  td.num, th.num { text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap; }
+  .pill { display:inline-block; font-size:12px; font-weight:600; padding:1px 8px; border-radius:10px; white-space:nowrap; }
+  .on { background:#e6f4ea; color:var(--good); }
+  .off { background:#fdecea; color:var(--bad); }
+  .watch { background:#fff4e0; color:var(--warn); }
+  .na { background:var(--soft); color:var(--muted); }
+  .bluf { background:var(--soft); border-left:4px solid var(--accent); padding:14px 18px; margin:0 0 8px; }
+  .bluf ul { margin:6px 0 0; padding-left:20px; }
+  .bluf li { margin:5px 0; }
+  .ask { border:2px solid var(--accent); border-radius:6px; padding:14px 18px; margin:14px 0; }
+  .ask .label { font-size:12px; text-transform:uppercase; letter-spacing:.06em; color:var(--accent); font-weight:700; }
+  .flag { border-left:4px solid var(--warn); background:#fffaf0; padding:10px 14px; margin:12px 0; font-size:14px; }
+  .kpis { display:grid; grid-template-columns:repeat(4, 1fr); gap:12px; margin:14px 0; }
+  .kpi { border:1px solid var(--line); border-radius:6px; padding:12px 14px; }
+  .kpi .k { font-size:12px; color:var(--muted); }
+  .kpi .v { font-size:24px; font-weight:700; font-variant-numeric:tabular-nums; }
+  .kpi .d { font-size:12px; color:var(--muted); }
+  .bar { position:relative; height:12px; background:var(--soft); border-radius:2px; min-width:160px; }
+  .bar .a { position:absolute; left:0; top:0; bottom:0; background:var(--accent); border-radius:2px; }
+  .bar .p { position:absolute; top:-3px; bottom:-3px; width:2px; background:var(--ink); }
+  .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+  ul.tight { padding-left:20px; margin:6px 0; } ul.tight li { margin:4px 0; }
+  footer { margin-top:48px; padding-top:12px; border-top:1px solid var(--line); font-size:12px; color:var(--muted); }
+  @media (max-width:720px) { .kpis { grid-template-columns:1fr 1fr; } .grid2 { grid-template-columns:1fr; } }
+  @media print { main { padding:0; } h2 { break-after:avoid; } table, .ask, .kpis { break-inside:avoid; } }
+</style>
+</head>
+<body>
+<main>
+<header>
+  <div class="kicker">Kestrel Labs · Board update</div>
+  <h1>Product &amp; Engineering: Q3 2026</h1>
+  <div class="meta">1 Jul – 30 Sep 2026 · Data as of 30 Sep 2026 · From the CPTO</div>
+</header>
+
+<section class="bluf">
+  <strong>The agent is working, and the gaps are activation and integrations.</strong>
+  <ul>
+    <li>Loads cleared with no manual touch reached <strong>23.1K/week</strong>, ahead of the 22K target and up 26% on Q2. All 22 deals we won cited the agent clearing exceptions.</li>
+    <li>Activation reached <strong>41%</strong> against a 50% target. It's the main miss and gets a Q4 experiment.</li>
+    <li>Lack of TMS integration caused <strong>11 of 17 lost deals</strong>. Integration errors made up 55% of support tickets. Nothing in the current plan addresses this. We'll bring a proposal from Q4 planning.</li>
+  </ul>
+</section>
+
+<div class="ask">
+  <div class="label">Decision requested</div>
+  <p><strong>Approve a per-load pricing pilot with 10 customers.</strong> The alternative is to wait a quarter.</p>
+  <p class="small">Per-load pricing is core to our strategy. Price caused 6 of 17 lost deals this quarter. The deadline was 4 Nov 2026 and has passed. If the pilot hasn't been decided yet, we need a decision now.</p>
+</div>
+
+<h2>Scorecard</h2>
+<table>
+  <tr><th>Metric</th><th class="num">Q2</th><th class="num">Q3</th><th class="num">Target</th><th>Status</th></tr>
+  <tr><td><strong>Loads cleared per week</strong> (north star)</td><td class="num">18.4K</td><td class="num">23.1K</td><td class="num">22K</td><td><span class="pill on">Above target</span></td></tr>
+  <tr><td>Activation (first automated load inside 14 days)</td><td class="num">39%</td><td class="num">41%</td><td class="num">50%</td><td><span class="pill off">Short</span></td></tr>
+  <tr><td>Weekly active dispatchers</td><td class="num">5,890</td><td class="num">6,120</td><td class="num">6,000</td><td><span class="pill on">Above target</span></td></tr>
+  <tr><td>Agent task success (evals)</td><td class="num">82%</td><td class="num">86%</td><td class="num">90%</td><td><span class="pill watch">Q4 bet</span></td></tr>
+  <tr><td>Cost per successful agent task</td><td class="num">$0.50</td><td class="num">$0.38</td><td class="num">n/a</td><td><span class="pill on">−24%</span></td></tr>
+  <tr><td>Change failure rate</td><td class="num">5.1%</td><td class="num">7.7%</td><td class="num">under 5%</td><td><span class="pill off">Out of range</span></td></tr>
+</table>
+
+<h2>Money</h2>
+<table>
+  <tr><th>Line</th><th class="num">Plan</th><th class="num">Actual</th><th>Note</th></tr>
+  <tr><td>Revenue</td><td class="num">$10.00M</td><td class="num">$10.30M</td><td class="small">3% ahead</td></tr>
+  <tr><td>R&amp;D (payroll, AI tools, cloud)</td><td class="num">$4.25M</td><td class="num">$4.20M</td><td class="small">1% under. 41% of revenue</td></tr>
+  <tr><td>Inference (cost of revenue)</td><td class="num">$480K</td><td class="num">$612K</td><td class="small"><strong>28% over.</strong> Volume grew even though unit cost fell</td></tr>
+</table>
+<p class="small">Net revenue retention for the June cohort was 96.4%: 15 accounts expanded and 4 churned. Progress toward the $50M ARR objective isn't reported here because finance and billing figures don't yet reconcile. The VP Engineering will close this in Q4.</p>
+
+<h2>Q4 bets</h2>
+<table>
+  <tr><th>Bet</th><th>Appetite</th><th>Expected outcome</th><th>Stop rule</th></tr>
+  <tr><td><strong>Multi-stop reroutes</strong> (promise, high confidence)</td><td>6 wks, 5 eng</td><td>Task success 86% → 90%</td><td class="small">Evals gain under 2 points by week 3</td></tr>
+  <tr><td><strong>Guided activation</strong> (experiment, medium confidence)</td><td>4 wks, 3 eng</td><td>Activation 41% → 50%</td><td class="small">No lift in a 2-week live test</td></tr>
+</table>
+<p class="small">We stopped the carrier marketplace because it did not serve the strategy.</p>
+
+<h2>Top risk</h2>
+<p>One model provider carries most of our inference spend. Likelihood is medium and impact is high. Mitigation: a routing layer across 2 providers, owned by the Platform lead and due Dec 2026.</p>
+
+<footer>The full leadership update has the details on delivery, effort mix, customer signal, team and data gaps. Sources: system exports and the CPTO intake.</footer>
+</main>
+</body>
+</html>

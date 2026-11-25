@@ -35,6 +35,7 @@ The prompt names a fixed release, so a later change to the repository can't reac
 - [Security and data handling](docs/security.md): where data goes, the supply chain, prompt injection and the Action's permissions.
 - [Intake and CLI reference](docs/intake-and-cli.md): every `intake.json` field and script flag.
 - [Troubleshooting](docs/troubleshooting.md): the errors the scripts give, and the fix for each.
+- [Ablation](docs/ablation.md): the skill against Claude alone on the same data, judged blind. Claude alone won every comparison on the synthetic fixtures.
 
 ## Privacy
 

@@ -1,0 +1,45 @@
+{
+ "id": "pair-complete-2-AB",
+ "fixture": "complete",
+ "kind": "pair",
+ "x": "runs/A/complete/2",
+ "y": "runs/B/complete/2",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "tie",
+    "reason": "Each update has one wrong statement. X's ARR bridge says 'All 36 retained accounts grew about 20%', but only A001\u2013A015 grew and the other 21 were flat; the $741K expansion total is still right. Y labels the raw $0.33 eval cost per task as 'Cost per successful task' on slides 8 and 12, when 0.33 \u00f7 0.86 is about $0.38. All other figures check out in both: 52 deploys, 7.7% CFR, 38h lead time, 96.4% NRR, 78% traced, 75% of seats used, 40.8% R&D share."
+   },
+   "no_invented_numbers": {
+    "winner": "Y",
+    "reason": "X's board cut states as fact that inference ran 27.5% over plan 'because volume grew', a cause its own full update says the data can't confirm. Y's one forecast ('Activation: 5 more periods') is clearly labelled as a rough projection."
+   },
+   "speed_with_quality": {
+    "winner": "tie",
+    "reason": "Both pair 4 deploys/week and 38h lead time with the 7.7% change failure rate and 41m time to restore. Both decline to present speed as good news: X says 'faster but less stable', and Y has slide 9's 'Quality, the pair for every speed metric'."
+   },
+   "gaps_shown": {
+    "winner": "X",
+    "reason": "X's Data gaps section, owned by the VP Engineering and due Q4, flags several things Y never mentions: finance revenue ($10.3M) not reconciling with ARR ($10.9M), 22 CRM wins against only 6 new billed accounts, undated CRM and support exports, lead time covering open-to-merge only, stop rules that can't be checked, and the September tracker drop. Y only flags Platform & security and AI gross margin, and its ledger assigns a Q3 window to the undated CRM data."
+   },
+   "board_cut_usable": {
+    "winner": "X",
+    "reason": "X's board cut leads with four headline figures, the pricing-pilot ask and the fact that its 4 Nov deadline has passed, plus three risks. Y's board cut repeats internal deck metadata, says 'Signed off by Ablation eval, synthetic data', calls the decision 'for you today' with a stale deadline, and includes product-marketing appendices ending in 'Book a call'. Y's board cut can't be sent as it is."
+   }
+  },
+  "overall": {
+   "winner": "X",
+   "reason": "X surfaces the gaps a board needs to know about: the revenue/ARR mismatch, the CRM/billing mismatch, the churn and integration risks, and the missed decision deadline. Its board cut is short and could be sent as it is. Each update has one figure error, but Y's board cut carries template and marketing material and misses most of the data conflicts, so a careful CPO would send X."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 3350,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 43100,
+  "cost_usd": 0.411808,
+  "num_turns": 2,
+  "duration_ms": 30473
+ }
+}

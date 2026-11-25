@@ -1,0 +1,45 @@
+{
+ "id": "self-complete-B1",
+ "fixture": "complete",
+ "kind": "self_B",
+ "x": "runs/B/complete/1",
+ "y": "runs/B/complete/1",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "tie",
+    "reason": "Both updates report the same figures, such as change failure rate rising from 5.1% to 7.7% (4 of 52 deploys) and lead time falling from 52h to 38h, and these match the data."
+   },
+   "no_invented_numbers": {
+    "winner": "tie",
+    "reason": "Both label the slide 11 'Activation: 5 more periods' projection as a rough guide and give 'None external' for benchmarks, so neither invents figures."
+   },
+   "speed_with_quality": {
+    "winner": "tie",
+    "reason": "Both pair deploys rising from 3 to 4 with change failure rising from 5.1% to 7.7% on slides 09 and 09b, and both file review time under quality on slide 09."
+   },
+   "gaps_shown": {
+    "winner": "tie",
+    "reason": "Both mark Platform & security (slide 10) and AI gross margin (slide 12) as data needed, owned by the VP Engineering and due in Q4."
+   },
+   "board_cut_usable": {
+    "winner": "tie",
+    "reason": "Both board cuts have the same 8 slides, open with the 23.1K-versus-22K result and the pricing-pilot ask, and carry the same appendix bulk."
+   }
+  },
+  "overall": {
+   "winner": "tie",
+   "reason": "Update X and Update Y are identical in every slide, figure, gap note and board cut. Neither has anything to tell it apart, so they tie in substance."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 1169,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 47687,
+  "cost_usd": 0.4053626,
+  "num_turns": 2,
+  "duration_ms": 14080
+ }
+}

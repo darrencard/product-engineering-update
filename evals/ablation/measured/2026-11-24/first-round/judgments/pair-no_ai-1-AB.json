@@ -1,0 +1,45 @@
+{
+ "id": "pair-no_ai-1-AB",
+ "fixture": "no_ai",
+ "kind": "pair",
+ "x": "runs/A/no_ai/1",
+ "y": "runs/B/no_ai/1",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "Y",
+    "reason": "Most of X's figures check out (ARR $10.911M, NRR 96.4%, GRR 89.3%, CFR 4/52 = 7.7%, items by month 53/37/10), but its claim that 'one deploy failed in each month' is wrong because Dc0 and Dc13 both failed in July; Y's figures (78% traced to an objective, 43% Platform, 40.8% R&D/revenue, 4 customers making 7 requests) are arithmetically right, so Y edges it narrowly."
+   },
+   "no_invented_numbers": {
+    "winner": "Y",
+    "reason": "X says 'cost per load is rising, not falling' with no Q2 inference figure to compare against, while Y's only forward number, 'Activation: 5 more periods', is clearly labelled as a projection."
+   },
+   "speed_with_quality": {
+    "winner": "tie",
+    "reason": "Both put 4 deploys a week and 38h lead time beside the 5.1% to 7.7% change failure rate and the 9h to 13h review time, and neither treats speed alone as good news (X's Delivery health and board Delivery paragraph; Y's slides 09 and 09b)."
+   },
+   "gaps_shown": {
+    "winner": "X",
+    "reason": "X flags the Finance $10.3M revenue vs Stripe $10.9M ARR conflict, the missing agent task success and cost-per-task data, and the thin September export, all owned by the VP Engineering and due Q4; Y silently uses the $10.3M to compute 40.8% R&D/revenue and names a gap owner only for Platform & security."
+   },
+   "board_cut_usable": {
+    "winner": "X",
+    "reason": "X's board cut opens with the answer, puts the pricing-pilot ask up front and notes that the 4 Nov deadline has passed; Y's board cut carries 'Signed off by Ablation eval, synthetic data', a 'Not reported' fragment, the 'Book a call' product appendix, and no flag on the lapsed deadline."
+   }
+  },
+  "overall": {
+   "winner": "X",
+   "reason": "X catches what matters to a board: churn of $1.11M wiping out $741K of expansion, the source conflict between Finance revenue and Stripe ARR, the missing task-success data and the overdue decision, and its board cut could be sent as it is. Y is clean on arithmetic, but it silently picks one of the conflicting sources, leaves out key gaps, and its board cut contains template and marketing text that can't go to a board."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 3199,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 39007,
+  "cost_usd": 0.3765226,
+  "num_turns": 2,
+  "duration_ms": 30564
+ }
+}

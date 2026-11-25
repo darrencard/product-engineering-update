@@ -1,0 +1,45 @@
+{
+ "id": "pair-sparse-2-AB",
+ "fixture": "sparse",
+ "kind": "pair",
+ "x": "runs/A/sparse/2",
+ "y": "runs/B/sparse/2",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "X",
+    "reason": "X's figures all match the data, including the 31/18/8/21/22 work-type split and the 53/37/10 monthly completions; Y's samples mix real figures (31/26/43, 78%) with made-up ones under the same company name, Kestrel Labs, so a reader cannot tell which are real."
+   },
+   "no_invented_numbers": {
+    "winner": "X",
+    "reason": "X states only figures taken from the data; Y's board cut carries numbers that are not in the data, such as $10.9M ARR, an 82% to 86% eval pass rate and a 4 Nov 2026 deadline, plus a CEO sign-off, and the 'made-up company' label still names Kestrel Labs."
+   },
+   "speed_with_quality": {
+    "winner": "Y",
+    "reason": "X reports monthly throughput (53/37/10) and calls Dispatch Agent's pace 'steady' with no quality figure beside it; Y has no real speed figures, and its sample slide 9 puts each speed metric next to change failure rate."
+   },
+   "gaps_shown": {
+    "winner": "X",
+    "reason": "X's section 4 lists each specific gap with the reason it matters, names the VP Engineering as owner with a Q4 due date, and flags the September drop as needing an explanation; Y calls slide 5 (investment mix) 'not reported' even though it computed that mix in ledger row L01."
+   },
+   "board_cut_usable": {
+    "winner": "X",
+    "reason": "X's board cut is one page that opens with the 100 items and the 78% roadmap share and states 'Asks of the board: None'; Y's board cut is 8 slides that each say 'not reported', followed by template appendices with a 'Book a call' line."
+   }
+  },
+  "overall": {
+   "winner": "X",
+   "reason": "X reports every figure the data supports correctly and states plainly what is missing and who owns it, in a short board cut that could be sent as it is. Y throws away the data it has, fills its slides with samples that reuse the real company name and real figures, and its board cut reads like a product brochure rather than a board update."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 2097,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 24613,
+  "cost_usd": 0.2393306,
+  "num_turns": 2,
+  "duration_ms": 22618
+ }
+}

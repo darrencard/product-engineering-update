@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<title>Kestrel Labs — Product &amp; Engineering Update, 2026-Q3</title>
+<style>
+body{font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;color:#1d2330;max-width:860px;margin:40px auto;padding:0 24px}
+h1{font-size:26px;margin:0 0 4px}h2{font-size:18px;margin:36px 0 10px;border-bottom:1px solid #dde1e8;padding-bottom:6px}
+.meta{color:#5b6475;font-size:13px}
+.tldr{background:#f4f6fa;border-left:4px solid #2f5fd0;padding:14px 18px;margin:22px 0}
+.tldr ul{margin:6px 0 0;padding-left:20px}
+table{border-collapse:collapse;width:100%;margin:8px 0 4px;font-size:14px}
+th,td{text-align:left;padding:7px 10px;border-bottom:1px solid #e6e9ef}th{background:#f7f8fb;font-weight:600}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+.bar{display:flex;height:22px;border-radius:3px;overflow:hidden;margin:4px 0}
+.bar span{display:block;height:100%}
+.c1{background:#2f5fd0}.c2{background:#6f93e8}.c3{background:#9aa3b5}.c4{background:#3fa58a}.c5{background:#e0a23a}
+.legend span{display:inline-block;margin-right:14px;font-size:13px}.legend i{display:inline-block;width:10px;height:10px;margin-right:5px;border-radius:2px}
+.row{display:grid;grid-template-columns:70px 1fr 40px;align-items:center;gap:10px;font-size:13px}
+.note{color:#5b6475;font-size:13px}
+.gap{color:#9a3b1e;font-weight:600}
+</style></head><body>
+
+<h1>Product &amp; Engineering Update — 2026-Q3</h1>
+<div class="meta">Kestrel Labs · From the CPTO · Covers 1 Jul – 30 Sep 2026 · Data as of 30 Sep 2026 · Source: Linear (the only system connected)</div>
+
+<div class="tldr"><strong>Summary</strong>
+<ul>
+<li>We closed <strong>100 tracked items</strong> this quarter. 31% went to new capabilities (Dispatch Agent), 21% to platform &amp; scale, 18% to improving Core Dispatch, 8% to growth, and 22% to keep-the-lights-on.</li>
+<li><strong>78 of the 100</strong> are tagged in Linear to "Grow ARR to $50M". The other 22 are KTLO and have no objective tag.</li>
+<li>Completions <strong>fell from 53 in July to 37 in August and 10 in September</strong>. All Growth work ended by 22 Jul, and Core Dispatch and Platform &amp; scale work ended in August. By September, Dispatch Agent was the only line still closing items.</li>
+<li><strong>We can't yet say whether this was a good quarter.</strong> There is no agreed north-star metric, no investment target, no committed delivery dates, and no eval results for Dispatch Agent to measure against. The VP Engineering owns closing these gaps in Q4.</li>
+</ul></div>
+
+<h2>1. Where the effort went</h2>
+<p>Every item in the export has an estimate of 1, so the shares below are item counts. They are not weighted by size.</p>
+<div class="bar">
+<span class="c1" style="width:31%"></span><span class="c4" style="width:21%"></span><span class="c2" style="width:18%"></span><span class="c5" style="width:8%"></span><span class="c3" style="width:22%"></span>
+</div>
+<div class="legend"><span><i class="c1"></i>New capabilities 31</span><span><i class="c4"></i>Platform &amp; scale 21</span><span><i class="c2"></i>Improve the core 18</span><span><i class="c5"></i>Growth 8</span><span><i class="c3"></i>Keep the lights on 22</span></div>
+
+<table>
+<tr><th>Product line / team</th><th>Work types</th><th class="n">Items</th><th class="n">Share</th></tr>
+<tr><td>Dispatch Agent</td><td>New capabilities</td><td class="n">31</td><td class="n">31%</td></tr>
+<tr><td>Core Dispatch</td><td>Improve the core (18), Growth (8)</td><td class="n">26</td><td class="n">26%</td></tr>
+<tr><td>Platform</td><td>Platform &amp; scale (21), Keep the lights on (22)</td><td class="n">43</td><td class="n">43%</td></tr>
+<tr><th>Total</th><th></th><th class="n">100</th><th class="n">100%</th></tr>
+</table>
+<p class="note">Platform is the largest line by item count, and half of its work was KTLO. 78% of all work went to roadmap work rather than maintenance. There is no investment plan in place, so we can't say whether this mix was on target or off.</p>
+
+<h2>2. Delivery across the quarter</h2>
+<div class="row"><span>July</span><div class="bar"><span class="c1" style="width:22.6%"></span><span class="c4" style="width:20.8%"></span><span class="c2" style="width:20.8%"></span><span class="c5" style="width:15.1%"></span><span class="c3" style="width:20.8%"></span></div><span>53</span></div>
+<div class="row"><span>August</span><div style="width:69.8%"><div class="bar"><span class="c1" style="width:27%"></span><span class="c4" style="width:27%"></span><span class="c2" style="width:18.9%"></span><span class="c3" style="width:27%"></span></div></div><span>37</span></div>
+<div class="row"><span>September</span><div style="width:18.9%"><div class="bar"><span class="c1" style="width:90%"></span><span class="c3" style="width:10%"></span></div></div><span>10</span></div>
+<p class="note">Bar length is scaled to July's total.</p>
+
+<table>
+<tr><th>Work type</th><th class="n">Jul</th><th class="n">Aug</th><th class="n">Sep</th><th>Last completion</th></tr>
+<tr><td>New capabilities (Dispatch Agent)</td><td class="n">12</td><td class="n">10</td><td class="n">9</td><td>26 Sep</td></tr>
+<tr><td>Keep the lights on (Platform)</td><td class="n">11</td><td class="n">10</td><td class="n">1</td><td>2 Sep</td></tr>
+<tr><td>Platform &amp; scale (Platform)</td><td class="n">11</td><td class="n">10</td><td class="n">0</td><td>30 Aug</td></tr>
+<tr><td>Improve the core (Core Dispatch)</td><td class="n">11</td><td class="n">7</td><td class="n">0</td><td>21 Aug</td></tr>
+<tr><td>Growth (Core Dispatch)</td><td class="n">8</td><td class="n">0</td><td class="n">0</td><td>22 Jul</td></tr>
+<tr><th>Total</th><th class="n">53</th><th class="n">37</th><th class="n">10</th><th></th></tr>
+</table>
+<p><strong>What this means:</strong> Dispatch Agent delivered at a steady pace all quarter. Every other line stopped closing items well before the quarter ended. The export has no in-progress or backlog items, so it can't tell us whether those teams moved to work that isn't finished yet or whether their planned work simply ran out. The September drop needs an explanation before Q4 planning, either from the team leads or from a fuller export.</p>
+
+<h2>3. AI: Dispatch Agent</h2>
+<p>Dispatch Agent is our one AI feature. It took 31 items, the largest share of new-capability work. Its eval set is at <strong>v14</strong>, but no eval scores, quality thresholds, or production metrics were provided. <span class="gap">We can report effort on Dispatch Agent but not whether its quality is improving.</span></p>
+
+<h2>4. What this update can't tell you yet</h2>
+<p>The intake left these areas blank, and Linear is the only connected system. We are listing the gaps here rather than filling them with guesses.</p>
+<table>
+<tr><th>Missing</th><th>Why it matters</th></tr>
+<tr><td>Confirmed objectives and a north-star metric</td><td>"Grow ARR to $50M" exists only as a Linear tag. Without ARR or a north-star metric, we can't link the 78 tagged items to any outcome.</td></tr>
+<tr><td>Strategy, bets, and non-goals</td><td>Without them, we can't judge whether the effort mix reflects deliberate choices.</td></tr>
+<tr><td>Investment plan by line</td><td>Without one, we can't call the 31/26/43 split by product line right or wrong.</td></tr>
+<tr><td>Delivery commitments and ranges</td><td>We have no dates to report against, and no open work to forecast from.</td></tr>
+<tr><td>Dispatch Agent eval results (v14)</td><td>Without them, we have no read on AI quality or regressions.</td></tr>
+<tr><td>Reliability, incidents, cost, and headcount</td><td>None of these systems is connected, so we can't put KTLO effort (22%) in context.</td></tr>
+<tr><td>Risks, decisions, and asks of leadership</td><td>None were recorded, so this update has no asks.</td></tr>
+</table>
+<p><strong>Owner:</strong> the VP Engineering. <strong>Due:</strong> Q4. The Q4 update should report against targets, not just activity.</p>
+
+<p class="note" style="margin-top:36px">Method: the source is tracker.csv exported from Linear, with 100 rows, all status Done, and completed_at dates from 1 Jul to 26 Sep 2026. All estimates equal 1. Item titles are generic ("&lt;work type&gt; item N"), so this update describes how effort was distributed, not specific features shipped.</p>
+</body></html>

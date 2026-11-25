@@ -1,0 +1,45 @@
+{
+ "id": "self-sparse-A1",
+ "fixture": "sparse",
+ "kind": "self_A",
+ "x": "runs/A/sparse/1",
+ "y": "runs/A/sparse/1",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "tie",
+    "reason": "Both show the same monthly totals (53/37/10) and team splits (e.g. Platform 22/20/1), and these match the tracker when recomputed."
+   },
+   "no_invented_numbers": {
+    "winner": "tie",
+    "reason": "Both use only tracker-derived counts, such as 78 items tagged to 'Grow ARR to $50M', and add no targets or benchmarks."
+   },
+   "speed_with_quality": {
+    "winner": "tie",
+    "reason": "Both state that cycle time and Dispatch Agent eval (v14) quality data are missing, and neither presents the 100 completions as good news on their own."
+   },
+   "gaps_shown": {
+    "winner": "tie",
+    "reason": "Both carry the same missing-inputs table, owned by the VP Engineering and due Q4, and both flag the drop to 10 items in September as a possible export gap."
+   },
+   "board_cut_usable": {
+    "winner": "tie",
+    "reason": "The board cuts are identical: they lead with 100 items and 78% tagged to ARR, then the 53\u219237\u219210 slowdown, then the Q4 gap closure."
+   }
+  },
+  "overall": {
+   "winner": "tie",
+   "reason": "Update X and Update Y are word-for-word identical in both the full update and the board cut. Neither differs from the other on any rubric criterion, so a careful CPO would have no reason to prefer one."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 859,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 11865,
+  "cost_usd": 0.11258660000000001,
+  "num_turns": 2,
+  "duration_ms": 11118
+ }
+}

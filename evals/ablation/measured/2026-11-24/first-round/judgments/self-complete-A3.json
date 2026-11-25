@@ -1,0 +1,45 @@
+{
+ "id": "self-complete-A3",
+ "fixture": "complete",
+ "kind": "self_A",
+ "x": "runs/A/complete/3",
+ "y": "runs/A/complete/3",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "tie",
+    "reason": "Both state the same figures, such as change failure rate 7.7% (4/52) and NRR 96.4%, and these check out against source_control.csv and billing.csv."
+   },
+   "no_invented_numbers": {
+    "winner": "tie",
+    "reason": "Both make the same unsupported causal claim in section 4, that the rise in change failures and integration tickets is the 'likely reason' keep-the-lights-on ran +7 points, so neither is better."
+   },
+   "speed_with_quality": {
+    "winner": "tie",
+    "reason": "Both place 4 deploys a week and 38h lead time beside 7.7% change failure, 15% rework and 41m time to restore, and both call delivery 'faster but less stable'."
+   },
+   "gaps_shown": {
+    "winner": "tie",
+    "reason": "Both flag the finance $10.3M revenue (about $41M annualized) against billing $10.9M ARR mismatch and name the VP Engineering as owner, due Q4."
+   },
+   "board_cut_usable": {
+    "winner": "tie",
+    "reason": "Both board cuts are identical: they lead with 23.1K loads a week and the per-load pricing pilot ask, and they note that the 4 Nov deadline has passed."
+   }
+  },
+  "overall": {
+   "winner": "tie",
+   "reason": "Update X and Update Y match word for word in both the full update and the board cut, so neither is better on any criterion. Their strengths and their flaws, such as the causal claim about keep-the-lights-on work, are the same."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 776,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 33105,
+  "cost_usd": 0.2808466,
+  "num_turns": 2,
+  "duration_ms": 8395
+ }
+}
