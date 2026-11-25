@@ -192,6 +192,28 @@ def plain_work_type(label: str) -> str:
     return PLAIN_WORK_TYPES.get(label.strip().lower(), label)
 
 
+def outcomes_title(rows: list[Json]) -> str:
+    """Slide 11's title. One outcome is named with its number and target, never counted as "all 1" or "none of the 1"."""
+    landed = [r for r in rows if r["status"] == "landed"]
+    missed = [r for r in rows if r["status"] != "landed"]
+    if not rows:
+        return "Outcomes are not reported this period. The sources disagree or are missing."
+    if landed and missed:
+        hit, short = landed[0], missed[0]
+        return (
+            f"{hit['metric']} reached {hit['actual']}, against a target of {hit['target']}. "
+            f"{short['metric']}, at {short['actual']} against {short['target']}, did not."
+        )
+    if len(rows) == 1:
+        row = rows[0]
+        if landed:
+            return f"{row['metric']} reached {row['actual']}, against a target of {row['target']}."
+        return f"{row['metric']} is at {row['actual']}, short of its target of {row['target']}."
+    if landed:
+        return f"All {len(landed)} reported outcomes met their targets."
+    return f"None of the {len(missed)} reported outcomes met their targets."
+
+
 class Draft:
     def __init__(self, run: Path, previous: Path | None = None) -> None:
         self.intake = load(run / "intake.json")
@@ -607,21 +629,7 @@ class Draft:
             blocks.append({"type": "cards", "columns": 1, "items": [{"title": "At this pace (Projected)", "body": [{"list": paces}, note]}]})
         if gaps:
             blocks.append({"type": "cards", "columns": 1, "items": [self.gap(" ".join(gaps))]})
-        landed = [r for r in rows if r["status"] == "landed"]
-        missed = [r for r in rows if r["status"] != "landed"]
-        if not rows:
-            title = "Outcomes are not reported this period. The sources disagree or are missing."
-        elif landed and missed:
-            hit, short = landed[0], missed[0]
-            title = (
-                f"{hit['metric']} reached {hit['actual']}, against a target of {hit['target']}. "
-                f"{short['metric']}, at {short['actual']} against {short['target']}, did not."
-            )
-        elif landed:
-            title = f"All {len(landed)} reported outcomes met their targets."
-        else:
-            title = f"None of the {len(missed)} reported outcomes met its target."
-        self.fill("11", title, blocks, refs, self.systems("analytics", "billing", "warehouse"))
+        self.fill("11", outcomes_title(rows), blocks, refs, self.systems("analytics", "billing", "warehouse"))
 
     def ai_in_product(self) -> None:
         tiles = [described_tile(self.metrics[k]) for k in ("eval_pass_rate", "cost_per_task") if k in self.metrics]
