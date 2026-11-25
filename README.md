@@ -28,9 +28,17 @@ The prompt names a fixed release, so a later change to the repository can't reac
 - **A weekly draft.** `references/weekly-rhythm.md` sets the update up as a scheduled job that drafts the Leadership and Staff cuts each week and never renders or posts the board cut.
 - **A landing brief kit for Linear.** `skills/landing-brief/` is a free project template (problem, definition of good, non-goals, cost budget, the line) and a script that drafts a landed, watch or stalled project update from it.
 
+## Documentation
+
+- [Validator rules](docs/validator-rules.md): every check that blocks a render, and how to fix it.
+- [Connectors](docs/connectors.md): each reader, what it needs, and which have run on a live account.
+- [Security and data handling](docs/security.md): where data goes, the supply chain, prompt injection and the Action's permissions.
+- [Intake and CLI reference](docs/intake-and-cli.md): every `intake.json` field and script flag.
+- [Troubleshooting](docs/troubleshooting.md): the errors the scripts give, and the fix for each.
+
 ## Privacy
 
-Your data stays in your own session. The scripts read files in a run folder and write files back to it. They make no network calls, use the Python standard library only, and install nothing. The test suite checks all three. Nothing reaches dacard.ai.
+Your data stays in your own session. The scripts read files in a run folder and write files back to it. They hold no network code, which a test checks. They use the Python standard library only and declare no dependencies, so they install nothing. Nothing reaches dacard.ai. The full detail, including what is not covered, is in [Security and data handling](docs/security.md).
 
 ## Install
 
