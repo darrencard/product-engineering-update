@@ -83,6 +83,10 @@ Some of these are fair, some are not. The revenue and ARR mismatch is real: the 
 
 **Counterfactual, not the shipped skill.** With Appendices B, C and D removed from the skill's decks before judging, the result was the same: 36 to 0, 18 of 18 pairs. The pitch alone does not explain the loss.
 
+## Since this run
+
+Version 0.8.0 fixes 4 of the judge's points: the template appendices and the pitch no longer print in a team's deck, the cover drops the template's reader instructions, the board cut carries only the ledger rows it cites, and revenue is checked against ARR. The eval has not been rerun on 0.8.0. The numbers on this page are for 0.7.4.
+
 ## What the skill did better
 
 - Every figure it printed traces to a ledger row and the data, on every fixture.

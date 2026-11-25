@@ -38,6 +38,7 @@ for folder in (HERE, SCRIPTS, BRIEF_SKILL / "scripts"):
 
 import draft  # noqa: E402
 import landing_brief  # noqa: E402
+import render  # noqa: E402
 import validate  # noqa: E402
 from test_pipeline import SKILL, rules, run_fixture, script, slide  # noqa: E402  (the shared helpers, beside this file)
 
@@ -720,6 +721,39 @@ class SkillHygiene(unittest.TestCase):
             self.assertIn(field, body)
             self.assertIn(f"label: {field}", form.read_text(encoding="utf-8"))
         self.assertIn("Never file it on your own", body, "a friction report is filed only after the user says yes")
+
+
+class Release080(unittest.TestCase):
+    """What the ablation judge held against the skill's decks: template text, the pitch, the board's ledger, and revenue against ARR."""
+
+    def setUp(self) -> None:
+        self.work = Path(tempfile.mkdtemp())
+        self.addCleanup(shutil.rmtree, self.work)
+
+    def test_a_teams_deck_carries_no_template_appendix_pitch_or_reader_instructions(self) -> None:
+        deck, _ = run_fixture("complete", self.work)
+        appendices = [s["id"] for s in deck["slides"] if s["kind"] == "appendix"]
+        self.assertEqual(appendices, ["A"], "only the evidence ledger stays")
+        text = json.dumps(deck)
+        for phrase in ("Book a call", "Keys J and K", "Sources you need: Appendix D", "A Claude skill will build this deck"):
+            self.assertNotIn(phrase, text)
+        self.assertEqual(validate.check(deck)["errors"], [])
+
+    def test_the_board_cut_carries_only_the_ledger_rows_its_slides_cite(self) -> None:
+        deck, _ = run_fixture("complete", self.work)
+        board = render.cut_deck(deck, "B")
+        cited = {ref for s in board["slides"] for ref in validate.ledger_refs(s)}
+        self.assertEqual({r["id"] for r in board["ledger"]}, cited & {r["id"] for r in deck["ledger"]})
+        self.assertLess(len(board["ledger"]), len(deck["ledger"]))
+        self.assertEqual(len(render.cut_deck(deck, "L")["ledger"]), len(deck["ledger"]), "other cuts keep the whole ledger")
+
+    def test_revenue_that_cannot_match_arr_is_flagged_and_a_disputed_arr_is_never_quoted(self) -> None:
+        deck, _ = run_fixture("complete", self.work)
+        five = json.dumps(slide(deck, "05"))
+        self.assertIn("Revenue and ARR do not reconcile", five)
+        self.assertIn("a year at that rate", five)
+        disputed, _ = run_fixture("conflicting", self.work)
+        self.assertNotIn("Revenue and ARR do not reconcile", json.dumps(disputed))
 
 
 if __name__ == "__main__":

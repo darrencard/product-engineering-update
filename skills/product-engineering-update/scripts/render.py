@@ -449,6 +449,10 @@ def cut_deck(deck: Json, key: str) -> Json:
     out = dict(deck)
     out["slides"] = [s for s in deck["slides"] if s["kind"] != "slide" or key in s["audiences"]]
     out["meta"] = dict(deck["meta"], audiences=[a for a in deck["meta"]["audiences"] if a["key"] == key])
+    if key == "B":
+        # A board reads the rows behind its own slides, not the whole working ledger.
+        cited = {ref for s in out["slides"] for ref in validate.ledger_refs(s)}
+        out["ledger"] = [r for r in deck["ledger"] if r["id"] in cited]
     return out
 
 
@@ -508,7 +512,7 @@ def main() -> int:
     ledger_path = out.with_name(out.stem + ".ledger.csv")
     try:
         out.write_text(html, encoding="utf-8")
-        write_ledger_csv(deck, ledger_path)
+        write_ledger_csv(shown, ledger_path)
     except OSError as e:
         raise SystemExit(f"render: cannot write {e.filename or out} ({e.strerror}). Check that the folder exists and is writable, then render again.") from None
     signed = f" Signed off by {signer}." if signer else ""

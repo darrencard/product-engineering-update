@@ -42,6 +42,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import intake as intake_mod  # noqa: E402  (a sibling script)
 
 ASSETS = Path(__file__).resolve().parent.parent / "assets"
+KEEP_APPENDICES = {"A"}
 Json = dict[str, Any]
 
 # The one line a generated deck carries about where it came from. The licence asks for credit; this is it.
@@ -378,6 +379,21 @@ class Draft:
             else "The team's time went where the plan said it would, within 3 points on every type of work."
         )
         blocks: list[Json] = [{"type": "cards", "columns": "2:1" if len(items) == 2 else 1, "items": items}]
+        check = self.extra.get("reconcile")
+        if check:
+            blocks.append(
+                {
+                    "type": "cards",
+                    "columns": 1,
+                    "items": [
+                        {
+                            "title": "Check before the board sees this",
+                            "body": [check["text"] + " Confirm which line is right before reading R&D as a share of revenue."],
+                        }
+                    ],
+                }
+            )
+            refs.append(check["ledger"])
         capex = self.extra.get("capex")
         if capex:
             confirmed = f"Confirmed by {capex['confirmed_by']}." if capex.get("confirmed_by") else "Not yet confirmed by finance."
@@ -905,6 +921,26 @@ class Draft:
 
     # ---- assembly --------------------------------------------------------
 
+    def cover_facts(self, cover: Json) -> None:
+        """The cover states this deck's own facts. The template's instructions to its reader (keys, where to find sources) go."""
+        intake = self.intake
+        core = [s for s in self.deck["slides"] if s["kind"] == "slide"]
+        cuts = {a["key"]: sum(1 for s in core if a["key"] in s["audiences"]) for a in self.deck["meta"]["audiences"]}
+        cover["blocks"] = [
+            {
+                "type": "text",
+                "variant": "lede",
+                "text": (
+                    f"{intake['company']}'s product & engineering update for {intake['period']['label']}. "
+                    "Every figure has a row in the evidence ledger, Appendix A. A slide without its data says so."
+                ),
+            },
+            {
+                "type": "facts",
+                "items": [f"{len(core)} core slides", f"Board cut {cuts.get('B', 0)}", f"Staff cut {cuts.get('S', 0)}", f"As of {intake['as_of']}"],
+            },
+        ]
+
     def build(self) -> Json:
         intake, deck = self.intake, self.deck
         deck["meta"].update(
@@ -949,6 +985,10 @@ class Draft:
                 # A rollup slide may only name slides that are still in the deck.
                 if "rolls_up" in s:
                     s["rolls_up"] = [sid for sid in s["rolls_up"] if sid in self.slides]
+        # The template's own appendices explain the template and offer the skill. A team's deck keeps only its ledger, Appendix A.
+        deck["slides"] = [s for s in deck["slides"] if s["kind"] != "appendix" or s["id"] in KEEP_APPENDICES]
+        self.slides = {s["id"]: s for s in deck["slides"]}
+        self.cover_facts(cover)
         for s in deck["slides"]:
             if s["kind"] != "slide":
                 continue
