@@ -705,5 +705,22 @@ class Release073(unittest.TestCase):
         self.assertNotIn("Traceback", drafted.stderr)
 
 
+class SkillHygiene(unittest.TestCase):
+    """What a skill linter checks: a body short enough to load, a recovery table, and a working path for friction reports."""
+
+    def test_the_skill_body_stays_short_and_has_its_recovery_table_and_friction_form(self) -> None:
+        body = (SKILL / "SKILL.md").read_text(encoding="utf-8")
+        self.assertLess(len(body.splitlines()), 500, "SKILL.md is loaded whole when the skill runs; keep it under 500 lines")
+        self.assertIn("## Error recovery", body)
+        self.assertIn("## Friction reports", body)
+        self.assertIn("template=friction.yml", body)
+        form = Path(__file__).resolve().parent.parent / ".github" / "ISSUE_TEMPLATE" / "friction.yml"
+        self.assertTrue(form.is_file(), "SKILL.md links an issue form that does not exist")
+        for field in ("Tried", "Expected", "Happened", "Would fix it"):
+            self.assertIn(field, body)
+            self.assertIn(f"label: {field}", form.read_text(encoding="utf-8"))
+        self.assertIn("Never file it on your own", body, "a friction report is filed only after the user says yes")
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- **Error recovery in the skill itself.** SKILL.md now holds a table of the refusals an agent meets most, each with what to do, so the fix is in the agent's context and not only in `docs/troubleshooting.md`. Facts only the user has are asked for, never filled in.
+- **Friction reports.** When a script crashes, a doc is wrong or a fix does not work, the agent drafts a four-field report (tried, expected, happened, would fix it) with no company data, shows it word for word, and files it only after a yes, through a new issue form. The idea is Uber's "papercuts" (Uber Engineering, Nov 2026).
+
 ## 0.7.3 (2026-11-24)
 
 Three fixes found while writing the reference docs in `docs/`.

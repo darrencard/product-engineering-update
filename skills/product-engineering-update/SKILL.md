@@ -180,6 +180,36 @@ Show the user the summary word for word. Post it only after they say yes, throug
 
 To run the draft every week, follow [references/weekly-rhythm.md](references/weekly-rhythm.md). The schedule lives outside the scripts and never renders, summarises or posts the board cut.
 
+## Error recovery
+
+Every script stops with one line that names the problem and the fix. Read it, act on it, and run the step again. Never work around a refusal by editing generated files, skipping a step or passing `--skip-validate`. When the fix needs a fact only the user has, ask them: never fill it in yourself. The full list is in [docs/troubleshooting.md](https://github.com/darrencard/product-engineering-update/blob/main/docs/troubleshooting.md).
+
+| The script says | What to do |
+|---|---|
+| `BLOCKING  company` from `intake.py check` (or another of the 7 required answers) | Ask the user for that answer, then pass it to `run.py` or write it in the intake. |
+| `BLOCKING  period.start (must be YYYY-MM-DD ...)` | Rewrite the date as `YYYY-MM-DD`. |
+| `BLOCKING  bet "<name>" has no appetite` (or `confidence`, `stop_rule`, or no cause) | Ask the bet's owner for the missing part. Never draft a stop rule or a confidence. |
+| `BLOCKING  bets[0] has no "bet"` (or a risk, stopped item, decision or product line with no text) | Ask what the item is, or remove it if the user agrees. |
+| `collect: <file> is missing the column(s) ...` | Run `python3 scripts/collect.py --list`, map the export's columns to the names it shows, and collect again. |
+| `collect: <file> has N bad row(s) ...` | Show the user the listed rows. Fix them in the export; rows are never skipped. |
+| `collect: <file> has no rows ...` or a reader's `found no ...` | Leave that source out. Its slides show a data needed block, which is the right result. |
+| `run: --github-prs needs --repo OWNER/NAME` (or `--vercel-project`, `--vercel-errors-from`) | Add the flag it names; the ledger must say where each figure came from. |
+| `validate: N error(s)` with a rule name | Look the rule up in [docs/validator-rules.md](https://github.com/darrencard/product-engineering-update/blob/main/docs/validator-rules.md). Fix the slide or its data. Never reword a claim just to pass. |
+| `render: the board cut needs --signed-off-by ...` | Show the change list from `review.py`, ask a named person for their yes in this session, then pass their name. |
+| `summary: the deck has N validator error(s) ...` | Fix the deck until `validate.py` passes, then write the summary. |
+| A script stops with a Python traceback, a flag in `--help` is refused, or a step reports success but writes nothing | That is a bug in the skill. Tell the user, and offer the friction report below. |
+
+## Friction reports
+
+When the skill fights you, draft a friction report so its maintainer can fix it. Do it when a script crashes or misbehaves, when a reference file or doc is wrong, when a fix in the table above does not work, or when you spend many turns on one step. Draft it with these four fields, from what you saw:
+
+- **Tried:** the step and the exact command.
+- **Expected:** what the docs said would happen.
+- **Happened:** the exact message or result, word for word.
+- **Would fix it:** your best guess at the fix.
+
+Leave out the user's company data, figures and document text: name the field or file instead. Show the report to the user word for word. File it only after they say yes, at https://github.com/darrencard/product-engineering-update/issues/new?template=friction.yml, or with `gh issue create` if they prefer. Never file it on your own.
+
 ## Reference files
 
 - [references/writing-rules.md](references/writing-rules.md): titles, status words, banned claims.
