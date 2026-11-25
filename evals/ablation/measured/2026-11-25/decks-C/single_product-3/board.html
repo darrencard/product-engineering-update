@@ -1,0 +1,12 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Kestrel Labs: board cut, awaiting sign-off</title>
+<style>body{font:16px/1.5 system-ui,sans-serif;max-width:760px;margin:48px auto;padding:0 24px;color:#1a1a1a}
+.banner{border:2px solid #b45309;background:#fff7ed;padding:16px 20px;border-radius:8px}h1{font-size:24px}li{margin:6px 0}code{background:#f3f3f3;padding:1px 4px}</style></head><body>
+<h1>Kestrel Labs: Product &amp; engineering update, 2026-Q3. Board cut</h1>
+<div class="banner"><b>Not rendered: waiting for sign-off.</b> The board cut only renders after a named person has reviewed the change list and said yes. This run was non-interactive, so nobody could sign off. This page is a placeholder, not the board deck. Do not send it to the board.</div>
+<h2>Check before sign-off</h2>
+<ul><li>Revenue and ARR do not match. Q3 revenue is $10.3M, which is about $40.9M a year at that rate, but ARR from billing is $10.9M. Find out which figure is right before anyone reads R&amp;D as a share of revenue (40.8%).</li>
+<li>Two slides in the full update show a data gap (10, platform &amp; security; 12, AI gross margin). Owner: the VP Engineering. Due: Q4 (the intake gives a quarter, not a date).</li></ul>
+<h2>The 8 slides drafted for the board cut</h2><ol style="list-style:none;padding:0"><li><b>01</b> Loads cleared per week reached 23.1K, against a target of 22K. Activation, at 41% against 50%, did not.</li><li><b>05</b> Basic upkeep was planned at 15% of the team&#x27;s time and took 22%.</li><li><b>09b</b> We release faster, from 3 to 4 times a week, but the share of releases that caused a problem in production rose from 5.1% to 7.7%.</li><li><b>11</b> Loads cleared per week reached 23.1K, against a target of 22K. Activation, at 41% against 50%, did not.</li><li><b>12</b> The share of quality tests the AI feature passes rose from 82% to 86%. The cost of each task the AI feature completes fell from $0.41 to $0.33.</li><li><b>14</b> One risk: one model provider carries most inference spend.</li><li><b>16</b> We are making 2 bets, each with a set budget of time and people and a stated point at which we stop.</li><li><b>18</b> One decision for you today: approve a per-load pricing pilot.</li></ol>
+<h2>To render it</h2><p>Once the signer has read <code>review.md</code> and said yes, run:</p>
+<p><code>python3 scripts/render.py run/deck.json --out out/board.html --cut B --signed-off-by "&lt;name&gt;"</code></p>
+</body></html>

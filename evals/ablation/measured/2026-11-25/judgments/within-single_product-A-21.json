@@ -1,0 +1,45 @@
+{
+ "id": "within-single_product-A-21",
+ "fixture": "single_product",
+ "kind": "within_A",
+ "x": "runs/A/single_product/2",
+ "y": "runs/A/single_product/1",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "Y",
+    "reason": "Both get the core figures right (NRR 96.4%, GRR 89.3%, CFR 7.7% = 4/52, lead time 38h, $1.11M churn), but X credits KES-388 with 2 requests including R-999, which is dated before Q3; Y correctly counts 1 Q3 request and excludes R-999."
+   },
+   "no_invented_numbers": {
+    "winner": "Y",
+    "reason": "X gives its new risks likelihood and impact ratings that are not in the data ('High \u00b7 High', 'Already happening \u00b7 Medium') and states as fact that inference ran over because 'loads grew faster than unit cost fell'; Y labels the same cause 'most likely' and says the export can't confirm it."
+   },
+   "speed_with_quality": {
+    "winner": "tie",
+    "reason": "Both pair 4.0 deploys/week and 38h lead time with the 7.7% change failure rate, 13h review time and 15% rework in the full update and the board cut, and neither presents speed alone as good news."
+   },
+   "gaps_shown": {
+    "winner": "tie",
+    "reason": "Both flag that billing ARR (~$10.9M) and finance revenue ($10.3M/quarter) don't reconcile, name the VP Engineering as owner due Q4, and list the lead-time, eval cost-per-successful-task and bet stop-rule gaps."
+   },
+   "board_cut_usable": {
+    "winner": "X",
+    "reason": "X's board cut opens with the pricing-pilot ask and a note that reads correctly to a board ('treat this as a record'), while Y's board cut puts the ask after the summary and contains an internal 'Check before sending\u2026 Confirm the status first' instruction, so it can't be sent as it is."
+   }
+  },
+  "overall": {
+   "winner": "Y",
+   "reason": "Y is the more trustworthy document: it handles R-999 consistently, hedges its causal claims, and does not invent risk ratings. X has the more sendable board cut, but the rubric weighs wrong or invented figures more heavily than presentation."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 2516,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 33545,
+  "cost_usd": 0.31916659999999997,
+  "num_turns": 2,
+  "duration_ms": 22432
+ }
+}

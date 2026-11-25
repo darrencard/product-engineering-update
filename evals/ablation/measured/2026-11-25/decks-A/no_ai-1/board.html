@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kestrel Labs — Board update, 2026-Q3</title>
+<style>
+:root{
+  color-scheme:light;
+  --page:#f9f9f7; --surface-1:#fcfcfb; --text-primary:#0b0b0b; --text-secondary:#52514e; --muted:#898781;
+  --grid:#e1e0d9; --axis:#c3c2b7; --border:rgba(11,11,11,0.10);
+  --series-1:#2a78d6; --series-neg:#e34948; --plan:#52514e;
+  --good:#006300; --good-mark:#0ca30c; --warning:#fab219; --critical:#d03b3b; --crit-text:#b42f2f;
+}
+@media (prefers-color-scheme:dark){
+  :root:where(:not([data-theme="light"])){
+    color-scheme:dark;
+    --page:#0d0d0d; --surface-1:#1a1a19; --text-primary:#fff; --text-secondary:#c3c2b7; --muted:#898781;
+    --grid:#2c2c2a; --axis:#383835; --border:rgba(255,255,255,0.10);
+    --series-1:#3987e5; --series-neg:#e66767; --plan:#c3c2b7;
+    --good:#0ca30c; --crit-text:#e66767;
+  }
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--text-primary);font:15px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 24px 80px}
+header .eyebrow{color:var(--text-secondary);font-size:13px;letter-spacing:.04em;text-transform:uppercase}
+h1{font-size:30px;line-height:1.2;margin:6px 0 4px}
+h2{font-size:20px;margin:44px 0 6px;padding-top:14px;border-top:1px solid var(--grid)}
+h3{font-size:16px;margin:22px 0 6px}
+p{margin:8px 0}
+.sub{color:var(--text-secondary)}
+.card{background:var(--surface-1);border:1px solid var(--border);border-radius:10px;padding:18px 20px;margin:14px 0}
+.tldr ol{margin:6px 0 0;padding-left:20px}.tldr li{margin:6px 0}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:16px 0}
+.kpi{background:var(--surface-1);border:1px solid var(--border);border-radius:10px;padding:14px 16px}
+.kpi .label{font-size:13px;color:var(--text-secondary)}
+.kpi .value{font-size:30px;font-weight:600;line-height:1.15;margin:4px 0}
+.kpi .meta{font-size:13px;color:var(--text-secondary)}
+.status{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;font-weight:600;white-space:nowrap}
+.status::before{content:"";display:inline-block;width:9px;height:9px;border-radius:50%}
+.s-good{color:var(--good)}.s-good::before{background:var(--good-mark)}
+.s-bad{color:var(--crit-text)}.s-bad::before{background:var(--critical)}
+.s-na{color:var(--text-secondary)}.s-na::before{background:transparent;border:1.5px solid var(--muted);width:7px;height:7px}
+.s-warn{color:var(--text-primary)}.s-warn::before{background:var(--warning)}
+table{width:100%;border-collapse:collapse;font-size:14px;margin:8px 0}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--grid);vertical-align:top}
+th{font-size:12.5px;color:var(--text-secondary);font-weight:600}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.note{font-size:13px;color:var(--text-secondary)}
+.callout{border-left:3px solid var(--warning);padding:8px 14px;background:var(--surface-1);margin:12px 0;border-radius:0 8px 8px 0}
+.decision{border-left:3px solid var(--series-1)}
+.chart{position:relative}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+.chart svg text{font:12px system-ui,-apple-system,"Segoe UI",sans-serif;fill:var(--text-secondary)}
+.chart svg text.val{fill:var(--text-primary);font-weight:600}
+.chart .hit{fill:transparent;cursor:default;outline:none}
+.chart .bar{transition:opacity .1s}
+.chart g.m:hover .bar,.chart g.m:focus-within .bar{opacity:.8}
+.legend{display:flex;gap:18px;font-size:13px;color:var(--text-secondary);margin:4px 0 8px;flex-wrap:wrap}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.sw{display:inline-block;width:12px;height:12px;border-radius:3px}
+.tick{display:inline-block;width:3px;height:14px;background:var(--plan)}
+.tip{position:absolute;pointer-events:none;background:var(--surface-1);border:1px solid var(--border);box-shadow:0 4px 14px rgba(0,0,0,.12);border-radius:8px;padding:8px 10px;font-size:13px;opacity:0;transition:opacity .08s;min-width:140px;z-index:2}
+.tip b{display:block;font-size:15px}
+.tip .k{color:var(--text-secondary)}
+details{margin:6px 0}summary{cursor:pointer;color:var(--text-secondary);font-size:13px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:720px){.two{grid-template-columns:1fr}}
+footer{margin-top:48px;font-size:12.5px;color:var(--text-secondary)}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <div class="eyebrow">Kestrel Labs · Board update · Product &amp; Engineering · 2026-Q3</div>
+  <h1>The agent is working, and growth now depends on activation, integrations and pricing</h1>
+  <p class="sub">From the CPTO · Data as of 30 Sep 2026</p>
+</header>
+
+<div class="kpis">
+  <div class="kpi"><div class="label">Loads cleared / week (north star)</div><div class="value">23,100</div><div class="meta">Target 22K · +26% vs Q2</div><span class="status s-good">Above target</span></div>
+  <div class="kpi"><div class="label">ARR (Sep)</div><div class="value">$10.91M</div><div class="meta">+5.1% vs Jun · Objective $50M</div><span class="status s-warn">22% of objective</span></div>
+  <div class="kpi"><div class="label">Net revenue retention</div><div class="value">96%</div><div class="meta">4 accounts churned ($1.11M)</div><span class="status s-bad">Below 100%</span></div>
+  <div class="kpi"><div class="label">Activation</div><div class="value">41%</div><div class="meta">Target 50% · +2 pts vs Q2</div><span class="status s-bad">9 pts below target</span></div>
+</div>
+
+<section class="card tldr">
+<strong>What is working</strong>
+<ol>
+<li>Customers buy the strategy. Every one of the 22 deals we won cited "agent clears exceptions".</li>
+<li>Multi-stop reroutes and the dispatcher inbox shipped, and both usage targets were beaten: 23,100 loads a week and 6,120 weekly active dispatchers. In total, 6 of 7 commitments shipped.</li>
+<li>Engineering ships faster: 4 deploys a week (up from 3) and a 38h lead time (down from 52h). R&amp;D spend was 1% under plan.</li>
+</ol>
+</section>
+
+<section class="card tldr">
+<strong>What is not working, and what we are doing</strong>
+<ol>
+<li><strong>Retention and activation.</strong> All four churned accounts had raised onboarding tickets. Guided activation shipped and is in a live test, which it must pass to continue. Self-serve carrier onboarding slipped.</li>
+<li><strong>Integrations.</strong> 11 of 17 lost deals cited "No TMS integration", and 55% of support tickets were integration errors. A proposal will go to Q4 planning.</li>
+<li><strong>Inference cost and concentration.</strong> Inference ran $612K against a $480K plan (+28%), mostly with one model provider. A routing layer across 2 providers is due Dec 2026.</li>
+<li><strong>Release quality.</strong> The change failure rate rose to 7.7% (limit: under 5%). The VP Engineering owns this and will report back in Q4.</li>
+</ol>
+</section>
+
+<h2>Decision requested</h2>
+<div class="callout decision">
+<p><strong>Approve a per-load pricing pilot with 10 customers</strong> (the alternative is to wait a quarter).</p>
+<p>Per-load pricing is our stated strategy, and 6 of 17 lost deals this quarter cited price. Deadline: <strong>4 Nov 2026</strong>.</p>
+</div>
+
+<p class="note">Before this goes out: Finance reports Q3 revenue of $10.3M, while Stripe shows September ARR of $10.91M. The two figures don't reconcile and should be checked before circulation. ARR figures above come from Stripe. The full leadership update has the supporting detail.</p>
+<footer>Kestrel Labs · Prepared by the CPTO · Sources: PostHog, Stripe, CRM, Linear, Finance close, Support desk, GitHub</footer>
+</main>
+</body>
+</html>

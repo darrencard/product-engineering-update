@@ -1,0 +1,46 @@
+{
+ "id": "pair-CA-conflict_resolved-3-21",
+ "fixture": "conflict_resolved",
+ "kind": "pair",
+ "matchup": "CA",
+ "x": "runs/A/conflict_resolved/3",
+ "y": "runs/C/conflict_resolved/3",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "X",
+    "reason": "Every X figure recomputes correctly, including ARR $10.911M, NRR 96.4%, billing $89K under plan and inference at 5.9% of revenue; Y's slide 5 annualises $10.3M revenue to '$40.9M' (x4 gives $41.2M), and slide 10 says incident data is missing while slide 9 uses it for time to restore."
+   },
+   "no_invented_numbers": {
+    "winner": "X",
+    "reason": "X's only addition, the ledger-mismatch risk with its own likelihood and impact, is labelled as not in the intake; Y's slide 5 compares an annualised revenue figure against ARR, a comparison the data does not contain and one that could mislead."
+   },
+   "speed_with_quality": {
+    "winner": "tie",
+    "reason": "Both put deploys at 4/week and lead time at 38h beside change failure 7.7% and time to restore 41m, and both frame the quarter as faster but breaking more."
+   },
+   "gaps_shown": {
+    "winner": "X",
+    "reason": "X names the billing $10.91M vs finance close $10.1M conflict and the PostHog 23,100 vs warehouse 21,400 conflict in the body and the board cut, with owner (VP Engineering) and due date (Q4), and also flags the passed 4 Nov deadline; Y leaves both conflicts in ledger rows L09 and L14 only."
+   },
+   "board_cut_usable": {
+    "winner": "X",
+    "reason": "X's board cut leads with a headline, the four key metrics and the pricing-pilot ask, ready to send; Y's 'board cut' is a reviewer checklist with a list of slide titles, so it cannot be sent as it is."
+   }
+  },
+  "overall": {
+   "winner": "X",
+   "reason": "Both updates get the core arithmetic right and pair speed with quality, but X states the two source conflicts plainly, with owner and due date, while Y hides them in ledger rows. X's board cut can go straight to a board; Y's is a reviewer checklist."
+  }
+ },
+ "usage": {
+  "input_tokens": 6,
+  "output_tokens": 3699,
+  "cache_read_input_tokens": 39985,
+  "cache_creation_input_tokens": 38200,
+  "cost_usd": 0.38760100000000003,
+  "num_turns": 3,
+  "duration_ms": 32690
+ }
+}

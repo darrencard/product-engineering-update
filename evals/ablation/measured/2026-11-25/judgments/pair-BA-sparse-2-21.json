@@ -1,0 +1,46 @@
+{
+ "id": "pair-BA-sparse-2-21",
+ "fixture": "sparse",
+ "kind": "pair",
+ "matchup": "BA",
+ "x": "runs/A/sparse/2",
+ "y": "runs/B/sparse/2",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "X",
+    "reason": "Every figure in X matches the recomputed data: 100 issues, the 31/22/21/18/8 split, 53\u219237\u219210 by month, 12/10/9 for Dispatch Agent, 78 issues tagged to an objective and 6 closed on Jul 1. Y's claim that '0 of 19 slides show data' is contradicted by its own ledger rows L01/L02, and its Investment mix slide wrongly says the work-type data is missing."
+   },
+   "no_invented_numbers": {
+    "winner": "X",
+    "reason": "X states only figures the data supports. Y's board cut adds 'Signed off by the CEO' and shows samples such as ARR of $10.9M and a pricing-pilot deadline of 4 Nov 2026 under the real company name. Its Investment mix sample even mixes the real 31/22% actuals with invented plan figures, which could mislead a reader."
+   },
+   "speed_with_quality": {
+    "winner": "X",
+    "reason": "X treats the 53\u219210 drop in completions as an open question rather than good news, and says next to the Dispatch Agent work that no eval or reliability data exists. Y reports no real speed figures at all, so it only meets this criterion because it says nothing."
+   },
+   "gaps_shown": {
+    "winner": "X",
+    "reason": "X's 'What this update can't tell you yet' table names each gap, and the VP Engineering owns closing them by Q4. It also flags the possible bulk close on Jul 1 (NEW-31) and that the 'Grow ARR to $50M' objective is missing from the intake. Y lists owners too, but it labels data it actually holds as missing."
+   },
+   "board_cut_usable": {
+    "winner": "X",
+    "reason": "X's board cut is one page, leads with 100 issues, the 31% Dispatch Agent share and the 53\u219237\u219210 decline, and says plainly that no decisions are asked. Y's 8-slide board cut has no real content, only greyed-out samples and an empty ledger, so it cannot be sent as it is."
+   }
+  },
+  "overall": {
+   "winner": "X",
+   "reason": "X reports the tracker data accurately, flags the monthly decline and the data gaps with an owner, and its board cut could be sent as it is. Y throws away the real data it holds and fills the board cut with sample numbers about a company sharing the real name, which a board could take as fact."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 2251,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 21734,
+  "cost_usd": 0.2193786,
+  "num_turns": 2,
+  "duration_ms": 20363
+ }
+}

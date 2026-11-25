@@ -1,0 +1,45 @@
+{
+ "id": "self-sparse-C1",
+ "fixture": "sparse",
+ "kind": "self_C",
+ "x": "runs/C/sparse/1",
+ "y": "runs/C/sparse/1",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "tie",
+    "reason": "Both ledgers state the same correct figures (capacity split 31/18/8/21/22% and 78% traced to an objective, from 100 tracker rows), and both show no real figures on any slide."
+   },
+   "no_invented_numbers": {
+    "winner": "tie",
+    "reason": "Both carry the same illustrative samples, such as ARR $10.9M on slide 1 and CFR 5.1% to 7.7% on slide 9, labelled as made-up. Both share the same risk that the slide 4 sample (31/26/43%) matches the real data and could confuse a reader."
+   },
+   "speed_with_quality": {
+    "winner": "tie",
+    "reason": "Both report no real speed figures, and the identical slide 9 and 9b samples pair deploys (3 to 4) with change failure rate (5.1% to 7.7%)."
+   },
+   "gaps_shown": {
+    "winner": "tie",
+    "reason": "Both name the VP Engineering as owner of every missing slide, due 2026-12-31, using identical wording. Both also mark slide 5 as missing even though ledger row L01 holds the capacity split."
+   },
+   "board_cut_usable": {
+    "winner": "tie",
+    "reason": "Both board cuts are the same 'held, not rendered' notice listing slides 1, 5, 9b, 11, 12, 14, 16 and 18 as data-needed, and neither could go to a board as it is."
+   }
+  },
+  "overall": {
+   "winner": "tie",
+   "reason": "Update X and Update Y are word-for-word identical, from every slide through the ledger rows L01 and L02 to the held board cut. They share the same strengths and the same flaws, so neither is better to send."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 1217,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 23343,
+  "cost_usd": 0.2115706,
+  "num_turns": 2,
+  "duration_ms": 10799
+ }
+}

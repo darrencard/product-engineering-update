@@ -1,0 +1,46 @@
+{
+ "id": "pair-BA-conflicting-1-21",
+ "fixture": "conflicting",
+ "kind": "pair",
+ "matchup": "BA",
+ "x": "runs/A/conflicting/1",
+ "y": "runs/B/conflicting/1",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "X",
+    "reason": "Both compute NRR 96.4%, CFR 7.7% and 4 deploys/week correctly, but Y reports 'R&D as a share of revenue 40.8%' using $10.3M quarterly revenue that exceeds $10.1M ARR (X flags this conflict and withholds the ratio), and Y shows '39% to 41%' for the unshipped self-serve carrier onboarding."
+   },
+   "no_invented_numbers": {
+    "winner": "X",
+    "reason": "Y adds an unsupported 'Signed off by the CEO' and builds a ratio on a suspect revenue line, while X's only inference (volume driving the 28% inference overrun) is explicitly labelled unconfirmed."
+   },
+   "speed_with_quality": {
+    "winner": "tie",
+    "reason": "Both pair 4 deploys/week and 38h lead time with the 7.7% change failure rate and 13h review time, and neither presents speed alone as good news."
+   },
+   "gaps_shown": {
+    "winner": "X",
+    "reason": "X shows the north star range 21.4K\u201323.1K, ARR $10.1M vs Stripe $10.91M, the revenue-exceeds-ARR conflict, undated support tickets and the passed 4 Nov deadline with owners, whereas Y holds ARR back and never gives the board a figure."
+   },
+   "board_cut_usable": {
+    "winner": "X",
+    "reason": "X's board cut leads with ARR $10.1M vs $11.0M plan and the pricing-pilot ask, and flags the passed deadline; Y's omits ARR, carries template boilerplate ('18 of 19 slides') and asks for a decision 'today' whose 4 Nov 2026 deadline has passed."
+   }
+  },
+  "overall": {
+   "winner": "X",
+   "reason": "X's figures check out against the data, it surfaces every source conflict (north star, ARR, revenue vs ARR) with owners, and its board cut leads with the ARR miss and the stale decision. Y is accurate on most of its arithmetic, but it computes a ratio from the suspect revenue line, leaves ARR out of the board cut and presents an expired deadline as a live ask."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 3302,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 36083,
+  "cost_usd": 0.35519059999999997,
+  "num_turns": 2,
+  "duration_ms": 29121
+ }
+}

@@ -1,0 +1,45 @@
+{
+ "id": "self-conflict_resolved-C1",
+ "fixture": "conflict_resolved",
+ "kind": "self_C",
+ "x": "runs/C/conflict_resolved/1",
+ "y": "runs/C/conflict_resolved/1",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "tie",
+    "reason": "Both updates show the same correct figures: ARR $10.4M to $10.9M, NRR 96.4%, GRR 89.3% and change failure rate 5.1% to 7.7% all match the billing and source-control data."
+   },
+   "no_invented_numbers": {
+    "winner": "tie",
+    "reason": "Both contain the same slide 11 'Activation: 5 more periods' projection, labelled as a rough guide, and no other figure the data does not support."
+   },
+   "speed_with_quality": {
+    "winner": "tie",
+    "reason": "Both pair deploys per week (3 to 4) with change failure rate (5.1% to 7.7%, above the 5% limit) on slides 9 and 9b, and neither presents speed as good news on its own."
+   },
+   "gaps_shown": {
+    "winner": "tie",
+    "reason": "Both name the VP Engineering, due Q4, as owner of the slide 10 platform gap, and both note the Stripe $10.9M vs Finance $10.1M ARR conflict only in ledger L09, not on slide 1."
+   },
+   "board_cut_usable": {
+    "winner": "tie",
+    "reason": "Both board cuts have the same 8 slides, open on slide 1 with loads cleared at 23.1K and the per-load pricing pilot ask, and close on slide 18 with the same ask."
+   }
+  },
+  "overall": {
+   "winner": "tie",
+   "reason": "Updates X and Y are word-for-word the same in every slide, ledger row and board-cut line, so they do not differ in substance. Both share the same strengths (correct retention and delivery figures) and the same weakness (the ARR source conflict is not shown on slide 1 of the board cut)."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 1506,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 36533,
+  "cost_usd": 0.3228706,
+  "num_turns": 2,
+  "duration_ms": 13787
+ }
+}

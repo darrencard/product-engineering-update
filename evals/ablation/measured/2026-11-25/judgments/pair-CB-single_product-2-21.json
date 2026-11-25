@@ -1,0 +1,46 @@
+{
+ "id": "pair-CB-single_product-2-21",
+ "fixture": "single_product",
+ "kind": "pair",
+ "matchup": "CB",
+ "x": "runs/B/single_product/2",
+ "y": "runs/C/single_product/2",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "tie",
+    "reason": "Both carry identical figures that recompute correctly, e.g. ARR $10.4M to $10.9M, net revenue retention 96.4%, change failure rate 5.1% to 7.7% (4 of 52 deploys), and 7 requests that correctly leave out R-999."
+   },
+   "no_invented_numbers": {
+    "winner": "tie",
+    "reason": "Neither adds a figure the data lacks; both label the 'Activation: 5 more periods' projection as a rough guide, and both mark benchmarks as 'None external'."
+   },
+   "speed_with_quality": {
+    "winner": "Y",
+    "reason": "Both pair deploys (3 to 4) with change failure (5.1% to 7.7%), but Y's slide 9 and 9b titles frame it as 'but \u2026 outside its healthy range' and add review time 9h to 13h, so speed is not read as good news on its own."
+   },
+   "gaps_shown": {
+    "winner": "tie",
+    "reason": "Both flag the $10.3M revenue versus $10.9M ARR mismatch on slide 5, and both name the VP Engineering as owner, due Q4, for the missing Platform & security data (slide 10) and AI gross margin (slide 12)."
+   },
+   "board_cut_usable": {
+    "winner": "X",
+    "reason": "X gives an 8-slide board cut that leads with loads cleared at 23.1K against 22K and the pricing-pilot ask, though it still has the internal 'Check before the board sees this' note and a 'Signed off by the CEO' line the data does not support; Y renders no board cut at all."
+   }
+  },
+  "overall": {
+   "winner": "X",
+   "reason": "The two updates are the same in figures, gaps and ledger; Y has slightly better headlines, but it produced no board cut. X gives the CPO an 8-slide board deck that leads with the answer and the ask, and needs only the internal reconciliation note removed and the sign-off line checked before sending."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 2835,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 36832,
+  "cost_usd": 0.3518426,
+  "num_turns": 2,
+  "duration_ms": 27120
+ }
+}

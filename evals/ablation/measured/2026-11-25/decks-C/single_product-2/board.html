@@ -1,0 +1,9 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Kestrel Labs board cut, 2026-Q3: awaiting sign-off</title>
+<style>body{font:16px/1.5 system-ui,sans-serif;max-width:46rem;margin:4rem auto;padding:0 1.5rem;color:#222}code{background:#f2f2f2;padding:.1em .3em}</style></head><body>
+<h1>Board cut not rendered: awaiting sign-off</h1>
+<p>The Kestrel Labs 2026-Q3 board cut (8 slides: 1, 5, 9b, 11, 12, 14, 16, 18) is drafted and passes validation with 0 errors, but it renders only after a named person gives an explicit yes. This run was non-interactive, so nobody could give that sign-off.</p>
+<p>The board slide titles, gaps and the pre-board checklist are in <code>board-review.md</code>. The full leadership update is in <code>update.html</code>.</p>
+<p>Before sign-off, check: Q3 revenue in the finance close ($10.3M for the quarter) does not reconcile with Stripe ARR ($10.9M). R&amp;D as a share of revenue (40.8%) depends on which figure is right.</p>
+<p>To render the board cut once someone signs off, run from the skill root:<br>
+<code>python3 scripts/render.py &lt;run&gt;/deck.json --out out/board.html --cut B --signed-off-by "&lt;name&gt;"</code></p>
+</body></html>

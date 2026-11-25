@@ -1,0 +1,46 @@
+{
+ "id": "pair-CA-complete-1-21",
+ "fixture": "complete",
+ "kind": "pair",
+ "matchup": "CA",
+ "x": "runs/A/complete/1",
+ "y": "runs/C/complete/1",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "Y",
+    "reason": "X's section 7 says 'All work tied to the ARR objective' though the 22 keep-the-lights-on items carry no objective, while Y's 78% traced-to-objective figure (slide 03/L02) is correct; otherwise both get ARR $10.91M, NRR 96.4%, CFR 4/52 = 7.7% right."
+   },
+   "no_invented_numbers": {
+    "winner": "tie",
+    "reason": "Y's 'Activation: 5 more periods' is labelled a projection and X's 'probably volume-driven' inference explanation is labelled unconfirmed; neither invents a target or benchmark."
+   },
+   "speed_with_quality": {
+    "winner": "tie",
+    "reason": "Both pair 4 deploys/week and 38h lead time with the 7.7% change failure rate and 13h review time (Y slides 09/09b, X section 6 and board Delivery), and neither presents speed alone as good news."
+   },
+   "gaps_shown": {
+    "winner": "X",
+    "reason": "X flags the ARR/revenue mismatch, the uniform review and incident times as a likely export fault, the missing week-3 eval and live-test results, and the passed 4 Nov deadline; Y misses those and wrongly lists incident data as missing on slide 10, though it names owners."
+   },
+   "board_cut_usable": {
+    "winner": "X",
+    "reason": "X's board cut leads with the results and the pricing-pilot ask and notes the deadline has passed, while Y's board cut is 'Not rendered: waiting on sign-off' and can't be sent."
+   }
+  },
+  "overall": {
+   "winner": "X",
+   "reason": "X gives a board cut that can be sent today and surfaces the integration gap (11 of 17 lost deals), the 4 largest accounts churning, and suspect export data. Y has the more accurate 78% capacity figure, but it has no usable board cut, misses that the decision deadline has passed, and misstates which data is missing."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 3736,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 37051,
+  "cost_usd": 0.371136,
+  "num_turns": 2,
+  "duration_ms": 33615
+ }
+}

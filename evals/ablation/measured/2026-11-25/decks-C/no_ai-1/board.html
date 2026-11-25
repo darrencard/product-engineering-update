@@ -1,0 +1,11 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Kestrel Labs, 2026-Q3 board cut: waiting on sign-off</title>
+<style>body{font:16px/1.5 system-ui,sans-serif;max-width:44rem;margin:4rem auto;padding:0 1rem;color:#1d1d1f}code{background:#f2f2f2;padding:.1em .3em;border-radius:3px}h1{font-size:1.5rem}</style></head>
+<body>
+<h1>Kestrel Labs 2026-Q3 board cut: waiting on sign-off</h1>
+<p>The board cut has not been rendered yet. It renders only after a named person reviews the change list and gives an explicit yes. This run had no way to ask anyone, so it has no sign-off.</p>
+<p>The content is ready. The 7 slides are drafted in <code>out/deck.json</code> and pass the validator with 0 errors. The leadership update, <code>out/update.html</code>, contains every board slide. The change list and checklist to review are in <code>run/review.md</code>.</p>
+<p>After the sign-off, render it with:</p>
+<p><code>python3 scripts/render.py run/deck.json --out out/board.html --cut B --signed-off-by "&lt;name&gt;"</code></p>
+<p>Before signing off, check one thing on slide 5: revenue and ARR do not reconcile. Q3 revenue is $10.3M, about $40.9M a year at that rate, but billing ARR is $10.9M. R&amp;D as a share of revenue (40.8%) depends on which figure is right.</p>
+</body></html>

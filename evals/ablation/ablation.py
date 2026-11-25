@@ -1,17 +1,18 @@
 #!/usr/bin/env python3
-"""Ablation eval: does the skill make a better update than Claude alone, from the same data?
+"""Ablation eval: does the skill, alone or used by Claude, make a better update than Claude alone?
 
 Usage:
   python3 evals/ablation/ablation.py all --out evals/ablation/results/latest
   python3 evals/ablation/ablation.py generate|judge|check|report --out DIR [options]
 
 Steps (each skips work already on disk, so a stopped run resumes):
-  generate  Condition A: headless `claude -p` with no skill, plugin, MCP server or CLAUDE.md
-            (--safe-mode), given the task prompt and the fixture's files. Condition B: the
-            skill's pipeline, scripts/run.py, on the same files. --runs times per fixture.
-  judge     A blind judge (`claude -p`, no tools) sees the data and two decks as X and Y in a
-            random order, and picks per criterion and overall. Each A/B pair is judged in both
-            orders. Self pairs (a deck against itself) measure the judge's noise.
+  generate  Condition A, Claude alone: headless `claude -p` reading project settings only, in an
+            empty folder, given the task prompt and the fixture's files. Condition B: the skill's
+            pipeline, scripts/run.py, on the same files. Condition C: as A, with the skill
+            installed through --plugin-dir. --runs times per fixture.
+  judge     A blind judge (`claude -p`, no tools) sees the data and two decks as X and Y, and picks
+            per criterion and overall. Each pair in --matchups is judged in both orders. Self and
+            within-condition pairs measure the judge's noise.
   check     Mechanical checks with no judge: figures in each deck that no one-step derivation
             from the data produces, and printed metrics that disagree with truth.py.
   report    Totals, win rates with a 95% Wilson interval, the noise band, the check counts and
@@ -104,22 +105,29 @@ def claude_env() -> dict[str, str]:
     return env
 
 
-def claude(prompt: str, cwd: Path, model: str, tools: str, schema: Json | None = None, stream_to: Path | None = None, budget: float = 10.0) -> Json:
-    """Run one headless, customisation-free Claude Code call. Returns the final result event."""
-    args = [
-        "claude",
-        "-p",
-        "--safe-mode",
-        "--disable-slash-commands",
-        "--strict-mcp-config",
-        "--no-session-persistence",
-        "--model",
-        model,
-        "--tools",
-        tools,
-        "--max-budget-usd",
-        str(budget),
-    ]
+def claude(
+    prompt: str,
+    cwd: Path,
+    model: str,
+    tools: str,
+    schema: Json | None = None,
+    stream_to: Path | None = None,
+    budget: float = 10.0,
+    worker: bool = False,
+    plugin_dir: Path | None = None,
+) -> Json:
+    """Run one headless Claude Code call. Returns the final result event.
+
+    A judge or extraction call runs with --safe-mode and no skills, as in the first measured run.
+    A worker call (conditions A and C) reads project settings only, so no user setting, output
+    style, plugin, hook or CLAUDE.md reaches it; --safe-mode cannot be used there because it also
+    blocks a skill loaded with --plugin-dir. Condition C adds the skill with plugin_dir.
+    """
+    args = ["claude", "-p"]
+    args += ["--setting-sources", "project"] if worker else ["--safe-mode", "--disable-slash-commands"]
+    if plugin_dir:
+        args += ["--plugin-dir", str(plugin_dir)]
+    args += ["--strict-mcp-config", "--no-session-persistence", "--model", model, "--tools", tools, "--max-budget-usd", str(budget)]
     if tools:
         args += ["--permission-mode", "bypassPermissions"]
     if schema:
@@ -173,48 +181,102 @@ def stage_input(fixture: Path, dest: Path) -> None:
     shutil.copytree(fixture / "csv", dest / "csv", dirs_exist_ok=True)
 
 
-def leaks_in(transcript: str) -> list[str]:
-    """Any sign condition A reached the skill: a skill loaded at start, a Skill call, or a tool call that touched its files."""
-    found = []
+SKILL_NAME = "product-engineering-update"
+SKILL_SCRIPTS = re.compile(r"\b(run|collect|compute_metrics|draft|validate|render|review|intake|summary|convert)\.py\b")
+WORKER_TOOLS = "Read,Write,Edit,Bash,Glob,Grep,Skill"
+
+
+def tool_calls(transcript: str) -> list[Json]:
+    calls = []
     for line in transcript.splitlines():
         try:
             e = json.loads(line)
         except json.JSONDecodeError:
             continue
-        if e.get("type") == "system" and e.get("subtype") == "init" and e.get("skills"):
-            found.append(f"skills loaded: {e['skills']}")
         for block in (e.get("message") or {}).get("content") or []:
-            if not isinstance(block, dict) or block.get("type") != "tool_use":
-                continue
-            text = json.dumps(block.get("input"))
-            if block.get("name") == "Skill" or any(w in text for w in ("product-engineering-update", "plugins/cache", "compute_metrics", "run.py")):
-                found.append(f"{block.get('name')}: {text[:200]}")
+            if isinstance(block, dict) and block.get("type") == "tool_use":
+                calls.append(block)
+    return calls
+
+
+def init_skills(transcript: str) -> list[str]:
+    for line in transcript.splitlines():
+        try:
+            e = json.loads(line)
+        except json.JSONDecodeError:
+            continue
+        if e.get("type") == "system" and e.get("subtype") == "init":
+            return list(e.get("skills") or [])
+    return []
+
+
+def skill_use(transcript: str) -> Json:
+    """How a run used the skill: Skill tool calls that loaded it, and Bash calls that ran its scripts."""
+    loaded, scripts = [], []
+    for block in tool_calls(transcript):
+        text = json.dumps(block.get("input"))
+        if block.get("name") == "Skill" and SKILL_NAME in text:
+            loaded.append(text[:200])
+        elif block.get("name") == "Bash" and SKILL_SCRIPTS.search(text) and ("pegskill-" in text or SKILL_NAME in text or "scripts/" in text):
+            scripts.append(SKILL_SCRIPTS.search(text).group(0))  # type: ignore[union-attr]
+    return {"skill_available": any(SKILL_NAME in s for s in init_skills(transcript)), "skill_loaded": len(loaded), "script_calls": scripts}
+
+
+def leaks_in(transcript: str) -> list[str]:
+    """Any sign condition A reached the skill: the skill available at start, or a tool call that loaded it or touched its files."""
+    found = [f"skill available: {s}" for s in init_skills(transcript) if SKILL_NAME in s]
+    for block in tool_calls(transcript):
+        text = json.dumps(block.get("input"))
+        if any(w in text for w in (SKILL_NAME, "plugins/cache", "pegskill-", "compute_metrics")):
+            found.append(f"{block.get('name')}: {text[:200]}")
     return found
 
 
-def gen_a(out: Path, fx: str, i: int, model: str) -> str:
-    run = out / "runs" / "A" / fx / str(i)
+def plugin_copy() -> Path:
+    """The skill as a user installs it (plugin manifest and skills), in a folder outside the repository.
+
+    Outside the repository so Claude cannot read the eval, its fixtures or this report through the path.
+    """
+    dest = Path(tempfile.mkdtemp(prefix="pegskill-"))
+    shutil.copytree(ROOT / ".claude-plugin", dest / ".claude-plugin")
+    shutil.copytree(ROOT / "skills", dest / "skills")
+    return dest
+
+
+def gen_claude(out: Path, cond: str, fx: str, i: int, model: str) -> str:
+    """Condition A (Claude alone) or C (Claude with the skill installed): same prompt, files and settings."""
+    run = out / "runs" / cond / fx / str(i)
     if (run / "meta.json").exists():
-        return f"A {fx} {i}: done before"
+        return f"{cond} {fx} {i}: done before"
     if run.exists():
         shutil.rmtree(run)
-    # A neutral folder outside the repository, so nothing in the path points at the skill.
+    # A neutral folder outside the repository, so nothing in the path points at the skill or the eval.
     work = Path(tempfile.mkdtemp(prefix="update-"))
+    plugin = plugin_copy() if cond == "C" else None
     try:
         stage_input(FIXTURES / fx, work / "input")
         (work / "out").mkdir()
         transcript = work.parent / f"{work.name}.jsonl"
-        final = claude((PROMPTS / "task.md").read_text(encoding="utf-8"), work, model, "Read,Write,Edit,Bash,Glob,Grep", stream_to=transcript, budget=15.0)
+        prompt = (PROMPTS / "task.md").read_text(encoding="utf-8")
+        final = claude(prompt, work, model, WORKER_TOOLS, stream_to=transcript, budget=15.0, worker=True, plugin_dir=plugin)
         run.mkdir(parents=True)
         shutil.copytree(work / "out", run / "out")
         shutil.move(str(transcript), run / "transcript.jsonl")
     finally:
         shutil.rmtree(work, ignore_errors=True)
-    leaks = leaks_in((run / "transcript.jsonl").read_text(encoding="utf-8"))
+        if plugin:
+            shutil.rmtree(plugin, ignore_errors=True)
+    text = (run / "transcript.jsonl").read_text(encoding="utf-8")
     decks = sorted(p.name for p in (run / "out").glob("*") if p.suffix.lower() in {".html", ".htm", ".md"})
-    meta = {"condition": "A", "fixture": fx, "run": i, "model": model, "usage": usage_of(final), "skill_leaks": leaks, "decks": decks}
+    meta: Json = {"condition": cond, "fixture": fx, "run": i, "model": model, "usage": usage_of(final), "decks": decks}
+    if cond == "A":
+        meta["skill_leaks"] = leaks_in(text)
+        note = f" LEAK {meta['skill_leaks']}" if meta["skill_leaks"] else ""
+    else:
+        meta["skill_use"] = skill_use(text)
+        note = f" skill loaded {meta['skill_use']['skill_loaded']}x, {len(meta['skill_use']['script_calls'])} script calls"
     (run / "meta.json").write_text(json.dumps(meta, indent=1), encoding="utf-8")
-    return f"A {fx} {i}: {decks} ${meta['usage']['cost_usd']:.2f}" + (f" LEAK {leaks}" if leaks else "")
+    return f"{cond} {fx} {i}: {decks} ${meta['usage']['cost_usd']:.2f}{note}"
 
 
 def gen_b(out: Path, fx: str, i: int) -> str:
@@ -243,17 +305,18 @@ def gen_b(out: Path, fx: str, i: int) -> str:
     return f"B {fx} {i}: exit {done.returncode} {decks}"
 
 
-def generate(out: Path, fixtures: list[str], runs: int, model: str, jobs: int) -> None:
-    for fx in fixtures:
-        for i in range(1, runs + 1):
-            print(gen_b(out, fx, i), flush=True)
+def generate(out: Path, fixtures: list[str], runs: int, model: str, jobs: int, conds: str = "ABC") -> None:
+    if "B" in conds:
+        for fx in fixtures:
+            for i in range(1, runs + 1):
+                print(gen_b(out, fx, i), flush=True)
     with cf.ThreadPoolExecutor(jobs) as pool:
-        futures = [pool.submit(gen_a, out, fx, i, model) for fx in fixtures for i in range(1, runs + 1)]
+        futures = [pool.submit(gen_claude, out, c, fx, i, model) for i in range(1, runs + 1) for fx in fixtures for c in "CA" if c in conds]
         for f in cf.as_completed(futures):
             try:
                 print(f.result(), flush=True)
             except Exception as e:  # noqa: BLE001  (one failed run should not stop the rest)
-                print(f"A failed: {e}", flush=True)
+                print(f"generate failed: {e}", flush=True)
 
 
 # ---------- deck text ----------
@@ -290,25 +353,40 @@ def runs_of(out: Path, cond: str, fx: str) -> list[Path]:
 # ---------- judge ----------
 
 
-def judge_jobs(out: Path, fixtures: list[str], self_b: int, pairs_only: bool = False) -> list[Json]:
+def parse_matchups(spec: str, runs: int) -> list[tuple[str, int]]:
+    """'CA,CB:2,BA' -> [('CA', runs), ('CB', 2), ('BA', runs)]. The first letter is the condition tested."""
+    out = []
+    for part in (p for p in spec.split(",") if p):
+        m, _, n = part.partition(":")
+        out.append((m, int(n) if n else runs))
+    return out
+
+
+def judge_jobs(out: Path, fixtures: list[str], matchups: list[tuple[str, int]], noise: str, self_n: int, pairs_only: bool = False) -> list[Json]:
+    """Pairs for each matchup in both orders, then the noise runs.
+
+    Noise, for each condition in `noise`: up to self_n runs judged against themselves (a consistent
+    judge says tie), and runs 1 and 2 judged against each other in both orders (how far the verdict
+    moves between runs of one condition and with position). B's decks are the same on every run, so
+    B gets only the self test.
+    """
     jobs = []
     for fx in fixtures:
-        a_runs, b_runs = runs_of(out, "A", fx), runs_of(out, "B", fx)
-        for a, b in zip(a_runs, b_runs):
-            for order in ("AB", "BA"):
-                jobs.append(
-                    {"id": f"pair-{fx}-{a.name}-{order}", "fixture": fx, "kind": "pair", "x": (a if order == "AB" else b), "y": (b if order == "AB" else a)}
-                )
+        for m, n in matchups:
+            first, second = runs_of(out, m[0], fx), runs_of(out, m[1], fx)
+            for p, q in list(zip(first, second))[:n]:
+                for order in ("12", "21"):
+                    x, y = (p, q) if order == "12" else (q, p)
+                    jobs.append({"id": f"pair-{m}-{fx}-{p.name}-{order}", "fixture": fx, "kind": "pair", "matchup": m, "x": x, "y": y})
         if pairs_only:
             continue
-        for a in a_runs:
-            jobs.append({"id": f"self-{fx}-A{a.name}", "fixture": fx, "kind": "self_A", "x": a, "y": a})
-        # Two different A runs: the spread between runs of one condition, the real noise floor.
-        if len(a_runs) >= 2:
-            for order, (x, y) in (("12", (a_runs[0], a_runs[1])), ("21", (a_runs[1], a_runs[0]))):
-                jobs.append({"id": f"within-{fx}-A-{order}", "fixture": fx, "kind": "within_A", "x": x, "y": y})
-        for b in b_runs[:self_b]:
-            jobs.append({"id": f"self-{fx}-B{b.name}", "fixture": fx, "kind": "self_B", "x": b, "y": b})
+        for c in noise:
+            rs = runs_of(out, c, fx)
+            for r in rs[:self_n]:
+                jobs.append({"id": f"self-{fx}-{c}{r.name}", "fixture": fx, "kind": f"self_{c}", "x": r, "y": r})
+            if c != "B" and len(rs) >= 2:
+                for order, (x, y) in (("12", (rs[0], rs[1])), ("21", (rs[1], rs[0]))):
+                    jobs.append({"id": f"within-{fx}-{c}-{order}", "fixture": fx, "kind": f"within_{c}", "x": x, "y": y})
     return jobs
 
 
@@ -334,9 +412,9 @@ def strip(job: Json) -> Json:
     return {**job, "x": str(job["x"].relative_to(job["x"].parents[3])), "y": str(job["y"].relative_to(job["y"].parents[3]))}
 
 
-def judge(out: Path, fixtures: list[str], model: str, jobs: int, self_b: int, pairs_only: bool = False) -> None:
+def judge(out: Path, fixtures: list[str], model: str, jobs: int, matchups: list[tuple[str, int]], noise: str, self_n: int, pairs_only: bool = False) -> None:
     (out / "judgments").mkdir(parents=True, exist_ok=True)
-    todo = judge_jobs(out, fixtures, self_b, pairs_only)
+    todo = judge_jobs(out, fixtures, matchups, noise, self_n, pairs_only)
     with cf.ThreadPoolExecutor(jobs) as pool:
         for f in cf.as_completed([pool.submit(run_judge, out, j, model) for j in todo]):
             try:
@@ -619,7 +697,7 @@ def extract(out: Path, run: Path, fx: str, model: str) -> str:
 
 
 def check(out: Path, fixtures: list[str], model: str, jobs: int) -> None:
-    runs = [(r, fx) for fx in fixtures for cond in ("A", "B") for r in runs_of(out, cond, fx)]
+    runs = [(r, fx) for fx in fixtures for cond in "ABC" for r in runs_of(out, cond, fx)]
     with cf.ThreadPoolExecutor(jobs) as pool:
         for f in cf.as_completed([pool.submit(extract, out, r, fx, model) for r, fx in runs]):
             try:
@@ -669,34 +747,38 @@ def condition_of(path: str) -> str:
     return path.split("/")[1]
 
 
-def report(out: Path) -> Json:
-    js = [json.loads(p.read_text(encoding="utf-8")) for p in sorted((out / "judgments").glob("*.json"))] if (out / "judgments").exists() else []
-    js = [j for j in js if "verdict" in j]
-    summary: Json = {"judgments": len(js)}
+def matchup_of(j: Json) -> str:
+    # The first measured run judged only A against B and stored no matchup.
+    return j.get("matchup") or "BA"
+
+
+def tally_pairs(pairs: list[Json], m: str) -> Json:
+    """Win counts for one matchup. m[0] is the condition tested, m[1] the one it is tested against."""
+    t, base = m[0], m[1]
 
     def winner_cond(j: Json, w: str) -> str:
         return "tie" if w == "tie" else condition_of(j["x"] if w == "X" else j["y"])
 
-    pairs = [j for j in js if j["kind"] == "pair"]
+    res: Json = {"tested": t, "against": base, "per_judgment": {}}
     for scope in ["overall", *CRITERIA]:
-        counts = {"A": 0, "B": 0, "tie": 0}
+        counts = {t: 0, base: 0, "tie": 0}
         for j in pairs:
             w = j["verdict"]["overall"]["winner"] if scope == "overall" else j["verdict"]["criteria"][scope]["winner"]
             counts[winner_cond(j, w)] += 1
         n = sum(counts.values())
-        decisive = counts["A"] + counts["B"]
-        summary.setdefault("per_judgment", {})[scope] = {
+        decisive = counts[t] + counts[base]
+        res["per_judgment"][scope] = {
             **counts,
             "n": n,
-            "b_share_with_ties_half": (counts["B"] + 0.5 * counts["tie"]) / n if n else None,
-            "b_share_of_decisive": counts["B"] / decisive if decisive else None,
-            "b_share_of_decisive_ci95": wilson(counts["B"], decisive) if decisive else None,
+            "tested_share_with_ties_half": (counts[t] + 0.5 * counts["tie"]) / n if n else None,
+            "tested_share_of_decisive": counts[t] / decisive if decisive else None,
+            "tested_share_of_decisive_ci95": wilson(counts[t], decisive) if decisive else None,
         }
     # A pair counts once: a win only if both orders agree, otherwise a split.
     by_pair: dict[str, list[Json]] = {}
     for j in pairs:
         by_pair.setdefault(j["id"].rsplit("-", 1)[0], []).append(j)
-    pc = {"A": 0, "B": 0, "split": 0}
+    pc = {t: 0, base: 0, "split": 0}
     position = {"X": 0, "Y": 0, "tie": 0}
     for group in by_pair.values():
         ws = {winner_cond(j, j["verdict"]["overall"]["winner"]) for j in group}
@@ -704,33 +786,42 @@ def report(out: Path) -> Json:
             position[j["verdict"]["overall"]["winner"]] += 1
         pc[next(iter(ws)) if len(ws) == 1 and len(group) == 2 and "tie" not in ws else "split"] += 1
     n_pairs = sum(pc.values())
-    summary["per_pair"] = {**pc, "n": n_pairs, "b_wins_ci95": wilson(pc["B"], n_pairs) if n_pairs else None}
-    summary["position"] = position
-    noise: Json = {}
-    within = [j for j in js if j["kind"] == "within_A"]
-    noise["within_A"] = {
-        "n": len(within),
-        "overall_not_tie": sum(j["verdict"]["overall"]["winner"] != "tie" for j in within),
-        # Both orders of one pair should name the same run; a flip means the verdict follows position.
-        "order_flips": sum(
-            1
-            for fx in {j["fixture"] for j in within}
-            for pair in [[j for j in within if j["fixture"] == fx]]
-            if len(pair) == 2
-            and len({(j["x"] if j["verdict"]["overall"]["winner"] == "X" else j["y"]) for j in pair if j["verdict"]["overall"]["winner"] != "tie"}) > 1
-        ),
-    }
-    for kind in ("self_A", "self_B"):
-        sel = [j for j in js if j["kind"] == kind]
-        non_tie = sum(j["verdict"]["overall"]["winner"] != "tie" for j in sel)
-        crit_non_tie = sum(j["verdict"]["criteria"][c]["winner"] != "tie" for j in sel for c in CRITERIA)
-        noise[kind] = {"n": len(sel), "overall_not_tie": non_tie, "criteria_not_tie": crit_non_tie, "criteria_n": len(sel) * len(CRITERIA)}
-    summary["noise"] = noise
+    res["per_pair"] = {**pc, "n": n_pairs, "tested_wins_ci95": wilson(pc[t], n_pairs) if n_pairs else None}
+    res["position"] = position
     per_fx: Json = {}
     for j in pairs:
-        d = per_fx.setdefault(j["fixture"], {"A": 0, "B": 0, "tie": 0})
+        d = per_fx.setdefault(j["fixture"], {t: 0, base: 0, "tie": 0})
         d[winner_cond(j, j["verdict"]["overall"]["winner"])] += 1
-    summary["per_fixture"] = per_fx
+    res["per_fixture"] = per_fx
+    return res
+
+
+def report(out: Path) -> Json:
+    js = [json.loads(p.read_text(encoding="utf-8")) for p in sorted((out / "judgments").glob("*.json"))] if (out / "judgments").exists() else []
+    js = [j for j in js if "verdict" in j]
+    summary: Json = {"judgments": len(js)}
+    pairs = [j for j in js if j["kind"] == "pair"]
+    summary["matchups"] = {m: tally_pairs([j for j in pairs if matchup_of(j) == m], m) for m in sorted({matchup_of(j) for j in pairs})}
+    noise: Json = {}
+    for kind in sorted({j["kind"] for j in js if j["kind"] != "pair"}):
+        sel = [j for j in js if j["kind"] == kind]
+        d: Json = {
+            "n": len(sel),
+            "overall_not_tie": sum(j["verdict"]["overall"]["winner"] != "tie" for j in sel),
+            "criteria_not_tie": sum(j["verdict"]["criteria"][c]["winner"] != "tie" for j in sel for c in CRITERIA),
+            "criteria_n": len(sel) * len(CRITERIA),
+        }
+        if kind.startswith("within_"):
+            # Both orders of one pair should name the same run; a flip means the verdict follows position.
+            d["order_flips"] = sum(
+                1
+                for fx in {j["fixture"] for j in sel}
+                for pair in [[j for j in sel if j["fixture"] == fx]]
+                if len(pair) == 2
+                and len({(j["x"] if j["verdict"]["overall"]["winner"] == "X" else j["y"]) for j in pair if j["verdict"]["overall"]["winner"] != "tie"}) > 1
+            )
+        noise[kind] = d
+    summary["noise"] = noise
 
     checks: Json = {}
     for p in sorted((out / "runs").glob("*/*/*/check.json")):
@@ -762,8 +853,9 @@ def report(out: Path) -> Json:
             if k != "calls":
                 d[k] += u.get(k) or 0
 
-    for p in sorted((out / "runs" / "A").glob("*/*/meta.json")):
-        tally("generate_A", json.loads(p.read_text(encoding="utf-8"))["usage"])
+    for cond in "AC":
+        for p in sorted((out / "runs" / cond).glob("*/*/meta.json")):
+            tally(f"generate_{cond}", json.loads(p.read_text(encoding="utf-8"))["usage"])
     for j in js:
         tally("judge", j["usage"])
     for p in sorted((out / "runs").glob("*/*/*/extract.json")):
@@ -772,9 +864,21 @@ def report(out: Path) -> Json:
             tally("extract", e["usage"])
     summary["cost"] = cost
     leaks = [
-        str(p.parent.relative_to(out)) for p in sorted((out / "runs" / "A").glob("*/*/meta.json")) if json.loads(p.read_text(encoding="utf-8"))["skill_leaks"]
+        str(p.parent.relative_to(out))
+        for p in sorted((out / "runs" / "A").glob("*/*/meta.json"))
+        if json.loads(p.read_text(encoding="utf-8")).get("skill_leaks")
     ]
     summary["skill_leaks_in_A"] = leaks
+    use: Json = {}
+    for p in sorted((out / "runs" / "C").glob("*/*/meta.json")):
+        u = json.loads(p.read_text(encoding="utf-8"))["skill_use"]
+        use[str(p.parent.relative_to(out))] = {"skill_loaded": u["skill_loaded"], "script_calls": len(u["script_calls"])}
+    summary["skill_use_in_C"] = {
+        "runs": len(use),
+        "loaded_the_skill": sum(v["skill_loaded"] > 0 for v in use.values()),
+        "ran_its_scripts": sum(v["script_calls"] > 0 for v in use.values()),
+        "per_run": use,
+    }
     hashes: Json = {}
     for p in sorted((out / "runs" / "B").glob("*/*/meta.json")):
         m = json.loads(p.read_text(encoding="utf-8"))
@@ -791,11 +895,14 @@ def main() -> int:
     ap.add_argument("--out", type=Path, default=HERE / "results" / "latest")
     ap.add_argument("--fixtures", default=",".join(sorted(p.name for p in FIXTURES.iterdir() if (p / "intake.json").exists())))
     ap.add_argument("--runs", type=int, default=3)
-    ap.add_argument("--model", default="claude-opus-5-5", help="the model for condition A")
+    ap.add_argument("--model", default="claude-opus-5-5", help="the model for conditions A and C")
+    ap.add_argument("--conditions", default="ABC", help="which conditions to generate: A Claude alone, B the pipeline, C Claude with the skill")
+    ap.add_argument("--matchups", default="CA,CB,BA", help="pairs to judge, the tested condition first; CB:2 judges 2 runs per fixture")
+    ap.add_argument("--noise", default="AC", help="conditions that get self and within-condition noise runs")
     ap.add_argument("--judge-model", default="claude-opus-5-5")
     ap.add_argument("--jobs", type=int, default=3)
-    ap.add_argument("--self-b", type=int, default=1, help="how many B runs per fixture to judge against themselves")
-    ap.add_argument("--pairs-only", action="store_true", help="judge only the A and B pairs, with no noise runs")
+    ap.add_argument("--self-n", type=int, default=1, help="how many runs per fixture and noise condition to judge against themselves")
+    ap.add_argument("--pairs-only", action="store_true", help="judge only the pairs, with no noise runs")
     ap.add_argument("--b-drop-sections", default="", help="counterfactual only: element ids to drop from B decks before judging, comma separated")
     args = ap.parse_args()
     fixtures = [f for f in args.fixtures.split(",") if f]
@@ -803,9 +910,9 @@ def main() -> int:
     B_DROP = frozenset(x for x in args.b_drop_sections.split(",") if x)
     args.out.mkdir(parents=True, exist_ok=True)
     if args.step in ("generate", "all"):
-        generate(args.out, fixtures, args.runs, args.model, args.jobs)
+        generate(args.out, fixtures, args.runs, args.model, args.jobs, args.conditions)
     if args.step in ("judge", "all"):
-        judge(args.out, fixtures, args.judge_model, args.jobs, args.self_b, args.pairs_only)
+        judge(args.out, fixtures, args.judge_model, args.jobs, parse_matchups(args.matchups, args.runs), args.noise, args.self_n, args.pairs_only)
     if args.step in ("check", "all"):
         check(args.out, fixtures, args.judge_model, args.jobs)
     if args.step in ("report", "all"):

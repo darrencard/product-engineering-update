@@ -1,0 +1,46 @@
+{
+ "id": "pair-CA-conflicting-3-12",
+ "fixture": "conflicting",
+ "kind": "pair",
+ "matchup": "CA",
+ "x": "runs/C/conflicting/3",
+ "y": "runs/A/conflicting/3",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "Y",
+    "reason": "The core figures in both updates check out: CFR 5.1%\u21927.7%, NRR 96.4%, GRR 89.3%, expansion $741K and Stripe ARR $10.9M. X calls the eval's cost_per_task $0.33 'cost per successful task', and its slide 5 shows R&D at 40.8% of revenue using a revenue line Y rightly flags as suspect, since Q3 revenue of $10.3M is about equal to full ARR. Y also notes that lead time is 38h measured to merge but 51h measured to deploy."
+   },
+   "no_invented_numbers": {
+    "winner": "tie",
+    "reason": "X's only forward-looking number, 'Activation: 5 more periods', is labelled as a projection. Y's causal guesses, such as inference volume driving the $132K overrun, are marked as unverified. Every other figure in both updates comes from the data."
+   },
+   "speed_with_quality": {
+    "winner": "X",
+    "reason": "X's slide 09 and board slide 09b both put deploys rising from 3 to 4 a week right next to CFR rising from 5.1% to 7.7%. Y's board cut lists 'We deployed 4 times a week, up from 3' under 'What went well', with no quality figure in that bullet."
+   },
+   "gaps_shown": {
+    "winner": "Y",
+    "reason": "Y has a conflicts table with owners covering the North Star (23,100 vs 21,400), ARR ($10.1M vs $10.91M), the suspect revenue line, the task-success baseline, item counts standing in for effort, the undated CRM export and the overdue 4 Nov deadline. Integrations are listed as 'Unassigned'. X flags only the North Star and ARR conflicts and the missing Platform & security data."
+   },
+   "board_cut_usable": {
+    "winner": "Y",
+    "reason": "X's board cut is 'Not rendered: awaiting sign-off', so there is nothing to send. Y's board cut opens with ARR $10.1M against an $11.0M plan and the pricing-pilot ask, and it is ready to send as is."
+   }
+  },
+  "overall": {
+   "winner": "Y",
+   "reason": "Y gives a board-ready cut and surfaces more of the real gaps, including the suspect revenue line, the overdue decision and the unowned integrations problem, while keeping its figures correct. X is accurate and pairs speed with quality more strictly, but it has no board cut to send and misses several data problems."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 2951,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 34472,
+  "cost_usd": 0.33528260000000004,
+  "num_turns": 2,
+  "duration_ms": 27442
+ }
+}

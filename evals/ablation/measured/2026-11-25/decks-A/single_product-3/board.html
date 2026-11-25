@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kestrel Labs: Board summary, Q3 2026</title>
+<style>
+:root{
+  color-scheme:light;
+  --page:#f9f9f7; --surface:#fcfcfb; --ink:#0b0b0b; --ink-2:#52514e; --muted:#898781;
+  --grid:#e1e0d9; --axis:#c3c2b7; --border:rgba(11,11,11,.10);
+  --series-1:#2a78d6; --series-2:#eb6834;
+  --good:#0ca30c; --good-text:#006300; --warning:#fab219; --critical:#d03b3b; --critical-text:#b02a2a;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    color-scheme:dark;
+    --page:#0d0d0d; --surface:#1a1a19; --ink:#ffffff; --ink-2:#c3c2b7; --muted:#898781;
+    --grid:#2c2c2a; --axis:#383835; --border:rgba(255,255,255,.10);
+    --series-1:#3987e5; --series-2:#d95926;
+    --good-text:#0ca30c; --critical-text:#e66767;
+  }
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--ink);font:15px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:980px;margin:0 auto;padding:32px 24px 64px}
+header{border-bottom:1px solid var(--grid);padding-bottom:16px;margin-bottom:24px}
+h1{font-size:26px;margin:0 0 4px}
+h2{font-size:19px;margin:36px 0 10px;padding-top:8px;border-top:1px solid var(--grid)}
+h3{font-size:15px;margin:20px 0 6px}
+p{margin:6px 0 10px}
+.meta{color:var(--ink-2);font-size:13px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px 18px;margin:12px 0}
+.decision{border-left:4px solid var(--series-1)}
+.flag{border-left:4px solid var(--warning)}
+ul{margin:6px 0 10px;padding-left:20px} li{margin:4px 0}
+table{width:100%;border-collapse:collapse;font-size:14px;margin:8px 0 4px}
+th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--grid);vertical-align:top}
+th{color:var(--ink-2);font-weight:600;font-size:12.5px}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:12px 0}
+.kpi{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 16px}
+.kpi .label{font-size:12.5px;color:var(--ink-2)}
+.kpi .value{font-size:30px;font-weight:650;line-height:1.15;margin:4px 0}
+.kpi .sub{font-size:12.5px;color:var(--ink-2)}
+.st{font-weight:600;white-space:nowrap}
+.st.ok{color:var(--good-text)} .st.miss{color:var(--critical-text)} .st.na{color:var(--ink-2)}
+.src{font-size:12px;color:var(--muted)}
+/* bar chart */
+.bars{margin:10px 0 4px}
+.bar-row{display:grid;grid-template-columns:210px 1fr 150px;align-items:center;gap:10px;height:30px;margin-bottom:2px}
+.bar-row .lbl{font-size:13.5px}
+.bar-row .val{font-size:13px;color:var(--ink-2);font-variant-numeric:tabular-nums}
+.track{position:relative;height:100%;border-left:1px solid var(--axis)}
+.fill{position:absolute;left:0;top:7px;height:16px;background:var(--series-1);border-radius:0 4px 4px 0}
+.fill.alt{background:var(--series-2)}
+.plan{position:absolute;top:2px;width:2px;height:26px;background:var(--ink)}
+.bar-row:hover .fill{filter:brightness(1.12)}
+.legend{display:flex;gap:16px;font-size:12.5px;color:var(--ink-2);margin:4px 0}
+.sw{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-2px;margin-right:5px;background:var(--series-1)}
+.sw.alt{background:var(--series-2)}
+.sw.tick{width:2px;height:14px;border-radius:0;background:var(--ink)}
+#tip{position:fixed;pointer-events:none;background:var(--surface);color:var(--ink);border:1px solid var(--border);border-radius:6px;padding:6px 9px;font-size:12.5px;box-shadow:0 2px 8px rgba(0,0,0,.15);display:none;z-index:9}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <h1>Kestrel Labs: Product &amp; Engineering, Q3 2026</h1>
+  <div class="meta">Board summary · 1 Jul – 30 Sep 2026 · Data as of 30 Sep 2026 · From the CPTO</div>
+</header>
+
+<h2 style="border-top:0;margin-top:0">Decision for the board</h2>
+<div class="card decision">
+  <p><strong>Approve a per-load pricing pilot.</strong></p>
+  <p><strong>Recommendation:</strong> run the pilot with 10 customers.<br>
+     <strong>Alternative:</strong> wait a quarter.<br>
+     <strong>Deadline:</strong> 4 Nov 2026</p>
+  <p><strong>Why:</strong> per-load pricing is core to our strategy for mid-market brokers. We lost 6 of 17 deals on price.</p>
+  <p class="src">The 4 Nov deadline has passed. These files don't say whether the decision was made, so confirm its status before the meeting.</p>
+</div>
+
+<h2>Q3 results</h2>
+<div class="kpis">
+  <div class="kpi"><div class="label">North star: loads cleared per week, no manual touch</div><div class="value">23,100</div><div class="sub">Target 22K · up 26% from Q2 · <span class="st ok">✓ Met</span></div></div>
+  <div class="kpi"><div class="label">Activation (first automated load within 14 days)</div><div class="value">41%</div><div class="sub">Target 50% · Q2 39% · <span class="st miss">✗ Missed</span></div></div>
+  <div class="kpi"><div class="label">Revenue</div><div class="value">$10.3M</div><div class="sub">Plan $10.0M · <span class="st ok">✓ 3% above plan</span></div></div>
+  <div class="kpi"><div class="label">Agent task success (evals)</div><div class="value">86%</div><div class="sub">Up from 82% · goal 90%</div></div>
+</div>
+
+<h2>What the board should know</h2>
+<ul>
+  <li><strong>The strategy is working.</strong> Every deal we won cited the same reason: the agent clears exceptions. Usage beat target, and we shipped 6 of 7 commitments.</li>
+  <li><strong>Activation is the main gap.</strong> It's 9 points short. Self-serve carrier onboarding slipped. All 4 accounts that churned ($1.1M ARR) had raised an onboarding ticket in Q3. Next quarter we'll test Guided activation, aiming to lift activation from 41% to 50%. If it shows no lift in a 2-week test, we'll stop it.</li>
+  <li><strong>We're losing deals to missing TMS integrations.</strong> That caused 11 of our 17 losses, and integration errors make up 55% of support tickets. None of our current bets targets integration.</li>
+  <li><strong>Spend:</strong> R&amp;D is on plan at $4.2M (41% of revenue). Inference spend was 28% over plan at $612K. That's because loads grew 26%. Cost per task fell 20%, so unit economics improved.</li>
+  <li><strong>Engineering:</strong> We ship more often and faster, but the change failure rate rose to 7.7% (target under 5%). The VP Engineering owns bringing it back under target in Q4.</li>
+</ul>
+
+<h2>Bets for next quarter</h2>
+<table>
+  <thead><tr><th>Bet</th><th>Expected result</th><th>Appetite</th><th>Stop rule</th></tr></thead>
+  <tbody>
+    <tr><td>Multi-stop reroutes (Promise, high confidence)</td><td>Task success from 86% to 90%</td><td>6 weeks, 5 engineers</td><td>Eval gain under 2 points by week 3</td></tr>
+    <tr><td>Guided activation (Experiment, medium confidence)</td><td>Activation from 41% to 50%</td><td>4 weeks, 3 engineers</td><td>No lift in a 2-week live test</td></tr>
+  </tbody>
+</table>
+
+<h2>Top risk</h2>
+<p><strong>Most of our inference spend goes through one model provider.</strong> Likelihood is medium and impact is high. The Platform lead will mitigate it by building a routing layer across 2 providers by Dec 2026.</p>
+
+<h2>Focus</h2>
+<p>We stopped work on a carrier marketplace this quarter because it didn't serve the strategy. We're still not building on-premise.</p>
+
+<p class="src" style="margin-top:28px">We can't state company ARR against the $50M objective from this quarter's data. The billing export covers only a subset of accounts. The full leadership update has the detail and the data notes.</p>
+</main>
+</body>
+</html>

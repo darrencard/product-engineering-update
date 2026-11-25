@@ -1,0 +1,45 @@
+{
+ "id": "within-conflict_resolved-C-12",
+ "fixture": "conflict_resolved",
+ "kind": "within_C",
+ "x": "runs/C/conflict_resolved/1",
+ "y": "runs/C/conflict_resolved/2",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "tie",
+    "reason": "Both carry identical, correct figures: ARR $10.4M to $10.9M, net revenue retention 96.4%, change failure rate 5.1% to 7.7% (4 of 52 releases) and Platform at 43% of capacity all recompute from the data."
+   },
+   "no_invented_numbers": {
+    "winner": "tie",
+    "reason": "Both use only figures from the data, and both label slide 11's 'Activation: 5 more periods' as a projection rather than a result."
+   },
+   "speed_with_quality": {
+    "winner": "tie",
+    "reason": "Both pair deploys rising from 3 to 4 a week with change failure rate rising from 5.1% to 7.7% on slides 9 and 9b; X's 9b title adds 'above the 5% limit', a marginal difference."
+   },
+   "gaps_shown": {
+    "winner": "tie",
+    "reason": "Both show the same gaps: Platform & security on slide 10 and AI gross margin on slide 12, both owned by the VP Engineering and due in Q4, plus the revenue-versus-ARR check on slide 5. Both leave the ARR ($10.9M vs $10.1M) and loads (23.1K vs 21.4K) conflicts in the ledger only."
+   },
+   "board_cut_usable": {
+    "winner": "X",
+    "reason": "X produces a board cut of 8 slides whose slide 1 title leads with loads cleared and ARR, then the pricing-pilot decision. It does carry a reviewer checklist that must be trimmed before sending. Y produced no board cut at all."
+   }
+  },
+  "overall": {
+   "winner": "X",
+   "reason": "The slide figures, gaps and speed-quality pairings are the same in both updates, so they differ only in how they present to the board. X wins because it has a board cut and its opening slide states the per-load pricing decision; Y has no board cut."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 2783,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 35272,
+  "cost_usd": 0.3383226,
+  "num_turns": 2,
+  "duration_ms": 25218
+ }
+}

@@ -1,0 +1,46 @@
+{
+ "id": "pair-CB-no_ai-2-21",
+ "fixture": "no_ai",
+ "kind": "pair",
+ "matchup": "CB",
+ "x": "runs/B/no_ai/2",
+ "y": "runs/C/no_ai/2",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "tie",
+    "reason": "Both carry identical figures that recompute correctly, e.g. ARR $10.9M, NRR 96.4%, change failure 4/52 = 7.7% on slide 09, R&D share 40.8% on slide 05."
+   },
+   "no_invented_numbers": {
+    "winner": "tie",
+    "reason": "Both use only intake targets and ranges, mark benchmarks 'None external', and label the slide 11 'Activation: 5 more periods' projection as a rough guide."
+   },
+   "speed_with_quality": {
+    "winner": "tie",
+    "reason": "Both pair deploys per week 3 to 4 with change failure 5.1% to 7.7% on slides 09 and 09b; Y's 'but' headlines are sharper but X never presents speed alone as good."
+   },
+   "gaps_shown": {
+    "winner": "tie",
+    "reason": "Both flag the revenue $10.3M vs ARR $10.9M mismatch on slide 05 and the missing Platform & security data on slide 10 with the VP Engineering as owner, due Q4."
+   },
+   "board_cut_usable": {
+    "winner": "X",
+    "reason": "X supplies a 7-slide board cut leading with loads cleared 23.1K vs 22K and the per-load pricing pilot ask (though it retains the 'Check before the board sees this' note on slide 05), while Y produced no board cut."
+   }
+  },
+  "overall": {
+   "winner": "X",
+   "reason": "The two updates match on figures, sourcing and how they flag gaps, so the main difference is the board cut. X delivers a short board cut that leads with the outcome and the pricing-pilot ask, while Y has none."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 2391,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 34703,
+  "cost_usd": 0.32593059999999996,
+  "num_turns": 2,
+  "duration_ms": 21459
+ }
+}

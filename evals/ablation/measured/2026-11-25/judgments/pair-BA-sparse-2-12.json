@@ -1,0 +1,46 @@
+{
+ "id": "pair-BA-sparse-2-12",
+ "fixture": "sparse",
+ "kind": "pair",
+ "matchup": "BA",
+ "x": "runs/B/sparse/2",
+ "y": "runs/A/sparse/2",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "Y",
+    "reason": "Y's 100 issues, 31/22/21/18/8 split, 53\u219237\u219210 monthly counts and 78 objective-tagged issues all recompute correctly, while X says '0 of 19 slides show data' yet lists the real split in ledger L01, and its sample gets $10.3M\u00d74 wrong as $40.9M."
+   },
+   "no_invented_numbers": {
+    "winner": "Y",
+    "reason": "X fills every slide with made-up figures under the real company's name (ARR $10.9M, 7.7% change failure, 86% eval pass rate), calls Kestrel Labs 'a made-up company' and adds an unsupported 'Signed off by the CEO', while Y states only figures it can derive from the Linear export."
+   },
+   "speed_with_quality": {
+    "winner": "tie",
+    "reason": "Y's throughput figures (100 issues, 53\u219210) have no quality figure beside them, though Y frames the trend as a problem and says plainly that quality data is missing; X reports no real speed figures, so it meets the criterion only because it has nothing to pair."
+   },
+   "gaps_shown": {
+    "winner": "Y",
+    "reason": "Y names specific gaps (Done-only export, every estimate equal to 1, the 'Grow ARR to $50M' objective missing from the intake, no results for eval v14, six issues closed on Jul 1) with the VP Engineering as owner, while X repeats the same 'data is missing' text on all 19 slides and ignores the tracker data it had."
+   },
+   "board_cut_usable": {
+    "winner": "Y",
+    "reason": "Y's one-page board cut leads with the Dispatch Agent focus and the 53\u219237\u219210 decline and states that no decisions are requested, while X's eight-slide board cut is all 'not reported' plus sample asks such as the per-load pricing pilot."
+   }
+  },
+  "overall": {
+   "winner": "Y",
+   "reason": "Y turns the only connected source, the Linear export, into correct and plainly worded findings, and names each gap and its owner. X reports nothing from the data it had, and it fills its board slides with made-up numbers under the real company's name and an unsupported CEO sign-off, which could mislead a board."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 2864,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 21734,
+  "cost_usd": 0.2316386,
+  "num_turns": 2,
+  "duration_ms": 25236
+ }
+}

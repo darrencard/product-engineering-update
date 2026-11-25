@@ -1,0 +1,46 @@
+{
+ "id": "pair-CA-no_ai-1-21",
+ "fixture": "no_ai",
+ "kind": "pair",
+ "matchup": "CA",
+ "x": "runs/A/no_ai/1",
+ "y": "runs/C/no_ai/1",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "tie",
+    "reason": "Both get the core figures right: ARR $10.38M to $10.91M, NRR 96.4%, change failure rate 7.7% (4/52), effort mix 31/18/8/21/22. X says churn 'cancelled out most of the expansion', but the $1.11M churned is more than the $741K of expansion. Y says the 7 requests were 'linked to 3 issues', but KES-388 has no link, and its '16 of 17 slides show data' does not match its own list of 3 slides without data."
+   },
+   "no_invented_numbers": {
+    "winner": "tie",
+    "reason": "Neither invents a material figure. Y's 'Activation: 5 more periods' is labelled as a projection. X's claim that the routing layer would give 'pricing leverage' on the 28% inference overrun is an unlabelled guess, but a small one."
+   },
+   "speed_with_quality": {
+    "winner": "Y",
+    "reason": "Y's slides 01 and 09 always put deploys and lead time next to the 7.7% change failure rate. X's board cut lists '4 deploys a week\u2026 38h lead time' under 'What is working', away from the change failure rate figure."
+   },
+   "gaps_shown": {
+    "winner": "X",
+    "reason": "X names the missing data with an owner (VP Engineering, Q4): agent task success, cost per successful task, the guided-activation live-test result, and the unlinked KES-388 request. It also flags the $10.3M revenue vs $10.91M ARR mismatch. Y flags the revenue/ARR mismatch and the missing Platform & security slide, but never says that task success for the Promise bet is unmeasured."
+   },
+   "board_cut_usable": {
+    "winner": "X",
+    "reason": "X's board cut is short, leads with the 23,100 north star, ARR and NRR, and ends on the pricing-pilot decision. Y produced no board cut, only a 'waiting on sign-off' notice."
+   }
+  },
+  "overall": {
+   "winner": "X",
+   "reason": "X delivers a board cut that could be sent, and it shows more of the important gaps (task success, cost per task, the live-test result), each with an owner. Y pairs speed and quality more strictly but has no board cut to send."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 3091,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 31985,
+  "cost_usd": 0.3181866,
+  "num_turns": 2,
+  "duration_ms": 26752
+ }
+}

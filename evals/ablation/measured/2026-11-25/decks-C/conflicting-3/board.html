@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Kestrel Labs board cut, 2026-Q3: awaiting sign-off</title>
+<style>body{font:16px/1.5 system-ui,sans-serif;max-width:44rem;margin:4rem auto;padding:0 1.5rem;color:#222}h1{font-size:1.4rem}.tag{display:inline-block;background:#fde8c8;color:#7a4a00;padding:.2rem .6rem;border-radius:4px;font-weight:600}code{background:#f2f2f2;padding:0 .3rem}</style></head>
+<body>
+<p class="tag">Not rendered: awaiting sign-off</p>
+<h1>Kestrel Labs product &amp; engineering update, 2026-Q3: board cut</h1>
+<p>The board cut is not rendered yet. It needs an explicit yes from a named person, given when it is reviewed. This was a non-interactive run, so nobody could give that yes.</p>
+<p>The 8-slide board cut is built and passes validation (0 errors). To produce it, a named person reviews <code>work/run/review.md</code>, then runs:</p>
+<p><code>python3 scripts/render.py work/run/deck.json --out out/board.html --cut B --signed-off-by "&lt;name&gt;"</code></p>
+<p>Open items to settle before sign-off:</p>
+<ul>
+<li>ARR: Stripe says $10.9M and the finance close says $10.1M. Which system is the record?</li>
+<li>Loads cleared per week (the North Star): PostHog says 23,100 and the warehouse says 21,400. Which system is the record?</li>
+</ul>
+<p>The full leadership update is in <code>update.html</code> next to this file.</p>
+</body></html>

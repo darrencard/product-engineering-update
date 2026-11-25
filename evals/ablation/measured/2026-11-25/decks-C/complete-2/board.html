@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Kestrel Labs 2026-Q3 board cut: awaiting sign-off</title>
+<style>body{font:16px/1.5 system-ui,sans-serif;max-width:46rem;margin:3rem auto;padding:0 1rem;color:#222}h1{font-size:1.4rem}code{background:#f2f2f2;padding:.1rem .3rem}li{margin:.3rem 0}.note{border-left:4px solid #c58a00;padding:.5rem 1rem;background:#fff8e6}</style></head>
+<body>
+<h1>Kestrel Labs product &amp; engineering update, 2026-Q3: board cut</h1>
+<p class="note"><strong>Not rendered yet. This is a holding page, not the board deck.</strong> The board cut renders only after a named person has reviewed it and given an explicit yes. This run was non-interactive, so nobody could give that sign-off.</p>
+<p>The board cut is drawn from the same deck as the leadership update (<code>update.html</code>). The figures, titles and status words are identical. Once it is signed off it will hold these 8 slides:</p>
+<ol>
+<li>Loads cleared with no manual touch reached 23.1K a week, past the 22K target. Activation reached 41%, short of its 50% target.</li>
+<li>Basic upkeep took 22% of the team's time against a plan of 15%.</li>
+<li>Releases to customers rose from 3 to 4 a week, but the share that caused a problem in production rose from 5.1% to 7.7%.</li>
+<li>Loads cleared with no manual touch reached 23.1K a week against a 22K target. Activation, at 41% against 50%, is short.</li>
+<li>The share of quality tests the AI feature passes rose from 82% to 86%. The cost of each task the AI feature completes fell from $0.41 to $0.33.</li>
+<li>One risk: one model provider carries most inference spend.</li>
+<li>We are making 2 bets, each with a set budget of time and people and a stated point at which we stop.</li>
+<li>One decision for you today: approve a per-load pricing pilot.</li>
+</ol>
+<p>Fix this before sign-off: Q3 revenue ($10.3M, finance close) and ARR ($10.9M, Stripe) do not reconcile. Slide 5 already flags this.</p>
+<p>To render, run this from the skill root once a named person has said yes:<br>
+<code>python3 scripts/render.py run/deck.json --out out/board.html --cut B --signed-off-by "&lt;name&gt;"</code></p>
+</body></html>

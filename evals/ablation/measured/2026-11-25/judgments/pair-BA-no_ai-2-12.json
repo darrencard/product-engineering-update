@@ -1,0 +1,46 @@
+{
+ "id": "pair-BA-no_ai-2-12",
+ "fixture": "no_ai",
+ "kind": "pair",
+ "matchup": "BA",
+ "x": "runs/B/no_ai/2",
+ "y": "runs/A/no_ai/2",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "Y",
+    "reason": "Both have correct core figures (ARR $10.91M, NRR 96.4%, CFR 7.7%), but X says '16 of 17 slides show data' while listing 3 slides with no data, and shows R&D at 40.8% of revenue even though it doubts the revenue line; Y's extra figures (win rate 56%, 4/52 failed deploys, total R&D $4,200K vs $4,245K, 53/37/10 monthly items) all check out."
+   },
+   "no_invented_numbers": {
+    "winner": "tie",
+    "reason": "X's board cut claims 'Signed off by the CEO', which nothing in the data supports; Y invents an issue date of '24 Nov 2026' and states 'Onboarding is where we lose customers' as a cause from undated tickets, so each has one or two unsupported claims of similar weight."
+   },
+   "speed_with_quality": {
+    "winner": "Y",
+    "reason": "Both pair deploys per week (3 to 4) with change failure rate (5.1% to 7.7%), but Y also shows rework (11.7% to 15%), review time and incidents next to the speed gains, and says plainly that quality slipped; X keeps rework (L07) in the ledger and never shows it."
+   },
+   "gaps_shown": {
+    "winner": "Y",
+    "reason": "Y's appendix lists the missing agent task success, missing cost per task, unlinked PRs vs deploys, undated CRM and support exports, and the revenue vs ARR conflict, all owned by the VP Engineering for Q4; X flags revenue vs ARR without an owner and silently counts R-007 as linked."
+   },
+   "board_cut_usable": {
+    "winner": "Y",
+    "reason": "Y's board cut opens with four KPIs and the pricing-pilot decision, flags that the deadline has passed, and fits on one page; X's board cut still contains 'Check before the board sees this' on slide 05 and the inconsistent '16 of 17 slides' line, so it can't go out as is."
+   }
+  },
+  "overall": {
+   "winner": "Y",
+   "reason": "Both are numerically sound, but Y names every data gap with an owner, pairs speed with rework and change failure rate, and has a short board cut that leads with the decision. X's board cut still holds an internal pre-send warning, an unsupported CEO sign-off and an inconsistent slide count, so a careful CPO couldn't send it unedited."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 3719,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 34876,
+  "cost_usd": 0.3538746,
+  "num_turns": 2,
+  "duration_ms": 33035
+ }
+}

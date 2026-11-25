@@ -1,0 +1,46 @@
+{
+ "id": "pair-CA-sparse-2-12",
+ "fixture": "sparse",
+ "kind": "pair",
+ "matchup": "CA",
+ "x": "runs/C/sparse/2",
+ "y": "runs/A/sparse/2",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "Y",
+    "reason": "Y's figures all check out against tracker.csv: 100 issues, 31/22/21/18/8 by work type, 43/31/26 by product line, 53\u219237\u219210 by month, 12/10/9 for New capabilities, 78 tagged to an objective, and 6 issues dated Jul 1. X's opening line says '0 of 19 slides show data' and slide 3 says no work traces to a goal, but its own ledger lists the correct 31/18/22/21/8 split and the 78% traced to an objective."
+   },
+   "no_invented_numbers": {
+    "winner": "Y",
+    "reason": "Y states only figures it derives from the Linear export. X's samples are labelled, but they put invented numbers such as ARR of $10.9M, revenue of $10.3M and a 7.7% change failure rate under the real company's name, 'Kestrel Labs', and mix them with the company's real 31%/43%/78% figures, so a reader could take them as fact."
+   },
+   "speed_with_quality": {
+    "winner": "X",
+    "reason": "X reports no speed figures of its own, and its slide 9 sample pairs deploys with change failure rate. Y gives throughput figures such as 53\u219237\u219210 and 'steady pace' with no quality figure beside them, though it says Dispatch Agent quality is unknown and treats the decline as a problem, not good news."
+   },
+   "gaps_shown": {
+    "winner": "Y",
+    "reason": "Y names real gaps, each owned by the VP Engineering by Q4: 'Grow ARR to $50M' is in the tracker but not in the intake, every estimate is 1 so shares count issues rather than effort, the export holds only Done issues, and the 6 issues closed on Jul 1 may be carry-over. X marks slides 3\u20135 as missing data the tracker actually holds, including work-type labels and objective tags."
+   },
+   "board_cut_usable": {
+    "winner": "Y",
+    "reason": "Y's board cut is short, leads with '100 issues, 31% Dispatch Agent, 53\u219237\u219210', says plainly that no decisions are asked, and could be sent as it is. X produced no board cut."
+   }
+  },
+  "overall": {
+   "winner": "Y",
+   "reason": "Y reports the tracker data correctly, finds the real story in the September collapse in completions, and names its gaps honestly, with an owner, in a board cut that could be sent as it is. X says it has no data while its own ledger holds figures, and its samples mix invented figures with real ones under the real company's name."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 2296,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 18224,
+  "cost_usd": 0.1921986,
+  "num_turns": 2,
+  "duration_ms": 20967
+ }
+}

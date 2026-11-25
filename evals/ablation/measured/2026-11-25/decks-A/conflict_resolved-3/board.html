@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kestrel Labs: Board Update, Product &amp; Engineering 2026-Q3</title>
+<style>
+:root {
+  color-scheme: light;
+  --surface-0: #f4f3f0;
+  --surface-1: #fcfcfb;
+  --border: #e2e0da;
+  --grid: #e9e8e4;
+  --text-primary: #0b0b0b;
+  --text-secondary: #52514e;
+  --text-muted: #77756f;
+  --series-1: #2a78d6;
+  --neg: #e34948;
+  --plan: #0b0b0b;
+  --good: #0ca30c;
+  --warning: #fab219;
+  --critical: #d03b3b;
+  --callout: #fff7e6;
+  --callout-border: #f0c870;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --surface-0: #111110;
+    --surface-1: #1a1a19;
+    --border: #383835;
+    --grid: #2b2b29;
+    --text-primary: #ffffff;
+    --text-secondary: #c3c2b7;
+    --text-muted: #9a998f;
+    --series-1: #3987e5;
+    --neg: #e66767;
+    --plan: #ffffff;
+    --callout: #2a2416;
+    --callout-border: #7a5d1c;
+  }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--surface-0); color: var(--text-primary);
+  font: 15px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+main { max-width: 920px; margin: 0 auto; padding: 32px 24px 64px; }
+header { margin-bottom: 24px; }
+.eyebrow { color: var(--text-secondary); font-size: 13px; letter-spacing: .04em; text-transform: uppercase; }
+h1 { font-size: 28px; line-height: 1.2; margin: 4px 0 8px; }
+h2 { font-size: 19px; margin: 0 0 4px; }
+h3 { font-size: 15px; margin: 18px 0 6px; }
+.meta { color: var(--text-secondary); font-size: 13px; }
+section { background: var(--surface-1); border: 1px solid var(--border); border-radius: 10px; padding: 20px 22px; margin: 16px 0; }
+.lede { color: var(--text-secondary); margin: 0 0 12px; }
+ul.tight { margin: 6px 0; padding-left: 20px; }
+ul.tight li { margin: 4px 0; }
+table { width: 100%; border-collapse: collapse; font-size: 14px; margin-top: 8px; }
+th, td { text-align: left; padding: 7px 8px; border-bottom: 1px solid var(--border); vertical-align: top; }
+th { color: var(--text-secondary); font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: .03em; }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.status { white-space: nowrap; font-weight: 600; font-size: 13px; }
+.status i { font-style: normal; display: inline-block; width: 1.1em; text-align: center; margin-right: 3px; }
+.s-good i { color: var(--good); }
+.s-warn i { color: var(--warning); }
+.s-bad i { color: var(--critical); }
+.s-na i { color: var(--text-muted); }
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; margin-top: 8px; }
+.tile { border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; }
+.tile .k { color: var(--text-secondary); font-size: 13px; }
+.tile .v { font-size: 26px; font-weight: 650; font-variant-numeric: tabular-nums; line-height: 1.2; margin: 2px 0; }
+.tile .d { font-size: 13px; color: var(--text-secondary); }
+.callout { background: var(--callout); border: 1px solid var(--callout-border); border-radius: 8px; padding: 12px 14px; margin: 10px 0; font-size: 14px; }
+.decision { border-left: 4px solid var(--series-1); }
+.src { color: var(--text-muted); font-size: 12px; }
+.chart { width: 100%; height: auto; display: block; margin-top: 6px; }
+.chart text { font-size: 12px; fill: var(--text-secondary); }
+.chart .lbl { fill: var(--text-primary); font-size: 13px; }
+.chart [data-tip]:hover { opacity: .8; }
+.legend { display: flex; gap: 18px; font-size: 13px; color: var(--text-secondary); margin-top: 6px; flex-wrap: wrap; }
+.legend span::before { content: ""; display: inline-block; vertical-align: -1px; margin-right: 6px; }
+.legend .lg-bar::before { width: 12px; height: 12px; border-radius: 3px; background: var(--series-1); }
+.legend .lg-neg::before { width: 12px; height: 12px; border-radius: 3px; background: var(--neg); }
+.legend .lg-plan::before { width: 2px; height: 14px; background: var(--plan); margin-left: 5px; margin-right: 10px; }
+details { margin-top: 8px; font-size: 14px; }
+summary { cursor: pointer; color: var(--text-secondary); }
+#tip { position: fixed; pointer-events: none; background: var(--text-primary); color: var(--surface-1); font-size: 12px;
+  padding: 6px 8px; border-radius: 6px; max-width: 260px; display: none; z-index: 10; }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+@media (max-width: 720px) { .two { grid-template-columns: 1fr; } }
+footer { color: var(--text-muted); font-size: 12px; margin-top: 24px; }
+@media print { body { background: #fff; } section { break-inside: avoid; } }
+</style>
+</head>
+<body>
+<main>
+<header>
+  <div class="eyebrow">Kestrel Labs · Board update</div>
+  <h1>Product &amp; Engineering: 2026-Q3</h1>
+  <div class="meta">Period 1 Jul to 30 Sep 2026 · Data as of 30 Sep 2026 · From the CPTO · Objective: grow ARR to $50M</div>
+</header>
+
+<section>
+  <h2>Headline</h2>
+  <p class="lede" style="margin-bottom:6px">The Dispatch Agent is the reason customers buy. Every won deal this quarter cited it, and loads cleared with no manual touch rose 26%. ARR ended just under plan, and churn offset most of the expansion. Activation is the main product miss. Lost deals point to TMS integration as the gap to close next.</p>
+  <div class="tiles">
+    <div class="tile"><div class="k">ARR (Sep, billing)</div><div class="v">$10.91M</div><div class="d"><span class="status s-warn"><i>▲</i>Just under</span> $11.0M plan · +5% QoQ</div></div>
+    <div class="tile"><div class="k">Loads cleared / week</div><div class="v">23,100</div><div class="d"><span class="status s-good"><i>✓</i>Above</span> 22K target · +26% QoQ</div></div>
+    <div class="tile"><div class="k">Activation</div><div class="v">41%</div><div class="d"><span class="status s-bad"><i>✕</i>Off track</span> 50% target</div></div>
+    <div class="tile"><div class="k">Net revenue retention</div><div class="v">96%</div><div class="d">4 accounts churned ($1.11M)</div></div>
+  </div>
+  <div class="callout"><b>Two figures are still being reconciled.</b> ARR is $10.91M in billing (the source of truth) and $10.1M in the finance close. Loads cleared are 23,100 in PostHog (the source of truth) and 21,400 in the warehouse, which would fall below target. The VP Engineering owns closing both gaps in Q4.</div>
+</section>
+
+<section>
+  <h2>What went well</h2>
+  <ul class="tight">
+    <li>We won 22 deals and lost 17. All 22 wins cited the agent clearing exceptions, which validates the strategy.</li>
+    <li>Agent task success rose from 82% to 86%, and cost per successful task fell 20% to $0.33.</li>
+    <li>6 of 7 commitments shipped, including multi-stop reroutes and guided activation.</li>
+    <li>Revenue was $10.3M against a $10.0M plan. R&amp;D spend was $4.20M, 1% under plan.</li>
+  </ul>
+  <h2 style="margin-top:14px">What needs attention</h2>
+  <ul class="tight">
+    <li><b>Activation is 41% against 50%.</b> Guided activation shipped, but its lift is not visible yet. Self-serve carrier onboarding slipped. All four churned accounts had raised onboarding issues.</li>
+    <li><b>Inference cost ran 28% over plan</b> ($612K against $480K), because usage grew faster than unit cost fell.</li>
+    <li><b>Release quality.</b> Change failure rate is 7.7% against a target under 5%, even as deploy speed improved.</li>
+    <li><b>Integration gap.</b> 11 of 17 losses cited "No TMS integration." No current bet addresses it, and a scope decision is needed.</li>
+  </ul>
+</section>
+
+<section class="decision">
+  <h2>Decision: per-load pricing pilot</h2>
+  <p style="margin:4px 0"><b>Recommendation:</b> run the pilot with 10 customers rather than wait a quarter. Per-load pricing is part of our strategy, and price was the second most common loss reason (6 of 17).</p>
+  <div class="callout">The decision deadline was 4 Nov 2026, which has passed. Confirm the outcome before this goes to the board. If it was already approved, report it as a decision taken.</div>
+</section>
+
+<section>
+  <h2>Key risk</h2>
+  <p style="margin:4px 0">One model provider carries most of our inference spend (likelihood medium, impact high). Mitigation: a routing layer across 2 providers, led by the Platform lead and due Dec 2026.</p>
+  <h2 style="margin-top:14px">Focus</h2>
+  <p style="margin:4px 0">We stopped the carrier marketplace, which is now an explicit non-goal. On-premise remains out of scope.</p>
+</section>
+
+<footer>Kestrel Labs · Board cut of the 2026-Q3 Product &amp; Engineering update · Full detail in the leadership update · Confidential</footer>
+</main>
+</body>
+</html>

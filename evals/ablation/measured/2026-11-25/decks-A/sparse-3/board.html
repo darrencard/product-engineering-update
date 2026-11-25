@@ -1,0 +1,86 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Kestrel Labs · 2026-Q3 Board summary</title><style>
+:root{color-scheme:light;--page:#f9f9f7;--surface-1:#fcfcfb;--text-primary:#0b0b0b;--text-secondary:#52514e;--muted:#898781;
+--grid:#e1e0d9;--axis:#c3c2b7;--border:rgba(11,11,11,.10);--series-1:#2a78d6;--series-2:#eb6834;--series-3:#1baf7a;
+--warning:#fab219;--critical:#d03b3b;--callout:#fff8e6}
+@media (prefers-color-scheme:dark){:root:where(:not([data-theme="light"])){color-scheme:dark;--page:#0d0d0d;--surface-1:#1a1a19;--text-primary:#fff;--text-secondary:#c3c2b7;
+--grid:#2c2c2a;--axis:#383835;--border:rgba(255,255,255,.10);--series-1:#3987e5;--series-2:#d95926;--series-3:#199e70;--callout:#2a2414}}
+:root[data-theme="dark"]{color-scheme:dark;--page:#0d0d0d;--surface-1:#1a1a19;--text-primary:#fff;--text-secondary:#c3c2b7;
+--grid:#2c2c2a;--axis:#383835;--border:rgba(255,255,255,.10);--series-1:#3987e5;--series-2:#d95926;--series-3:#199e70;--callout:#2a2414}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--text-primary);font:15px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:880px;margin:0 auto;padding:40px 24px 64px}
+header .kicker{color:var(--text-secondary);font-size:13px;letter-spacing:.04em;text-transform:uppercase;margin:0}
+h1{font-size:28px;line-height:1.2;margin:4px 0 6px}
+h2{font-size:19px;margin:40px 0 8px;padding-top:16px;border-top:1px solid var(--grid)}
+h3{font-size:15px;margin:20px 0 6px}
+p,li{color:var(--text-primary)} .sub{color:var(--text-secondary);margin:0}
+.meta{color:var(--text-secondary);font-size:13px}
+.card{background:var(--surface-1);border:1px solid var(--border);border-radius:10px;padding:18px 20px;margin:14px 0}
+.bluf{border-left:4px solid var(--series-1)}
+.bluf ol{margin:6px 0 0;padding-left:20px} .bluf li{margin:6px 0}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:14px 0}
+.tile{background:var(--surface-1);border:1px solid var(--border);border-radius:10px;padding:14px 16px}
+.tile .v{font-size:30px;font-weight:600;line-height:1.1}
+.tile .l{color:var(--text-secondary);font-size:13px;margin-top:4px}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{text-align:left;padding:7px 10px;border-bottom:1px solid var(--grid);vertical-align:top}
+th{color:var(--text-secondary);font-weight:600;font-size:13px}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+.gap td:first-child{font-weight:600}
+.flag{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--text-primary);
+background:var(--callout);border:1px solid var(--border);border-radius:999px;padding:1px 9px;white-space:nowrap}
+.flag::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--warning)}
+.flag.crit::before{background:var(--critical)}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--text-secondary);margin:4px 0 8px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:10px;height:10px;border-radius:2px;display:inline-block}
+svg text{font-family:inherit}
+.tick{fill:var(--muted);font-size:12px;font-variant-numeric:tabular-nums}
+.lab{fill:var(--text-secondary);font-size:12px}
+.val{fill:var(--text-primary);font-size:12px;font-weight:600}
+.hit{fill:transparent;cursor:default} .hit:hover+.mark,.hit:focus+.mark{opacity:.8}
+#tip{position:fixed;pointer-events:none;background:var(--surface-1);color:var(--text-primary);border:1px solid var(--border);
+border-radius:6px;padding:6px 9px;font-size:12px;box-shadow:0 2px 8px rgba(0,0,0,.15);display:none;z-index:9}
+details{margin-top:8px} summary{cursor:pointer;color:var(--text-secondary);font-size:13px}
+.note{color:var(--text-secondary);font-size:13px}
+footer{margin-top:48px;color:var(--muted);font-size:12px}
+@media print{body{background:#fff}.card,.tile{break-inside:avoid}details{display:none}}
+</style></head><body><main>
+<header>
+<p class="kicker">Kestrel Labs · Board summary · Product &amp; Engineering</p>
+<h1>2026-Q3: steady AI delivery, a September slowdown to explain, and outcome metrics still to set</h1>
+<p class="sub">1 Jul 2026 – 30 Sep 2026 · from the CPTO · source: Linear work tracker</p>
+</header>
+
+<div class="tiles">
+<div class="tile"><div class="v">100</div><div class="l">work items completed</div></div>
+<div class="tile"><div class="v">31%</div><div class="l">new capabilities (Dispatch Agent)</div></div>
+<div class="tile"><div class="v">22%</div><div class="l">keep-the-lights-on</div></div>
+<div class="tile"><div class="v">53 → 10</div><div class="l">items completed, July vs September (37 in August)</div></div>
+</div>
+
+<div class="card bluf">
+<b>Three things to know</b>
+<ol>
+<li><b>Investment leaned toward the AI product.</b> Dispatch Agent accounted for 31% of completed work and kept a steady pace all quarter. Core Dispatch improvement and growth took 26%, platform &amp; scale 21%, and keep-the-lights-on 22%.</li>
+<li><b>Output fell from 53 items in July to 10 in September.</b> Core Dispatch and Platform closed almost nothing in September. The data doesn't show why. It could be a real slowdown, larger work still in progress, or a reporting gap, and it needs an explanation before the Q4 plan is locked.</li>
+<li><b>We can't yet report outcomes.</b> There are no agreed objectives, north-star metric, target investment mix or Dispatch Agent quality results yet. The VP Engineering will close these gaps in Q4 so the next update can report results, not just activity.</li>
+</ol>
+</div>
+
+<div class="card" style="padding:6px 8px">
+<table><thead><tr><th>Where effort went</th><th class="n">Items</th><th class="n">Share</th></tr></thead><tbody>
+<tr><td>New capabilities</td><td class="n">31</td><td class="n">31%</td></tr><tr><td>Improve the core</td><td class="n">18</td><td class="n">18%</td></tr><tr><td>Growth</td><td class="n">8</td><td class="n">8%</td></tr><tr><td>Platform &amp; scale</td><td class="n">21</td><td class="n">21%</td></tr><tr><td>Keep the lights on</td><td class="n">22</td><td class="n">22%</td></tr>
+<tr><td><b>Total</b></td><td class="n"><b>100</b></td><td class="n"><b>100%</b></td></tr></tbody></table>
+</div>
+
+<p class="note">No risks or decisions were recorded for the board this quarter, because that input was missing from the intake. Counts are completed work items. Every item has the same size estimate, so shares are by item, not by engineering time. Full detail and data caveats are in the leadership update (update.html).</p>
+</main><div id="tip" role="tooltip"></div><script>
+(()=>{const t=document.getElementById('tip');
+document.querySelectorAll('[data-tip]').forEach(el=>{
+const show=ev=>{t.textContent=el.dataset.tip;t.style.display='block';
+const r=el.getBoundingClientRect();const x=ev&&ev.clientX!==undefined?ev.clientX:r.left+r.width/2;const y=ev&&ev.clientY!==undefined?ev.clientY:r.top;
+t.style.left=Math.min(x+12,innerWidth-t.offsetWidth-8)+'px';t.style.top=(y-t.offsetHeight-10)+'px'};
+el.addEventListener('mousemove',show);el.addEventListener('focus',()=>show());
+el.addEventListener('mouseleave',()=>t.style.display='none');el.addEventListener('blur',()=>t.style.display='none');});})();
+</script></body></html>

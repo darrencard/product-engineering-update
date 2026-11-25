@@ -1,0 +1,46 @@
+{
+ "id": "pair-CA-no_ai-2-12",
+ "fixture": "no_ai",
+ "kind": "pair",
+ "matchup": "CA",
+ "x": "runs/C/no_ai/2",
+ "y": "runs/A/no_ai/2",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "Y",
+    "reason": "Y's figures recompute correctly (ARR $10.38M\u2192$10.911M, churn $1.11M, NRR 96.4%, CFR 4/52 = 7.7%, total R&D $4,200K vs $4,245K, and the 53/37/10 monthly item split); X's core figures are also right, but it contradicts itself, saying '16 of 17 slides show data' and then listing 3 slides with no data."
+   },
+   "no_invented_numbers": {
+    "winner": "X",
+    "reason": "X's only extra figure is the activation 'At this pace: 5 more periods', which is clearly labelled as a projection. Y states an issue date of 24 Nov 2026 that is not in the data and gives its own 'Activation stays below target' risk Medium/High ratings and a Q4 due date."
+   },
+   "speed_with_quality": {
+    "winner": "Y",
+    "reason": "Both pair deploys and lead time with change failure 5.1%\u21927.7% and time to restore. Y also adds rework (11.7%\u219215.0%) and incidents, and its summary says plainly that 'quality slipped at the same time'."
+   },
+   "gaps_shown": {
+    "winner": "Y",
+    "reason": "Y's appendix lists the missing agent task success, cost per task, guided-activation readout, PR-to-deploy linkage, undated CRM and support exports, and the R-007 and R-999 request issues, all owned by the VP Engineering for Q4. X flags the revenue/ARR mismatch with no owner and misses most of these gaps."
+   },
+   "board_cut_usable": {
+    "winner": "Y",
+    "reason": "Y produced a short board cut that leads with 4 headline metrics and the pricing-pilot decision, and flags that the 4 Nov deadline has passed. X produced no separate board cut, and its board-tagged slide 01 shows 'Now what \u2026 Not reported'."
+   }
+  },
+  "overall": {
+   "winner": "Y",
+   "reason": "Y has correct, recomputable figures and pairs speed with quality more fully. It is far more candid about data gaps, with owners, and comes with a board cut that can be sent as it is and flags the missed decision deadline. X is accurate and avoids invented numbers, but it has no usable board cut and leaves most of the data gaps unstated."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 3399,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 32414,
+  "cost_usd": 0.3277786,
+  "num_turns": 2,
+  "duration_ms": 29178
+ }
+}

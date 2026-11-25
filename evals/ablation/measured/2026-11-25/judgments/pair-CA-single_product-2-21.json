@@ -1,0 +1,46 @@
+{
+ "id": "pair-CA-single_product-2-21",
+ "fixture": "single_product",
+ "kind": "pair",
+ "matchup": "CA",
+ "x": "runs/A/single_product/2",
+ "y": "runs/C/single_product/2",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "X",
+    "reason": "X's recomputable figures check out (ARR bridge $10.38M\u2192$10.91M, churn $1.11M, NRR 96%, CFR 4/52=7.7%, lead time 52h\u219238h, R&D $4.20M vs $4.25M), while Y mislabels the eval harness's cost per task ($0.33) as 'cost per successful task'."
+   },
+   "no_invented_numbers": {
+    "winner": "Y",
+    "reason": "X asserts an unsupported cause ('inference 28% over plan because loads grew faster than unit cost fell') and an unsourced compile date, whereas Y's only forward figure ('Activation: 5 more periods') is explicitly labelled projected."
+   },
+   "speed_with_quality": {
+    "winner": "tie",
+    "reason": "Both pair 4 deploys/week and 38h lead time with the 7.7% change failure rate and 13h review time, and neither frames speed alone as good news."
+   },
+   "gaps_shown": {
+    "winner": "X",
+    "reason": "X's Data gaps section names the VP Engineering and Q4 for the ARR ($10.9M) vs revenue ($10.3M) mismatch, lead-time scope and the bet readouts, while Y's slide 1 states 'ARR rose $10.4M to $10.9M' with no caveat and gives no owner for that mismatch."
+   },
+   "board_cut_usable": {
+    "winner": "X",
+    "reason": "X's board cut leads with the per-load pilot ask and covers TMS losses (11 of 17) and inference overspend; Y's board cut was not rendered ('awaiting sign-off'), so there is nothing to send."
+   }
+  },
+  "overall": {
+   "winner": "X",
+   "reason": "X's figures recompute correctly, it surfaces the commercial story (TMS losses, onboarding-linked churn, the ARR/revenue mismatch) with an owner, and its board cut can be sent as is. Y is slightly more careful about causes but put an unqualified ARR figure on its opening slide and produced no board cut at all."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 4052,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 34039,
+  "cost_usd": 0.3538386,
+  "num_turns": 2,
+  "duration_ms": 35761
+ }
+}

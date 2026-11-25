@@ -1,0 +1,45 @@
+{
+ "id": "self-no_ai-A1",
+ "fixture": "no_ai",
+ "kind": "self_A",
+ "x": "runs/A/no_ai/1",
+ "y": "runs/A/no_ai/1",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "tie",
+    "reason": "Both state identical figures, and the recomputed ones check out: ARR $10.38M\u2192$10.91M (+5.1%), churn $1.11M, NRR 96% and change failure rate 7.7% (4/52)."
+   },
+   "no_invented_numbers": {
+    "winner": "tie",
+    "reason": "Both make the same claims, including the one weak spot: guided activation 'is in a live test', which the data does not show; no target or forecast is invented."
+   },
+   "speed_with_quality": {
+    "winner": "tie",
+    "reason": "Both pair 4 deploys/week and 38h lead time with a 7.7% change failure rate and 13h review time in \u00a74, and both board cuts put speed under 'What is working', separate from release quality."
+   },
+   "gaps_shown": {
+    "winner": "tie",
+    "reason": "Both flag the same gaps: the $10.3M Finance revenue vs $10.91M Stripe ARR mismatch, and task success and cost per successful task missing from exports, each with the VP Engineering named as owner for Q4."
+   },
+   "board_cut_usable": {
+    "winner": "tie",
+    "reason": "The board cuts are identical: four headline tiles, then what works and what doesn't, then the 10-customer pricing-pilot ask due 4 Nov 2026, with the same reconciliation note before circulation."
+   }
+  },
+  "overall": {
+   "winner": "tie",
+   "reason": "Update X and Update Y are identical word for word, in both the full update and the board cut. With no difference in substance on any criterion, neither one can be preferred."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 1230,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 31483,
+  "cost_usd": 0.2769506,
+  "num_turns": 2,
+  "duration_ms": 11543
+ }
+}

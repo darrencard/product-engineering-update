@@ -1,0 +1,78 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kestrel Labs: Q3 2026 board summary</title><style>
+:root{color-scheme:light;--page:#f9f9f7;--surface:#fcfcfb;--ink:#0b0b0b;--ink2:#52514e;--muted:#898781;--grid:#e1e0d9;--base:#c3c2b7;--ring:rgba(11,11,11,.10);
+--s1:#2a78d6;--plan:#c3c2b7;--good:#0ca30c;--goodtext:#006300;--warn:#fab219;--serious:#ec835a;--crit:#d03b3b;--crittext:#b02a2a}
+@media (prefers-color-scheme:dark){:root{color-scheme:dark;--page:#0d0d0d;--surface:#1a1a19;--ink:#fff;--ink2:#c3c2b7;--muted:#898781;--grid:#2c2c2a;--base:#383835;--ring:rgba(255,255,255,.10);
+--s1:#3987e5;--plan:#5e5d59;--goodtext:#0ca30c;--crittext:#e66767}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--ink);font:15px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:980px;margin:0 auto;padding:40px 24px 80px}
+h1{font-size:28px;margin:0 0 4px;letter-spacing:-.01em}
+h2{font-size:19px;margin:44px 0 12px;padding-top:16px;border-top:1px solid var(--grid)}
+h3{font-size:15px;margin:22px 0 8px}
+.meta{color:var(--ink2);margin:0 0 24px}
+.card{background:var(--surface);border:1px solid var(--ring);border-radius:10px;padding:18px 20px}
+.tldr li{margin:6px 0}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.tile{background:var(--surface);border:1px solid var(--ring);border-radius:10px;padding:14px 16px}
+.tile .k{color:var(--ink2);font-size:13px}
+.tile .v{font-size:28px;font-weight:600;margin:2px 0}
+.tile .d{font-size:13px;color:var(--ink2)}
+table{width:100%;border-collapse:collapse;background:var(--surface);border:1px solid var(--ring);border-radius:10px;overflow:hidden;font-size:14px}
+th,td{text-align:left;padding:8px 12px;border-bottom:1px solid var(--grid);vertical-align:top}
+th{font-weight:600;color:var(--ink2);font-size:13px}
+tr:last-child td{border-bottom:0}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.st{display:inline-flex;align-items:center;gap:6px;font-weight:600;white-space:nowrap;font-size:13px}
+.st::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--c)}
+.ok{--c:var(--good)} .wn{--c:var(--warn)} .bad{--c:var(--crit)} .na{--c:var(--muted)}
+.ok::after{content:" ✓"} .bad::after{content:" ✕"} .wn::after{content:" !"} .na::after{content:" ?"}
+.note{color:var(--ink2);font-size:13px}
+.decision{border-left:4px solid var(--s1)}
+.chart{width:100%;max-width:600px;height:auto;display:block}
+.chart .plan{fill:var(--plan)} .chart .act{fill:var(--s1)}
+.chart path{stroke:var(--surface);stroke-width:1}
+.chart path:hover{opacity:.8}
+.chart .lab{fill:var(--ink);font-size:13px} .chart .val{fill:var(--ink2);font-size:12px} .chart .strong{fill:var(--ink);font-weight:600}
+.chart .tick{fill:var(--muted);font-size:11px} .chart .grid{stroke:var(--grid);stroke-width:1} .chart .base{stroke:var(--base)}
+.legend{display:flex;gap:16px;font-size:13px;color:var(--ink2);margin:0 0 8px}
+.legend span::before{content:"";display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-2px;background:var(--c)}
+#tip{position:fixed;pointer-events:none;background:var(--ink);color:var(--surface);font-size:12px;padding:5px 8px;border-radius:6px;opacity:0;transition:opacity .08s}
+details summary{cursor:pointer;color:var(--ink2);font-size:13px;margin-top:8px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:720px){.two{grid-template-columns:1fr}}
+ul{padding-left:20px}
+@media print{body{background:#fff}h2{break-after:avoid}.card,table,.tile{break-inside:avoid}}
+</style></head><body><main>
+<h1>Kestrel Labs: Product &amp; Engineering, Q3 2026</h1>
+<p class="meta">Board summary · 1 Jul to 30 Sep 2026 · From the CPTO. The full leadership update has the detail and sources.</p>
+
+<div class="tiles">
+<div class="tile"><div class="k">Loads cleared/week (north star)</div><div class="v">23,100</div><div class="d">Target 22K · +26% QoQ · <span class="st ok">Ahead</span></div></div>
+<div class="tile"><div class="k">Activation</div><div class="v">41%</div><div class="d">Target 50% · +2 pts QoQ · <span class="st bad">Behind</span></div></div>
+<div class="tile"><div class="k">ARR (Stripe)</div><div class="v">$10.91M</div><div class="d">+5.1% QoQ · NRR 96% · objective $50M</div></div>
+<div class="tile"><div class="k">Inference cost</div><div class="v">$612K</div><div class="d">Plan $480K · +28% · <span class="st bad">Over</span></div></div>
+</div>
+
+<h2>Decision requested</h2>
+<div class="card decision">
+<p style="margin-top:0"><b>Approve a per-load pricing pilot with 10 customers</b> (the alternative is to wait a quarter).</p>
+<p>Pricing per load is central to our strategy, and 6 of 17 lost deals cite price.</p>
+<p class="note" style="margin-bottom:0"><span class="st wn">Deadline passed</span> The original deadline was 4 Nov 2026. If the pilot hasn't been approved yet, we need a new date.</p>
+</div>
+
+<h2>The quarter in brief</h2>
+<ul>
+<li><b>The strategy is working where we can measure it.</b> Every one of the 22 won deals cites the agent clearing exceptions. The north star beat its target, and weekly active dispatchers passed 6,000.</li>
+<li><b>Activation is the gap.</b> Guided activation shipped but hasn't lifted activation yet. Self-serve carrier onboarding did not ship. The 4 accounts that churned ($1.11M ARR) all had onboarding issues.</li>
+<li><b>We shipped 6 of 7 commitments.</b> We deploy more often and faster than in Q2, but change failure rate rose to 7.7% (target under 5%), and we recommend making it a Q4 focus.</li>
+<li><b>Integration is an open signal.</b> Missing TMS integration lost us 11 deals and drives the most support tickets. No current bet targets it.</li>
+<li><b>R&amp;D spend is on plan</b> ($4.20M against $4.25M). Engineering headcount is 44 against a plan of 46.</li>
+</ul>
+
+<h2>Top risk</h2>
+<p><b>One model provider carries most of our inference spend</b> (likelihood medium, impact high). The 28% overrun this quarter increases the exposure. Mitigation: a routing layer across 2 providers by Dec 2026.</p>
+
+<h2>Caveats</h2>
+<p class="note">Finance reports Q3 revenue of $10.3M while Stripe shows ARR of $10.9M. These don't reconcile, and they need to be reconciled. Agent task success and cost per task are not yet reported. Closing these gaps is owned by the VP Engineering for Q4.</p>
+</main></body></html>

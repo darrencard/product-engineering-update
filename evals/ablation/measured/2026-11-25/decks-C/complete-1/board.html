@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Kestrel Labs board cut, 2026-Q3: waiting on sign-off</title>
+<style>
+body{font:16px/1.5 -apple-system,system-ui,sans-serif;max-width:760px;margin:48px auto;padding:0 24px;color:#1a1a1a}
+h1{font-size:24px;margin-bottom:4px}
+.status{display:inline-block;padding:2px 10px;border-radius:4px;background:#fff4d6;color:#7a5200;font-weight:600}
+ol li,ul li{margin:6px 0}
+code{background:#f2f2f2;padding:2px 6px;border-radius:3px;font-size:14px}
+.muted{color:#666}
+</style>
+</head>
+<body>
+<h1>Kestrel Labs board cut, 2026-Q3</h1>
+<p><span class="status">Not rendered: waiting on sign-off</span></p>
+
+<p>The board cut is only rendered after a named person gives an explicit yes to its contents. This file was built in an unattended run, so nobody could give that yes. The full leadership update is in <code>update.html</code>, alongside this file. Its 8 board slides are listed below.</p>
+
+<h2>Before sign-off</h2>
+<ul>
+<li><strong>Revenue and ARR do not match.</strong> Finance close shows Q3 revenue of $10.3M, which works out to about $41M a year. Stripe shows ARR of $10.9M. Finance needs to say which figure is right before the board sees R&amp;D as a share of revenue (40.8%).</li>
+<li><strong>2 slides are missing data</strong> (owner: the VP Engineering, due "Q4", which needs a real date): platform and security (slide 10), and AI revenue and cost of revenue for AI gross margin (slide 12).</li>
+</ul>
+
+<h2>The 8 board slides waiting on sign-off</h2>
+<ol>
+<li>Loads cleared per week reached 23.1K against a 22K target. Activation, at 41% against 50%, has not reached its target.</li>
+<li>Basic upkeep was planned at 15% of the team's time and took 22%.</li>
+<li>Releases to customers rose from 3 to 4 a week, but the share of releases that caused a problem in production rose from 5.1% to 7.7%.</li>
+<li>Loads cleared per week (23.1K) and weekly active dispatchers (6,120) beat their targets. Activation, at 41% against 50%, has not.</li>
+<li>The share of quality tests the AI feature passes rose from 82% to 86%. The cost of each task the AI feature completes fell from $0.41 to $0.33.</li>
+<li>One risk: one model provider carries most inference spend.</li>
+<li>We are making 2 bets, each with a set budget of time and people and a stated point at which we stop.</li>
+<li>One decision for you today: approve a per-load pricing pilot.</li>
+</ol>
+
+<p class="muted">To render the board cut once it is signed off, run this from the skill root: <code>python3 scripts/render.py run/deck.json --out out/board.html --cut B --signed-off-by "&lt;name&gt;"</code></p>
+</body>
+</html>

@@ -1,0 +1,46 @@
+{
+ "id": "pair-BA-complete-2-12",
+ "fixture": "complete",
+ "kind": "pair",
+ "matchup": "BA",
+ "x": "runs/B/complete/2",
+ "y": "runs/A/complete/2",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "tie",
+    "reason": "Recomputed, both sets of core figures match the data: ARR $10.38M to $10.91M, NRR 96.4%, GRR 89.3%, change failure rate 5.1% to 7.7% (2/39, 4/52), lead time 52h to 38h, rework 11.7% to 15%, inference +28%, seat use 75%/89%/61%, and R&D at 40.8%/41% of revenue. X's '$40.9M a year' is a defensible day-based annualisation, and its only real slip is calling the eval's $0.33 'cost per successful task' when the data says cost per task."
+   },
+   "no_invented_numbers": {
+    "winner": "X",
+    "reason": "Y states a send date ('going out on 24 Nov 2026') that is not in the data and uses it to call the decision overdue. X's only extra figure is the activation projection ('5 more periods'), which is clearly labelled as projected and 'never a result or a commitment'."
+   },
+   "speed_with_quality": {
+    "winner": "X",
+    "reason": "X pairs every speed metric with a quality metric on slides 09 and 09b, including the board cut. Y's leadership table pairs them well and adds rework, but its board cut lists '4 deploys a week... lead time down to 38h' under 'What went well' and puts the 7.7% failure rate in a separate section."
+   },
+   "gaps_shown": {
+    "winner": "Y",
+    "reason": "Y names the gaps plainly and gives owners: the billing-versus-finance mismatch blocks reporting against $50M, CRM and support data are undated, R-999 was excluded, no reason was recorded for the onboarding slip, bets have no post-launch reading, and the TMS gap has an owner (VP Engineering, Q4). X flags the $10.3M vs $10.9M mismatch with no owner and drops R-999 without saying so."
+   },
+   "board_cut_usable": {
+    "winner": "Y",
+    "reason": "Y's board cut opens with the answer, four headline metrics and the pricing-pilot decision, and is short enough to send. X's board cut still contains an internal note ('Check before the board sees this... Confirm which line is right'), says it was 'Signed off by the CEO', which nothing in the data supports, and carries a ledger appendix, so it cannot go out as is."
+   }
+  },
+  "overall": {
+   "winner": "Y",
+   "reason": "Both updates get the numbers right, but Y shows the gaps with owners, surfaces the TMS-integration and churn signals, and has a board cut that could be sent as is. X is stricter on invented figures and on pairing speed with quality, but its board cut still contains an internal 'check before the board sees this' note, which a careful CPO would not send."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 3035,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 36422,
+  "cost_usd": 0.3525626,
+  "num_turns": 2,
+  "duration_ms": 26585
+ }
+}

@@ -1,0 +1,46 @@
+{
+ "id": "pair-CB-single_product-1-12",
+ "fixture": "single_product",
+ "kind": "pair",
+ "matchup": "CB",
+ "x": "runs/C/single_product/1",
+ "y": "runs/B/single_product/1",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "tie",
+    "reason": "Both updates carry the same figures, and all of them recompute correctly, including ARR rising from $10.4M to $10.9M, net revenue retention of 96.4%, change failure rate of 7.7% (4 of 52 deploys) and R&D at 40.8% of revenue."
+   },
+   "no_invented_numbers": {
+    "winner": "X",
+    "reason": "Both label the 'Activation: 5 more periods' projection as a rough guide, but Y's board cut adds 'Signed off by the CEO', which nothing in the data supports."
+   },
+   "speed_with_quality": {
+    "winner": "X",
+    "reason": "Both pair deploys per week with change failure rate, but X's slide 09/09b headline says releases rose to 4 a week 'but' change failure rate rose to 7.7%, 'outside the healthy range of under 5%'; Y only states the two facts side by side."
+   },
+   "gaps_shown": {
+    "winner": "X",
+    "reason": "Both name the Platform & security gap and the AI gross margin gap (owner VP Engineering, due Q4) and flag that $10.3M revenue and $10.9M ARR don't reconcile, but X holds back the board cut until that is resolved, while Y sends it to the board still unresolved."
+   },
+   "board_cut_usable": {
+    "winner": "X",
+    "reason": "Neither can be sent as it is: X's board cut isn't rendered yet, but Y's 8-slide cut keeps slide 05's internal 'Check before the board sees this' note and an unverified CEO sign-off, which is worse than an honest hold."
+   }
+  },
+  "overall": {
+   "winner": "X",
+   "reason": "The figures are identical and correct in both, but X frames the speed gain against the rise in change failure rate to 7.7% and opens slide 01 with the pricing-pilot ask. Y's board cut looks ready to send, yet it still carries the unresolved revenue/ARR note meant for internal review and a CEO sign-off the data doesn't support, so a careful CPO would prefer X's honest hold."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 3069,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 36755,
+  "cost_usd": 0.3559066,
+  "num_turns": 2,
+  "duration_ms": 28443
+ }
+}

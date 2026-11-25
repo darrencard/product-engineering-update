@@ -1,0 +1,46 @@
+{
+ "id": "pair-CA-complete-3-12",
+ "fixture": "complete",
+ "kind": "pair",
+ "matchup": "CA",
+ "x": "runs/C/complete/3",
+ "y": "runs/A/complete/3",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "X",
+    "reason": "Every X figure I recomputed holds, including 43% of time on Platform (21 Platform & scale items plus 22 upkeep items) and R&D at 40.8% of revenue, while Y says R&D total came in 1.1% under plan when $4.20M against $4.25M is 1.2% under, and repeats that figure in the board cut."
+   },
+   "no_invented_numbers": {
+    "winner": "X",
+    "reason": "X's only figure not in the data is the 'Activation: 5 more periods' projection, which it labels as a rough guide; Y gives two new risks 'High / High' and 'High / Medium' ratings that are not in the data (though it flags them as proposed) and implies onboarding tickets caused the $1.11M churn."
+   },
+   "speed_with_quality": {
+    "winner": "X",
+    "reason": "X pairs deploys 3 to 4 with change failure 5.1% to 7.7% on slides 9 and 9b and in the board cut's title for 9b, while Y's board cut lists 'deploying 4.0 times a week' under 'What's working', apart from the 7.7% change failure rate under 'What isn't working'."
+   },
+   "gaps_shown": {
+    "winner": "Y",
+    "reason": "Y flags the revenue-against-ARR mismatch ($10.30M of revenue against $10.91M ARR), the missing eval run and live-test results for both bets, the undated CRM deals, the 4 Nov deadline that has already passed, and the integration gap with the VP Engineering named as owner; X flags only the revenue mismatch and the Platform & security slide."
+   },
+   "board_cut_usable": {
+    "winner": "Y",
+    "reason": "X's board cut is 'Not rendered: waiting for sign-off' and repeats one slide title twice (slides 1 and 11), while Y's board cut opens with ARR $10.91M, net retention 96% and the per-load pricing pilot decision, and could be sent as it is."
+   }
+  },
+  "overall": {
+   "winner": "Y",
+   "reason": "X is slightly more careful with numbers and pairing, but it has no board cut to send and misses the gaps a board would care about: churn tied to onboarding, TMS integration losses (11 of 17 lost deals), unmeasured bets and a deadline that has passed. Y's one rounding slip (\u22121.1% instead of \u22121.2%) and its labelled proposed risk ratings cost far less than X's unusable board cut."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 3804,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 34757,
+  "cost_usd": 0.3546226,
+  "num_turns": 2,
+  "duration_ms": 33757
+ }
+}
