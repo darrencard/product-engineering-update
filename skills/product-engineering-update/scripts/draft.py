@@ -134,6 +134,17 @@ def range_status(value: float, prior: float | None, text: str, higher_is_better:
     return "watch" if improving else "stalled"
 
 
+NO_RANGE = "No range set yet"
+
+
+def direction_status(value: float, prior: float | None, higher_is_better: bool) -> str:
+    """With no range to judge against: stalled when it moved the wrong way, otherwise watch. Never landed."""
+    if prior is None:
+        return "watch"
+    worse = value < prior if higher_is_better else value > prior
+    return "stalled" if worse else "watch"
+
+
 def status_for(value: float, prior: float | None, target: float | None, higher_is_better: bool) -> str:
     """landed: the target is met. watch: moving the right way, not there yet. stalled: flat or moving the wrong way."""
     if target is None:
@@ -560,8 +571,14 @@ class Draft:
         rows: list[Json] = []
         refs: list[str] = []
         shown: dict[str, list[str]] = {}
+        quality_group = groups[1][0]
         for group, keys in groups:
-            picked = [k for k in keys if k in self.metrics and self.metrics[k]["label"] in ranges]
+            # A quality metric shows even with no range yet: leaving out a computed quality figure hides what speed may cost.
+            picked = [
+                k
+                for k in keys
+                if k in self.metrics and (self.metrics[k]["label"] in ranges or (group == quality_group and self.metrics[k].get("value") is not None))
+            ]
             if not picked:
                 continue
             rows.append({"group": group})
@@ -574,8 +591,12 @@ class Draft:
                             "metric": metric["label"],
                             "prior": metric["prior_display"] or "No prior",
                             "actual": metric["display"],
-                            "target": ranges[metric["label"]],
-                            "status": range_status(metric["value"], metric["prior"], ranges[metric["label"]], metric.get("higher_is_better", True)),
+                            "target": ranges.get(metric["label"], NO_RANGE),
+                            "status": (
+                                range_status(metric["value"], metric["prior"], ranges[metric["label"]], metric.get("higher_is_better", True))
+                                if metric["label"] in ranges
+                                else direction_status(metric["value"], metric["prior"], metric.get("higher_is_better", True))
+                            ),
                         },
                         metric.get("definition"),
                         metric.get("coverage"),
@@ -921,7 +942,7 @@ class Draft:
         points = [(self.change(k), self.metrics[k]["ledger"]) for k in keys if k in self.metrics and self.change(k)]
         # Where ARR stands against a money objective, computed in compute_metrics.derived(), so the draft does no arithmetic.
         # Spelled out: slide 1's title may use it, and a title says what an abbreviation means.
-        progress = [(f"{p['text'].replace('ARR ', 'Annual recurring revenue of ', 1)}.", p["ledger"]) for p in self.extra.get("objective_progress") or []]
+        progress = [(f"{p['text'].replace('ARR ', 'Yearly recurring revenue of ', 1)}.", p["ledger"]) for p in self.extra.get("objective_progress") or []]
         points = points[:1] + progress + points[1:]
         asks = [d["ask"] for d in self.intake.get("decisions") or []]
         if len(points) < 2:

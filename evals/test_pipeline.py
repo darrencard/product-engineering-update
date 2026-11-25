@@ -239,7 +239,8 @@ class Fixtures(unittest.TestCase):
         signed = script("render.py", str(deck_path), "--out", str(out), "--cut", "B", "--signed-off-by", "A Person")
         self.assertEqual(signed.returncode, 0, signed.stderr)
         html = out.read_text(encoding="utf-8")
-        self.assertEqual(len(re.findall(r'<section class="slide" id="s\d', html)), 8)
+        # 8 board slides, plus the gap list the board page moves to its appendix (v0.9.1)
+        self.assertEqual(len(re.findall(r'<section class="slide" id="s\d', html)), 9)
         self.assertTrue((self.work / "board.ledger.csv").exists())
 
     def test_review_lists_changes_gaps_and_the_checklist(self) -> None:
@@ -311,7 +312,8 @@ class GitHub(unittest.TestCase):
         self.assertNotIn("change_failure_rate", metrics, "GitHub cannot supply a change failure rate")
         deck = json.loads((self.run / "deck.json").read_text(encoding="utf-8"))
         rows = {r["metric"] for r in slide(deck, "09")["blocks"][0]["rows"] if "metric" in r}
-        self.assertEqual(rows, {"Deploys per week", "Lead time for change", "Pull request review time"})
+        # Rework shows with no range set: a computed quality figure is never left off (v0.9.1)
+        self.assertEqual(rows, {"Deploys per week", "Lead time for change", "Pull request review time", "Rework rate"})
         self.assertEqual(validate.check(deck)["errors"], [])
         self.assertIn("GitHub (kestrel/app)", {r["source_system"] for r in deck["ledger"]})
 

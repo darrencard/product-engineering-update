@@ -461,30 +461,53 @@ BOARD_DETAIL = "Appendix: the detail"
 
 
 def one_page_first(slides: list[Json]) -> list[Json]:
-    """The board cut reads as one page: slide 1 carries the answer, the open questions, the asks and a line per
-    detail slide (its title, which is its claim). The detail slides follow as an appendix, then the ledger.
-    Nothing is reworded, so every figure stays one the pipeline computed and validate.py checked."""
+    """The board cut reads as one page: slide 1's title, its open questions on the data, what happened and the
+    decisions, with one line saying how many gaps there are and where the detail is. The gap list and the detail
+    slides follow under "Appendix: the detail", then the ledger. Nothing is reworded, so every figure stays one the
+    pipeline computed and validate.py checked."""
     one = next((s for s in slides if s.get("id") == "01"), None)
     detail = [s for s in slides if s["kind"] == "slide" and s.get("id") != "01"]
-    if not one or not detail:
+    if not one:
         return slides
-    page = dict(
-        one,
-        nav="The page",
-        blocks=[
-            *one["blocks"],
-            {"type": "cards", "columns": 1, "items": [{"title": "The detail, in the appendix", "body": [{"list": [s["title"] for s in detail]}]}]},
-        ],
+    gap_blocks = [b for b in one["blocks"] if is_gap_list(b)]
+    kept = [b for b in one["blocks"] if not is_gap_list(b)]
+    pointer = []
+    if gap_blocks:
+        count = sum(len(part.get("list", [])) for b in gap_blocks for item in b["items"] for part in item.get("body", []) if isinstance(part, dict))
+        pointer.append(f"{count} gaps and data notes, each with an owner and a date, are in the appendix.")
+    if detail:
+        pointer.append("The detail follows: " + ", ".join(s["nav"] for s in detail) + ".")
+    page = dict(one, nav="The page", blocks=[*kept, *([{"type": "text", "variant": "note", "text": " ".join(pointer)}] if pointer else [])])
+    gaps = (
+        [
+            dict(
+                one,
+                id="01g",
+                nav="Gaps and data notes",
+                act=BOARD_DETAIL,
+                kicker=BOARD_DETAIL,
+                title="Gaps and data notes, each with an owner and a date.",
+                blocks=gap_blocks,
+                ledger_refs=[],
+            )
+        ]
+        if gap_blocks
+        else []
     )
     out = []
     for s in slides:
         if s is one:
-            out.append(page)
+            out += [page, *gaps]
         elif s in detail:
             out.append(dict(s, act=BOARD_DETAIL, kicker=BOARD_DETAIL))
         else:
             out.append(s)
     return out
+
+
+def is_gap_list(block: Json) -> bool:
+    """Slide 1's card that lists every gap and data note (draft.py gap_register)."""
+    return block.get("type") == "cards" and any(str(item.get("title", "")).startswith("Gaps and data notes") for item in block.get("items", []))
 
 
 def sign_cover(deck: Json, signer: str) -> Json:

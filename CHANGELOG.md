@@ -1,5 +1,13 @@
 # Changelog
 
+## Unreleased
+
+- **A shorter board page.** The board page keeps the headline, the open questions on the data, what happened and the decisions, plus one line on how many gaps there are and where the detail is. The full gap list moves to the appendix, ahead of the detail slides and the ledger. The 0.9.0 mini eval judge said the page still repeated too much.
+- **No progress to the objective while revenue and ARR disagree.** Slide 1 no longer headlines ARR's share of the objective when it also says revenue and ARR do not reconcile.
+- **Rework shows on slide 9 with no range set.** A computed quality figure is never left off; it reads "No range set yet" and is never marked landed. `point-target` accepts that text.
+- **How the deck reads.** SKILL.md sets the standard for any voice: clear, short, no filler or jargon, accurate, one name per thing, and titles that tell the story in order. Slide 1 says "yearly recurring revenue" throughout.
+- 197 tests.
+
 ## 0.9.0 (2026-11-25)
 
 - **Claude writes the words; the pipeline owns the numbers.** `draft.py` now also writes `run/figures.json`, every figure it computed. Claude may rewrite titles, ledes and card text, reorder slides or cut them, in the user's voice. A new blocking rule, `figure-not-computed`, refuses any printed figure that is not on that list, matched by kind (a percentage only matches a computed percentage) and within the rounding its printing implies. A hand-edited `figures.json` is refused. SKILL.md spells out what Claude may and may not change.

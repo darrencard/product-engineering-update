@@ -98,6 +98,7 @@ HAS_NUMBER = re.compile(r"\d+(\.\d+)?\s?(%|x\b|×)", re.I)
 BASELINE = re.compile(
     r"(baseline|than (a|last|the prior) (year|quarter|month)|year ago|on Q\d|against|versus|\bvs\b|from .+ to |compared (with|to)|before)", re.I
 )
+NO_RANGE = "No range set yet"
 RANGE = re.compile(r"(\bto\b|under|over|below|above|at least|at most|up to|between|<|>|\+|≤|≥|-)", re.I)
 BANNED = [
     (re.compile(r"\b\d+x\b", re.I), 'a multiplier claim such as "10x"'),
@@ -441,7 +442,9 @@ def _check_scorecard(b: Json, sid: str, found: Findings) -> None:
                 )
         return
     for r in rows:
-        if not RANGE.search(r["target"]):
+        # "No range set yet" is an honest absence, not a single-point target. draft.py shows a quality metric that way
+        # rather than hide it; the user sets the range in delivery_ranges.
+        if r["target"] != NO_RANGE and not RANGE.search(r["target"]):
             found.err(
                 "point-target",
                 sid,
