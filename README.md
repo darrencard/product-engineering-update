@@ -4,17 +4,39 @@ A Claude skill that builds a product and engineering update from your own data: 
 
 Most coding agents now write, review and approve the code, then stop at merge. This update reports what landed. It is built not to overclaim. Every figure is computed in code and carries a row in the ledger. A slide without its data says so. A deck with an unsupported claim does not render.
 
-See the worked example and the template at https://www.dacard.ai/update.
+See the worked example and the template at https://www.dacard.ai/update. How it was built, and every eval result: [field note 24](https://www.dacard.ai/paper-trail/how-i-built-the-product-engineering-update-skill-in-claude-code).
 
-## Try it on your own repo: one prompt
+## Get started: three steps
 
-Paste this into Claude Code, replace `OWNER/REPO`, and answer the few questions it asks. It needs the `gh` command line signed in to GitHub. Your data stays on your machine.
+1. **Use the tools Claude already has.** GitHub through the `gh` command line, and Linear, Jira, Vercel, Sentry, Stripe, PostHog, HubSpot, Notion or Google Drive through Claude's connectors. Any other system: a CSV export.
+2. **Paste one prompt into Claude Code.** Replace `OWNER/REPO`. It installs the pinned release, checks it, reads what's connected and asks only what it can't find: the company, the period and its dates, the data date, and who owns the gaps and by when.
+3. **Read slide 1.** It shows what your data disagrees on, what happened, the decision you need and every gap with an owner. The board version renders once a named person signs it off.
 
 ```text
-Install the Product & Engineering Update skill from the v0.9.2 release at https://github.com/darrencard/product-engineering-update/releases/tag/v0.9.2, and check the download against its SHA256SUMS before installing. Then build an update for OWNER/REPO from its GitHub history, using the skill's GitHub shortcut. If the repository has no pull request reviews and runs on Vercel, add Vercel's release and error records as the quality stand-in. Ask me only for what you cannot find, show every gap with an owner and a date, and render the full deck.
+Install the Product & Engineering Update skill from the v0.9.2 release at https://github.com/darrencard/product-engineering-update/releases/tag/v0.9.2, and check the download against its SHA256SUMS before installing. Then build my product & engineering update for last quarter from the tools already connected to this session: GitHub for OWNER/REPO through gh, and any connected Linear, Jira, Vercel, Sentry, Stripe, PostHog, HubSpot, Notion or Google Drive. Ask me only for what you cannot find, show every gap with an owner and a date, and render the full deck.
 ```
 
-The prompt names a fixed release, so a later change to the repository can't reach you until you choose a newer one. Something wrong or missing? [Open an issue](https://github.com/darrencard/product-engineering-update/issues).
+The prompt names a fixed release, so a later change to the repository can't reach you until you choose a newer one. Tested on live accounts so far: GitHub, Vercel and Google Drive; the other readers are tested on fixtures. Something wrong or missing? [Open an issue](https://github.com/darrencard/product-engineering-update/issues).
+
+## Features, functions and benefits
+
+| Feature | What it does | What it does for you |
+|---|---|---|
+| Figures computed in code | Python computes every number from your exports; the model never does the arithmetic | No wrong numbers in front of the board: 0 arithmetic errors in every eval run so far, against 2 to 5 a run for Claude alone ([ablation](docs/ablation.md)) |
+| Evidence ledger | Each figure has a row with its source, window and confidence, also written as a CSV | Any number traces back to its source in seconds when someone asks |
+| Figure check | Blocks any printed number the pipeline didn't compute (`figure-not-computed`) | Claude can rewrite the words but can't invent or change a number |
+| 22 blocking rules | Stops the render on, for example, speed without quality, an unsourced or stale figure, or a bet with no stop rule | The deck can't claim more than the data shows, so there's less to fix in review |
+| Open questions on the data | Slide 1 opens with sources that disagree, revenue that doesn't match ARR and decisions past their date, each with an owner | Problems with the data show up before anyone relies on the numbers |
+| Gaps and data notes | Lists every missing input and data caveat with an owner and a due date | Missing data becomes owned work, not a vague slide |
+| Shipped against impact | Lists last period's work against the outcome each piece named, and says which moved | You can say whether what shipped worked, without claiming it caused the change |
+| Your voice | Claude writes the prose in your style, from a few lines or a past update | It reads like you wrote it, with the checks still in place |
+| One-page board version | One page, then the detail as an appendix; renders only after a named person signs off | Ready to send, with a clear owner of what went out |
+| Three versions | Leadership, board and all-staff versions from one run | One run covers three meetings, with the same numbers in each |
+| Readers for your tools | 19 readers for GitHub, Linear, Jira, Vercel, Stripe, PostHog, HubSpot, Google Drive and more, plus CSV | Works from the tools already connected to Claude, with no new tooling |
+| Local and open | Runs on your machine; MIT licensed; signed releases with checksums; Python standard library only | Board data never leaves the company, and the code can be audited |
+| Published evals | Every blind eval against Claude alone is public, losses included | Claims can be checked rather than taken on trust |
+
+Results so far come from synthetic test companies and one real repository, not a real team's full data.
 
 ## What you get
 
