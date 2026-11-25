@@ -627,5 +627,28 @@ class WriteBack(unittest.TestCase):
         self.assertNotIn(" @dana", text)
 
 
+class OutcomesTitle(unittest.TestCase):
+    """Slide 11's title reads as a sentence for one outcome as well as many."""
+
+    @staticmethod
+    def row(metric: str, status: str) -> dict[str, str]:
+        return {"metric": metric, "actual": "15", "target": "25", "status": status}
+
+    def test_one_outcome_is_named_with_its_number_and_target(self) -> None:
+        self.assertEqual(draft.outcomes_title([self.row("Unique cloners", "watch")]), "Unique cloners is at 15, short of its target of 25.")
+        self.assertEqual(draft.outcomes_title([self.row("Unique cloners", "landed")]), "Unique cloners reached 15, against a target of 25.")
+
+    def test_several_outcomes_are_counted_in_the_plural(self) -> None:
+        missed = [self.row("A", "watch"), self.row("B", "stalled")]
+        landed = [self.row("A", "landed"), self.row("B", "landed")]
+        self.assertEqual(draft.outcomes_title(missed), "None of the 2 reported outcomes met their targets.")
+        self.assertEqual(draft.outcomes_title(landed), "All 2 reported outcomes met their targets.")
+
+    def test_no_title_counts_a_single_outcome(self) -> None:
+        for status in ("landed", "watch", "stalled"):
+            title = draft.outcomes_title([self.row("A", status)])
+            self.assertNotRegex(title, r"\b(of the|All) 1\b")
+
+
 if __name__ == "__main__":
     unittest.main()
