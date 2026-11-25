@@ -2,6 +2,10 @@
 
 A Claude skill that builds a product and engineering update from your own data: one deck for leadership, the board and all staff, as a single HTML file with an evidence ledger.
 
+![Slide 1 of a deck the skill built for a synthetic test company: open questions on the data, what happened, and the decision needed](docs/images/slide-1.png)
+
+*Slide 1 of a deck built for a synthetic test company. It opens with what the data disagrees on, then what happened and the decision needed. Every number carries its ledger ID.*
+
 Most coding agents now write, review and approve the code, then stop at merge. This update reports what landed. It is built not to overclaim. Every figure is computed in code and carries a row in the ledger. A slide without its data says so. A deck with an unsupported claim does not render.
 
 See the worked example and the template at https://www.dacard.ai/update. How it was built, and every eval result: [field note 24](https://www.dacard.ai/paper-trail/how-i-built-the-product-technology-leader-report-skill-in-claude-code).
