@@ -1,0 +1,46 @@
+{
+ "id": "pair-CA-complete-1-21",
+ "fixture": "complete",
+ "kind": "pair",
+ "matchup": "CA",
+ "x": "runs/A/complete/1",
+ "y": "runs/C/complete/1",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "X",
+    "reason": "X's figures hold on recompute: ARR $10.38M to $10.91M, NRR 96.4%, GRR 89.3%, change failure rate 4/52 = 7.7%, rework 12% to 15%, and revenue annualized as 4 \u00d7 $10.3M = $41.2M. Y states $40.9M without saying it was annualized by day count, and lists 'incident data' as missing even though the incident export exists and Y's own slide 09 reports a 41m time to restore."
+   },
+   "no_invented_numbers": {
+    "winner": "tie",
+    "reason": "Neither adds an unsupported figure. X marks its two extra risks as 'added from this quarter's data, not in the intake', and Y labels its 'Activation: 5 more periods' line as a projection, 'never a result or a commitment'."
+   },
+   "speed_with_quality": {
+    "winner": "tie",
+    "reason": "Both put deploys of 3 to 4 a week beside change failure rate of 5.1% to 7.7% and review time of 9h to 13h, and neither presents speed alone as good news. X's \u00a76 adds rework, and Y's slide 09 marks each quality metric as 'the pair for every speed metric'."
+   },
+   "gaps_shown": {
+    "winner": "X",
+    "reason": "X's \u00a711 lists eight specific gaps, each owned by the VP Engineering and due Q4, including that company ARR can't be read from the billing export ($10.91M vs $41.2M annualized revenue) and that neither bet's stop rule can be checked yet. Y flags the revenue/ARR mismatch but still reports 'ARR rose to $10.9M' as fact, and its 'incident data' gap is false."
+   },
+   "board_cut_usable": {
+    "winner": "X",
+    "reason": "X's board cut opens with four KPI tiles and the answer, then gives the overdue pricing decision with 'outcome not recorded', the top risk, and data caveats with an owner. Y's board cut repeats internal notes such as 'Check before the board sees this' on slide 05, so it can't be sent as it is."
+   }
+  },
+  "overall": {
+   "winner": "X",
+   "reason": "X's figures are all correct, it names the TMS integration gap (11 of 17 lost deals), and it is explicit that billing-export ARR is not company ARR. Y has a false data gap, reports ARR it also says doesn't reconcile, and its board cut contains internal pre-board notes."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 3018,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 39926,
+  "cost_usd": 0.379776,
+  "num_turns": 2,
+  "duration_ms": 27483
+ }
+}

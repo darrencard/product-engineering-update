@@ -1,0 +1,46 @@
+{
+ "id": "pair-CA-no_ai-3-21",
+ "fixture": "no_ai",
+ "kind": "pair",
+ "matchup": "CA",
+ "x": "runs/A/no_ai/3",
+ "y": "runs/C/no_ai/3",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "X",
+    "reason": "Both get ARR ($10.911M), NRR (96.4%), GRR (89.3%) and change failure rate (5.1% to 7.7%) right. But Y's slide 9 calls the 38h open-to-merge median 'Lead time for change' and says changes 'reached customers' in 38h, and its '$40.9M a year' revenue rate doesn't match 4 x $10.3M."
+   },
+   "no_invented_numbers": {
+    "winner": "X",
+    "reason": "Y presents 38h as measured lead time marked 'landed' and adds an 'Activation: 5 more periods' projection, while X labels the 38h as only a partial stand-in that shouldn't be compared with the 40h range."
+   },
+   "speed_with_quality": {
+    "winner": "X",
+    "reason": "Both pair deploys with change failure rate, but Y's slide 9 counts lead time as a speed win ('landed') when it can't be measured, while X's delivery table marks it 'Can't measure' and states that more releases fail."
+   },
+   "gaps_shown": {
+    "winner": "X",
+    "reason": "X lists seven gaps, each with the VP Engineering as owner and a Q4 due date (task success, cost per successful task, lead time, Finance vs Stripe revenue, objective date, and more), while Y shows a single gap that wrongly says incident data is missing and omits task success and cost per task."
+   },
+   "board_cut_usable": {
+    "winner": "X",
+    "reason": "X's board cut is a short memo that leads with the summary, scorecard and pricing decision (with the passed 4 Nov deadline flagged), while Y's is an internal review artifact with a ledger table, unticked checklist boxes and a render.py instruction."
+   }
+  },
+  "overall": {
+   "winner": "X",
+   "reason": "X's figures are correct and it says plainly what can't be measured, while Y presents the 38h open-to-merge time as lead time that has 'landed' and shows only one gap, which is also wrong. X's board cut can be sent as written, while Y's is an internal checklist."
+  }
+ },
+ "usage": {
+  "input_tokens": 6,
+  "output_tokens": 3215,
+  "cache_read_input_tokens": 38164,
+  "cache_creation_input_tokens": 35897,
+  "cost_usd": 0.35913280000000003,
+  "num_turns": 3,
+  "duration_ms": 29432
+ }
+}

@@ -1,0 +1,67 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kestrel Labs Board summary 2026-Q3</title><style>
+:root{color-scheme:light;--page:#f9f9f7;--surface:#fcfcfb;--ink:#0b0b0b;--ink2:#52514e;--muted:#6f6e69;--grid:#e1e0d9;--base:#c3c2b7;
+--border:rgba(11,11,11,.10);--s1:#2a78d6;--good:#006300;--bad:#b42d2d;--warn:#8a5a00;--tint:#f0efec}
+@media (prefers-color-scheme:dark){:root{color-scheme:dark;--page:#0d0d0d;--surface:#1a1a19;--ink:#fff;--ink2:#c3c2b7;--muted:#a3a29b;--grid:#2c2c2a;
+--base:#383835;--border:rgba(255,255,255,.10);--s1:#3987e5;--good:#0ca30c;--bad:#e66767;--warn:#fab219;--tint:#262624}}
+*{box-sizing:border-box}body{margin:0;background:var(--page);color:var(--ink);font:15px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:980px;margin:0 auto;padding:32px 24px 64px}
+h1{font-size:28px;margin:0 0 4px}h2{font-size:20px;margin:40px 0 12px;padding-top:16px;border-top:1px solid var(--grid)}h3{font-size:16px;margin:20px 0 8px}
+p,li{color:var(--ink)}.meta{color:var(--ink2);margin:0}.small{font-size:13px;color:var(--ink2)}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px 20px;margin:12px 0}
+.tldr li{margin:6px 0}.ask{border-left:4px solid var(--s1)}
+table{width:100%;border-collapse:collapse;background:var(--surface);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin:8px 0}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--grid);vertical-align:top;font-size:14px}
+th{color:var(--ink2);font-weight:600;font-size:13px;background:var(--tint)}td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+.st{font-weight:600;white-space:nowrap}.st.ok{color:var(--good)}.st.no{color:var(--bad)}.st.na{color:var(--warn)}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:12px 0}
+.tile{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 16px}
+.tile .k{font-size:13px;color:var(--ink2)}.tile .v{font-size:28px;font-weight:650;margin:2px 0}.tile .d{font-size:13px;color:var(--ink2)}
+.chart{position:relative}.chart svg{width:100%;height:auto;display:block}
+.tip{position:absolute;pointer-events:none;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:6px 10px;font-size:13px;
+box-shadow:0 2px 8px rgba(0,0,0,.15);display:none;white-space:nowrap}
+.legend{display:flex;gap:18px;font-size:13px;color:var(--ink2);margin:4px 0 8px}.sw{display:inline-block;vertical-align:middle;margin-right:6px}
+.signoff{margin-top:32px;padding:12px 16px;border:1px solid var(--border);border-radius:10px;background:var(--surface)}
+footer{margin-top:40px;font-size:13px;color:var(--ink2)}
+@media print{body{background:#fff}h2{break-after:avoid}table,.card{break-inside:avoid}}
+</style></head><body><main>
+<header><h1>Kestrel Labs: Product &amp; Engineering, 2026-Q3</h1>
+<p class="meta">Board summary · 1 Jul – 30 Sep 2026 · data as of 30 Sep 2026 · prepared by the CPTO</p></header>
+
+<h2>Headline</h2>
+<div class="card"><p>The automation engine is working: the north star beat target and customers choose us for it. Our weak spots are activation, integrations and churn, and agent inference costs are running over plan. One pricing decision is needed.</p></div>
+
+<div class="tiles">
+<div class="tile"><div class="k">Loads cleared per week (north star)</div><div class="v">23.1K</div><div class="d"><span class="st ok">✓ Target 22K</span> · Q2 18.4K</div></div>
+<div class="tile"><div class="k">Activation</div><div class="v">41%</div><div class="d"><span class="st no">✕ Target 50%</span> · Q2 39%</div></div>
+<div class="tile"><div class="k">ARR (Stripe)</div><div class="v">$10.9M</div><div class="d">+5.1% vs Jun · net revenue retention 96%</div></div>
+<div class="tile"><div class="k">Agent task success (eval)</div><div class="v">86%</div><div class="d"><span class="st no">✕ Target 90%</span> · was 82%</div></div>
+</div>
+
+<h2>Decision needed</h2><div class="card ask"><h3 style="margin-top:0">Decision: Approve a per-load pricing pilot</h3>
+<p><b>Options:</b> Pilot with 10 customers, or wait a quarter.<br><b>Recommendation:</b> Run the pilot with 10 customers.<br><b>Deadline:</b> 4 Nov 2026</p>
+<p><b>Evidence:</b> price was the stated reason in 6 of 17 lost deals in the CRM export. Per-load pricing is the pricing model the strategy already names (“We win mid-market brokers by automating the exception, priced per load.”).</p>
+<p class="small">This update is being issued on 25 Nov 2026, after the 4 Nov deadline. Nothing in the source files says whether the decision was made. If it is still open, it is overdue.</p></div>
+
+<h2>What happened</h2>
+<ul>
+<li><b>Delivery:</b> 6 of 7 commitments shipped, including multi-stop reroutes and guided activation. Self-serve carrier onboarding slipped.</li>
+<li><b>Revenue:</b> ARR grew from $10.38M to $10.91M. That was +$900K from 6 new logos and +$741K from expansion, offset by −$1.11M from 4 churned accounts. The objective is $50M ARR. The intake gives no target date for it.</li>
+<li><b>Customers:</b> we won 22 of 39 deals, all on exception automation. Of the 17 losses, 11 were for missing TMS integration and 6 were on price. No current bet or commitment targets integrations.</li>
+<li><b>Spend:</b> R&amp;D was $4.20M, on plan and 41% of revenue. Inference was $612K, 28% over plan, mostly with one model provider. A routing layer across 2 providers is due Dec 2026.</li>
+<li><b>Engineering health:</b> deploy pace rose to 4.0 a week. Change failure rate (7.7%) is above our 5% limit. The release checklist meant to bring it down has shipped, but it has not worked yet.</li>
+<li><b>Team:</b> 53 of 56 planned, with 3 roles open.</li>
+</ul>
+
+<h2>Bets in flight (both shipped in Q3, outcomes still to show)</h2>
+<ul>
+<li><b>Multi-stop reroutes</b> (promise): Task success 86% to 90%. We stop if: evals gain under 2 points by week 3.</li>
+<li><b>Guided activation</b> (experiment): Activation 41% to 50%. We stop if: no lift in a 2 week live test.</li>
+</ul>
+
+<h2>Caveats</h2>
+<p class="small">ARR is taken from Stripe and doesn't yet reconcile with finance-close revenue ($10.3M for the quarter). Task success compares two different eval set versions. The VP Engineering owns closing these data gaps by Q4. Full detail is in the leadership update.</p>
+
+<div class="signoff"><b>Sign-off:</b> the CEO</div>
+<footer>Prepared by the CPTO · Kestrel Labs · 2026-Q3</footer></main></body></html>

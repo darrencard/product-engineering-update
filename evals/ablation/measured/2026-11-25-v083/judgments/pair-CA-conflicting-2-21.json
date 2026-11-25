@@ -1,0 +1,46 @@
+{
+ "id": "pair-CA-conflicting-2-21",
+ "fixture": "conflicting",
+ "kind": "pair",
+ "matchup": "CA",
+ "x": "runs/A/conflicting/2",
+ "y": "runs/C/conflicting/2",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "X",
+    "reason": "X's figures recompute correctly (ARR bridge $10.38M\u2192$10.91M, NRR 96.4%, CFR 4/52=7.7%, cost per successful task $0.50\u2192$0.38), while Y's slide 12 and slide 08 call $0.33 (cost per task) the 'cost per successful task', which is actually $0.38."
+   },
+   "no_invented_numbers": {
+    "winner": "X",
+    "reason": "X's only unsupported cause ('most of the overrun is likely higher volume') is hedged and paired with 'this data doesn't separate volume from price', whereas Y presents a mislabelled $0.41\u2192$0.33 'cost per successful task' figure and an activation 'at this pace' projection."
+   },
+   "speed_with_quality": {
+    "winner": "tie",
+    "reason": "Both pair deploys 3\u21924 and lead time 38h with change failure rate 7.7% and time to restore 41m, and both say quality moved the wrong way, so neither presents speed alone as good news."
+   },
+   "gaps_shown": {
+    "winner": "X",
+    "reason": "X's data-gaps table lists the North Star 23,100 vs 21,400, ARR $10.1M vs $10.91M, revenue above ARR, missing deploy timestamps, the unlinked R-007 and the passed 4 Nov deadline, all owned by the VP Engineering and due Q4; Y's slide 1 leaves the ARR gap without an owner ('Name the source that owns it') and wrongly lists incident data as missing."
+   },
+   "board_cut_usable": {
+    "winner": "X",
+    "reason": "X has a short board cut that leads with ARR $10.1M vs $11.0M plan and the pricing-pilot decision with its passed deadline, while Y produced no separate board cut ('no separate board cut was produced')."
+   }
+  },
+  "overall": {
+   "winner": "X",
+   "reason": "X is accurate when recomputed, names an owner and due date for every gap, and comes with a board cut that can be sent as it is. Y labels cost per task as cost per successful task, leaves the ARR gap without an owner, and has no board cut."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 2849,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 33316,
+  "cost_usd": 0.3239946,
+  "num_turns": 2,
+  "duration_ms": 25040
+ }
+}

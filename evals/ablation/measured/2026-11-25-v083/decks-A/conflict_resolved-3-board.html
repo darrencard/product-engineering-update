@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kestrel Labs: Board update, Product &amp; Engineering, 2026-Q3</title>
+<style>
+:root {
+  color-scheme: light;
+  --surface: #fcfcfb; --surface-2: #f3f2ef; --rule: #e2e0da;
+  --text-primary: #0b0b0b; --text-secondary: #52514e; --accent: #2a78d6;
+  --good: #0a7a3b; --warn: #9a6200; --bad: #b42318;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --surface: #1a1a19; --surface-2: #242422; --rule: #3a3a37;
+    --text-primary: #ffffff; --text-secondary: #c3c2b7; --accent: #3987e5;
+    --good: #5cc98a; --warn: #e0b24a; --bad: #f08a80;
+  }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--surface); color: var(--text-primary);
+  font: 15px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+main { max-width: 760px; margin: 0 auto; padding: 40px 24px 64px; }
+h1 { font-size: 26px; line-height: 1.2; margin: 0 0 6px; }
+h2 { font-size: 18px; margin: 34px 0 8px; padding-top: 16px; border-top: 1px solid var(--rule); }
+p { margin: 8px 0; }
+ul { padding-left: 20px; } li { margin: 5px 0; }
+.meta, .small { color: var(--text-secondary); font-size: 13px; }
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin: 16px 0; }
+.tile { background: var(--surface-2); border-radius: 8px; padding: 12px 14px; }
+.tile .k { font-size: 12px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: .03em; }
+.tile .v { font-size: 24px; font-weight: 650; font-variant-numeric: tabular-nums; }
+.tile .s { font-size: 13px; color: var(--text-secondary); }
+.st { font-weight: 600; white-space: nowrap; }
+.st.good { color: var(--good); } .st.warn { color: var(--warn); } .st.bad { color: var(--bad); }
+.ask { background: var(--surface-2); border-left: 3px solid var(--accent); border-radius: 4px; padding: 12px 16px; margin: 12px 0; }
+table { width: 100%; border-collapse: collapse; font-size: 14px; margin: 8px 0; }
+th, td { text-align: left; padding: 7px 8px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+th { color: var(--text-secondary); font-size: 12px; text-transform: uppercase; letter-spacing: .03em; }
+.signoff { margin-top: 36px; padding-top: 14px; border-top: 1px solid var(--rule); font-size: 14px; }
+</style>
+</head>
+<body>
+<main>
+<p class="meta">Kestrel Labs · Board update · Product &amp; Engineering · 2026-Q3</p>
+<h1>The agent is working, and retention is now the constraint</h1>
+<p class="meta">From the CPTO · Data as of 30 Sep 2026 · Full leadership update: <code>update.html</code></p>
+
+<div class="tiles">
+  <div class="tile"><div class="k">Loads cleared / wk</div><div class="v">23,100</div><div class="s">Target 22K · <span class="st good">✓ met</span><br>+25.5% QoQ</div></div>
+  <div class="tile"><div class="k">ARR</div><div class="v">$10.91M</div><div class="s">Plan $11.0M · <span class="st warn">▲ 0.8% under</span><br>+5.1% QoQ</div></div>
+  <div class="tile"><div class="k">Gross retention</div><div class="v">89.3%</div><div class="s">4 accounts churned,<br>−$1.11M ARR</div></div>
+  <div class="tile"><div class="k">Agent task success</div><div class="v">86%</div><div class="s">Goal 90% · <span class="st warn">▲ 4 pts short</span><br>Cost/task −19.5%</div></div>
+</div>
+
+<h2>What happened</h2>
+<ul>
+  <li><strong>Usage is ahead of target.</strong> Loads cleared with no manual touch reached 23,100/week (target 22K), and weekly active dispatchers reached 6,120 (target 6,000).</li>
+  <li><strong>Churn held back growth.</strong> New business ($900K) and expansion ($741K) were partly offset by $1.11M of churn. Net ARR was up $531K, to $10.91M.</li>
+  <li><strong>We delivered most of what we committed, but not all of it worked.</strong> 6 of 7 commitments shipped. Activation is stuck at 41% (target 50%), and change failure rate rose to 7.7% (target under 5%).</li>
+  <li><strong>Margins are under pressure.</strong> Cost per agent task fell 19.5%, but volume growth pushed inference spend to $612K, 27.5% over plan. R&amp;D spend was 1.1% under plan.</li>
+  <li><strong>The market is telling us something.</strong> Missing TMS integrations explain 11 of 17 lost deals and most support tickets. No current bet addresses this.</li>
+</ul>
+
+<h2>Decision requested</h2>
+<div class="ask">
+  <p><strong>Approve a per-load pricing pilot with 10 customers</strong> (the alternative is to wait a quarter).</p>
+  <p>Recommendation: run the pilot. Per-load pricing is central to our strategy, and price was the stated reason for 6 of 17 lost deals.</p>
+  <p class="small">The original deadline was 4 Nov 2026 and has passed. Management will confirm whether an interim decision was taken.</p>
+</div>
+
+<h2>Risks</h2>
+<table>
+  <tr><th>Risk</th><th>Mitigation</th><th>Due</th></tr>
+  <tr><td>Most inference spend sits with one model provider (medium likelihood, high impact)</td><td>Routing layer across 2 providers · Platform lead</td><td>Dec 2026</td></tr>
+  <tr><td>Churn outpacing new business</td><td>Proposed: a root-cause review of the 4 churned accounts, all of which had raised onboarding issues. No owner assigned yet.</td><td>—</td></tr>
+</table>
+
+<h2>Data caveats</h2>
+<p class="small">ARR comes from billing ($10.91M). The finance close shows $10.1M, and the VP Engineering is reconciling the two by Q4. Loads cleared comes from PostHog (23,100). The warehouse shows 21,400, which would be below target, and is being reconciled on the same timeline. The agent eval set changed versions (v13 to v14) this quarter, so the quarter-over-quarter comparison is approximate.</p>
+
+<p class="signoff">Board cut signed off by <strong>the CEO</strong>.</p>
+</main>
+</body>
+</html>

@@ -1,0 +1,46 @@
+{
+ "id": "pair-CA-conflict_resolved-1-21",
+ "fixture": "conflict_resolved",
+ "kind": "pair",
+ "matchup": "CA",
+ "x": "runs/A/conflict_resolved/1",
+ "y": "runs/C/conflict_resolved/1",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "X",
+    "reason": "Every X figure recomputes exactly (ARR bridge to $10,911,000, NRR 96.4%, CFR 4/52=7.7%, rework 9/60=15%, R&D $4.20M), while Y slide 01/10 wrongly lists incident data as missing though the incident tool supplied the 41m time to restore Y itself reports."
+   },
+   "no_invented_numbers": {
+    "winner": "tie",
+    "reason": "Neither invents unsupported figures: Y's 'Activation: 5 more periods' is labelled projected and its $40.9M annualisation is derived, while X's 'load volume drove the inference overrun' is a reasoned inference from the 20% unit-cost fall and 26% load rise."
+   },
+   "speed_with_quality": {
+    "winner": "tie",
+    "reason": "Both pair deploys 3\u21924 and lead time 52h\u219238h with change failure 5.1%\u21927.7% and review time 9h\u219213h (X delivery table and board line; Y slides 09/09b), and neither presents speed alone as good news."
+   },
+   "gaps_shown": {
+    "winner": "X",
+    "reason": "X states the billing $10.91M vs finance $10.1M ARR conflict and the PostHog 23,100 vs warehouse 21,400 north-star conflict in its summary and board cut, names the VP Engineering as owner, and treats the hit as provisional; Y puts both only in ledger rows L09/L14, marks the north star 'landed', and invents an incident-data gap."
+   },
+   "board_cut_usable": {
+    "winner": "X",
+    "reason": "X's board cut is short, leads with the north star, ARR, churn and the overdue 4 Nov pricing decision; Y's repeats eight full slides, includes the internal note 'Check before the board sees this', and slide 18 calls the decision 'for you today' with a 4 Nov 2026 deadline that has already passed."
+   }
+  },
+  "overall": {
+   "winner": "X",
+   "reason": "All of X's figures check out against the data, it shows both source conflicts with an owner, and it raises the real issues (churn of $1.11M outweighing new logos, the TMS gap behind 11 of 17 losses, the 4 Nov deadline having passed) in a board cut that could go out as it is. Y hides the ARR and north-star conflicts in its ledger, wrongly reports incident data as missing, and its board cut carries internal notes and a deadline that has already passed."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 3290,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 36772,
+  "cost_usd": 0.36046259999999997,
+  "num_turns": 2,
+  "duration_ms": 29379
+ }
+}

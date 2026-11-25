@@ -1,0 +1,46 @@
+{
+ "id": "pair-CA-conflict_resolved-2-12",
+ "fixture": "conflict_resolved",
+ "kind": "pair",
+ "matchup": "CA",
+ "x": "runs/C/conflict_resolved/2",
+ "y": "runs/A/conflict_resolved/2",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "tie",
+    "reason": "Both updates get the core figures right: ARR $10.91M (sum of the September billing rows), net revenue retention 96.4%, change failure rate 7.7% (4 of 52 deploys), lead time 38h, rework 15% and AI seat use 75%. Neither has a figure I could find wrong; X's $40.9M annualised revenue holds on a 92-day basis."
+   },
+   "no_invented_numbers": {
+    "winner": "X",
+    "reason": "X's only forward number, 'Activation: 5 more periods' on slide 11, is clearly labelled as a projection. Y adds causes the data does not support: 'the eval set changed between v13 and v14', and in the board cut 'cost per agent task fell 20%, but volume rose faster' to explain the 27.5% inference overspend."
+   },
+   "speed_with_quality": {
+    "winner": "tie",
+    "reason": "Both put deploys (3 to 4 a week) and lead time (52h to 38h) next to change failure rate (5.1% to 7.7%), and neither calls speed good news. Y adds rework (11.7% to 15%) in its delivery table, while X pairs each speed metric with a quality metric on both its leadership and board slides (9 and 9b)."
+   },
+   "gaps_shown": {
+    "winner": "Y",
+    "reason": "Y states both source conflicts on the page, with the VP Engineering as owner and Q4 as the due date: loads cleared, PostHog 23,100 vs warehouse 21,400, and ARR, billing $10.91M vs finance $10.1M. X leaves these conflicts in the appendix ledger (L09, L14) and lists 'incident data' as missing on slide 1, even though slide 9 reports time to restore from the incident tool."
+   },
+   "board_cut_usable": {
+    "winner": "Y",
+    "reason": "Y's board cut is a short summary with headlines, a scorecard that flags the source conflicts, and the pricing-pilot decision with its recommendation, ready to send. X's board cut still carries the internal note 'Check before the board sees this' on slide 05, and it calls the 4 Nov deadline passed on slide 01 while slide 18 presents the same decision as 'for you today'."
+   }
+  },
+  "overall": {
+   "winner": "Y",
+   "reason": "Both get the figures right, but only Y tells the board plainly that the north-star and ARR sources disagree, with an owner, and it ties the TMS-integration losses (11 of 17) and the churned accounts' onboarding tickets to the plan. X is more careful about causes, but it hides the source conflicts in its ledger, wrongly lists incident data as missing, and its board cut contains an internal note that stops it being sent as it is."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 4593,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 37498,
+  "cost_usd": 0.3923306,
+  "num_turns": 2,
+  "duration_ms": 40855
+ }
+}

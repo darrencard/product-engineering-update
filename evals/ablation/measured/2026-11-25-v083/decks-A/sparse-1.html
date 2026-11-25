@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kestrel Labs: Product &amp; Engineering update, 2026-Q3</title>
+<style>
+:root{
+  color-scheme:light;
+  --surface-0:#f5f4f1; --surface-1:#fcfcfb; --rule:#e4e3df; --grid:#ecebe7;
+  --text-primary:#0b0b0b; --text-secondary:#52514e; --text-muted:#76756f;
+  --accent:#2a78d6;
+  --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a; --s4:#eda100; --s5:#e87ba4;
+  --warn-bg:#fff6e0; --warn-rule:#e0b44a;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    color-scheme:dark;
+    --surface-0:#111110; --surface-1:#1a1a19; --rule:#33332f; --grid:#2a2a27;
+    --text-primary:#ffffff; --text-secondary:#c3c2b7; --text-muted:#9a998f;
+    --accent:#3987e5;
+    --s1:#3987e5; --s2:#d95926; --s3:#199e70; --s4:#c98500; --s5:#d55181;
+    --warn-bg:#2c2512; --warn-rule:#8a6a1c;
+  }
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--surface-0);color:var(--text-primary);
+  font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Helvetica,Arial,sans-serif}
+main{max-width:880px;margin:0 auto;padding:40px 24px 64px}
+header{border-bottom:1px solid var(--rule);padding-bottom:18px;margin-bottom:28px}
+.eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted);margin:0 0 6px}
+h1{font-size:28px;line-height:1.2;margin:0 0 10px}
+h2{font-size:19px;margin:40px 0 10px}
+h3{font-size:15px;margin:22px 0 6px}
+p{margin:0 0 12px}
+.meta{color:var(--text-secondary);font-size:13px;margin:0}
+.meta b{color:var(--text-primary);font-weight:600}
+.card{background:var(--surface-1);border:1px solid var(--rule);border-radius:10px;padding:20px 22px;margin:14px 0}
+.tldr ol{margin:0;padding-left:20px}
+.tldr li{margin:0 0 10px}
+.tldr li:last-child{margin:0}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:14px 0}
+.tile{background:var(--surface-1);border:1px solid var(--rule);border-radius:10px;padding:14px 16px}
+.tile .v{font-size:30px;font-weight:650;line-height:1.1;font-variant-numeric:tabular-nums}
+.tile .l{font-size:13px;color:var(--text-secondary);margin-top:4px}
+.callout{background:var(--warn-bg);border:1px solid var(--warn-rule);border-radius:10px;padding:14px 18px;margin:14px 0}
+.callout b:first-child{display:block;margin-bottom:4px}
+table{border-collapse:collapse;width:100%;font-size:14px;font-variant-numeric:tabular-nums}
+th,td{text-align:left;padding:7px 10px;border-bottom:1px solid var(--rule)}
+th{font-weight:600;color:var(--text-secondary);font-size:12px;text-transform:uppercase;letter-spacing:.04em}
+td.n,th.n{text-align:right}
+tfoot td{font-weight:600;border-bottom:none}
+details{margin-top:10px}
+summary{cursor:pointer;color:var(--text-secondary);font-size:13px}
+.chart-title{font-weight:600;margin:0 0 2px}
+.chart-sub{color:var(--text-secondary);font-size:13px;margin:0 0 12px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:13px;color:var(--text-secondary);margin:0 0 10px;padding:0;list-style:none}
+.legend li{display:flex;align-items:center;gap:6px}
+.sw{width:10px;height:10px;border-radius:2px;display:inline-block}
+svg{display:block;width:100%;height:auto;overflow:visible}
+svg text{font-family:inherit}
+.tip{position:fixed;pointer-events:none;background:var(--surface-1);color:var(--text-primary);border:1px solid var(--rule);
+  border-radius:8px;padding:8px 10px;font-size:13px;box-shadow:0 4px 16px rgba(0,0,0,.12);opacity:0;transition:opacity .08s;z-index:10;max-width:260px}
+.tip .k{color:var(--text-secondary)}
+.gaps li{margin-bottom:8px}
+.owner{display:inline-block;font-size:12px;color:var(--text-secondary);border:1px solid var(--rule);border-radius:999px;padding:1px 8px;margin-left:4px;white-space:nowrap}
+footer{margin-top:44px;border-top:1px solid var(--rule);padding-top:14px;color:var(--text-muted);font-size:12.5px}
+code{font-size:12.5px}
+@media print{body{background:#fff} .card,.tile{break-inside:avoid}}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <p class="eyebrow">Kestrel Labs · Product &amp; Engineering update · Leadership</p>
+  <h1>Q3 2026: where engineering time went, and what we still can't see</h1>
+  <p class="meta"><b>Period</b> 1 Jul – 30 Sep 2026 &nbsp;·&nbsp; <b>Author</b> the CPTO &nbsp;·&nbsp; <b>Data as of</b> 30 Sep 2026 &nbsp;·&nbsp; <b>Prepared</b> 25 Nov 2026 &nbsp;·&nbsp; <b>Source</b> Linear export (the only connected system)</p>
+</header>
+
+<section class="card tldr" aria-labelledby="tldr">
+  <h2 id="tldr" style="margin-top:0">In brief</h2>
+  <ol>
+    <li><b>We finished 100 tickets in Q3. 78% were tied to a company goal and 22% were keep-the-lights-on work.</b> The largest share, 31%, went to new capabilities, and all of it was Dispatch Agent. Next came platform &amp; scale (21%), improving the core (18%) and growth (8%). The 78 goal-linked tickets all point to one goal, "Grow ARR to $50M".</li>
+    <li><b>Finished tickets fell every month: 53 in July, 37 in August, 10 in September.</b> By September, the only work being closed was Dispatch Agent plus one keep-the-lights-on ticket. Growth tickets stopped on 22 Jul, Improve the core on 21 Aug and Platform &amp; scale on 30 Aug. The data doesn't say why. It could be a real slowdown, a change in priorities, or an incomplete export. We should find out before anyone quotes this trend.</li>
+    <li><b>This update shows what we spent time on, not whether it worked.</b> We have no Q3 plan to compare against, no north-star or outcome metrics, no Dispatch Agent evaluation results, and no risk register. <span class="owner">Owner: the VP Engineering · due Q4</span></li>
+  </ol>
+</section>
+
+<div class="tiles" role="list">
+  <div class="tile" role="listitem"><div class="v">100</div><div class="l">tickets finished in Q3</div></div>
+  <div class="tile" role="listitem"><div class="v">78%</div><div class="l">tied to "Grow ARR to $50M"</div></div>
+  <div class="tile" role="listitem"><div class="v">31%</div><div class="l">new capabilities (all Dispatch Agent)</div></div>
+  <div class="tile" role="listitem"><div class="v">53 → 10</div><div class="l">tickets finished, July vs September</div></div>
+</div>
+
+<h2 id="mix">1. Where the effort went</h2>
+<p>Every ticket in the export has an estimate of 1, so the shares below count tickets, not effort. One large ticket and one small ticket count the same.</p>
+<div class="card">
+  <p class="chart-title">Q3 tickets finished, by type of work</p>
+  <p class="chart-sub">Share of 100 finished tickets</p>
+  <div id="chart-mix"></div>
+  <details>
+    <summary>Show as table</summary>
+    <table>
+      <thead><tr><th>Type of work</th><th>Product line</th><th>Goal</th><th class="n">Tickets</th><th class="n">Share</th></tr></thead>
+      <tbody>
+        <tr><td>New capabilities</td><td>Dispatch Agent</td><td>Grow ARR to $50M</td><td class="n">31</td><td class="n">31%</td></tr>
+        <tr><td>Keep the lights on</td><td>Platform</td><td>None</td><td class="n">22</td><td class="n">22%</td></tr>
+        <tr><td>Platform &amp; scale</td><td>Platform</td><td>Grow ARR to $50M</td><td class="n">21</td><td class="n">21%</td></tr>
+        <tr><td>Improve the core</td><td>Core Dispatch</td><td>Grow ARR to $50M</td><td class="n">18</td><td class="n">18%</td></tr>
+        <tr><td>Growth</td><td>Core Dispatch</td><td>Grow ARR to $50M</td><td class="n">8</td><td class="n">8%</td></tr>
+      </tbody>
+      <tfoot><tr><td>Total</td><td></td><td></td><td class="n">100</td><td class="n">100%</td></tr></tfoot>
+    </table>
+  </details>
+</div>
+<p>By product line, Dispatch Agent had 31 tickets, Core Dispatch had 26 (18 improving the core, 8 growth) and Platform had 43 (21 platform &amp; scale, 22 keep-the-lights-on). All 22 keep-the-lights-on tickets were on Platform, which makes Platform's keep-the-lights-on share 51%.</p>
+<p><b>We can't say yet whether this is the right mix.</b> The intake didn't include an investment plan or target allocation. Without one, these shares only describe what happened. They don't tell us whether we were over or under plan.</p>
+
+<h2 id="trend">2. How the quarter unfolded</h2>
+<div class="card">
+  <p class="chart-title">Tickets finished per month, by type of work</p>
+  <p class="chart-sub">July–September 2026 · bar height is the month's total</p>
+  <ul class="legend" id="legend-month"></ul>
+  <div id="chart-month"></div>
+  <details>
+    <summary>Show as table</summary>
+    <table>
+      <thead><tr><th>Type of work</th><th class="n">Jul</th><th class="n">Aug</th><th class="n">Sep</th><th class="n">Last finished</th></tr></thead>
+      <tbody>
+        <tr><td>New capabilities</td><td class="n">12</td><td class="n">10</td><td class="n">9</td><td class="n">26 Sep</td></tr>
+        <tr><td>Keep the lights on</td><td class="n">11</td><td class="n">10</td><td class="n">1</td><td class="n">2 Sep</td></tr>
+        <tr><td>Platform &amp; scale</td><td class="n">11</td><td class="n">10</td><td class="n">0</td><td class="n">30 Aug</td></tr>
+        <tr><td>Improve the core</td><td class="n">11</td><td class="n">7</td><td class="n">0</td><td class="n">21 Aug</td></tr>
+        <tr><td>Growth</td><td class="n">8</td><td class="n">0</td><td class="n">0</td><td class="n">22 Jul</td></tr>
+      </tbody>
+      <tfoot><tr><td>Total</td><td class="n">53</td><td class="n">37</td><td class="n">10</td><td></td></tr></tfoot>
+    </table>
+  </details>
+</div>
+<div class="callout" role="note">
+  <b>Why the drop needs checking before it's quoted</b>
+  For every type of work, tickets were finished at a steady pace of one every three days, then stopped completely. They didn't taper off. Activity that stops this abruptly usually means one of two things: the export only includes some of the work (for example a date cut-off or a filter on project or team), or the teams deliberately moved off that work. The export contains only finished tickets, so we can't see whether anything was in progress or slipped. If the drop is real, it's the main story of the quarter. If it isn't, the July-to-September comparison is meaningless.
+</div>
+
+<h2 id="ai">3. Dispatch Agent (AI feature)</h2>
+<p>Dispatch Agent is the only AI feature listed in the intake and the only product line still closing tickets through September: 31 new-capability tickets in total, 9 of them in September. The intake names its evaluation set as <b>v14</b>, but no results were supplied. <b>We have no evidence on Dispatch Agent's quality, accuracy or customer impact this quarter.</b> The tickets show it was built. They don't show it works well.</p>
+
+<h2 id="gaps">4. What this update can't tell you yet</h2>
+<p>The intake left these empty, and the only connected system is Linear, so none of them could be reported. Filling them in is assigned to <b>the VP Engineering, due Q4</b>.</p>
+<div class="card">
+<ul class="gaps">
+  <li><b>Goals and the north star.</b> No goals or north-star metric were provided. "Grow ARR to $50M" appears only as a label on tickets, so we have no target or progress figure for it.</li>
+  <li><b>Plan vs. actual.</b> There's no investment plan, delivery ranges or commitments, so we can't say what was promised or whether it was delivered.</li>
+  <li><b>Outcomes.</b> There's no product usage, revenue or customer data, so we can't link the 100 finished tickets to results.</li>
+  <li><b>AI quality.</b> There are no results for Dispatch Agent's evaluation set (v14).</li>
+  <li><b>Risks, bets, things we stopped, and decisions.</b> The intake has none recorded. That doesn't mean there aren't any.</li>
+  <li><b>Reliability and incidents.</b> No operations or incident system is connected, so the 22 keep-the-lights-on tickets are the only sign of operational load.</li>
+</ul>
+</div>
+<p><b>Decisions requested from leadership:</b> none. The intake didn't submit any, and this update doesn't invent them.</p>
+
+<h2 id="notes">Data notes</h2>
+<ul style="font-size:14px;color:var(--text-secondary)">
+  <li>The source is the Linear export <code>tracker.csv</code>: 100 rows, all marked Done, finished between 1 Jul and 26 Sep 2026. There are no duplicate IDs.</li>
+  <li>Every estimate is 1, so all shares are ticket counts and not effort.</li>
+  <li>NEW-31 is dated 1 Jul. That breaks the every-three-days pattern of NEW-1 to NEW-30, where the next date would have been 29 Sep. It might be a back-dated ticket or a data-entry error. Either way it doesn't change any figure by more than 1 point.</li>
+  <li>Keep-the-lights-on tickets have no goal set, which is expected. They make up the 22% that isn't tied to a goal.</li>
+  <li>This is published about eight weeks after the period ended (data as of 30 Sep, prepared 25 Nov). Nothing from Q4 is included.</li>
+</ul>
+
+<footer>Kestrel Labs · Q3 2026 Product &amp; Engineering update for leadership · Prepared by the CPTO from the intake interview and a Linear export. The board version is in <code>board.html</code>.</footer>
+</main>
+<div class="tip" id="tip" role="tooltip"></div>
+
+<script>
+(function(){
+  const NS='http://www.w3.org/2000/svg';
+  const css=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+  const tip=document.getElementById('tip');
+  function showTip(e,html){tip.innerHTML=html;tip.style.opacity=1;moveTip(e);}
+  function moveTip(e){const w=tip.offsetWidth;let x=e.clientX+14;if(x+w>innerWidth-8)x=e.clientX-w-14;tip.style.left=x+'px';tip.style.top=(e.clientY+14)+'px';}
+  function hideTip(){tip.style.opacity=0;}
+  function el(tag,attrs,parent){const n=document.createElementNS(NS,tag);for(const k in attrs)n.setAttribute(k,attrs[k]);if(parent)parent.appendChild(n);return n;}
+  // rounded-end bar path: square at baseline, 4px radius at data end
+  function hbar(x,y,w,h,r){r=Math.min(r,w,h/2);return `M${x},${y}H${x+w-r}Q${x+w},${y} ${x+w},${y+r}V${y+h-r}Q${x+w},${y+h} ${x+w-r},${y+h}H${x}Z`;}
+  function vbarTop(x,y,w,h,r){r=Math.min(r,h,w/2);return `M${x},${y+h}V${y+r}Q${x},${y} ${x+r},${y}H${x+w-r}Q${x+w},${y} ${x+w},${y+r}V${y+h}Z`;}
+
+  const TYPES=[
+    {k:'New capabilities',c:'--s1',jul:12,aug:10,sep:9,line:'Dispatch Agent'},
+    {k:'Keep the lights on',c:'--s2',jul:11,aug:10,sep:1,line:'Platform'},
+    {k:'Platform & scale',c:'--s3',jul:11,aug:10,sep:0,line:'Platform'},
+    {k:'Improve the core',c:'--s4',jul:11,aug:7,sep:0,line:'Core Dispatch'},
+    {k:'Growth',c:'--s5',jul:8,aug:0,sep:0,line:'Core Dispatch'}
+  ];
+  const esc=s=>s.replace(/&/g,'&amp;');
+
+  function drawMix(){
+    const host=document.getElementById('chart-mix');host.innerHTML='';
+    const data=TYPES.map(t=>({k:t.k,v:t.jul+t.aug+t.sep,line:t.line}));
+    const W=820,labelW=150,valW=44,rowH=34,barH=18,H=data.length*rowH+24;
+    const svg=el('svg',{viewBox:`0 0 ${W} ${H}`,role:'img','aria-label':'Horizontal bar chart: share of 100 Q3 tickets by type of work. New capabilities 31%, Keep the lights on 22%, Platform & scale 21%, Improve the core 18%, Growth 8%.'},host);
+    const plotW=W-labelW-valW, max=40, sx=v=>v/max*plotW;
+    [0,10,20,30,40].forEach(g=>{
+      const x=labelW+sx(g);
+      el('line',{x1:x,x2:x,y1:0,y2:data.length*rowH,stroke:css('--grid'),'stroke-width':1},svg);
+      const t=el('text',{x,y:data.length*rowH+16,'text-anchor':'middle','font-size':11,fill:css('--text-muted')},svg);t.textContent=g+'%';
+    });
+    data.forEach((d,i)=>{
+      const y=i*rowH+(rowH-barH)/2;
+      const lab=el('text',{x:labelW-10,y:y+barH/2+4,'text-anchor':'end','font-size':13,fill:css('--text-primary')},svg);lab.textContent=d.k;
+      el('path',{d:hbar(labelW,y,sx(d.v),barH,4),fill:css('--s1')},svg);
+      const v=el('text',{x:labelW+sx(d.v)+8,y:y+barH/2+4,'font-size':13,'font-weight':600,fill:css('--text-primary')},svg);v.textContent=d.v+'%';
+      const hit=el('rect',{x:0,y:i*rowH,width:W,height:rowH,fill:'transparent'},svg);
+      hit.addEventListener('mouseenter',e=>showTip(e,`<b>${esc(d.k)}</b><br><span class="k">Tickets</span> ${d.v} of 100<br><span class="k">Product line</span> ${d.line}`));
+      hit.addEventListener('mousemove',moveTip);hit.addEventListener('mouseleave',hideTip);
+    });
+    el('line',{x1:labelW,x2:labelW,y1:0,y2:data.length*rowH,stroke:css('--text-muted'),'stroke-width':1},svg);
+  }
+
+  function drawMonth(){
+    const lg=document.getElementById('legend-month');lg.innerHTML='';
+    TYPES.forEach(t=>{const li=document.createElement('li');li.innerHTML=`<span class="sw" style="background:var(${t.c})"></span>${esc(t.k)}`;lg.appendChild(li);});
+    const host=document.getElementById('chart-month');host.innerHTML='';
+    const months=[['jul','July'],['aug','August'],['sep','September']];
+    const W=820,H=300,padL=36,padB=28,padT=18,plotH=H-padB-padT,max=60,sy=v=>v/max*plotH;
+    const svg=el('svg',{viewBox:`0 0 ${W} ${H}`,role:'img','aria-label':'Stacked bar chart of tickets finished per month: July 53, August 37, September 10. In September, 9 of 10 were new capabilities.'},host);
+    [0,20,40,60].forEach(g=>{
+      const y=padT+plotH-sy(g);
+      el('line',{x1:padL,x2:W,y1:y,y2:y,stroke:g?css('--grid'):css('--text-muted'),'stroke-width':1},svg);
+      const t=el('text',{x:padL-8,y:y+4,'text-anchor':'end','font-size':11,fill:css('--text-muted')},svg);t.textContent=g;
+    });
+    const slot=(W-padL)/3,bw=120,gap=2;
+    months.forEach(([m,label],i)=>{
+      const x=padL+slot*i+(slot-bw)/2;
+      const segs=TYPES.filter(t=>t[m]>0);
+      const total=TYPES.reduce((s,t)=>s+t[m],0);
+      let base=padT+plotH;
+      segs.forEach((t,j)=>{
+        const h=sy(t[m]);const top=j===segs.length-1;
+        const hh=Math.max(h-(top?0:gap),1);
+        const y=base-h+(top?0:gap);
+        el('path',{d:top?vbarTop(x,base-h,bw,h,4):`M${x},${y}h${bw}v${hh}h${-bw}Z`,fill:css(t.c)},svg);
+        base-=h;
+      });
+      const tv=el('text',{x:x+bw/2,y:padT+plotH-sy(total)-7,'text-anchor':'middle','font-size':14,'font-weight':650,fill:css('--text-primary')},svg);tv.textContent=total;
+      const tl=el('text',{x:x+bw/2,y:H-8,'text-anchor':'middle','font-size':12,fill:css('--text-secondary')},svg);tl.textContent=label;
+      const hit=el('rect',{x:padL+slot*i,y:padT,width:slot,height:plotH,fill:'transparent'},svg);
+      const rows=TYPES.map(t=>`<span class="sw" style="background:var(${t.c})"></span> ${esc(t.k)}: <b>${t[m]}</b>`).join('<br>');
+      hit.addEventListener('mouseenter',e=>showTip(e,`<b>${label} 2026: ${total} tickets</b><br>${rows}`));
+      hit.addEventListener('mousemove',moveTip);hit.addEventListener('mouseleave',hideTip);
+    });
+  }
+  function draw(){drawMix();drawMonth();}
+  draw();
+  matchMedia('(prefers-color-scheme: dark)').addEventListener('change',draw);
+})();
+</script>
+</body>
+</html>
