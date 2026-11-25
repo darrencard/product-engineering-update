@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.7.2 (2026-11-24)
 
 - **Slide 11's title reads right for one outcome.** With a single outcome the draft said "None of the 1 reported outcomes met its target." It now names the outcome with its number and target, for example "Unique cloners is at 15, short of its target of 25." Two or more outcomes keep the count, now in the plural throughout ("met their targets").
 
