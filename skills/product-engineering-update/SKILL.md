@@ -184,6 +184,8 @@ To run the draft every week, follow [references/weekly-rhythm.md](references/wee
 
 Every script stops with one line that names the problem and the fix. Read it, act on it, and run the step again. Never work around a refusal by editing generated files, skipping a step or passing `--skip-validate`. When the fix needs a fact only the user has, ask them: never fill it in yourself. The full list is in [docs/troubleshooting.md](https://github.com/darrencard/product-engineering-update/blob/main/docs/troubleshooting.md).
 
+**Three attempts, then the user.** If the same step still fails after three attempts to fix it, stop. Tell the user what you tried each time and the exact message, and offer the friction report below. Never retry a command unchanged, loosen a check, or skip the step to get past it.
+
 | The script says | What to do |
 |---|---|
 | `BLOCKING  company` from `intake.py check` (or another of the 7 required answers) | Ask the user for that answer, then pass it to `run.py` or write it in the intake. |

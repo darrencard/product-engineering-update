@@ -721,6 +721,7 @@ class SkillHygiene(unittest.TestCase):
             self.assertIn(field, body)
             self.assertIn(f"label: {field}", form.read_text(encoding="utf-8"))
         self.assertIn("Never file it on your own", body, "a friction report is filed only after the user says yes")
+        self.assertIn("Three attempts, then the user.", body, "a step that keeps failing goes to the user after three attempts")
 
 
 class Release080(unittest.TestCase):
