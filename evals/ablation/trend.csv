@@ -2,3 +2,4 @@ date,version,fixtures,judgments,skill_wins,claude_wins,ties,skill_gaps_wins,clau
 2026-11-25,0.8.0,all,36,0,36,0,1,35,0,792,14,1008,72.17
 2026-11-25,0.8.3,all,34,0,34,0,0,34,0,715,4,986,41.41
 2026-11-25,0.9.0,"complete,conflicting",4,0,4,0,1,3,0,94,4,138,5.8
+2026-11-25,0.9.1,"complete,conflicting",4,0,4,0,0,4,0,96,5,137,5.06
