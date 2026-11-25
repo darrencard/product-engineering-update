@@ -1,0 +1,57 @@
+name: Friction report
+description: A script, doc or step that fought you (or your agent). Four fields, no company data.
+title: "Friction: "
+labels: ["friction"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Agents running the skill draft these from SKILL.md's "Friction reports" section; people can file them too.
+        Leave out your company's data, figures and document text. Name the field or file instead.
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: The release you ran, from SKILL.md's metadata or the release you installed.
+      placeholder: v0.7.3
+    validations:
+      required: true
+  - type: textarea
+    id: tried
+    attributes:
+      label: Tried
+      description: The step and the exact command.
+      render: shell
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected
+      description: What the docs said would happen.
+    validations:
+      required: true
+  - type: textarea
+    id: happened
+    attributes:
+      label: Happened
+      description: The exact message or result, word for word.
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: fix
+    attributes:
+      label: Would fix it
+      description: Your best guess at the fix.
+    validations:
+      required: false
+  - type: dropdown
+    id: agent
+    attributes:
+      label: Filed by
+      options:
+        - An agent, with my yes
+        - Me
+    validations:
+      required: true
