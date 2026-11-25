@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.9.4 (2026-11-25)
+
+- **Slide titles use the full width.** A two-line title fills the first line before it wraps, instead of splitting into two even halves.
+- The README links to the field note at its new address.
+- 198 tests.
+
 ## 0.9.3 (2026-11-25)
 
 - **A new name: the Product & Technology Leader Report.** The skill's display name changes in the README, SKILL.md, the plugin listing and the deck. The repository, the skill folder and ID (`product-engineering-update`), and every install command stay the same, so nothing already installed or linked breaks.
