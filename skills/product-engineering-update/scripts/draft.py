@@ -39,6 +39,7 @@ from pathlib import Path
 from typing import Any
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+import figures  # noqa: E402  (a sibling script)
 import intake as intake_mod  # noqa: E402  (a sibling script)
 
 ASSETS = Path(__file__).resolve().parent.parent / "assets"
@@ -862,9 +863,6 @@ class Draft:
         """The board's one delivery slide: the computed changes from the slides it condenses."""
         keys = ("deploys_per_week", "change_failure_rate", "review_time", "ai_weekly_use")
         points = [(self.change(k), self.metrics[k]["ledger"]) for k in keys if k in self.metrics and self.change(k)]
-        # Where ARR stands against a money objective, computed in compute_metrics.derived(), so the draft does no arithmetic.
-        progress = [(f"{p['text']}.", p["ledger"]) for p in self.extra.get("objective_progress") or []]
-        points = points[:1] + progress + points[1:]
         if len(points) < 2 or "09" not in self.filled:
             return
         cards = [{"title": "Delivery and its cost", "body": [{"list": [f"{text}[[{ref}]]" for text, ref in points]}]}]
@@ -1109,6 +1107,7 @@ class Draft:
             for s in deck["slides"]:
                 if "rolls_up" in s:
                     s["rolls_up"] = [sid for sid in s["rolls_up"] if sid in self.slides]
+            self.cover_facts(cover)
             gaps = len(deck["meta"]["gaps"])
             lede = (
                 f"{len(self.filled)} slides show data for {intake['period']['label']}. "
@@ -1152,10 +1151,12 @@ def main() -> int:
     deck = draft.build()
     out = run / "deck.json"
     out.write_text(json.dumps(deck, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    # Every figure this draft computed. validate.py blocks any printed figure not on this list, so a rewrite keeps the numbers.
+    figures.write(run, deck, draft.intake)
     core = [s for s in deck["slides"] if s["kind"] == "slide"]
     with_data = ", ".join(x.lstrip("0") for x in draft.filled) or "none"
     print(f"draft: wrote {out}. {len(draft.filled)} of {len(core)} core slides across the 3 cuts have data ({with_data}). The rest show data needed.")
-    print("draft: next, improve the titles without changing what they claim, then run validate.py.")
+    print("draft: next, rewrite titles and text in the reader's voice using only these figures (figures.json), then run validate.py.")
     return 0
 
 

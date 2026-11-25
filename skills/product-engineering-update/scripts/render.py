@@ -480,9 +480,9 @@ def write_ledger_csv(deck: Json, path: str | Path) -> None:
             w.writerow({k: csv_cell(r.get(k)) for k in LEDGER_FIELDS})
 
 
-def refuse_blocked(deck: Json) -> None:
+def refuse_blocked(deck: Json, allowed: dict[str, list[float]] | None = None) -> None:
     """Stop the render when validate.py finds errors, after listing them."""
-    errors = validate.check(deck)["errors"]
+    errors = validate.check(deck, allowed=allowed)["errors"]
     if not errors:
         return
     for e in errors:
@@ -500,7 +500,7 @@ def main() -> int:
     args = ap.parse_args()
     deck = validate.read_deck(Path(args.deck), tool="render")
     if not args.skip_validate:
-        refuse_blocked(deck)
+        refuse_blocked(deck, validate.figures.load(Path(args.deck)))
     signer = (args.signed_off_by or "").strip()
     if args.cut == "B" and not signer:
         raise SystemExit("render: the board cut needs --signed-off-by with a person's name. Show the change list (review.py) and get an explicit yes first.")

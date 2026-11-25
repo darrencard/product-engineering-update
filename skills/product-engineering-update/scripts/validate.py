@@ -29,6 +29,10 @@ from pathlib import Path
 from typing import Any, TypedDict
 
 HERE = Path(__file__).resolve().parent
+if str(HERE) not in sys.path:
+    sys.path.insert(0, str(HERE))
+import figures  # noqa: E402  (a sibling script)
+
 ASSETS = HERE.parent / "assets"
 Json = dict[str, Any]
 
@@ -63,6 +67,7 @@ RULES = {
     "coverage-unstated": "A figure built from less than the reporting window sits on a slide that does not say what it covers.",
     "status-change-unexplained": "A status moved since the last update and the slide still says [reason needed].",
     "capex-not-estimate": "A slide talks about capitalisation without calling the figure an estimate.",
+    "figure-not-computed": "A slide prints a figure the pipeline did not compute (not in figures.json beside the deck).",
 }
 
 # Warnings: reported, never block the render.
@@ -583,8 +588,9 @@ def _check_slide(s: Json, deck: Json, contract: Json | None, found: Findings) ->
         found.warn("illustrative", sid, "the deck is marked illustrative but this slide is not.")
 
 
-def check(deck: Json, contracts: list[Json] | None = None, schema: Json | None = None) -> Report:
-    """Return {"ok", "errors", "warnings"}; each finding has rule, slide and message."""
+def check(deck: Json, contracts: list[Json] | None = None, schema: Json | None = None, allowed: dict[str, list[float]] | None = None) -> Report:
+    """Return {"ok", "errors", "warnings"}; each finding has rule, slide and message. With allowed (from
+    figures.json), every printed figure must be one the pipeline computed."""
     found = Findings()
     if schema is None:
         schema = _load_asset("deck.schema.json")
@@ -606,6 +612,14 @@ def check(deck: Json, contracts: list[Json] | None = None, schema: Json | None =
     for s in deck["slides"]:
         if s["kind"] == "slide":
             _check_slide(s, deck, contract_by_id.get(s["id"]), found)
+
+    if allowed is not None:
+        for sid, printed in figures.unmatched(deck, allowed):
+            found.err(
+                "figure-not-computed",
+                sid,
+                f'prints "{printed}", which the pipeline did not compute. Use a figure from the draft or the ledger, or add the source and run compute again.',
+            )
 
     unknown = [r["id"] for r in deck["ledger"] if r["confidence"] == "Unknown"]
     if unknown:
@@ -637,7 +651,7 @@ def main() -> int:
     ap.add_argument("deck")
     ap.add_argument("--json", action="store_true")
     args = ap.parse_args()
-    report = check(read_deck(Path(args.deck)))
+    report = check(read_deck(Path(args.deck)), allowed=figures.load(Path(args.deck)))
     if args.json:
         print(json.dumps(report, indent=2))
     else:

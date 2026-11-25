@@ -112,9 +112,26 @@ Definitions and formulas are in [references/metrics-glossary.md](references/metr
 
 Run `python3 scripts/draft.py --run run`. It writes `run/deck.json`: slides with data get their blocks, ledger references and a plain title; the rest keep a `data_needed` block.
 
-Titles are drafted in plain board language. Improve them, following [references/writing-rules.md](references/writing-rules.md); `validate.py` warns (`jargon-in-title`) on engineering shorthand in a title. A title is a claim someone can check. You may change the wording. You may not change what the title claims, add a figure that is not on the slide, or add a cause the data does not show.
+It also writes `run/figures.json`: every figure the draft computed. Never edit it.
 
-Titles are the only thing you edit in `run/deck.json`. Do not change blocks, figures, status words or the ledger by hand. If a slide looks wrong, the intake or the data is wrong: fix that and run the steps again, or tell the user what you found.
+**You write the words; the pipeline owns the numbers.** The draft is correct but plain. Rewrite it so a leader wants to read it, in the user's voice. You may:
+
+- rewrite titles, ledes, card titles and card text;
+- reorder slides, or cut a slide the audience does not need;
+- merge two points into one sentence, or split one.
+
+You may not:
+
+- print a figure that is not in `run/figures.json` (`validate.py` blocks it as `figure-not-computed`);
+- change a table, a tile, a chart, a status word, a ledger reference or the ledger;
+- drop slide 1's "Check before you rely on this" card or any gap in its list;
+- add a cause the data does not show, or claim more than the figure supports.
+
+**Titles.** One sentence: the claim, its figure and what it is compared with (target, last period or plan). Under 20 words. No engineering shorthand (`validate.py` warns: `jargon-in-title`). Follow [references/writing-rules.md](references/writing-rules.md).
+
+**Voice.** If the intake has `voice` (a few lines on how the user writes, or a paragraph of a past update), write like that: their sentence length, their words, their level of formality. Without it, write plain and direct. Voice changes the wording, never the figures or the checks.
+
+If a figure you need is missing, the data is missing: say so in the gap list, or add the source and run compute and draft again. Never work a figure out yourself.
 
 **What changed since the last update.** When there is a previous update, pass its deck: `python3 scripts/draft.py --run run --previous <last deck.json>`. Slide 1 then lists each status that moved on the delivery and outcome scorecards, each target that moved, and each metric added or dropped. Every status that moved needs a reason: ask the user for one line per metric and record it in `status_reasons` in `run/intake.json`, for example `{"Activation": "The new onboarding shipped in week 2"}`, then draft again. Never write the reason yourself; until it is there, the line reads `[reason needed]` and the validator blocks the deck.
 
@@ -122,7 +139,7 @@ Titles are the only thing you edit in `run/deck.json`. Do not change blocks, fig
 
 **The pace to each target (slide 11).** The "At this pace (Projected)" note under the outcome scorecard repeats this period's change until the target is reached and, when the target has a date (`by`), says whether that lands before or after it. It prints as Projected. Never quote it as a result or a forecast the team committed to.
 
-Slide IDs in the files are `00` (cover), `01` to `18`, `09b` (the board's delivery slide) and `A` to `D` (appendices). The deck has 19 core slides in all; no single cut shows more than 18.
+Slide IDs in the files are `00` (cover), `01` to `18`, `09b` (the board's delivery slide) and `A` to `D` (appendices). The template has 19 core slides; no single cut shows more than 18. When slide 1 is drafted, slides with no data are dropped and their gaps are listed on slide 1 with owners and dates.
 
 For a slide's question, required data and a good and bad title, read its contract: `references/slides/NN.md`, where NN is `01` to `18` or `09b`.
 
@@ -151,6 +168,7 @@ Run `python3 scripts/validate.py run/deck.json`. Repeat until it reports 0 error
 | `coverage-unstated` | A figure built from less than the reporting window, on a slide that does not say what it covers |
 | `status-change-unexplained` | A status that moved since the last update with no reason in `status_reasons` |
 | `capex-not-estimate` | A capitalisable figure that is not labelled an estimate |
+| `figure-not-computed` | A printed figure that is not in `run/figures.json` |
 
 ### 6. Review
 

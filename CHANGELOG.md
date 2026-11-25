@@ -1,5 +1,13 @@
 # Changelog
 
+## Unreleased
+
+- **Claude writes the words; the pipeline owns the numbers.** `draft.py` now also writes `run/figures.json`, every figure it computed. Claude may rewrite titles, ledes and card text, reorder slides or cut them, in the user's voice. A new blocking rule, `figure-not-computed`, refuses any printed figure that is not on that list, matched by kind (a percentage only matches a computed percentage) and within the rounding its printing implies. A hand-edited `figures.json` is refused. SKILL.md spells out what Claude may and may not change.
+- **Voice.** The intake takes an optional `voice`: a few lines on how the author writes, or a paragraph of a past update. Claude writes the prose that way; figures and checks never change.
+- **Progress to the objective, computed.** When an objective names ARR and a money target ("$50M"), compute adds a ledger row with ARR's share of it and what is left, and slide 1 shows it. Revenue at its yearly rate is a ledger row too. The 0.8.0 rerun judge credited Claude alone for working these out.
+- **No empty slides.** Once slide 1 is drafted it lists every gap with its owner and date, so slides with no data are dropped. The deck records its gaps in `meta.gaps`. Without slide 1 (too little data), gap slides stay as before.
+- 22 blocking rules and 4 warnings. 188 tests.
+
 ## 0.8.3 (2026-11-25)
 
 - **Slide 1 leads with what not to rely on.** It opens with a "Check before you rely on this" card: every figure held because two sources disagree (named by source, never by number) and the revenue against ARR check, each cited to its ledger row. It closes with every gap in the deck, each with what is missing, its owner and its date. Before, it listed only the names of empty slides. This answers the 0.8.0 ablation rerun, where the judge preferred Claude alone on showing gaps 35 to 1.

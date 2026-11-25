@@ -37,6 +37,7 @@ for folder in (HERE, SCRIPTS, BRIEF_SKILL / "scripts"):
     sys.path.insert(0, str(folder))
 
 import draft  # noqa: E402
+import figures  # noqa: E402
 import landing_brief  # noqa: E402
 import render  # noqa: E402
 import validate  # noqa: E402
@@ -830,6 +831,61 @@ class GapRegister(unittest.TestCase):
         self.assertEqual(draft.due_date("Feb 2027"), dt.date(2027, 2, 28))
         for vague in ("Q4", "next quarter", "", None, "31 Feb 2026"):
             self.assertIsNone(draft.due_date(vague))
+
+
+class ClaudeWritesSkillChecks(unittest.TestCase):
+    """Claude may rewrite the words; every printed figure must be one the pipeline computed (0.9.0)."""
+
+    def setUp(self) -> None:
+        self.work = Path(tempfile.mkdtemp())
+        self.addCleanup(shutil.rmtree, self.work)
+
+    def drafted(self, fixture: str = "complete") -> tuple[Any, list[float]]:
+        deck, _ = run_fixture(fixture, self.work)
+        allowed = figures.load(self.work / fixture / "deck.json")
+        self.assertIsNotNone(allowed, "draft.py writes figures.json beside the deck")
+        return deck, allowed
+
+    def test_the_pipelines_own_deck_passes_the_figure_check(self) -> None:
+        for fixture in ("complete", "conflicting", "sparse"):
+            deck, allowed = self.drafted(fixture)
+            self.assertEqual(figures.unmatched(deck, allowed), [], fixture)
+
+    def test_a_rewritten_title_that_reuses_computed_figures_passes(self) -> None:
+        deck, allowed = self.drafted()
+        slide(deck, "01")["title"] = "ARR reached $10.9M, 22% of the $50M goal, with $39.1M still to go."
+        self.assertEqual([e for e in validate.check(deck, allowed=allowed)["errors"] if e["rule"] == "figure-not-computed"], [])
+
+    def test_a_figure_the_pipeline_did_not_compute_is_blocked(self) -> None:
+        deck, allowed = self.drafted()
+        slide(deck, "01")["title"] = "ARR grew 14% to $12.4M this quarter."
+        found = [e for e in validate.check(deck, allowed=allowed)["errors"] if e["rule"] == "figure-not-computed"]
+        self.assertEqual({e["message"].split('"')[1] for e in found}, {"14%", "$12.4M"})
+
+    def test_dates_years_and_ledger_references_are_not_figures(self) -> None:
+        printed = [f["printed"] for f in figures.extract("Due 4 Nov 2026, in 2026-Q3 (L09) [[L14]], v0.9.0, R-999, Nov 2026, 3 bets.")]
+        self.assertEqual(printed, [])
+
+    def test_a_hand_edited_figures_file_is_refused(self) -> None:
+        self.drafted()
+        path = self.work / "complete" / "figures.json"
+        body = json.loads(path.read_text(encoding="utf-8"))
+        body["figures"]["money"].append(12400000.0)
+        path.write_text(json.dumps(body), encoding="utf-8")
+        with self.assertRaises(SystemExit):
+            figures.load(self.work / "complete" / "deck.json")
+
+    def test_slide_1_shows_progress_to_the_money_objective(self) -> None:
+        deck, _ = self.drafted()
+        self.assertIn("22% of the $50M objective, $39.1M to go", json.dumps(slide(deck, "01")))
+
+    def test_slides_with_no_data_go_once_slide_1_lists_their_gaps(self) -> None:
+        deck, _ = self.drafted()
+        titles = [s["title"] for s in deck["slides"] if s["kind"] == "slide"]
+        self.assertFalse([t for t in titles if "is not reported this period" in t])
+        self.assertTrue(deck["meta"]["gaps"])
+        self.assertIn("Slide 1 lists the", json.dumps(slide(deck, "00")))
+        self.assertEqual(validate.check(deck)["errors"], [])
 
 
 if __name__ == "__main__":
