@@ -3,9 +3,6 @@
 ## 0.8.2 (2026-11-25)
 
 - **Ablation eval.** `evals/ablation/` compares the skill's pipeline with Claude alone on the same fixture data, with a blind judge, noise runs and mechanical checks. It calls the model, so it stays out of the unit tests and CI. On the 6 synthetic fixtures the judge preferred Claude alone in 36 of 36 judgments. The skill made 0 arithmetic errors and Claude alone 1 in 1,049 checked figures. The skill's behaviour is unchanged. Results and limits: `docs/ablation.md`.
-
-## 0.8.2 (2026-11-25)
-
 - **Three attempts, then the user.** SKILL.md's error recovery section now says that a step still failing after three attempts to fix it goes to the user, with what was tried and the exact message, and never by retrying unchanged, loosening a check or skipping the step. The rule comes from the Claude Code team's account of how they verify agent work (claude.dev, Nov 2026).
 
 ## 0.8.1 (2026-11-24)
