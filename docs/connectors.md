@@ -32,7 +32,7 @@ Each reader writes one of the sources that `collect.py` defines (run `python3 sc
 | PagerDuty | `from_pagerduty.py` ([guide](../skills/product-engineering-update/references/connect-pagerduty.md)) | `GET /incidents` pages, or the PagerDuty connector | `incidents` | `incident_number` or `id`, `created_at`, `resolved_at`, `urgency` or `priority.summary`, `service.summary` | `collect.py incidents --csv` | Fixtures only |
 | incident.io | `from_incidentio.py` ([guide](../skills/product-engineering-update/references/connect-incidentio.md)) | `GET /v2/incidents` pages, or the incident.io connector | `incidents` | `id`, `created_at`, the two `incident_timestamp_values` you name for start and restore, severity name | `collect.py incidents --csv` | Fixtures only |
 | Notion | `from_notion.py` ([guide](../skills/product-engineering-update/references/connect-notion.md)) | Page objects or search results from the Notion API or connector, or a folder from Notion's "Export as Markdown & CSV" | `docs` | Title property, `last_edited_time`, `url`; for the Markdown export, each file's first `# ` heading or file name | `collect.py docs --csv` | Fixtures only |
-| Google Drive | `from_gdrive.py` ([guide](../skills/product-engineering-update/references/connect-gdrive.md)) | Drive API v3 `files.list` pages, with `fields=nextPageToken,files(id,name,mimeType,modifiedTime,webViewLink)`, or the Google Drive connector | `docs` | `name`, `mimeType`, `modifiedTime`, `webViewLink`, `trashed` | `collect.py docs --csv` | Fixtures only |
+| Google Drive | `from_gdrive.py` ([guide](../skills/product-engineering-update/references/connect-gdrive.md)) | Drive API v3 `files.list` pages, with `fields=nextPageToken,files(id,name,mimeType,modifiedTime,webViewLink)`, or the Google Drive connector | `docs` | `name` or `title`, `mimeType`, `modifiedTime`, `webViewLink` or `viewUrl`, `trashed` | `collect.py docs --csv` | Run on a live account |
 | Anything else | `collect.py` | A CSV or JSON file with the source's columns | Any source in `collect.py --list` | The columns listed for that source | Not applicable | Tested on the bundled fixture companies in `evals/fixtures/` |
 
 ## What the tested levels mean
@@ -43,7 +43,7 @@ Each reader writes one of the sources that `collect.py` defines (run `python3 sc
 Notes on specific readers:
 
 - **Linear.** The readers for issues, projects, project updates, initiatives and customer requests are untested on a real workspace.
-- **Google Drive.** The first live run was blocked by connector permissions, so it remains fixtures only.
+- **Google Drive.** Run on the maintainer's own drive through the Claude Drive connector on 24 Nov 2026 (10 files). That run found the connector names fields `title` and `viewUrl`; the reader now accepts both shapes.
 - **Salesforce.** Salesforce's developer documentation could not be fetched for this release, so the fixture follows the standard query result shape (`records`, `done`, `nextRecordsUrl`) and is not checked against the published docs.
 
 Every one of the 19 readers has at least one test in `evals/`. The full suite runs with `python3 -m unittest discover -s evals -v` from the repository root.

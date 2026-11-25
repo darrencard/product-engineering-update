@@ -562,6 +562,29 @@ class Documents(Base):
             ],
         )
 
+    def test_the_claude_drive_connector_shape_reads_the_same_as_the_api(self) -> None:
+        """The live run on 24 Nov found the connector says title and viewUrl where the API says name and webViewLink."""
+        files = {
+            "files": [
+                {
+                    "id": "1",
+                    "title": "Risk register",
+                    "mimeType": "application/vnd.google-apps.spreadsheet",
+                    "modifiedTime": "2026-10-20T12:00:00.000Z",
+                    "viewUrl": "https://docs.google.com/x",
+                    "trashed": False,
+                },
+                {"id": "2", "title": "Old plan", "mimeType": "application/vnd.google-apps.document", "trashed": True},
+                {"id": "3", "title": "A folder", "mimeType": "application/vnd.google-apps.folder"},
+            ],
+            "nextPageToken": "next",
+        }
+        self.ok("from_gdrive.py", "--files", self.save("connector.json", files), "--kind", "risk register", "--drive", "acme")
+        self.assertEqual(
+            self.rows("docs"),
+            [{"document": "Risk register", "kind": "risk register", "updated_at": "2026-10-20T12:00:00+00:00", "location": "https://docs.google.com/x"}],
+        )
+
     def test_a_notion_markdown_export_lists_pages_and_backs_a_quoted_proposal(self) -> None:
         folder = self.work / "export"
         folder.mkdir()

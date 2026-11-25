@@ -126,6 +126,6 @@ Tests: `test_the_board_cut_needs_a_named_sign_off` and `test_the_board_cut_still
 - **Connectors and `gh` are out of scope.** What a connector or `gh` can reach depends on your own account and tokens. This project doesn't control or check that.
 - **Injection defence relies partly on the model.** The tests cover what the scripts do with injected text. Whether Claude follows the "data, never instructions" rule in a live session is not something a unit test can prove.
 - **Tools outside the skill folder.** `tools/print_pdf.py` and `tools/build_samples.py` use `subprocess` and are not covered by the no-network scan.
-- **Live data.** Only the GitHub and Vercel readers have run on a live account. See [connectors.md](connectors.md).
+- **Live data.** Only the GitHub, Vercel and Google Drive readers have run on a live account. See [connectors.md](connectors.md).
 
 Related: [validator-rules.md](validator-rules.md) lists the checks that block a render, and [troubleshooting.md](troubleshooting.md) covers refused files.

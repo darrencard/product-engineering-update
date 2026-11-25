@@ -2,7 +2,7 @@
 
 Google Drive holds the documents the intake drafts from. `scripts/from_gdrive.py` lists them in the `docs` source (document, kind, updated_at, location).
 
-Connector: Google Drive has a Claude connector in the directory (`drivemcp.googleapis.com`), with search and read. Status: tested on fixtures shaped like the documented Drive API v3 `files.list` response; not yet run on a live drive.
+Connector: Google Drive has a Claude connector in the directory (`drivemcp.googleapis.com`), with search and read. Status: run on a live drive through this connector (24 Nov 2026), and tested on fixtures in both the API's shape (`name`, `webViewLink`) and the connector's (`title`, `viewUrl`).
 
 ## List the documents
 
