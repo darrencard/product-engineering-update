@@ -772,7 +772,7 @@ class GapRegister(unittest.TestCase):
     def test_slide_1_leads_with_the_revenue_check_and_cites_it(self) -> None:
         deck, metrics = run_fixture("complete", self.work)
         one = slide(deck, "01")
-        self.assertEqual(self.titles(one)[0], "Check before you rely on this")
+        self.assertEqual(self.titles(one)[0], "Open questions on the data")
         self.assertIn("Revenue and ARR do not reconcile", json.dumps(one["blocks"][0]))
         self.assertIn(metrics["extra"]["reconcile"]["ledger"], one["ledger_refs"])
         self.assertEqual(validate.check(deck)["errors"], [])
@@ -798,7 +798,7 @@ class GapRegister(unittest.TestCase):
         one = slide(deck, "01")
         if "01" not in {s["id"] for s in deck["slides"]} or not one["ledger_refs"]:
             self.skipTest("the fixture has too few figures for slide 1")
-        self.assertEqual(self.titles(one)[0], "Check before you rely on this")
+        self.assertEqual(self.titles(one)[0], "Open questions on the data")
         self.assertIn("disagree, so no figure is shown", json.dumps(one["blocks"][0]))
 
     def test_gap_owners_names_an_owner_per_slide(self) -> None:
@@ -886,6 +886,40 @@ class ClaudeWritesSkillChecks(unittest.TestCase):
         self.assertTrue(deck["meta"]["gaps"])
         self.assertIn("Slide 1 lists the", json.dumps(slide(deck, "00")))
         self.assertEqual(validate.check(deck)["errors"], [])
+
+
+class Rerun083Causes(unittest.TestCase):
+    """The five causes the v0.8.3 rerun judge named (docs/ablation.md)."""
+
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.work = Path(tempfile.mkdtemp())
+        cls.complete, _ = run_fixture("complete", cls.work)
+        cls.conflicting, _ = run_fixture("conflicting", cls.work)
+
+    @classmethod
+    def tearDownClass(cls) -> None:
+        shutil.rmtree(cls.work)
+
+    def test_a_quarter_is_annualised_by_four(self) -> None:
+        self.assertIn("$41.2M a year", json.dumps(slide(self.complete, "05")))
+        self.assertNotIn("$40.9M", json.dumps(self.complete["slides"]))
+
+    def test_the_deck_carries_no_internal_notes_and_slide_1_has_its_own_title(self) -> None:
+        self.assertNotIn("Check before", json.dumps(self.complete["slides"]))
+        self.assertNotEqual(slide(self.complete, "01")["title"], slide(self.complete, "11")["title"])
+
+    def test_slide_1_lists_data_notes_and_gives_conflicts_an_owner(self) -> None:
+        one = json.dumps(slide(self.complete, "01"), ensure_ascii=False)
+        self.assertIn("Inference (cost of revenue) ran 27.5% over plan, and the data does not say why.", one)
+        self.assertIn("The CRM and Support desk exports carry no dates", one)
+        self.assertIn("Nothing in the data measures the stop rule", one)
+        checks = json.dumps(slide(self.conflicting, "01")["blocks"][0])
+        self.assertIn("disagree, so no figure is shown", checks)
+        self.assertIn("Owner: ", checks)
+
+    def test_a_gap_never_asks_for_data_the_run_collected(self) -> None:
+        self.assertNotIn("incident data", json.dumps(self.complete).lower().replace("incident data is", ""))
 
 
 if __name__ == "__main__":

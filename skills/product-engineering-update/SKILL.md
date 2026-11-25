@@ -124,7 +124,7 @@ You may not:
 
 - print a figure that is not in `run/figures.json` (`validate.py` blocks it as `figure-not-computed`);
 - change a table, a tile, a chart, a status word, a ledger reference or the ledger;
-- drop slide 1's "Check before you rely on this" card or any gap in its list;
+- drop slide 1's "Open questions on the data" card or any gap in its list;
 - add a cause the data does not show, or claim more than the figure supports.
 
 **Titles.** One sentence: the claim, its figure and what it is compared with (target, last period or plan). Under 20 words. No engineering shorthand (`validate.py` warns: `jargon-in-title`). Follow [references/writing-rules.md](references/writing-rules.md).

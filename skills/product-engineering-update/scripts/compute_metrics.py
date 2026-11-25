@@ -457,6 +457,16 @@ def analytics(r: Run) -> None:
         r.extra["analytics_metrics"].append("analytics:" + name)
 
 
+def per_year(r: Run) -> float:
+    """How many of this period make a year: 4 for a quarter, 12 for a month, 1 for a year, as a finance team
+    annualises. Any other length goes by days. A quarter is 90 to 92 days, so days alone would misstate it."""
+    days = (r.end - r.start).days + 1
+    for low, high, n in ((89, 92, 4.0), (28, 31, 12.0), (365, 366, 1.0)):
+        if low <= days <= high:
+            return n
+    return 365 / days
+
+
 # Revenue for the period, at that rate for a year, should land near ARR. Outside this band one of the two lines is likely wrong.
 RECONCILE_BAND = (0.5, 2.0)
 
@@ -474,8 +484,7 @@ def reconcile(r: Run) -> None:
     arr = billed["value"] if billed else revenue.get("stated_arr")
     if not arr:
         return
-    days = (r.end - r.start).days + 1
-    yearly = revenue["actual"] * 365 / days
+    yearly = revenue["actual"] * per_year(r)
     ratio = yearly / arr
     if RECONCILE_BAND[0] <= ratio <= RECONCILE_BAND[1]:
         return
@@ -689,9 +698,45 @@ def derived(r: Run) -> None:
             r.extra["objective_progress"] = progress
     revenue = r.extra.get("revenue_line")
     if revenue and revenue.get("actual") and "reconcile" not in r.extra and r.data("finance"):
-        yearly = revenue["actual"] * 365 / ((r.end - r.start).days + 1)
+        yearly = revenue["actual"] * per_year(r)
         claim = f"Revenue for {r.label} is {money(revenue['actual'])}, {money(yearly)} a year at that rate"
         r.extra["run_rate"] = {"text": claim, "ledger": r.row(claim, rounded(yearly), "$", r.data("finance"), "Derived")}
+
+
+# A cost line this far over plan needs a reason the data does not give.
+OVER_PLAN = 0.10
+DATED = ("_at", "date", "month", "period", "week")
+
+
+def caveats(r: Run) -> None:
+    """Data notes a careful reader would raise, each a plain sentence for slide 1's gap list: exports with
+    no dates, cost lines well over plan with no reason, bet stop rules nothing measures, and figures built
+    from part of the window. Nothing here changes a figure."""
+    notes: list[str] = []
+    undated = []
+    for source in r.collected():
+        data = r.data(source) or {}
+        rows = data.get("rows") or []
+        # Headcount is a snapshot by nature; every other export should say when each row happened.
+        if source != "hr" and rows and not any(k.endswith(DATED) or k in DATED for k in rows[0]):
+            undated.append(data.get("system") or source)
+    if undated:
+        names = ", ".join(undated[:-1]) + (" and " if len(undated) > 1 else "") + undated[-1]
+        many = len(undated) > 1
+        notes.append(f"The {names} export{'s carry' if many else ' carries'} no dates, so {'they' if many else 'it'} cannot be tied to {r.label}.")
+    finance_rows = [x for x in (r.data("finance") or {}).get("rows") or [] if x.get("period") == r.label]
+    for line in finance_rows:
+        name, plan, actual = line.get("line"), line.get("plan"), line.get("actual")
+        if name and not str(name).lower().startswith("revenue") and plan and actual and actual > plan * (1 + OVER_PLAN):
+            notes.append(f"{name} ran {(actual / plan - 1) * 100:.1f}% over plan, and the data does not say why.")
+    for bet in r.intake.get("bets") or []:
+        if bet.get("stop_rule") and bet.get("bet"):
+            notes.append(f"Nothing in the data measures the stop rule for \u201c{bet['bet']}\u201d ({bet['stop_rule']}).")
+    for metric in r.metrics.values():
+        if metric.get("coverage"):
+            notes.append(f"{metric['label']} covers {metric['coverage']['text']}.")
+    if notes:
+        r.extra["caveats"] = notes
 
 
 STEPS = (tracker, source_control, incidents, billing, analytics, finance, reconcile, evals, ai_tools, people, survey)
@@ -709,6 +754,7 @@ def main() -> int:
         counts(r, "support", "theme", "support", "Support themes")
         customer_requests(r)
         derived(r)
+        caveats(r)
     except KeyError as e:
         # collect.py writes every column of a source, so a missing one means the file was edited by hand or is from an older run.
         raise SystemExit(f"compute: a data file in {r.data_dir} has no {e} column. Run collect.py again for that source, then run this again.") from None

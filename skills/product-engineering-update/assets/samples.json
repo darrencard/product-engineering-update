@@ -5,19 +5,19 @@
       {
         "type": "strip",
         "label": "Title",
-        "text": "Loads cleared per week reached 23.1K, against a target of 22K. Activation, at 41% against 50%, did not."
+        "text": "Loads cleared per week rose from 18.4K to 23.1K. Annual recurring revenue of $10.9M is 22% of the $50M objective, $39.1M to go."
       },
       {
         "type": "cards",
         "columns": 1,
         "items": [
           {
-            "title": "Check before you rely on this",
+            "title": "Open questions on the data",
             "body": [
               {
                 "list": [
-                  "Revenue and ARR do not reconcile. Revenue for 2026-Q3 is $10.3M, which is $40.9M a year at that rate; ARR is $10.9M. Confirm which is right before reading any ratio to revenue.",
-                  "Decision “Approve a per-load pricing pilot” was due 4 Nov 2026, which has passed. Settle it now or set a new date."
+                  "Revenue and ARR do not reconcile. Revenue for 2026-Q3 is $10.3M, which is $41.2M a year at that rate; ARR is $10.9M. Which is right decides any ratio to revenue. Owner: the VP Engineering. Due: Q4.",
+                  "Decision “Approve a per-load pricing pilot” was due 4 Nov 2026 and is not recorded as settled. Settle it or set a new date."
                 ]
               }
             ]
@@ -34,7 +34,7 @@
               {
                 "list": [
                   "Loads cleared per week rose from 18.4K to 23.1K.",
-                  "ARR $10.9M is 22% of the $50M objective, $39.1M to go.",
+                  "Annual recurring revenue of $10.9M is 22% of the $50M objective, $39.1M to go.",
                   "Yearly recurring revenue rose from $10.4M to $10.9M.",
                   "Revenue from existing customers, against what they paid before, is 96.4%.",
                   "The share of quality tests the AI feature passes rose from 82% to 86%."
@@ -59,12 +59,16 @@
         "columns": 1,
         "items": [
           {
-            "title": "Missing this period: 2 gaps, each with an owner and a date",
+            "title": "Gaps and data notes: 6, each with an owner and a date",
             "body": [
               {
                 "list": [
-                  "Platform & security: Service-level objectives and error budgets, incident data, audit status, vulnerability ageing, the debt register. Owner: the VP Engineering. Due: Q4.",
-                  "AI in the product: AI revenue and cost of revenue, for AI gross margin. Owner: the VP Engineering. Due: Q4."
+                  "Platform & security: Service-level objectives and error budgets, audit status, vulnerability ageing, the debt register. Owner: the VP Engineering. Due: Q4.",
+                  "AI in the product: AI revenue and cost of revenue, for AI gross margin. Owner: the VP Engineering. Due: Q4.",
+                  "Data note: The CRM and Support desk exports carry no dates, so they cannot be tied to 2026-Q3. Owner: the VP Engineering. Due: Q4.",
+                  "Data note: Inference (cost of revenue) ran 27.5% over plan, and the data does not say why. Owner: the VP Engineering. Due: Q4.",
+                  "Data note: Nothing in the data measures the stop rule for “Multi-stop reroutes” (Evals gain under 2 points by week 3). Owner: the VP Engineering. Due: Q4.",
+                  "Data note: Nothing in the data measures the stop rule for “Guided activation” (No lift in a 2 week live test). Owner: the VP Engineering. Due: Q4."
                 ]
               }
             ]
@@ -302,9 +306,9 @@
         "columns": 1,
         "items": [
           {
-            "title": "Check before the board sees this",
+            "title": "Revenue and ARR do not reconcile",
             "body": [
-              "Revenue and ARR do not reconcile. Revenue for 2026-Q3 is $10.3M, which is $40.9M a year at that rate; ARR is $10.9M. Confirm which line is right before reading R&D as a share of revenue."
+              "Revenue and ARR do not reconcile. Revenue for 2026-Q3 is $10.3M, which is $41.2M a year at that rate; ARR is $10.9M. Which line is right decides R&D as a share of revenue."
             ]
           }
         ]

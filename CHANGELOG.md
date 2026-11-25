@@ -6,7 +6,8 @@
 - **Voice.** The intake takes an optional `voice`: a few lines on how the author writes, or a paragraph of a past update. Claude writes the prose that way; figures and checks never change.
 - **Progress to the objective, computed.** When an objective names ARR and a money target ("$50M"), compute adds a ledger row with ARR's share of it and what is left, and slide 1 shows it. Revenue at its yearly rate is a ledger row too. The 0.8.0 rerun judge credited Claude alone for working these out.
 - **No empty slides.** Once slide 1 is drafted it lists every gap with its owner and date, so slides with no data are dropped. The deck records its gaps in `meta.gaps`. Without slide 1 (too little data), gap slides stay as before.
-- 22 blocking rules and 4 warnings. 188 tests.
+- **The five causes from the v0.8.3 rerun.** Revenue is annualised as a finance team does it (4 times a quarter, 12 times a month), so $10.3M in a quarter is $41.2M a year, not $40.9M. No internal notes reach the deck: slide 1's card is "Open questions on the data" and slide 5's is "Revenue and ARR do not reconcile", each with an owner and a date. Slide 1 has its own title, no longer a copy of slide 11's. Slide 1 adds data notes: exports with no dates, cost lines more than 10% over plan with no reason, bet stop rules nothing measures, and figures built from part of the window. A gap never asks for data the run collected. With tracker data and no plan, slide 5 shows the effort mix and asks for the plan.
+- 22 blocking rules and 4 warnings. 192 tests.
 
 ## 0.8.3 (2026-11-25)
 
