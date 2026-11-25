@@ -5,7 +5,7 @@
       {
         "type": "strip",
         "label": "Title",
-        "text": "Loads cleared per week rose from 18.4K to 23.1K. Annual recurring revenue of $10.9M is 22% of the $50M objective, $39.1M to go."
+        "text": "Loads cleared per week rose from 18.4K to 23.1K. Yearly recurring revenue rose from $10.4M to $10.9M."
       },
       {
         "type": "cards",
@@ -34,10 +34,10 @@
               {
                 "list": [
                   "Loads cleared per week rose from 18.4K to 23.1K.",
-                  "Annual recurring revenue of $10.9M is 22% of the $50M objective, $39.1M to go.",
                   "Yearly recurring revenue rose from $10.4M to $10.9M.",
                   "Revenue from existing customers, against what they paid before, is 96.4%.",
-                  "The share of quality tests the AI feature passes rose from 82% to 86%."
+                  "The share of quality tests the AI feature passes rose from 82% to 86%.",
+                  "The share of releases that caused a problem in production rose from 5.1% to 7.7%."
                 ]
               }
             ]
@@ -561,6 +561,14 @@
             "target": "under 10h",
             "status": "stalled",
             "definition": "Typical (median) time a code change spent in review by a colleague."
+          },
+          {
+            "metric": "Rework rate",
+            "prior": "11.7%",
+            "actual": "15%",
+            "target": "No range set yet",
+            "status": "stalled",
+            "definition": "Share of accepted code changes that had to be reworked."
           }
         ]
       }

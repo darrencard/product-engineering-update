@@ -853,7 +853,7 @@ class ClaudeWritesSkillChecks(unittest.TestCase):
 
     def test_a_rewritten_title_that_reuses_computed_figures_passes(self) -> None:
         deck, allowed = self.drafted()
-        slide(deck, "01")["title"] = "ARR reached $10.9M, 22% of the $50M goal, with $39.1M still to go."
+        slide(deck, "01")["title"] = "Loads cleared per week reached 23.1K, past the 22K target, up from 18.4K."
         self.assertEqual([e for e in validate.check(deck, allowed=allowed)["errors"] if e["rule"] == "figure-not-computed"], [])
 
     def test_a_figure_the_pipeline_did_not_compute_is_blocked(self) -> None:
@@ -875,9 +875,17 @@ class ClaudeWritesSkillChecks(unittest.TestCase):
         with self.assertRaises(SystemExit):
             figures.load(self.work / "complete" / "deck.json")
 
-    def test_slide_1_shows_progress_to_the_money_objective(self) -> None:
+    def test_slide_1_shows_progress_to_the_money_objective_only_when_revenue_and_arr_agree(self) -> None:
         deck, _ = self.drafted()
-        self.assertIn("22% of the $50M objective, $39.1M to go", json.dumps(slide(deck, "01")))
+        self.assertNotIn("of the $50M objective", json.dumps(slide(deck, "01")), "held while revenue and ARR do not reconcile")
+        base = self.work / "fixtures"
+        shutil.copytree(SKILL.parent.parent / "evals" / "fixtures" / "complete", base / "complete")
+        finance = base / "complete" / "csv" / "finance.csv"
+        finance.write_text(
+            finance.read_text(encoding="utf-8").replace("Revenue,2026-Q3,10000000,10300000", "Revenue,2026-Q3,2600000,2700000"), encoding="utf-8"
+        )
+        agreed, _ = run_fixture("complete", self.work / "agreed", base)
+        self.assertIn("22% of the $50M objective, $39.1M to go", json.dumps(slide(agreed, "01")))
 
     def test_slides_with_no_data_go_once_slide_1_lists_their_gaps(self) -> None:
         deck, _ = self.drafted()
@@ -958,13 +966,44 @@ class BoardOnePage(unittest.TestCase):
         board = render.cut_deck(deck, "B")
         core = [s for s in board["slides"] if s["kind"] == "slide"]
         self.assertEqual(core[0]["id"], "01")
-        detail = json.dumps(core[0]["blocks"][-1])
-        self.assertIn("The detail, in the appendix", detail)
+        pointer = json.dumps(core[0]["blocks"][-1])
         for s in core[1:]:
             self.assertEqual(s["act"], render.BOARD_DETAIL)
-            self.assertIn(json.dumps(s["title"])[1:-1], detail)
+            if s["id"] != "01g":
+                self.assertIn(s["nav"], pointer)
         self.assertNotIn("today", json.dumps(board["slides"]).lower())
-        self.assertEqual(json.dumps(deck["slides"]).count("The detail, in the appendix"), 0, "only the board cut changes")
+        self.assertNotIn("in the appendix", json.dumps(deck["slides"]), "only the board cut changes")
+
+
+class Mini090Causes(unittest.TestCase):
+    """The three causes the v0.9.0 mini eval judge named."""
+
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.work = Path(tempfile.mkdtemp())
+        cls.deck, _ = run_fixture("complete", cls.work)
+
+    @classmethod
+    def tearDownClass(cls) -> None:
+        shutil.rmtree(cls.work)
+
+    def test_the_board_page_is_short_and_the_gap_list_moves_to_the_appendix(self) -> None:
+        board = render.cut_deck(self.deck, "B")
+        core = [s for s in board["slides"] if s["kind"] == "slide"]
+        page = json.dumps(core[0]["blocks"])
+        self.assertNotIn("Data note:", page)
+        self.assertIn("gaps and data notes, each with an owner and a date, are in the appendix", page)
+        self.assertEqual(core[1]["id"], "01g")
+        self.assertIn("Data note:", json.dumps(core[1]["blocks"]))
+        self.assertTrue(all(s["act"] == render.BOARD_DETAIL for s in core[1:]))
+
+    def test_rework_shows_beside_speed_even_with_no_range(self) -> None:
+        rows = [r for b in slide(self.deck, "09")["blocks"] if b["type"] == "scorecard" for r in b["rows"] if "metric" in r]
+        rework = next(r for r in rows if r["metric"] == "Rework rate")
+        self.assertEqual(rework["target"], "No range set yet")
+        self.assertNotEqual(rework["status"], "landed")
+        self.assertEqual(validate.check(self.deck)["errors"], [])
+        self.assertEqual(validate.NO_RANGE, draft.NO_RANGE)
 
 
 if __name__ == "__main__":

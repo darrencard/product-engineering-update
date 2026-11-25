@@ -129,7 +129,16 @@ You may not:
 
 **Titles.** One sentence: the claim, its figure and what it is compared with (target, last period or plan). Under 20 words. No engineering shorthand (`validate.py` warns: `jargon-in-title`). Follow [references/writing-rules.md](references/writing-rules.md).
 
-**Voice.** If the intake has `voice` (a few lines on how the user writes, or a paragraph of a past update), write like that: their sentence length, their words, their level of formality. Without it, write plain and direct. Voice changes the wording, never the figures or the checks.
+**How it reads, in any voice.** A reader outside the team should follow it in one pass.
+
+- Clear and short: one idea per sentence, everyday words, active voice. Cut any sentence that adds nothing.
+- No filler or hype: no "significant", "robust", "exciting", "leverage", "key learnings".
+- No jargon: say what a term means, or use the plain word. Keep the term in the table, not the title.
+- Accurate: every claim matches its figure and its comparison. Say "we don't know" where the data doesn't say.
+- Consistent: one name for each thing across the deck (pick "ARR" or "annual recurring revenue" and keep it).
+- A narrative: the titles, read in order, tell the story of the period on their own.
+
+**Voice.** If the intake has `voice` (a few lines on how the user writes, or a paragraph of a past update), write like that: their sentence length, their words, their level of formality. Voice changes the wording, never the figures or the checks.
 
 If a figure you need is missing, the data is missing: say so in the gap list, or add the source and run compute and draft again. Never work a figure out yourself.
 

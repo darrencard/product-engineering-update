@@ -682,7 +682,8 @@ def derived(r: Run) -> None:
     objective, and revenue at its yearly rate. Computed here so a draft never has to do the arithmetic.
     Runs last, so the ledger IDs of every other row stay the same."""
     arr = r.metrics.get("arr")
-    if arr and arr.get("value") and not arr.get("conflict"):
+    # Progress to an ARR objective waits while revenue and ARR do not reconcile: one of the two lines is likely wrong.
+    if arr and arr.get("value") and not arr.get("conflict") and "reconcile" not in r.extra:
         row = next(x for x in r.ledger if x["id"] == arr["ledger"])
         progress = []
         for objective in r.intake.get("objectives") or []:
