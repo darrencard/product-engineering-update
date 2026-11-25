@@ -2551,7 +2551,7 @@
         {
           "type": "strip",
           "label": "Status.",
-          "text": "The template is ready to use by hand today. The skill is published as version 0.8.0 at github.com/darrencard/product-engineering-update. It has been tested on synthetic companies and on one real repository's GitHub and Vercel history, not yet on a real company's full data."
+          "text": "The template is ready to use by hand today. The skill is published as version 0.8.1 at github.com/darrencard/product-engineering-update. It has been tested on synthetic companies and on one real repository's GitHub and Vercel history, not yet on a real company's full data."
         },
         {
           "type": "steps",
