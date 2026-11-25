@@ -4,6 +4,12 @@
 
 - **Ablation eval.** `evals/ablation/` compares the skill's pipeline with Claude alone on the same fixture data, with a blind judge, noise runs and mechanical checks. It calls the model, so it stays out of the unit tests and CI. On the 6 synthetic fixtures the judge preferred Claude alone in 36 of 36 judgments. The skill made 0 arithmetic errors and Claude alone 1 in 1,049 checked figures. The skill's behaviour is unchanged. Results and limits: `docs/ablation.md`.
 
+## 0.8.1 (2026-11-24)
+
+- **The Google Drive reader reads the Claude Drive connector.** The first live run, on the maintainer's own drive through the Claude Google Drive connector, found it names a file's title and link `title` and `viewUrl`, where the Drive API says `name` and `webViewLink`. `from_gdrive.py` now reads either. Google Drive joins GitHub and Vercel as a reader run on a live account.
+- **Signed from here.** This is the first release with a signed tag, and `main` now only accepts signed commits. `docs/security.md` says what that covers.
+- 174 tests.
+
 ## 0.8.0 (2026-11-24)
 
 Four fixes from the ablation eval in `docs/ablation.md`, where a blind judge preferred Claude alone to the skill's pipeline in 36 of 36 comparisons. The judge's reasons named these.
