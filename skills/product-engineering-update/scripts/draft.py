@@ -67,6 +67,11 @@ def load(path: Path) -> Json:
         return json.load(f)
 
 
+def needs(slide: Json) -> list[Json]:
+    """The data_needed items a slide holds directly, in its card blocks. Samples are not searched."""
+    return [item for b in slide["blocks"] if b.get("type") == "cards" for item in b.get("items", []) if item.get("type") == "data_needed"]
+
+
 def plural(n: int, word: str) -> str:
     return f"{n} {word}" if n == 1 else f"{n} {word}s"
 
@@ -244,6 +249,45 @@ class Draft:
             "owner": self.intake.get("gap_owner") or "[owner]",
             "due": self.intake.get("gap_due") or "[date]",
         }
+
+    def owner_for(self, sid: str) -> str:
+        """Who owns a slide's gap: the slide's own owner from the intake's gap_owners, else the deck-wide gap_owner."""
+        owners = self.intake.get("gap_owners") or {}
+        owner = owners.get(sid) if isinstance(owners, dict) else None
+        return owner or self.intake.get("gap_owner") or "[owner]"
+
+    def gap_register(self) -> None:
+        """Slide 1 leads with every figure held because sources disagree, then lists every gap in the deck with its owner
+        and date. A reader sees what not to rely on before reading anything else."""
+        if "01" not in self.filled:
+            return
+        checks: list[str] = []
+        refs: list[str] = []
+        # A disputed figure never prints as a number, here or anywhere: name the sources, cite the row that holds both values.
+        for c in self.m["conflicts"]:
+            row = next((r for r in self.m["ledger"] if r["claim"].startswith(f"{c['metric']}: sources disagree")), None)
+            sources = " and ".join(v["source"] for v in c["values"])
+            cite = f"[[{row['id']}]]" if row else ""
+            checks.append(f"{c['metric']}: {sources} disagree, so no figure is shown. Name the source that owns it.{cite}")
+            if row:
+                refs.append(row["id"])
+        check = self.extra.get("reconcile")
+        if check:
+            checks.append(f"{check['text']} Confirm which is right before reading any ratio to revenue.[[{check['ledger']}]]")
+            refs.append(check["ledger"])
+        missing = [
+            f"{s['nav']}: {item['text']} Owner {item['owner']}, due {item['due']}."
+            for s in self.deck["slides"]
+            if s["kind"] == "slide" and s["id"] != "01"
+            for item in needs(s)
+        ]
+        slide = self.slides["01"]
+        if checks:
+            slide["blocks"].insert(0, {"type": "cards", "columns": 1, "items": [{"title": "Check before you rely on this", "body": [{"list": checks}]}]})
+        if missing:
+            title = f"Missing this period: {plural(len(missing), 'gap')}, each with an owner and a date"
+            slide["blocks"].append({"type": "cards", "columns": 1, "items": [{"title": title, "body": [{"list": missing}]}]})
+        slide["ledger_refs"] = sorted(set(slide["ledger_refs"]) | set(refs))
 
     def fill(self, sid: str, title: str, blocks: list[Json], refs: list[str], asof: str) -> None:
         s = self.slides[sid]
@@ -800,17 +844,9 @@ class Draft:
             return
         items: list[Json] = [{"title": "What happened", "body": [{"list": [f"{text}[[{ref}]]" for text, ref in points[:4]]}]}]
         items.append({"title": "Now what", "body": [{"list": asks}] if asks else ["No decisions were supplied for this period."]})
-        gaps = [s["nav"] for s in self.deck["slides"] if s["kind"] == "slide" and s["id"] not in self.filled and s["id"] != "01"]
-        held = [c["metric"] for c in self.m["conflicts"]]
-        notes = []
-        if gaps:
-            notes.append(f"{plural(len(gaps), 'slide')} lack data this period: {', '.join(gaps)}.")
-        if held:
-            notes.append(f"{plural(len(held), 'figure')} held because two sources disagree: {', '.join(held)}.")
-        if notes:
-            items.append({"title": "Not reported", "body": notes})
         title = self.slides["11"]["title"] if "11" in self.filled else points[0][0]
-        blocks: list[Json] = [{"type": "cards", "columns": 3 if len(items) == 3 else 2, "items": items}]
+        # gap_register() adds the checks and the gaps once every slide is drafted.
+        blocks: list[Json] = [{"type": "cards", "columns": 2, "items": items}]
         since = self.since_last()
         if since is not None:
             blocks.append({"type": "cards", "columns": 1, "items": [{"title": "Since the last update", "body": [{"list": since}] if since else [NO_CHANGE]}]})
@@ -993,16 +1029,15 @@ class Draft:
             if s["kind"] != "slide":
                 continue
             s["kicker"] = s["act"]
+            for item in needs(s):
+                item["owner"] = self.owner_for(s["id"])
+                item["due"] = intake.get("gap_due") or item["due"]
             if s["id"] in self.filled:
                 continue
             s["title"] = f"{s['nav']} is not reported this period. The data is missing."
-            for b in s["blocks"]:
-                for item in b.get("items", []):
-                    if item.get("type") == "data_needed":
-                        if s["id"] == "09" and self.held_speed():
-                            item["text"] = self.held_speed()
-                        item["owner"] = intake.get("gap_owner") or item["owner"]
-                        item["due"] = intake.get("gap_due") or item["due"]
+            if s["id"] == "09" and self.held_speed():
+                for item in needs(s):
+                    item["text"] = self.held_speed()
             s["asof"] = f"No data collected for {intake['period']['label']}."
             sample = self.samples["slides"].get(s["id"])
             if sample:
@@ -1015,6 +1050,7 @@ class Draft:
                         "blocks": copy.deepcopy(sample),
                     }
                 )
+        self.gap_register()
         core = [s for s in deck["slides"] if s["kind"] == "slide"]
         cover["blocks"] = [
             {

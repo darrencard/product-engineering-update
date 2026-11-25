@@ -757,5 +757,57 @@ class Release080(unittest.TestCase):
         self.assertNotIn("Revenue and ARR do not reconcile", json.dumps(disputed))
 
 
+class GapRegister(unittest.TestCase):
+    """The ablation judge preferred decks that named every gap with an owner and led with source conflicts (0.8.0 rerun)."""
+
+    def setUp(self) -> None:
+        self.work = Path(tempfile.mkdtemp())
+        self.addCleanup(shutil.rmtree, self.work)
+
+    @staticmethod
+    def titles(s: Any) -> list[str]:
+        return [item.get("title", "") for b in s["blocks"] if b.get("type") == "cards" for item in b.get("items", [])]
+
+    def test_slide_1_leads_with_the_revenue_check_and_cites_it(self) -> None:
+        deck, metrics = run_fixture("complete", self.work)
+        one = slide(deck, "01")
+        self.assertEqual(self.titles(one)[0], "Check before you rely on this")
+        self.assertIn("Revenue and ARR do not reconcile", json.dumps(one["blocks"][0]))
+        self.assertIn(metrics["extra"]["reconcile"]["ledger"], one["ledger_refs"])
+        self.assertEqual(validate.check(deck)["errors"], [])
+
+    def test_every_gap_in_the_deck_is_listed_on_slide_1_with_its_owner_and_date(self) -> None:
+        deck, _ = run_fixture("complete", self.work)
+        gaps = [(s["nav"], i) for s in deck["slides"] if s["kind"] == "slide" and s["id"] != "01" for i in draft.needs(s)]
+        self.assertTrue(gaps, "the fixture has at least one gap")
+        register = json.dumps(slide(deck, "01"))
+        for nav, item in gaps:
+            self.assertIn(json.dumps(f"{nav}: {item['text']} Owner {item['owner']}, due {item['due']}.")[1:-1], register)
+        self.assertNotIn("Not reported", register)
+
+    def test_a_figure_held_for_disagreeing_sources_leads_slide_1(self) -> None:
+        deck, _ = run_fixture("conflicting", self.work)
+        one = slide(deck, "01")
+        if "01" not in {s["id"] for s in deck["slides"]} or not one["ledger_refs"]:
+            self.skipTest("the fixture has too few figures for slide 1")
+        self.assertEqual(self.titles(one)[0], "Check before you rely on this")
+        self.assertIn("disagree, so no figure is shown", json.dumps(one["blocks"][0]))
+
+    def test_gap_owners_names_an_owner_per_slide(self) -> None:
+        base = self.work / "fixtures"
+        shutil.copytree(SKILL.parent.parent / "evals" / "fixtures" / "complete", base / "complete")
+        deck, _ = run_fixture("complete", self.work / "first")
+        sid = next(s["id"] for s in deck["slides"] if s["kind"] == "slide" and s["id"] != "01" and draft.needs(s))
+        path = base / "complete" / "intake.json"
+        intake = json.loads(path.read_text(encoding="utf-8"))
+        intake["gap_owners"] = {sid: "Priya Shah, finance"}
+        path.write_text(json.dumps(intake), encoding="utf-8")
+        deck, _ = run_fixture("complete", self.work / "second", base)
+        self.assertTrue(all(i["owner"] == "Priya Shah, finance" for i in draft.needs(slide(deck, sid))))
+        self.assertIn("Owner Priya Shah, finance", json.dumps(slide(deck, "01")))
+        others = [i["owner"] for s in deck["slides"] if s["kind"] == "slide" and s["id"] not in (sid, "01") for i in draft.needs(s)]
+        self.assertTrue(all(o == intake["gap_owner"] for o in others))
+
+
 if __name__ == "__main__":
     unittest.main()

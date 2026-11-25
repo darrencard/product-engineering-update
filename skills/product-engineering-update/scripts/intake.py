@@ -46,6 +46,8 @@ EMPTY: Json = {
     # Who owns a gap when nobody else is named, and when it is due. Used on data_needed blocks.
     "gap_owner": None,
     "gap_due": None,
+    # Optional: an owner per slide, by slide ID, for example {"06": "Priya, finance"}. Unlisted slides use gap_owner.
+    "gap_owners": None,
     "objectives": [],  # [{"name": "Grow ARR to $50M", "target": "$50M", "owner": "CEO"}]
     "strategy": {"diagnosis": None, "policy": None, "actions": [], "non_goals": []},
     "product_lines": [],  # [{"name": "...", "stage": "Explore|Expand|Sustain", "objective": "..."}]

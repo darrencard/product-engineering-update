@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+- **Slide 1 leads with what not to rely on.** It opens with a "Check before you rely on this" card: every figure held because two sources disagree (named by source, never by number) and the revenue against ARR check, each cited to its ledger row. It closes with every gap in the deck, each with what is missing, its owner and its date. Before, it listed only the names of empty slides. This answers the 0.8.0 ablation rerun, where the judge preferred Claude alone on showing gaps 35 to 1.
+- **An owner per gap.** The intake takes an optional `gap_owners`, an owner per slide ID; unlisted slides use `gap_owner`.
+- 178 tests.
+
 ## 0.8.2 (2026-11-25)
 
 - **Ablation eval, third condition.** The eval now also runs Claude with the skill installed (condition C), loaded with `--plugin-dir`, and judges C against Claude alone, C against the pipeline, and the pipeline against Claude alone. Claude and Claude-with-skill runs read project settings only, so no user output style reaches them. On v0.8.0 and the 6 synthetic fixtures, the judge preferred Claude alone to Claude with the skill in 36 of 36 judgments, mostly because the skill holds the board cut back without a sign-off in an unattended run. Claude with the skill made 0 arithmetic errors against 2 for Claude alone. The skill's behaviour is unchanged. Results: `docs/ablation.md`.

@@ -73,6 +73,7 @@ These 7 fields (all but `author`) are the answers a run cannot start without. `r
 | `as_of` | string, `YYYY-MM-DD` | Blocking, must be a date | Slide 1 "Data as of", deck meta. `compute_metrics.py` stops if HR data is collected and `as_of` is missing | `"2026-09-30"` |
 | `gap_owner` | string | Blocking | The owner on every `data_needed` block | `"the VP Engineering"` |
 | `gap_due` | string | Blocking | The due date on every `data_needed` block. Free text | `"Q4"` |
+| `gap_owners` | object | Optional | An owner per slide, keyed by slide ID. A listed slide's gaps go to that person; the rest go to `gap_owner` | `{"06": "Priya Shah, finance"}` |
 
 ## Strategy and objectives
 
