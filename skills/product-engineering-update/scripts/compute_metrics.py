@@ -23,6 +23,7 @@ from __future__ import annotations
 import argparse
 import datetime
 import json
+import re
 import statistics
 import sys
 from collections import Counter
@@ -651,6 +652,48 @@ def survey(r: Run) -> None:
         r.metric("dev_experience", "Developer experience index", score, statistics.mean(prior) if prior else None, "score", src)
 
 
+MONEY_TARGET = re.compile(r"^\$\s?(\d+(?:\.\d+)?)\s?(k|thousand|m|million|b|billion)?$", re.I)
+SCALE = {"k": 1e3, "thousand": 1e3, "m": 1e6, "million": 1e6, "b": 1e9, "billion": 1e9}
+
+
+def money_target(text: object) -> float | None:
+    """A money target as the intake writes it ("$50M", "$1.2 billion", "$500K"), or None for anything else."""
+    m = MONEY_TARGET.match(str(text or "").strip())
+    if not m:
+        return None
+    return float(m.group(1)) * SCALE.get((m.group(2) or "").lower(), 1.0)
+
+
+def source_of(row: Json) -> Json:
+    return {"system": row["source_system"], "query_or_url": row.get("query_or_url"), "retrieved_at": row.get("retrieved_at")}
+
+
+def derived(r: Run) -> None:
+    """Figures one step from a computed metric that a reader works out anyway: how far ARR is toward a money
+    objective, and revenue at its yearly rate. Computed here so a draft never has to do the arithmetic.
+    Runs last, so the ledger IDs of every other row stay the same."""
+    arr = r.metrics.get("arr")
+    if arr and arr.get("value") and not arr.get("conflict"):
+        row = next(x for x in r.ledger if x["id"] == arr["ledger"])
+        progress = []
+        for objective in r.intake.get("objectives") or []:
+            name = str(objective.get("name") or "")
+            target = money_target(objective.get("target"))
+            if not target or "arr" not in name.lower():
+                continue
+            share, to_go = arr["value"] / target * 100, target - arr["value"]
+            claim = f"ARR {money(arr['value'])} is {share:.0f}% of the {objective['target']} objective, {money(to_go)} to go"
+            lid = r.row(claim, round(share, 1), "%", source_of(row), "Derived")
+            progress.append({"objective": name, "target": objective["target"], "share": round(share, 1), "to_go": money(to_go), "text": claim, "ledger": lid})
+        if progress:
+            r.extra["objective_progress"] = progress
+    revenue = r.extra.get("revenue_line")
+    if revenue and revenue.get("actual") and "reconcile" not in r.extra and r.data("finance"):
+        yearly = revenue["actual"] * 365 / ((r.end - r.start).days + 1)
+        claim = f"Revenue for {r.label} is {money(revenue['actual'])}, {money(yearly)} a year at that rate"
+        r.extra["run_rate"] = {"text": claim, "ledger": r.row(claim, rounded(yearly), "$", r.data("finance"), "Derived")}
+
+
 STEPS = (tracker, source_control, incidents, billing, analytics, finance, reconcile, evals, ai_tools, people, survey)
 
 
@@ -665,6 +708,7 @@ def main() -> int:
         counts(r, "crm", "reason", "crm", "Win and loss reasons")
         counts(r, "support", "theme", "support", "Support themes")
         customer_requests(r)
+        derived(r)
     except KeyError as e:
         # collect.py writes every column of a source, so a missing one means the file was edited by hand or is from an older run.
         raise SystemExit(f"compute: a data file in {r.data_dir} has no {e} column. Run collect.py again for that source, then run this again.") from None

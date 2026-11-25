@@ -862,6 +862,9 @@ class Draft:
         """The board's one delivery slide: the computed changes from the slides it condenses."""
         keys = ("deploys_per_week", "change_failure_rate", "review_time", "ai_weekly_use")
         points = [(self.change(k), self.metrics[k]["ledger"]) for k in keys if k in self.metrics and self.change(k)]
+        # Where ARR stands against a money objective, computed in compute_metrics.derived(), so the draft does no arithmetic.
+        progress = [(f"{p['text']}.", p["ledger"]) for p in self.extra.get("objective_progress") or []]
+        points = points[:1] + progress + points[1:]
         if len(points) < 2 or "09" not in self.filled:
             return
         cards = [{"title": "Delivery and its cost", "body": [{"list": [f"{text}[[{ref}]]" for text, ref in points]}]}]
@@ -878,10 +881,13 @@ class Draft:
         north = (self.intake.get("north_star") or {}).get("metric")
         keys = [f"analytics:{north}" if north else "", "arr", "nrr", "eval_pass_rate", "change_failure_rate"]
         points = [(self.change(k), self.metrics[k]["ledger"]) for k in keys if k in self.metrics and self.change(k)]
+        # Where ARR stands against a money objective, computed in compute_metrics.derived(), so the draft does no arithmetic.
+        progress = [(f"{p['text']}.", p["ledger"]) for p in self.extra.get("objective_progress") or []]
+        points = points[:1] + progress + points[1:]
         asks = [d["ask"] for d in self.intake.get("decisions") or []]
         if len(points) < 2:
             return
-        items: list[Json] = [{"title": "What happened", "body": [{"list": [f"{text}[[{ref}]]" for text, ref in points[:4]]}]}]
+        items: list[Json] = [{"title": "What happened", "body": [{"list": [f"{text}[[{ref}]]" for text, ref in points[:5]]}]}]
         items.append({"title": "Now what", "body": [{"list": asks}] if asks else ["No decisions were supplied for this period."]})
         title = self.slides["11"]["title"] if "11" in self.filled else points[0][0]
         # gap_register() adds the checks and the gaps once every slide is drafted.
@@ -893,7 +899,7 @@ class Draft:
             "01",
             title,
             blocks,
-            [ref for _, ref in points[:4]],
+            [ref for _, ref in points[:5]],
             f"Data as of {self.intake['as_of']}. Status words: landed, watch, stalled.",
         )
 
@@ -1090,13 +1096,36 @@ class Draft:
                     }
                 )
         self.gap_register()
-        core = [s for s in deck["slides"] if s["kind"] == "slide"]
+        deck["meta"]["gaps"] = [
+            {"slide": s["id"], "nav": s["nav"], "text": i["text"], "owner": i["owner"], "due": i["due"]}
+            for s in deck["slides"]
+            if s["kind"] == "slide" and s["id"] != "01"
+            for i in needs(s)
+        ]
+        if "01" in self.filled:
+            # Slide 1 lists every gap with its owner and date, so a slide with no data adds only length. It goes.
+            deck["slides"] = [s for s in deck["slides"] if s["kind"] != "slide" or s["id"] in self.filled]
+            self.slides = {s["id"]: s for s in deck["slides"]}
+            for s in deck["slides"]:
+                if "rolls_up" in s:
+                    s["rolls_up"] = [sid for sid in s["rolls_up"] if sid in self.slides]
+            gaps = len(deck["meta"]["gaps"])
+            lede = (
+                f"{len(self.filled)} slides show data for {intake['period']['label']}. "
+                + (f"Slide 1 lists the {plural(gaps, 'gap')}, each with an owner and a date. " if gaps else "")
+                + "Every figure has a row in the evidence ledger."
+            )
+        else:
+            core = [s for s in deck["slides"] if s["kind"] == "slide"]
+            lede = (
+                f"{len(self.filled)} of {len(core)} slides show data for {intake['period']['label']}. "
+                "The rest show what is missing, who owns it and when it is due. Every figure has a row in the evidence ledger."
+            )
         cover["blocks"] = [
             {
                 "type": "text",
                 "variant": "lede",
-                "text": f"{len(self.filled)} of {len(core)} slides show data for {intake['period']['label']}. "
-                "The rest show what is missing, who owns it and when it is due. Every figure has a row in the evidence ledger.",
+                "text": lede,
             },
             *[b for b in cover["blocks"] if b["type"] == "facts"],
         ]
