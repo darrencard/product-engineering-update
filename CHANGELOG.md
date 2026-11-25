@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.7.3 (2026-11-24)
+
+Three fixes found while writing the reference docs in `docs/`.
+
+- **The board cut carries its sign-off.** `render.py --cut B` now refuses a blank `--signed-off-by` (it accepted one made of spaces) and prints "Signed off by <name>" on the board cut's cover, so the sign-off travels with the file. Other cuts carry none.
+- **An item with nothing to print is caught before the draft.** A product line, bet, risk, stopped item or decision without its key (`name`, `bet`, `risk`, `what`, `ask`) made `draft.py` crash with a Python `KeyError`. `intake.py check` now lists each one as blocking, and `draft.py` refuses with the same list.
+- **The validator's rule list is complete.** `RULES` named 19 of the 21 blocking rules; it now names all 21, and a new `WARNINGS` list names the 4 warnings. A test keeps both in step with the rules the code raises and with `docs/validator-rules.md`.
+
 ## 0.7.2 (2026-11-24)
 
 - **Slide 11's title reads right for one outcome.** With a single outcome the draft said "None of the 1 reported outcomes met its target." It now names the outcome with its number and target, for example "Unique cloners is at 15, short of its target of 25." Two or more outcomes keep the count, now in the plural throughout ("met their targets").

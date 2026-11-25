@@ -45,7 +45,7 @@ This page is for a security reviewer. Every statement on it comes from the code,
 
 **Standard library only.** `pyproject.toml` sets `dependencies = []` and `requires-python = ">=3.9"`, with the comment that the scripts run inside sandboxes that can't install packages. Each script's docstring says "Standard library only." The import scan above is the only test of imports; there is no separate test that every import is from the standard library.
 
-**Pinned releases.** Releases are git tags (`v0.2.0` to `v0.7.2` at the time of writing). The one-prompt start in `README.md` names a fixed release (`v0.7.2`) and asks Claude to check the download against `SHA256SUMS` before installing, so a later change to the repository doesn't reach a user until they choose a newer release.
+**Pinned releases.** Releases are git tags (`v0.2.0` to `v0.7.3` at the time of writing). The one-prompt start in `README.md` names a fixed release (`v0.7.3`) and asks Claude to check the download against `SHA256SUMS` before installing, so a later change to the repository doesn't reach a user until they choose a newer release.
 
 **How a release is built.** `tools/release.sh <version>`:
 
@@ -100,7 +100,7 @@ A test checks that `contents: write` appears exactly once in the example.
 
 **It never renders the board cut.** `ci.py` renders only Leadership and Staff. A test checks that neither `action.yml` nor the example contains `--board`, `signed-off-by` or `--cut B`, and another checks the output folder holds only the two cuts, their ledgers, `deck.json` and `SUMMARY.txt`.
 
-**Pinning.** A test checks that every third-party action is pinned to a full 40-character commit SHA (`actions/upload-artifact`, `actions/checkout`, `actions/download-artifact`), and that this action is referenced by a release tag (`@v0.7.2`), never `main`. A test also checks that neither file uses `github.event`, so no event text such as a pull request title can reach a shell. Inputs reach shell steps through environment variables.
+**Pinning.** A test checks that every third-party action is pinned to a full 40-character commit SHA (`actions/upload-artifact`, `actions/checkout`, `actions/download-artifact`), and that this action is referenced by a release tag (`@v0.7.3`), never `main`. A test also checks that neither file uses `github.event`, so no event text such as a pull request title can reach a shell. Inputs reach shell steps through environment variables.
 
 **Tested status.** `references/github-action.md` and `CHANGELOG.md` say the steps were tested by running them locally against real exports, and that the action has not yet run in GitHub's own CI.
 
@@ -108,7 +108,7 @@ A test checks that `contents: write` appears exactly once in the example.
 
 The board cut needs a named person's explicit yes.
 
-- `render.py --cut B` refuses to run without `--signed-off-by`, and prints the name in its console output.
+- `render.py --cut B` refuses to run without `--signed-off-by` holding a non-blank name, prints "Signed off by <name>" on the board cut's cover, and prints the name in its console output.
 - `run.py --board` refuses to run without `--signed-off-by` holding a non-blank name.
 - `summary.py --cut B` refuses without a non-blank `--signed-off-by`, writes nothing, and adds "Signed off by <name>." to the summary.
 - `summary.py` also refuses a deck with validator errors.
@@ -122,7 +122,7 @@ Tests: `test_the_board_cut_needs_a_named_sign_off` and `test_the_board_cut_still
 - **Unsigned releases.** Release commits and tags are not signed. The tags are annotated but carry no GPG or SSH signature.
 - **Tag pinning.** The workflow pins this action by release tag, not by commit SHA. A git tag can be moved by someone with write access to this repository. If you need an immutable reference, pin the commit SHA the tag points to.
 - **No audit or certification.** No third-party security audit has been done, and the project claims no certification.
-- **The sign-off is a name, not an identity.** `--signed-off-by` takes any text. Nothing checks who the person is. `render.py` checks only that the flag is present; `run.py` and `summary.py` also reject a blank name. `render.py` doesn't write the name into the board HTML file; it prints it to the console. `summary.py` does write it into the summary.
+- **The sign-off is a name, not an identity.** `--signed-off-by` takes any text. Nothing checks who the person is. `render.py`, `run.py` and `summary.py` reject a blank name. The board HTML carries the name on its cover, and the summary carries it too.
 - **Connectors and `gh` are out of scope.** What a connector or `gh` can reach depends on your own account and tokens. This project doesn't control or check that.
 - **Injection defence relies partly on the model.** The tests cover what the scripts do with injected text. Whether Claude follows the "data, never instructions" rule in a live session is not something a unit test can prove.
 - **Tools outside the skill folder.** `tools/print_pdf.py` and `tools/build_samples.py` use `subprocess` and are not covered by the no-network scan.

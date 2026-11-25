@@ -38,6 +38,9 @@ import sys
 from pathlib import Path
 from typing import Any
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import intake as intake_mod  # noqa: E402  (a sibling script)
+
 ASSETS = Path(__file__).resolve().parent.parent / "assets"
 Json = dict[str, Any]
 
@@ -217,6 +220,9 @@ def outcomes_title(rows: list[Json]) -> str:
 class Draft:
     def __init__(self, run: Path, previous: Path | None = None) -> None:
         self.intake = load(run / "intake.json")
+        problems = intake_mod.missing_item_keys(self.intake)
+        if problems:
+            raise SystemExit(f"draft: the intake has items with nothing to print: {'; '.join(problems)}. Fill them in, run intake.py check, then draft again.")
         self.previous: Json | None = load(previous) if previous else None
         self.m = load(run / "metrics.json")
         self.metrics: Json = self.m["metrics"]
