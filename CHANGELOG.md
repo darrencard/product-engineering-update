@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.9.5 (2026-11-25)
+
+- **Ready for the GitHub Marketplace.** The Action's description is under 125 characters and its colour is one GitHub accepts. It still never renders the board cut.
+- The README shows slide 1 near the top.
+- The release zip is now named `product-technology-leader-report-<version>.zip`, and unzips to a folder of the same name. Earlier releases keep their file names.
+- 198 tests.
+
 ## 0.9.4 (2026-11-25)
 
 - **Slide titles use the full width.** A two-line title fills the first line before it wraps, instead of splitting into two even halves.

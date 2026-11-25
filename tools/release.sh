@@ -10,7 +10,7 @@ set -euo pipefail
 
 version="${1:?usage: tools/release.sh <version>, for example 0.5.0}"
 tag="v${version}"
-name="product-engineering-update-${version}"
+name="product-technology-leader-report-${version}"
 root="$(git rev-parse --show-toplevel)"
 cd "$root"
 

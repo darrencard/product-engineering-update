@@ -17,7 +17,7 @@ See the worked example and the template at https://www.dacard.ai/update. How it 
 3. **Read slide 1.** It shows what your data disagrees on, what happened, the decision you need and every gap with an owner. The board version renders once a named person signs it off.
 
 ```text
-Install the Product & Technology Leader Report skill from the v0.9.4 release at https://github.com/darrencard/product-engineering-update/releases/tag/v0.9.4, and check the download against its SHA256SUMS before installing. Then build my product & engineering update for last quarter from the tools already connected to this session: GitHub for OWNER/REPO through gh, and any connected Linear, Jira, Vercel, Sentry, Stripe, PostHog, HubSpot, Notion or Google Drive. Ask me only for what you cannot find, show every gap with an owner and a date, and render the full deck.
+Install the Product & Technology Leader Report skill from the v0.9.5 release at https://github.com/darrencard/product-engineering-update/releases/tag/v0.9.5, and check the download against its SHA256SUMS before installing. Then build my product & engineering update for last quarter from the tools already connected to this session: GitHub for OWNER/REPO through gh, and any connected Linear, Jira, Vercel, Sentry, Stripe, PostHog, HubSpot, Notion or Google Drive. Ask me only for what you cannot find, show every gap with an owner and a date, and render the full deck.
 ```
 
 The prompt names a fixed release, so a later change to the repository can't reach you until you choose a newer one. Tested on live accounts so far: GitHub, Vercel and Google Drive; the other readers are tested on fixtures. Something wrong or missing? [Open an issue](https://github.com/darrencard/product-engineering-update/issues).
@@ -171,7 +171,7 @@ The scenarios in `evals/scenarios/` describe how the skill should behave under p
 
 ## Status
 
-Version 0.9.4. The scripts pass 174 tests. Fresh model sessions ran version 0.1.0 on the bundled fixtures 6 times, across two model sizes, under pressure to overclaim, invent figures and pick the better-looking of two conflicting numbers; each held the line. Versions 0.2.0 and 0.3.0 have run on one real repository's GitHub and Vercel history. The Linear converter is tested on Linear's real response shape but not on a workspace with completed issues, and the PostHog converter only on fixtures of PostHog's documented responses. The Linear projects, project updates, initiatives and customer requests readers (0.4.0) are tested only on fixtures built from Linear's documented fields. It has not yet been run on a real company's full data. See CHANGELOG.md.
+Version 0.9.5. The scripts pass 174 tests. Fresh model sessions ran version 0.1.0 on the bundled fixtures 6 times, across two model sizes, under pressure to overclaim, invent figures and pick the better-looking of two conflicting numbers; each held the line. Versions 0.2.0 and 0.3.0 have run on one real repository's GitHub and Vercel history. The Linear converter is tested on Linear's real response shape but not on a workspace with completed issues, and the PostHog converter only on fixtures of PostHog's documented responses. The Linear projects, project updates, initiatives and customer requests readers (0.4.0) are tested only on fixtures built from Linear's documented fields. It has not yet been run on a real company's full data. See CHANGELOG.md.
 
 Not built: an export to Slides or PowerPoint. The deck is one HTML file: present it in a browser or print it to PDF.
 
