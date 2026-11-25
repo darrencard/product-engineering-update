@@ -182,7 +182,7 @@ class Fixtures(unittest.TestCase):
             [r for r in deck["ledger"] if r["confidence"] != "Unknown" and r["claim"].startswith("ARR")], "no ledger row may state a disputed ARR as fact"
         )
         self.assertNotIn("ARR $", " ".join(r["claim"] for r in deck["ledger"] if "Plan and actual" in r["claim"]))
-        self.assertIn("2 figures held because two sources disagree", json.dumps(slide(deck, "01")))
+        self.assertIn("disagree, so no figure is shown", json.dumps(slide(deck, "01")))
 
     def test_naming_the_owning_source_settles_a_conflict_and_keeps_the_other_reading(self) -> None:
         deck, metrics = self.decks["conflict_resolved"], self.metrics["conflict_resolved"]

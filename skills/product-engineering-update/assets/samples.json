@@ -9,7 +9,23 @@
       },
       {
         "type": "cards",
-        "columns": 3,
+        "columns": 1,
+        "items": [
+          {
+            "title": "Check before you rely on this",
+            "body": [
+              {
+                "list": [
+                  "Revenue and ARR do not reconcile. Revenue for 2026-Q3 is $10.3M, which is $40.9M a year at that rate; ARR is $10.9M. Confirm which is right before reading any ratio to revenue."
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "cards",
+        "columns": 2,
         "items": [
           {
             "title": "What happened",
@@ -33,11 +49,22 @@
                 ]
               }
             ]
-          },
+          }
+        ]
+      },
+      {
+        "type": "cards",
+        "columns": 1,
+        "items": [
           {
-            "title": "Not reported",
+            "title": "Missing this period: 2 gaps, each with an owner and a date",
             "body": [
-              "1 slide lack data this period: Platform & security."
+              {
+                "list": [
+                  "Platform & security: Service-level objectives and error budgets, incident data, audit status, vulnerability ageing, the debt register. Owner the VP Engineering, due Q4.",
+                  "AI in the product: AI revenue and cost of revenue, for AI gross margin. Owner the VP Engineering, due Q4."
+                ]
+              }
             ]
           }
         ]
