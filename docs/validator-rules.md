@@ -5,7 +5,7 @@
 - **Errors** block the render. `render.py`, `summary.py` and `run.py` all refuse a deck with any error.
 - **Warnings** never block. They point at something a reader may trip over.
 
-This page lists every rule the validator can emit: 21 that block and 4 that warn. Each entry gives the rule ID exactly as it prints, what triggers it in the code, an example that trips it, and the fix.
+This page lists every rule the validator can emit: 22 that block and 4 that warn. Each entry gives the rule ID exactly as it prints, what triggers it in the code, an example that trips it, and the fix.
 
 To clear an error, fix the data or downgrade the claim. Do not reword a claim just to get past a rule, and never replace a missing figure with prose: use a `data_needed` block with an owner and a due date.
 
@@ -22,6 +22,7 @@ To clear an error, fix the data or downgrade the claim. Do not reword a claim ju
   - [`stale-figure`](#stale-figure)
   - [`unsafe-link`](#unsafe-link)
   - [`placeholder-left`](#placeholder-left)
+  - [`figure-not-computed`](#figure-not-computed)
 - [Layer 3: claims, slide by slide](#layer-3-claims-slide-by-slide)
   - [`no-ledger-row`](#no-ledger-row)
   - [`status-change-unexplained`](#status-change-unexplained)
@@ -212,6 +213,18 @@ $.meta.as_of: "2026-02-30" is not a real date. Use YYYY-MM-DD.
 **Fix.** Write the slide's claim, replace the template text, and name a real person and date on every gap. Setting `gap_owner` and `gap_due` in the intake and drafting again fills the gaps `draft.py` writes.
 
 ---
+
+### `figure-not-computed`
+
+**Severity:** blocks the render.
+
+**Trigger.** A `figures.json` sits beside the deck (draft.py writes it) and a slide, outside the appendix and outside illustrative samples, prints a figure that matches nothing on its list. The list holds every figure in the pipeline's own draft, in the ledger and in the intake. A figure matches within the rounding its printing implies, so "$10.9M" matches 10,910,000. Dates, years, quarters, versions, ledger references, tracker keys and bare counts of 20 or less are not figures. A `figures.json` edited by hand stops the check with an error.
+
+**Example.** Claude rewrites slide 1's title as "ARR grew 12% to $12.4M", and neither figure was computed.
+
+**Message:** `prints "$12.4M", which the pipeline did not compute. Use a figure from the draft or the ledger, or add the source and run compute again.`
+
+**Fix.** Use a figure the pipeline computed. If the number is right and missing, add the data it comes from, then run compute and draft again. A deck written by hand, with no `figures.json`, is not checked.
 
 ## Layer 3: claims, slide by slide
 

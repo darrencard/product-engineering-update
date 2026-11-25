@@ -37,6 +37,7 @@ for folder in (HERE, SCRIPTS, BRIEF_SKILL / "scripts"):
     sys.path.insert(0, str(folder))
 
 import draft  # noqa: E402
+import figures  # noqa: E402
 import landing_brief  # noqa: E402
 import render  # noqa: E402
 import validate  # noqa: E402
@@ -771,7 +772,7 @@ class GapRegister(unittest.TestCase):
     def test_slide_1_leads_with_the_revenue_check_and_cites_it(self) -> None:
         deck, metrics = run_fixture("complete", self.work)
         one = slide(deck, "01")
-        self.assertEqual(self.titles(one)[0], "Check before you rely on this")
+        self.assertEqual(self.titles(one)[0], "Open questions on the data")
         self.assertIn("Revenue and ARR do not reconcile", json.dumps(one["blocks"][0]))
         self.assertIn(metrics["extra"]["reconcile"]["ledger"], one["ledger_refs"])
         self.assertEqual(validate.check(deck)["errors"], [])
@@ -797,7 +798,7 @@ class GapRegister(unittest.TestCase):
         one = slide(deck, "01")
         if "01" not in {s["id"] for s in deck["slides"]} or not one["ledger_refs"]:
             self.skipTest("the fixture has too few figures for slide 1")
-        self.assertEqual(self.titles(one)[0], "Check before you rely on this")
+        self.assertEqual(self.titles(one)[0], "Open questions on the data")
         self.assertIn("disagree, so no figure is shown", json.dumps(one["blocks"][0]))
 
     def test_gap_owners_names_an_owner_per_slide(self) -> None:
@@ -832,6 +833,95 @@ class GapRegister(unittest.TestCase):
             self.assertIsNone(draft.due_date(vague))
 
 
+class ClaudeWritesSkillChecks(unittest.TestCase):
+    """Claude may rewrite the words; every printed figure must be one the pipeline computed (0.9.0)."""
+
+    def setUp(self) -> None:
+        self.work = Path(tempfile.mkdtemp())
+        self.addCleanup(shutil.rmtree, self.work)
+
+    def drafted(self, fixture: str = "complete") -> tuple[Any, list[float]]:
+        deck, _ = run_fixture(fixture, self.work)
+        allowed = figures.load(self.work / fixture / "deck.json")
+        self.assertIsNotNone(allowed, "draft.py writes figures.json beside the deck")
+        return deck, allowed
+
+    def test_the_pipelines_own_deck_passes_the_figure_check(self) -> None:
+        for fixture in ("complete", "conflicting", "sparse"):
+            deck, allowed = self.drafted(fixture)
+            self.assertEqual(figures.unmatched(deck, allowed), [], fixture)
+
+    def test_a_rewritten_title_that_reuses_computed_figures_passes(self) -> None:
+        deck, allowed = self.drafted()
+        slide(deck, "01")["title"] = "ARR reached $10.9M, 22% of the $50M goal, with $39.1M still to go."
+        self.assertEqual([e for e in validate.check(deck, allowed=allowed)["errors"] if e["rule"] == "figure-not-computed"], [])
+
+    def test_a_figure_the_pipeline_did_not_compute_is_blocked(self) -> None:
+        deck, allowed = self.drafted()
+        slide(deck, "01")["title"] = "ARR grew 14% to $12.4M this quarter."
+        found = [e for e in validate.check(deck, allowed=allowed)["errors"] if e["rule"] == "figure-not-computed"]
+        self.assertEqual({e["message"].split('"')[1] for e in found}, {"14%", "$12.4M"})
+
+    def test_dates_years_and_ledger_references_are_not_figures(self) -> None:
+        printed = [f["printed"] for f in figures.extract("Due 4 Nov 2026, in 2026-Q3 (L09) [[L14]], v0.9.0, R-999, Nov 2026, 3 bets.")]
+        self.assertEqual(printed, [])
+
+    def test_a_hand_edited_figures_file_is_refused(self) -> None:
+        self.drafted()
+        path = self.work / "complete" / "figures.json"
+        body = json.loads(path.read_text(encoding="utf-8"))
+        body["figures"]["money"].append(12400000.0)
+        path.write_text(json.dumps(body), encoding="utf-8")
+        with self.assertRaises(SystemExit):
+            figures.load(self.work / "complete" / "deck.json")
+
+    def test_slide_1_shows_progress_to_the_money_objective(self) -> None:
+        deck, _ = self.drafted()
+        self.assertIn("22% of the $50M objective, $39.1M to go", json.dumps(slide(deck, "01")))
+
+    def test_slides_with_no_data_go_once_slide_1_lists_their_gaps(self) -> None:
+        deck, _ = self.drafted()
+        titles = [s["title"] for s in deck["slides"] if s["kind"] == "slide"]
+        self.assertFalse([t for t in titles if "is not reported this period" in t])
+        self.assertTrue(deck["meta"]["gaps"])
+        self.assertIn("Slide 1 lists the", json.dumps(slide(deck, "00")))
+        self.assertEqual(validate.check(deck)["errors"], [])
+
+
+class Rerun083Causes(unittest.TestCase):
+    """The five causes the v0.8.3 rerun judge named (docs/ablation.md)."""
+
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.work = Path(tempfile.mkdtemp())
+        cls.complete, _ = run_fixture("complete", cls.work)
+        cls.conflicting, _ = run_fixture("conflicting", cls.work)
+
+    @classmethod
+    def tearDownClass(cls) -> None:
+        shutil.rmtree(cls.work)
+
+    def test_a_quarter_is_annualised_by_four(self) -> None:
+        self.assertIn("$41.2M a year", json.dumps(slide(self.complete, "05")))
+        self.assertNotIn("$40.9M", json.dumps(self.complete["slides"]))
+
+    def test_the_deck_carries_no_internal_notes_and_slide_1_has_its_own_title(self) -> None:
+        self.assertNotIn("Check before", json.dumps(self.complete["slides"]))
+        self.assertNotEqual(slide(self.complete, "01")["title"], slide(self.complete, "11")["title"])
+
+    def test_slide_1_lists_data_notes_and_gives_conflicts_an_owner(self) -> None:
+        one = json.dumps(slide(self.complete, "01"), ensure_ascii=False)
+        self.assertIn("Inference (cost of revenue) ran 27.5% over plan, and the data does not say why.", one)
+        self.assertIn("The CRM and Support desk exports carry no dates", one)
+        self.assertIn("Nothing in the data measures the stop rule", one)
+        checks = json.dumps(slide(self.conflicting, "01")["blocks"][0])
+        self.assertIn("disagree, so no figure is shown", checks)
+        self.assertIn("Owner: ", checks)
+
+    def test_a_gap_never_asks_for_data_the_run_collected(self) -> None:
+        self.assertNotIn("incident data", json.dumps(self.complete).lower().replace("incident data is", ""))
+
+
 class MiniEval(unittest.TestCase):
     """The per-release mini eval reads a summary into one trend row and flags a regression (no model calls)."""
 
@@ -856,6 +946,25 @@ class MiniEval(unittest.TestCase):
         self.assertTrue(self.mini.regressions(dict(base, version="2", skill_wins=1), base))
         self.assertTrue(self.mini.regressions(dict(base, version="2", skill_arithmetic_errors=1), base))
         self.assertEqual(self.mini.regressions(dict(base, version="2", skill_wins=0, fixtures="g"), base), [], "other fixtures are not compared")
+
+
+class BoardOnePage(unittest.TestCase):
+    """The board cut reads as one page, with the detail as an appendix (0.9.0)."""
+
+    def test_slide_1_is_the_page_and_the_rest_is_appendix(self) -> None:
+        work = Path(tempfile.mkdtemp())
+        self.addCleanup(shutil.rmtree, work)
+        deck, _ = run_fixture("complete", work)
+        board = render.cut_deck(deck, "B")
+        core = [s for s in board["slides"] if s["kind"] == "slide"]
+        self.assertEqual(core[0]["id"], "01")
+        detail = json.dumps(core[0]["blocks"][-1])
+        self.assertIn("The detail, in the appendix", detail)
+        for s in core[1:]:
+            self.assertEqual(s["act"], render.BOARD_DETAIL)
+            self.assertIn(json.dumps(s["title"])[1:-1], detail)
+        self.assertNotIn("today", json.dumps(board["slides"]).lower())
+        self.assertEqual(json.dumps(deck["slides"]).count("The detail, in the appendix"), 0, "only the board cut changes")
 
 
 if __name__ == "__main__":

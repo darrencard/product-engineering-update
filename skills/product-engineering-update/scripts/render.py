@@ -450,9 +450,40 @@ def cut_deck(deck: Json, key: str) -> Json:
     out["slides"] = [s for s in deck["slides"] if s["kind"] != "slide" or key in s["audiences"]]
     out["meta"] = dict(deck["meta"], audiences=[a for a in deck["meta"]["audiences"] if a["key"] == key])
     if key == "B":
+        out["slides"] = one_page_first(out["slides"])
         # A board reads the rows behind its own slides, not the whole working ledger.
         cited = {ref for s in out["slides"] for ref in validate.ledger_refs(s)}
         out["ledger"] = [r for r in deck["ledger"] if r["id"] in cited]
+    return out
+
+
+BOARD_DETAIL = "Appendix: the detail"
+
+
+def one_page_first(slides: list[Json]) -> list[Json]:
+    """The board cut reads as one page: slide 1 carries the answer, the open questions, the asks and a line per
+    detail slide (its title, which is its claim). The detail slides follow as an appendix, then the ledger.
+    Nothing is reworded, so every figure stays one the pipeline computed and validate.py checked."""
+    one = next((s for s in slides if s.get("id") == "01"), None)
+    detail = [s for s in slides if s["kind"] == "slide" and s.get("id") != "01"]
+    if not one or not detail:
+        return slides
+    page = dict(
+        one,
+        nav="The page",
+        blocks=[
+            *one["blocks"],
+            {"type": "cards", "columns": 1, "items": [{"title": "The detail, in the appendix", "body": [{"list": [s["title"] for s in detail]}]}]},
+        ],
+    )
+    out = []
+    for s in slides:
+        if s is one:
+            out.append(page)
+        elif s in detail:
+            out.append(dict(s, act=BOARD_DETAIL, kicker=BOARD_DETAIL))
+        else:
+            out.append(s)
     return out
 
 
@@ -480,9 +511,9 @@ def write_ledger_csv(deck: Json, path: str | Path) -> None:
             w.writerow({k: csv_cell(r.get(k)) for k in LEDGER_FIELDS})
 
 
-def refuse_blocked(deck: Json) -> None:
+def refuse_blocked(deck: Json, allowed: dict[str, list[float]] | None = None) -> None:
     """Stop the render when validate.py finds errors, after listing them."""
-    errors = validate.check(deck)["errors"]
+    errors = validate.check(deck, allowed=allowed)["errors"]
     if not errors:
         return
     for e in errors:
@@ -500,7 +531,7 @@ def main() -> int:
     args = ap.parse_args()
     deck = validate.read_deck(Path(args.deck), tool="render")
     if not args.skip_validate:
-        refuse_blocked(deck)
+        refuse_blocked(deck, validate.figures.load(Path(args.deck)))
     signer = (args.signed_off_by or "").strip()
     if args.cut == "B" and not signer:
         raise SystemExit("render: the board cut needs --signed-off-by with a person's name. Show the change list (review.py) and get an explicit yes first.")

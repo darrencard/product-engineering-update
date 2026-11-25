@@ -41,6 +41,8 @@ Json = dict[str, Any]
 EMPTY: Json = {
     "company": None,
     "author": None,
+    # Optional: how the author writes (a few lines, or a paragraph of a past update). Claude writes the prose in this voice; figures never change.
+    "voice": None,
     "period": {"label": None, "start": None, "end": None},
     "as_of": None,
     # Who owns a gap when nobody else is named, and when it is due. Used on data_needed blocks.

@@ -39,6 +39,7 @@ from pathlib import Path
 from typing import Any
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+import figures  # noqa: E402  (a sibling script)
 import intake as intake_mod  # noqa: E402  (a sibling script)
 
 ASSETS = Path(__file__).resolve().parent.parent / "assets"
@@ -69,6 +70,8 @@ def load(path: Path) -> Json:
 
 # The sentence outcomes() writes for a figure held because two sources disagree.
 HELD_CONFLICT = re.compile(r"[^.]*: two sources disagree\. See ledger row L\d+\.\s*")
+# Phrases in the template's data-needed text, and the source that supplies each.
+COLLECTED_PHRASES = (("incident data, ", "incidents"),)
 MONTHS = {m: i + 1 for i, m in enumerate(("jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"))}
 
 
@@ -292,17 +295,18 @@ class Draft:
             return
         checks: list[str] = []
         refs: list[str] = []
+        owner_due = f"Owner: {self.owner_for('01')}. Due: {self.intake.get('gap_due') or '[date]'}."
         # A disputed figure never prints as a number, here or anywhere: name the sources, cite the row that holds both values.
         for c in self.m["conflicts"]:
             row = next((r for r in self.m["ledger"] if r["claim"].startswith(f"{c['metric']}: sources disagree")), None)
             sources = " and ".join(v["source"] for v in c["values"])
             cite = f"[[{row['id']}]]" if row else ""
-            checks.append(f"{c['metric']}: {sources} disagree, so no figure is shown. Name the source that owns it.{cite}")
+            checks.append(f"{c['metric']}: {sources} disagree, so no figure is shown until the source that owns it is named. {owner_due}{cite}")
             if row:
                 refs.append(row["id"])
         check = self.extra.get("reconcile")
         if check:
-            checks.append(f"{check['text']} Confirm which is right before reading any ratio to revenue.[[{check['ledger']}]]")
+            checks.append(f"{check['text']} Which is right decides any ratio to revenue. {owner_due}[[{check['ledger']}]]")
             refs.append(check["ledger"])
         # A deadline that has passed by the day the deck is drafted, which can be later than the data date.
         today = max(datetime.date.fromisoformat(self.intake["as_of"]), datetime.date.today())
@@ -310,7 +314,7 @@ class Draft:
             for item in self.intake.get(items) or []:
                 due = due_date(item.get(when))
                 if due and due < today:
-                    checks.append(f"{kind} \u201c{item[name]}\u201d was due {item[when]}, which has passed. Settle it now or set a new date.")
+                    checks.append(f"{kind} \u201c{item[name]}\u201d was due {item[when]} and is not recorded as settled. Settle it or set a new date.")
         missing = []
         for s in self.deck["slides"]:
             if s["kind"] != "slide" or s["id"] == "01":
@@ -320,11 +324,14 @@ class Draft:
                 text = HELD_CONFLICT.sub("", item["text"]).strip()
                 if text:
                     missing.append(f"{s['nav']}: {text} Owner: {item['owner']}. Due: {item['due']}.")
+        # Data notes from compute_metrics.caveats(): what a careful reader would raise about the data itself.
+        owner, due = self.owner_for("01"), self.intake.get("gap_due") or "[date]"
+        missing += [f"Data note: {note} Owner: {owner}. Due: {due}." for note in self.extra.get("caveats") or []]
         slide = self.slides["01"]
         if checks:
-            slide["blocks"].insert(0, {"type": "cards", "columns": 1, "items": [{"title": "Check before you rely on this", "body": [{"list": checks}]}]})
+            slide["blocks"].insert(0, {"type": "cards", "columns": 1, "items": [{"title": "Open questions on the data", "body": [{"list": checks}]}]})
         if missing:
-            title = f"Missing this period: {plural(len(missing), 'gap')}, each with an owner and a date"
+            title = f"Gaps and data notes: {len(missing)}, each with an owner and a date"
             slide["blocks"].append({"type": "cards", "columns": 1, "items": [{"title": title, "body": [{"list": missing}]}]})
         slide["ledger_refs"] = sorted(set(slide["ledger_refs"]) | set(refs))
 
@@ -433,7 +440,10 @@ class Draft:
 
     def investment_mix(self) -> None:
         mix = self.extra.get("mix")
-        if not mix or not mix["has_plan"]:
+        if not mix:
+            return
+        if not mix["has_plan"]:
+            self.mix_without_plan(mix)
             return
         rows = [{"label": r["label"], "plan": r["plan"] or 0, "actual": r["actual"], **({"over": True} if r["over"] else {})} for r in mix["rows"]]
         left: Json = {
@@ -470,8 +480,8 @@ class Draft:
                     "columns": 1,
                     "items": [
                         {
-                            "title": "Check before the board sees this",
-                            "body": [check["text"] + " Confirm which line is right before reading R&D as a share of revenue."],
+                            "title": "Revenue and ARR do not reconcile",
+                            "body": [check["text"] + " Which line is right decides R&D as a share of revenue."],
                         }
                     ],
                 }
@@ -508,6 +518,37 @@ class Draft:
         if "arr" not in self.metrics or not finance:
             blocks.append({"type": "cards", "columns": 1, "items": [self.gap("Cash, net burn and runway in months. A board cut needs all three.")]})
         self.fill("05", title, blocks, refs, self.systems("tracker", "finance"))
+
+    def mix_without_plan(self, mix: Json) -> None:
+        """The tracker shows where the effort went even with no plan to compare it with. Show that, and ask for the plan."""
+        rows = sorted(mix["rows"], key=lambda r: -r["actual"])
+        table: Json = {
+            "type": "table",
+            "columns": [{"label": "Type of work"}, {"label": "Share of effort", "align": "num"}],
+            "rows": [[r["label"], f"{r['actual']}%"] for r in rows],
+        }
+        refs = [mix["ledger"]]
+        traced = self.metrics.get("traced_pct")
+        if traced:
+            table["rows"].append(["Tied to a company objective", traced["display"]])
+            refs.append(traced["ledger"])
+        top = rows[0]
+        self.fill(
+            "05",
+            f"{plain_work_type(top['label'])} took {top['actual']}% of the team's effort. There is no plan yet to compare the mix with.",
+            [
+                {
+                    "type": "cards",
+                    "columns": 1,
+                    "items": [
+                        {"title": "Effort by type of work", "body": [table]},
+                        self.gap("The investment plan by type of work, and plan and actual spend, to compare against."),
+                    ],
+                }
+            ],
+            refs,
+            f"Data as of {self.intake['as_of']}.",
+        )
 
     def delivery(self) -> None:
         ranges: Json = self.intake.get("delivery_ranges") or {}
@@ -878,12 +919,17 @@ class Draft:
         north = (self.intake.get("north_star") or {}).get("metric")
         keys = [f"analytics:{north}" if north else "", "arr", "nrr", "eval_pass_rate", "change_failure_rate"]
         points = [(self.change(k), self.metrics[k]["ledger"]) for k in keys if k in self.metrics and self.change(k)]
+        # Where ARR stands against a money objective, computed in compute_metrics.derived(), so the draft does no arithmetic.
+        # Spelled out: slide 1's title may use it, and a title says what an abbreviation means.
+        progress = [(f"{p['text'].replace('ARR ', 'Annual recurring revenue of ', 1)}.", p["ledger"]) for p in self.extra.get("objective_progress") or []]
+        points = points[:1] + progress + points[1:]
         asks = [d["ask"] for d in self.intake.get("decisions") or []]
         if len(points) < 2:
             return
-        items: list[Json] = [{"title": "What happened", "body": [{"list": [f"{text}[[{ref}]]" for text, ref in points[:4]]}]}]
+        items: list[Json] = [{"title": "What happened", "body": [{"list": [f"{text}[[{ref}]]" for text, ref in points[:5]]}]}]
         items.append({"title": "Now what", "body": [{"list": asks}] if asks else ["No decisions were supplied for this period."]})
-        title = self.slides["11"]["title"] if "11" in self.filled else points[0][0]
+        # Its own title, from its first two points: slide 11 already carries the outcome headline.
+        title = f"{points[0][0]} {points[1][0]}"
         # gap_register() adds the checks and the gaps once every slide is drafted.
         blocks: list[Json] = [{"type": "cards", "columns": 2, "items": items}]
         since = self.since_last()
@@ -893,7 +939,7 @@ class Draft:
             "01",
             title,
             blocks,
-            [ref for _, ref in points[:4]],
+            [ref for _, ref in points[:5]],
             f"Data as of {self.intake['as_of']}. Status words: landed, watch, stalled.",
         )
 
@@ -988,7 +1034,7 @@ class Draft:
         ]
         self.fill(
             "18",
-            f"One decision for you today: {lower_first(asks[0]['ask'])}." if len(asks) == 1 else f"{plural(len(asks), 'decision')} for you today.",
+            f"One decision for you: {lower_first(asks[0]['ask'])}." if len(asks) == 1 else f"{plural(len(asks), 'decision')} for you.",
             [{"type": "cards", "columns": min(max(len(items), 2), 3), "items": items}],
             [],
             "Decisions as stated in the intake interview.",
@@ -1077,6 +1123,11 @@ class Draft:
             if s["id"] == "09" and self.held_speed():
                 for item in needs(s):
                     item["text"] = self.held_speed()
+            for item in needs(s):
+                # A gap never asks for data the run already collected (incidents feed slide 9 even when slide 10 is empty).
+                for phrase, source in COLLECTED_PHRASES:
+                    if source in self.m["collected"]:
+                        item["text"] = item["text"].replace(phrase, "")
             s["asof"] = f"No data collected for {intake['period']['label']}."
             sample = self.samples["slides"].get(s["id"])
             if sample:
@@ -1090,13 +1141,37 @@ class Draft:
                     }
                 )
         self.gap_register()
-        core = [s for s in deck["slides"] if s["kind"] == "slide"]
+        deck["meta"]["gaps"] = [
+            {"slide": s["id"], "nav": s["nav"], "text": i["text"], "owner": i["owner"], "due": i["due"]}
+            for s in deck["slides"]
+            if s["kind"] == "slide" and s["id"] != "01"
+            for i in needs(s)
+        ]
+        if "01" in self.filled:
+            # Slide 1 lists every gap with its owner and date, so a slide with no data adds only length. It goes.
+            deck["slides"] = [s for s in deck["slides"] if s["kind"] != "slide" or s["id"] in self.filled]
+            self.slides = {s["id"]: s for s in deck["slides"]}
+            for s in deck["slides"]:
+                if "rolls_up" in s:
+                    s["rolls_up"] = [sid for sid in s["rolls_up"] if sid in self.slides]
+            self.cover_facts(cover)
+            gaps = len(deck["meta"]["gaps"])
+            lede = (
+                f"{len(self.filled)} slides show data for {intake['period']['label']}. "
+                + (f"Slide 1 lists the {plural(gaps, 'gap')}, each with an owner and a date. " if gaps else "")
+                + "Every figure has a row in the evidence ledger."
+            )
+        else:
+            core = [s for s in deck["slides"] if s["kind"] == "slide"]
+            lede = (
+                f"{len(self.filled)} of {len(core)} slides show data for {intake['period']['label']}. "
+                "The rest show what is missing, who owns it and when it is due. Every figure has a row in the evidence ledger."
+            )
         cover["blocks"] = [
             {
                 "type": "text",
                 "variant": "lede",
-                "text": f"{len(self.filled)} of {len(core)} slides show data for {intake['period']['label']}. "
-                "The rest show what is missing, who owns it and when it is due. Every figure has a row in the evidence ledger.",
+                "text": lede,
             },
             *[b for b in cover["blocks"] if b["type"] == "facts"],
         ]
@@ -1123,10 +1198,12 @@ def main() -> int:
     deck = draft.build()
     out = run / "deck.json"
     out.write_text(json.dumps(deck, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    # Every figure this draft computed. validate.py blocks any printed figure not on this list, so a rewrite keeps the numbers.
+    figures.write(run, deck, draft.intake)
     core = [s for s in deck["slides"] if s["kind"] == "slide"]
     with_data = ", ".join(x.lstrip("0") for x in draft.filled) or "none"
     print(f"draft: wrote {out}. {len(draft.filled)} of {len(core)} core slides across the 3 cuts have data ({with_data}). The rest show data needed.")
-    print("draft: next, improve the titles without changing what they claim, then run validate.py.")
+    print("draft: next, rewrite titles and text in the reader's voice using only these figures (figures.json), then run validate.py.")
     return 0
 
 

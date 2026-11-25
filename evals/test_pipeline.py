@@ -138,11 +138,13 @@ class Fixtures(unittest.TestCase):
 
     def test_sparse_data_shows_gaps_and_never_prose(self) -> None:
         deck = self.decks["sparse"]
-        gaps = [s for s in deck["slides"] if s["kind"] == "slide" and "data_needed" in block_types(s)]
+        gaps = [s for s in deck["slides"] if s["kind"] == "slide" and "is not reported this period" in s["title"]]
         self.assertGreaterEqual(len(gaps), self.expect("sparse")["min_gaps"])
         for s in gaps:
             self.assertEqual(block_types(s), {"cards", "data_needed"}, f"slide {s['id']} mixes a gap with other content")
             self.assertIn("The data is missing", s["title"])
+        # The tracker alone supports the effort mix, so slide 5 shows it beside its gap for the plan (v0.8.3 rerun).
+        self.assertIn("table", block_types(slide(deck, "05")))
         for row in deck["ledger"]:
             self.assertEqual(row["source_system"], "Linear")
 
@@ -198,7 +200,7 @@ class Fixtures(unittest.TestCase):
         deck = self.decks["complete"]
         cover = json.dumps(slide(deck, "00"))
         self.assertNotIn("Fill in each slide", cover)
-        self.assertIn("18 of 19 slides show data", cover)
+        self.assertIn("18 slides show data", cover)
         rows = {r["metric"]: r for r in slide(deck, "11")["blocks"][0]["rows"] if "metric" in r}
         self.assertEqual((rows["Activation"]["prior"], rows["Activation"]["actual"]), ("39%", "41%"))
         self.assertIn("data_needed", block_types(slide(deck, "12")), "slide 12 must show the AI margin gap")
