@@ -72,7 +72,7 @@ def html_to_text(html: str, drop_ids: frozenset[str] = frozenset()) -> str:
     p.feed(html)
     p.close()
     text = "".join(p.out)
-    text = re.sub(r"\bDacard\b", "", text).replace("Show template guidance", "").replace("Made with the Product & Engineering Update by", "")
+    text = re.sub(r"\bDacard\b", "", text).replace("Show template guidance", "").replace("Made with the Product & Technology Leader Report by", "")
     text = re.sub(r"[ \t ]+", " ", text)
     text = re.sub(r" *\n *", "\n", text)
     return re.sub(r"\n{2,}", "\n", text).strip()

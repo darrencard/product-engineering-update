@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://www.dacard.ai/update/deck.schema.json",
-  "title": "Product & Engineering Update deck",
+  "title": "Product & Technology Leader Report deck",
   "description": "The data contract for one deck. Text fields accept a light markup: **bold**, [label](https://url), [[L01]] for an evidence ledger reference and [[status:landed]] for a status mark.",
   "type": "object",
   "required": [

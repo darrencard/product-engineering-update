@@ -1,6 +1,6 @@
 # Documentation
 
-Reference for the Product & Engineering Update skill. Start with the [README](../README.md) for what it does and the one-prompt install.
+Reference for the Product & Technology Leader Report skill. Start with the [README](../README.md) for what it does and the one-prompt install.
 
 | Doc | Read it when |
 |---|---|

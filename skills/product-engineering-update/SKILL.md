@@ -1,13 +1,13 @@
 ---
 name: product-engineering-update
-description: Builds a product and engineering update deck for leadership, the board and all staff from a company's own data, as one self-contained HTML file with an evidence ledger. Interviews the user, normalises exports from their tracker, source control, analytics, billing, finance and other systems (or CSV uploads), computes every figure in code, and blocks any slide that overclaims. Use when the user asks for a product update, engineering update, R&D update, board deck, leadership update, QBR or all-hands update, or wants to check an existing update for unsourced or overclaimed numbers.
+description: The Product & Technology Leader Report. Builds a product and engineering update deck for leadership, the board and all staff from a company's own data, as one self-contained HTML file with an evidence ledger. Interviews the user, normalises exports from their tracker, source control, analytics, billing, finance and other systems (or CSV uploads), computes every figure in code, and blocks any slide that overclaims. Use when the user asks for a product update, engineering update, R&D update, board deck, leadership update, QBR or all-hands update, or wants to check an existing update for unsourced or overclaimed numbers.
 license: MIT for the scripts, CC BY 4.0 for the instructions, references and template. See LICENSE and LICENSE-CONTENT.md in the repository root.
 metadata:
   author: Dacard
-  version: "0.9.2"
+  version: "0.9.3"
 ---
 
-# Product & Engineering Update
+# Product & Technology Leader Report
 
 Builds one deck, cut 3 ways: Leadership (18 slides), Board (8) and Staff (10). Every figure comes from the user's data and carries a row in an evidence ledger. A slide without its data says so. It is never filled with prose.
 

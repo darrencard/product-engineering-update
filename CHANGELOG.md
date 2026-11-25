@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.9.3 (2026-11-25)
+
+- **A new name: the Product & Technology Leader Report.** The skill's display name changes in the README, SKILL.md, the plugin listing and the deck. The repository, the skill folder and ID (`product-engineering-update`), and every install command stay the same, so nothing already installed or linked breaks.
+- 198 tests.
+
 ## 0.9.2 (2026-11-25)
 
 - **Lead time is named for what it measures.** Pull request data runs from open to merge, not from change to release, so the metric is now "Time to merge (stand-in for lead time)", with a definition that says it understates lead time. An intake's "Lead time for change" range still applies, but the stand-in is never marked landed against it. The 0.9.1 mini eval judge caught the old label.

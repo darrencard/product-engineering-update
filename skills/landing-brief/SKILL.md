@@ -4,7 +4,7 @@ description: A free Linear kit for saying, before work starts, what landing look
 license: MIT for the scripts, CC BY 4.0 for the instructions and template. See LICENSE and LICENSE-CONTENT.md in the repository root.
 metadata:
   author: Dacard
-  version: "0.9.2"
+  version: "0.9.3"
 ---
 
 # Landing brief
@@ -43,7 +43,7 @@ Plus `Decides the next step`: the named person who decides what happens when the
 
 ## The status rule
 
-The same rule as the Product & Engineering Update:
+The same rule as the Product & Technology Leader Report:
 
 | Word | When |
 |---|---|
@@ -53,9 +53,9 @@ The same rule as the Product & Engineering Update:
 
 The update states the number against the bar and the date, and who decides the next step. It never says the project caused the change: a metric moving is not proof.
 
-## With the Product & Engineering Update
+## With the Product & Technology Leader Report
 
-`scripts/from_linear.py --projects` in the Product & Engineering Update reads the same brief from each project, so slide 8 (shipped vs impact) names each project's target metric, and slide 11 shows the bar as a target. A project without a brief shows on slide 8 with no metric, and the slide says so.
+`scripts/from_linear.py --projects` in the Product & Technology Leader Report reads the same brief from each project, so slide 8 (shipped vs impact) names each project's target metric, and slide 11 shows the bar as a target. A project without a brief shows on slide 8 with no metric, and the slide says so.
 
 ## Requirements
 

@@ -20,7 +20,7 @@ Everything else (the scripts, the tests, the tools, the schema and the slide con
 
 ## How to give credit
 
-"Based on the Product & Engineering Update by Darren Card at Dacard, https://www.dacard.ai/update, CC BY 4.0."
+"Based on the Product & Technology Leader Report by Darren Card at Dacard, https://www.dacard.ai/update, CC BY 4.0."
 
 ## Not covered
 
