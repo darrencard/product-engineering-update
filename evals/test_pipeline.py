@@ -313,7 +313,7 @@ class GitHub(unittest.TestCase):
         deck = json.loads((self.run / "deck.json").read_text(encoding="utf-8"))
         rows = {r["metric"] for r in slide(deck, "09")["blocks"][0]["rows"] if "metric" in r}
         # Rework shows with no range set: a computed quality figure is never left off (v0.9.1)
-        self.assertEqual(rows, {"Deploys per week", "Lead time for change", "Pull request review time", "Rework rate"})
+        self.assertEqual(rows, {"Deploys per week", "Time to merge (stand-in for lead time)", "Pull request review time", "Rework rate"})
         self.assertEqual(validate.check(deck)["errors"], [])
         self.assertIn("GitHub (kestrel/app)", {r["source_system"] for r in deck["ledger"]})
 
@@ -490,7 +490,7 @@ class Definitions(unittest.TestCase):
         outcomes = self.rows("11")
         self.assertEqual(outcomes["Loads cleared per week"]["definition"], "Loads cleared with no manual touch")
         self.assertEqual(outcomes["Activation"]["definition"], "Accounts with a first automated load inside 14 days, percent")
-        self.assertIn("median", self.rows("09")["Lead time for change"]["definition"])
+        self.assertIn("median", self.rows("09")["Time to merge (stand-in for lead time)"]["definition"])
 
     def test_the_ai_figures_carry_their_definition_as_a_note(self) -> None:
         tiles = next(b for b in slide(self.deck, "12")["blocks"] if b["type"] == "tiles")
@@ -503,7 +503,7 @@ class Definitions(unittest.TestCase):
         html = render.render_deck(deck)
         self.assertNotIn("<img", html)
         self.assertIn("Loads &lt;img src=x", html)
-        self.assertIn(self.rows("09")["Lead time for change"]["definition"], html)
+        self.assertIn(self.rows("09")["Time to merge (stand-in for lead time)"]["definition"], html)
 
     def test_an_outcome_with_no_definition_warns_and_still_renders(self) -> None:
         deck = copy.deepcopy(self.deck)

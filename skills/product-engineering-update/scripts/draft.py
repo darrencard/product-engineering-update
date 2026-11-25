@@ -135,6 +135,13 @@ def range_status(value: float, prior: float | None, text: str, higher_is_better:
 
 
 NO_RANGE = "No range set yet"
+# Metrics measured by a stand-in, and the range name an intake may still use for them.
+STAND_INS = {"lead_time": "Lead time for change"}
+
+
+def range_for(ranges: Json, key: str, label: str) -> str | None:
+    """The healthy range for a metric: by its label, or for a stand-in, by the name of the metric it stands in for."""
+    return ranges.get(label) or ranges.get(STAND_INS.get(key, ""))
 
 
 def direction_status(value: float, prior: float | None, higher_is_better: bool) -> str:
@@ -206,7 +213,7 @@ def described_tile(metric: Json) -> Json:
 PLAIN_SUBJECTS = {
     "traced_pct": "The share of the team's time tied to a company objective",
     "deploys_per_week": "Releases to customers per week",
-    "lead_time": "The time from a code change being proposed to it being accepted",
+    "lead_time": "The time from a pull request being opened to it being merged; it stops at merge, not release",
     "change_failure_rate": "The share of releases that caused a problem in production",
     "troubled_deploy_rate": "The share of releases rolled back or followed by errors",
     "review_time": "The time a code change spent in review",
@@ -577,7 +584,8 @@ class Draft:
             picked = [
                 k
                 for k in keys
-                if k in self.metrics and (self.metrics[k]["label"] in ranges or (group == quality_group and self.metrics[k].get("value") is not None))
+                if k in self.metrics
+                and (range_for(ranges, k, self.metrics[k]["label"]) or (group == quality_group and self.metrics[k].get("value") is not None))
             ]
             if not picked:
                 continue
@@ -591,10 +599,13 @@ class Draft:
                             "metric": metric["label"],
                             "prior": metric["prior_display"] or "No prior",
                             "actual": metric["display"],
-                            "target": ranges.get(metric["label"], NO_RANGE),
+                            "target": range_for(ranges, k, metric["label"]) or NO_RANGE,
                             "status": (
-                                range_status(metric["value"], metric["prior"], ranges[metric["label"]], metric.get("higher_is_better", True))
-                                if metric["label"] in ranges
+                                range_status(
+                                    metric["value"], metric["prior"], range_for(ranges, k, metric["label"]) or "", metric.get("higher_is_better", True)
+                                )
+                                if range_for(ranges, k, metric["label"]) and k not in STAND_INS
+                                # A stand-in is never called landed against the range of the metric it stands in for.
                                 else direction_status(metric["value"], metric["prior"], metric.get("higher_is_better", True))
                             ),
                         },

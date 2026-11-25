@@ -528,12 +528,12 @@
             "definition": "How many times a week new code was released to customers."
           },
           {
-            "metric": "Lead time for change",
+            "metric": "Time to merge (stand-in for lead time)",
             "prior": "52h",
             "actual": "38h",
             "target": "under 40h",
-            "status": "landed",
-            "definition": "Typical (median) time from a code change being proposed to it being accepted."
+            "status": "watch",
+            "definition": "Typical (median) time from a pull request being opened to it being merged. It stops at merge, not at release, so it understates lead time."
           },
           {
             "group": "Quality, the pair for every speed metric"
