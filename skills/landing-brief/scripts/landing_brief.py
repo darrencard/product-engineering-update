@@ -21,7 +21,7 @@ project (its description or content field is read). The brief is the section und
 
 A brief with any missing, unknown, repeated or unreadable part is refused whole, with every problem listed.
 
-The status rule is the same as the Product & Engineering Update's (draft.status_for):
+The status rule is the same as the Product & Technology Leader Report's (draft.status_for):
   landed   the bar is met
   watch    not there, moving the right way; or no prior value yet
   stalled  not there, and flat or moving the wrong way

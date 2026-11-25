@@ -47,7 +47,7 @@ KEEP_APPENDICES = {"A"}
 Json = dict[str, Any]
 
 # The one line a generated deck carries about where it came from. The licence asks for credit; this is it.
-CREDIT = "Made with [the Product & Engineering Update](https://www.dacard.ai/update) by Dacard."
+CREDIT = "Made with [the Product & Technology Leader Report](https://www.dacard.ai/update) by Dacard."
 
 # The most items a list slide shows; a longer list stops being a summary.
 TOP_ITEMS = 5

@@ -207,8 +207,8 @@ class Fixtures(unittest.TestCase):
 
     def test_a_generated_deck_credits_the_template_with_a_safe_link(self) -> None:
         deck = self.decks["complete"]
-        self.assertIn("[the Product & Engineering Update](https://www.dacard.ai/update)", deck["meta"]["footer"])
-        self.assertIn('<a href="https://www.dacard.ai/update">the Product &amp; Engineering Update</a>', render.render_deck(deck))
+        self.assertIn("[the Product & Technology Leader Report](https://www.dacard.ai/update)", deck["meta"]["footer"])
+        self.assertIn('<a href="https://www.dacard.ai/update">the Product &amp; Technology Leader Report</a>', render.render_deck(deck))
 
     def test_computed_figures_are_right(self) -> None:
         m = self.metrics["complete"]["metrics"]

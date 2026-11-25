@@ -1,10 +1,10 @@
 {
   "$schema": "../deck.schema.json",
   "meta": {
-    "title": "The Product & Engineering Update | Dacard",
+    "title": "The Product & Technology Leader Report | Dacard",
     "description": "An answer-first, source-cited template for product and engineering updates to leadership, boards and staff. Worked example plus template guidance.",
     "brand": "Dacard",
-    "product": "The Product & Engineering Update",
+    "product": "The Product & Technology Leader Report",
     "company": "Harborline",
     "period": "Q3 FY26",
     "as_of": "2026-09-30",
@@ -74,7 +74,7 @@
       "illustrative": true,
       "text": "Worked example. Harborline is a fictional company and every Harborline figure is illustrative. Benchmarks and frameworks are real and cited."
     },
-    "footer": "Made with [the Product & Engineering Update](https://www.dacard.ai/update) by Dacard, Darren Card's applied AI studio. Free to use and adapt with credit. Harborline and its data are fictional. Benchmarks are quoted with source and date, and survey figures are labelled as such.",
+    "footer": "Made with [the Product & Technology Leader Report](https://www.dacard.ai/update) by Dacard, Darren Card's applied AI studio. Free to use and adapt with credit. Harborline and its data are fictional. Benchmarks are quoted with source and date, and survey figures are labelled as such.",
     "source_types": [
       {
         "key": "interview",
@@ -2551,7 +2551,7 @@
         {
           "type": "strip",
           "label": "Status.",
-          "text": "The template is ready to use by hand today. The skill is published as version 0.9.2 at github.com/darrencard/product-engineering-update. It has been tested on synthetic companies and on one real repository's GitHub and Vercel history, not yet on a real company's full data."
+          "text": "The template is ready to use by hand today. The skill is published as version 0.9.3 at github.com/darrencard/product-engineering-update. It has been tested on synthetic companies and on one real repository's GitHub and Vercel history, not yet on a real company's full data."
         },
         {
           "type": "steps",
