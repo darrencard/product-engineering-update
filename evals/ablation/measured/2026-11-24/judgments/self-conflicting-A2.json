@@ -1,0 +1,45 @@
+{
+ "id": "self-conflicting-A2",
+ "fixture": "conflicting",
+ "kind": "self_A",
+ "x": "runs/A/conflicting/2",
+ "y": "runs/A/conflicting/2",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "tie",
+    "reason": "Both are identical, including the same small inconsistency of inference at 27% in the summary but 28% in \u00a710 ($612K vs $480K is 27.5%), and the same correct ARR bridge ($10.38M to $10.91M)."
+   },
+   "no_invented_numbers": {
+    "winner": "tie",
+    "reason": "Both state the same figures, all traceable to the data, and both label the inference-volume explanation as unconfirmed."
+   },
+   "speed_with_quality": {
+    "winner": "tie",
+    "reason": "Both place 4.0 deploys/week beside change failure rate 7.7% and restore time 41 min, and both headline 'faster but less stable' in the board cut."
+   },
+   "gaps_shown": {
+    "winner": "tie",
+    "reason": "Both flag the North Star disagreement (23,100 PostHog vs 21,400 Warehouse) and the ARR gap ($10.10M finance vs $10.91M Stripe), with the VP Engineering as owner, due Q4, in \u00a715."
+   },
+   "board_cut_usable": {
+    "winner": "tie",
+    "reason": "The board cuts are identical: they lead with a summary, a scorecard and the pricing-pilot ask, and both note that the 4 Nov 2026 deadline has passed."
+   }
+  },
+  "overall": {
+   "winner": "tie",
+   "reason": "Update X and Update Y are word-for-word identical in both the full update and the board cut. Any strength or flaw, such as the 27% vs 28% inference inconsistency, applies equally to both."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 817,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 34104,
+  "cost_usd": 0.28965860000000004,
+  "num_turns": 2,
+  "duration_ms": 8567
+ }
+}

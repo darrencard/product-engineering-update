@@ -1,0 +1,45 @@
+{
+ "id": "pair-single_product-1-AB",
+ "fixture": "single_product",
+ "kind": "pair",
+ "x": "runs/A/single_product/1",
+ "y": "runs/B/single_product/1",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "X",
+    "reason": "Every X figure recomputes correctly (e.g. NRR 96.4%, GRR 89.3%, inference 5.9% of revenue, total R&D \u22121.1%), while Y's ledger labels the CRM win/loss counts (L24) with a Q3 window even though the deals have no close dates."
+   },
+   "no_invented_numbers": {
+    "winner": "X",
+    "reason": "Y's board cut claims 'Signed off by the CEO', which the data does not support, and adds an 'Activation: 5 more periods' projection, while X's only stretch is attributing the 27.5% inference overrun 'mostly' to volume."
+   },
+   "speed_with_quality": {
+    "winner": "X",
+    "reason": "Both pair deploys 3\u21924/week with change failure 5.1%\u21927.7%, but X also shows rework 11.7%\u219215% and calls it 'faster but less reliable', while Y marks deploys 'landed'."
+   },
+   "gaps_shown": {
+    "winner": "X",
+    "reason": "X flags that Stripe ARR $10.9M doesn't reconcile with finance revenue of $10.3M for the quarter, plus the PR-deploy linkage gap and the undated CRM deals, all owned by the VP Engineering for Q4, whereas Y silently reports ARR $10.9M as fact."
+   },
+   "board_cut_usable": {
+    "winner": "X",
+    "reason": "X's board cut opens with the per-load pricing decision and fits on about a page, while Y's repeats slides, keeps placeholder text ('Keys J and K move between slides'), attaches a full ledger with empty rows, and omits the TMS gap (11 of 17 losses)."
+   }
+  },
+  "overall": {
+   "winner": "X",
+   "reason": "X is accurate, shows the ARR-versus-revenue conflict with an owner, and ties the TMS integration gap to lost deals, support load and churn. Y gets most figures right but presents a disputed ARR without comment and its board cut isn't ready to send."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 3482,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 36598,
+  "cost_usd": 0.36291059999999997,
+  "num_turns": 2,
+  "duration_ms": 33815
+ }
+}

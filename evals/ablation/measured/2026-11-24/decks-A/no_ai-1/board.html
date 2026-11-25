@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kestrel Labs: Product &amp; Engineering, Board Update Q3 2026</title>
+<style>
+  :root { --ink:#1b1f24; --muted:#5b6470; --line:#dde1e6; --soft:#f5f7f9;
+          --good:#1a7f37; --warn:#9a6700; --bad:#b42318; --none:#57606a; }
+  * { box-sizing:border-box; }
+  body { margin:0; color:var(--ink); background:#fff;
+         font:15px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
+  main { max-width:820px; margin:0 auto; padding:36px 28px 56px; }
+  header { border-bottom:2px solid var(--ink); padding-bottom:12px; margin-bottom:22px; }
+  .kicker { text-transform:uppercase; letter-spacing:.08em; font-size:12px; color:var(--muted); }
+  h1 { font-size:26px; margin:4px 0 4px; }
+  .meta { color:var(--muted); font-size:13px; }
+  h2 { font-size:17px; margin:30px 0 8px; padding-top:8px; border-top:1px solid var(--line); }
+  p { margin:8px 0; }
+  .small { font-size:13px; } .muted { color:var(--muted); }
+  .summary { background:var(--soft); border-left:4px solid var(--ink); padding:12px 18px; }
+  .summary ul { margin:4px 0 0; padding-left:20px; } .summary li { margin:4px 0; }
+  .decision { border:2px solid var(--bad); padding:12px 18px; }
+  table { width:100%; border-collapse:collapse; font-size:14px; margin:8px 0; }
+  th, td { text-align:left; padding:6px 8px; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { font-size:12px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); font-weight:600; }
+  td.num, th.num { text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap; }
+  .tag { display:inline-block; font-size:12px; font-weight:600; padding:1px 7px; border-radius:10px; border:1px solid; white-space:nowrap; }
+  .good { color:var(--good); } .bad { color:var(--bad); } .warn { color:var(--warn); }
+  .none { color:var(--none); border-style:dashed; }
+  footer { margin-top:36px; border-top:1px solid var(--line); padding-top:10px; font-size:12px; color:var(--muted); }
+  @media print { main { padding:0; } table, .decision { break-inside:avoid; } }
+</style>
+</head>
+<body>
+<main>
+<header>
+  <div class="kicker">Kestrel Labs · Board update · Product &amp; Engineering</div>
+  <h1>Q3 2026</h1>
+  <div class="meta">1 Jul – 30 Sep 2026 · Data as of 30 Sep 2026 · Prepared 24 Nov 2026 by the CPTO</div>
+</header>
+
+<section class="summary">
+  <strong>The quarter in brief</strong>
+  <ul>
+    <li><b>The product is working.</b> Loads cleared with no manual touch averaged 23,100 a week, 5% above target and up 26% on Q2. Every won deal cited the agent clearing exceptions.</li>
+    <li><b>Retention and activation are holding growth back.</b> ARR grew 5% to $10.91M, but churn of $1.11M cancelled out all of the expansion. Activation was 41% against a 50% target.</li>
+    <li><b>Integrations are the gap.</b> TMS integration drove 65% of lost deals and integration errors were 55% of support tickets. It goes into Q4 planning as an open question.</li>
+    <li><b>Unit cost is rising.</b> Inference ran 27.5% over plan, and one provider carries most of that spend. A two-provider routing layer is due in December.</li>
+  </ul>
+</section>
+
+<h2>Decision for the board</h2>
+<div class="decision">
+  <p><b>Approve a per-load pricing pilot.</b> The options are to pilot with 10 customers or wait a quarter.</p>
+  <p><b>Recommendation: run the pilot with 10 customers.</b> Per-load pricing is central to our strategy, and price was cited in 6 of 17 lost deals.</p>
+  <p class="small"><b>The 4 Nov 2026 deadline has passed.</b> If no decision has been made yet, it is overdue.</p>
+</div>
+
+<h2>Scorecard</h2>
+<table>
+  <thead><tr><th>Measure</th><th class="num">Q2</th><th class="num">Q3</th><th class="num">Target</th><th>Status</th></tr></thead>
+  <tbody>
+    <tr><td><b>Loads cleared per week</b> (north star)</td><td class="num">18,400</td><td class="num">23,100</td><td class="num">22K</td><td><span class="tag good">Met</span></td></tr>
+    <tr><td>Activation</td><td class="num">39%</td><td class="num">41%</td><td class="num">50%</td><td><span class="tag bad">Missed</span></td></tr>
+    <tr><td>Weekly active dispatchers</td><td class="num">5,890</td><td class="num">6,120</td><td class="num">6,000</td><td><span class="tag good">Met</span></td></tr>
+    <tr><td>Agent task success</td><td class="num">—</td><td class="num">—</td><td class="num">90%</td><td><span class="tag none">Not yet measured</span></td></tr>
+    <tr><td>ARR (objective $50M)</td><td class="num">$10.38M</td><td class="num">$10.91M</td><td class="num">$50M</td><td class="small">+$531K net new</td></tr>
+    <tr><td>Net revenue retention</td><td class="num">—</td><td class="num">96.4%</td><td class="num">—</td><td class="small">4 of 40 accounts churned</td></tr>
+    <tr><td>Inference vs plan</td><td class="num">—</td><td class="num">$612K</td><td class="num">$480K</td><td><span class="tag bad">+27.5%</span></td></tr>
+    <tr><td>R&amp;D spend vs plan</td><td class="num">—</td><td class="num">$4.20M</td><td class="num">$4.25M</td><td><span class="tag good">On plan</span></td></tr>
+  </tbody>
+</table>
+<p class="small muted">Finance close reports Q3 revenue of $10.3M, which does not reconcile with Stripe ARR of $10.9M. This is being resolved with Finance. ARR above is from Stripe.</p>
+
+<h2>Delivery</h2>
+<p>We shipped 6 of 7 committed items. Multi-stop reroutes and the dispatcher inbox moved their metrics. Guided activation and the release checklist have not yet. Self-serve carrier onboarding slipped. Engineering shipped more often (4 deploys a week, lead time 38h), but change failure rate rose to 7.7% against a target under 5%. Keep-the-lights-on work took 22% of capacity against a plan of 15%.</p>
+
+<h2>Risks</h2>
+<table>
+  <thead><tr><th>Risk</th><th>Mitigation</th><th>Due</th></tr></thead>
+  <tbody>
+    <tr><td>One model provider carries most inference spend (likelihood Medium, impact High)</td><td>Routing layer across 2 providers</td><td>Dec 2026</td></tr>
+    <tr><td>No integration work on the roadmap, despite it being the top loss reason and the top ticket theme</td><td>Open question for Q4 planning</td><td>—</td></tr>
+    <tr><td>Churn linked to onboarding: all 4 churned accounts raised onboarding tickets</td><td>Ship self-serve carrier onboarding</td><td>—</td></tr>
+  </tbody>
+</table>
+
+<h2>Focus</h2>
+<p class="small">We stopped the carrier marketplace because it did not serve the strategy. On-premise remains a non-goal. Measurement gaps, including agent task success and cost per successful task, are owned by the VP Engineering and due in Q4.</p>
+
+<footer>Sources: PostHog, Stripe, CRM, Linear, Finance close, GitHub, Incident tool, Support desk. The full leadership update has the detail behind every figure here.</footer>
+</main>
+</body>
+</html>

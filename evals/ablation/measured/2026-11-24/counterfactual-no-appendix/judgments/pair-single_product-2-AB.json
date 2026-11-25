@@ -1,0 +1,45 @@
+{
+ "id": "pair-single_product-2-AB",
+ "fixture": "single_product",
+ "kind": "pair",
+ "x": "runs/A/single_product/2",
+ "y": "runs/B/single_product/2",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "X",
+    "reason": "X's ARR $10.38M\u2192$10.91M, NRR 96.4%, GRR 89.3%, CFR 4/52=7.7% and monthly completions 53/37/10 all recompute correctly. Y's slide 05 '40.8% R&D share of revenue' rests on the unreconciled $10.3M revenue line, and Y's slide 08 gives the unshipped Self-serve carrier onboarding a '39% to 41%' result."
+   },
+   "no_invented_numbers": {
+    "winner": "X",
+    "reason": "Y's board cut claims 'Signed off by the CEO' and cites a nonexistent 'Appendix D' and 'Keys J and K'. X's extra risks are explicitly labelled as drawn from this quarter's data with no agreed owner."
+   },
+   "speed_with_quality": {
+    "winner": "X",
+    "reason": "X's section 5 pairs 4 deploys/week and 38h lead time with CFR 7.7%, rework 15% and review time 13h, and says outright that quality slipped. Y pairs them too, but its board slide 09b leaves out rework and gives no verdict."
+   },
+   "gaps_shown": {
+    "winner": "X",
+    "reason": "X flags that the $10.3M finance revenue doesn't reconcile with $10.9M Stripe ARR, that the September tracker drop-off may be an incomplete export (VP Engineering to check), and that the 4 Nov deadline has passed. Y silently uses the finance revenue figure, and its slide 10 wrongly calls incident data missing."
+   },
+   "board_cut_usable": {
+    "winner": "X",
+    "reason": "X's board cut opens with 'product working, revenue not keeping pace' and the pricing-pilot ask, then a single scorecard. Y's board cut repeats slides, carries tool artifacts ('Keys J and K', empty ledger rows) and puts a deadline that has already passed in front of the board as current."
+   }
+  },
+  "overall": {
+   "winner": "X",
+   "reason": "X's figures recompute correctly, it names the revenue-source conflict and the passed 4 Nov deadline, and it surfaces the TMS integration gap behind 11 of 17 lost deals. Y relies silently on the suspect $10.3M revenue line, claims a CEO sign-off that isn't in the data, and its board cut is cluttered with tool artifacts."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 2770,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 36758,
+  "cost_usd": 0.3499506,
+  "num_turns": 2,
+  "duration_ms": 28030
+ }
+}

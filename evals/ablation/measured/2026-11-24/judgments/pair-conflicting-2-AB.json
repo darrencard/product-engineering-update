@@ -1,0 +1,45 @@
+{
+ "id": "pair-conflicting-2-AB",
+ "fixture": "conflicting",
+ "kind": "pair",
+ "x": "runs/A/conflicting/2",
+ "y": "runs/B/conflicting/2",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "X",
+    "reason": "X's recomputable figures (CFR 4/52=7.7%, NRR 96.4%, GRR 89.3%, Stripe ARR $10.91M, rework 12%\u219215%) all check out, while Y reports 'Lead time for change 52h\u219238h, landed', which is actually PR open-to-merge time."
+   },
+   "no_invented_numbers": {
+    "winner": "X",
+    "reason": "X labels its inference-volume explanation as unconfirmed and the churn/onboarding link as correlation, whereas Y asserts an unsupported lead-time hit and attaches '39% to 41%' to the unshipped Self-serve carrier onboarding."
+   },
+   "speed_with_quality": {
+    "winner": "X",
+    "reason": "Both pair deploys 3\u21924/week with CFR 5.1%\u21927.7%, but Y's slide 9 marks the mislabelled 38h lead time 'landed' as good news, while X refuses to count open-to-merge time against the target."
+   },
+   "gaps_shown": {
+    "winner": "X",
+    "reason": "X's \u00a715 lists seven gaps (North Star 23,100 vs 21,400, ARR $10.10M vs $10.91M, unmeasurable lead time, missing stop-rule readouts) owned by the VP Engineering due Q4, while Y leaves the ARR disagreement in ledger row L09 with no owner."
+   },
+   "board_cut_usable": {
+    "winner": "X",
+    "reason": "X's board cut leads with the answer, scorecard and pricing-pilot ask (flagging the passed 4 Nov deadline), while Y's never shows ARR on a slide and includes 'Book a call' marketing in Appendix C plus template guidance in Appendix D."
+   }
+  },
+  "overall": {
+   "winner": "X",
+   "reason": "X's figures recompute correctly, it handles both source conflicts openly with an owner, and it pairs every speed figure with a quality figure without overstating, including saying lead time is unmeasurable. Y presents a lead-time hit that isn't supported and pads its board cut with product-marketing appendices, so a careful CPO would send X."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 3055,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 41045,
+  "cost_usd": 0.3899466,
+  "num_turns": 2,
+  "duration_ms": 30911
+ }
+}

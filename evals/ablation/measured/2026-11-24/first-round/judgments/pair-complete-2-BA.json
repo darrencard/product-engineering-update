@@ -1,0 +1,45 @@
+{
+ "id": "pair-complete-2-BA",
+ "fixture": "complete",
+ "kind": "pair",
+ "x": "runs/B/complete/2",
+ "y": "runs/A/complete/2",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "X",
+    "reason": "X's figures (ARR $10.9M, NRR 96.4%, CFR 7.7%, R&D 40.8%, capacity 31/18/8/21/22) all check out apart from labelling $0.33 as cost per successful task, while Y wrongly says all 36 retained accounts grew about 20% (only 15 did) and that 8 retained accounts filed onboarding tickets (it is 14)."
+   },
+   "no_invented_numbers": {
+    "winner": "X",
+    "reason": "X's one projection ('Activation: 5 more periods') is labelled as a rough guide, while Y's board cut states as fact that inference ran 27.5% over plan 'because volume grew' and that the VP Engineering 'owns the fix, due in Q4', neither of which is in the data."
+   },
+   "speed_with_quality": {
+    "winner": "tie",
+    "reason": "Both pair 4 deploys/week and the 38h lead time with change failure rising from 5.1% to 7.7% and review time rising from 9h to 13h, and neither presents speed alone as good news; Y also adds rework (11.7% to 15%)."
+   },
+   "gaps_shown": {
+    "winner": "Y",
+    "reason": "Y's Data gaps section, owned by the VP Engineering and due Q4, flags $10.3M revenue not reconciling with $10.9M ARR, 22 CRM wins against 6 new billing accounts, partial lead time and uncheckable stop rules, while X only flags Platform & security and AI gross margin."
+   },
+   "board_cut_usable": {
+    "winner": "Y",
+    "reason": "Y's board cut is one page that leads with four KPIs, the pricing-pilot decision and the passed 4 Nov deadline, while X's board cut carries 'Signed off by Ablation eval, synthetic data', a product pitch with 'Book a call', and Appendices A to D."
+   }
+  },
+  "overall": {
+   "winner": "Y",
+   "reason": "X is more accurate, but its board cut can't be sent as it is and it misses the revenue-vs-ARR and CRM-vs-billing conflicts. Y has two minor counting errors and one unsupported cause, but it gives the board a usable, honest summary with the real gaps and the overdue decision up front."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 3991,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 43100,
+  "cost_usd": 0.424628,
+  "num_turns": 2,
+  "duration_ms": 35913
+ }
+}

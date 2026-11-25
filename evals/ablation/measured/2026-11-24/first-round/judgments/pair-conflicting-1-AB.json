@@ -1,0 +1,45 @@
+{
+ "id": "pair-conflicting-1-AB",
+ "fixture": "conflicting",
+ "kind": "pair",
+ "x": "runs/A/conflicting/1",
+ "y": "runs/B/conflicting/1",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "X",
+    "reason": "X's billing walk ($10.38M to $10.91M, NRR 96.4%, GRR 89.3%) and delivery figures (CFR 4/52 = 7.7%, rework 9/60 = 15%) all recompute, while Y's slide 8 gives Self-serve carrier onboarding a '39% to 41%' movement though it never shipped, and its 40.8% R&D/revenue ratio rests on the dubious $10.3M revenue line."
+   },
+   "no_invented_numbers": {
+    "winner": "tie",
+    "reason": "X adds two data-derived risks with its own likelihood/impact ratings (e.g. 'High' for inference overrun), and Y adds a labelled projection ('Activation: 5 more periods'); both are minor and roughly offset."
+   },
+   "speed_with_quality": {
+    "winner": "X",
+    "reason": "Both pair deploys 3\u21924 with change failure 5.1%\u21927.7%, but X also shows rework rising from 11.7% to 15.0% and says outright that 'delivery got faster, but quality slipped', and its board cut ties CFR to the 4/week deploy rate."
+   },
+   "gaps_shown": {
+    "winner": "X",
+    "reason": "X names the VP Engineering as owner of the ARR ($10.1M vs $10.91M) and north-star (21.4K vs 23.1K) conflicts and also flags the revenue-line anomaly, the 22 won deals vs 6 new accounts mismatch and the passed 4 Nov deadline; Y flags only ARR and loads, uses the revenue line uncritically, and its board cut never shows ARR."
+   },
+   "board_cut_usable": {
+    "winner": "X",
+    "reason": "X's board cut opens with the pricing-pilot decision and a four-metric scorecard on about one page, while Y's carries the full ledger, tool-promotion appendices ('Book a call') and 'Signed off by Ablation eval, synthetic data'."
+   }
+  },
+  "overall": {
+   "winner": "X",
+   "reason": "X is correct throughout and reports every source conflict with an owner, including the passed 4 Nov deadline and the suspect revenue line. Y misattributes a metric to an unshipped commitment, and its board cut is padded with tooling appendices, so it can't go to a board as it is."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 3318,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 40804,
+  "cost_usd": 0.3932786,
+  "num_turns": 2,
+  "duration_ms": 33378
+ }
+}

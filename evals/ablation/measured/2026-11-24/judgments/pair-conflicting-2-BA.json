@@ -1,0 +1,45 @@
+{
+ "id": "pair-conflicting-2-BA",
+ "fixture": "conflicting",
+ "kind": "pair",
+ "x": "runs/B/conflicting/2",
+ "y": "runs/A/conflicting/2",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "Y",
+    "reason": "Both have correct NRR 96.4%/GRR 89.3% and CFR 5.1%\u21927.7%, but X's slide 9 reports PR open-to-merge time (38h) as 'Lead time for change' and marks it landed; Y's only slip is rounding the inference overrun as both 27% and 28%."
+   },
+   "no_invented_numbers": {
+    "winner": "X",
+    "reason": "X labels its only forecast ('Activation: 5 more periods') as projected, while Y's board summary gives a cause the data doesn't contain: ARR missed because of 'weak activation'."
+   },
+   "speed_with_quality": {
+    "winner": "tie",
+    "reason": "Both put deploys 3\u21924/week next to change failure rate 5.1%\u21927.7% (X slide 9b, Y 'Delivery is faster but less stable'), and neither presents speed alone as good news."
+   },
+   "gaps_shown": {
+    "winner": "Y",
+    "reason": "Y's \u00a715 lists the North Star disagreement (23,100 vs 21,400), the ARR disagreement ($10.10M vs $10.91M), the unmeasurable lead time and the missing bet readouts, all owned by the VP Engineering for Q4; X names an owner only for the loads gap and fills lead time with a proxy."
+   },
+   "board_cut_usable": {
+    "winner": "Y",
+    "reason": "Y's board cut opens with the summary, a scorecard including ARR $10.1M vs $11.0M, and the decision with its passed deadline; X's carries a 'Book a call' tool pitch in Appendix C and template Appendix D, leaves ARR off the scorecard, and misses the 4 Nov deadline."
+   }
+  },
+  "overall": {
+   "winner": "Y",
+   "reason": "Y's figures check out, it puts both disputed sources side by side with an owner, and it catches the passed 4 Nov deadline, though one causal claim is unsupported. X is careful about sourcing but labels PR cycle time as lead time, and its board cut includes product-marketing appendices and leaves out ARR, so it can't be sent as it is."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 3758,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 41045,
+  "cost_usd": 0.4040066,
+  "num_turns": 2,
+  "duration_ms": 38805
+ }
+}

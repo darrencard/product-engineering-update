@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- **Ablation eval.** `evals/ablation/` compares the skill's pipeline with Claude alone on the same fixture data, with a blind judge, noise runs and mechanical checks. It calls the model, so it stays out of the unit tests and CI. On the 6 synthetic fixtures the judge preferred Claude alone in 36 of 36 judgments. The skill made 0 arithmetic errors and Claude alone 1 in 1,049 checked figures. The skill's behaviour is unchanged. Results and limits: `docs/ablation.md`.
+
 ## 0.7.4 (2026-11-24)
 
 - **Error recovery in the skill itself.** SKILL.md now holds a table of the refusals an agent meets most, each with what to do, so the fix is in the agent's context and not only in `docs/troubleshooting.md`. Facts only the user has are asked for, never filled in.

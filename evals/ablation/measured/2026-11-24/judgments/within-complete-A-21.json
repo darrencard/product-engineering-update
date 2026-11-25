@@ -1,0 +1,45 @@
+{
+ "id": "within-complete-A-21",
+ "fixture": "complete",
+ "kind": "within_A",
+ "x": "runs/A/complete/2",
+ "y": "runs/A/complete/1",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "Y",
+    "reason": "X says all 36 retained accounts grew about 20% (only 15 did; 21 were flat) and that 8 retained accounts filed Onboarding tickets (it is 14), while Y's ARR bridge correctly shows 15 accounts up 20% for +$741K."
+   },
+   "no_invented_numbers": {
+    "winner": "X",
+    "reason": "Y's full update says inference ran 27.5% over plan 'because volume grew' and places the 6 price losses 'in Q3' despite undated CRM data, whereas X says the volume cause can't be confirmed and flags that the CRM deals are undated."
+   },
+   "speed_with_quality": {
+    "winner": "tie",
+    "reason": "Both put 4 deploys a week and 38h lead time beside the 7.7% change failure rate and 13h review time, and neither board cut presents speed as good news on its own."
+   },
+   "gaps_shown": {
+    "winner": "X",
+    "reason": "X flags that 22 CRM wins don't match 6 new billing accounts, that the CRM and support exports are undated, and that only 10 tracker items closed in September, all with an owner; Y misses the CRM-versus-billing conflict."
+   },
+   "board_cut_usable": {
+    "winner": "Y",
+    "reason": "Y's board cut opens with the per-load pricing pilot decision and the passed 4 Nov deadline, then splits into went-well and needs-attention, while X puts the decision after five paragraphs of 'what happened'."
+   }
+  },
+  "overall": {
+   "winner": "Y",
+   "reason": "X has two wrong figures in its churn and ARR analysis (36 retained accounts growing, 8 retained accounts with onboarding tickets), and the rubric says a wrong number is worse than a missing one. X shows data gaps more thoroughly, but Y's figures are correct and its board cut, which leads with the decision, could go to a board as it is."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 3412,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 32868,
+  "cost_usd": 0.3316706,
+  "num_turns": 2,
+  "duration_ms": 30709
+ }
+}

@@ -1,0 +1,45 @@
+{
+ "id": "pair-single_product-1-BA",
+ "fixture": "single_product",
+ "kind": "pair",
+ "x": "runs/B/single_product/1",
+ "y": "runs/A/single_product/1",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "tie",
+    "reason": "On recomputation, both get the core figures right: ARR $10.38M to $10.91M, NRR 96.4%, GRR 89.3%, change failure 5.1% to 7.7% (2 of 39, then 4 of 52 deploys), R&D at 40.8% of revenue and AI seat use at 75%. Y's extra figures also check out, including rework 11.7% to 15%, inference at 5.9% of revenue and support shares of 55/33/13%."
+   },
+   "no_invented_numbers": {
+    "winner": "X",
+    "reason": "Y says inference ran 27.5% over plan 'because volume grew faster than the 20% cut in unit cost', but the data doesn't support that cause: 1.26 \u00d7 0.80 is only about +1%. X's only forward number, 'Activation: 5 more periods', is clearly labelled as a projection."
+   },
+   "speed_with_quality": {
+    "winner": "Y",
+    "reason": "Both pair 4 deploys a week with the 7.7% change failure rate, but Y also shows rework rising from 11.7% to 15% and flags that 38h lead time is a PR-open-to-merge proxy. X keeps rework (L07) in its ledger and never puts it on a slide."
+   },
+   "gaps_shown": {
+    "winner": "Y",
+    "reason": "Y flags that $10.9M billing ARR doesn't reconcile with $10.3M quarterly finance revenue (about a $41M run rate), plus the missing CRM close dates and the PRs not linked to deploys, all owned by the VP Engineering for Q4. X reports $10.9M ARR without comment and lists only Platform & security as missing."
+   },
+   "board_cut_usable": {
+    "winner": "Y",
+    "reason": "Y's board cut opens with the pricing-pilot decision and fits on about one page. X's board cut buries the ask under 'Now what' on slide 1 and still carries tool marketing in Appendix C ('Book a call'), plus template artefacts like 'Keys J and K move between slides'."
+   }
+  },
+  "overall": {
+   "winner": "Y",
+   "reason": "Y surfaces the material ARR-versus-revenue discrepancy, the integration risk and the proxy lead time, and its board cut leads with the ask and could be sent as is. Its one unsupported causal claim about the inference overrun matters less than X silently reporting unreconciled ARR and shipping a board cut padded with product-pitch appendices."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 2725,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 40415,
+  "cost_usd": 0.3783066,
+  "num_turns": 2,
+  "duration_ms": 27589
+ }
+}

@@ -1,0 +1,45 @@
+{
+ "id": "pair-complete-1-AB",
+ "fixture": "complete",
+ "kind": "pair",
+ "x": "runs/A/complete/1",
+ "y": "runs/B/complete/1",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "tie",
+    "reason": "Both state ARR $10.91M/NRR 96.4%/GRR 89.3%, CFR 7.7% (4/52), effort split 31/18/8/21/22 and 75% AI seat use, all of which recompute correctly."
+   },
+   "no_invented_numbers": {
+    "winner": "Y",
+    "reason": "X asserts the $612K vs $480K inference overrun 'comes from volume', an unsupported cause, while Y's 'Activation: 5 more periods' is labelled as a rough projection."
+   },
+   "speed_with_quality": {
+    "winner": "X",
+    "reason": "Both pair deploys 3\u21924 with CFR 5.1%\u21927.7%, but X explicitly frames it as 'faster but less stable' and adds rework rate 12%\u219215%, which Y omits."
+   },
+   "gaps_shown": {
+    "winner": "X",
+    "reason": "X's Data gaps section (owner VP Engineering, due Q4) flags the $10.3M revenue vs $10.91M ARR mismatch and the PR-only lead time proxy, whereas Y silently uses $10.3M for R&D at 40.8% of revenue."
+   },
+   "board_cut_usable": {
+    "winner": "X",
+    "reason": "X's board cut leads with ARR, KPIs and the pricing-pilot ask, noting the 4 Nov deadline has passed; Y's says 'decision for you today' and appends the ledger, a 'Book a call' pitch and a 'synthetic data' sign-off."
+   }
+  },
+  "overall": {
+   "winner": "X",
+   "reason": "Both are numerically accurate, but X surfaces the real data conflict (revenue vs ARR), the overdue decision and the speed-vs-stability tradeoff plainly. Its board cut is concise and sendable, whereas Y's carries product marketing appendices and an out-of-date ask."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 3614,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 42241,
+  "cost_usd": 0.410216,
+  "num_turns": 2,
+  "duration_ms": 33847
+ }
+}

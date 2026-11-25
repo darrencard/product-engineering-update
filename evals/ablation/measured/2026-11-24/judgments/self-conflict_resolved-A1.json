@@ -1,0 +1,45 @@
+{
+ "id": "self-conflict_resolved-A1",
+ "fixture": "conflict_resolved",
+ "kind": "self_A",
+ "x": "runs/A/conflict_resolved/1",
+ "y": "runs/A/conflict_resolved/1",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "tie",
+    "reason": "Both state the same figures (e.g. $10.911M ending ARR from $10.38M + $900K + $741K \u2212 $1.11M, and 7.7% change failure from 4 of 52 deploys), and all check out against the data."
+   },
+   "no_invented_numbers": {
+    "winner": "tie",
+    "reason": "Both include the same unsupported claim in \u00a712 that finance close's $10.3M revenue is 'close to annual ARR rather than one quarter's revenue'; otherwise every figure is sourced."
+   },
+   "speed_with_quality": {
+    "winner": "tie",
+    "reason": "Both put 4 deploys a week and 38h lead time next to the 7.7% change failure rate and 15.0% rework in \u00a78, and both board cuts say 'We ship faster, but more releases fail.'"
+   },
+   "gaps_shown": {
+    "winner": "tie",
+    "reason": "Both flag the $10.91M vs $10.1M ARR conflict and the 23,100 vs 21,400 loads conflict, and both name the VP Engineering as owner with a Q4 due date in \u00a712."
+   },
+   "board_cut_usable": {
+    "winner": "tie",
+    "reason": "Both board cuts are the same: a short headline, a scorecard with the two reconciliation notes, and the per-load pricing pilot ask with its 4 Nov 2026 deadline."
+   }
+  },
+  "overall": {
+   "winner": "tie",
+   "reason": "Updates X and Y are textually identical in both the full update and the board cut, so they are equal in substance on every criterion. Any strength (correct ARR bridge, delivery speed shown next to quality) or weakness (the unsupported revenue-vs-ARR remark) applies equally to both."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 983,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 33495,
+  "cost_usd": 0.2881066,
+  "num_turns": 2,
+  "duration_ms": 12158
+ }
+}

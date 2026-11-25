@@ -1,0 +1,45 @@
+{
+ "id": "pair-conflict_resolved-1-AB",
+ "fixture": "conflict_resolved",
+ "kind": "pair",
+ "x": "runs/A/conflict_resolved/1",
+ "y": "runs/B/conflict_resolved/1",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "X",
+    "reason": "Both compute ARR $10.911M, NRR 96.4% and CFR 7.7% correctly, but Y's slide 5 reports 'R&D as a share of revenue 40.8%' off a $10.3M 'Q3 revenue' line that is roughly annual ARR, while X flags that line as suspect in \u00a712."
+   },
+   "no_invented_numbers": {
+    "winner": "X",
+    "reason": "Y's board cut claims 'Signed off by the CEO', which nothing in the data supports, and adds an 'Activation: 5 more periods' projection, whereas X's extras (\u2248$2,050 per engineer, warehouse 7% below PostHog) are all derived from the data."
+   },
+   "speed_with_quality": {
+    "winner": "tie",
+    "reason": "Both pair deploys 3\u21924/week with change failure 5.1%\u21927.7% (X \u00a78 and board cut; Y slides 9 and 9b) and neither presents speed alone as good news."
+   },
+   "gaps_shown": {
+    "winner": "X",
+    "reason": "X \u00a712 plainly states the $811K billing-vs-finance ARR gap and the 23,100-vs-21,400 loads gap with the VP Engineering as owner due Q4, plus the missing bet readouts; Y only mentions the conflicts inside ledger rows L09/L14."
+   },
+   "board_cut_usable": {
+    "winner": "X",
+    "reason": "X's board cut leads with the headline, a scorecard and the pricing-pilot ask; Y's board cut carries Appendix C ('Book a call', GitHub link to the tool) and Appendix D, a source guide, so it cannot be sent as is."
+   }
+  },
+  "overall": {
+   "winner": "X",
+   "reason": "Both get the core arithmetic right, but X states both data conflicts openly with an owner and flags the suspect $10.3M revenue line that Y uses for its 40.8% figure. X's board cut is ready to send as it stands, while Y's includes an unsupported CEO sign-off and appendices that pitch the tool."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 3538,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 40766,
+  "cost_usd": 0.39737459999999997,
+  "num_turns": 2,
+  "duration_ms": 33501
+ }
+}

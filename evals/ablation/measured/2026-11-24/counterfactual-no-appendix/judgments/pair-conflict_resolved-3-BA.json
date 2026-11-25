@@ -1,0 +1,45 @@
+{
+ "id": "pair-conflict_resolved-3-BA",
+ "fixture": "conflict_resolved",
+ "kind": "pair",
+ "x": "runs/B/conflict_resolved/3",
+ "y": "runs/A/conflict_resolved/3",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "tie",
+    "reason": "Both compute ARR $10.38M to $10.91M, NRR 96.4%, CFR 2/39 to 4/52 (5.1% to 7.7%) and lead time 52h to 38h correctly against the data."
+   },
+   "no_invented_numbers": {
+    "winner": "Y",
+    "reason": "X's board cut claims 'Signed off by the CEO' and cites 'Appendix D, Keys J and K', none supported by the data, while Y labels its inference-cost explanation as 'likely'."
+   },
+   "speed_with_quality": {
+    "winner": "Y",
+    "reason": "Both pair deploys 3 to 4 with CFR 5.1% to 7.7%, but Y also adds rework 11.7% to 15% and explicitly says 'we shipped faster, but quality slipped'."
+   },
+   "gaps_shown": {
+    "winner": "Y",
+    "reason": "X buries the warehouse 21,400 and finance-close $10.1M conflicts in ledger rows L09/L14 while its headline calls 23.1K a hit, whereas Y flags both up front with the VP Engineering owning reconciliation in Q4."
+   },
+   "board_cut_usable": {
+    "winner": "Y",
+    "reason": "Y's board cut is a one-page scorecard plus the pricing-pilot decision and overdue 4 Nov deadline, while X's carries tool artifacts, the full 26-row ledger and empty table rows."
+   }
+  },
+  "overall": {
+   "winner": "Y",
+   "reason": "Both get the numbers right, but Y states the north-star and ARR source conflicts plainly with an owner and surfaces churn and integration losses. X hides those conflicts in an appendix and ships a board cut with unsupported sign-off text and formatting junk."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 3233,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 37426,
+  "cost_usd": 0.3645546,
+  "num_turns": 2,
+  "duration_ms": 30205
+ }
+}

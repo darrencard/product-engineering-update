@@ -1,0 +1,45 @@
+{
+ "id": "pair-complete-1-BA",
+ "fixture": "complete",
+ "kind": "pair",
+ "x": "runs/B/complete/1",
+ "y": "runs/A/complete/1",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "tie",
+    "reason": "Recomputed figures in both are correct: ARR $10.91M, NRR 96.4%, GRR 89.3%, change failure rate 4/52 = 7.7%, lead time 38h, R&D at 40.8% of revenue (X), and $4.20M total R&D and 89%/61% seat adoption (Y)."
+   },
+   "no_invented_numbers": {
+    "winner": "X",
+    "reason": "Y says the 27.5% inference overrun \"comes from volume\", a cause the data doesn't support (a 26% volume rise and a 20% fall in cost per task barely net out), while X's only extra figure, \"Activation: 5 more periods\", is labelled as a projection."
+   },
+   "speed_with_quality": {
+    "winner": "tie",
+    "reason": "Both put deploys (3\u21924) and lead time (52h\u219238h) beside change failure rate (5.1%\u21927.7%), time to restore and review time, and both call the result faster but less stable, not good news."
+   },
+   "gaps_shown": {
+    "winner": "Y",
+    "reason": "Y's data gaps section, owned by the VP Engineering and due Q4, flags that Finance revenue ($10.3M) and ARR ($10.91M) don't reconcile, that lead time is only PR opened to merged, and that commitments and stop rules can't be traced; X silently uses Stripe ARR and only flags Platform & security and AI margin."
+   },
+   "board_cut_usable": {
+    "winner": "Y",
+    "reason": "Y's board cut opens on four headline metrics and the pricing-pilot decision on one page, while X's board cut carries the full ledger, product-marketing appendices (\"Book a call\") and a \"Signed off by Ablation eval, synthetic data\" stamp, so it can't be sent as it is."
+   }
+  },
+  "overall": {
+   "winner": "Y",
+   "reason": "Both get the numbers right, but Y surfaces the revenue/ARR conflict and other gaps with an owner, and its board cut can go to a board as it stands while X's carries tool-marketing appendices. Y's one unsupported causal claim about inference volume is a real flaw, but it costs less than X's unusable board cut and silently chosen sources."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 2785,
+  "cache_read_input_tokens": 0,
+  "cache_creation_input_tokens": 42241,
+  "cost_usd": 0.393636,
+  "num_turns": 2,
+  "duration_ms": 27272
+ }
+}

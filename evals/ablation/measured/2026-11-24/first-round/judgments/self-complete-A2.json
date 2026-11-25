@@ -1,0 +1,45 @@
+{
+ "id": "self-complete-A2",
+ "fixture": "complete",
+ "kind": "self_A",
+ "x": "runs/A/complete/2",
+ "y": "runs/A/complete/2",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "tie",
+    "reason": "Both updates are identical, and both have the same correct figures, e.g. the ARR bridge ($10.38M + $0.9M + $0.741M \u2212 $1.11M = $10.911M) and change failure rate of 7.7% (4/52)."
+   },
+   "no_invented_numbers": {
+    "winner": "tie",
+    "reason": "Both make the same unsupported claims: the board cut says inference ran 27.5% over plan 'because volume grew', and both say price caused '6 of 17 lost deals this quarter' although the CRM export has no deal dates."
+   },
+   "speed_with_quality": {
+    "winner": "tie",
+    "reason": "Both put 4.0 deploys/week and 38h lead time beside the 7.7% change failure rate, 15.0% rework and 41m time to restore, and both call this 'faster but less stable'."
+   },
+   "gaps_shown": {
+    "winner": "tie",
+    "reason": "Both have the same Data gaps section, owned by the VP Engineering and due Q4. It flags the $10.3M revenue vs $10.91M ARR mismatch and the 22 CRM wins vs 6 new accounts."
+   },
+   "board_cut_usable": {
+    "winner": "tie",
+    "reason": "Both board cuts are identical: they lead with four KPI tiles (23.1K North Star, $10.91M ARR, 86% task success, 41% activation) and the overdue per-load pricing decision."
+   }
+  },
+  "overall": {
+   "winner": "tie",
+   "reason": "Update X and Update Y are word-for-word identical in the full update and the board cut, so they are equal in substance on every criterion. They also share the same flaws, such as stating 'because volume grew' as fact in the board cut."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 1175,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 33727,
+  "cost_usd": 0.2938026,
+  "num_turns": 2,
+  "duration_ms": 11869
+ }
+}

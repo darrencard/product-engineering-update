@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kestrel Labs: Board Update, Product &amp; Engineering, Q3 2026</title>
+<style>
+:root{--ink:#1b1f24;--mute:#5b6570;--line:#e3e6ea;--good:#1f7a4d;--bad:#b3261e;--warn:#9a6700;--accent:#2b5fd9}
+*{box-sizing:border-box}
+body{margin:0;background:#fafbfc;color:var(--ink);font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif}
+main{max-width:820px;margin:0 auto;padding:36px 28px 48px;background:#fff;min-height:100vh}
+header{border-bottom:2px solid var(--ink);padding-bottom:12px;margin-bottom:20px}
+.co{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
+h1{font-size:26px;margin:4px 0}
+.meta{color:var(--mute);font-size:13px}
+h2{font-size:17px;margin:26px 0 8px}
+.ask{border:2px solid var(--ink);padding:14px 18px;margin:16px 0}
+.ask .lbl{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
+.ask .q{font-size:18px;font-weight:700;margin:2px 0 6px}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.kpi{border:1px solid var(--line);padding:12px}
+.kpi .l{font-size:12px;color:var(--mute)}
+.kpi .v{font-size:24px;font-weight:700}
+.kpi .s{font-size:12px}
+.good{color:var(--good);font-weight:600}.bad{color:var(--bad);font-weight:600}.warn{color:var(--warn);font-weight:600}
+ul{padding-left:20px;margin:6px 0}li{margin:5px 0}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12px;text-transform:uppercase;color:var(--mute);letter-spacing:.04em}
+.note{font-size:12px;color:var(--mute)}
+@media (max-width:700px){.kpis{grid-template-columns:repeat(2,1fr)}}
+@media print{body{background:#fff}main{padding:0}}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <div class="co">Kestrel Labs &middot; Board update &middot; Product &amp; Engineering</div>
+  <h1>Q3 2026: the agent is working, and activation is the constraint</h1>
+  <div class="meta">1 Jul to 30 Sep 2026 &middot; Data as of 30 Sep 2026 &middot; From the CPTO</div>
+</header>
+
+<div class="ask">
+  <div class="lbl">Decision for the board &middot; deadline 4 Nov 2026</div>
+  <div class="q">Approve a per-load pricing pilot with 10 customers</div>
+  <p>The alternative is to wait a quarter. Per-load pricing is core to our strategy, and price was the reason for 6 of 17 lost deals. <strong>Recommendation: run the pilot with 10 customers.</strong> <span class="warn">The deadline has passed relative to when this update was compiled. Please confirm or ratify the decision.</span></p>
+</div>
+
+<h2>Scorecard</h2>
+<div class="kpis">
+  <div class="kpi"><div class="l">Loads cleared / week (north star)</div><div class="v">23,100</div><div class="s good">Target 22K &middot; +26% QoQ</div></div>
+  <div class="kpi"><div class="l">Activation</div><div class="v">41%</div><div class="s bad">Target 50% &middot; +2 pts QoQ</div></div>
+  <div class="kpi"><div class="l">ARR (Stripe)</div><div class="v">$10.91M</div><div class="s">+5.1% QoQ &middot; objective $50M</div></div>
+  <div class="kpi"><div class="l">Net revenue retention</div><div class="v">96.4%</div><div class="s warn">4 churned accounts, &minus;$1.11M</div></div>
+</div>
+
+<h2>What the board should know</h2>
+<ul>
+  <li><strong>The product thesis is holding.</strong> The north star beat target. All 22 won deals cited the agent clearing exceptions. Retained accounts expanded by about 20% in the quarter. 6 of 7 commitments shipped.</li>
+  <li><strong>Churn offset growth.</strong> New logos added $900K and expansion added $741K, but churn removed $1.11M. All 4 churned accounts had onboarding issues. The fix is to get accounts to their first automated load faster: activation is our top Q4 priority.</li>
+  <li><strong>Integrations are an open gap.</strong> Missing TMS integrations cost 11 of 17 lost deals and account for 55% of support tickets. No current bet addresses them, and that is a Q4 planning decision.</li>
+  <li><strong>Spend is on plan except inference.</strong> R&amp;D came in at $4.20M against a $4.25M plan. Inference ran 27.5% over plan at $612K, partly because agent volume grew.</li>
+  <li><strong>Engineering throughput is up and quality is down.</strong> We deploy 4 times a week (previously 3), but change failure rate rose to 7.7% against a target under 5%.</li>
+</ul>
+
+<h2>Top risks</h2>
+<table>
+  <tr><th>Risk</th><th>Impact</th><th>Mitigation</th><th>Due</th></tr>
+  <tr><td>One model provider carries most inference spend</td><td>High</td><td>Routing layer across 2 providers (Platform lead)</td><td>Dec 2026</td></tr>
+  <tr><td>Churn among accounts that fail onboarding</td><td>High</td><td>Self-serve carrier onboarding (missed in Q3). Apply the Guided activation stop rule.</td><td>Q4</td></tr>
+</table>
+
+<h2>Data caveat</h2>
+<p>Stripe ARR ($10.91M) does not reconcile with Finance Q3 revenue ($10.3M, about $41M annualized). Agent task success and cost per task are not yet measured. The VP Engineering owns closing these gaps in Q4.</p>
+
+<p class="note">The full leadership update has detail on delivery health, investment mix, customer signal and sources.</p>
+</main>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Kestrel Labs: Product &amp; Engineering Update, 2026-Q3</title><style>
+body{font:15px/1.5 -apple-system,Segoe UI,Helvetica,Arial,sans-serif;color:#1d232b;max-width:860px;margin:40px auto;padding:0 24px}
+h1{font-size:26px;margin:0 0 4px}h2{font-size:18px;margin:32px 0 8px;border-bottom:1px solid #dde2e8;padding-bottom:4px}
+.meta{color:#5b6673;font-size:13px}.call{background:#f4f6f9;border-left:4px solid #2d5b8a;padding:12px 16px;margin:16px 0}
+table{border-collapse:collapse;width:100%;font-size:14px;margin:8px 0}th,td{text-align:left;padding:6px 8px;border-bottom:1px solid #e6e9ee}th{color:#5b6673;font-weight:600}
+td.n{text-align:right;font-variant-numeric:tabular-nums}.bar{background:#2d5b8a;height:12px;display:inline-block;vertical-align:middle}
+.warn{color:#9a4a00;font-weight:600}.note{color:#5b6673;font-size:13px}ul{padding-left:20px}li{margin:4px 0}
+</style>
+</head><body>
+<h1>Product &amp; Engineering Update: 2026-Q3</h1>
+<div class="meta">Kestrel Labs · from the CPTO · period 2026-07-01 to 2026-09-30 · data as of 2026-09-30 · source: Linear tracker export (the only connected system)</div>
+
+<div class="call"><strong>Summary.</strong> We completed 100 tracker items in Q3. 78 of them are tagged to “Grow ARR to $50M”. The other 22 are keep-the-lights-on work with no objective. Completions fell each month: <strong>53 in July, 37 in August, 10 in September</strong>. In September only the Dispatch Agent team was still closing work. We must confirm whether this is a real slowdown or a gap in the export before we draw conclusions. This update covers output only. No strategy, outcome, AI-quality or risk data was supplied (see the last section).</div>
+
+<h2>1. Where the effort went</h2>
+<p class="note">Every item has an estimate of 1, so these figures are item counts, not effort. They show share of items, not share of engineering time.</p>
+<table><tr><th>Work type</th><th class="n">Items</th><th class="n">Share</th><th></th></tr><tr><td>New capabilities</td><td class="n">31</td><td class="n">31%</td><td><span class="bar" style="width:124px"></span></td></tr><tr><td>Keep the lights on</td><td class="n">22</td><td class="n">22%</td><td><span class="bar" style="width:88px"></span></td></tr><tr><td>Platform &amp; scale</td><td class="n">21</td><td class="n">21%</td><td><span class="bar" style="width:84px"></span></td></tr><tr><td>Improve the core</td><td class="n">18</td><td class="n">18%</td><td><span class="bar" style="width:72px"></span></td></tr><tr><td>Growth</td><td class="n">8</td><td class="n">8%</td><td><span class="bar" style="width:32px"></span></td></tr></table>
+<table><tr><th>Product line / team</th><th>Work types</th><th class="n">Items</th></tr>
+<tr><td>Platform</td><td>Keep the lights on 22 · Platform &amp; scale 21</td><td class="n">43</td></tr>
+<tr><td>Dispatch Agent</td><td>New capabilities 31</td><td class="n">31</td></tr>
+<tr><td>Core Dispatch</td><td>Improve the core 18 · Growth 8</td><td class="n">26</td></tr></table>
+<ul>
+<li><strong>Each team does one kind of work.</strong> All new-capability work sits with the Dispatch Agent. All maintenance and scale work sits with Platform. All growth work sits with Core Dispatch.</li>
+<li><strong>Growth is the smallest category at 8 items (8%), and all 8 closed by 22 July.</strong> The quarter’s only tagged objective is about ARR, so leadership should check that this split was intended.</li>
+<li><strong>Keep-the-lights-on was 22% of items</strong>, and none of it was linked to an objective.</li>
+</ul>
+
+<h2>2. Delivery over the quarter</h2>
+<table><tr><th>Team</th><th class="n">Jul</th><th class="n">Aug</th><th class="n">Sep</th><th>Last completion</th></tr>
+<tr><td>Dispatch Agent</td><td class="n">12</td><td class="n">10</td><td class="n">9</td><td>26 Sep</td></tr>
+<tr><td>Platform</td><td class="n">22</td><td class="n">20</td><td class="n">1</td><td>2 Sep</td></tr>
+<tr><td>Core Dispatch</td><td class="n">19</td><td class="n">7</td><td class="n">0</td><td class="warn">21 Aug</td></tr>
+<tr><th>Total</th><th class="n">53</th><th class="n">37</th><th class="n">10</th><th></th></tr></table>
+<ul>
+<li><span class="warn">Core Dispatch closed nothing in the last ~6 weeks of the quarter. Platform closed one item after 2 September.</span> This could be a real stall, work that is still open (open items are not in the export), or an export cut-off. The VP Engineering should check this first.</li>
+<li>The Dispatch Agent team delivered at a steady pace across all three months.</li>
+<li>We can’t report cycle time, plan-vs-actual or carry-over, because the export has only completed items and no planned ranges.</li>
+</ul>
+
+<h2>3. AI features</h2>
+<p><strong>Dispatch Agent</strong> (eval set v14): 31 new-capability items shipped. <span class="warn">No eval results were supplied</span>, so we can’t say whether quality improved, held or regressed this quarter.</p>
+
+<h2>4. Not covered in this update: missing inputs</h2>
+<table><tr><th>Missing input</th><th>Why it matters</th></tr>
+<tr><td>Strategy (diagnosis, policy, actions, non-goals)</td><td>Nothing to judge the allocation against</td></tr>
+<tr><td>Objectives and the investment plan</td><td>“Grow ARR to $50M” appears only as a tracker tag. There is no target split by work type, so we can’t say if 8% on Growth is on plan</td></tr>
+<tr><td>North-star metric and its inputs</td><td>We can report output (items closed) but not outcomes</td></tr>
+<tr><td>Dispatch Agent eval results (eval set v14 is named, but there are no scores)</td><td>31% of completed items went to this AI feature and we have no quality evidence for it</td></tr>
+<tr><td>Delivery ranges and commitments</td><td>No plan-vs-actual, so we can’t measure predictability</td></tr>
+<tr><td>Risks, bets, decisions, things we stopped</td><td>Nothing to escalate or ask for</td></tr>
+<tr><td>Open and in-progress tracker items; real estimates</td><td>The export has only Done items, all estimated at 1</td></tr></table>
+<p>Owner: the VP Engineering. Due: Q4.</p>
+<p class="note">Data notes: 100 rows, all with status Done. Item titles are generic (“… item N”), so we can’t name specific deliverables. One item (NEW-31) is dated 1 July, out of sequence with the rest of its series.</p>
+</body></html>

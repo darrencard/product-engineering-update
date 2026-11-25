@@ -1,0 +1,45 @@
+{
+ "id": "pair-conflict_resolved-2-AB",
+ "fixture": "conflict_resolved",
+ "kind": "pair",
+ "x": "runs/A/conflict_resolved/2",
+ "y": "runs/B/conflict_resolved/2",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "tie",
+    "reason": "Both get the hard numbers right: ARR $10.911M, NRR 96.4%, GRR 89.3%, CFR 4/52 = 7.7%, lead time 38h, effort mix 31/18/8/21/22. Both also make the same mislabel, calling the eval's $0.41\u2192$0.33 cost per task a 'cost per successful task' (X in the commitments table; X separately computes the true per-success figure, $0.50\u2192$0.38)."
+   },
+   "no_invented_numbers": {
+    "winner": "Y",
+    "reason": "X's board cut states inference overspend was 'driven by volume', a cause the data does not contain. Y's one forecast ('Activation: 5 more periods') is labelled as a projection, though Y's ledger does give the undated CRM and support exports a Q3 window they can't support."
+   },
+   "speed_with_quality": {
+    "winner": "X",
+    "reason": "Both pair deploys (3\u21924/week) with change failure rate (5.1%\u21927.7%). X goes further and says plainly 'the team shipped faster but less cleanly', adds rework going from 12% to 15%, and names the VP Engineering as owner. Y marks deploys 'landed' without that framing."
+   },
+   "gaps_shown": {
+    "winner": "X",
+    "reason": "X puts the ARR gap (Stripe $10.91M vs finance close $10.10M) and the loads gap (PostHog 23.1K vs warehouse 21.4K, which would be a miss) in its summary, data notes and board cut. Y only mentions them in ledger rows L09 and L14. Neither names an owner for reconciling the two."
+   },
+   "board_cut_usable": {
+    "winner": "X",
+    "reason": "X's board cut leads with the per-load pricing decision, flags that the 4 Nov deadline has passed, and fits on a page. Y's board cut repeats the template header, the full ledger, a product pitch with 'Book a call', and a 'Signed off by Ablation eval, synthetic data' line, so it could not go to a board as it is."
+   }
+  },
+  "overall": {
+   "winner": "X",
+   "reason": "X gets the same figures right as Y and also puts the two source disagreements, the ARR miss against plan and the overdue decision in front of the board. Y hides the gaps in an appendix and pads its board cut with template and marketing material, so a careful CPO would send X."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 4054,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 40126,
+  "cost_usd": 0.4025746,
+  "num_turns": 2,
+  "duration_ms": 39414
+ }
+}

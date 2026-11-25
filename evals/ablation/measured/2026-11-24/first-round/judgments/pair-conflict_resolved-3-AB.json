@@ -1,0 +1,45 @@
+{
+ "id": "pair-conflict_resolved-3-AB",
+ "fixture": "conflict_resolved",
+ "kind": "pair",
+ "x": "runs/A/conflict_resolved/3",
+ "y": "runs/B/conflict_resolved/3",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "reason": "Both compute ARR $10.91M, NRR 96.4%, change failure rate 7.7% (4/52), lead time 38h and the 31/18/8/21/22 work mix correctly, and Y's 40.8% R&D/revenue and 75% seat use are arithmetically right.",
+    "winner": "tie"
+   },
+   "no_invented_numbers": {
+    "reason": "Y's slide 5 presents 'R&D as a share of revenue 40.8%' from a $10.3M 'Revenue' line that is implausible as quarterly revenue next to $10.1M ARR. X flags that line and refuses to compute ratios from it, and labels its inference-cost explanation as 'likely'.",
+    "winner": "X"
+   },
+   "speed_with_quality": {
+    "reason": "Both pair deploys 3\u21924 and lead time 52h\u219238h with change failure rate 5.1%\u21927.7%. X's summary ('We shipped faster, but quality slipped') and Y's slide 9/9b titles both refuse to present speed alone as good news.",
+    "winner": "tie"
+   },
+   "gaps_shown": {
+    "reason": "X states plainly that the warehouse shows 21,400 against PostHog's 23,100 and finance close shows ARR $811K below billing, and lists both under the VP Engineering, due Q4. Y's slides 1 and 11 show 23.1K as 'landed' and $10.9M ARR with those conflicts only in ledger notes L09/L14.",
+    "winner": "X"
+   },
+   "board_cut_usable": {
+    "reason": "X's board cut leads with a one-paragraph answer, a six-row scorecard and the pricing-pilot ask, and notes the 4 Nov deadline has passed. Y's board cut includes a 'Signed off by Ablation eval, synthetic data' stamp, a 'Not reported' under Now what, and Appendix C marketing with 'Book a call', so it cannot be sent as it is.",
+    "winner": "X"
+   }
+  },
+  "overall": {
+   "reason": "The arithmetic is equally sound in both, but X plainly surfaces the north-star (23,100 vs 21,400) and ARR ($10.91M vs $10.1M) conflicts with an owner, avoids the dubious 40.8% revenue ratio, and flags the overdue 4 Nov decision. Y's board cut buries those conflicts in a ledger and carries tool marketing and an eval sign-off, so a careful CPO would send X.",
+   "winner": "X"
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 3498,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 41251,
+  "cost_usd": 0.4004546,
+  "num_turns": 2,
+  "duration_ms": 33102
+ }
+}

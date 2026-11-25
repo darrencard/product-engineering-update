@@ -1,0 +1,45 @@
+{
+ "id": "pair-conflict_resolved-3-BA",
+ "fixture": "conflict_resolved",
+ "kind": "pair",
+ "x": "runs/B/conflict_resolved/3",
+ "y": "runs/A/conflict_resolved/3",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "tie",
+    "reason": "Both recompute correctly: ARR $10.38M\u2192$10.91M, NRR 96.4%, change failure rate 5.1%\u21927.7% (2/39, 4/52), lead time 38h, KTLO 22%, and Y's extra derived figures (bridge +$900K/+$741K/\u2212$1.11M, 89.3% GRR, $1,692 per active code-assistant user) also check out."
+   },
+   "no_invented_numbers": {
+    "winner": "tie",
+    "reason": "X's only projection ('Activation: 5 more periods') is labelled as a rough guide, and Y's causal remarks (inference overrun 'likely' from volume, churned accounts' onboarding tickets 'doesn't prove cause') are hedged; neither adds unsupported targets or benchmarks."
+   },
+   "speed_with_quality": {
+    "winner": "tie",
+    "reason": "X slide 9/9b puts deploys 3\u21924 next to change failure rate 5.1%\u21927.7%, and Y's 'shipped faster, but quality slipped' does the same with CFR, review time and rework 11.7%\u219215.0%, so neither treats speed alone as good news."
+   },
+   "gaps_shown": {
+    "winner": "Y",
+    "reason": "Y shows the $811K ARR gap between billing and finance close and the PostHog 23,100 vs warehouse 21,400 conflict (which decides whether the 22K target was met) on the slides themselves, with the VP Engineering as owner, while X puts both only in Appendix A rows L09/L14 and silently calls the target 'landed'."
+   },
+   "board_cut_usable": {
+    "winner": "Y",
+    "reason": "Y's board cut is one page that leads with the answer, a scorecard and the pricing-pilot ask, and notes the 4 Nov deadline has passed, while X's board cut carries the full ledger, Appendices B\u2013D, a 'Book a call' pitch and a 'Signed off by Ablation eval, synthetic data' line."
+   }
+  },
+  "overall": {
+   "winner": "Y",
+   "reason": "Both are numerically accurate, but Y states the ARR and north-star source conflicts in the body with an owner, where X buries them in the appendix and declares the target met. Y's board cut is short, leads with the ask and could be sent as it is, while X's includes product marketing and eval artefacts."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 3130,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 41251,
+  "cost_usd": 0.3930946,
+  "num_turns": 2,
+  "duration_ms": 32266
+ }
+}

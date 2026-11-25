@@ -1,0 +1,45 @@
+{
+ "id": "pair-no_ai-1-AB",
+ "fixture": "no_ai",
+ "kind": "pair",
+ "x": "runs/A/no_ai/1",
+ "y": "runs/B/no_ai/1",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "tie",
+    "reason": "Both get the core figures right (ARR $10.91M, NRR 96.4%, CFR 7.7%, 31/18/8/21/22 split), but X's 'one deploy failed in each month' is wrong (July had Dc0 and Dc13) and Y's '16 of 17 slides show data' contradicts its own 3 slides with no data."
+   },
+   "no_invented_numbers": {
+    "winner": "X",
+    "reason": "X labels its ~$2.7M quarterly-revenue figure as an estimate, while Y states an unsupported 'Signed off by the CEO' and computes R&D at 40.8% of revenue from a Finance figure that conflicts with Stripe."
+   },
+   "speed_with_quality": {
+    "winner": "X",
+    "reason": "Both put 4 deploys/week beside the 7.7% change failure rate, but X also adds rework (15%, 9 of 60) and says plainly that 'delivery got faster but less stable,' so speed is never read as good news."
+   },
+   "gaps_shown": {
+    "winner": "X",
+    "reason": "X has a Data gaps table owned by the VP Engineering for Q4 (no task success, no cost per successful task, Finance $10.3M vs Stripe $10.9M), while Y says nothing on the revenue conflict and leaves out task success."
+   },
+   "board_cut_usable": {
+    "winner": "X",
+    "reason": "X's board cut leads with the quarter in brief and the pricing-pilot ask, and flags that the 4 Nov deadline has passed; Y's carries template text ('Appendix D, Keys J and K'), an unsupported sign-off and the whole 22-row ledger."
+   }
+  },
+  "overall": {
+   "winner": "X",
+   "reason": "Both have correct core financial and delivery figures, but X reports the Finance-vs-Stripe conflict and the missing task-success measure with an owner, where Y skips the conflict and builds a ratio on the disputed figure. X's board cut could go to a board as it is; Y's still has template text and an unsupported CEO sign-off."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 3129,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 35381,
+  "cost_usd": 0.3461146,
+  "num_turns": 2,
+  "duration_ms": 30320
+ }
+}

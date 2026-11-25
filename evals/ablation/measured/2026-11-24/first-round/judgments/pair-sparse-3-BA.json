@@ -1,0 +1,45 @@
+{
+ "id": "pair-sparse-3-BA",
+ "fixture": "sparse",
+ "kind": "pair",
+ "x": "runs/B/sparse/3",
+ "y": "runs/A/sparse/3",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "Y",
+    "reason": "Y's monthly table (Dispatch Agent 12/10/9, Core Dispatch 19/7/0, Platform 22/20/1, totals 53/37/10), 78 of 100 tagged items and the 2026-09-26 last close all recompute correctly, while X's '0 of 19 slides show data' contradicts its 18 core slides and its own ledger rows L01/L02."
+   },
+   "no_invented_numbers": {
+    "winner": "Y",
+    "reason": "X's greyed samples put invented figures such as $10.9M ARR and a 5.1% to 7.7% change failure rate on board slides, and its 'made-up' slides 4 and 5 reuse the real tracker split (43/31/26, 31/18/8/21/22), which could mislead; Y states only figures the CSV supports."
+   },
+   "speed_with_quality": {
+    "winner": "X",
+    "reason": "X's only speed figures (sample slides 9 and 9b) are each paired with change failure rate or review time, while Y gives throughput counts (53/37/10) with no quality pair, though it doesn't present them as good news."
+   },
+   "gaps_shown": {
+    "winner": "Y",
+    "reason": "Y's 'What this update can't tell you' table names each missing input, why it matters and the VP Engineering as owner by Q4, and it flags the unexplained September drop, while X wrongly marks slide 5 Investment mix as missing although its own ledger holds the work-type split."
+   },
+   "board_cut_usable": {
+    "winner": "Y",
+    "reason": "Y's one-page board cut leads with 100 items, the 39/39/22 mix and the September drop, and says plainly that no decisions are requested; X's 8-slide cut is all 'not reported' with fake samples and an Appendix C product pitch, so it can't go to a board."
+   }
+  },
+  "overall": {
+   "winner": "Y",
+   "reason": "Y turns the only connected source into correct, sourced figures, says plainly what it can't show, and names who owns each gap. X throws away real tracker data, fills board slides with sample numbers that partly match the real ones, and includes a product pitch, so a careful CPO couldn't send it."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 2401,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 24722,
+  "cost_usd": 0.24628260000000002,
+  "num_turns": 2,
+  "duration_ms": 22622
+ }
+}

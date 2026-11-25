@@ -1,0 +1,45 @@
+{
+ "id": "pair-sparse-2-BA",
+ "fixture": "sparse",
+ "kind": "pair",
+ "x": "runs/B/sparse/2",
+ "y": "runs/A/sparse/2",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "Y",
+    "reason": "Y's figures recompute exactly (100 items, 31/21/18/8/22%, 78 tagged, 53/37/10 by month), though it wrongly says Dispatch Agent was the only line closing items in September when Platform closed KEE-22 on 2 Sep; X says '0 of 19 slides show data' and calls Investment mix missing even though the Linear export supplies it."
+   },
+   "no_invented_numbers": {
+    "winner": "Y",
+    "reason": "Y states only figures derived from tracker.csv, while X fills its board slides with made-up samples such as ARR $10.9M, 96.4% net revenue retention and an 82%\u219286% eval pass rate, and some of these (43% Platform, 78% tied to objective) happen to match the real data, so a reader could take them as fact."
+   },
+   "speed_with_quality": {
+    "winner": "X",
+    "reason": "X states no real speed figure without a quality pair, and its samples pair 3\u21924 deploys with change failure going from 5.1% to 7.7%; Y reports throughput (53/37/10, and 'steady pace' for Dispatch Agent) with no quality figure next to it, though it does treat the drop as a concern rather than good news."
+   },
+   "gaps_shown": {
+    "winner": "Y",
+    "reason": "Y's 'What this update can't tell you yet' table lists each real gap (no north star, no v14 eval results, no investment plan) with the VP Engineering as owner and Q4 as the due date, while X marks every slide missing, including the capacity mix it could have computed from Linear."
+   },
+   "board_cut_usable": {
+    "winner": "Y",
+    "reason": "Y's board cut is one page that leads with 100 items, the 78% roadmap share and the July-to-September drop, and states 'Asks: none'; X's board cut is eight empty slides of samples plus 'Signed off by Ablation eval, synthetic data' and a 'Book a call' pitch, so it can't be sent as it is."
+   }
+  },
+  "overall": {
+   "winner": "Y",
+   "reason": "Y reports the real Linear data correctly and flags the gaps it can't fill, with an owner and a due date, while X calls computable data missing and fills a board deck with made-up sample numbers and a product pitch. Y has one slip (the September 'only line' claim) and pairs no quality figure with its throughput, but it is the only one of the two a CPO could send."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 2132,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 24621,
+  "cost_usd": 0.24009460000000002,
+  "num_turns": 2,
+  "duration_ms": 20842
+ }
+}

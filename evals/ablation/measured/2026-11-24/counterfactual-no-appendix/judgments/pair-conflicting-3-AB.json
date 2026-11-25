@@ -1,0 +1,45 @@
+{
+ "id": "pair-conflicting-3-AB",
+ "fixture": "conflicting",
+ "kind": "pair",
+ "x": "runs/A/conflicting/3",
+ "y": "runs/B/conflicting/3",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "X",
+    "reason": "X's figures all recompute correctly (NRR 96.4%, CFR 7.7% vs 5.1%, 53/37/10 monthly items, $8.4M/77% of Stripe ARR), while Y's slide 08 marks Multi-stop reroutes 'No movement' despite loads rising from 18,400 and assigns '39% to 41%' to the unshipped Self-serve onboarding."
+   },
+   "no_invented_numbers": {
+    "winner": "X",
+    "reason": "Y's board cut asserts 'Signed off by the CEO' and references a nonexistent 'Appendix D' and 'Keys J and K', whereas X's estimates (e.g. 20\u201322% of the $50M objective) are derived and labelled."
+   },
+   "speed_with_quality": {
+    "winner": "Y",
+    "reason": "Y's board slide 09b sets deploys 3\u21924 directly beside change failure 5.1%\u21927.7% and review time 9h\u219213h, while X's board cut lists 'Deploys rose to 4 a week and lead time fell to 38h' under 'What went well' apart from quality."
+   },
+   "gaps_shown": {
+    "winner": "X",
+    "reason": "X shows both loads figures (21,400 vs 23,100) and both ARR figures ($10.1M vs $10.91M) with owners, notes the revenue/ARR basis mismatch and flags the passed 4 Nov deadline, while Y only says the figures are 'held', gives no owner for ARR and misassigns the loads gap to the VP Engineering."
+   },
+   "board_cut_usable": {
+    "winner": "X",
+    "reason": "X's board cut opens with a one-line answer and the pricing-pilot ask and is sendable as is, while Y's includes template boilerplate, empty table rows and the full ledger, and never shows ARR $0.9M behind plan."
+   }
+  },
+  "overall": {
+   "winner": "X",
+   "reason": "X is accurate, flags every data conflict with an owner, and gives the board a short, sendable cut that leads with the ARR shortfall and the decision. Y pairs speed with quality more tightly but invents a CEO sign-off, mislabels commitment movement, leaves ARR off the board cut and ships boilerplate and empty rows."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 4090,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 36399,
+  "cost_usd": 0.3734786,
+  "num_turns": 2,
+  "duration_ms": 37878
+ }
+}

@@ -1,0 +1,45 @@
+{
+ "id": "pair-sparse-3-BA",
+ "fixture": "sparse",
+ "kind": "pair",
+ "x": "runs/B/sparse/3",
+ "y": "runs/A/sparse/3",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "Y",
+    "reason": "Y's 31/22/21/18/8 mix, 78 tagged items and monthly totals of 53/37/10 (Dispatch Agent 12/10/9, Core Dispatch 19/7/0, Platform 22/20/1) all recompute correctly from tracker.csv, while X's headline '0 of 19 slides show data' is contradicted by its own ledger rows L01/L02."
+   },
+   "no_invented_numbers": {
+    "winner": "Y",
+    "reason": "Y states only tracker-derived counts, while X adds an unsourced 'Signed off by the CEO' and puts the real 31/18/8/21/22 split and 78% inside samples labelled 'made-up' under the real company name, which blurs real and invented figures."
+   },
+   "speed_with_quality": {
+    "winner": "X",
+    "reason": "Y's monthly completion counts (53, 37, 10) have no quality figure beside them, while X's only speed figures are samples, each paired with change failure rate (slides 9 and 9b)."
+   },
+   "gaps_shown": {
+    "winner": "Y",
+    "reason": "Y's 'What this update can't tell you' table lists each missing input with the VP Engineering owning it by Q4 and flags the September drop as unexplained, while X wrongly marks tracker-backed slides 3 to 5 as having no data."
+   },
+   "board_cut_usable": {
+    "winner": "Y",
+    "reason": "Y's board cut is one page that leads with 100 items, the 39/39/22 mix and 'Decisions requested: None', while X's board cut is eight empty slides plus product-marketing appendices ending in 'Book a call'."
+   }
+  },
+  "overall": {
+   "winner": "Y",
+   "reason": "Y reports the tracker data accurately and states its limits and owners plainly. X throws away the data it had, mixes real figures into 'made-up' samples, and gives a board cut nobody could send."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 2106,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 24714,
+  "cost_usd": 0.2403186,
+  "num_turns": 2,
+  "duration_ms": 22505
+ }
+}

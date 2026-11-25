@@ -1,0 +1,45 @@
+{
+ "id": "pair-single_product-2-BA",
+ "fixture": "single_product",
+ "kind": "pair",
+ "x": "runs/B/single_product/2",
+ "y": "runs/A/single_product/2",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "tie",
+    "reason": "Recomputed key figures in both and they hold: ARR $10.38M to $10.91M, NRR 96.4%, GRR 89.3%, change failure 4 of 52 = 7.7%, rework 15% vs 11.7%, the 31/18/8/21/22 capacity split, and X's 40.8% R&D share (computed correctly, though on an unreconciled revenue line)."
+   },
+   "no_invented_numbers": {
+    "winner": "X",
+    "reason": "X's only extrapolation, 'Activation: 5 more periods', is labelled as a projection; Y adds risk ratings that are not in the data (the inference overrun rated High/Medium, integration rated High/High) and says the VP Engineering owns a Q4 fix for change failure and review time, which the intake never states."
+   },
+   "speed_with_quality": {
+    "winner": "tie",
+    "reason": "Both pair 'deploys 3 to 4 per week' with 'change failure 5.1% to 7.7%' and review time 9h to 13h. X's slide 9b and Y's section 5 ('We are shipping faster, and quality has slipped') both refuse to call speed alone good news."
+   },
+   "gaps_shown": {
+    "winner": "Y",
+    "reason": "Y flags that the finance close's $10.3M Q3 revenue doesn't reconcile with $10.9M Stripe ARR, and that September has only 10 tracker completions, naming the VP Engineering for the check. X silently builds its 40.8% R&D-to-revenue ratio on that $10.3M line and only flags the Platform & security gap."
+   },
+   "board_cut_usable": {
+    "winner": "Y",
+    "reason": "Y's board cut opens with the answer, the pricing-pilot ask and a single scorecard. X's board cut carries internal junk ('18 of 19 slides', 'Keys J and K move between slides'), plus Appendix C selling the skill with 'Book a call' and Appendix D, so it can't be sent as is."
+   }
+  },
+  "overall": {
+   "winner": "Y",
+   "reason": "Y catches the revenue-vs-ARR conflict and the integration gap behind 11 of 17 lost deals, and its board cut can be sent as it stands. X is slightly cleaner on invented figures, but it silently relies on the unreconciled $10.3M revenue line and its board cut includes product-marketing appendices."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 2899,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 40575,
+  "cost_usd": 0.38306660000000003,
+  "num_turns": 2,
+  "duration_ms": 29426
+ }
+}

@@ -1,0 +1,45 @@
+{
+ "id": "self-no_ai-A3",
+ "fixture": "no_ai",
+ "kind": "self_A",
+ "x": "runs/A/no_ai/3",
+ "y": "runs/A/no_ai/3",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "reason": "Both updates give the same figures, such as change failure rate of 7.7% (4 of 52 deploys) and net revenue retention of 96.4%, so neither is more accurate than the other.",
+    "winner": "tie"
+   },
+   "no_invented_numbers": {
+    "reason": "Both label the ~$2.04 inference cost per cleared load as a rough upper bound and the ~$41M run-rate as an implication, in the same words.",
+    "winner": "tie"
+   },
+   "speed_with_quality": {
+    "reason": "Both put 4 deploys a week and 38h lead time next to the 7.7% change failure rate and the 15.0% rework rate in the Delivery health table and the board cut's Release quality line.",
+    "winner": "tie"
+   },
+   "gaps_shown": {
+    "reason": "Both list the same Data gaps, owned by the VP Engineering and due Q4, and both flag the Stripe $10.9M versus Finance $10.3M mismatch without picking one source.",
+    "winner": "tie"
+   },
+   "board_cut_usable": {
+    "reason": "The board cuts are identical: each opens with the headline and scorecard, asks for the per-load pricing pilot ahead of the passed 4 Nov deadline, and ends with caveats.",
+    "winner": "tie"
+   }
+  },
+  "overall": {
+   "reason": "Update X and Update Y are identical in substance and wording, in both the full update and the board cut. Neither is better on any criterion, so the result is a tie.",
+   "winner": "tie"
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 748,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 32727,
+  "cost_usd": 0.27726259999999997,
+  "num_turns": 2,
+  "duration_ms": 8944
+ }
+}

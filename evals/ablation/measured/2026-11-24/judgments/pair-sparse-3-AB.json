@@ -1,0 +1,45 @@
+{
+ "id": "pair-sparse-3-AB",
+ "fixture": "sparse",
+ "kind": "pair",
+ "x": "runs/A/sparse/3",
+ "y": "runs/B/sparse/3",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "X",
+    "reason": "All of X's figures check out against tracker.csv: 100 items, the 31/22/21/18/8 split, 78 tagged items and the monthly 53/37/10 (Dispatch Agent 12/10/9, Core Dispatch 19/7/0, Platform 22/20/1). Y says '0 of 19 slides show data', but its own ledger computes the 78% and the work-type split."
+   },
+   "no_invented_numbers": {
+    "winner": "X",
+    "reason": "X states only figures derived from the tracker. Y's board cut claims 'Signed off by the CEO', which is not in the data. Y's samples carry the real company name and mix real figures (78%, 43/31/26, 22% upkeep) with invented ones like the $10.9M ARR and the 15% upkeep plan, so a reader could take them as fact."
+   },
+   "speed_with_quality": {
+    "winner": "Y",
+    "reason": "X reports throughput (53\u219237\u219210 completions, Dispatch Agent's 'steady pace') with no quality figure beside it, though it doesn't call it good news. Y reports no real speed figures, and its sample slide 9 pairs deploys and lead time with change failure rate and time to restore."
+   },
+   "gaps_shown": {
+    "winner": "X",
+    "reason": "X's section 5 lists each missing input, names the VP Engineering as owner due Q4, and says plainly that the September drop can't be explained from completed-only data. Y marks Investment mix, Line of sight and Portfolio as missing data when the tracker holds work type, objective and product line for all 100 items."
+   },
+   "board_cut_usable": {
+    "winner": "X",
+    "reason": "X's board cut is a few lines that lead with the 100 items, the 78% tagged and the 53\u219237\u219210 drop, state 'Decisions requested: None', and could go to a board today. Y's board cut is 8 empty slides of greyed samples plus appendices that include a product pitch and 'Book a call'."
+   }
+  },
+  "overall": {
+   "winner": "X",
+   "reason": "X reports every figure the tracker supports, all correct, names the gaps and their owner, and gives a short board cut that is ready to send. Y throws away real data, invents a CEO sign-off, and fills its board cut with samples under the real company name that could mislead a reader."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 1900,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 24714,
+  "cost_usd": 0.2361986,
+  "num_turns": 2,
+  "duration_ms": 20707
+ }
+}

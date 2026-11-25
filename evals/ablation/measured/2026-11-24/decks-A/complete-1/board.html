@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kestrel Labs: Board Update, Product &amp; Engineering, 2026-Q3</title>
+<style>
+:root{--ink:#1d2433;--mute:#5b6577;--line:#dde2ea;--good:#1a7f4b;--bad:#b42318;--warn:#b54708;--accent:#2f5bd3}
+*{box-sizing:border-box}body{font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);margin:0}
+main{max-width:860px;margin:0 auto;padding:40px 28px 60px}
+h1{font-size:26px;margin:0 0 4px}h2{font-size:17px;margin:30px 0 10px;padding-bottom:5px;border-bottom:2px solid var(--ink)}
+.sub{color:var(--mute);margin:0 0 20px}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.kpi{border:1px solid var(--line);border-radius:8px;padding:12px 14px}
+.kpi .l{font-size:12px;color:var(--mute);text-transform:uppercase;letter-spacing:.04em}.kpi .v{font-size:24px;font-weight:700}.kpi .t{font-size:13px;color:var(--mute)}
+.good{color:var(--good)}.bad{color:var(--bad)}.warn{color:var(--warn)}
+.box{border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:8px;padding:14px 18px;background:#f7f8fa}
+ul{padding-left:20px;margin:6px 0}li{margin:5px 0}
+table{border-collapse:collapse;width:100%;font-size:14px}th,td{text-align:left;padding:6px 10px;border-bottom:1px solid var(--line)}th{font-size:12px;color:var(--mute);text-transform:uppercase}
+footer{margin-top:36px;font-size:12px;color:var(--mute)}
+@media(max-width:640px){.kpis{grid-template-columns:repeat(2,1fr)}}
+</style></head><body><main>
+<h1>Product &amp; Engineering: 2026-Q3</h1>
+<p class="sub">Kestrel Labs · Board cut · From the CPTO · Data as of 30 Sep 2026</p>
+
+<div class="kpis">
+<div class="kpi"><div class="l">ARR</div><div class="v">$10.91M</div><div class="t">+5.1% QoQ · NRR 96%</div></div>
+<div class="kpi"><div class="l">Loads cleared / wk</div><div class="v good">23,100</div><div class="t">Target 22K · +26%</div></div>
+<div class="kpi"><div class="l">Activation</div><div class="v bad">41%</div><div class="t">Target 50%</div></div>
+<div class="kpi"><div class="l">Agent task success</div><div class="v warn">86%</div><div class="t">Target 90% · from 82%</div></div>
+</div>
+
+<h2>Decision for the board</h2>
+<div class="box">
+<b>Approve a per-load pricing pilot.</b> We recommend running it with 10 customers now rather than waiting a quarter. Per-load pricing is central to our strategy, and price was the reason for 6 of 17 lost deals in Q3.<br>
+<span class="bad"><b>The 4 Nov 2026 deadline has passed.</b></span> If the board has already decided, please record the outcome.
+</div>
+
+<h2>What went well</h2>
+<ul>
+<li>Our north star, loads cleared with no manual touch, beat target at 23,100 a week.</li>
+<li>Weekly active dispatchers reached 6,120 (target 6,000).</li>
+<li>We shipped 6 of 7 commitments.</li>
+<li>Expansion ($741K) and 6 new logos ($900K) more than offset $1.11M of churn.</li>
+<li>Agent cost per task fell 20%. R&amp;D spend came in 1% under plan at $4.20M.</li>
+</ul>
+
+<h2>What needs attention</h2>
+<ul>
+<li><b>Activation and churn.</b> Activation reached 41% against a 50% target, and self-serve carrier onboarding slipped. All 4 churned accounts had raised onboarding tickets.</li>
+<li><b>Integrations.</b> Missing TMS integrations caused 11 of 17 lost deals, and integration errors made up 55% of support tickets. No current bet addresses this. Leadership will decide in Q4 whether to add one.</li>
+<li><b>Inference cost.</b> Inference spend ran 27.5% over plan ($612K against $480K) because volume grew, and most of it sits with one provider. A routing layer across 2 providers is due Dec 2026.</li>
+<li><b>Release quality.</b> The change failure rate rose to 7.7%, outside the under-5% range we hold ourselves to.</li>
+</ul>
+
+<h2>Bets in flight</h2>
+<table>
+<tr><th>Bet</th><th>Goal</th><th>We stop if</th></tr>
+<tr><td>Multi-stop reroutes</td><td>Task success 86% → 90%</td><td>Eval gain is under 2 points by week 3</td></tr>
+<tr><td>Guided activation</td><td>Activation 41% → 50%</td><td>A 2-week live test shows no lift</td></tr>
+</table>
+<p style="font-size:13px;color:var(--mute)">We stopped the carrier marketplace because it didn't serve the strategy.</p>
+
+<footer>The full leadership update has the detail and the data gaps. Finance's Q3 revenue figure ($10.3M) doesn't yet reconcile with ARR, so this cut uses ARR from Stripe.</footer>
+</main></body></html>

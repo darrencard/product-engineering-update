@@ -1,0 +1,45 @@
+{
+ "id": "pair-no_ai-2-AB",
+ "fixture": "no_ai",
+ "kind": "pair",
+ "x": "runs/A/no_ai/2",
+ "y": "runs/B/no_ai/2",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "Y",
+    "reason": "X's ARR bridge and board cut say all 36 retained accounts grew about 20%, but only A001\u2013A015 grew 20% while A016\u2013A036 were flat (blended about 8%); Y's figures, such as NRR 96.4%, CFR 7.7% and 7 in-period requests, all check out."
+   },
+   "no_invented_numbers": {
+    "winner": "Y",
+    "reason": "Y's 'Activation: 5 more periods' projection is clearly labelled as a rough guide, while X adds causes the data doesn't show, such as inference over plan 'partly because agent volume grew' and the KTLO overrun that 'fits with' rising change failure."
+   },
+   "speed_with_quality": {
+    "winner": "tie",
+    "reason": "Both pair deploys 3\u21924 and lead time 52h\u219238h with change failure 5.1%\u21927.7%, in the full update and in the board cut (X's delivery bullet, Y's slide 9b)."
+   },
+   "gaps_shown": {
+    "winner": "X",
+    "reason": "X flags that Stripe ARR $10.91M and Finance revenue $10.3M a quarter (about $41M a year) don't reconcile, and that task success and cost per task are missing, with the VP Engineering as owner due Q4; Y misses all of these and only shows a Platform & security gap."
+   },
+   "board_cut_usable": {
+    "winner": "X",
+    "reason": "X's board cut opens with the pricing-pilot decision and a four-number scorecard, while Y's includes Appendix C tool marketing with 'Book a call', a ledger, a source checklist and a 'synthetic data' sign-off line."
+   }
+  },
+  "overall": {
+   "winner": "X",
+   "reason": "X surfaces the problems a board most needs to see: the Stripe-vs-Finance ARR gap, the missing task-success and cost-per-task data, and churn tied to onboarding, and its board cut leads with the decision and could be sent once fixed. Its 'about 20%' expansion claim is a real error that needs fixing, but Y's board cut carries tool marketing and leaves the reconciliation gap out entirely."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 3572,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 38783,
+  "cost_usd": 0.3821906,
+  "num_turns": 2,
+  "duration_ms": 33186
+ }
+}

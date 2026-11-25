@@ -1,0 +1,45 @@
+{
+ "id": "pair-conflicting-3-AB",
+ "fixture": "conflicting",
+ "kind": "pair",
+ "x": "runs/A/conflicting/3",
+ "y": "runs/B/conflicting/3",
+ "model": "claude-opus-5-5",
+ "verdict": {
+  "criteria": {
+   "figures_correct": {
+    "winner": "X",
+    "reason": "Every figure I recomputed in X is right, including NRR 96.4%, GRR 89.3%, CFR 7.7% (4 of 52), rework 15.0% vs 11.7%, the 53/37/10 monthly item counts and integration-ticket accounts at $8.4M (77%) of Stripe ARR; Y's numbers are also right, but its slide 10 says incident data is missing when the incident export exists."
+   },
+   "no_invented_numbers": {
+    "winner": "Y",
+    "reason": "Y's only forward figure ('Activation: 5 more periods') is labelled as a projection, while X adds causes the data doesn't contain, such as inference volume growing faster than unit cost and self-serve onboarding being 'the commitment that would have addressed' churn."
+   },
+   "speed_with_quality": {
+    "winner": "Y",
+    "reason": "Y puts deploys 3\u21924 next to change failure rate 5.1%\u21927.7% on both slide 9 and board slide 9b, while X's board cut lists 'Deploys rose to 4 a week and lead time fell to 38h' under 'What went well', apart from the 7.7% failure rate."
+   },
+   "gaps_shown": {
+    "winner": "X",
+    "reason": "X shows both loads figures (21,400 vs 23,100), the Finance vs Stripe ARR split ($10.1M vs $10.91M), the 4 Nov deadline that has already passed and the falling monthly item counts; Y leaves ARR out of its board cut, repeats the 4 Nov deadline as if still open, and claims data is missing when some of it exists."
+   },
+   "board_cut_usable": {
+    "winner": "X",
+    "reason": "X's board cut leads with a one-line answer and the pricing-pilot ask, then four headline metrics, and could be sent as it is; Y's board cut has no ARR figure, an internal 'Signed off by Ablation eval, synthetic data' line, template notes ('Keys J and K move between slides') and a product pitch with 'Book a call' in Appendix C."
+   }
+  },
+  "overall": {
+   "winner": "X",
+   "reason": "X is correct, deals with every data conflict openly (loads cleared, ARR, the passed 4 Nov deadline) and has a board cut that leads with the answer and could go out today. Y pairs speed with quality more strictly, but its board cut leaves out ARR, presents a stale deadline as current and carries template and marketing text that no CPO would send to a board."
+  }
+ },
+ "usage": {
+  "input_tokens": 2,
+  "output_tokens": 3504,
+  "cache_read_input_tokens": 2393,
+  "cache_creation_input_tokens": 40224,
+  "cost_usd": 0.3923586,
+  "num_turns": 2,
+  "duration_ms": 33279
+ }
+}
