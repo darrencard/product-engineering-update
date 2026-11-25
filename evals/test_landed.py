@@ -782,8 +782,15 @@ class GapRegister(unittest.TestCase):
         self.assertTrue(gaps, "the fixture has at least one gap")
         register = json.dumps(slide(deck, "01"))
         for nav, item in gaps:
-            self.assertIn(json.dumps(f"{nav}: {item['text']} Owner {item['owner']}, due {item['due']}.")[1:-1], register)
+            text = draft.HELD_CONFLICT.sub("", item["text"]).strip()
+            if text:
+                self.assertIn(json.dumps(f"{nav}: {text} Owner: {item['owner']}. Due: {item['due']}.")[1:-1], register)
         self.assertNotIn("Not reported", register)
+
+    def test_a_conflict_on_the_check_card_is_not_listed_again_as_a_gap(self) -> None:
+        deck, _ = run_fixture("conflicting", self.work)
+        blocks = slide(deck, "01")["blocks"]
+        self.assertNotIn("two sources disagree", json.dumps(blocks[-1]))
 
     def test_a_figure_held_for_disagreeing_sources_leads_slide_1(self) -> None:
         deck, _ = run_fixture("conflicting", self.work)
@@ -804,7 +811,7 @@ class GapRegister(unittest.TestCase):
         path.write_text(json.dumps(intake), encoding="utf-8")
         deck, _ = run_fixture("complete", self.work / "second", base)
         self.assertTrue(all(i["owner"] == "Priya Shah, finance" for i in draft.needs(slide(deck, sid))))
-        self.assertIn("Owner Priya Shah, finance", json.dumps(slide(deck, "01")))
+        self.assertIn("Owner: Priya Shah, finance.", json.dumps(slide(deck, "01")))
         others = [i["owner"] for s in deck["slides"] if s["kind"] == "slide" and s["id"] not in (sid, "01") for i in draft.needs(s)]
         self.assertTrue(all(o == intake["gap_owner"] for o in others))
 

@@ -67,6 +67,8 @@ def load(path: Path) -> Json:
         return json.load(f)
 
 
+# The sentence outcomes() writes for a figure held because two sources disagree.
+HELD_CONFLICT = re.compile(r"[^.]*: two sources disagree\. See ledger row L\d+\.\s*")
 MONTHS = {m: i + 1 for i, m in enumerate(("jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"))}
 
 
@@ -309,12 +311,15 @@ class Draft:
                 due = due_date(item.get(when))
                 if due and due < today:
                     checks.append(f"{kind} \u201c{item[name]}\u201d was due {item[when]}, which has passed. Settle it now or set a new date.")
-        missing = [
-            f"{s['nav']}: {item['text']} Owner {item['owner']}, due {item['due']}."
-            for s in self.deck["slides"]
-            if s["kind"] == "slide" and s["id"] != "01"
-            for item in needs(s)
-        ]
+        missing = []
+        for s in self.deck["slides"]:
+            if s["kind"] != "slide" or s["id"] == "01":
+                continue
+            for item in needs(s):
+                # A conflict already leads the check card, so the gap keeps only what is plainly missing.
+                text = HELD_CONFLICT.sub("", item["text"]).strip()
+                if text:
+                    missing.append(f"{s['nav']}: {text} Owner: {item['owner']}. Due: {item['due']}.")
         slide = self.slides["01"]
         if checks:
             slide["blocks"].insert(0, {"type": "cards", "columns": 1, "items": [{"title": "Check before you rely on this", "body": [{"list": checks}]}]})

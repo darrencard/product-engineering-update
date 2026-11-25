@@ -5,7 +5,7 @@
 - **Slide 1 leads with what not to rely on.** It opens with a "Check before you rely on this" card: every figure held because two sources disagree (named by source, never by number) and the revenue against ARR check, each cited to its ledger row. It closes with every gap in the deck, each with what is missing, its owner and its date. Before, it listed only the names of empty slides. This answers the 0.8.0 ablation rerun, where the judge preferred Claude alone on showing gaps 35 to 1.
 - **Deadlines that have passed.** Slide 1's check card also names any decision or risk whose stated date ("4 Nov 2026", "Nov 2026" or an ISO date) has passed by the day the deck is drafted. Vague dates such as "Q4" are never called overdue. The 0.8.0 rerun judge credited Claude alone for flagging a passed 4 Nov deadline.
 - **An owner per gap.** The intake takes an optional `gap_owners`, an owner per slide ID; unlisted slides use `gap_owner`.
-- 180 tests.
+- 181 tests.
 
 ## 0.8.2 (2026-11-25)
 

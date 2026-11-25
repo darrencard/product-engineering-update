@@ -62,8 +62,8 @@
             "body": [
               {
                 "list": [
-                  "Platform & security: Service-level objectives and error budgets, incident data, audit status, vulnerability ageing, the debt register. Owner the VP Engineering, due Q4.",
-                  "AI in the product: AI revenue and cost of revenue, for AI gross margin. Owner the VP Engineering, due Q4."
+                  "Platform & security: Service-level objectives and error budgets, incident data, audit status, vulnerability ageing, the debt register. Owner: the VP Engineering. Due: Q4.",
+                  "AI in the product: AI revenue and cost of revenue, for AI gross margin. Owner: the VP Engineering. Due: Q4."
                 ]
               }
             ]
