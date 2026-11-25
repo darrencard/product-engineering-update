@@ -39,6 +39,16 @@ Or one step at a time: `generate`, `judge`, `check`, `report`. Each step skips w
 
 `report` writes `summary.json`: win rates per judgment and per pair with a 95% Wilson interval, per-criterion counts, position counts, the noise band, the check counts per condition, the chance-match rates and the token cost per stage.
 
+## Mini eval per release
+
+`mini.py` runs a small fixed version on every release: Claude with the skill against Claude alone on `complete` and `conflicting`, 1 run each, pairs only, 4 judgments. About $5 and 15 minutes. It appends one row to `trend.csv` (committed) and exits 1 with a REGRESSION line if the skill made an arithmetic error or won a smaller share of judgments than the last row on the same fixtures. The fixture set never changes, so the trend compares like with like.
+
+```bash
+python3 evals/ablation/mini.py --version 0.9.0
+```
+
+`--from-summary <summary.json> --fixtures all` adds a row from a full run already on disk and calls nothing; the first two rows came from the v0.8.0 and v0.8.3 full runs. The arithmetic counts are the raw mechanical checks, before the hand review that `docs/ablation.md` reports.
+
 ## Cost
 
 The v0.8.0 run (6 fixtures, 3 runs, `--matchups CA,CB:2,BA:2 --noise AC --self-n 1`, Opus for every call) made 36 generation calls, 108 judge calls and 54 extraction calls, and cost $72.17 as `claude -p` reports it: $18.82 for A, $9.46 for C, $38.35 for the judge and $5.55 for extraction. It took about 1 hour at 4 parallel calls. The v0.7.4 run, A and B only, cost $38.25. The breakdown is in [docs/ablation.md](../../docs/ablation.md); `summary.json` reports it for every run. Each call has a `--max-budget-usd` cap: 15 for a generation, 5 for a judgment, 3 for an extraction.
