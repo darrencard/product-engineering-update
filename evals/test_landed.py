@@ -948,5 +948,24 @@ class MiniEval(unittest.TestCase):
         self.assertEqual(self.mini.regressions(dict(base, version="2", skill_wins=0, fixtures="g"), base), [], "other fixtures are not compared")
 
 
+class BoardOnePage(unittest.TestCase):
+    """The board cut reads as one page, with the detail as an appendix (0.9.0)."""
+
+    def test_slide_1_is_the_page_and_the_rest_is_appendix(self) -> None:
+        work = Path(tempfile.mkdtemp())
+        self.addCleanup(shutil.rmtree, work)
+        deck, _ = run_fixture("complete", work)
+        board = render.cut_deck(deck, "B")
+        core = [s for s in board["slides"] if s["kind"] == "slide"]
+        self.assertEqual(core[0]["id"], "01")
+        detail = json.dumps(core[0]["blocks"][-1])
+        self.assertIn("The detail, in the appendix", detail)
+        for s in core[1:]:
+            self.assertEqual(s["act"], render.BOARD_DETAIL)
+            self.assertIn(json.dumps(s["title"])[1:-1], detail)
+        self.assertNotIn("today", json.dumps(board["slides"]).lower())
+        self.assertEqual(json.dumps(deck["slides"]).count("The detail, in the appendix"), 0, "only the board cut changes")
+
+
 if __name__ == "__main__":
     unittest.main()

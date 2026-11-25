@@ -11,6 +11,7 @@ One deck, one set of facts, 3 cuts. The slides change between cuts. The numbers 
 ## Rules
 
 - The board cut holds at most 8 slides. `validate.py` blocks a longer one.
+- The board cut reads as one page: slide 1 carries the answer, the open questions on the data, the asks, the gaps and one line per detail slide. The other board slides follow under "Appendix: the detail", then the ledger rows they cite. `render.py` arranges it; nothing is reworded.
 - Slide 9b exists only in the board cut. It condenses slides 8, 9, 10 and 13, so the board cut needs their sources too.
 - If the company has no AI features in production, slides 12 and 13 are removed and the board cut has 7 slides.
 - Do not write a different number, status word or title for a different audience. Remove a slide from a cut; do not edit it for the cut.

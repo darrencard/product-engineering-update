@@ -1034,7 +1034,7 @@ class Draft:
         ]
         self.fill(
             "18",
-            f"One decision for you today: {lower_first(asks[0]['ask'])}." if len(asks) == 1 else f"{plural(len(asks), 'decision')} for you today.",
+            f"One decision for you: {lower_first(asks[0]['ask'])}." if len(asks) == 1 else f"{plural(len(asks), 'decision')} for you.",
             [{"type": "cards", "columns": min(max(len(items), 2), 3), "items": items}],
             [],
             "Decisions as stated in the intake interview.",

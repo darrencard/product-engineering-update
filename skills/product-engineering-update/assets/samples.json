@@ -891,7 +891,7 @@
       {
         "type": "strip",
         "label": "Title",
-        "text": "One decision for you today: approve a per-load pricing pilot."
+        "text": "One decision for you: approve a per-load pricing pilot."
       },
       {
         "type": "cards",
