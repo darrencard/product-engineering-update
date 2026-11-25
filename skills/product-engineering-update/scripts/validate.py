@@ -61,6 +61,16 @@ RULES = {
     "sample-beside-data": "A sample block sits on a slide that shows real data.",
     "sample-cites-ledger": "A sample block cites a ledger row, so it would pass for evidence.",
     "coverage-unstated": "A figure built from less than the reporting window sits on a slide that does not say what it covers.",
+    "status-change-unexplained": "A status moved since the last update and the slide still says [reason needed].",
+    "capex-not-estimate": "A slide talks about capitalisation without calling the figure an estimate.",
+}
+
+# Warnings: reported, never block the render.
+WARNINGS = {
+    "undefined-metric": "An outcome metric has no definition.",
+    "jargon-in-title": "A slide title uses team shorthand a reader outside the team may not know.",
+    "illustrative": "The deck is marked illustrative but a slide is not.",
+    "unknown-rows": "Some ledger rows are Unknown; each must show as a data needed block, never as a figure.",
 }
 
 SPEED = re.compile(r"\b(deploys?|deployment frequency|lead time|cycle time|throughput|velocity|merge frequency|pull requests? merged|time to merge)\b", re.I)

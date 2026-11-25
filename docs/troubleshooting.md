@@ -281,6 +281,7 @@ python3 scripts/draft.py --run run
 |---|---|
 | `draft: run/intake.json is missing. Run intake.py, collect.py and compute_metrics.py first.` (also for `metrics.json`) | Run the earlier steps first. |
 | `draft: <path> is missing. Pass the deck.json from the last update, or leave --previous out.` | Fix the `--previous` path, or drop the flag. |
+| `draft: the intake has items with nothing to print: bets[0] has no "bet"; ...` | An item in `product_lines`, `bets`, `risks`, `stopped` or `decisions` lacks the key it is drawn from (`name`, `bet`, `risk`, `what`, `ask`). Fill it in or remove the item. `intake.py check` lists the same items as blocking. |
 
 **A period with no data does not stop the draft.** `draft.py` reports how many core slides have data (`draft: wrote run/deck.json. N of M core slides across the 3 cuts have data (...). The rest show data needed.`). Each slide without data gets:
 
@@ -332,7 +333,7 @@ Do not reword a claim only to get past a rule. A hedge such as "up to 40% faster
 
 | Script | Message |
 |---|---|
-| `render.py` | `render: the board cut needs --signed-off-by. Show the change list (review.py) and get an explicit yes first.` |
+| `render.py` | `render: the board cut needs --signed-off-by with a person's name. Show the change list (review.py) and get an explicit yes first.` |
 | `run.py` | `run: the board cut needs --signed-off-by with the name of the person who said yes to it, asked now.` |
 | `summary.py` | `summary: the board cut needs --signed-off-by with the name of the person who said yes. Nothing was written.` |
 

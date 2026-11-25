@@ -110,6 +110,8 @@ REQUIRED = ["company", "period.label", "period.start", "period.end", "as_of", "g
 DATE_FIELDS = ("period.start", "period.end", "as_of")
 # What every bet must state before the run starts; validate.py blocks a deck whose bets lack them.
 BET_FIELDS = ("appetite", "confidence", "stop_rule")
+# The one key each listed item is drawn from. Without it the item has nothing to print, so the draft cannot use it.
+ITEM_KEYS = (("product_lines", "name"), ("bets", "bet"), ("risks", "risk"), ("stopped", "what"), ("decisions", "ask"))
 
 
 def get(d: object, path: str) -> Any:
@@ -133,6 +135,20 @@ def is_date(v: object) -> bool:
     return True
 
 
+def missing_item_keys(intake: Json) -> list[str]:
+    """Each listed item that lacks the key it is drawn from, for example a bet with no "bet"."""
+    problems = []
+    for field, key in ITEM_KEYS:
+        items = intake.get(field) or []
+        if not isinstance(items, list):
+            problems.append(f"{field} must be a list")
+            continue
+        for i, item in enumerate(items):
+            if not isinstance(item, dict) or is_unknown(item.get(key)) or not str(item.get(key)).strip():
+                problems.append(f'{field}[{i}] has no "{key}"')
+    return problems
+
+
 def check(intake: Json) -> tuple[list[str], list[tuple[str, str]]]:
     """Return (blocking, unknown): fields the run cannot start without, and fields that will show as data needed."""
     blocking = [p for p in REQUIRED if is_unknown(get(intake, p))]
@@ -147,8 +163,11 @@ def check(intake: Json) -> tuple[list[str], list[tuple[str, str]]]:
     for i, metric in enumerate(intake.get("inputs") or []):
         if isinstance(metric, dict) and metric.get("metric") and is_unknown(metric.get("definition")):
             unknown.append((f'inputs[{i}].definition ("{metric["metric"]}")', "11"))
+    blocking += missing_item_keys(intake)
     for bet in intake.get("bets") or []:
-        name = bet.get("bet", "?")
+        if not isinstance(bet, dict):
+            continue
+        name = bet.get("bet") or "?"
         for field in BET_FIELDS:
             if is_unknown(bet.get(field)):
                 blocking.append(f'bet "{name}" has no {field}')

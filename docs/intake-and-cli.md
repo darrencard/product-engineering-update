@@ -54,7 +54,7 @@ Every statement here comes from the scripts in `skills/product-engineering-updat
 | Label | Meaning |
 |---|---|
 | **Blocking** | `intake.py check` reports it as BLOCKING when missing or malformed. `run.py` and `ci.py` will not start. |
-| **Needed per item** | Not checked by `intake.py check`, but `draft.py` reads the key with no fallback. Leave it out of an item and `draft.py` stops with a Python `KeyError`, not a readable message. |
+| **Needed per item** | Each item in the list must have this key. `intake.py check` reports an item without it as blocking, for example `bets[0] has no "bet"`, and `draft.py` refuses with the same list. |
 | **Optional** | The code works without it. The slide shows a gap, or a stated fallback such as "Not stated". |
 
 Slide numbers refer to the deck in `assets/blank.deck.json`: 1 The answer, 2 Strategy on a page, 3 Line of sight, 4 Portfolio, 5 Investment mix, 8 Shipped vs impact, 9 Delivery system health, 11 Outcome scorecard, 12 AI in the product, 13 AI in how we build, 14 Risks & assumptions, 15 Stopped & won't do, 16 Next bets, 18 Decisions & asks.

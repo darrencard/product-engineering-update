@@ -650,5 +650,60 @@ class OutcomesTitle(unittest.TestCase):
             self.assertNotRegex(title, r"\b(of the|All) 1\b")
 
 
+class Release073(unittest.TestCase):
+    """The three gaps the reference docs found: the rules list, a blank board sign-off, and an item with nothing to print."""
+
+    def setUp(self) -> None:
+        self.work = Path(tempfile.mkdtemp())
+        self.addCleanup(shutil.rmtree, self.work)
+
+    def test_every_rule_the_validator_raises_is_listed_and_documented(self) -> None:
+        code = (SKILL / "scripts" / "validate.py").read_text(encoding="utf-8")
+        raised = set(re.findall(r'\.(?:err|warn)\(\s*"([a-z]+(?:-[a-z]+)*)"', code))
+        raised |= set(re.findall(r'^\s+"([a-z]+(?:-[a-z]+)+)",\s*$', code, re.M))
+        listed = set(validate.RULES) | set(validate.WARNINGS)
+        self.assertEqual(raised - listed, set(), "a rule is raised but not listed in RULES or WARNINGS")
+        docs = (Path(__file__).resolve().parent.parent / "docs" / "validator-rules.md").read_text(encoding="utf-8")
+        self.assertEqual(set(re.findall(r"^### `([a-z-]+)`", docs, re.M)), listed, "docs/validator-rules.md and the code list different rules")
+
+    def test_the_board_cut_refuses_a_blank_name_and_prints_the_name_on_its_cover(self) -> None:
+        run_fixture("complete", self.work)
+        deck = self.work / "complete" / "deck.json"
+        out = self.work / "board.html"
+        blank = script("render.py", str(deck), "--out", str(out), "--cut", "B", "--signed-off-by", "   ")
+        self.assertNotEqual(blank.returncode, 0)
+        self.assertIn("needs --signed-off-by", blank.stderr)
+        self.assertFalse(out.exists(), "a refused render writes nothing")
+        done = script("render.py", str(deck), "--out", str(out), "--cut", "B", "--signed-off-by", "  Ana Ruiz ")
+        self.assertEqual(done.returncode, 0, done.stderr)
+        html = out.read_text(encoding="utf-8")
+        self.assertIn("Signed off by Ana Ruiz", html)
+        self.assertIn("Signed off by Ana Ruiz.", done.stdout)
+        leadership = self.work / "leadership.html"
+        self.assertEqual(script("render.py", str(deck), "--out", str(leadership), "--cut", "L").returncode, 0)
+        self.assertNotIn("Signed off by", leadership.read_text(encoding="utf-8"), "only the board cut carries a sign-off")
+
+    def test_an_item_with_nothing_to_print_blocks_the_check_and_the_draft_says_why(self) -> None:
+        run_fixture("complete", self.work)
+        run = self.work / "complete"
+        path = run / "intake.json"
+        data = json.loads(path.read_text(encoding="utf-8"))
+        dropped = []
+        for field, key in (("bets", "bet"), ("risks", "risk"), ("stopped", "what"), ("decisions", "ask")):
+            if data.get(field):
+                data[field][0].pop(key, None)
+                dropped.append(f'{field}[0] has no "{key}"')
+        self.assertTrue(dropped, "the fixture holds the lists this test needs")
+        path.write_text(json.dumps(data), encoding="utf-8")
+        checked = script("intake.py", "check", str(path))
+        self.assertEqual(checked.returncode, 1)
+        for problem in dropped:
+            self.assertIn(problem, checked.stdout + checked.stderr)
+        drafted = script("draft.py", "--run", str(run))
+        self.assertNotEqual(drafted.returncode, 0)
+        self.assertIn("nothing to print", drafted.stderr)
+        self.assertNotIn("Traceback", drafted.stderr)
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -452,6 +452,15 @@ def cut_deck(deck: Json, key: str) -> Json:
     return out
 
 
+def sign_cover(deck: Json, signer: str) -> Json:
+    """The board cut carries the name of the person who said yes, on its cover, so the sign-off travels with the file."""
+    out = dict(deck)
+    out["slides"] = [
+        dict(s, meta=[*s.get("meta", []), f"Signed off by {signer}"]) if s["kind"] == "cover" else s for s in deck["slides"]
+    ]
+    return out
+
+
 def csv_cell(value: object) -> object:
     """A ledger value as a CSV cell. Text that a spreadsheet would run as a formula gets a leading apostrophe."""
     if value is None:
@@ -490,9 +499,13 @@ def main() -> int:
     deck = validate.read_deck(Path(args.deck), tool="render")
     if not args.skip_validate:
         refuse_blocked(deck)
-    if args.cut == "B" and not args.signed_off_by:
-        raise SystemExit("render: the board cut needs --signed-off-by. Show the change list (review.py) and get an explicit yes first.")
-    html = render_deck(cut_deck(deck, args.cut) if args.cut else deck)
+    signer = (args.signed_off_by or "").strip()
+    if args.cut == "B" and not signer:
+        raise SystemExit("render: the board cut needs --signed-off-by with a person's name. Show the change list (review.py) and get an explicit yes first.")
+    shown = cut_deck(deck, args.cut) if args.cut else deck
+    if args.cut == "B":
+        shown = sign_cover(shown, signer)
+    html = render_deck(shown)
     out = Path(args.out)
     ledger_path = out.with_name(out.stem + ".ledger.csv")
     try:
@@ -500,7 +513,7 @@ def main() -> int:
         write_ledger_csv(deck, ledger_path)
     except OSError as e:
         raise SystemExit(f"render: cannot write {e.filename or out} ({e.strerror}). Check that the folder exists and is writable, then render again.") from None
-    signed = f" Signed off by {args.signed_off_by}." if args.signed_off_by else ""
+    signed = f" Signed off by {signer}." if signer else ""
     print(f"render: wrote {out} ({len(html) // 1024} KB) and {ledger_path}.{signed}")
     return 0
 
