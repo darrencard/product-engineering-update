@@ -533,7 +533,8 @@ def _check_slide(s: Json, deck: Json, contract: Json | None, found: Findings) ->
         found.err(
             "capex-not-estimate",
             sid,
-            "states a capitalisable figure without calling it an estimate. What may be capitalised is the company's accounting policy; label it an estimate for finance to confirm.",
+            "states a capitalisable figure without calling it an estimate. "
+            "What may be capitalised is the company's accounting policy; label it an estimate for finance to confirm.",
         )
 
     # minimum evidence, or a data_needed block in its place

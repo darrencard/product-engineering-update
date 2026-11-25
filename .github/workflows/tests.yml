@@ -17,7 +17,8 @@ concurrency:
 jobs:
   tests:
     name: Tests (Python ${{ matrix.python }})
-    runs-on: ubuntu-latest
+    # 24.04, not latest: setup-python has no Python 3.9 build for newer Ubuntu images.
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     strategy:
       fail-fast: false
