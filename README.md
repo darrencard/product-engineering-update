@@ -11,7 +11,7 @@ See the worked example and the template at https://www.dacard.ai/update.
 Paste this into Claude Code, replace `OWNER/REPO`, and answer the few questions it asks. It needs the `gh` command line signed in to GitHub. Your data stays on your machine.
 
 ```text
-Install the Product & Engineering Update skill from the v0.7.3 release at https://github.com/darrencard/product-engineering-update/releases/tag/v0.7.3, and check the download against its SHA256SUMS before installing. Then build an update for OWNER/REPO from its GitHub history, using the skill's GitHub shortcut. If the repository has no pull request reviews and runs on Vercel, add Vercel's release and error records as the quality stand-in. Ask me only for what you cannot find, show every gap with an owner and a date, and render the full deck.
+Install the Product & Engineering Update skill from the v0.7.4 release at https://github.com/darrencard/product-engineering-update/releases/tag/v0.7.4, and check the download against its SHA256SUMS before installing. Then build an update for OWNER/REPO from its GitHub history, using the skill's GitHub shortcut. If the repository has no pull request reviews and runs on Vercel, add Vercel's release and error records as the quality stand-in. Ask me only for what you cannot find, show every gap with an owner and a date, and render the full deck.
 ```
 
 The prompt names a fixed release, so a later change to the repository can't reach you until you choose a newer one. Something wrong or missing? [Open an issue](https://github.com/darrencard/product-engineering-update/issues).
@@ -144,7 +144,7 @@ The scenarios in `evals/scenarios/` describe how the skill should behave under p
 
 ## Status
 
-Version 0.7.3. The scripts pass 169 tests. Fresh model sessions ran version 0.1.0 on the bundled fixtures 6 times, across two model sizes, under pressure to overclaim, invent figures and pick the better-looking of two conflicting numbers; each held the line. Versions 0.2.0 and 0.3.0 have run on one real repository's GitHub and Vercel history. The Linear converter is tested on Linear's real response shape but not on a workspace with completed issues, and the PostHog converter only on fixtures of PostHog's documented responses. The Linear projects, project updates, initiatives and customer requests readers (0.4.0) are tested only on fixtures built from Linear's documented fields. It has not yet been run on a real company's full data. See CHANGELOG.md.
+Version 0.7.4. The scripts pass 170 tests. Fresh model sessions ran version 0.1.0 on the bundled fixtures 6 times, across two model sizes, under pressure to overclaim, invent figures and pick the better-looking of two conflicting numbers; each held the line. Versions 0.2.0 and 0.3.0 have run on one real repository's GitHub and Vercel history. The Linear converter is tested on Linear's real response shape but not on a workspace with completed issues, and the PostHog converter only on fixtures of PostHog's documented responses. The Linear projects, project updates, initiatives and customer requests readers (0.4.0) are tested only on fixtures built from Linear's documented fields. It has not yet been run on a real company's full data. See CHANGELOG.md.
 
 Not built: an export to Slides or PowerPoint. The deck is one HTML file: present it in a browser or print it to PDF.
 

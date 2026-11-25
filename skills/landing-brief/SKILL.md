@@ -4,7 +4,7 @@ description: A free Linear kit for saying, before work starts, what landing look
 license: MIT for the scripts, CC BY 4.0 for the instructions and template. See LICENSE and LICENSE-CONTENT.md in the repository root.
 metadata:
   author: Dacard
-  version: "0.7.3"
+  version: "0.7.4"
 ---
 
 # Landing brief
