@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.10.0 (2026-11-25)
+
+- **A new look, with a written style guide.** The outcome scorecard on dacard.ai/update is now the reference for every slide (`references/design.md`). Scorecards show a range line: prior, actual in its status colour, and the healthy range or target. Plan against actual, share and count columns, and tiles get bars. High/Medium/Low get dot meters, confidence and commitment get chips, and owners and due dates get their own columns, the owner in brass. Decisions list their options with the deadline in brass.
+- **More space.** Cards, rows, blocks and columns all have more room.
+- No figure or word changes: every chart is drawn from a number already on the page.
+- 199 tests.
+
 ## 0.9.6 (2026-11-25)
 
 - **The cover title uses the full width too.** It was capped at 15 characters wide and balanced into even lines; now it fills each line like the slide titles.
