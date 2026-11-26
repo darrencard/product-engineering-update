@@ -17,6 +17,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import math
 import re
 import sys
 from collections.abc import Iterable
@@ -121,19 +122,21 @@ def share_columns(columns: list[Json], rows: list[Any]) -> dict[int, float]:
 
 def styled_cell(cell: Any, column: Json, full: float | None) -> str:
     """A cell with the style guide's marks. The words never change; a mark only sits beside them."""
-    if full and isinstance(cell, str):
+    if not isinstance(cell, str):
+        return cell_html(cell)
+    if full:
         value = float(PERCENT.match(cell)[1]) if cell.endswith("%") else float(cell)
-        return f'<span class="sh"><i style="width:{num(round(value / full * 100, 1))}%"></i></span>{rich(cell)}'
+        return f'<span class="sh"><i style="width:{num(r1(value / full * 100))}%"></i></span>{rich(cell)}'
     if cell in ("Yes", "No"):
         return f'<span class="yn{" no" if cell == "No" else ""}">{esc(cell)}</span>'
     if cell in LEVELS:
-        pips = "".join(f"<i{' class=on' if n < LEVELS[cell] else ''}></i>" for n in range(3))
+        pips = "".join('<i class="on"></i>' if n < LEVELS[cell] else "<i></i>" for n in range(3))
         return f'<span class="nw"><span class="pp" aria-hidden="true">{pips}</span>{esc(cell)}</span>'
     if cell in CHIPS:
         return f'<span class="chip {cell.lower()}">{esc(cell)}</span>'
-    if isinstance(cell, str) and column.get("label") in MONO_COLUMNS:
+    if column.get("label") in MONO_COLUMNS:
         return f'<span class="mo">{rich(cell)}</span>'
-    if isinstance(cell, str) and column.get("label") == "Result":
+    if column.get("label") == "Result":
         dot = next((st for prefix, st in RESULT_DOT if cell.startswith(prefix)), "")
         if dot:
             return f'<span class="rd {dot}"></span>{rich(cell)}'
@@ -212,7 +215,7 @@ def bullet(r: Json) -> str:
     top = max(prior[0], actual[0], target[0]) * 1.18 or 1
 
     def x(v: float) -> float:
-        return round(max(0.0, min(v / top, 1)) * 100, 1)
+        return r1(max(0.0, min(v / top, 1)) * 100)
 
     t, direction = x(target[0]), target[2]
     band = (
@@ -225,7 +228,7 @@ def bullet(r: Json) -> str:
     goal = "" if direction else f'<i class="goal" style="left:{num(t)}%"></i>'
     lo, hi = sorted((x(prior[0]), x(actual[0])))
     return (
-        f'<span class="bl" aria-hidden="true"><i class="tr"></i>{band}{goal}<i class="mv" style="left:{num(lo)}%;width:{num(round(hi - lo, 1))}%"></i>'
+        f'<span class="bl" aria-hidden="true"><i class="tr"></i>{band}{goal}<i class="mv" style="left:{num(lo)}%;width:{num(r1(hi - lo))}%"></i>'
         f'<i class="pr" style="left:{num(x(prior[0]))}%"></i><i class="ac {esc(r["status"])}" style="left:{num(x(actual[0]))}%"></i></span>'
     )
 
@@ -352,11 +355,16 @@ def plan_vs_actual(b: Json) -> str:
         over = " over" if r.get("over") else ""
         rows.append(
             f'<div class="pvr"><span>{rich(r["label"])}</span><span class="v">{num(r["plan"])} / {num(r["actual"])}%</span>'
-            f'<div class="track"><div class="b" style="width:{num(round(r["plan"] / top * 100, 1))}%"></div>'
-            f'<div class="b a{over}" style="width:{num(round(r["actual"] / top * 100, 1))}%"></div></div></div>'
+            f'<div class="track"><div class="b" style="width:{num(r1(r["plan"] / top * 100))}%"></div>'
+            f'<div class="b a{over}" style="width:{num(r1(r["actual"] / top * 100))}%"></div></div></div>'
         )
     joined = "\n".join(rows)
     return f'{key}\n<div class="pv">\n{joined}\n</div>'
+
+
+def r1(v: float) -> float:
+    """Round to one decimal, half up, the same way the site's renderer does, so both print the same widths."""
+    return math.floor(v * 10 + 0.5) / 10
 
 
 def num(n: float) -> str:
@@ -453,7 +461,7 @@ def tile(t: Json, track: bool = False) -> str:
     note = f'<p style="margin-top:10px">{rich(t["note"])}</p>' if t.get("note") else ""
     share = tile_share(t["value"])
     bar = (
-        f'<span class="tb" aria-hidden="true"><i style="width:{share:.1f}%"></i></span>'
+        f'<span class="tb" aria-hidden="true"><i style="width:{num(r1(share))}%"></i></span>'
         if share is not None
         else '<span class="tb none" aria-hidden="true"></span>'
         if track
