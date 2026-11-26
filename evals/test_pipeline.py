@@ -40,6 +40,7 @@ SCRIPTS = SKILL / "scripts"
 FIXTURES = ROOT / "evals" / "fixtures"
 sys.path.insert(0, str(SCRIPTS))
 
+import compute_metrics  # noqa: E402
 import render  # noqa: E402
 import validate  # noqa: E402
 
@@ -205,6 +206,21 @@ class Fixtures(unittest.TestCase):
         self.assertEqual((rows["Activation"]["prior"], rows["Activation"]["actual"]), ("39%", "41%"))
         self.assertIn("data_needed", block_types(slide(deck, "12")), "slide 12 must show the AI margin gap")
 
+    def test_autonomy_leads_slide_12_beside_its_quality_pair(self) -> None:
+        s12 = slide(self.decks["complete"], "12")
+        tiles = next(b for b in s12["blocks"] if b["type"] == "tiles")["items"]
+        self.assertEqual([t["value"] for t in tiles], ["70%", "86%", "$0.33"])
+        self.assertTrue(s12["title"].startswith("The share of tasks the AI feature finished without a person rose from 63% to 70%."), s12["title"])
+        self.assertIn("86%", s12["title"])
+        self.assertEqual(validate.check(self.decks["complete"])["errors"], [])
+
+    def test_more_unassisted_tasks_than_tasks_stops_the_run(self) -> None:
+        run = {"version": "v14", "tasks": 10, "tasks_unassisted": 11}
+        with self.assertRaises(SystemExit) as stop:
+            compute_metrics.unassisted_share(run)
+        self.assertIn("more unassisted tasks", str(stop.exception))
+        self.assertIsNone(compute_metrics.unassisted_share({"version": "v1", "tasks": None, "tasks_unassisted": None}))
+
     def test_a_generated_deck_credits_the_template_with_a_safe_link(self) -> None:
         deck = self.decks["complete"]
         self.assertIn("[the Product & Technology Leader Report](https://www.dacard.ai/update)", deck["meta"]["footer"])
@@ -217,6 +233,7 @@ class Fixtures(unittest.TestCase):
         self.assertEqual(m["time_to_restore"]["display"], "41m")
         self.assertEqual(m["review_time"]["display"], "13h")
         self.assertEqual(m["eval_pass_rate"]["display"], "86%")
+        self.assertEqual((m["autonomy_rate"]["prior_display"], m["autonomy_rate"]["display"]), ("63%", "70%"))
         self.assertEqual(m["traced_pct"]["display"], "78%")
         mix = {r["label"]: r for r in self.metrics["complete"]["extra"]["mix"]["rows"]}
         self.assertEqual((mix["Keep the lights on"]["plan"], mix["Keep the lights on"]["actual"], mix["Keep the lights on"]["over"]), (15, 22, True))

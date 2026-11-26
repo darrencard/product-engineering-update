@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.11.0 (2026-11-25)
+
+- **Autonomy rate.** Slide 12 now shows the share of tasks the AI feature finished in production with no person stepping in, computed in code from two new optional columns in the evals source: `tasks` and `tasks_unassisted`. It sits beside the eval pass rate, its quality pair, so autonomy can't rise unseen while quality falls. A run with more unassisted tasks than tasks stops with a fix.
+- 201 tests.
+
 ## 0.10.0 (2026-11-25)
 
 - **A new look, with a written style guide.** The outcome scorecard on dacard.ai/update is now the reference for every slide (`references/design.md`). Scorecards show a range line: prior, actual in its status colour, and the healthy range or target. Plan against actual, share and count columns, and tiles get bars. High/Medium/Low get dot meters, confidence and commitment get chips, and owners and due dates get their own columns, the owner in brass. Decisions list their options with the deadline in brass.

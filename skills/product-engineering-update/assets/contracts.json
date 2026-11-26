@@ -380,7 +380,7 @@
     "requires": [
       {
         "source": "evals",
-        "data": "A versioned eval set, production traces and cost per request",
+        "data": "A versioned eval set, production traces with tasks run and tasks finished with no person stepping in, and cost per request",
         "required": true
       },
       {

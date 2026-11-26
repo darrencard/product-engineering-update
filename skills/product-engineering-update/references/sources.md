@@ -267,10 +267,12 @@ Examples: Eval harness, Production traces. Feeds slides: 6, 12.
 | `cases` | num | Yes |
 | `passed` | num | Yes |
 | `cost_per_task` | num | No |
+| `tasks` | num | No |
+| `tasks_unassisted` | num | No |
 
 What the slides read from it:
 
-- A versioned eval set, production traces and cost per request
+- A versioned eval set, production traces with tasks run and tasks finished with no person stepping in, and cost per request
 - Eval error analysis
 
 <a id="ai_tools"></a>

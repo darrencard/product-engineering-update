@@ -81,7 +81,10 @@ SOURCES = {
     },
     "incidents": {"label": "Incidents and status", "columns": {"id": "str", "started_at": "date", "restored_at": "date", "severity": "str?"}},
     "security": {"label": "Security tracker", "columns": {"finding": "str", "severity": "str", "opened_at": "date", "status": "str"}},
-    "evals": {"label": "Evals and traces", "columns": {"version": "str", "run_at": "date", "cases": "num", "passed": "num", "cost_per_task": "num?"}},
+    "evals": {
+        "label": "Evals and traces",
+        "columns": {"version": "str", "run_at": "date", "cases": "num", "passed": "num", "cost_per_task": "num?", "tasks": "num?", "tasks_unassisted": "num?"},
+    },
     "ai_tools": {"label": "AI tool admin data", "columns": {"tool": "str", "period": "str", "seats": "num", "weekly_active": "num", "cost": "num"}},
     "survey": {"label": "Developer survey", "columns": {"question": "str", "period": "str", "score": "num"}},
     "hr": {"label": "HR and hiring", "columns": {"function": "str", "now": "num", "plan": "num", "open_roles": "str?"}},

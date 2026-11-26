@@ -72,6 +72,7 @@ At this pace (Projected): the periods needed to reach the target if this period'
 | Metric | Formula | Source |
 |---|---|---|
 | Eval pass rate | `passed` as a percent of `cases`, latest run against the run before | `evals` |
+| Tasks finished without a person (autonomy) | `tasks_unassisted` as a percent of `tasks`, latest run against the run before. Shown only beside the eval pass rate, its quality pair | `evals` |
 | Cost per successful task | `cost_per_task`, latest run against the run before | `evals` |
 | AI tool spend | Sum of `cost` for the period | `ai_tools` |
 | Seats used weekly | Sum of `weekly_active` as a percent of the sum of `seats` | `ai_tools` |

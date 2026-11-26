@@ -1,3 +1,3 @@
-version,run_at,cases,passed,cost_per_task
-v13,2026-06-20,500,410,0.41
-v14,2026-09-22,500,430,0.33
+version,run_at,cases,passed,cost_per_task,tasks,tasks_unassisted
+v13,2026-06-20,500,410,0.41,12000,7560
+v14,2026-09-22,500,430,0.33,18400,12880
