@@ -2,7 +2,7 @@
 
 A Claude skill that builds a product and engineering update from your own data: one deck for leadership, the board and all staff, as a single HTML file with an evidence ledger.
 
-![Slide 1 of a deck the skill built for a synthetic test company. It opens with what the data disagrees on, every figure carries a tag to its row in the evidence ledger, and 22 rules check the deck before it renders.](docs/images/readme-hero.png)
+![Outcome scorecard and plan against actual from the worked example: each outcome marked landed, watch or stalled against its target](docs/images/readme-hero.png)
 
 *Slide 1 of a deck built for a synthetic test company. It opens with what the data disagrees on, then what happened and the decision needed. Every number carries its ledger ID.*
 
