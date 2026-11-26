@@ -1,26 +1,26 @@
 # The Product & Technology Leader Report
 
-A Claude skill that builds a product and engineering update from your own data: one deck for leadership, the board and all staff, as a single HTML file with an evidence ledger.
+A free Claude skill that builds your product & engineering update from your own tools. One HTML deck for leadership, the board and staff. Every number traces to its source.
 
 ![Outcome scorecard and plan against actual from the worked example: each outcome marked landed, watch or stalled against its target](docs/images/readme-hero.png)
 
-*Slide 1 of a deck built for a synthetic test company. It opens with what the data disagrees on, then what happened and the decision needed. Every number carries its ledger ID.*
+*The outcome scorecard from the worked example. Harborline is fictional.*
 
-Most coding agents now write, review and approve the code, then stop at merge. This update reports what landed. It is built not to overclaim. Every figure is computed in code and carries a row in the ledger. A slide without its data says so. A deck with an unsupported claim does not render.
+**Why it matters:** AI now writes and ships much of the code. This report says whether what shipped worked. Code computes every figure, each one has a ledger row, and a slide that overclaims won't render.
 
-See the worked example and the template at https://www.dacard.ai/update. How it was built, and every eval result: [field note 24](https://www.dacard.ai/paper-trail/how-i-built-the-product-technology-leader-report-skill-in-claude-code).
+**Go deeper:** the worked example at [dacard.ai/update](https://www.dacard.ai/update), and how it was built, with every eval result, in [field note 24](https://www.dacard.ai/paper-trail/how-i-built-the-product-technology-leader-report-skill-in-claude-code).
 
 ## Get started: three steps
 
-1. **Use the tools Claude already has.** GitHub through the `gh` command line, and Linear, Jira, Vercel, Sentry, Stripe, PostHog, HubSpot, Notion or Google Drive through Claude's connectors. Any other system: a CSV export.
-2. **Paste one prompt into Claude Code.** Replace `OWNER/REPO`. It installs the pinned release, checks it, reads what's connected and asks only what it can't find: the company, the period and its dates, the data date, and who owns the gaps and by when.
-3. **Read slide 1.** It shows what your data disagrees on, what happened, the decision you need and every gap with an owner. The board version renders once a named person signs it off.
+1. **Use the tools Claude already has.** GitHub through `gh`. Linear, Jira, Stripe, PostHog and more through Claude's connectors. Anything else: a CSV.
+2. **Paste one prompt into Claude Code.** Replace `OWNER/REPO`. It installs the pinned release, checks it, reads your tools and asks only what's missing: the period, the dates and who owns each gap.
+3. **Read slide 1.** What your data disagrees on, what happened, the decision you need, and every gap with an owner. The board version needs a named sign-off.
 
 ```text
 Install the Product & Technology Leader Report skill from the v0.11.0 release at https://github.com/darrencard/product-engineering-update/releases/tag/v0.11.0, and check the download against its SHA256SUMS before installing. Then build my product & engineering update for last quarter from the tools already connected to this session: GitHub for OWNER/REPO through gh, and any connected Linear, Jira, Vercel, Sentry, Stripe, PostHog, HubSpot, Notion or Google Drive. Ask me only for what you cannot find, show every gap with an owner and a date, and render the full deck.
 ```
 
-The prompt names a fixed release, so a later change to the repository can't reach you until you choose a newer one. Tested on live accounts so far: GitHub, Vercel and Google Drive; the other readers are tested on fixtures. Something wrong or missing? [Open an issue](https://github.com/darrencard/product-engineering-update/issues).
+The prompt pins a release, so later changes can't reach you until you choose them. Live-tested so far: GitHub, Vercel and Google Drive; the other readers on fixtures. Something wrong? [Open an issue](https://github.com/darrencard/product-engineering-update/issues).
 
 ## Features, functions and benefits
 
