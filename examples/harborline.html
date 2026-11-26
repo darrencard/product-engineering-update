@@ -104,16 +104,80 @@ tr.grp td{font:400 10px/16px var(--mono);letter-spacing:.1em;text-transform:uppe
 .need p{margin:4px 0 0;font-size:12.5px;color:var(--t2)}
 
 /* plan vs actual bars: plan is grey, actual is ink, over plan is hatched */
-.pv{display:grid;grid-template-columns:170px 1fr 92px;gap:8px 12px;align-items:center;font-size:12.5px}
-.pv .track{display:grid;gap:3px}
-.pv .b{height:9px;border-radius:2px;background:var(--agent-mid)}
+.pv{display:grid;font-size:13px}
+.pvr{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 16px;align-items:center;border-top:1px solid var(--line);padding:9px 0}
+.pvr:last-child{padding-bottom:0}
+.pvr>span:first-child{color:var(--t2);line-height:1.3}
+.pv .track{grid-column:1/-1;display:grid;gap:3px}
+.pv .b{height:6px;border-radius:1px;background:var(--agent-mid)}
 .pv .b.a{background:var(--t1)}
 .pv .b.a.over{background:repeating-linear-gradient(135deg,var(--t1) 0 4px,transparent 4px 7px);outline:1px solid var(--t1);outline-offset:-1px}
-.pv .v{font:400 10px var(--mono);font-variant-numeric:tabular-nums;color:var(--t2);text-align:right}
-.key{display:flex;flex-wrap:wrap;gap:6px 16px;font:400 10px/16px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--t3);margin-bottom:14px}
+.pv .v{font:400 11.5px var(--mono);font-variant-numeric:tabular-nums;color:var(--t2);text-align:right}
+.key{display:flex;flex-wrap:wrap;gap:6px 16px;font:400 10px/16px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--t3);margin:-2px 0 10px}
 .key i{display:inline-block;width:14px;height:8px;border-radius:2px;margin-right:6px;background:var(--agent-mid)}
 .key i.a{background:var(--t1)}
 .key i.o{background:repeating-linear-gradient(135deg,var(--t1) 0 4px,transparent 4px 7px);outline:1px solid var(--t1);outline-offset:-1px}
+
+/* Style guide: the site's outcome scorecard is the reference. Mono micro labels, hairline rows, figures in mono,
+   colour for status only, brass where a person owes something. See references/design.md. */
+.sc{padding:2px 20px 8px}
+.sc-h,.sc-r{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr) 96px;gap:24px}
+.sc-h{font:400 10px/16px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--t3);padding:14px 0 10px}
+.sc-h span:last-child,.sc-s{text-align:right}
+.sc-g{font:400 10px/16px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--t3);padding:18px 0 8px;border-top:1px solid var(--line2)}
+.sc-r{align-items:center;border-top:1px solid var(--line);padding:13px 0}
+.sc-g+.sc-r{border-top-color:transparent;padding-top:4px}
+.sc-n>span:first-child{display:block;color:var(--t1);font-size:14px;line-height:1.4}
+.sc-d{display:block;font-size:12px;line-height:1.45;color:var(--t3);margin-top:3px}
+.sc-x{display:block;font:400 10px/16px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--t3);margin-top:5px}
+.sc-v{display:flex;flex-direction:column;gap:7px;min-width:0}
+.sc-l{font:400 12px/16px var(--mono);font-variant-numeric:tabular-nums;color:var(--t3)}
+.sc-l b{color:var(--t1);font-weight:500}.sc-l i{font-style:normal}.sc-l em{font-style:normal;font-size:10px;letter-spacing:.1em;text-transform:uppercase}
+.bl{position:relative;display:block;height:14px}
+.bl i{position:absolute;display:block}
+.bl .tr{left:0;right:0;top:6px;height:2px;border-radius:1px;background:var(--line2)}
+.bl .ok{top:4px;height:6px;border-radius:2px;background:rgba(92,211,140,.16)}
+.bl .goal{top:1px;width:1.5px;height:12px;margin-left:-.75px;background:var(--t2)}
+.bl .mv{top:6px;height:2px;background:var(--agent-mid)}
+.bl .pr{top:3px;width:8px;height:8px;margin-left:-4px;border-radius:50%;background:var(--agent-mid)}
+.bl .ac{top:2px;width:10px;height:10px;margin-left:-5px;border-radius:50%;background:var(--t1);box-shadow:0 0 0 2px var(--s1)}
+.bl .ac.landed{background:var(--landed)}.bl .ac.watch{background:var(--bg);border:2px solid var(--watch)}.bl .ac.stalled{background:var(--stalled)}
+
+/* lists read as hairline rows, like the scorecard */
+.card ul{list-style:none;padding:0}
+.card li{border-top:1px solid var(--line);padding:9px 0;line-height:1.55}
+.card li+li{margin-top:0}
+.card li:last-child{padding-bottom:0}
+.card li:only-child:not(.own){font-size:16px;line-height:1.45;color:var(--t1)}
+.card li.own{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:4px 20px;align-items:baseline}
+.li-t{font:400 10px/16px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--t3);margin-right:10px}
+.li-o,.li-d{font:400 11.5px/16px var(--mono);white-space:nowrap}
+.li-o{color:var(--brass)}.li-d{color:var(--t2)}
+.li-o::before,.li-d::before{font-size:10px;letter-spacing:.1em;color:var(--t3);margin-right:6px}
+.li-o::before{content:"OWNER"}.li-d::before{content:"DUE"}
+
+/* cards side by side share one frame, split by hairlines, as the scorecard's two panels do */
+.grid{gap:0;border:1px solid var(--line);border-radius:12px;background:var(--s1);overflow:hidden}
+.grid>*{box-shadow:-1px 0 0 var(--line),0 -1px 0 var(--line)}
+.grid>.card,.grid>.tablewrap{border:0;border-radius:0;background:none}
+.grid>.card{padding:18px 20px}
+.grid>.need{margin:12px;border-radius:8px}
+
+/* small charts inside tables and tiles: a share bar, YES/NO in mono, a status dot before a result word */
+td .sh{display:inline-block;vertical-align:middle;width:72px;height:6px;margin-right:10px;border-radius:1px;background:var(--line2);position:relative;overflow:hidden}
+td .sh i{position:absolute;inset:0 auto 0 0;background:var(--t2)}
+.yn{font:400 10.5px/16px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--t1)}.yn.no{color:var(--t3)}
+.rd{display:inline-block;width:7px;height:7px;border-radius:2px;margin-right:8px;vertical-align:1px;background:currentColor}
+.rd.landed{color:var(--landed)}.rd.stalled{color:var(--stalled)}.rd.watch{width:8px;height:8px;border-radius:50%;background:none;border:1.5px solid var(--watch)}
+.tb{display:block;height:4px;margin:12px 0 2px;border-radius:1px;background:var(--line2);position:relative;overflow:hidden}
+.tb i{position:absolute;inset:0 auto 0 0;background:var(--t1)}
+/* a decision: options as rows, the deadline in brass because a person decides */
+.dc{margin-top:12px;border-top:1px solid var(--line)}
+.dc>div{display:grid;grid-template-columns:110px 1fr;gap:16px;padding:10px 0;border-bottom:1px solid var(--line);font-size:14px;color:var(--t1)}
+.dc>div:last-child{border-bottom:0;padding-bottom:0}
+.dc-k{font:400 10px/22px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--t3)}
+.dc .dl{color:var(--brass);font-family:var(--mono);font-size:13px}
+.dc .dl .dc-k{color:var(--brass)}
 
 /* footer of slide */
 .foot{margin-top:auto;padding-top:24px}
@@ -159,7 +223,9 @@ body.guides .guide{display:block}
   .slide{padding:40px 16px 32px;min-height:0}
   .g2,.g3,.g4,.g21,.steps,.tree,.tree .leaf{grid-template-columns:1fr}
   .tree .br{padding-left:0;margin-top:8px}.tree .br::before,.tree .leaf::before{display:none}
-  .pv{grid-template-columns:120px 1fr 80px}
+  .pv{font-size:12.5px}
+  .sc-h{display:none}.sc-r{grid-template-columns:1fr;gap:8px}.sc-s{text-align:left}
+  .card li.own{grid-template-columns:1fr}
   .guide dl{grid-template-columns:1fr}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
@@ -331,11 +397,11 @@ body.guides .guide{display:block}
 <h2>The agent line produced 81% of ARR growth on 34% of capacity.</h2>
 <div class="tablewrap"><table>
 <tr><th>Product line</th><th>Stage</th><th>Objective served</th><th class="num">Capacity</th><th class="num">ARR</th><th>Lead outcome</th><th>Status</th></tr>
-<tr><td>Dispatch Agent</td><td>Expand</td><td>Retention, AI margin</td><td class="num">34%</td><td class="num">$14.0M, up 19%</td><td>Task success 86%, target 88%</td><td><span class="st watch">watch</span></td></tr>
-<tr><td>Core Dispatch</td><td>Sustain</td><td>Retention</td><td class="num">26%</td><td class="num">$27.2M, up 2%</td><td>12.6 tickets per 100 accounts, target 12</td><td><span class="st watch">watch</span></td></tr>
-<tr><td>Onboarding &amp; growth</td><td>Expand</td><td>ARR growth</td><td class="num">13%</td><td class="num">Drives new ARR</td><td>Activation 41%, target 50%</td><td><span class="st stalled">stalled</span></td></tr>
-<tr><td>Carrier Scorecards</td><td>Explore</td><td>ARR growth</td><td class="num">6%</td><td class="num">Beta, no revenue</td><td>Too early to read</td><td><span class="st watch">watch</span></td></tr>
-<tr><td>Platform, shared</td><td>Sustain</td><td>All three</td><td class="num">21%</td><td class="num">Shared</td><td>Cost per task $0.33, target $0.27</td><td><span class="st landed">landed</span></td></tr>
+<tr><td>Dispatch Agent</td><td>Expand</td><td>Retention, AI margin</td><td class="num"><span class="sh"><i style="width:34%"></i></span>34%</td><td class="num">$14.0M, up 19%</td><td>Task success 86%, target 88%</td><td><span class="st watch">watch</span></td></tr>
+<tr><td>Core Dispatch</td><td>Sustain</td><td>Retention</td><td class="num"><span class="sh"><i style="width:26%"></i></span>26%</td><td class="num">$27.2M, up 2%</td><td>12.6 tickets per 100 accounts, target 12</td><td><span class="st watch">watch</span></td></tr>
+<tr><td>Onboarding &amp; growth</td><td>Expand</td><td>ARR growth</td><td class="num"><span class="sh"><i style="width:13%"></i></span>13%</td><td class="num">Drives new ARR</td><td>Activation 41%, target 50%</td><td><span class="st stalled">stalled</span></td></tr>
+<tr><td>Carrier Scorecards</td><td>Explore</td><td>ARR growth</td><td class="num"><span class="sh"><i style="width:6%"></i></span>6%</td><td class="num">Beta, no revenue</td><td>Too early to read</td><td><span class="st watch">watch</span></td></tr>
+<tr><td>Platform, shared</td><td>Sustain</td><td>All three</td><td class="num"><span class="sh"><i style="width:21%"></i></span>21%</td><td class="num">Shared</td><td>Cost per task $0.33, target $0.27</td><td><span class="st landed">landed</span></td></tr>
 </table></div>
 <div class="grid g3" style="margin-top:14px">
 <div class="card"><h3>Explore</h3><p>We are still testing value. Fund in small, time-boxed amounts and expect to kill some.</p></div>
@@ -361,11 +427,11 @@ body.guides .guide{display:block}
 <div class="grid g21">
 <div class="card"><h3>Engineering capacity by type of work</h3><div class="key"><span><i></i>Plan</span><span><i class="a"></i>Actual</span><span><i class="o"></i>Over plan</span></div>
 <div class="pv">
-<span>New capabilities</span><div class="track"><div class="b" style="width:70%"></div><div class="b a" style="width:62%"></div></div><span class="v">35 / 31%</span>
-<span>Improve the core</span><div class="track"><div class="b" style="width:40%"></div><div class="b a" style="width:36%"></div></div><span class="v">20 / 18%</span>
-<span>Growth</span><div class="track"><div class="b" style="width:20%"></div><div class="b a" style="width:16%"></div></div><span class="v">10 / 8%</span>
-<span>Platform &amp; scale</span><div class="track"><div class="b" style="width:40%"></div><div class="b a" style="width:42%"></div></div><span class="v">20 / 21%</span>
-<span>Keep the lights on</span><div class="track"><div class="b" style="width:30%"></div><div class="b a over" style="width:44%"></div></div><span class="v">15 / 22%</span>
+<div class="pvr"><span>New capabilities</span><span class="v">35 / 31%</span><div class="track"><div class="b" style="width:100%"></div><div class="b a" style="width:88.6%"></div></div></div>
+<div class="pvr"><span>Improve the core</span><span class="v">20 / 18%</span><div class="track"><div class="b" style="width:57.1%"></div><div class="b a" style="width:51.4%"></div></div></div>
+<div class="pvr"><span>Growth</span><span class="v">10 / 8%</span><div class="track"><div class="b" style="width:28.6%"></div><div class="b a" style="width:22.9%"></div></div></div>
+<div class="pvr"><span>Platform &amp; scale</span><span class="v">20 / 21%</span><div class="track"><div class="b" style="width:57.1%"></div><div class="b a" style="width:60%"></div></div></div>
+<div class="pvr"><span>Keep the lights on</span><span class="v">15 / 22%</span><div class="track"><div class="b" style="width:42.9%"></div><div class="b a over" style="width:62.9%"></div></div></div>
 </div><p style="margin-top:14px">SOC 2 evidence work and follow-up from 3 Sev-2 incidents took 7 points from new capabilities and growth. We expect 17% next quarter.<span class="led">L05</span></p></div>
 <div class="card"><h3>Dollars, Q3</h3><table>
 <tr><th>Line</th><th class="num">Plan</th><th class="num">Actual</th></tr>
@@ -429,8 +495,8 @@ body.guides .guide{display:block}
 <div class="meta"><span>07</span><span>Discovery</span><span class="aud">Leadership</span><span class="ill">Illustrative</span></div>
 <h2>Buyers choose us on agent accuracy and leave over a missing integration.</h2>
 <div class="grid g3">
-<div class="card"><div class="big">19 of 37</div><div class="sub">wins cite agent accuracy in the pilot</div><p style="margin-top:10px">The pilot is our best sales asset. Keep it under 14 days.</p></div>
-<div class="card"><div class="big">11 of 27</div><div class="sub">losses cite the missing TMS integration</div><p style="margin-top:10px">This commitment slipped to Q4. It is the top delivery priority.</p></div>
+<div class="card"><div class="big">19 of 37</div><span class="tb" aria-hidden="true"><i style="width:51.4%"></i></span><div class="sub">wins cite agent accuracy in the pilot</div><p style="margin-top:10px">The pilot is our best sales asset. Keep it under 14 days.</p></div>
+<div class="card"><div class="big">11 of 27</div><span class="tb" aria-hidden="true"><i style="width:40.7%"></i></span><div class="sub">losses cite the missing TMS integration</div><p style="margin-top:10px">This commitment slipped to Q4. It is the top delivery priority.</p></div>
 <div class="card"><div class="big">12.6</div><div class="sub">support tickets per 100 accounts, down from 14.2</div><p style="margin-top:10px">Reroute errors remain the largest ticket theme.</p></div>
 </div>
 <div class="card" style="margin-top:14px"><h3>Market</h3><p>One direct competitor moved to per-load pricing in September. Two prospects raised it unprompted in October. This supports the pricing pilot on slide 16 and adds no proof that customers will pay more.</p></div>
@@ -463,7 +529,7 @@ body.guides .guide{display:block}
 <tr class="grp"><td colspan="4">Shipped, no movement (2)</td></tr>
 <tr><td>Rate confirmation parsing v2, driver mobile updates</td><td>Manual edits, driver response time</td><td>No change</td><td><span class="st watch">watch</span></td></tr>
 <tr class="grp"><td colspan="4">Slipped (2)</td></tr>
-<tr><td>TMS integration, SOC 2 Type II evidence</td><td>Loss rate, enterprise readiness</td><td>Moved to Q4</td><td><span class="st stalled">stalled</span></td></tr>
+<tr><td>TMS integration, SOC 2 Type II evidence</td><td>Loss rate, enterprise readiness</td><td><span class="rd landed"></span>Moved to Q4</td><td><span class="st stalled">stalled</span></td></tr>
 </table></div>
 <div class="foot">
 <div class="asof">Sources: Linear projects, release notes, product analytics. Q3 FY26.<span class="led">L03</span></div>
@@ -481,22 +547,7 @@ body.guides .guide{display:block}
 <section class="slide" id="s09" data-aud="L" data-act="Delivery" data-nav="Delivery system health">
 <div class="meta"><span>09</span><span>Delivery</span><span class="aud">Leadership</span><span class="ill">Illustrative</span></div>
 <h2>Throughput is up 21%. Review time and change failures are the cost.</h2>
-<div class="tablewrap"><table>
-<tr><th>Metric</th><th class="num">Prior qtr</th><th class="num">This qtr</th><th class="num">Healthy range</th><th>Status</th></tr>
-<tr class="grp"><td colspan="5">Speed</td></tr>
-<tr><td>Deploys per week</td><td class="num">34</td><td class="num">41</td><td class="num">35+</td><td><span class="st landed">landed</span></td></tr>
-<tr><td>Lead time for change</td><td class="num">52h</td><td class="num">38h</td><td class="num">under 40h</td><td><span class="st landed">landed</span></td></tr>
-<tr><td>Delivered against committed</td><td class="num">74%</td><td class="num">82%</td><td class="num">80 to 90%</td><td><span class="st landed">landed</span></td></tr>
-<tr class="grp"><td colspan="5">Quality, the pair for every speed metric</td></tr>
-<tr><td>Change failure rate</td><td class="num">3.1%</td><td class="num">3.4%</td><td class="num">under 3.5%</td><td><span class="st watch">watch</span></td></tr>
-<tr><td>Time to restore</td><td class="num">46m</td><td class="num">41m</td><td class="num">under 60m</td><td><span class="st landed">landed</span></td></tr>
-<tr><td>Pull request review time</td><td class="num">9h</td><td class="num">13h</td><td class="num">under 10h</td><td><span class="st stalled">stalled</span></td></tr>
-<tr><td>Rework rate</td><td class="num">11%</td><td class="num">14%</td><td class="num">under 12%</td><td><span class="st watch">watch</span></td></tr>
-<tr class="grp"><td colspan="5">Effectiveness and impact</td></tr>
-<tr><td>Developer experience index, 14-question quarterly survey scored 0 to 100</td><td class="num">68</td><td class="num">71</td><td class="num">70+</td><td><span class="st landed">landed</span></td></tr>
-<tr><td>Capacity on new capabilities</td><td class="num">33%</td><td class="num">31%</td><td class="num">30 to 40%</td><td><span class="st landed">landed</span></td></tr>
-<tr><td>ARR per R&amp;D employee</td><td class="num">$642K</td><td class="num">$687K</td><td class="num">$650K+</td><td><span class="st landed">landed</span></td></tr>
-</table></div>
+<div class="tablewrap"><div class="sc"><div class="sc-h"><span>Metric</span><span>Prior qtr → This qtr</span><span>Status</span></div><div class="sc-g">Speed</div><div class="sc-r"><div class="sc-n"><span>Deploys per week</span></div><div class="sc-v"><span class="bl" aria-hidden="true"><i class="tr"></i><i class="ok" style="left:72.3%;right:0"></i><i class="mv" style="left:70.3%;width:14.4%"></i><i class="pr" style="left:70.3%"></i><i class="ac landed" style="left:84.7%"></i></span><span class="sc-l">34 <i>→</i> <b>41</b> · <em>Healthy range</em> 35+</span></div><div class="sc-s"><span class="st landed">landed</span></div></div><div class="sc-r"><div class="sc-n"><span>Lead time for change</span></div><div class="sc-v"><span class="bl" aria-hidden="true"><i class="tr"></i><i class="ok" style="left:0;width:65.2%"></i><i class="mv" style="left:61.9%;width:22.8%"></i><i class="pr" style="left:84.7%"></i><i class="ac landed" style="left:61.9%"></i></span><span class="sc-l">52h <i>→</i> <b>38h</b> · <em>Healthy range</em> under 40h</span></div><div class="sc-s"><span class="st landed">landed</span></div></div><div class="sc-r"><div class="sc-n"><span>Delivered against committed</span></div><div class="sc-v"><span class="sc-l">74% <i>→</i> <b>82%</b> · 80 to 90%</span></div><div class="sc-s"><span class="st landed">landed</span></div></div><div class="sc-g">Quality, the pair for every speed metric</div><div class="sc-r"><div class="sc-n"><span>Change failure rate</span></div><div class="sc-v"><span class="bl" aria-hidden="true"><i class="tr"></i><i class="ok" style="left:0;width:84.7%"></i><i class="mv" style="left:75.1%;width:7.2%"></i><i class="pr" style="left:75.1%"></i><i class="ac watch" style="left:82.3%"></i></span><span class="sc-l">3.1% <i>→</i> <b>3.4%</b> · <em>Healthy range</em> under 3.5%</span></div><div class="sc-s"><span class="st watch">watch</span></div></div><div class="sc-r"><div class="sc-n"><span>Time to restore</span></div><div class="sc-v"><span class="bl" aria-hidden="true"><i class="tr"></i><i class="ok" style="left:0;width:84.7%"></i><i class="mv" style="left:57.9%;width:7.1%"></i><i class="pr" style="left:65%"></i><i class="ac landed" style="left:57.9%"></i></span><span class="sc-l">46m <i>→</i> <b>41m</b> · <em>Healthy range</em> under 60m</span></div><div class="sc-s"><span class="st landed">landed</span></div></div><div class="sc-r"><div class="sc-n"><span>Pull request review time</span></div><div class="sc-v"><span class="bl" aria-hidden="true"><i class="tr"></i><i class="ok" style="left:0;width:65.2%"></i><i class="mv" style="left:58.7%;width:26%"></i><i class="pr" style="left:58.7%"></i><i class="ac stalled" style="left:84.7%"></i></span><span class="sc-l">9h <i>→</i> <b>13h</b> · <em>Healthy range</em> under 10h</span></div><div class="sc-s"><span class="st stalled">stalled</span></div></div><div class="sc-r"><div class="sc-n"><span>Rework rate</span></div><div class="sc-v"><span class="bl" aria-hidden="true"><i class="tr"></i><i class="ok" style="left:0;width:72.6%"></i><i class="mv" style="left:66.6%;width:18.1%"></i><i class="pr" style="left:66.6%"></i><i class="ac watch" style="left:84.7%"></i></span><span class="sc-l">11% <i>→</i> <b>14%</b> · <em>Healthy range</em> under 12%</span></div><div class="sc-s"><span class="st watch">watch</span></div></div><div class="sc-g">Effectiveness and impact</div><div class="sc-r"><div class="sc-n"><span>Developer experience index, 14-question quarterly survey scored 0 to 100</span></div><div class="sc-v"><span class="bl" aria-hidden="true"><i class="tr"></i><i class="ok" style="left:83.6%;right:0"></i><i class="mv" style="left:81.2%;width:3.5%"></i><i class="pr" style="left:81.2%"></i><i class="ac landed" style="left:84.7%"></i></span><span class="sc-l">68 <i>→</i> <b>71</b> · <em>Healthy range</em> 70+</span></div><div class="sc-s"><span class="st landed">landed</span></div></div><div class="sc-r"><div class="sc-n"><span>Capacity on new capabilities</span></div><div class="sc-v"><span class="sc-l">33% <i>→</i> <b>31%</b> · 30 to 40%</span></div><div class="sc-s"><span class="st landed">landed</span></div></div><div class="sc-r"><div class="sc-n"><span>ARR per R&amp;D employee</span></div><div class="sc-v"><span class="bl" aria-hidden="true"><i class="tr"></i><i class="ok" style="left:80.2%;right:0"></i><i class="mv" style="left:79.2%;width:5.5%"></i><i class="pr" style="left:79.2%"></i><i class="ac landed" style="left:84.7%"></i></span><span class="sc-l">$642K <i>→</i> <b>$687K</b> · <em>Healthy range</em> $650K+</span></div><div class="sc-s"><span class="st landed">landed</span></div></div></div></div>
 <div class="foot">
 <div class="asof">Sources: GitHub, CI, incident tool, quarterly developer survey. Q3 FY26.<span class="led">L09</span></div>
 <div class="guide"><dl>
@@ -574,15 +625,7 @@ body.guides .guide{display:block}
 <section class="slide" id="s11" data-aud="LBS" data-act="Measurement" data-nav="Outcome scorecard">
 <div class="meta"><span>11</span><span>Measurement</span><span class="aud">Leadership</span><span class="aud">Board</span><span class="aud">Staff</span><span class="ill">Illustrative</span></div>
 <h2>The North Star beat target. Activation and expansion did not.</h2>
-<div class="tablewrap"><table>
-<tr><th>Outcome</th><th class="num">Prior qtr</th><th class="num">This qtr</th><th class="num">Target</th><th>Status</th><th>Benchmark</th><th>Owner</th></tr>
-<tr><td>North Star, loads cleared with no manual touch per week</td><td class="num">18.4K</td><td class="num">23.1K</td><td class="num">22K</td><td><span class="st landed">landed</span></td><td>None external</td><td>Agent team</td></tr>
-<tr><td>Activation, first automated load in 14 days</td><td class="num">39%</td><td class="num">41%</td><td class="num">50%</td><td><span class="st stalled">stalled</span></td><td>None external</td><td>Activation team</td></tr>
-<tr><td>Weekly active dispatchers</td><td class="num">5,890</td><td class="num">6,120</td><td class="num">6,000</td><td><span class="st landed">landed</span></td><td>None external</td><td>Core dispatch</td></tr>
-<tr><td>Net revenue retention</td><td class="num">117%</td><td class="num">118%</td><td class="num">120%</td><td><span class="st watch">watch</span></td><td>Median 102%, top quartile 110%</td><td>CPTO, CRO</td></tr>
-<tr><td>Gross logo retention</td><td class="num">93%</td><td class="num">93%</td><td class="num">92%</td><td><span class="st landed">landed</span></td><td>None comparable</td><td>Customer success</td></tr>
-<tr><td>Expansion ARR in quarter</td><td class="num">$2.1M</td><td class="num">$1.9M</td><td class="num">$2.4M</td><td><span class="st stalled">stalled</span></td><td>None external</td><td>Growth team</td></tr>
-</table></div>
+<div class="tablewrap"><div class="sc"><div class="sc-h"><span>Outcome</span><span>Prior qtr → This qtr</span><span>Status</span></div><div class="sc-r"><div class="sc-n"><span>North Star, loads cleared with no manual touch per week</span><span class="sc-x">Benchmark None external · Owner Agent team</span></div><div class="sc-v"><span class="bl" aria-hidden="true"><i class="tr"></i><i class="goal" style="left:80.7%"></i><i class="mv" style="left:67.5%;width:17.2%"></i><i class="pr" style="left:67.5%"></i><i class="ac landed" style="left:84.7%"></i></span><span class="sc-l">18.4K <i>→</i> <b>23.1K</b> · <em>Target</em> 22K</span></div><div class="sc-s"><span class="st landed">landed</span></div></div><div class="sc-r"><div class="sc-n"><span>Activation, first automated load in 14 days</span><span class="sc-x">Benchmark None external · Owner Activation team</span></div><div class="sc-v"><span class="bl" aria-hidden="true"><i class="tr"></i><i class="goal" style="left:84.7%"></i><i class="mv" style="left:66.1%;width:3.4%"></i><i class="pr" style="left:66.1%"></i><i class="ac stalled" style="left:69.5%"></i></span><span class="sc-l">39% <i>→</i> <b>41%</b> · <em>Target</em> 50%</span></div><div class="sc-s"><span class="st stalled">stalled</span></div></div><div class="sc-r"><div class="sc-n"><span>Weekly active dispatchers</span><span class="sc-x">Benchmark None external · Owner Core dispatch</span></div><div class="sc-v"><span class="bl" aria-hidden="true"><i class="tr"></i><i class="goal" style="left:83.1%"></i><i class="mv" style="left:81.6%;width:3.1%"></i><i class="pr" style="left:81.6%"></i><i class="ac landed" style="left:84.7%"></i></span><span class="sc-l">5,890 <i>→</i> <b>6,120</b> · <em>Target</em> 6,000</span></div><div class="sc-s"><span class="st landed">landed</span></div></div><div class="sc-r"><div class="sc-n"><span>Net revenue retention</span><span class="sc-x">Benchmark Median 102%, top quartile 110% · Owner CPTO, CRO</span></div><div class="sc-v"><span class="bl" aria-hidden="true"><i class="tr"></i><i class="goal" style="left:84.7%"></i><i class="mv" style="left:82.6%;width:0.7%"></i><i class="pr" style="left:82.6%"></i><i class="ac watch" style="left:83.3%"></i></span><span class="sc-l">117% <i>→</i> <b>118%</b> · <em>Target</em> 120%</span></div><div class="sc-s"><span class="st watch">watch</span></div></div><div class="sc-r"><div class="sc-n"><span>Gross logo retention</span><span class="sc-x">Benchmark None comparable · Owner Customer success</span></div><div class="sc-v"><span class="bl" aria-hidden="true"><i class="tr"></i><i class="goal" style="left:83.8%"></i><i class="mv" style="left:84.7%;width:0%"></i><i class="pr" style="left:84.7%"></i><i class="ac landed" style="left:84.7%"></i></span><span class="sc-l">93% <i>→</i> <b>93%</b> · <em>Target</em> 92%</span></div><div class="sc-s"><span class="st landed">landed</span></div></div><div class="sc-r"><div class="sc-n"><span>Expansion ARR in quarter</span><span class="sc-x">Benchmark None external · Owner Growth team</span></div><div class="sc-v"><span class="bl" aria-hidden="true"><i class="tr"></i><i class="goal" style="left:84.7%"></i><i class="mv" style="left:67.1%;width:7.1%"></i><i class="pr" style="left:74.2%"></i><i class="ac stalled" style="left:67.1%"></i></span><span class="sc-l">$2.1M <i>→</i> <b>$1.9M</b> · <em>Target</em> $2.4M</span></div><div class="sc-s"><span class="st stalled">stalled</span></div></div></div></div>
 <div class="grid g2" style="margin-top:14px">
 <div class="card"><h3>Who does the work</h3><p>The agent touched 62% of loads this quarter and people alone handled 38%. We report agent and human activity separately so rising agent volume can't hide falling human use.</p></div>
 <div class="card"><h3>What we don't count as outcomes</h3><p>Feature usage counts, AI adoption and pilots started. They are inputs and they live on slides 8 and 13.</p></div>
@@ -607,12 +650,12 @@ body.guides .guide{display:block}
 <div class="meta"><span>12</span><span>Measurement</span><span class="aud">Leadership</span><span class="aud">Board</span><span class="ill">Illustrative</span></div>
 <h2>The agent passes its quality bar and costs 20% less per task. Margin is 3 points short.</h2>
 <div class="grid g3">
-<div class="card"><div class="big">91.3%</div><div class="sub">eval pass rate on 412 cases, bar is 90%</div></div>
-<div class="card"><div class="big">86%</div><div class="sub">task success in production, target 88%</div></div>
-<div class="card"><div class="big">7.1%</div><div class="sub">human override rate, down from 9.2%</div></div>
+<div class="card"><div class="big">91.3%</div><span class="tb" aria-hidden="true"><i style="width:91.3%"></i></span><div class="sub">eval pass rate on 412 cases, bar is 90%</div></div>
+<div class="card"><div class="big">86%</div><span class="tb" aria-hidden="true"><i style="width:86.0%"></i></span><div class="sub">task success in production, target 88%</div></div>
+<div class="card"><div class="big">7.1%</div><span class="tb" aria-hidden="true"><i style="width:7.1%"></i></span><div class="sub">human override rate, down from 9.2%</div></div>
 <div class="card"><div class="big">$0.33</div><div class="sub">cost per successful task, down from $0.41</div></div>
-<div class="card"><div class="big">52%</div><div class="sub">AI gross margin, target 55%. Survey average 53% projected for 2026 (ICONIQ, Jul 2026)</div></div>
-<div class="card"><div class="big">81%</div><div class="sub">of inference spend with one provider, 2 providers in use</div></div>
+<div class="card"><div class="big">52%</div><span class="tb" aria-hidden="true"><i style="width:52.0%"></i></span><div class="sub">AI gross margin, target 55%. Survey average 53% projected for 2026 (ICONIQ, Jul 2026)</div></div>
+<div class="card"><div class="big">81%</div><span class="tb" aria-hidden="true"><i style="width:81.0%"></i></span><div class="sub">of inference spend with one provider, 2 providers in use</div></div>
 </div>
 <div class="grid g3" style="margin-top:14px">
 <div class="card"><h3>Where it fails, 36 of 412 cases</h3><ul><li>Multi-stop reroutes, 14</li>

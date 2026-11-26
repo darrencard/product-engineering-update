@@ -651,7 +651,7 @@ class Vercel(unittest.TestCase):
         self.assertEqual(validate.check(deck)["errors"], [])
         html = render.render_deck(deck)
         self.assertIn(
-            '66.7%<span class="t3" style="display:block;font-size:12px;line-height:1.4;margin-top:2px">Covers 9 Jul to 23 Jul 2026, 3 of 4 releases</span>',
+            '<b>66.7%</b> <span class="sc-c">(Covers 9 Jul to 23 Jul 2026, 3 of 4 releases)</span>',
             html,
         )
 
@@ -1400,6 +1400,21 @@ class Safety(unittest.TestCase):
 
     def test_the_python_renderer_matches_the_site_renderer_byte_for_byte(self) -> None:
         self.assertEqual(render.render_deck(self.example()), (ROOT / "examples" / "harborline.html").read_text(encoding="utf-8"))
+
+    def test_the_style_guide_draws_charts_without_changing_a_figure(self) -> None:
+        html = render.render_deck(self.example())
+        for mark in ('class="sc-r"', 'class="pvr"', 'class="bl"'):
+            self.assertIn(mark, html)
+        row = {"prior": "52h", "actual": "38h", "target": "under 40h", "status": "watch"}
+        self.assertIn('class="ok" style="left:0;', render.bullet(row))
+        self.assertEqual(render.bullet({**row, "target": "No range set yet"}), "")
+        self.assertEqual(render.bullet({**row, "actual": "38%"}), "")
+        self.assertEqual(render.tile_share("22 of 39"), 22 / 39 * 100)
+        self.assertIsNone(render.tile_share("$0.33"))
+        owned = render.list_item("Data note: Exports carry no dates. Owner: the CTO. Due: Q4. [[L09]]")
+        self.assertIn('<span class="li-o">the CTO</span><span class="li-d">Q4</span>', owned)
+        self.assertIn('<span class="led">L09</span>', owned)
+        self.assertEqual(render.list_item("No owner here."), "<li>No owner here.</li>")
 
     def test_the_example_and_the_blank_deck_are_valid(self) -> None:
         self.assertEqual(validate.check(self.example())["errors"], [])

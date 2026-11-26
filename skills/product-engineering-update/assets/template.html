@@ -104,16 +104,80 @@ tr.grp td{font:400 10px/16px var(--mono);letter-spacing:.1em;text-transform:uppe
 .need p{margin:4px 0 0;font-size:12.5px;color:var(--t2)}
 
 /* plan vs actual bars: plan is grey, actual is ink, over plan is hatched */
-.pv{display:grid;grid-template-columns:170px 1fr 92px;gap:8px 12px;align-items:center;font-size:12.5px}
-.pv .track{display:grid;gap:3px}
-.pv .b{height:9px;border-radius:2px;background:var(--agent-mid)}
+.pv{display:grid;font-size:13px}
+.pvr{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 16px;align-items:center;border-top:1px solid var(--line);padding:9px 0}
+.pvr:last-child{padding-bottom:0}
+.pvr>span:first-child{color:var(--t2);line-height:1.3}
+.pv .track{grid-column:1/-1;display:grid;gap:3px}
+.pv .b{height:6px;border-radius:1px;background:var(--agent-mid)}
 .pv .b.a{background:var(--t1)}
 .pv .b.a.over{background:repeating-linear-gradient(135deg,var(--t1) 0 4px,transparent 4px 7px);outline:1px solid var(--t1);outline-offset:-1px}
-.pv .v{font:400 10px var(--mono);font-variant-numeric:tabular-nums;color:var(--t2);text-align:right}
-.key{display:flex;flex-wrap:wrap;gap:6px 16px;font:400 10px/16px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--t3);margin-bottom:14px}
+.pv .v{font:400 11.5px var(--mono);font-variant-numeric:tabular-nums;color:var(--t2);text-align:right}
+.key{display:flex;flex-wrap:wrap;gap:6px 16px;font:400 10px/16px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--t3);margin:-2px 0 10px}
 .key i{display:inline-block;width:14px;height:8px;border-radius:2px;margin-right:6px;background:var(--agent-mid)}
 .key i.a{background:var(--t1)}
 .key i.o{background:repeating-linear-gradient(135deg,var(--t1) 0 4px,transparent 4px 7px);outline:1px solid var(--t1);outline-offset:-1px}
+
+/* Style guide: the site's outcome scorecard is the reference. Mono micro labels, hairline rows, figures in mono,
+   colour for status only, brass where a person owes something. See references/design.md. */
+.sc{padding:2px 20px 8px}
+.sc-h,.sc-r{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr) 96px;gap:24px}
+.sc-h{font:400 10px/16px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--t3);padding:14px 0 10px}
+.sc-h span:last-child,.sc-s{text-align:right}
+.sc-g{font:400 10px/16px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--t3);padding:18px 0 8px;border-top:1px solid var(--line2)}
+.sc-r{align-items:center;border-top:1px solid var(--line);padding:13px 0}
+.sc-g+.sc-r{border-top-color:transparent;padding-top:4px}
+.sc-n>span:first-child{display:block;color:var(--t1);font-size:14px;line-height:1.4}
+.sc-d{display:block;font-size:12px;line-height:1.45;color:var(--t3);margin-top:3px}
+.sc-x{display:block;font:400 10px/16px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--t3);margin-top:5px}
+.sc-v{display:flex;flex-direction:column;gap:7px;min-width:0}
+.sc-l{font:400 12px/16px var(--mono);font-variant-numeric:tabular-nums;color:var(--t3)}
+.sc-l b{color:var(--t1);font-weight:500}.sc-l i{font-style:normal}.sc-l em{font-style:normal;font-size:10px;letter-spacing:.1em;text-transform:uppercase}
+.bl{position:relative;display:block;height:14px}
+.bl i{position:absolute;display:block}
+.bl .tr{left:0;right:0;top:6px;height:2px;border-radius:1px;background:var(--line2)}
+.bl .ok{top:4px;height:6px;border-radius:2px;background:rgba(92,211,140,.16)}
+.bl .goal{top:1px;width:1.5px;height:12px;margin-left:-.75px;background:var(--t2)}
+.bl .mv{top:6px;height:2px;background:var(--agent-mid)}
+.bl .pr{top:3px;width:8px;height:8px;margin-left:-4px;border-radius:50%;background:var(--agent-mid)}
+.bl .ac{top:2px;width:10px;height:10px;margin-left:-5px;border-radius:50%;background:var(--t1);box-shadow:0 0 0 2px var(--s1)}
+.bl .ac.landed{background:var(--landed)}.bl .ac.watch{background:var(--bg);border:2px solid var(--watch)}.bl .ac.stalled{background:var(--stalled)}
+
+/* lists read as hairline rows, like the scorecard */
+.card ul{list-style:none;padding:0}
+.card li{border-top:1px solid var(--line);padding:9px 0;line-height:1.55}
+.card li+li{margin-top:0}
+.card li:last-child{padding-bottom:0}
+.card li:only-child:not(.own){font-size:16px;line-height:1.45;color:var(--t1)}
+.card li.own{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:4px 20px;align-items:baseline}
+.li-t{font:400 10px/16px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--t3);margin-right:10px}
+.li-o,.li-d{font:400 11.5px/16px var(--mono);white-space:nowrap}
+.li-o{color:var(--brass)}.li-d{color:var(--t2)}
+.li-o::before,.li-d::before{font-size:10px;letter-spacing:.1em;color:var(--t3);margin-right:6px}
+.li-o::before{content:"OWNER"}.li-d::before{content:"DUE"}
+
+/* cards side by side share one frame, split by hairlines, as the scorecard's two panels do */
+.grid{gap:0;border:1px solid var(--line);border-radius:12px;background:var(--s1);overflow:hidden}
+.grid>*{box-shadow:-1px 0 0 var(--line),0 -1px 0 var(--line)}
+.grid>.card,.grid>.tablewrap{border:0;border-radius:0;background:none}
+.grid>.card{padding:18px 20px}
+.grid>.need{margin:12px;border-radius:8px}
+
+/* small charts inside tables and tiles: a share bar, YES/NO in mono, a status dot before a result word */
+td .sh{display:inline-block;vertical-align:middle;width:72px;height:6px;margin-right:10px;border-radius:1px;background:var(--line2);position:relative;overflow:hidden}
+td .sh i{position:absolute;inset:0 auto 0 0;background:var(--t2)}
+.yn{font:400 10.5px/16px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--t1)}.yn.no{color:var(--t3)}
+.rd{display:inline-block;width:7px;height:7px;border-radius:2px;margin-right:8px;vertical-align:1px;background:currentColor}
+.rd.landed{color:var(--landed)}.rd.stalled{color:var(--stalled)}.rd.watch{width:8px;height:8px;border-radius:50%;background:none;border:1.5px solid var(--watch)}
+.tb{display:block;height:4px;margin:12px 0 2px;border-radius:1px;background:var(--line2);position:relative;overflow:hidden}
+.tb i{position:absolute;inset:0 auto 0 0;background:var(--t1)}
+/* a decision: options as rows, the deadline in brass because a person decides */
+.dc{margin-top:12px;border-top:1px solid var(--line)}
+.dc>div{display:grid;grid-template-columns:110px 1fr;gap:16px;padding:10px 0;border-bottom:1px solid var(--line);font-size:14px;color:var(--t1)}
+.dc>div:last-child{border-bottom:0;padding-bottom:0}
+.dc-k{font:400 10px/22px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--t3)}
+.dc .dl{color:var(--brass);font-family:var(--mono);font-size:13px}
+.dc .dl .dc-k{color:var(--brass)}
 
 /* footer of slide */
 .foot{margin-top:auto;padding-top:24px}
@@ -159,7 +223,9 @@ body.guides .guide{display:block}
   .slide{padding:40px 16px 32px;min-height:0}
   .g2,.g3,.g4,.g21,.steps,.tree,.tree .leaf{grid-template-columns:1fr}
   .tree .br{padding-left:0;margin-top:8px}.tree .br::before,.tree .leaf::before{display:none}
-  .pv{grid-template-columns:120px 1fr 80px}
+  .pv{font-size:12.5px}
+  .sc-h{display:none}.sc-r{grid-template-columns:1fr;gap:8px}.sc-s{text-align:left}
+  .card li.own{grid-template-columns:1fr}
   .guide dl{grid-template-columns:1fr}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}

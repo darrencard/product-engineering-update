@@ -93,14 +93,46 @@ def cell_class(column: Json) -> str:
     return ' class="mono"' if column.get("mono") else num_class(column)
 
 
+PERCENT = re.compile(r"^(\d+(?:\.\d+)?)%$")
+RESULT_DOT = (("Moved the wrong way", "stalled"), ("Moved", "landed"), ("Not shipped", "watch"), ("No movement", "watch"))
+
+
+def share_columns(columns: list[Json], rows: list[Any]) -> set[int]:
+    """Columns where every cell is a percentage of at most 100: each gets a bar, so the shares read at a glance."""
+    data = [r for r in rows if not isinstance(r, dict)]
+    out = set()
+    for i, c in enumerate(columns):
+        cells = [r[i] for r in data if i < len(r) and isinstance(r[i], str)]
+        if c.get("align") == "num" and len(cells) == len(data) > 1 and all((m := PERCENT.match(x)) and float(m[1]) <= 100 for x in cells):
+            out.add(i)
+    return out
+
+
+def styled_cell(cell: Any, column: Json, share: bool) -> str:
+    """A cell with the style guide's marks: a share bar, YES/NO in mono, a status dot before a result word. The words never change."""
+    if share and isinstance(cell, str):
+        return f'<span class="sh"><i style="width:{num(float(PERCENT.match(cell)[1]))}%"></i></span>{rich(cell)}'
+    if cell in ("Yes", "No"):
+        return f'<span class="yn{" no" if cell == "No" else ""}">{esc(cell)}</span>'
+    if isinstance(cell, str) and column.get("label") == "Result":
+        dot = next((st for prefix, st in RESULT_DOT if cell.startswith(prefix)), "")
+        if dot:
+            return f'<span class="rd {dot}"></span>{rich(cell)}'
+    return cell_html(cell)
+
+
 def table_rows(columns: list[Json], rows: list[Any]) -> str:
     head = "".join(f"<th{num_class(c)}>{rich(c['label'])}</th>" for c in columns)
+    shares = share_columns(columns, rows)
     body = []
     for r in rows:
         if isinstance(r, dict):
             body.append(f'<tr class="grp"><td colspan="{len(columns)}">{rich(r["group"])}</td></tr>')
             continue
-        cells = [f"<td{cell_class(columns[i] if i < len(columns) else {})}>{cell_html(cell)}</td>" for i, cell in enumerate(r)]
+        cells = [
+            f"<td{cell_class(columns[i] if i < len(columns) else {})}>{styled_cell(cell, columns[i] if i < len(columns) else {}, i in shares)}</td>"
+            for i, cell in enumerate(r)
+        ]
         body.append(f"<tr>{''.join(cells)}</tr>")
     joined = "\n".join(body)
     return f"<table>\n<tr>{head}</tr>\n{joined}\n</table>"
@@ -136,6 +168,90 @@ def cell_html(cell: Any) -> str:
     if isinstance(cell, dict):
         return f'{rich(cell["text"])}<span class="t3" style="display:block;font-size:12px;line-height:1.4;margin-top:2px">{rich(cell["sub"])}</span>'
     return rich(cell)
+
+
+FIGURE = re.compile(r"^\s*(under|below|less than|over|above|at least)?\s*(\$)?(-?[\d,]*\.?\d+)\s*([KMB])?\s*(%|h|m|d|s|x)?\s*(\+)?\s*$", re.I)
+SCALE = {"K": 1e3, "M": 1e6, "B": 1e9}
+
+
+def parse_figure(text: str) -> tuple[float, str, str] | None:
+    """A printed figure as (value, unit, direction). Direction is "under", "over" or "" for a plain target. None when it isn't one figure."""
+    found = FIGURE.match(text or "")
+    if not found:
+        return None
+    word, dollar, n, mult, unit, plus = found.groups()
+    value = float(n.replace(",", "")) * SCALE.get((mult or "").upper(), 1)
+    direction = "under" if (word or "").lower() in ("under", "below", "less than") else "over" if word or plus else ""
+    return value, (dollar or "") + (unit or "").lower(), direction
+
+
+def bullet(r: Json) -> str:
+    """Prior, actual and the target or healthy range on one line, as the site's scorecard draws them. Drawn only when all three are figures in one unit."""
+    prior, actual, target = (parse_figure(r.get(k, "")) for k in ("prior", "actual", "target"))
+    if not (prior and actual and target) or len({prior[1], actual[1], target[1]}) != 1:
+        return ""
+    top = max(prior[0], actual[0], target[0]) * 1.18 or 1
+
+    def x(v: float) -> float:
+        return round(max(0.0, min(v / top, 1)) * 100, 1)
+
+    t, direction = x(target[0]), target[2]
+    band = (
+        f'<i class="ok" style="left:0;width:{num(t)}%"></i>'
+        if direction == "under"
+        else f'<i class="ok" style="left:{num(t)}%;right:0"></i>'
+        if direction == "over"
+        else ""
+    )
+    goal = "" if direction else f'<i class="goal" style="left:{num(t)}%"></i>'
+    lo, hi = sorted((x(prior[0]), x(actual[0])))
+    return (
+        f'<span class="bl" aria-hidden="true"><i class="tr"></i>{band}{goal}<i class="mv" style="left:{num(lo)}%;width:{num(round(hi - lo, 1))}%"></i>'
+        f'<i class="pr" style="left:{num(x(prior[0]))}%"></i><i class="ac {esc(r["status"])}" style="left:{num(x(actual[0]))}%"></i></span>'
+    )
+
+
+def scorecard_rows(b: Json) -> str:
+    """The scorecard as the style guide draws it: name and definition, the status mark, then prior → actual · target in mono, with the line beneath."""
+    labels = b["labels"]
+    extra_labels = labels.get("extra", [])
+    out = []
+    for r in b["rows"]:
+        if "group" in r:
+            out.append(f'<div class="sc-g">{rich(r["group"])}</div>')
+            continue
+        sub = f'<span class="sc-d">{rich(r["definition"])}</span>' if r.get("definition") else ""
+        extras = " · ".join(f"{esc(lab)} {rich(v)}" for lab, v in zip(extra_labels, r.get("extra", [])) if v)
+        extra = f'<span class="sc-x">{extras}</span>' if extras else ""
+        cover = f' <span class="sc-c">({rich(r["coverage"])})</span>' if r.get("coverage") else ""
+        target = f"<em>{esc(labels['target'])}</em> {rich(r['target'])}" if parse_figure(r["target"]) else rich(r["target"])
+        line = f"{rich(r['prior'])} <i>→</i> <b>{rich(r['actual'])}</b>{cover} · {target}"
+        out.append(
+            f'<div class="sc-r"><div class="sc-n"><span>{rich(r["metric"])}</span>{sub}{extra}</div>'
+            f'<div class="sc-v">{bullet(r)}<span class="sc-l">{line}</span></div>'
+            f'<div class="sc-s"><span class="st {esc(r["status"])}">{esc(r["status"])}</span></div></div>'
+        )
+    between = f"{esc(labels['prior'])} → {esc(labels['actual'])}"
+    head = f'<div class="sc-h"><span>{esc(labels["metric"])}</span><span>{between}</span><span>{esc(labels["status"])}</span></div>'
+    return f'<div class="sc">{head}{"".join(out)}</div>'
+
+
+OWNED = re.compile(
+    r"^(?:(?P<tag>[A-Z][^:]{1,28}):\s+)?(?P<text>.+?)\s*Owner(?: is|:)\s*(?P<owner>.+?)\.\s*Due(?: in|:)\s*(?P<due>[^.\[]+?)\.?\s*"
+    r"(?P<refs>(?:\[\[[A-Z]\d+\]\]\s*)*)$"
+)
+
+
+def list_item(text: str) -> str:
+    """A list row. An item that names an owner and a due date shows them in their own columns, the owner in brass because a person owes it."""
+    found = OWNED.match(text)
+    if not found:
+        return f"<li>{rich(text)}</li>"
+    tag = f'<span class="li-t">{rich(found["tag"])}</span>' if found["tag"] else ""
+    return (
+        f'<li class="own"><span class="li-b">{tag}{rich(found["text"])}{rich(" " + found["refs"].strip()) if found["refs"].strip() else ""}</span>'
+        f'<span class="li-o">{rich(found["owner"])}</span><span class="li-d">{rich(found["due"])}</span></li>'
+    )
 
 
 def ledger_as_table(deck: Json) -> Table:
@@ -212,11 +328,13 @@ def plan_vs_actual(b: Json) -> str:
         f'<span><i class="o"></i>{rich(lg["over"])}</span></div>'
     )
     rows = []
+    top = max([r["plan"] for r in b["rows"]] + [r["actual"] for r in b["rows"]]) or 1
     for r in b["rows"]:
         over = " over" if r.get("over") else ""
         rows.append(
-            f'<span>{rich(r["label"])}</span><div class="track"><div class="b" style="width:{num(r["plan"] * 2)}%"></div>'
-            f'<div class="b a{over}" style="width:{num(r["actual"] * 2)}%"></div></div><span class="v">{num(r["plan"])} / {num(r["actual"])}%</span>'
+            f'<div class="pvr"><span>{rich(r["label"])}</span><span class="v">{num(r["plan"])} / {num(r["actual"])}%</span>'
+            f'<div class="track"><div class="b" style="width:{num(round(r["plan"] / top * 100, 1))}%"></div>'
+            f'<div class="b a{over}" style="width:{num(round(r["actual"] / top * 100, 1))}%"></div></div></div>'
         )
     joined = "\n".join(rows)
     return f'{key}\n<div class="pv">\n{joined}\n</div>'
@@ -227,8 +345,15 @@ def num(n: float) -> str:
     return str(int(n)) if float(n) == int(n) else repr(float(n))
 
 
+DECISION = re.compile(r"^Options: (?P<options>.+?)\. Deadline: (?P<deadline>.+?)\.$")
+
+
 def paragraph(part: str | Json, prev: str) -> str:
     p = {"p": part} if isinstance(part, str) else part
+    if found := DECISION.match(p["p"]):
+        options = [o.strip() for o in re.split(r",? or ", found["options"]) if o.strip()]
+        rows = "".join(f'<div><span class="dc-k">Option {chr(65 + i)}</span>{rich(o[:1].upper() + o[1:])}</div>' for i, o in enumerate(options))
+        return f'<div class="dc">{rows}<div class="dl"><span class="dc-k">Deadline</span>{rich(found["deadline"])}</div></div>'
     space = p.get("space", PARAGRAPH_GAP.get(prev))
     margin = f"margin-top:{num(space)}px" if space is not None and prev != "h3" else ""
     return f"<p{style_attr([margin, 'color:var(--t1)' if p.get('emphasis') else ''])}>{rich(p['p'])}</p>"
@@ -244,7 +369,7 @@ def card(c: Json, deck: Json, style: str = "") -> str:
             out.append(paragraph(part, prev))
             prev = "p"
         elif "list" in part:
-            items = "\n".join(f"<li>{rich(li)}</li>" for li in part["list"])
+            items = "\n".join(list_item(li) for li in part["list"])
             out.append(f"<ul>{items}</ul>")
             prev = "ul"
         elif "cta" in part:
@@ -272,7 +397,9 @@ def cards(b: Json, deck: Json, top: str) -> str:
     for it in b["items"]:
         if it.get("type") == "data_needed":
             items.append(data_needed(it))
-        elif it.get("type") in ("table", "scorecard"):
+        elif it.get("type") == "scorecard":
+            items.append(f'<div class="tablewrap">{scorecard_rows(it)}</div>')
+        elif it.get("type") == "table":
             items.append(f'<div class="tablewrap">{table_of(it, deck)}</div>')
         else:
             items.append(card(it, deck))
@@ -281,12 +408,30 @@ def cards(b: Json, deck: Json, top: str) -> str:
 
 def grid(b: Json, style: str, items: list[str]) -> str:
     joined = "\n".join(items)
-    return f'<div class="grid {GRID[str(b["columns"])]}"{style}>\n{joined}\n</div>'
+    cls = GRID[str(b["columns"])]
+    if b["columns"] == 2 and len(items) == 2 and len(re.sub(r"<[^>]+>", "", items[1])) * 3 < len(re.sub(r"<[^>]+>", "", items[0])):
+        cls = GRID["2:1"]
+    return f'<div class="grid {cls}"{style}>\n{joined}\n</div>'
+
+
+OF = re.compile(r"^([\d,]+(?:\.\d+)?) of ([\d,]+(?:\.\d+)?)$")
+
+
+def tile_share(value: str) -> float | None:
+    """The share a tile's figure shows, for its bar: 22 of 39, or 86%. None for any other figure."""
+    if found := OF.match(value):
+        whole = float(found[2].replace(",", ""))
+        return float(found[1].replace(",", "")) / whole * 100 if whole else None
+    if (found := PERCENT.match(value)) and float(found[1]) <= 100:
+        return float(found[1])
+    return None
 
 
 def tile(t: Json) -> str:
     note = f'<p style="margin-top:10px">{rich(t["note"])}</p>' if t.get("note") else ""
-    return f'<div class="card"><div class="big">{rich(t["value"])}</div><div class="sub">{rich(t["label"])}</div>{note}</div>'
+    share = tile_share(t["value"])
+    bar = f'<span class="tb" aria-hidden="true"><i style="width:{share:.1f}%"></i></span>' if share is not None else ""
+    return f'<div class="card"><div class="big">{rich(t["value"])}</div>{bar}<div class="sub">{rich(t["label"])}</div>{note}</div>'
 
 
 def tiles(b: Json, top: str) -> str:
@@ -321,7 +466,9 @@ def block(b: Json, i: int, blocks: list[Json], deck: Json) -> str:
         return cards(b, deck, top)
     if kind == "tiles":
         return tiles(b, top)
-    if kind in ("table", "scorecard", "ledger"):
+    if kind == "scorecard":
+        return f'<div class="tablewrap"{style_attr([top])}>{scorecard_rows(b)}</div>'
+    if kind in ("table", "ledger"):
         return f'<div class="tablewrap"{style_attr([top])}>{table_of(b, deck)}</div>'
     if kind == "sources_needed":
         return sources_block(b, deck, top)
