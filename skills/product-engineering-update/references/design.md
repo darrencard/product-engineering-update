@@ -20,13 +20,22 @@ The reference is the outcome scorecard on dacard.ai/update: a scorecard on the l
 |---|---|---|
 | Scorecard row (prior, actual, target) | Range line: grey dot for prior, status dot for actual, a green band for the healthy range or a tick for a target | `bullet()`, drawn only when all three are figures in one unit |
 | Plan against actual | Paired bars, plan grey above actual ink, scaled to the largest value; hatched when over | `plan_vs_actual()` |
-| A table column where every cell is a % of 100 or less | A share bar before the figure | `share_columns()` |
+| A table column where every cell is a % of 100 or less, or every cell a whole count | A bar before the figure: against 100 for shares, against the column's largest for counts | `share_columns()` |
 | A tile showing `22 of 39` or `86%` | A proportion bar under the figure | `tile_share()` |
 | A list item ending `Owner: X. Due: Y.` | Owner and due date in their own columns, owner in brass; a leading `Label:` becomes a mono tag | `list_item()` |
 | `Yes` / `No` cells | Mono capitals, `NO` muted | `styled_cell()` |
+| `High` / `Medium` / `Low` cells | Three pips, filled to the level | `styled_cell()` |
+| Confidence and commitment words (Verified, Derived, Estimated, Unknown, Promise, Experiment) | A mono chip; Verified and Promise in ink, Estimated and Unknown dashed | `styled_cell()` |
+| `Window` and `Due` columns | Mono, on one line | `styled_cell()` |
+| Cover facts like `18 core slides`, `Board cut 8` | The figure large, its label in mono beneath | `fact()` |
+| Data needed | Owner and due date in their own columns, owner in brass | `data_needed()` |
 | A `Result` column | A status dot before the word: moved (green), moved the wrong way (red), not shipped or no movement (ring) | `styled_cell()` |
 | `Options: A, or B. Deadline: D.` | Options as rows, the deadline in brass | `paragraph()` |
 | A one-item list | Set larger, in ink, as the slide's single ask | CSS `li:only-child` |
+
+## Space
+
+Give elements room. Cards pad 22 to 26px; rows pad 12 to 18px; blocks on a slide sit 20px apart; columns in a row sit 32 to 36px apart. When in doubt, add space, never a border.
 
 ## Checks before a change ships
 
