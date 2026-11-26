@@ -76,36 +76,37 @@ main{margin-left:248px}
 .meta .aud{border:1px solid var(--line2);border-radius:3px;padding:2px 7px;color:var(--t2)}
 h1{font-family:var(--display);font-weight:600;text-wrap:pretty}h2{font-family:var(--display);font-weight:600;text-wrap:pretty}
 h1{font-size:clamp(43px,5.8vw,79px);font-stretch:88%;line-height:.95;letter-spacing:-.05em;margin:0 0 24px;max-width:none}
-h2{font-size:clamp(25px,2.7vw,35px);font-stretch:90%;line-height:1.08;letter-spacing:-.035em;margin:0 0 26px;max-width:none;padding-right:24px}
-h3{font:400 10px/16px var(--mono);letter-spacing:.1em;text-transform:uppercase;margin:0 0 10px;color:var(--t3)}
+h2{font-size:clamp(25px,2.7vw,35px);font-stretch:90%;line-height:1.08;letter-spacing:-.035em;margin:0 0 32px;max-width:none;padding-right:24px}
+h3{font:400 10px/16px var(--mono);letter-spacing:.1em;text-transform:uppercase;margin:0 0 12px;color:var(--t3)}
 .lede{font-size:clamp(16px,1.5vw,19px);line-height:1.55;color:var(--t2);max-width:62ch;margin:0 0 28px;text-wrap:pretty}
 .grid{display:grid;gap:14px}
 .g2{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
 .g21{grid-template-columns:1.6fr 1fr}
-.card{background:var(--s1);border:1px solid var(--line);border-radius:12px;padding:18px}
+.card{background:var(--s1);border:1px solid var(--line);border-radius:12px;padding:22px 24px}
 .card p{margin:0;font-size:13px;color:var(--t2)}
 .card ul{margin:0;padding-left:18px;font-size:13px;color:var(--t2)}
 .card li+li{margin-top:6px}
 .big{font:600 37px/1 var(--display);font-stretch:85%;letter-spacing:-.045em;font-variant-numeric:tabular-nums;color:var(--t1)}
 .sub{font-size:11.5px;color:var(--t3);margin-top:6px}
 table{width:100%;border-collapse:collapse;font-size:12.5px}
-th{font:400 10px/16px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--t3);text-align:left;padding:10px 12px;border-bottom:1px solid var(--line2);white-space:nowrap}
-td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--t2)}
+th{font:400 10px/16px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--t3);text-align:left;padding:14px 18px 12px;border-bottom:1px solid var(--line2);white-space:nowrap}
+td{padding:13px 18px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--t2)}
 tr:last-child td{border-bottom:0}
 td:first-child{color:var(--t1)}
 td.num,th.num{text-align:right;white-space:nowrap}
 td.num{font-family:var(--mono);font-size:11.5px;font-variant-numeric:tabular-nums}
-tr.grp td{font:400 10px/16px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--t3);padding-top:16px;border-bottom:0}
+tr.grp td{font:400 10px/16px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--t3);padding-top:22px;border-bottom:0}
 .tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--s1)}
 .led{font:400 10px var(--mono);color:var(--t3);border:1px solid var(--line2);border-radius:3px;padding:0 4px;margin-left:5px;white-space:nowrap}
 /* data needed: a named person owes it, so it carries brass */
-.need{border:1px dashed var(--brass);border-radius:10px;padding:14px 16px;background:var(--brass-bg)}
+.need{border:1px dashed var(--brass);border-radius:10px;padding:16px 20px;background:var(--brass-bg)}
 .need b{color:var(--brass);font:400 10px/16px var(--mono);letter-spacing:.1em;text-transform:uppercase}
-.need p{margin:4px 0 0;font-size:12.5px;color:var(--t2)}
+.need p{margin:0;font-size:13px;color:var(--t2)}
+.need-r{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:6px 32px;align-items:baseline;margin-top:8px}
 
 /* plan vs actual bars: plan is grey, actual is ink, over plan is hatched */
 .pv{display:grid;font-size:13px}
-.pvr{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 16px;align-items:center;border-top:1px solid var(--line);padding:9px 0}
+.pvr{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 16px;align-items:center;border-top:1px solid var(--line);padding:12px 0}
 .pvr:last-child{padding-bottom:0}
 .pvr>span:first-child{color:var(--t2);line-height:1.3}
 .pv .track{grid-column:1/-1;display:grid;gap:3px}
@@ -113,24 +114,24 @@ tr.grp td{font:400 10px/16px var(--mono);letter-spacing:.1em;text-transform:uppe
 .pv .b.a{background:var(--t1)}
 .pv .b.a.over{background:repeating-linear-gradient(135deg,var(--t1) 0 4px,transparent 4px 7px);outline:1px solid var(--t1);outline-offset:-1px}
 .pv .v{font:400 11.5px var(--mono);font-variant-numeric:tabular-nums;color:var(--t2);text-align:right}
-.key{display:flex;flex-wrap:wrap;gap:6px 16px;font:400 10px/16px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--t3);margin:-2px 0 10px}
+.key{display:flex;flex-wrap:wrap;gap:6px 16px;font:400 10px/16px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--t3);margin:0 0 14px}
 .key i{display:inline-block;width:14px;height:8px;border-radius:2px;margin-right:6px;background:var(--agent-mid)}
 .key i.a{background:var(--t1)}
 .key i.o{background:repeating-linear-gradient(135deg,var(--t1) 0 4px,transparent 4px 7px);outline:1px solid var(--t1);outline-offset:-1px}
 
 /* Style guide: the site's outcome scorecard is the reference. Mono micro labels, hairline rows, figures in mono,
    colour for status only, brass where a person owes something. See references/design.md. */
-.sc{padding:2px 20px 8px}
-.sc-h,.sc-r{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr) 96px;gap:24px}
-.sc-h{font:400 10px/16px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--t3);padding:14px 0 10px}
+.sc{padding:6px 24px 14px}
+.sc-h,.sc-r{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr) 96px;gap:36px}
+.sc-h{font:400 10px/16px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--t3);padding:16px 0 12px}
 .sc-h span:last-child,.sc-s{text-align:right}
-.sc-g{font:400 10px/16px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--t3);padding:18px 0 8px;border-top:1px solid var(--line2)}
-.sc-r{align-items:center;border-top:1px solid var(--line);padding:13px 0}
+.sc-g{font:400 10px/16px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--t3);padding:24px 0 10px;border-top:1px solid var(--line2)}
+.sc-r{align-items:center;border-top:1px solid var(--line);padding:18px 0}
 .sc-g+.sc-r{border-top-color:transparent;padding-top:4px}
 .sc-n>span:first-child{display:block;color:var(--t1);font-size:14px;line-height:1.4}
 .sc-d{display:block;font-size:12px;line-height:1.45;color:var(--t3);margin-top:3px}
 .sc-x{display:block;font:400 10px/16px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--t3);margin-top:5px}
-.sc-v{display:flex;flex-direction:column;gap:7px;min-width:0}
+.sc-v{display:flex;flex-direction:column;gap:10px;min-width:0}
 .sc-l{font:400 12px/16px var(--mono);font-variant-numeric:tabular-nums;color:var(--t3)}
 .sc-l b{color:var(--t1);font-weight:500}.sc-l i{font-style:normal}.sc-l em{font-style:normal;font-size:10px;letter-spacing:.1em;text-transform:uppercase}
 .bl{position:relative;display:block;height:14px}
@@ -145,12 +146,12 @@ tr.grp td{font:400 10px/16px var(--mono);letter-spacing:.1em;text-transform:uppe
 
 /* lists read as hairline rows, like the scorecard */
 .card ul{list-style:none;padding:0}
-.card li{border-top:1px solid var(--line);padding:9px 0;line-height:1.55}
+.card li{border-top:1px solid var(--line);padding:12px 0;line-height:1.55}
 .card li+li{margin-top:0}
 .card li:last-child{padding-bottom:0}
 .card li:only-child:not(.own){font-size:16px;line-height:1.45;color:var(--t1)}
-.card li.own{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:4px 20px;align-items:baseline}
-.li-t{font:400 10px/16px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--t3);margin-right:10px}
+.card li.own{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:6px 32px;align-items:baseline}
+.li-t{font:400 10px/16px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--t3);margin-right:12px}
 .li-o,.li-d{font:400 11.5px/16px var(--mono);white-space:nowrap}
 .li-o{color:var(--brass)}.li-d{color:var(--t2)}
 .li-o::before,.li-d::before{font-size:10px;letter-spacing:.1em;color:var(--t3);margin-right:6px}
@@ -160,8 +161,8 @@ tr.grp td{font:400 10px/16px var(--mono);letter-spacing:.1em;text-transform:uppe
 .grid{gap:0;border:1px solid var(--line);border-radius:12px;background:var(--s1);overflow:hidden}
 .grid>*{box-shadow:-1px 0 0 var(--line),0 -1px 0 var(--line)}
 .grid>.card,.grid>.tablewrap{border:0;border-radius:0;background:none}
-.grid>.card{padding:18px 20px}
-.grid>.need{margin:12px;border-radius:8px}
+.grid>.card{padding:22px 26px}
+.grid>.need{margin:16px;border-radius:8px}
 
 /* small charts inside tables and tiles: a share bar, YES/NO in mono, a status dot before a result word */
 td .sh{display:inline-block;vertical-align:middle;width:72px;height:6px;margin-right:10px;border-radius:1px;background:var(--line2);position:relative;overflow:hidden}
@@ -169,11 +170,19 @@ td .sh i{position:absolute;inset:0 auto 0 0;background:var(--t2)}
 .yn{font:400 10.5px/16px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--t1)}.yn.no{color:var(--t3)}
 .rd{display:inline-block;width:7px;height:7px;border-radius:2px;margin-right:8px;vertical-align:1px;background:currentColor}
 .rd.landed{color:var(--landed)}.rd.stalled{color:var(--stalled)}.rd.watch{width:8px;height:8px;border-radius:50%;background:none;border:1.5px solid var(--watch)}
-.tb{display:block;height:4px;margin:12px 0 2px;border-radius:1px;background:var(--line2);position:relative;overflow:hidden}
+.tb{display:block;height:4px;margin:14px 0 4px;border-radius:1px;background:var(--line2);position:relative;overflow:hidden}
 .tb i{position:absolute;inset:0 auto 0 0;background:var(--t1)}
+.tb.none{background:none}
+.nw{white-space:nowrap}
+.pp{display:inline-flex;gap:3px;margin-right:9px;vertical-align:1px}
+.pp i{width:6px;height:6px;border-radius:50%;border:1px solid var(--t3)}
+.pp i.on{background:var(--t2);border-color:var(--t2)}
+.chip{display:inline-block;font:400 10px/18px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--t2);border:1px solid var(--line2);border-radius:3px;padding:0 7px}
+.chip.verified,.chip.promise{color:var(--t1);border-color:var(--line3)}.chip.estimated,.chip.unknown{color:var(--t3);border-style:dashed}
+.mo{font:400 11.5px/18px var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
 /* a decision: options as rows, the deadline in brass because a person decides */
-.dc{margin-top:12px;border-top:1px solid var(--line)}
-.dc>div{display:grid;grid-template-columns:110px 1fr;gap:16px;padding:10px 0;border-bottom:1px solid var(--line);font-size:14px;color:var(--t1)}
+.dc{margin-top:16px;border-top:1px solid var(--line)}
+.dc>div{display:grid;grid-template-columns:120px 1fr;gap:20px;padding:13px 0;border-bottom:1px solid var(--line);font-size:14px;color:var(--t1)}
 .dc>div:last-child{border-bottom:0;padding-bottom:0}
 .dc-k{font:400 10px/22px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--t3)}
 .dc .dl{color:var(--brass);font-family:var(--mono);font-size:13px}
@@ -203,10 +212,12 @@ body.guides .guide{display:block}
 .tree .leaf::before{content:"";position:absolute;left:-12px;top:50%;width:12px;border-top:1px solid var(--line3)}
 .tree .leaf b{color:var(--t1);font-weight:600;display:block}
 .tree .leaf small{font:400 10px/16px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--t3);display:block;margin-bottom:3px}
-.strip{margin-top:14px;border:1px solid var(--line);border-left:2px solid var(--agent);border-radius:8px;padding:12px 16px;font-size:12.5px;color:var(--t2);background:var(--s1)}
+.strip{margin-top:20px;border:1px solid var(--line);border-left:2px solid var(--agent);border-radius:8px;padding:14px 20px;font-size:12.5px;color:var(--t2);background:var(--s1)}
 .strip b{color:var(--t1)}
 .cover{min-height:92vh;justify-content:center}
-.facts{display:flex;flex-wrap:wrap;gap:8px 28px;font:400 10px var(--mono);color:var(--t3);margin-top:12px}
+.facts{display:flex;flex-wrap:wrap;align-items:flex-end;gap:16px 48px;margin-top:28px;padding-top:24px;border-top:1px solid var(--line)}
+.facts span{display:flex;flex-direction:column;gap:6px;font:400 10px/16px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--t3)}
+.facts b{font:600 30px/1 var(--display);font-stretch:85%;letter-spacing:-.04em;text-transform:none;color:var(--t1);font-variant-numeric:tabular-nums}
 .cta{display:inline-flex;align-items:center;min-height:48px;background:var(--t1);color:#0A0A0A;font-weight:600;font-size:13px;padding:0 22px;border-radius:999px;text-decoration:none}
 .cta:hover{background:#fff}
 .steps{counter-reset:s;display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
@@ -225,7 +236,7 @@ body.guides .guide{display:block}
   .tree .br{padding-left:0;margin-top:8px}.tree .br::before,.tree .leaf::before{display:none}
   .pv{font-size:12.5px}
   .sc-h{display:none}.sc-r{grid-template-columns:1fr;gap:8px}.sc-s{text-align:left}
-  .card li.own{grid-template-columns:1fr}
+  .card li.own,.need-r{grid-template-columns:1fr}
   .guide dl{grid-template-columns:1fr}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
@@ -271,7 +282,7 @@ body.guides .guide{display:block}
 <div class="card"><h3>Paired metrics</h3><p>Every speed number sits next to the quality number it can hurt.</p></div>
 <div class="card"><h3>One source, three cuts</h3><p>Switch the audience above. The slides change, the facts don't.</p></div>
 </div>
-<div class="facts"><span>18 core slides</span><span>Board cut 8</span><span>Staff cut 10</span><span>Sources you need: Appendix D</span><span>Keys J and K move between slides</span></div>
+<div class="facts"><span><b>18</b>core slides</span><span><b>8</b>Board cut</span><span><b>10</b>Staff cut</span><span>Sources you need: Appendix D</span><span>Keys J and K move between slides</span></div>
 <div class="foot">
 <div class="guide"><dl>
 <dt>How to use</dt><dd>Read the example once as Leadership. Switch to Board to see what drops out. Turn on guidance to see the question each slide answers, the data it needs and the rule it follows.</dd>
@@ -293,7 +304,7 @@ body.guides .guide{display:block}
 <li>Approve a per-load pricing pilot with 10 customers.</li>
 <li>Refer candidates for Head of AI Quality.</li></ul></div>
 </div>
-<div class="tablewrap" style="margin-top:14px"><table>
+<div class="tablewrap" style="margin-top:20px"><table>
 <tr><th>Pillar</th><th>Status</th><th>Signal</th><th>Trend</th></tr>
 <tr><td>Customer outcomes</td><td><span class="st watch">watch</span></td><td>North Star ahead of target, activation at 41% against 50%</td><td>Mixed</td></tr>
 <tr><td>Delivery</td><td><span class="st landed">landed</span></td><td>9 of 11 commitments shipped, 5 moved their metric</td><td>Up</td></tr>
@@ -330,7 +341,7 @@ body.guides .guide{display:block}
 <li>Ship on-premise</li>
 <li>Take custom work for fleets above 5,000 trucks this year</li></ul></div>
 </div>
-<div class="tablewrap" style="margin-top:14px"><table>
+<div class="tablewrap" style="margin-top:20px"><table>
 <tr><th>Layer</th><th>Harborline</th><th>Owner</th><th>Horizon</th></tr>
 <tr><td>Mission</td><td>Freight that moves without phone calls</td><td>CEO</td><td>Open</td></tr>
 <tr><td>Company strategy</td><td>Lead exception automation for mid-market brokers</td><td>CEO</td><td>1 to 3 years</td></tr>
@@ -376,7 +387,7 @@ body.guides .guide{display:block}
 <div class="leaf"><div><small>Bet</small><b>Model routing</b>Platform team, review agent</div><div><small>Product outcome</small>Cost per task $0.33 to $0.27</div><div><small>Why we think it works</small>Simple tasks go to a cheaper model with no eval loss</div><div><small>Confidence</small>High, offline evals</div></div>
 </div>
 </div>
-<p class="t2" style="font-size:12.5px;margin:14px 0 0">The other 22% is keep-the-lights-on and unplanned work. It supports every objective and is reported on slide 5.<span class="led">L05</span></p>
+<p class="t2" style="font-size:12.5px;margin:18px 0 0">The other 22% is keep-the-lights-on and unplanned work. It supports every objective and is reported on slide 5.<span class="led">L05</span></p>
 <div class="foot">
 <div class="asof">Source: Linear initiatives tagged by objective, Q3 FY26.</div>
 <div class="guide"><dl>
@@ -403,7 +414,7 @@ body.guides .guide{display:block}
 <tr><td>Carrier Scorecards</td><td>Explore</td><td>ARR growth</td><td class="num"><span class="sh"><i style="width:6%"></i></span>6%</td><td class="num">Beta, no revenue</td><td>Too early to read</td><td><span class="st watch">watch</span></td></tr>
 <tr><td>Platform, shared</td><td>Sustain</td><td>All three</td><td class="num"><span class="sh"><i style="width:21%"></i></span>21%</td><td class="num">Shared</td><td>Cost per task $0.33, target $0.27</td><td><span class="st landed">landed</span></td></tr>
 </table></div>
-<div class="grid g3" style="margin-top:14px">
+<div class="grid g3" style="margin-top:20px">
 <div class="card"><h3>Explore</h3><p>We are still testing value. Fund in small, time-boxed amounts and expect to kill some.</p></div>
 <div class="card"><h3>Expand</h3><p>Value is proven. Fund growth and measure adoption and revenue.</p></div>
 <div class="card"><h3>Sustain</h3><p>The line pays for the rest. Fund reliability and cost, and cap new scope.</p></div>
@@ -432,7 +443,7 @@ body.guides .guide{display:block}
 <div class="pvr"><span>Growth</span><span class="v">10 / 8%</span><div class="track"><div class="b" style="width:28.6%"></div><div class="b a" style="width:22.9%"></div></div></div>
 <div class="pvr"><span>Platform &amp; scale</span><span class="v">20 / 21%</span><div class="track"><div class="b" style="width:57.1%"></div><div class="b a" style="width:60%"></div></div></div>
 <div class="pvr"><span>Keep the lights on</span><span class="v">15 / 22%</span><div class="track"><div class="b" style="width:42.9%"></div><div class="b a over" style="width:62.9%"></div></div></div>
-</div><p style="margin-top:14px">SOC 2 evidence work and follow-up from 3 Sev-2 incidents took 7 points from new capabilities and growth. We expect 17% next quarter.<span class="led">L05</span></p></div>
+</div><p style="margin-top:20px">SOC 2 evidence work and follow-up from 3 Sev-2 incidents took 7 points from new capabilities and growth. We expect 17% next quarter.<span class="led">L05</span></p></div>
 <div class="card"><h3>Dollars, Q3</h3><table>
 <tr><th>Line</th><th class="num">Plan</th><th class="num">Actual</th></tr>
 <tr><td>R&amp;D payroll</td><td class="num">$3.75M</td><td class="num">$3.7M</td></tr>
@@ -440,9 +451,9 @@ body.guides .guide{display:block}
 <tr><td>AI tools for the team</td><td class="num">$95K</td><td class="num">$90K</td></tr>
 <tr><td>Cloud</td><td class="num">$400K</td><td class="num">$410K</td></tr>
 <tr><td>R&amp;D as a share of revenue</td><td class="num">41%</td><td class="num">41%</td></tr>
-</table><p style="margin-top:12px">Inference grew with agent volume, which rose 26%. Unit cost fell 20%.<span class="led">L06</span></p><p style="margin-top:10px">R&amp;D was 45% of revenue a year ago. The plan reaches 36% by FY28. SaaS Capital puts the private SaaS median at 22% of ARR (Jun 2026).</p></div>
+</table><p style="margin-top:16px">Inference grew with agent volume, which rose 26%. Unit cost fell 20%.<span class="led">L06</span></p><p style="margin-top:10px">R&amp;D was 45% of revenue a year ago. The plan reaches 36% by FY28. SaaS Capital puts the private SaaS median at 22% of ARR (Jun 2026).</p></div>
 </div>
-<div style="margin-top:14px"><div class="need"><b>Data needed</b><p>Cash, net burn and runway in months. This example covers product and engineering spend only, so it has no company cash position. A board cut needs all three. Owner is the CFO. Due in Q4.</p></div></div>
+<div style="margin-top:20px"><div class="need"><b>Data needed</b><div class="need-r"><p>Cash, net burn and runway in months. This example covers product and engineering spend only, so it has no company cash position. A board cut needs all three.</p><span class="li-o">the CFO</span><span class="li-d">Q4</span></div></div></div>
 <div class="foot">
 <div class="asof">Sources: Linear work-type labels, Finance actuals, provider invoices. Quarter ending 30 Sep 2026.</div>
 <div class="guide"><dl>
@@ -464,13 +475,13 @@ body.guides .guide{display:block}
 <h2>Two of five opportunities are validated. We killed one after a prototype test.</h2>
 <div class="tablewrap"><table>
 <tr><th>Opportunity</th><th>Risk tested</th><th>Evidence</th><th>How we tested</th><th>Confidence</th><th>Decision</th></tr>
-<tr><td>The agent fails on multi-stop reroutes</td><td>Feasibility</td><td>14 of 36 eval failures, 9 interviews</td><td>Error analysis, prototype</td><td>High</td><td>Fund, bet 1</td></tr>
-<tr><td>New accounts stall before the first automated load</td><td>Usability</td><td>41% activate in 14 days, 7 interviews</td><td>Live test, plus 6 points</td><td>Medium</td><td>Fund, bet 2</td></tr>
-<tr><td>Brokers want to pay per load</td><td>Viability</td><td>11 interviews, 1 competitor move</td><td>Untested</td><td>Low</td><td>Pilot, bet 4</td></tr>
-<tr><td>Carrier scorecards</td><td>Value</td><td>5 interviews</td><td>Prototype in test</td><td>Medium</td><td>Continue</td></tr>
-<tr><td>Carrier marketplace</td><td>Value</td><td>3 of 12 customers would pay</td><td>Prototype</td><td>High</td><td>Killed</td></tr>
+<tr><td>The agent fails on multi-stop reroutes</td><td>Feasibility</td><td>14 of 36 eval failures, 9 interviews</td><td>Error analysis, prototype</td><td><span class="nw"><span class="pp" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i></span>High</span></td><td>Fund, bet 1</td></tr>
+<tr><td>New accounts stall before the first automated load</td><td>Usability</td><td>41% activate in 14 days, 7 interviews</td><td>Live test, plus 6 points</td><td><span class="nw"><span class="pp" aria-hidden="true"><i class="on"></i><i class="on"></i><i></i></span>Medium</span></td><td>Fund, bet 2</td></tr>
+<tr><td>Brokers want to pay per load</td><td>Viability</td><td>11 interviews, 1 competitor move</td><td>Untested</td><td><span class="nw"><span class="pp" aria-hidden="true"><i class="on"></i><i></i><i></i></span>Low</span></td><td>Pilot, bet 4</td></tr>
+<tr><td>Carrier scorecards</td><td>Value</td><td>5 interviews</td><td>Prototype in test</td><td><span class="nw"><span class="pp" aria-hidden="true"><i class="on"></i><i class="on"></i><i></i></span>Medium</span></td><td>Continue</td></tr>
+<tr><td>Carrier marketplace</td><td>Value</td><td>3 of 12 customers would pay</td><td>Prototype</td><td><span class="nw"><span class="pp" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i></span>High</span></td><td>Killed</td></tr>
 </table></div>
-<div class="grid g4" style="margin-top:14px">
+<div class="grid g4" style="margin-top:20px">
 <div class="card"><div class="big">23</div><div class="sub">customer interviews</div></div>
 <div class="card"><div class="big">6</div><div class="sub">prototype tests</div></div>
 <div class="card"><div class="big">2</div><div class="sub">live experiments</div></div>
@@ -497,9 +508,9 @@ body.guides .guide{display:block}
 <div class="grid g3">
 <div class="card"><div class="big">19 of 37</div><span class="tb" aria-hidden="true"><i style="width:51.4%"></i></span><div class="sub">wins cite agent accuracy in the pilot</div><p style="margin-top:10px">The pilot is our best sales asset. Keep it under 14 days.</p></div>
 <div class="card"><div class="big">11 of 27</div><span class="tb" aria-hidden="true"><i style="width:40.7%"></i></span><div class="sub">losses cite the missing TMS integration</div><p style="margin-top:10px">This commitment slipped to Q4. It is the top delivery priority.</p></div>
-<div class="card"><div class="big">12.6</div><div class="sub">support tickets per 100 accounts, down from 14.2</div><p style="margin-top:10px">Reroute errors remain the largest ticket theme.</p></div>
+<div class="card"><div class="big">12.6</div><span class="tb none" aria-hidden="true"></span><div class="sub">support tickets per 100 accounts, down from 14.2</div><p style="margin-top:10px">Reroute errors remain the largest ticket theme.</p></div>
 </div>
-<div class="card" style="margin-top:14px"><h3>Market</h3><p>One direct competitor moved to per-load pricing in September. Two prospects raised it unprompted in October. This supports the pricing pilot on slide 16 and adds no proof that customers will pay more.</p></div>
+<div class="card" style="margin-top:20px"><h3>Market</h3><p>One direct competitor moved to per-load pricing in September. Two prospects raised it unprompted in October. This supports the pricing pilot on slide 16 and adds no proof that customers will pay more.</p></div>
 <div class="foot">
 <div class="asof">Sources: CRM win and loss notes on 64 closed deals, support desk. Q3 FY26.<span class="led">L10</span></div>
 <div class="guide"><dl>
@@ -626,7 +637,7 @@ body.guides .guide{display:block}
 <div class="meta"><span>11</span><span>Measurement</span><span class="aud">Leadership</span><span class="aud">Board</span><span class="aud">Staff</span><span class="ill">Illustrative</span></div>
 <h2>The North Star beat target. Activation and expansion did not.</h2>
 <div class="tablewrap"><div class="sc"><div class="sc-h"><span>Outcome</span><span>Prior qtr → This qtr</span><span>Status</span></div><div class="sc-r"><div class="sc-n"><span>North Star, loads cleared with no manual touch per week</span><span class="sc-x">Benchmark None external · Owner Agent team</span></div><div class="sc-v"><span class="bl" aria-hidden="true"><i class="tr"></i><i class="goal" style="left:80.7%"></i><i class="mv" style="left:67.5%;width:17.2%"></i><i class="pr" style="left:67.5%"></i><i class="ac landed" style="left:84.7%"></i></span><span class="sc-l">18.4K <i>→</i> <b>23.1K</b> · <em>Target</em> 22K</span></div><div class="sc-s"><span class="st landed">landed</span></div></div><div class="sc-r"><div class="sc-n"><span>Activation, first automated load in 14 days</span><span class="sc-x">Benchmark None external · Owner Activation team</span></div><div class="sc-v"><span class="bl" aria-hidden="true"><i class="tr"></i><i class="goal" style="left:84.7%"></i><i class="mv" style="left:66.1%;width:3.4%"></i><i class="pr" style="left:66.1%"></i><i class="ac stalled" style="left:69.5%"></i></span><span class="sc-l">39% <i>→</i> <b>41%</b> · <em>Target</em> 50%</span></div><div class="sc-s"><span class="st stalled">stalled</span></div></div><div class="sc-r"><div class="sc-n"><span>Weekly active dispatchers</span><span class="sc-x">Benchmark None external · Owner Core dispatch</span></div><div class="sc-v"><span class="bl" aria-hidden="true"><i class="tr"></i><i class="goal" style="left:83.1%"></i><i class="mv" style="left:81.6%;width:3.1%"></i><i class="pr" style="left:81.6%"></i><i class="ac landed" style="left:84.7%"></i></span><span class="sc-l">5,890 <i>→</i> <b>6,120</b> · <em>Target</em> 6,000</span></div><div class="sc-s"><span class="st landed">landed</span></div></div><div class="sc-r"><div class="sc-n"><span>Net revenue retention</span><span class="sc-x">Benchmark Median 102%, top quartile 110% · Owner CPTO, CRO</span></div><div class="sc-v"><span class="bl" aria-hidden="true"><i class="tr"></i><i class="goal" style="left:84.7%"></i><i class="mv" style="left:82.6%;width:0.7%"></i><i class="pr" style="left:82.6%"></i><i class="ac watch" style="left:83.3%"></i></span><span class="sc-l">117% <i>→</i> <b>118%</b> · <em>Target</em> 120%</span></div><div class="sc-s"><span class="st watch">watch</span></div></div><div class="sc-r"><div class="sc-n"><span>Gross logo retention</span><span class="sc-x">Benchmark None comparable · Owner Customer success</span></div><div class="sc-v"><span class="bl" aria-hidden="true"><i class="tr"></i><i class="goal" style="left:83.8%"></i><i class="mv" style="left:84.7%;width:0%"></i><i class="pr" style="left:84.7%"></i><i class="ac landed" style="left:84.7%"></i></span><span class="sc-l">93% <i>→</i> <b>93%</b> · <em>Target</em> 92%</span></div><div class="sc-s"><span class="st landed">landed</span></div></div><div class="sc-r"><div class="sc-n"><span>Expansion ARR in quarter</span><span class="sc-x">Benchmark None external · Owner Growth team</span></div><div class="sc-v"><span class="bl" aria-hidden="true"><i class="tr"></i><i class="goal" style="left:84.7%"></i><i class="mv" style="left:67.1%;width:7.1%"></i><i class="pr" style="left:74.2%"></i><i class="ac stalled" style="left:67.1%"></i></span><span class="sc-l">$2.1M <i>→</i> <b>$1.9M</b> · <em>Target</em> $2.4M</span></div><div class="sc-s"><span class="st stalled">stalled</span></div></div></div></div>
-<div class="grid g2" style="margin-top:14px">
+<div class="grid g2" style="margin-top:20px">
 <div class="card"><h3>Who does the work</h3><p>The agent touched 62% of loads this quarter and people alone handled 38%. We report agent and human activity separately so rising agent volume can't hide falling human use.</p></div>
 <div class="card"><h3>What we don't count as outcomes</h3><p>Feature usage counts, AI adoption and pilots started. They are inputs and they live on slides 8 and 13.</p></div>
 </div>
@@ -651,19 +662,19 @@ body.guides .guide{display:block}
 <h2>The agent passes its quality bar and costs 20% less per task. Margin is 3 points short.</h2>
 <div class="grid g3">
 <div class="card"><div class="big">91.3%</div><span class="tb" aria-hidden="true"><i style="width:91.3%"></i></span><div class="sub">eval pass rate on 412 cases, bar is 90%</div></div>
-<div class="card"><div class="big">86%</div><span class="tb" aria-hidden="true"><i style="width:86.0%"></i></span><div class="sub">task success in production, target 88%</div></div>
+<div class="card"><div class="big">86%</div><span class="tb" aria-hidden="true"><i style="width:86%"></i></span><div class="sub">task success in production, target 88%</div></div>
 <div class="card"><div class="big">7.1%</div><span class="tb" aria-hidden="true"><i style="width:7.1%"></i></span><div class="sub">human override rate, down from 9.2%</div></div>
-<div class="card"><div class="big">$0.33</div><div class="sub">cost per successful task, down from $0.41</div></div>
-<div class="card"><div class="big">52%</div><span class="tb" aria-hidden="true"><i style="width:52.0%"></i></span><div class="sub">AI gross margin, target 55%. Survey average 53% projected for 2026 (ICONIQ, Jul 2026)</div></div>
-<div class="card"><div class="big">81%</div><span class="tb" aria-hidden="true"><i style="width:81.0%"></i></span><div class="sub">of inference spend with one provider, 2 providers in use</div></div>
+<div class="card"><div class="big">$0.33</div><span class="tb none" aria-hidden="true"></span><div class="sub">cost per successful task, down from $0.41</div></div>
+<div class="card"><div class="big">52%</div><span class="tb" aria-hidden="true"><i style="width:52%"></i></span><div class="sub">AI gross margin, target 55%. Survey average 53% projected for 2026 (ICONIQ, Jul 2026)</div></div>
+<div class="card"><div class="big">81%</div><span class="tb" aria-hidden="true"><i style="width:81%"></i></span><div class="sub">of inference spend with one provider, 2 providers in use</div></div>
 </div>
-<div class="grid g3" style="margin-top:14px">
+<div class="grid g3" style="margin-top:20px">
 <div class="card"><h3>Where it fails, 36 of 412 cases</h3><ul><li>Multi-stop reroutes, 14</li>
 <li>Carrier constraint missed, 9</li>
 <li>Ambiguous instruction, 8</li>
 <li>Other, 5</li></ul></div>
 <div class="card"><h3>Margin path</h3><p>48% in Q2, 52% in Q3. Plan is 56% in Q4 once routing ships and 60% by Q2 FY27. Blended gross margin is 71%.</p></div>
-<div class="need"><b>Data needed</b><p>Inference cost by customer segment. We don't measure it yet, so we can't say which accounts run below margin. Owner is the Platform team. Due in Q4.</p></div>
+<div class="need"><b>Data needed</b><div class="need-r"><p>Inference cost by customer segment. We don't measure it yet, so we can't say which accounts run below margin.</p><span class="li-o">the Platform team</span><span class="li-d">Q4</span></div></div>
 </div>
 <div class="foot">
 <div class="asof">Sources: eval harness v14, production traces, provider billing, Finance. Q3 FY26.<span class="led">L07</span><span class="led">L08</span><span class="led">L11</span></div>
@@ -689,7 +700,7 @@ body.guides .guide{display:block}
 <tr><td>Review agent</td><td>Operational</td><td>First review on 61% of pull requests</td><td>Human review time still up, 9h to 13h</td><td>Rework rate, 14%</td></tr>
 <tr><td>Unattended coding agents</td><td>Experimental</td><td>4 teams, 12% of merged pull requests</td><td>Too early to read</td><td>100% human review before merge</td></tr>
 </table></div>
-<div class="grid g2" style="margin-top:14px">
+<div class="grid g2" style="margin-top:20px">
 <div class="card"><h3>Cost</h3><p>$685 per engineer per month across tools and tokens, $90K for the quarter.<span class="led">L12</span></p></div>
 <div class="card"><h3>What we claim</h3><p>Throughput rose and review became the constraint. We don't report a productivity percentage. Slide 11 is the test of whether faster shipping produced better outcomes.</p></div>
 </div>
@@ -714,13 +725,13 @@ body.guides .guide{display:block}
 <h2>Our largest risk is inference cost tied to one provider. Routing is the fix.</h2>
 <div class="tablewrap"><table>
 <tr><th>Risk</th><th>Likelihood</th><th>Impact</th><th>Mitigation and owner</th><th>Due</th></tr>
-<tr><td>81% of inference spend sits with one model provider</td><td>Medium</td><td>High</td><td>Routing layer across 2 providers. Platform lead</td><td>Dec 2026</td></tr>
-<tr><td>Review capacity caps delivery as agent output grows</td><td>High</td><td>Medium</td><td>Merge queue, smaller batches, review agent tuning. VP Engineering</td><td>Nov 2026</td></tr>
-<tr><td>A model upgrade lowers agent quality</td><td>Medium</td><td>High</td><td>Eval gate on every model change. Agent team lead</td><td>In place</td></tr>
-<tr><td>SOC 2 Type II slips again and blocks enterprise deals</td><td>Low</td><td>Medium</td><td>Evidence automation, weekly check. Security lead</td><td>Jan 2027</td></tr>
-<tr><td>Head of AI Quality stays open past Q4</td><td>Medium</td><td>Medium</td><td>Search firm engaged, interim owner named. CPTO</td><td>Dec 2026</td></tr>
+<tr><td>81% of inference spend sits with one model provider</td><td><span class="nw"><span class="pp" aria-hidden="true"><i class="on"></i><i class="on"></i><i></i></span>Medium</span></td><td><span class="nw"><span class="pp" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i></span>High</span></td><td>Routing layer across 2 providers. Platform lead</td><td><span class="mo">Dec 2026</span></td></tr>
+<tr><td>Review capacity caps delivery as agent output grows</td><td><span class="nw"><span class="pp" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i></span>High</span></td><td><span class="nw"><span class="pp" aria-hidden="true"><i class="on"></i><i class="on"></i><i></i></span>Medium</span></td><td>Merge queue, smaller batches, review agent tuning. VP Engineering</td><td><span class="mo">Nov 2026</span></td></tr>
+<tr><td>A model upgrade lowers agent quality</td><td><span class="nw"><span class="pp" aria-hidden="true"><i class="on"></i><i class="on"></i><i></i></span>Medium</span></td><td><span class="nw"><span class="pp" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i></span>High</span></td><td>Eval gate on every model change. Agent team lead</td><td><span class="mo">In place</span></td></tr>
+<tr><td>SOC 2 Type II slips again and blocks enterprise deals</td><td><span class="nw"><span class="pp" aria-hidden="true"><i class="on"></i><i></i><i></i></span>Low</span></td><td><span class="nw"><span class="pp" aria-hidden="true"><i class="on"></i><i class="on"></i><i></i></span>Medium</span></td><td>Evidence automation, weekly check. Security lead</td><td><span class="mo">Jan 2027</span></td></tr>
+<tr><td>Head of AI Quality stays open past Q4</td><td><span class="nw"><span class="pp" aria-hidden="true"><i class="on"></i><i class="on"></i><i></i></span>Medium</span></td><td><span class="nw"><span class="pp" aria-hidden="true"><i class="on"></i><i class="on"></i><i></i></span>Medium</span></td><td>Search firm engaged, interim owner named. CPTO</td><td><span class="mo">Dec 2026</span></td></tr>
 </table></div>
-<div class="card" style="margin-top:14px"><h3>The plan assumes</h3><p>Model prices keep falling or hold. Brokers accept per-load pricing. Agent volume grows 20% a quarter. If one fails, slide 16 changes.</p></div>
+<div class="card" style="margin-top:20px"><h3>The plan assumes</h3><p>Model prices keep falling or hold. Brokers accept per-load pricing. Agent volume grows 20% a quarter. If one fails, slide 16 changes.</p></div>
 <div class="foot">
 <div class="asof">Source: risk register, reviewed 2 Oct 2026.</div>
 <div class="guide"><dl>
@@ -761,13 +772,13 @@ body.guides .guide{display:block}
 <h2>Five bets for Q4. Three are promises, one is an experiment and one is a probe.</h2>
 <div class="tablewrap"><table>
 <tr><th>Bet</th><th>Commitment</th><th>Appetite</th><th>Expected result</th><th>Confidence</th><th>We stop if</th></tr>
-<tr><td>Multi-stop reroutes in the agent</td><td>Promise</td><td>6 weeks, 5 engineers</td><td>Task success 86% to 90%</td><td>High</td><td>Evals gain under 2 points by week 3</td></tr>
-<tr><td>TMS integration</td><td>Promise</td><td>6 weeks, 4 engineers</td><td>Integration losses fall from 11 to under 4 a quarter</td><td>High</td><td>Partner API access slips past week 2</td></tr>
-<tr><td>Model routing layer</td><td>Promise</td><td>6 weeks, 4 engineers</td><td>AI gross margin 52% to 56%</td><td>High</td><td>Eval pass rate drops below 90%</td></tr>
-<tr><td>Guided activation</td><td>Experiment</td><td>4 weeks, 3 engineers</td><td>Activation 41% to 48%</td><td>Medium</td><td>Test arm gains under 3 points</td></tr>
-<tr><td>Per-load pricing pilot</td><td>Probe</td><td>8 weeks, 10 customers</td><td>Learn whether accounts expand. Target $0.4M expansion</td><td>Low</td><td>Fewer than 4 of 10 convert</td></tr>
+<tr><td>Multi-stop reroutes in the agent</td><td><span class="chip promise">Promise</span></td><td>6 weeks, 5 engineers</td><td>Task success 86% to 90%</td><td><span class="nw"><span class="pp" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i></span>High</span></td><td>Evals gain under 2 points by week 3</td></tr>
+<tr><td>TMS integration</td><td><span class="chip promise">Promise</span></td><td>6 weeks, 4 engineers</td><td>Integration losses fall from 11 to under 4 a quarter</td><td><span class="nw"><span class="pp" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i></span>High</span></td><td>Partner API access slips past week 2</td></tr>
+<tr><td>Model routing layer</td><td><span class="chip promise">Promise</span></td><td>6 weeks, 4 engineers</td><td>AI gross margin 52% to 56%</td><td><span class="nw"><span class="pp" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i></span>High</span></td><td>Eval pass rate drops below 90%</td></tr>
+<tr><td>Guided activation</td><td><span class="chip experiment">Experiment</span></td><td>4 weeks, 3 engineers</td><td>Activation 41% to 48%</td><td><span class="nw"><span class="pp" aria-hidden="true"><i class="on"></i><i class="on"></i><i></i></span>Medium</span></td><td>Test arm gains under 3 points</td></tr>
+<tr><td>Per-load pricing pilot</td><td>Probe</td><td>8 weeks, 10 customers</td><td>Learn whether accounts expand. Target $0.4M expansion</td><td><span class="nw"><span class="pp" aria-hidden="true"><i class="on"></i><i></i><i></i></span>Low</span></td><td>Fewer than 4 of 10 convert</td></tr>
 </table></div>
-<p class="t2" style="font-size:12.5px;margin:14px 0 0">A promise is a date we give customers. An experiment has a metric and an end. A probe buys learning and may ship nothing.</p>
+<p class="t2" style="font-size:12.5px;margin:18px 0 0">A promise is a date we give customers. An experiment has a metric and an end. A probe buys learning and may ship nothing.</p>
 <div class="foot">
 <div class="asof">Source: bet briefs approved 6 Oct 2026.</div>
 <div class="guide"><dl>
@@ -788,19 +799,19 @@ body.guides .guide{display:block}
 <div class="grid g21">
 <div class="tablewrap"><table>
 <tr><th>Function</th><th class="num">Now</th><th class="num">Plan</th><th>Open</th></tr>
-<tr><td>Engineering</td><td class="num">44</td><td class="num">46</td><td>1 platform, 1 product engineer</td></tr>
-<tr><td>Product management</td><td class="num">5</td><td class="num">5</td><td></td></tr>
-<tr><td>Design</td><td class="num">4</td><td class="num">5</td><td>1 designer</td></tr>
-<tr><td>Data &amp; ML</td><td class="num">4</td><td class="num">5</td><td>Head of AI Quality</td></tr>
-<tr><td>Security &amp; platform operations</td><td class="num">3</td><td class="num">3</td><td></td></tr>
-<tr><td>Total R&amp;D</td><td class="num">60</td><td class="num">64</td><td>4 roles</td></tr>
+<tr><td>Engineering</td><td class="num"><span class="sh"><i style="width:73.3%"></i></span>44</td><td class="num"><span class="sh"><i style="width:71.9%"></i></span>46</td><td>1 platform, 1 product engineer</td></tr>
+<tr><td>Product management</td><td class="num"><span class="sh"><i style="width:8.3%"></i></span>5</td><td class="num"><span class="sh"><i style="width:7.8%"></i></span>5</td><td></td></tr>
+<tr><td>Design</td><td class="num"><span class="sh"><i style="width:6.7%"></i></span>4</td><td class="num"><span class="sh"><i style="width:7.8%"></i></span>5</td><td>1 designer</td></tr>
+<tr><td>Data &amp; ML</td><td class="num"><span class="sh"><i style="width:6.7%"></i></span>4</td><td class="num"><span class="sh"><i style="width:7.8%"></i></span>5</td><td>Head of AI Quality</td></tr>
+<tr><td>Security &amp; platform operations</td><td class="num"><span class="sh"><i style="width:5%"></i></span>3</td><td class="num"><span class="sh"><i style="width:4.7%"></i></span>3</td><td></td></tr>
+<tr><td>Total R&amp;D</td><td class="num"><span class="sh"><i style="width:100%"></i></span>60</td><td class="num"><span class="sh"><i style="width:100%"></i></span>64</td><td>4 roles</td></tr>
 </table></div>
 <div class="card"><h3>How we work now</h3><ul><li>Product managers lead eval error analysis each week.</li>
 <li>Each team owns the tools its agents use.</li>
 <li>Weekly written project updates feed this deck. Nobody builds slides by hand.</li>
 <li>9 engineers per product manager. 1 regretted exit this quarter.</li></ul></div>
 </div>
-<div class="card" style="margin-top:14px"><h3>Help needed</h3><p>Referrals for Head of AI Quality. The profile is a leader who has run evals for a production agent and can work across product and engineering.</p></div>
+<div class="card" style="margin-top:20px"><h3>Help needed</h3><p>Referrals for Head of AI Quality. The profile is a leader who has run evals for a production agent and can work across product and engineering.</p></div>
 <div class="foot">
 <div class="asof">Sources: HR system, hiring tracker. As of 30 Sep 2026.<span class="led">L13</span></div>
 <div class="guide"><dl>
@@ -843,23 +854,23 @@ body.guides .guide{display:block}
 <h2>Every number has a row in the ledger.</h2>
 <div class="tablewrap"><table>
 <tr><th>ID</th><th>Claim</th><th>Source</th><th>Window</th><th>Confidence</th></tr>
-<tr><td class="mono">L01</td><td>ARR $41.2M</td><td>Stripe, Finance close</td><td>30 Sep 2026</td><td>Verified</td></tr>
-<tr><td class="mono">L02</td><td>23.1K no-touch loads per week</td><td>Warehouse query ns_weekly</td><td>Last 4 weeks of Q3</td><td>Verified</td></tr>
-<tr><td class="mono">L03</td><td>9 of 11 commitments shipped</td><td>Linear projects</td><td>Q3 FY26</td><td>Verified</td></tr>
-<tr><td class="mono">L04</td><td>Expansion ARR $1.9M</td><td>CRM, Finance</td><td>Q3 FY26</td><td>Verified</td></tr>
-<tr><td class="mono">L05</td><td>Capacity split by work type</td><td>Linear labels, 94% of issues labelled</td><td>Q3 FY26</td><td>Derived</td></tr>
-<tr><td class="mono">L06</td><td>Inference $612K</td><td>Provider invoices</td><td>Q3 FY26</td><td>Verified</td></tr>
-<tr><td class="mono">L07</td><td>Cost per successful task $0.33</td><td>Billing divided by successful traces</td><td>Sep 2026</td><td>Derived</td></tr>
-<tr><td class="mono">L08</td><td>Eval pass rate 91.3%</td><td>Eval harness v14, 376 of 412</td><td>Run of 28 Sep 2026</td><td>Verified</td></tr>
-<tr><td class="mono">L09</td><td>Review time 13h, cycle time down 18%</td><td>GitHub</td><td>Q3 FY26 against Q3 FY25</td><td>Derived</td></tr>
-<tr><td class="mono">L10</td><td>Win and loss reasons</td><td>CRM notes coded by product ops</td><td>64 deals, Q3 FY26</td><td>Estimated</td></tr>
-<tr><td class="mono">L11</td><td>AI gross margin 52%</td><td>Finance</td><td>Q3 FY26</td><td>Verified</td></tr>
-<tr><td class="mono">L12</td><td>AI tools $685 per engineer per month</td><td>Vendor invoices over 72 engineers</td><td>Q3 FY26</td><td>Derived</td></tr>
-<tr><td class="mono">L13</td><td>Headcount 60 of 64</td><td>HR system</td><td>30 Sep 2026</td><td>Verified</td></tr>
-<tr><td class="mono">L15</td><td>Capacity and ARR by product line</td><td>Linear, Finance ARR by SKU</td><td>Q3 FY26</td><td>Derived</td></tr>
-<tr><td class="mono">L14</td><td>Inference cost by segment</td><td>Not instrumented</td><td></td><td>Unknown</td></tr>
+<tr><td class="mono">L01</td><td>ARR $41.2M</td><td>Stripe, Finance close</td><td><span class="mo">30 Sep 2026</span></td><td><span class="chip verified">Verified</span></td></tr>
+<tr><td class="mono">L02</td><td>23.1K no-touch loads per week</td><td>Warehouse query ns_weekly</td><td><span class="mo">Last 4 weeks of Q3</span></td><td><span class="chip verified">Verified</span></td></tr>
+<tr><td class="mono">L03</td><td>9 of 11 commitments shipped</td><td>Linear projects</td><td><span class="mo">Q3 FY26</span></td><td><span class="chip verified">Verified</span></td></tr>
+<tr><td class="mono">L04</td><td>Expansion ARR $1.9M</td><td>CRM, Finance</td><td><span class="mo">Q3 FY26</span></td><td><span class="chip verified">Verified</span></td></tr>
+<tr><td class="mono">L05</td><td>Capacity split by work type</td><td>Linear labels, 94% of issues labelled</td><td><span class="mo">Q3 FY26</span></td><td><span class="chip derived">Derived</span></td></tr>
+<tr><td class="mono">L06</td><td>Inference $612K</td><td>Provider invoices</td><td><span class="mo">Q3 FY26</span></td><td><span class="chip verified">Verified</span></td></tr>
+<tr><td class="mono">L07</td><td>Cost per successful task $0.33</td><td>Billing divided by successful traces</td><td><span class="mo">Sep 2026</span></td><td><span class="chip derived">Derived</span></td></tr>
+<tr><td class="mono">L08</td><td>Eval pass rate 91.3%</td><td>Eval harness v14, 376 of 412</td><td><span class="mo">Run of 28 Sep 2026</span></td><td><span class="chip verified">Verified</span></td></tr>
+<tr><td class="mono">L09</td><td>Review time 13h, cycle time down 18%</td><td>GitHub</td><td><span class="mo">Q3 FY26 against Q3 FY25</span></td><td><span class="chip derived">Derived</span></td></tr>
+<tr><td class="mono">L10</td><td>Win and loss reasons</td><td>CRM notes coded by product ops</td><td><span class="mo">64 deals, Q3 FY26</span></td><td><span class="chip estimated">Estimated</span></td></tr>
+<tr><td class="mono">L11</td><td>AI gross margin 52%</td><td>Finance</td><td><span class="mo">Q3 FY26</span></td><td><span class="chip verified">Verified</span></td></tr>
+<tr><td class="mono">L12</td><td>AI tools $685 per engineer per month</td><td>Vendor invoices over 72 engineers</td><td><span class="mo">Q3 FY26</span></td><td><span class="chip derived">Derived</span></td></tr>
+<tr><td class="mono">L13</td><td>Headcount 60 of 64</td><td>HR system</td><td><span class="mo">30 Sep 2026</span></td><td><span class="chip verified">Verified</span></td></tr>
+<tr><td class="mono">L15</td><td>Capacity and ARR by product line</td><td>Linear, Finance ARR by SKU</td><td><span class="mo">Q3 FY26</span></td><td><span class="chip derived">Derived</span></td></tr>
+<tr><td class="mono">L14</td><td>Inference cost by segment</td><td>Not instrumented</td><td><span class="mo"></span></td><td><span class="chip unknown">Unknown</span></td></tr>
 </table></div>
-<p class="t2" style="font-size:12.5px;margin:14px 0 0">Product operations keeps the ledger and each metric owner confirms their rows before review.</p>
+<p class="t2" style="font-size:12.5px;margin:18px 0 0">Product operations keeps the ledger and each metric owner confirms their rows before review.</p>
 <div class="foot">
 <div class="guide"><dl>
 <dt>Rule</dt><dd>Verified comes from the system that owns the number. Derived is computed in code. Estimated is supplied by a person. Unknown renders as a "data needed" card and is never filled with prose.</dd>
@@ -876,7 +887,7 @@ body.guides .guide{display:block}
 <tr><td>Board &amp; investors</td><td>1, 5, 9b, 11, 12, 14, 16, 18</td><td>Team-level detail, backlog, tooling. Strategy returns when it changes</td><td>Why now, economics, risk, asks</td><td>Quarterly, sent 5 business days ahead</td></tr>
 <tr><td>All staff</td><td>1, 2, 3, 4, 6, 8, 11, 15, 16, 17</td><td>Margin detail, confidential risks</td><td>Why this problem, how your work connects</td><td>Monthly or quarterly</td></tr>
 </table></div>
-<div class="grid g4" style="margin-top:14px">
+<div class="grid g4" style="margin-top:20px">
 <div class="card"><h3>Weekly</h3><p>Written project updates in your tracker. They are the input.</p></div>
 <div class="card"><h3>Monthly</h3><p>Regenerate the leadership cut and review it.</p></div>
 <div class="card"><h3>Quarterly</h3><p>Board and staff cuts. Reset plan against actual. Review bets.</p></div>
@@ -895,7 +906,7 @@ body.guides .guide{display:block}
 <div><b>Check</b>The rules below run on every slide. One command runs every step up to the sign-off.</div>
 <div><b>Review</b>You see a change list and sign off before the board cut renders.</div>
 </div>
-<div class="grid g2" style="margin-top:14px">
+<div class="grid g2" style="margin-top:20px">
 <div class="card"><h3>Checks that will block a render</h3><ul><li>A figure with no ledger row</li>
 <li>A speed metric with no quality pair</li>
 <li>An AI productivity claim with no baseline and window</li>
@@ -936,8 +947,8 @@ body.guides .guide{display:block}
 <tr><td>Developer survey</td><td>Quarterly survey</td><td>9, 9b, 13</td><td>The developer experience index. Developer sentiment.</td><td>Question, period and score</td></tr>
 <tr><td>HR and hiring</td><td>HR system, Hiring tracker</td><td>17</td><td>Headcount against plan by function, open senior roles and attrition.</td><td>Headcount and plan by function, open roles, exits</td></tr>
 </table></div>
-<p class="t2" style="font-size:12.5px;margin:14px 0 0"><b>Required sources by cut.</b> Leadership 15, Board 11, Staff 8, of 17 in all. The rest improve a slide but don’t block it.</p>
-<p class="t2" style="font-size:12.5px;margin:14px 0 0">Slide 1 rolls up the slides in its own cut and needs nothing new. Slide 9b condenses slides 8, 9, 10 and 13, so the board cut needs their sources too. Turn on template guidance to see what each slide needs.</p>
+<p class="t2" style="font-size:12.5px;margin:18px 0 0"><b>Required sources by cut.</b> Leadership 15, Board 11, Staff 8, of 17 in all. The rest improve a slide but don’t block it.</p>
+<p class="t2" style="font-size:12.5px;margin:18px 0 0">Slide 1 rolls up the slides in its own cut and needs nothing new. Slide 9b condenses slides 8, 9, 10 and 13, so the board cut needs their sources too. Turn on template guidance to see what each slide needs.</p>
 </section>
 <footer class="slide" style="min-height:0;padding-top:28px;padding-bottom:40px;border:0" data-skip>
 <p class="t3" style="font-size:11.5px;margin:0">Made with <a href="https://www.dacard.ai/update">the Product &amp; Technology Leader Report</a> by Dacard, Darren Card's applied AI studio. Free to use and adapt with credit. Harborline and its data are fictional. Benchmarks are quoted with source and date, and survey figures are labelled as such.</p>
