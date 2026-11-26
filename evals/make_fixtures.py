@@ -252,8 +252,8 @@ def incidents() -> Rows:
 
 def evals() -> Rows:
     return [
-        {"version": "v13", "run_at": "2026-06-20", "cases": 500, "passed": 410, "cost_per_task": 0.41},
-        {"version": "v14", "run_at": "2026-09-22", "cases": 500, "passed": 430, "cost_per_task": 0.33},
+        {"version": "v13", "run_at": "2026-06-20", "cases": 500, "passed": 410, "cost_per_task": 0.41, "tasks": 12000, "tasks_unassisted": 7560},
+        {"version": "v14", "run_at": "2026-09-22", "cases": 500, "passed": 430, "cost_per_task": 0.33, "tasks": 18400, "tasks_unassisted": 12880},
     ]
 
 

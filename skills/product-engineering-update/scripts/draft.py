@@ -226,6 +226,7 @@ PLAIN_SUBJECTS = {
     "rd_share": "Research and development spend as a share of revenue",
     "eval_pass_rate": "The share of quality tests the AI feature passes",
     "cost_per_task": "The cost of each task the AI feature completes",
+    "autonomy_rate": "The share of tasks the AI feature finished without a person",
     "ai_tool_cost": "Spend on AI tools for the team",
     "ai_weekly_use": "The share of AI tool licences used each week",
     "dev_experience": "The developer survey score",
@@ -812,11 +813,16 @@ class Draft:
         self.fill("11", outcomes_title(rows), blocks, refs, self.systems("analytics", "billing", "warehouse"))
 
     def ai_in_product(self) -> None:
-        tiles = [described_tile(self.metrics[k]) for k in ("eval_pass_rate", "cost_per_task") if k in self.metrics]
+        # Autonomy shows only beside the eval pass rate, its quality pair.
+        keys = [k for k in ("autonomy_rate", "eval_pass_rate", "cost_per_task") if k in self.metrics]
+        if "eval_pass_rate" not in keys:
+            keys = [k for k in keys if k != "autonomy_rate"]
+        tiles = [described_tile(self.metrics[k]) for k in keys]
         if not tiles:
             return
-        refs = [self.metrics[k]["ledger"] for k in ("eval_pass_rate", "cost_per_task") if k in self.metrics]
-        title = " ".join(c for c in (self.change("eval_pass_rate"), self.change("cost_per_task")) if c)
+        refs = [self.metrics[k]["ledger"] for k in keys]
+        lead = ("autonomy_rate", "eval_pass_rate") if "autonomy_rate" in keys else ("eval_pass_rate", "cost_per_task")
+        title = " ".join(c for c in (self.change(k) for k in lead) if c)
         blocks: list[Json] = [{"type": "tiles", "columns": 3, "items": tiles}]
         # The slide's contract also needs AI revenue against its cost. Nothing computes that yet, so the gap is shown.
         blocks.append({"type": "cards", "columns": 1, "items": [self.gap("AI revenue and cost of revenue, for AI gross margin.")]})

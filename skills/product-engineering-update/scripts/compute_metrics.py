@@ -59,6 +59,7 @@ DEFINITIONS = {
     "rd_share": "Spend on research and development as a share of revenue.",
     "eval_pass_rate": "Share of test cases the AI feature got right, on the named test set.",
     "cost_per_task": "What the AI feature costs to run for each task it completes successfully.",
+    "autonomy_rate": "Share of the tasks the AI feature ran in production that it finished with no person stepping in.",
     "ai_tool_cost": "Spend on AI tools for the team in the period.",
     "ai_weekly_use": "Share of paid AI tool licences used at least once a week.",
     "dev_experience": "Average score from the developer survey.",
@@ -593,6 +594,29 @@ def evals(r: Run) -> None:
     if last["cost_per_task"] is not None:
         prior_cost = before["cost_per_task"] if before else None
         r.metric("cost_per_task", "Cost per successful task", last["cost_per_task"], prior_cost, "$", src, higher_is_better=False)
+    autonomy(r, src, last, before)
+
+
+def unassisted_share(run: Json | None) -> float | None:
+    """Tasks finished with no person stepping in, as a percent of the tasks run. None when the run doesn't count them."""
+    if not run or not run.get("tasks") or run.get("tasks_unassisted") is None:
+        return None
+    if run["tasks_unassisted"] > run["tasks"]:
+        raise SystemExit(
+            f"compute: eval run {run['version']} has more unassisted tasks ({run['tasks_unassisted']:g}) than tasks ({run['tasks']:g}). "
+            "Fix the trace export, then run this again."
+        )
+    return pct(run["tasks_unassisted"], run["tasks"])
+
+
+def autonomy(r: Run, src: Json, last: Json, before: Json | None) -> None:
+    """Autonomy: the share of production tasks the AI feature finished with no person stepping in. It is only
+    computed with the eval pass rate from the same run, its quality pair, so autonomy can't rise unseen while
+    quality falls."""
+    share = unassisted_share(last)
+    if share is None:
+        return
+    r.metric("autonomy_rate", "Tasks finished without a person", share, unassisted_share(before), "%", src)
 
 
 def ai_tools(r: Run) -> None:

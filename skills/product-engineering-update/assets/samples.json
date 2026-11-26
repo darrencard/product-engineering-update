@@ -680,12 +680,17 @@
       {
         "type": "strip",
         "label": "Title",
-        "text": "The share of quality tests the AI feature passes rose from 82% to 86%. The cost of each task the AI feature completes fell from $0.41 to $0.33."
+        "text": "The share of tasks the AI feature finished without a person rose from 63% to 70%. The share of quality tests the AI feature passes rose from 82% to 86%."
       },
       {
         "type": "tiles",
         "columns": 3,
         "items": [
+          {
+            "value": "70%",
+            "label": "Tasks finished without a person",
+            "note": "Share of the tasks the AI feature ran in production that it finished with no person stepping in."
+          },
           {
             "value": "86%",
             "label": "Eval pass rate (v14)",

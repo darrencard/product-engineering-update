@@ -4,7 +4,7 @@ description: The Product & Technology Leader Report. Builds a product and engine
 license: MIT for the scripts, CC BY 4.0 for the instructions, references and template. See LICENSE and LICENSE-CONTENT.md in the repository root.
 metadata:
   author: Dacard
-  version: "0.10.0"
+  version: "0.11.0"
 ---
 
 # Product & Technology Leader Report
