@@ -40,7 +40,7 @@ Table = tuple[list[Json], list[Any]]
 GRID = {"2": "g2", "3": "g3", "4": "g4", "2:1": "g21"}
 NOTE_STYLE = ' style="font-size:12.5px;margin:18px 0 0"'
 # The space above a paragraph, in px, by what comes before it in a card.
-PARAGRAPH_GAP = {"pv": 14, "table": 12, "p": 10}
+PARAGRAPH_GAP = {"pv": 20, "table": 16, "p": 10}
 LEDGER_FIELDS = ("id", "claim", "value", "unit", "source_system", "query_or_url", "window", "retrieved_at", "confidence", "owner", "stale")
 # A spreadsheet runs a cell that starts with one of these as a formula, so a ledger claim could run code
 # on the reader's machine. A leading apostrophe makes the cell plain text.
