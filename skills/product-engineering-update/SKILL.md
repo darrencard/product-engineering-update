@@ -242,6 +242,7 @@ Leave out the user's company data, figures and document text: name the field or 
 ## Reference files
 
 - [references/writing-rules.md](references/writing-rules.md): titles, status words, banned claims.
+- [references/design.md](references/design.md): how the report looks, and which data gets which chart.
 - [references/audience-cuts.md](references/audience-cuts.md): what each cut includes and leaves out, and the cadence.
 - [references/metrics-glossary.md](references/metrics-glossary.md): every computed metric, its formula and its quality pair.
 - [references/sources.md](references/sources.md): each source, the columns it needs and the slides it feeds.
