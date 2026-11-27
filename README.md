@@ -52,6 +52,7 @@ Results so far come from synthetic test companies and one real repository, not a
 - **Linear projects, initiatives and customer requests.** `from_linear.py` turns them into commitments and stated targets (for you to confirm), line of sight, and counted customer requests.
 - **Write back.** `summary.py` writes a Markdown summary with ledger IDs, to post to Linear after a yes. It refuses the board cut without a named sign-off.
 - **A weekly draft.** `references/weekly-rhythm.md` sets the update up as a scheduled job that drafts the Leadership and Staff cuts each week and never renders or posts the board cut.
+- **One owner for each project's status.** When a project has a project file from the Landing Loop (`landing/<name>.json`), the outcome scorecard prints the landed, watch or stalled status that did-it-land wrote there, and names did-it-land as the source. Without one, the report works the status out by did-it-land's rule (the target met, a target date set before the work, a move outside the metric's normal ups and downs) and says so under the scorecard.
 - **A landing brief kit for Linear.** `skills/landing-brief/` is a free project template (problem, definition of good, non-goals, cost budget, the line) and a script that drafts a landed, watch or stalled project update from it.
 
 ## Documentation
@@ -171,7 +172,7 @@ The scenarios in `evals/scenarios/` describe how the skill should behave under p
 
 ## Status
 
-Version 0.11.0. The scripts pass 174 tests. Fresh model sessions ran version 0.1.0 on the bundled fixtures 6 times, across two model sizes, under pressure to overclaim, invent figures and pick the better-looking of two conflicting numbers; each held the line. Versions 0.2.0 and 0.3.0 have run on one real repository's GitHub and Vercel history. The Linear converter is tested on Linear's real response shape but not on a workspace with completed issues, and the PostHog converter only on fixtures of PostHog's documented responses. The Linear projects, project updates, initiatives and customer requests readers (0.4.0) are tested only on fixtures built from Linear's documented fields. It has not yet been run on a real company's full data. See CHANGELOG.md.
+Version 0.11.1. The scripts pass 208 tests. Fresh model sessions ran version 0.1.0 on the bundled fixtures 6 times, across two model sizes, under pressure to overclaim, invent figures and pick the better-looking of two conflicting numbers; each held the line. Versions 0.2.0 and 0.3.0 have run on one real repository's GitHub and Vercel history. The Linear converter is tested on Linear's real response shape but not on a workspace with completed issues, and the PostHog converter only on fixtures of PostHog's documented responses. The Linear projects, project updates, initiatives and customer requests readers (0.4.0) are tested only on fixtures built from Linear's documented fields. It has not yet been run on a real company's full data. See CHANGELOG.md.
 
 Not built: an export to Slides or PowerPoint. The deck is one HTML file: present it in a browser or print it to PDF.
 

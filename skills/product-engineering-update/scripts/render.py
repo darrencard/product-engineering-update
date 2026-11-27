@@ -208,7 +208,9 @@ def parse_figure(text: str) -> tuple[float, str, str] | None:
 
 
 def bullet(r: Json) -> str:
-    """Prior, actual and the target or healthy range on one line, as the site's scorecard draws them. Drawn only when all three are figures in one unit."""
+    """Prior, actual and the target on one line, as the site's scorecard draws them: a grey dot for prior, a status dot for actual and
+    a target tick, with no coloured band (green, grey-white and red are for the status word only). Drawn only when all three are
+    figures in one unit. For a healthy range such as "under 40h", the tick marks its edge."""
     prior, actual, target = (parse_figure(r.get(k, "")) for k in ("prior", "actual", "target"))
     if not (prior and actual and target) or len({prior[1], actual[1], target[1]}) != 1:
         return ""
@@ -217,18 +219,10 @@ def bullet(r: Json) -> str:
     def x(v: float) -> float:
         return r1(max(0.0, min(v / top, 1)) * 100)
 
-    t, direction = x(target[0]), target[2]
-    band = (
-        f'<i class="ok" style="left:0;width:{num(t)}%"></i>'
-        if direction == "under"
-        else f'<i class="ok" style="left:{num(t)}%;right:0"></i>'
-        if direction == "over"
-        else ""
-    )
-    goal = "" if direction else f'<i class="goal" style="left:{num(t)}%"></i>'
+    goal = f'<i class="goal" style="left:{num(x(target[0]))}%"></i>'
     lo, hi = sorted((x(prior[0]), x(actual[0])))
     return (
-        f'<span class="bl" aria-hidden="true"><i class="tr"></i>{band}{goal}<i class="mv" style="left:{num(lo)}%;width:{num(r1(hi - lo))}%"></i>'
+        f'<span class="bl" aria-hidden="true"><i class="tr"></i>{goal}<i class="mv" style="left:{num(lo)}%;width:{num(r1(hi - lo))}%"></i>'
         f'<i class="pr" style="left:{num(x(prior[0]))}%"></i><i class="ac {esc(r["status"])}" style="left:{num(x(actual[0]))}%"></i></span>'
     )
 

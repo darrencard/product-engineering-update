@@ -167,7 +167,9 @@ class Pace(unittest.TestCase):
         self.assertEqual(card["labels"]["extra"], ["Benchmark", "Owner"])
         self.assertNotIn("Projected", json.dumps(card))
         note = next(i for b in s11["blocks"] for i in b.get("items", []) if i.get("title") == "At this pace (Projected)")
-        missed = [r["metric"] for r in card["rows"] if "metric" in r and r["status"] != "landed"]
+        # A pace line is for an outcome short of its target, whatever its status word (a met target can still read watch).
+        short = {"Loads cleared per week": False, "Activation": True, "Weekly active dispatchers": False}
+        missed = [r["metric"] for r in card["rows"] if "metric" in r and short[r["metric"]]]
         self.assertEqual([line.split(":")[0] for line in note["body"][0]["list"]], missed)
         self.assertIn("never a result", note["body"][1])
 

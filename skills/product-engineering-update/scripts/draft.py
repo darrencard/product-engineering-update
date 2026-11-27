@@ -2,13 +2,19 @@
 """Draft the deck from the intake and the computed metrics.
 
 Usage:
-  python3 scripts/draft.py --run run [--previous last/deck.json]
+  python3 scripts/draft.py --run run [--previous last/deck.json] [--landing landing]
 
 Reads run/intake.json and run/metrics.json, starts from assets/blank.deck.json
 and writes run/deck.json. With --previous, slide 1 lists what changed since that
 deck: each status that moved, each target that moved, and each metric added or
 dropped. A status that moved needs a reason in the intake's status_reasons, or
 the validator blocks the deck.
+
+Status words on the outcome scorecard have one owner, did-it-land. An outcome
+that names its project ("bet": "<name>") and has a project file,
+landing/<name>.json with a landed key, prints that file's landed.status. Every
+other outcome's status is computed here by did-it-land's rule (loop_status),
+and a note under the scorecard says which is which.
 
 What it does, and what it leaves to you:
   - A slide with computed data gets its blocks, its ledger references and a
@@ -20,7 +26,7 @@ What it does, and what it leaves to you:
 
 Every figure placed on a slide comes from metrics.json with its ledger row.
 This script does no arithmetic of its own beyond comparing a value to its
-target to choose a status word, and projecting this period's change forward to
+target and to its readings before the work to choose a status word, and projecting this period's change forward to
 the target, which prints as Projected and never as a result.
 
 Standard library only. Runs on Python 3.9 or later.
@@ -165,6 +171,109 @@ def status_for(value: float, prior: float | None, target: float | None, higher_i
     return "watch" if improving else "stalled"
 
 
+# did-it-land's noise rule (its checks.py): a level less than this many standard deviations from the mean of the
+# readings before the work is inside normal ups and downs. Fewer readings than MIN_BASELINE give no range to judge by.
+LEVEL_Z = 2.0
+MIN_BASELINE = 3
+STATUSES = ("landed", "watch", "stalled")
+# The one record format the Landing Loop shares (landing-loop-contract): landing/<project>.json, one file per project.
+RECORD_SCHEMA = "landing-loop/1"
+SLUG = re.compile(r"[a-z0-9][a-z0-9-]{0,79}")
+
+
+def outside_normal(value: float, baseline: list[float]) -> bool | None:
+    """Whether a value sits outside the range the metric held before the work: did-it-land's level test.
+    None with fewer than MIN_BASELINE readings. A flat baseline counts any change as outside it."""
+    if len(baseline) < MIN_BASELINE:
+        return None
+    mean = sum(baseline) / len(baseline)
+    sd = math.sqrt(sum((v - mean) ** 2 for v in baseline) / (len(baseline) - 1))
+    if sd == 0:
+        return value != mean
+    return abs(value - mean) / sd >= LEVEL_Z
+
+
+def iso_date(text: object) -> datetime.date | None:
+    try:
+        return datetime.date.fromisoformat(str(text))
+    except ValueError:
+        return None
+
+
+def loop_status(value: float, prior: float | None, target: float | None, higher_is_better: bool, want: Json, as_of: str) -> str:
+    """An outcome's status when no project file has a did-it-land read, by did-it-land's rule.
+
+    The base call: landed when the target is met; stalled when the target's date has passed and it is not met;
+    otherwise status_for (watch when moving the right way, stalled when flat or moving the wrong way). A landed call
+    is held to watch unless the target has a date (by), was not set after the work started (set_on after started),
+    and the value sits outside the normal ups and downs of the readings before the work (baseline)."""
+    if target is None:
+        return "watch"
+    by, today = iso_date(want.get("by")), iso_date(as_of)
+    met = value >= target if higher_is_better else value <= target
+    if not met:
+        if by and today and today > by:
+            return "stalled"
+        return status_for(value, prior, target, higher_is_better)
+    set_on, started = iso_date(want.get("set_on")), iso_date(want.get("started"))
+    baseline = [float(v) for v in want.get("baseline") or [] if isinstance(v, (int, float)) and not isinstance(v, bool)]
+    if not by or (set_on and started and set_on > started) or not outside_normal(value, baseline):
+        return "watch"
+    return "landed"
+
+
+def met_target(value: float, target: object, higher_is_better: bool) -> bool:
+    """Whether a value meets its target. A title says "reached" on this, never on the status word."""
+    if not isinstance(target, (int, float)) or isinstance(target, bool):
+        return False
+    return value >= target if higher_is_better else value <= target
+
+
+def landing_record(folder: Path, bet: object) -> Json | None:
+    """A project's did-it-land read from its Landing Loop record, landing/<bet>.json. None when there is no file, or
+    the file has no landed key yet. A file that is there and unreadable stops the draft: it is never read around."""
+    if not isinstance(bet, str) or not SLUG.fullmatch(bet):
+        raise SystemExit(
+            f"draft: an outcome names the project {bet!r}. Write the project file's name in lower case, digits and hyphens, as in landing/<name>.json."
+        )
+    path = folder / f"{bet}.json"
+    if not path.exists():
+        return None
+    try:
+        record = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, UnicodeDecodeError, json.JSONDecodeError) as e:
+        raise SystemExit(f"draft: cannot read the project file {path} ({e}). Fix it or move it out of the folder, then draft again.") from None
+    if not isinstance(record, dict) or record.get("schema") != RECORD_SCHEMA or record.get("bet") != bet:
+        raise SystemExit(f'draft: {path} is not a Landing Loop project file for "{bet}". It needs "schema": "{RECORD_SCHEMA}" and "bet": "{bet}".')
+    landed = record.get("landed")
+    if landed is None:
+        return None
+    if not isinstance(landed, dict) or landed.get("status") not in STATUSES:
+        raise SystemExit(f"draft: {path} has a landed key without a status of landed, watch or stalled. Run did-it-land again; never write the status by hand.")
+    return landed
+
+
+def status_note(from_record: list[tuple[str, str]], computed: list[str]) -> str:
+    """The line under the outcome scorecard that says who set each status word."""
+    parts = []
+    if from_record:
+        files = ", ".join(f"landing/{bet}.json" for _, bet in from_record)
+        names = ", ".join(name for name, _ in from_record)
+        which = f"Status for {names}" if computed else "Status"
+        parts.append(f"{which}: set by did-it-land, read from the project {'file' if len(from_record) == 1 else 'files'} {files}.")
+    if computed:
+        which = "Status for the rest" if from_record else "Status"
+        parts.append(f"{which}: {COMPUTED_NOTE}")
+    return " ".join(parts)
+
+
+# Printed under an outcome scorecard whose status words this report computed. The Harborline example carries it too.
+COMPUTED_NOTE = (
+    "computed by this report, as no project file has a did-it-land read. It uses did-it-land's rule: landed needs the target met, "
+    "a target date set before the work, and a move outside the metric's normal ups and downs before the work. Without all three it never reads landed."
+)
+
+
 def pace(value: float, prior: float | None, target: float | None, higher_is_better: bool, by: str | None, period: Json) -> str:
     """Where this period's change, repeated, takes a metric: Projected, in periods, and against the target date when
     one was stated. A straight line from one period is a rough guide, so the column says Projected and never Met."""
@@ -252,10 +361,13 @@ def plain_work_type(label: str) -> str:
     return PLAIN_WORK_TYPES.get(label.strip().lower(), label)
 
 
-def outcomes_title(rows: list[Json]) -> str:
-    """Slide 11's title. One outcome is named with its number and target, never counted as "all 1" or "none of the 1"."""
-    landed = [r for r in rows if r["status"] == "landed"]
-    missed = [r for r in rows if r["status"] != "landed"]
+def outcomes_title(rows: list[Json], met: list[bool] | None = None) -> str:
+    """Slide 11's title. One outcome is named with its number and target, never counted as "all 1" or "none of the 1".
+    met says which rows reached their target; without it, a landed row counts as met. A row can meet its target and
+    still read watch (the date or the normal ups and downs are not shown), so the draft passes met."""
+    hits = met if met is not None else [r["status"] == "landed" for r in rows]
+    landed = [r for r, hit in zip(rows, hits) if hit]
+    missed = [r for r, hit in zip(rows, hits) if not hit]
     if not rows:
         return "Outcomes are not reported this period. The sources disagree or are missing."
     if landed and missed:
@@ -275,8 +387,10 @@ def outcomes_title(rows: list[Json]) -> str:
 
 
 class Draft:
-    def __init__(self, run: Path, previous: Path | None = None) -> None:
+    def __init__(self, run: Path, previous: Path | None = None, landing: Path | None = None) -> None:
         self.intake = load(run / "intake.json")
+        # The Landing Loop's project files, landing/<project>.json, in the working folder beside the run.
+        self.landing = landing if landing is not None else run.parent / "landing"
         problems = intake_mod.missing_item_keys(self.intake)
         if problems:
             raise SystemExit(f"draft: the intake has items with nothing to print: {'; '.join(problems)}. Fill them in, run intake.py check, then draft again.")
@@ -749,6 +863,9 @@ class Draft:
         refs: list[str] = []
         gaps: list[str] = []
         paces: list[str] = []
+        met: list[bool] = []
+        from_record: list[tuple[str, str]] = []
+        computed: list[str] = []
         for want in wanted:
             name = want.get("metric")
             if not name:
@@ -770,6 +887,15 @@ class Draft:
             )
             if projected not in ("Met", "No target"):
                 paces.append(f"{name}: {lower_first(projected.removeprefix('Projected: '))}.")
+            # One owner for status: did-it-land's read when the project file has one, else did-it-land's rule here.
+            record = landing_record(self.landing, want["bet"]) if want.get("bet") else None
+            if record:
+                status = record["status"]
+                from_record.append((name, want["bet"]))
+            else:
+                status = loop_status(metric["value"], metric["prior"], target if isinstance(target, (int, float)) else None, better, want, self.intake["as_of"])
+                computed.append(name)
+            met.append(met_target(metric["value"], target, better))
             rows.append(
                 described(
                     {
@@ -777,7 +903,7 @@ class Draft:
                         "prior": metric["prior_display"] or "No prior",
                         "actual": metric["display"],
                         "target": want.get("target_display") or (f"{target:g}{unit}" if isinstance(target, (int, float)) else (target or "Not set")),
-                        "status": status_for(metric["value"], metric["prior"], target if isinstance(target, (int, float)) else None, better),
+                        "status": status,
                         "extra": ["None external", want.get("owner") or "Owner not stated"],
                     },
                     want.get("definition") or metric.get("definition"),
@@ -803,6 +929,7 @@ class Draft:
                     "rows": rows,
                 }
             )
+            blocks.append({"type": "text", "variant": "note", "text": status_note(from_record, computed)})
         if paces:
             # Under the table, never in it: a projection sits apart from the actual and the status, and an eighth
             # column would push the scorecard into a sideways scroll on a laptop screen.
@@ -810,7 +937,7 @@ class Draft:
             blocks.append({"type": "cards", "columns": 1, "items": [{"title": "At this pace (Projected)", "body": [{"list": paces}, note]}]})
         if gaps:
             blocks.append({"type": "cards", "columns": 1, "items": [self.gap(" ".join(gaps))]})
-        self.fill("11", outcomes_title(rows), blocks, refs, self.systems("analytics", "billing", "warehouse"))
+        self.fill("11", outcomes_title(rows, met), blocks, refs, self.systems("analytics", "billing", "warehouse"))
 
     def ai_in_product(self) -> None:
         # Autonomy shows only beside the eval pass rate, its quality pair.
@@ -1224,6 +1351,7 @@ def main() -> int:
     ap = argparse.ArgumentParser(description="Draft the deck from the intake and the computed metrics.")
     ap.add_argument("--run", default="run")
     ap.add_argument("--previous", help="the last update's deck.json, to list what changed since it")
+    ap.add_argument("--landing", help="the folder of Landing Loop project files (landing/<project>.json); default: landing beside the run folder")
     args = ap.parse_args()
     run = Path(args.run)
     previous = Path(args.previous) if args.previous else None
@@ -1232,7 +1360,7 @@ def main() -> int:
     for name in ("intake.json", "metrics.json"):
         if not (run / name).exists():
             raise SystemExit(f"draft: {run / name} is missing. Run intake.py, collect.py and compute_metrics.py first.")
-    draft = Draft(run, previous)
+    draft = Draft(run, previous, Path(args.landing) if args.landing else None)
     deck = draft.build()
     out = run / "deck.json"
     out.write_text(json.dumps(deck, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")

@@ -4,7 +4,7 @@ description: The Product & Technology Leader Report. Builds a product and engine
 license: MIT for the scripts, CC BY 4.0 for the instructions, references and template. See LICENSE and LICENSE-CONTENT.md in the repository root.
 metadata:
   author: Dacard
-  version: "0.11.0"
+  version: "0.11.1"
 ---
 
 # Product & Technology Leader Report
@@ -73,7 +73,7 @@ Draft only what a document says. A field no document covers stays for the interv
 1. Company, period (label, start and end dates), the as-of date, the audience, and who owns gaps and by when.
 2. Objectives and targets. Strategy: diagnosis, guiding policy, actions and non-goals.
 3. Product lines and their stage. The investment plan as percent of capacity by work type.
-4. The North Star and its input metrics, each with a target, an owner and a one-sentence definition in plain English (what it counts, for a reader outside the team). Healthy ranges for delivery metrics.
+4. The North Star and its input metrics, each with a target, an owner and a one-sentence definition in plain English (what it counts, for a reader outside the team). For each target, its date, when it was set, when the work started, and at least three readings from before the work: without them an outcome never reads landed (see "Who sets the status" below). Healthy ranges for delivery metrics.
 5. AI features in production and their eval sets. An empty list means none.
 6. Bets (each needs appetite, confidence, a stop rule, an objective and a cause), risks, what was stopped, and the decisions needed.
 7. Which systems have data, and whether a connector or a CSV export will supply each.
@@ -147,6 +147,8 @@ If a figure you need is missing, the data is missing: say so in the gap list, or
 **The capitalisable estimate (slide 5).** If finance says which work types it treats as capitalisable and which cost lines the share applies to, record them in `capitalisation` (`work_types`, `cost_lines`, and `confirmed_by` once finance has checked it). The slide shows the estimate beside the spend, labelled an estimate for finance to confirm. Never pick the work types yourself: what may be capitalised is the company's accounting policy.
 
 **The pace to each target (slide 11).** The "At this pace (Projected)" note under the outcome scorecard repeats this period's change until the target is reached and, when the target has a date (`by`), says whether that lands before or after it. It prints as Projected. Never quote it as a result or a forecast the team committed to.
+
+**Who sets the status (slide 11).** Only did-it-land sets landed, watch or stalled for a project. When an outcome belongs to a project that has a project file (`landing/<name>.json` in the working folder, with a `landed` key that did-it-land wrote), name the project on that outcome in the intake (`"bet": "<name>"`). The scorecard then prints the file's status as it stands, and the note under it names did-it-land and the file. Pass `--landing <folder>` if the files are not in `landing/` beside the run folder. With no project file, the draft works the status out with did-it-land's rule and the note says so: landed needs the target met, a target date (`by`) set before the work (`set_on` no later than `started`), and a move outside the metric's normal ups and downs before the work (`baseline`, at least three readings). Without all three it reads watch at most; past the date and short of the target, stalled. Never write a status word yourself, and never edit a project file to change one: run did-it-land again.
 
 Slide IDs in the files are `00` (cover), `01` to `18`, `09b` (the board's delivery slide) and `A` to `D` (appendices). The template has 19 core slides; no single cut shows more than 18. When slide 1 is drafted, slides with no data are dropped and their gaps are listed on slide 1 with owners and dates.
 

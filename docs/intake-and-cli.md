@@ -117,7 +117,11 @@ Slide 4 also needs tracker data with product lines and work types. The capitalis
 | `north_star.target_display` | string | Optional | The target as printed. Without it, the number plus `unit` | `"22K"` |
 | `north_star.unit` | string | Optional | Unit for an analytics metric and for the printed target. Defaults to `count` in `compute_metrics.py` | `"%"` |
 | `north_star.higher_is_better` | boolean | Optional, default `true` | Direction for status, projection and slide 8 "Moved" | `true` |
-| `north_star.by` | string, `YYYY-MM-DD` | Optional | The "At this pace" note says whether the projection lands before or after this date. Ignored if not a date | `"2026-12-31"` |
+| `north_star.by` | string, `YYYY-MM-DD` | Optional | The target's date. The "At this pace" note says whether the projection lands before or after it. The status rule needs it for landed, and reads stalled once it has passed short of the target. Ignored if not a date | `"2026-12-31"` |
+| `north_star.set_on` | string, `YYYY-MM-DD` | Optional | When the target was set. Later than `started`, the outcome never reads landed: a target set after the work started is not a test | `"2026-06-15"` |
+| `north_star.started` | string, `YYYY-MM-DD` | Optional | When the work started | `"2026-07-01"` |
+| `north_star.baseline` | list of numbers | Optional | At least three readings from before the work. Landed needs the value 2 standard deviations or more from their mean (outside the metric's normal ups and downs), did-it-land's rule. Without them, a met target reads watch | `[17400, 18100, 18400]` |
+| `north_star.bet` | string | Optional | The project's file name in the Landing Loop. When `landing/<bet>.json` has a `landed` key, its status is printed and named as did-it-land's, instead of computing one. Lower case, digits and hyphens | `"quote-drafting"` |
 | `north_star.owner` | string | Optional | Slide 11 "Owner" column. Falls back to "Owner not stated" | `"Agent team"` |
 | `inputs[].metric` | string | Optional (an empty list is Unknown for slide 11) | Slide 11 row | `"Activation"` |
 | `inputs[].definition` | string | Optional | As `north_star.definition`. `intake.py check` lists each input without one | `"Accounts with a first automated load inside 14 days"` |
@@ -458,6 +462,7 @@ Drafts `run/deck.json` from `run/intake.json` and `run/metrics.json`, starting f
 |---|---|---|---|
 | `--run` | path | `run` | The run folder |
 | `--previous` | path | none | The last update's `deck.json`. Slide 1 then lists each status that moved, each target that moved, and each metric added or dropped |
+| `--landing` | path | `landing` beside the run folder | The folder of Landing Loop project files, `<bet>.json`. An outcome that names its project prints the file's `landed.status`; the rest are computed by did-it-land's rule. A note under the slide 11 scorecard says which |
 
 ```sh
 python3 scripts/draft.py --run run --previous last-quarter/deck.json

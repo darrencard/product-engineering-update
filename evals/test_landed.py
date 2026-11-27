@@ -11,6 +11,7 @@ Groups:
   CustomerSignal   slides 6 and 7 from customer requests, counted in code and linked.
   LandingBrief     the landing-brief skill: parsing, refusals and the status rule.
   WriteBack        summary.py: a postable summary, and no board cut without a named sign-off.
+  OneStatusOwner   slide 11 prints did-it-land's status from a project file, or computes one by its rule and says so.
 
 Standard library only. Runs on Python 3.9 or later.
 """
@@ -1020,6 +1021,122 @@ class LeadTimeStandIn(unittest.TestCase):
         self.assertNotEqual(merge["status"], "landed")
         self.assertNotIn('"Lead time for change"', json.dumps(deck["slides"]))
         self.assertEqual(validate.check(deck)["errors"], [])
+
+
+class OneStatusOwner(unittest.TestCase):
+    """Only did-it-land sets landed, watch or stalled. With a project file the report prints that file's landed.status;
+    without one it computes the status by did-it-land's rule and says so under the scorecard (0.11.1)."""
+
+    work: Path
+    folder: Path
+
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.work = Path(tempfile.mkdtemp())
+        run_fixture("complete", cls.work)
+        cls.folder = cls.work / "complete"
+        cls.intake = json.loads((cls.folder / "intake.json").read_text(encoding="utf-8"))
+
+    @classmethod
+    def tearDownClass(cls) -> None:
+        shutil.rmtree(cls.work)
+
+    def setUp(self) -> None:
+        (self.folder / "intake.json").write_text(json.dumps(self.intake), encoding="utf-8")
+        shutil.rmtree(self.work / "landing", ignore_errors=True)
+
+    def name_project(self, bet: str) -> None:
+        intake = copy.deepcopy(self.intake)
+        intake["north_star"]["bet"] = bet
+        (self.folder / "intake.json").write_text(json.dumps(intake), encoding="utf-8")
+
+    def record(self, bet: str, body: Json) -> None:
+        folder = self.work / "landing"
+        folder.mkdir(exist_ok=True)
+        (folder / f"{bet}.json").write_text(json.dumps(body), encoding="utf-8")
+
+    def drafted(self) -> tuple[Json, dict[str, str], str]:
+        done = script("draft.py", "--run", str(self.folder))
+        self.assertEqual(done.returncode, 0, done.stderr)
+        deck = json.loads((self.folder / "deck.json").read_text(encoding="utf-8"))
+        s11 = slide(deck, "11")
+        card = next(b for b in s11["blocks"] if b["type"] == "scorecard")
+        note = next(b["text"] for b in s11["blocks"] if b["type"] == "text" and b["variant"] == "note")
+        return deck, {r["metric"]: r["status"] for r in card["rows"] if "metric" in r}, note
+
+    def test_with_no_project_file_the_status_is_computed_by_did_it_lands_rule_and_says_so(self) -> None:
+        deck, rows, note = self.drafted()
+        # Dated, set before the work and well outside its baseline: landed. Met with no date or baseline: held to watch.
+        self.assertEqual(rows, {"Loads cleared per week": "landed", "Activation": "watch", "Weekly active dispatchers": "watch"})
+        self.assertTrue(note.startswith("Status: computed by this report, as no project file has a did-it-land read."), note)
+        self.assertIn("normal ups and downs", note)
+        self.assertNotIn("set by did-it-land", note)
+        # The title says "reached" on the target, never on the status word.
+        self.assertIn("Loads cleared per week reached 23.1K", slide(deck, "11")["title"])
+        self.assertEqual(validate.check(deck)["errors"], [])
+
+    def test_a_project_file_sets_the_status_and_is_named_as_the_source(self) -> None:
+        self.name_project("loads-cleared")
+        self.record("loads-cleared", {"schema": "landing-loop/1", "bet": "loads-cleared", "landed": {"status": "stalled", "computed_by": "did-it-land"}})
+        deck, rows, note = self.drafted()
+        self.assertEqual(rows["Loads cleared per week"], "stalled", "the record's word wins over the report's own landed")
+        self.assertEqual(rows["Weekly active dispatchers"], "watch")
+        self.assertIn("Status for Loads cleared per week: set by did-it-land, read from the project file landing/loads-cleared.json.", note)
+        self.assertIn("Status for the rest: computed by this report", note)
+        html = render.render_deck(deck)
+        self.assertIn("landing/loads-cleared.json", html)
+        self.assertEqual(validate.check(deck)["errors"], [])
+
+    def test_every_status_from_project_files_drops_the_computed_line(self) -> None:
+        note = draft.status_note([("A", "a"), ("B", "b")], [])
+        self.assertEqual(note, "Status: set by did-it-land, read from the project files landing/a.json, landing/b.json.")
+
+    def test_a_project_file_with_no_read_yet_falls_back_to_the_rule(self) -> None:
+        self.name_project("loads-cleared")
+        self.record("loads-cleared", {"schema": "landing-loop/1", "bet": "loads-cleared", "cost": {}})
+        _, rows, note = self.drafted()
+        self.assertEqual(rows["Loads cleared per week"], "landed")
+        self.assertTrue(note.startswith("Status: computed by this report"), note)
+
+    def test_a_bad_project_file_stops_the_draft(self) -> None:
+        self.name_project("loads-cleared")
+        for body in (
+            {"schema": "landing-loop/1", "bet": "loads-cleared", "landed": {"status": "on track"}},
+            {"schema": "landing-loop/1", "bet": "another-project", "landed": {"status": "landed"}},
+            {"bet": "loads-cleared", "landed": {"status": "landed"}},
+        ):
+            with self.subTest(body=body):
+                self.record("loads-cleared", body)
+                done = script("draft.py", "--run", str(self.folder))
+                self.assertNotEqual(done.returncode, 0)
+                self.assertIn("landing/loads-cleared.json", done.stderr)
+        self.name_project("../intake")
+        done = script("draft.py", "--run", str(self.folder))
+        self.assertNotEqual(done.returncode, 0)
+        self.assertIn("lower case, digits and hyphens", done.stderr)
+
+    def test_the_rule_needs_a_dated_target_set_before_the_work_and_a_move_outside_normal_ups_and_downs(self) -> None:
+        good = {"by": "2026-09-30", "set_on": "2026-06-01", "started": "2026-07-01", "baseline": [40, 41, 42]}
+
+        def status(value: float, prior: float | None = 41, as_of: str = "2026-09-15", better: bool = True, **change: Any) -> str:
+            return draft.loop_status(value, prior, 45, better, {**good, **change}, as_of)
+
+        self.assertEqual(status(46), "landed")
+        self.assertEqual(status(46, by=None), "watch", "no date for the target")
+        self.assertEqual(status(46, set_on="2026-08-01"), "watch", "the target was set after the work started")
+        self.assertEqual(status(46, baseline=[30, 40, 50]), "watch", "inside normal ups and downs")
+        self.assertEqual(status(46, baseline=[44, 45]), "watch", "too few readings before the work")
+        self.assertEqual(status(46, baseline=[41, 41, 41]), "landed", "a flat baseline counts any change")
+        self.assertEqual(status(44, prior=42), "watch", "short, moving the right way, date not passed")
+        self.assertEqual(status(44, prior=42, as_of="2026-10-01"), "stalled", "the date passed short of the target")
+        self.assertEqual(status(41, prior=42), "stalled", "short and moving the wrong way")
+        self.assertEqual(draft.loop_status(46, 41, None, True, good, "2026-09-15"), "watch", "no target")
+        self.assertEqual(draft.loop_status(30, 40, 35, False, {**good, "baseline": [40, 41, 39]}, "2026-09-15"), "landed", "lower is better")
+
+    def test_a_met_target_with_no_date_reads_watch_and_the_title_still_says_reached(self) -> None:
+        row = {"metric": "Unique cloners", "prior": "10", "actual": "30", "target": "25", "status": "watch"}
+        self.assertEqual(draft.outcomes_title([row], [True]), "Unique cloners reached 30, against a target of 25.")
+        self.assertEqual(draft.outcomes_title([row]), "Unique cloners is at 30, short of its target of 25.")
 
 
 if __name__ == "__main__":
