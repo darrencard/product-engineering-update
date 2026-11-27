@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.11.1 (2026-11-27)
+
+- **One owner for status.** Only did-it-land sets landed, watch or stalled for a project. An outcome in the intake can name its project (`"bet": "<name>"`). When the project file `landing/<name>.json` has a `landed` key, the outcome scorecard prints its status as it stands, and a note under the scorecard names did-it-land and the file. `draft.py --landing <folder>` points at the files; the default is `landing/` beside the run folder. A project file that is there but unreadable, for another project or with a status outside the three words stops the draft.
+- **Without a project file, did-it-land's rule.** The report still computes the status, now by the same rule did-it-land uses, and says so under the scorecard: landed needs the target met, a target date (`by`) set before the work (`set_on` no later than `started`), and a move outside the metric's normal ups and downs before the work (`baseline`, at least three readings, 2 standard deviations). A met target without those reads watch. Past its date and short, an outcome reads stalled. The slide title still says "reached" when the target is met.
+- **No coloured band on the range line.** A scorecard row now draws a grey dot for prior, a status dot for actual and a target tick, with the tick at the edge of a healthy range. Green, grey-white and red stay for the status word only (`references/design.md`). Nothing else on the page changes.
+- Examples: Harborline's outcome scorecard carries the note that its status words were computed by the report. Its range lines lose the band and gain a tick; no status word or figure changed.
+- 208 tests.
+
 ## 0.11.0 (2026-11-25)
 
 - **Autonomy rate.** Slide 12 now shows the share of tasks the AI feature finished in production with no person stepping in, computed in code from two new optional columns in the evals source: `tasks` and `tasks_unassisted`. It sits beside the eval pass rate, its quality pair, so autonomy can't rise unseen while quality falls. A run with more unassisted tasks than tasks stops with a fix.

@@ -52,7 +52,15 @@
     "definition": "Loads cleared with no manual touch",
     "target": 22000,
     "target_display": "22K",
-    "owner": "Agent team"
+    "owner": "Agent team",
+    "by": "2026-09-30",
+    "set_on": "2026-06-15",
+    "started": "2026-07-01",
+    "baseline": [
+      17400,
+      18100,
+      18400
+    ]
   },
   "inputs": [
     {

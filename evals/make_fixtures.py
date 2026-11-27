@@ -71,6 +71,11 @@ INTAKE: dict[str, Any] = {
         "target": 22000,
         "target_display": "22K",
         "owner": "Agent team",
+        # For the status rule: a dated target, set before the work, and readings from before it (did-it-land's rule).
+        "by": "2026-09-30",
+        "set_on": "2026-06-15",
+        "started": "2026-07-01",
+        "baseline": [17400, 18100, 18400],
     },
     "inputs": [
         {"metric": "Activation", "unit": "%", "target": 50, "target_display": "50%", "higher_is_better": True, "owner": "Activation team"},

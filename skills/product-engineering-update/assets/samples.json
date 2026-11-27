@@ -649,7 +649,7 @@
             "prior": "5,890",
             "actual": "6,120",
             "target": "6,000",
-            "status": "landed",
+            "status": "watch",
             "extra": [
               "None external",
               "Core dispatch"
@@ -657,6 +657,11 @@
             "definition": "Dispatchers active in a week"
           }
         ]
+      },
+      {
+        "type": "text",
+        "variant": "note",
+        "text": "Status: computed by this report, as no project file has a did-it-land read. It uses did-it-land's rule: landed needs the target met, a target date set before the work, and a move outside the metric's normal ups and downs before the work. Without all three it never reads landed."
       },
       {
         "type": "cards",

@@ -1423,7 +1423,12 @@ class Safety(unittest.TestCase):
         for mark in ('class="sc-r"', 'class="pvr"', 'class="bl"'):
             self.assertIn(mark, html)
         row = {"prior": "52h", "actual": "38h", "target": "under 40h", "status": "watch"}
-        self.assertIn('class="ok" style="left:0;', render.bullet(row))
+        # No coloured band: a grey dot for prior, a status dot for actual and a target tick, here at the range's edge (40h).
+        line = render.bullet(row)
+        self.assertNotIn('class="ok"', line)
+        self.assertEqual(re.findall(r'class="(\w+)', line), ["bl", "tr", "goal", "mv", "pr", "ac"])
+        self.assertIn('class="goal" style="left:65.2%"', line)
+        self.assertIn('class="goal"', render.bullet({**row, "target": "35+", "prior": "34", "actual": "41"}))
         self.assertEqual(render.bullet({**row, "target": "No range set yet"}), "")
         self.assertEqual(render.bullet({**row, "actual": "38%"}), "")
         self.assertEqual(render.tile_share("22 of 39"), 22 / 39 * 100)

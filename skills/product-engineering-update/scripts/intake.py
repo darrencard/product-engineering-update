@@ -58,6 +58,9 @@ EMPTY: Json = {
     "north_star": {"metric": None, "definition": None, "target": None, "owner": None},
     # Each input: {"metric": "Activation", "definition": "Accounts with a first automated load inside 14 days",
     #              "unit": "%", "target": 50, "target_display": "50%", "higher_is_better": true, "owner": "..."}
+    # The north star and each input may also carry, for the status rule: "by" (the target's date), "set_on" (when the
+    # target was set), "started" (when the work started), "baseline" (at least 3 readings from before the work), and
+    # "bet" (the project file's name: landing/<bet>.json, whose did-it-land status is printed instead of computing one).
     "inputs": [],
     "delivery_ranges": {},  # {"Deploys per week": "35+", "Change failure rate": "under 3.5%"}  healthy ranges, never single points
     "ai_features": None,  # [{"name": "Dispatch Agent", "eval_set": "v14"}]  [] means none in production; null means not asked yet

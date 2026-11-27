@@ -18,7 +18,7 @@ The reference is the outcome scorecard on dacard.ai/update: a scorecard on the l
 
 | Data | Picture | Rule in render.py |
 |---|---|---|
-| Scorecard row (prior, actual, target) | Range line: grey dot for prior, status dot for actual, a green band for the healthy range or a tick for a target | `bullet()`, drawn only when all three are figures in one unit |
+| Scorecard row (prior, actual, target) | Range line: a grey dot for prior, a status dot for actual, and a target tick; no coloured band. Green, grey-white and red stay for the status word only. | `bullet()`, drawn only when all three are figures in one unit |
 | Plan against actual | Paired bars, plan grey above actual ink, scaled to the largest value; hatched when over | `plan_vs_actual()` |
 | A table column where every cell is a % of 100 or less, or every cell a whole count | A bar before the figure: against 100 for shares, against the column's largest for counts | `share_columns()` |
 | A tile showing `22 of 39` or `86%` | A proportion bar under the figure | `tile_share()` |
